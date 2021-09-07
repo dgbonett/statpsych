@@ -1,0 +1,290 @@
+library(statpsych)
+
+test_that("ci.cor returns valid matrix", {
+  colnames_expected <- c(
+    "Estimate", "SE", "LL", "UL"
+  )
+  
+  res <- ci.cor(.05, .536, 0, 50)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+test_that("ci.spcor returns valid matrix", {
+  colnames_expected <- c(
+    "Estimate", "SE", "LL", "UL"
+  )
+  
+  res <- ci.spcor(.05, .582, .699, 20)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+test_that("ci.cor2 returns valid matrix", {
+  colnames_expected <- c(
+    "Estimate", "LL", "UL"
+  )
+  
+  res <- ci.cor2(.05, .886, .802, 200, 200)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+test_that("ci.cor.dep returns valid matrix", {
+  colnames_expected <- c(
+    "Estimate", "LL", "UL"
+  )
+  
+  res <- ci.cor.dep(.05, .396, .179, .088, 166)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+test_that("ci.cor2.gen returns valid matrix", {
+  colnames_expected <- c(
+    "Estimate", "LL", "UL"
+  )
+  
+  res <- ci.cor2.gen(.4, .35, .47, .2, .1, .32)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+test_that("ci.pbcor returns valid matrix", {
+  colnames_expected <- c(
+    "Estimate", "LL", "UL"
+  )
+  
+  res <- ci.pbcor(.05, 28.32, 21.48, 3.81, 3.09, 40, 40)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(2, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+test_that("ci.spear returns valid matrix", {
+  colnames_expected <- c(
+    "Estimate", "SE", "LL", "UL"
+  )
+  
+  y <- c(21, 4, 9, 12, 35, 18, 10, 22, 24, 1, 6, 8, 13, 16, 19)
+  x <- c(67, 28, 30, 28, 52, 40, 25, 37, 44, 10, 14, 20, 28, 40, 51)
+  res <- ci.spear(.05, y, x)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+test_that("ci.spear2 returns valid matrix", {
+  colnames_expected <- c(
+    "Estimate", "LL", "UL"
+  )
+  
+  y <- c(21, 4, 9, 12, 35, 18, 10, 22, 24, 1, 6, 8, 13, 16, 19)
+  x <- c(67, 28, 30, 28, 52, 40, 25, 37, 44, 10, 14, 20, 28, 40, 51)
+  res <- ci.spear2(.05, .54, .48, 180, 200)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+test_that("ci.mape returns valid matrix", {
+  colnames_expected <- c(
+    "MAPE", "LL", "UL"
+  )
+  
+  r <- c(-2.70, -2.69, -1.32, 1.02, 1.23, -1.46, 2.21, -2.10, 2.56,
+         -3.02, -1.55, 1.46, 4.02, 2.34)
+  res <- ci.mape(.05, r, 1)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+test_that("ci.condslope returns valid matrix", {
+  colnames_expected <- c(
+    "Estimate", "SE", "t", "df", "p", "LL", "UL"
+  )
+  
+  res <- ci.condslope(.05, .132, .154, .031, .021, .015, 5.2, 10.6, 122)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(2, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+test_that("ci.lc.reg returns valid matrix", {
+  colnames_expected <- c(
+    "Estimate", "SE", "t", "df", "p", "LL", "UL"
+  )
+  
+  est <- c(1.74, 1.83, 0.482)
+  se <- c(.483, .421, .395)
+  n <- c(40, 40, 40)
+  v <- c(.5, .5, -1)
+  res <- ci.lc.reg(.05, est, se, n, 4, v)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+test_that("ci.fisher returns valid matrix", {
+  colnames_expected <- c(
+    "LL", "UL"
+  )
+  
+  res <- ci.fisher(.05, .641, .052)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+test_that("ci.indirect returns valid matrix", {
+  colnames_expected <- c(
+    "Estimate", "SE", "LL", "UL"
+  )
+  
+  res <- ci.indirect (.05, 2.48, 1.92, .586, .379)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+test_that("size.ci.slope returns valid numeric", {
+  
+  x <- c(2, 5, 8)
+  res <- size.ci.slope(.05, 31.1, x, 1)
+
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(res[[1,1]], 83)
+})
+
+
+test_that("size.ci.cor returns valid numeric", {
+  
+  res <- size.ci.cor(.05, .362, 0, .25)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(res[[1,1]], 188)
+})
+
+
+test_that("size.ci.rsqr returns valid numeric", {
+  
+  res <- size.ci.rsqr(.05, .333, 2, .2)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(res[[1,1]], 232)
+})
+
+
+test_that("size.ci.condmean returns valid numeric", {
+  
+  res <- size.ci.condmean(.05, 120, 125, 15, 5)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(res[[1,1]], 210)
+})
+
+
+test_that("size.ci.lc.ancova returns valid numeric", {
+  
+  v <- c(1, -1)
+  res <- size.ci.lc.ancova(.05, 1.37, 1, 0, 1.5, v)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(res[[1,1]], 21)
+})
+
+
+test_that("size.test.slope returns valid numeric", {
+  
+  x <- c(2, 5, 8)
+  res <- size.test.slope(.05, .9, 31.1, x, .75, 0)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(res[[1,1]], 100)
+})
+
+
+test_that("size.test.cor returns valid numeric", {
+  
+  res <- size.test.cor(.05, .9, .45, 0, 0)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(res[[1,1]], 48)
+})
+
+
+
+test_that("size.interval.cor returns valid numeric", {
+  
+  res <- size.interval.cor(.05, .8, .1, 0, .25)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(res[[1,1]], 360)
+})
+
+
+test_that("size.test.lc.ancova returns valid numeric", {
+  
+  v <- c(.5, .5, -1)
+  res <- size.test.lc.ancova(.05, .9, 1.37, .7, 1, 0, v)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(res[[1,1]], 47)
+})
+
+
+test_that("ci.indirect returns valid matrix", {
+  colnames_expected <- c("Coefficient")
+  
+  x <- c(25, 50, 75, 100)
+  res <- slope.contrast(x)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(4, 1))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+  
+
+test_that("random.yx returns valid data.frame", {
+  colnames_expected <- c(
+    "y", "x"
+  )
+  
+  res <- random.yx(10, 50, 20, 4, 2, .5, 1)
+  
+  testthat::expect_equal(class(res), c("data.frame"))
+  testthat::expect_equal(dim(res), c(10, length(res)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
