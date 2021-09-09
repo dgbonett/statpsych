@@ -1,5 +1,9 @@
 url: https://dgbonett.github.io/statpsych
 
+template:
+  params:
+    bootswatch: cosmo
+
 authors:
   Douglas G. Bonett:
     href: https://people.ucsc.edu/~dgbonett/
