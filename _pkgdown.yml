@@ -12,7 +12,7 @@ reference:
 - title: Package overview
   desc:  Overview of statpsych.
   contents:
-  - statpsych-package
+  - statpsych
 
 - title: Confidence intervals
   desc:  Confidence intervals for different effect sizes and designs
