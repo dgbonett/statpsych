@@ -9,11 +9,6 @@ authors:
     href: https://people.ucsc.edu/~dgbonett/
 
 reference:
-- title: Package overview
-  desc:  Overview of statpsych.
-  contents:
-  - statpsych
-
 - title: Confidence intervals
   desc:  Confidence intervals for different effect sizes and designs
   contents:
