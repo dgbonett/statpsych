@@ -1,5 +1,3 @@
-README
-================
 
 # statpsych: statistical Methods for Psychologists
 

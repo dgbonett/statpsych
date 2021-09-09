@@ -1,0 +1,39 @@
+url: https://dgbonett.github.io/statpsych
+
+authors:
+  Douglas G. Bonett:
+    href: https://people.ucsc.edu/~dgbonett/
+
+reference:
+- title: Package overview
+  desc:  Overview of statpsych.
+  contents:
+  - statpsych-package
+
+- title: Confidence intervals
+  desc:  Confidence intervals for different effect sizes and designs
+  contents:
+  - starts_with("ci.")
+
+- title: Tests
+  desc:  Hypothesis tests
+  contents:
+  - starts_with("test.")
+
+- title: Sample-size planning
+  desc:  Sample sizes for desired precision or power
+  contents:
+  - starts_with("size.")
+  
+- title: Miscellaneous
+  desc:  Other functions, including functions for simulating data
+  contents:
+  - etasqr.adj
+  - iqv
+  - pi.score1
+  - pi.score2
+  - random.sample
+  - random.y
+  - random.yx
+  - randomize
+  - slope.contrast

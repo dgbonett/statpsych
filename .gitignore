@@ -5,8 +5,7 @@ temp
 build*
 .Rhistory
 .Rbuildignore
-working.R
-References.docx
+
 
 # Windows thumbnail cache files
 Thumbs.db
@@ -33,4 +32,4 @@ $RECYCLE.BIN/
 # =========================
 .Rproj.user
 inst/doc
-statpsych.pdf
+
