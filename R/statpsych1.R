@@ -2969,7 +2969,7 @@ size.test.sign.ps <- function(alpha, pow, p) {
 #' @param  alpha  alpha level for hypothesis test 
 #' @param  pow    desired power
 #' @param  rel    reliability planning value
-#' @param  a      number of measurements
+#' @param  r      number of measurements
 #' @param  h      null hypothesis value of reliability
 #'
 #'
@@ -2991,11 +2991,11 @@ size.test.sign.ps <- function(alpha, pow, p) {
 #' 
 #' @importFrom stats qnorm
 #' @export
-size.test.cronbach <- function(alpha, pow, rel, a, h) {
+size.test.cronbach <- function(alpha, pow, rel, r, h) {
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
  e <- (1 - rel)/(1 - h)
- n <- ceiling((2*a/(a - 1))*(za + zb)^2/log(e)^2 + 2)
+ n <- ceiling((2*r/(r - 1))*(za + zb)^2/log(e)^2 + 2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
  return(out)
