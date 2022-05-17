@@ -1012,7 +1012,7 @@ size.ci.lc.ancova <- function(alpha, evar, s, d, w, v) {
 #'  
 #' @param  alpha   alpha level for hypothesis test
 #' @param  pow     desired power
-#' @param  evar    planning value of within group (error) variance
+#' @param  evar    planning value of within-group (error) variance
 #' @param  x       vector of x values of the quantitative factor
 #' @param  slope   planning value of slope
 #' @param  h       hypothesized value of slope  
@@ -1061,7 +1061,7 @@ size.test.slope <- function(alpha, pow, evar, x, slope, h) {
 #' @param  pow     desired power
 #' @param  cor     planning value of correlation
 #' @param  s       number of control variables
-#' @param  h       hypothesized value of slope  
+#' @param  h       hypothesized value of correlation  
 #'
 #' 
 #' @return 
@@ -1154,7 +1154,7 @@ size.interval.cor <- function(alpha, pow, cor, s, h) {
 #'  
 #' @param  alpha   alpha level for hypothesis test
 #' @param  pow     desired power
-#' @param  evar    planning value of within group (error) variance
+#' @param  evar    planning value of within-group (error) variance
 #' @param  es      planning value of linear contrast
 #' @param  s       number of covariates 
 #' @param  d       largest standardized mean difference for all covariates
