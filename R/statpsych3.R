@@ -1183,7 +1183,7 @@ test.prop2 <- function(f1, f2, n1, n2) {
 #' dichotomous response variable in a one-factor between-subjects design.
 #'
 #'
-#' @param  f    vector of frequency counts of participants with the attribute
+#' @param  f    vector of frequency counts of participants who have the attribute
 #' @param  n    vector of sample sizes
 #'
 #'
