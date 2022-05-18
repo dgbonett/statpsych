@@ -3013,8 +3013,8 @@ size.test.cronbach <- function(alpha, pow, rel, r, h) {
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
-#' @param  m      sample mean
-#' @param  sd     sample standard deviation
+#' @param  m      estimated mean
+#' @param  sd     estimated standard deviation
 #' @param  n      sample size
 #'
 #'
@@ -3061,10 +3061,10 @@ pi.score1 <- function(alpha, m, sd, n) {
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
-#' @param  m1     sample mean for group 1
-#' @param  m2     sample mean for group 1
-#' @param  sd1    sample standard deviation for group 1
-#' @param  sd2    sample standard deviation for group 2
+#' @param  m1     estaimted mean for group 1
+#' @param  m2     estimated mean for group 1
+#' @param  sd1    estimated standard deviation for group 1
+#' @param  sd2    estimated standard deviation for group 2
 #' @param  n1     sample size for group 1
 #' @param  n2     sample size for group 2
 #'
@@ -3224,14 +3224,14 @@ random.y <- function(n, m, sd, min, max, dec) {
 #'
 #'
 #' @description
-#' Computes an upper limit for a population variance using a sample variance 
+#' Computes an upper limit for a population variance using an estimated variance 
 #' from a sample of size n in a prior study. The upper limit can be used as 
 #' a variance planning value in sample size functions that require a variance 
 #' planning value.
 #'
 #'
 #' @param  alpha  alpha value for 1-alpha confidence (one-sided)
-#' @param  var    sample variance
+#' @param  var    estimated variance
 #' @param  n      sample size
 
 #' @return 
@@ -3300,11 +3300,11 @@ etasqr.adj <- function(etasqr, dfeffect, dferror) {
 #' @description
 #' Computes the F statistic, p-value, eta-squared, and adjusted eta-squared 
 #' for the main effect of Factor A in a one-way between-subjects ANOVA using
-#' the sample means, sample standard deviations, and sample sizes.  
+#' the estimated means, estimated standard deviations, and sample sizes.  
 #'
 #'
-#' @param   m       vector of sample means
-#' @param   sd      vector of sample standard deviations
+#' @param   m       vector of estimated means
+#' @param   sd      vector of estimated standard deviations
 #' @param   n       vector of sample sizes
 #'
 #'
