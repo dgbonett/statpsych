@@ -6,7 +6,7 @@
 #' @description
 #' Computes a Fisher confidence interval for a population Pearson correlation  
 #' or partial correlation with s control variables. Set s = 0 for a Pearson 
-#' correlation. This function uses a sample correlation as input. Use the
+#' correlation. This function uses an estimated correlation as input. Use the
 #' cor.test function for a Pearson correlation with raw data input.
 #'
 #'  
@@ -869,7 +869,7 @@ size.ci.cor <- function(alpha, cor, s, w) {
 #' in a random-x regression model with desired confidence interval precision.
 #' Set the planning value of squared multiple correlation to 1/3 for a 
 #' conservatively large sample size. This function uses an approximation to
-#' the standrd error of the squared multiple correlation.
+#' the standard error of the squared multiple correlation.
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -946,20 +946,20 @@ size.ci.condmean <- function(alpha, evar, xvar, diff, w) {
 
 
 #  size.ci.lc.ancova =========================================================
-#' Sample size for a mean linear contrast confidence interval in an ANCOVA  
+#' Sample size for a linear contrast confidence interval in an ANCOVA  
 #'
 #'
 #' @description
-#' Computes the sample size for each group required to estimate a linear 
-#' contrast of means in an ANCOVA model with desired confidence interval
-#' precision. In a nonexperimental design, the sample size is affected by 
-#' the magnitude of covariate mean differences across groups. The covariate
-#' mean differences can be approximated by specifying the largest 
-#' standardized covariate mean difference across all pairwise group 
-#' differences and for all covariates. In an experiment, this standardized 
-#' mean difference should be set to 0. Set the error variance planning value
-#' to the largest value within a plausible range for a conservatively large 
-#' sample size.
+#' Computes the sample size for each group (assuming equal sample sizes) 
+#' required to estimate a linear contrast of means in an ANCOVA model with 
+#' desired confidence interval precision. In a nonexperimental design, the 
+#' sample size is affected by the magnitude of covariate mean differences 
+#' across groups. The covariate mean differences can be approximated by 
+#' specifying the largest standardized covariate mean difference across all 
+#' pairwise group differences and for all covariates. In an experiment, this
+#' standardized mean difference should be set to 0. Set the error variance 
+#' planning value to the largest value within a plausible range for a 
+#' conservatively large sample size.
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -1141,12 +1141,12 @@ size.interval.cor <- function(alpha, pow, cor, s, h) {
 #'
 #'
 #' @description
-#' Computes the sample size for each group required to test a linear contrast
-#' of means in an ANCOVA model with desired power. In a nonexperimental design,
-#' the sample size is affected by the magnitude of covariate mean differences 
-#' across groups. The covariate mean differences can be approximated by 
-#' specifying the largest standardized covariate mean difference across all 
-#' pairwise comparisons and for all covariates. In an experiment, this 
+#' Computes the sample size for each group (assuming equal sample sizes) required
+#' to test a linear contrast of means in an ANCOVA model with desired power. In a 
+#' nonexperimental design, the sample size is affected by the magnitude of 
+#' covariate mean differences across groups. The covariate mean differences can be 
+#' approximated by specifying the largest standardized covariate mean difference 
+#' across all pairwise comparisons and for all covariates. In an experiment, this 
 #' standardized mean difference is set to 0. Set the error variance planning 
 #' value to the largest value within a plausible range for a conservatively 
 #' large sample size.
