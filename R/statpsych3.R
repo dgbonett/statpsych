@@ -721,11 +721,11 @@ ci.yule <- function(alpha, f00, f01, f10, f11) {
 
 
 #  ci.phi ====================================================================
-#' Confidence interval for a phi coefficient
+#' Confidence interval for a phi correlation
 #'
 #'
 #' @description
-#' Computes a confidence interval for a phi coefficient. This function requires 
+#' Computes a confidence interval for a phi correlation. This function requires 
 #' the frequency counts from a 2 x 2 contingency table for two dichotomous 
 #' variables. This measure of association assumes that both dichotomous  
 #' variables are naturally dichotomous.
@@ -915,7 +915,7 @@ ci.tetra <- function(alpha, f00, f01, f10, f11) {
 #' @description
 #' Computes a confidence interval for the intraclass kappa coefficient and
 #' Cohen's kappa coefficient for two dichotomous ratings. Both measures
-#' are intraclass reliability coefficients. 
+#' are intraclass reliability coefficients.
 #'
 #'
 #' @param   alpha  alpha level for 1-alpha confidence
@@ -1278,7 +1278,7 @@ test.prop.ps <- function(f00, f01, f10, f11) {
 
 
 # ================= File 3: Sample Size for Desired Precision ================
-#  size.ci.prop1 =============================================================
+#  size.ci.prop1 
 #' Sample size for a single proportion confidence interval  
 #'
 #'
@@ -1321,10 +1321,10 @@ size.ci.prop1 <- function(alpha, p, w) {
 #'
 #'
 #' @description
-#' Computes the sample size in each group required to estimate a difference of
-#' proportions with desired confidence interval precision in a 2-group design.
-#' Set the proportion planning values to .5 for a conservatively large sample
-#' size.
+#' Computes the sample size in each group (assuming equal sample sizes) required
+#' to estimate a difference of proportions with desired confidence interval 
+#' precision in a 2-group design. Set the proportion planning values to .5 for
+#' a conservatively large sample size.
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
@@ -1361,8 +1361,9 @@ size.ci.prop2 <- function(alpha, p1, p2, w) {
 #'
 #'
 #' @description
-#' Computes the sample size in each group required to estimate a ratio of 
-#' proportions with desired confidence interval precision in a 2-group design.
+#' Computes the sample size in each group (assuming equal sample sizes) required
+#' to estimate a ratio of proportions with desired confidence interval precision 
+#' in a 2-group design.
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
@@ -1400,10 +1401,10 @@ size.ci.ratio.prop2 <- function(alpha, p1, p2, r) {
 #'
 #'
 #' @description
-#' Computes the sample size in each group required to estimate a linear 
-#' contrast of proportions with desired confidence interval precision in 
-#' a between-subjects design. Set the proportion planning values to .5
-#' for a conservatively large sample size.
+#' Computes the sample size in each group (assuming equal sample sizes) required 
+#' to estimate a linear contrast of proportions with desired confidence interval 
+#' precision in a between-subjects design. Set the proportion planning values to
+#' .5 for a conservatively large sample size.
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
@@ -1445,14 +1446,14 @@ size.ci.lc.prop.bs <- function(alpha, p, w, v) {
 #' Computes the sample size required to estimate a proportion difference with 
 #' desired confidence interval precision in a paired-samples design. Set the 
 #' proportion planning values to .5 for a conservatively large sample size.
-#' Set the phi planning value to the smallest value within a plausible range
-#' for a conservatively large sample size.
+#' Set the phi correlation planning value to the smallest value within a
+#' plausible range for a conservatively large sample size.
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
 #' @param  p1     planning value of proportion for group 1
 #' @param  p2     planning value of proportion for group 2
-#' @param  phi    planning value of phi coefficient
+#' @param  phi    planning value of phi correlation
 #' @param  w      desired confidence interval width
 #'
 #'
@@ -1494,7 +1495,7 @@ size.ci.prop.ps <- function(alpha, p1, p2, phi, w) {
 #' @param  alpha  alpha level for 1-alpha confidence 
 #' @param  p1     planning value of proportion for measurement 1
 #' @param  p2     planning value of proportion for measurement 2
-#' @param  phi    planning value of phi coefficient
+#' @param  phi    planning value of phi correlation
 #' @param  r      desired upper to lower confidence interval endpoint ratio
 #'
 #'
@@ -1651,13 +1652,13 @@ size.test.prop2 <- function(alpha, pow, p1, p2, es) {
 #'
 #'
 #' @description
-#' Computes the sample size in each group required to test a linear contrast of 
-#' population proportions with desired power in a between-subjects design. This 
-#' function requires planning values for all proportions. Set the proportion 
-#' planning values to .5 for a conservatively large sample size. The planning
-#' value for the linear contrast of proportions could be set equal to the
-#' linear contrast of proportion planning values or it could be set equal to
-#' a minimally interesting effect size.
+#' Computes the sample size in each group (assuming equal sample sizes) required
+#' to test a linear contrast of population proportions with desired power in a 
+#' between-subjects design. This function requires planning values for all 
+#' proportions. Set the proportion planning values to .5 for a conservatively 
+#' large sample size. The planning value for the linear contrast of proportions 
+#' could be set equal to the linear contrast of proportion planning values or it
+#' could be set equal to a minimally interesting effect size.
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test 
@@ -1698,13 +1699,13 @@ size.test.lc.prop.bs <- function(alpha, pow, p, es, v) {
 #'
 #'
 #' @description
-#' Computes the sample size in each group required to perform an equivalence 
-#' test for the difference in population proportions with desired power in a
-#' 2-group design. The value of h specifies a range of practical equivalence,
-#' -h to h, for the difference in population proportions. The absolute 
-#' difference in the proportion planning values must be less than h.  
+#' Computes the sample size in each group (assuming equal sample sizes) required
+#' to perform an equivalence test for the difference in population proportions 
+#' with desired power in a 2-group design. The value of h specifies a range of
+#' practical equivalence, -h to h, for the difference in population proportions. 
+#' The absolute difference in the proportion planning values must be less than h.  
 #' Equivalence tests often require a very large sample size. Equivalence tests 
-#' usually use 2 x alpha rather than alpha (e.g., use alpha = .10 rather 
+#' usually use 2 x alpha rather than alpha (e.g., use alpha = .10 rather than
 #' alpha = .05).
 #'
 #'
@@ -1745,14 +1746,14 @@ size.equiv.prop2 <- function(alpha, pow, p1, p2, h) {
 #'
 #'
 #' @description
-#' Computes the sample size in each group required to perform a superiority 
-#' or inferiority test for the difference in population proportions with 
-#' desired power in a 2-group design. For a superiority test, specify the 
-#' upper limit (h) for the range of practical equivalence and specify values
-#' of p1 and p2 such that p1 - p2 > h. For an inferiority test, specify the 
+#' Computes the sample size in each group (assuming equal sample sizes) required
+#' to perform a superiority or inferiority test for the difference in population 
+#' proportions with desired power in a 2-group design. For a superiority test, 
+#' specify the upper limit (h) for the range of practical equivalence and specify
+#' values of p1 and p2 such that p1 - p2 > h. For an inferiority test, specify the 
 #' lower limit (-h) for the range of practical equivalence and specify values
-#' of p1 and p2 such that p1 - p2 > -h. This function sets the effect size 
-#' equal to p1 - p2.
+#' of p1 and p2 such that p1 - p2 > -h. This function sets the effect size equal
+#' to p1 - p2.
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test 
@@ -1799,16 +1800,16 @@ size.supinf.prop2 <- function(alpha, pow, p1, p2, h) {
 #' proportion planning values can set to .5 for a conservatively large sample 
 #' size. The planning value for the proportion difference could be set equal 
 #' to the difference of the two proportion planning values or it could be set
-#' equal to a minimally interesting effect size. Set the phi planning value 
-#' to the smallest value within a plausible range for a conservatively large
-#' sample size.
+#' equal to a minimally interesting effect size. Set the phi correlation 
+#' planning value to the smallest value within a plausible range for a 
+#' conservatively large sample size.
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test 
 #' @param  pow    desired power
 #' @param  p1     planning value of proportion for measurement 1
 #' @param  p2     planning value of proportion for measurement 2
-#' @param  phi    planning value of phi coefficient
+#' @param  phi    planning value of phi correlation
 #' @param  es     planning value of proportion difference
 #'
 #'
@@ -1842,16 +1843,17 @@ size.test.prop.ps <- function(alpha, pow, p1, p2, phi, es) {
 #'
 #'
 #' @description
-#' Computes the sample size in each group required to perform an equivalence 
-#' test for the difference in population proportions with desired power in a
-#' paired-samples design. The value of h specifies a range of practical 
-#' equivalence, -h to h, for the difference in population proportions. The 
-#' absolute difference in the proportion planning values must be less than h.  
-#' Equivalence tests often require a very large sample size. Equivalence tests 
-#' usually use 2 x alpha rather than alpha (e.g., use alpha = .10 rather 
-#' alpha = .05). This function sets the effect size equal to the difference
-#' in proportion planning values. Set the phi planning value to the smallest 
-#' value within a plausible range for a conservatively large sample size.
+#' Computes the sample size in each group (assuming equal sample sizes) required
+#' to perform an equivalence test for the difference in population proportions 
+#' with desired power in a paired-samples design. The value of h specifies a 
+#' range of practical equivalence, -h to h, for the difference in population 
+#' proportions. The absolute difference in the proportion planning values must
+#' be less than h.  Equivalence tests often require a very large sample size. 
+#' Equivalence tests usually use 2 x alpha rather than alpha (e.g., use 
+#' alpha = .10 rather alpha = .05). This function sets the effect size equal to
+#' the difference in proportion planning values. Set the phi correlation planning
+#' value to the smallest value within a plausible range for a conservatively 
+#' large sample size.
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test 
@@ -1901,16 +1903,16 @@ size.equiv.prop.ps <- function(alpha, pow, p1, p2, phi, h) {
 #' that p1 - p2 > h. For an inferiority test, specify the lower limit (-h) for 
 #' the range of practical equivalence and specify values of p1 and p2 such  
 #' that p1 - p2 > -h. This function sets the effect size equal to the 
-#' difference in proportion planning values. Set the phi planning value to the
-#' smallest value within a plausible range for a conservatively large sample 
-#' size.
+#' difference in proportion planning values. Set the phi correlation planning 
+#' value to the smallest value within a plausible range for a conservatively 
+#' large sample size.
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test 
 #' @param  pow    desired power
 #' @param  p1     planning value of proportion for measurement 1
 #' @param  p2     planning value of proportion for measurement 2
-#' @param  phi    planning value of phi coefficient
+#' @param  phi    planning value of phi correlation
 #' @param  h      lower or upper limit for range of practical equivalence
 #'
 #'
