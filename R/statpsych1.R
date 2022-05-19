@@ -2093,10 +2093,10 @@ size.ci.lc.stdmean.bs <- function(alpha, d, w, v) {
 #' Computes the sample size required to estimate a difference in population  
 #' means with desired confidence interval precision in a paired-samples 
 #' design. This function requires a planning value for the average of the  
-#' variances for the two measurements. Set the correlation planning value to   
-#' the smallest value within a plausible range for a conservatively large  
-#' sample size. Set the variance planning value to the largest value within
-#' a plausible range for a conservatively large sample size. 
+#' variances for the two measurements. Set the Pearson correlation planning  
+#' vaklue to the smallest value within a plausible range for a conservatively  
+#' large sample size. Set the variance planning value to the largest value 
+#' within a plausible range for a conservatively large sample size. 
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -2138,8 +2138,8 @@ size.ci.mean.ps <- function(alpha, var, cor, w) {
 #' mean difference with desired confidence interval precision in a 
 #' paired-samples design. Set the standardized mean difference planning value 
 #' to the largest value within a plausible range for a conservatively large 
-#' sample size. Set the correlation planning value to the smallest value
-#' within a plausible range for a conservatively large sample size.
+#' sample size. Set the pearson correlation planning value to the smallest
+#' value within a plausible range for a conservatively large sample size.
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -2230,8 +2230,9 @@ size.ci.ratio.mean.ps <- function(alpha, var, m1, m2, cor, r) {
 #' population means with desired confidence interval precision in a 
 #' within-subjects design. Set the variance planning value to the  
 #' largest value within a plausible range for a conservatively large  
-#' sample size. Set the correlation planning value to the smallest value
-#' within a plausible range for a conservatively large sample size. 
+#' sample size. Set the Pearson correlation planning value to the 
+#' smallest value within a plausible range for a conservatively 
+#' large sample size. 
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
@@ -2276,8 +2277,8 @@ size.ci.lc.mean.ws <- function(alpha, var, cor, w, q) {
 #' contrast of population means with desired confidence interval precision
 #' in a within-subjects design. Set the standardized mean difference planning 
 #' value to the largest value within a plausible range for a conservatively 
-#' large sample size. Set the correlation planning value to the smallest value
-#' within a plausible range for a conservatively large sample size.
+#' large sample size. Set the pearson correlation planning value to the smallest
+#' value within a plausible range for a conservatively large sample size.
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -2326,7 +2327,7 @@ size.ci.lc.stdmean.ws <- function(alpha, d, cor, w, q) {
 #'
 #' @param  alpha  alpha value for 1-alpha confidence 
 #' @param  rel    reliability planning value
-#' @param  a      number of measurements
+#' @param  r      number of measurements
 #' @param  w      desired confidence interval width
 #'
 #'
@@ -2349,11 +2350,11 @@ size.ci.lc.stdmean.ws <- function(alpha, d, cor, w, q) {
 #' @importFrom stats qf
 #' @importFrom stats qnorm
 #' @export
-size.ci.cronbach <- function(alpha, rel, a, w) {
+size.ci.cronbach <- function(alpha, rel, r w) {
  z <- qnorm(1 - alpha/2)
- n0 <- ceiling((8*a/(a - 1))*(1 - rel)^2*(z/w)^2 + 2)
+ n0 <- ceiling((8*r/(r - 1))*(1 - rel)^2*(z/w)^2 + 2)
  df1 = n0 - 1
- df2 = n0*(a - 1)
+ df2 = n0*(r - 1)
  f1 = qf(1 - alpha/2, df1, df2)
  f2 = qf(1 - alpha/2, df2, df1)
  f0 <- 1/(1 - rel)
