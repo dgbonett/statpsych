@@ -781,11 +781,11 @@ ci.phi <- function(alpha, f00, f01, f10, f11) {
 
 
 #  ci.biphi ==================================================================
-#' Confidence interval for a biserial-phi coefficient
+#' Confidence interval for a biserial-phi correlation
 #'
 #'
 #' @description
-#' Computes a confidence interval for a biserial-phi coefficient using a
+#' Computes a confidence interval for a biserial-phi correlation using a
 #' transformation of a confidence interval for an odds ratio with .5 added to
 #' each cell frequency. This measure of association assumes the group variable
 #' is naturally dichotomous and the response variable is artificially
@@ -801,7 +801,7 @@ ci.phi <- function(alpha, f00, f01, f10, f11) {
 #'
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Estimate - estimate of phi coefficient
+#' * Estimate - estimate of biserial-phi correlation
 #' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
