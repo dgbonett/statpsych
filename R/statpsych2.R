@@ -11,7 +11,7 @@
 #'
 #'  
 #' @param  alpha 	alpha level for 1-alpha confidence
-#' @param  cor	  	sample Pearson or partial correlation 
+#' @param  cor	  	estimated Pearson or partial correlation 
 #' @param  s	  	number of control variables
 #' @param  n	  	sample size
 #'
@@ -68,8 +68,8 @@ ci.cor <- function(alpha, cor, s, n) {
 #'
 #'  
 #' @param  alpha 	alpha level for 1-alpha confidence
-#' @param  cor	  	sample semipartial correlation 
-#' @param  r2	  	sample squared multiple correlation in full model
+#' @param  cor	  	estimated semipartial correlation 
+#' @param  r2	  	estimated squared multiple correlation in full model
 #' @param  n	  	sample size
 #'
 #'
@@ -122,8 +122,8 @@ ci.spcor <- function(alpha, cor, r2, n) {
 #'
 #'  
 #' @param  alpha	alpha level for 1-alpha confidence
-#' @param  cor1	  	sample Pearson correlation in group 1
-#' @param  cor2	  	sample Pearson correlation in group 2
+#' @param  cor1	  	estimated Pearson correlation in group 1
+#' @param  cor2	  	estimated Pearson correlation in group 2
 #' @param  n1	  	sample size in group 1
 #' @param  n2	  	sample size in group 2
 #'
@@ -183,9 +183,9 @@ ci.cor2 <- function(alpha, cor1, cor2, n1, n2) {
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
-#' @param  cor1	  sample Pearson correlation between y and x1
-#' @param  cor2	  sample Pearson correlation between y and x2
-#' @param  cor12  sample Pearson correlation between x1 and x2
+#' @param  cor1	  estimated Pearson correlation between y and x1
+#' @param  cor2	  estimated Pearson correlation between y and x2
+#' @param  cor12  estimated Pearson correlation between x1 and x2
 #' @param  n	  sample size
 #'
 #'
@@ -251,10 +251,10 @@ ci.cor.dep <- function(alpha, cor1, cor2, cor12, n) {
 #' coefficients.
 #'
 #'  
-#' @param  cor1  sample correlation in group 1 
+#' @param  cor1  estimated correlation in group 1 
 #' @param  ll1   lower limit for group 1 correlation
 #' @param  ul1   upper limit for group 1 correlation
-#' @param  cor2  sample correlation in group 2
+#' @param  cor2  estimated correlation in group 2
 #' @param  ll2   lower limit for group 2 correlation
 #' @param  ul2   upper limit for group 2 correlation
 #'
@@ -304,12 +304,12 @@ ci.cor2.gen <- function(cor1, ll1, ul1, cor2, ll2, ul2) {
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
-#' @param  m1     sample mean for group 1
-#' @param  m2     sample mean for group 2
-#' @param  sd1    sample standard deviation for group 1
-#' @param  sd2    sample standard deviation for group 2
-#' @param  n1     sample size for group 1
-#' @param  n2	  sample size for group 2
+#' @param  m1     estimated mean for group 1
+#' @param  m2     estimated mean for group 2
+#' @param  sd1    estimated standard deviation for group 1
+#' @param  sd2    estimated standard deviation for group 2
+#' @param  n1     sample size in group 1
+#' @param  n2	  sample size in group 2
 #'
 #'
 #' @references
@@ -428,8 +428,8 @@ ci.spear <- function(alpha, y, x) {
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
-#' @param  cor1	  sample Spearman correlation in group 1
-#' @param  cor2	  sample Spearman correlation in group 2
+#' @param  cor1	  estimated Spearman correlation in group 1
+#' @param  cor2	  estimated Spearman correlation in group 2
 #' @param  n1	  sample size in group 1
 #' @param  n2	  sample size in group 2
 #'
@@ -487,9 +487,9 @@ ci.spear2 <- function(alpha, cor1, cor2, n1, n2) {
 #'
 #' @description
 #' Computes a confidence interval for a population mean absolute prediction
-#' error (MAPE) in a general linear model. The MAPE is a robust alternative 
-#' to the residual standard deviation. This function requires a vector of 
-#' estimated residuals from a general linear model.
+#' error (MAPE) in a general linear model. The MAPE is a more robust 
+#' alternative to the residual standard deviation. This function requires a
+#' vector of estimated residuals from a general linear model.
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -619,7 +619,7 @@ ci.condslope <- function(alpha, b1, b2, se1, se2, cov, lo, hi, dfe) {
 #' @param  est    vector of parameter estimates
 #' @param  se     vector of standard errors
 #' @param  n      vector of group sample sizes
-#' @param  s      number of predictor variables for within-group model
+#' @param  s      number of predictor variables for each within-group model
 #' @param  v      vector of between-subject contrast coefficients
 #'
 #' 
@@ -673,7 +673,7 @@ ci.lc.reg <- function(alpha, est, se, n, s, v) {
 #'
 #'
 #' @param   alpha  alpha value for 1-alpha confidence
-#' @param   cor    sample correlation or association coefficient 
+#' @param   cor    estimated correlation or association coefficient 
 #' @param   se     standard error of estimate
 #'
 #'
@@ -712,7 +712,7 @@ ci.fisher <- function(alpha, cor, se) {
 #' Computes a Monte Carlo confidence interval (500,000 trials) for a population
 #' unstandardized indirect effect in a path model. This function is not
 #' recommended for a standardized indirect effect unless the standardized
-#' slope estimates for both paths are less than about .3 in absoslute value. 
+#' slope estimates for both paths are less than about .3 in absolute value. 
 #' The Monte Carlo method is general in that the slope estimates and standard 
 #' errors do not need to be OLS estimates with homoscedastic standard errors. 
 #' For example, LAD slope estimates and their standard errors, OLS slope 
@@ -731,7 +731,7 @@ ci.fisher <- function(alpha, cor, se) {
 #' @return 
 #' Returns a 1-row matrix. The columns are:
 #' * Estimate - estimated indirect effect
-#' * SE - standard error
+#' * SE - standard error of indirect effect
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #' 
