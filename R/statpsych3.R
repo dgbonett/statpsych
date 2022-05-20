@@ -797,8 +797,8 @@ ci.phi <- function(alpha, f00, f01, f10, f11) {
 #' @param   alpha  alpha level for 1-alpha confidence
 #' @param   f1     number of participants in group 1 who have the attribute
 #' @param   f2     number of participants in group 2 who have the attribute
-#' @param   n1     sample size of group 1
-#' @param   n2     sample size of group 2
+#' @param   n1     sample size in group 1
+#' @param   n2     sample size in group 2
 #'
 #'
 #' @return
