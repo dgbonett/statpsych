@@ -543,15 +543,15 @@ ci.mape <- function(alpha, r, s) {
 #' conditional slopes (simple slopes) in a general linear model that
 #' includes a predictor variable that is the product of a moderator 
 #' variable and a predictor variable. Conditional slopes are computed  
-#' at low and high values of the moderator variable. 
+#' at specified low and high values of the moderator variable. 
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
-#' @param  b1     sample coefficient for predictor variable
-#' @param  b2     sample coefficient for product variable
+#' @param  b1     estimated slope coefficient for predictor variable
+#' @param  b2     estimated slope coefficient for product variable
 #' @param  se1    standard error for predictor coefficient
 #' @param  se2    standard error for product coefficient
-#' @param  cov    sample covariance between predictor and product coefficients
+#' @param  cov    estimated covariance between predictor and product coefficients
 #' @param  lo     low value of moderator variable 
 #' @param  hi     high value of moderator variable 
 #' @param  dfe    error degrees of freedom 
