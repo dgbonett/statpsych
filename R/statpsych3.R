@@ -77,8 +77,8 @@ ci.prop1 <- function(alpha, f, n) {
 #' @description
 #' Computes adjusted Wald confidence intervals for pairwise proportion
 #' differences of a polychotomous variable. These adjusted Wald confidence
-#' intervals use the same method that is used to compare proportions in a 
-#' paired-samples design.
+#' intervals use the same method that is used to compare the two proportions
+#' in a paired-samples design.
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
@@ -202,7 +202,7 @@ ci.prop2 <- function(alpha, f1, f2, n1, n2) {
 #'
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Estimate - adjusted ratio of proportion ratio
+#' * Estimate - adjusted estimate of proportion ratio
 #' * LL - lower limit of the adjusted Wald confidence interval
 #' * UL - upper limit of the adjusted Wald confidence interval
 #'
@@ -309,7 +309,7 @@ ci.lc.prop.bs <- function(alpha, f, n, v) {
 #'
 #'
 #' @param   alpha   alpha level for simultaneous 1-alpha confidence
-#' @param   f       vector of frequency counts of participants with attribute
+#' @param   f       vector of frequency counts of participants who have the attribute
 #' @param   n       vector of sample sizes
 #'
 #'
@@ -364,12 +364,14 @@ ci.pairs.prop.bs <-function(alpha, f, n) {
 
 
 #  ci.slope.prop.bs ========================================================== 
-#' Confidence interval for a slope of a quantitative between-subjects factor
+#' Confidence interval for a slope of a proportion in a single-factor desigh
+#' with a quantitative between-subjects factor
 #'
 #'
 #' @description
-#' Computes an adjusted Wald confidence interval for the slope of a 
-#' quantitative between-subjects factor using contrast coefficients. 
+#' Computes a test statistic and an adjusted Wald confidence interval for the 
+#' slope of proportions in a single-factor design with a quantitative 
+#' between-subjects factor. 
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
@@ -554,18 +556,18 @@ ci.ratio.prop.ps <- function(alpha, f00, f10, f01, f11) {
 #'
 #' @description
 #' Computes confidence intervals and test statistics for population 
-#' conditional slopes (simple slopes) in a general linear model that
+#' conditional slopes (simple slopes) in a logistic model that
 #' includes a predictor variable that is the product of a moderator 
 #' variable and a predictor variable. Conditional slopes are computed 
 #' at low and high values of the moderator variable. 
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
-#' @param  b1     sample coefficient for predictor variable
-#' @param  b2     sample coefficient for product variable
+#' @param  b1     estimated slope coefficient for predictor variable
+#' @param  b2     estimated slope coefficient for product variable
 #' @param  se1    standard error for predictor coefficient
 #' @param  se2    standard error for product coefficient
-#' @param  cov    sample covariance between predictor and product coefficients
+#' @param  cov    estimated covariance between predictor and product coefficients
 #' @param  lo     low value of moderator variable 
 #' @param  hi     high value of moderator variable 
 #'
@@ -740,7 +742,7 @@ ci.yule <- function(alpha, f00, f01, f10, f11) {
 #'
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Estimate - estimate of phi coefficient
+#' * Estimate - estimate of phi correlation
 #' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
