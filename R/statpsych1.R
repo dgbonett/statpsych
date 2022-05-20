@@ -4,14 +4,14 @@
 #'
 #'
 #' @description
-#' Computes a confidence interval for a population mean using the sample 
-#' mean, sample standard deviation, and sample size. Use the t.test function
+#' Computes a confidence interval for a population mean using the estimated 
+#' mean, estimated standard deviation, and sample size. Use the t.test function
 #' for raw data input.
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
-#' @param  m	  sample mean 
-#' @param  sd	  sample standard deviation
+#' @param  m	  estimated mean 
+#' @param  sd	  estimated standard deviation
 #' @param  n	  sample size
 #'
 #'
@@ -110,15 +110,15 @@ ci.stdmean1 <- function(alpha, m, sd, n, h) {
 #'
 #' @description
 #' Computes a confidence interval for a population 2-group mean difference
-#' using the sample means, sample standard deviations, and sample sizes. Use 
-#' the t.test function for raw data input.
+#' using the estimated means, estimated standard deviations, and sample sizes. 
+#' Use the t.test function for raw data input.
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
-#' @param  m1     sample mean for group 1
-#' @param  m2     sample mean for group 2
-#' @param  sd1    sample standard deviation for group 1
-#' @param  sd2    sample standard deviation for group 2
+#' @param  m1     estimated mean for group 1
+#' @param  m2     estimated mean for group 2
+#' @param  sd1    estimated standard deviation for group 1
+#' @param  sd2    estimated standard deviation for group 2
 #' @param  n1     sample size for group 1
 #' @param  n2     sample size for group 2
 #'
@@ -188,15 +188,15 @@ ci.mean2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #'
 #' @description
 #' Computes a test statistic and confidence interval for a linear contrast
-#' of means. This function computes both unequal variance (recommended) and 
-#' equal variance confidence intervals and test statistics. A Satterthwaite 
+#' of means. This function computes both unequal variance and equal
+#' variance confidence intervals and test statistics. A Satterthwaite 
 #' adjustment to the degrees of freedom is used with the unequal variance 
 #' method. 
 #'
 #'
 #' @param     alpha  	alpha level for 1-alpha confidence
-#' @param     m     	vector of group sample means
-#' @param     sd    	vector of group sample standard deviations
+#' @param     m     	vector of group estimated means
+#' @param     sd    	vector of group estimated standard deviations
 #' @param     n     	vector of sample sizes
 #' @param     v     	vector of betwen-subjects contrast coefficients
 #' 
@@ -271,14 +271,14 @@ ci.lc.mean.bs <- function(alpha, m, sd, n, v) {
 #' @description
 #' Computes heteroscedastic Tukey-Kramer (also known as Games-Howell) 
 #' confidence intervals for all pairwise comparisons of population means 
-#' using sample means, sample standard deviations, and samples sizes as 
+#' using estimated means, estimatede standard deviations, and samples sizes as 
 #' input. A Satterthwaite adjustment to the degrees of freedom is used to 
 #' improve the accuracy of the confidence intervals. 
 #'
 #'
 #' @param  alpha   alpha level for simultaneous 1-alpha confidence
-#' @param  m       vector of group sample means
-#' @param  sd      vector of group sample standard deviations
+#' @param  m       vector of group estimated means
+#' @param  sd      vector of group estimated standard deviations
 #' @param  n       vector of sample sizes
 #'
 #'
@@ -416,10 +416,10 @@ ci.ratio.mean2 <- function(alpha, y1, y2){
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
-#' @param  m1     sample mean in group 1
-#' @param  m2     sample mean in group 2
-#' @param  sd1    sample standard deviation in group 1
-#' @param  sd2    sample standard deviation in group 2
+#' @param  m1     estimated mean in group 1
+#' @param  m2     estimated mean in group 2
+#' @param  sd1    estimated standard deviation in group 1
+#' @param  sd2    estimated standard deviation in group 2
 #' @param  n1     sample size in group 1
 #' @param  n2     sample size in group 2
 #'
@@ -501,16 +501,17 @@ ci.stdmean2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #'
 #' @description
 #' Computes confidence intervals for a population standardized mean difference
-#' in a 2-group nonexperimental design with stratified random sampling using a 
-#' square root weighted variance standardizer or single group standard 
-#' deviation standardizer.  Equality of variances is not assumed.
+#' in a 2-group nonexperimental design with stratified random sampling (a random
+#' sample of a specificied size from each subpopulation) using a square root 
+#' weighted variance standardizer or single group standard deviation 
+#' standardizer.  Equality of variances is not assumed.
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
-#' @param  m1     sample mean in group 1
-#' @param  m2     sample mean in group 2
-#' @param  sd1    sample standard deviation in group 1
-#' @param  sd2    sample standard deviation in group 2
+#' @param  m1     estimated mean in group 1
+#' @param  m2     estimated mean in group 2
+#' @param  sd1    estimated standard deviation in group 1
+#' @param  sd2    estimated standard deviation in group 2
 #' @param  n1     sample size in group 1
 #' @param  n2     sample size in group 2
 #' @param  p1     proportion of total population in subpopulation 1
@@ -593,8 +594,8 @@ ci.stdmean.strat <- function(alpha, m1, m2, sd1, sd2, n1, n2, p1) {
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
-#' @param  m      vector of group sample means
-#' @param  sd     vector of group sample standard deviation
+#' @param  m      vector of group estimated means
+#' @param  sd     vector of group estimated standard deviation
 #' @param  n      vector of sample sizes
 #' @param  v      vector of between-subjects contrast coefficients
 #'
@@ -664,16 +665,17 @@ ci.lc.stdmean.bs <- function(alpha, m, sd, n, v) {
 #'
 #' @description
 #' Computes a confidence interval for a population paired-samples mean 
-#' difference using the sample means, sample standard deviations, sample 
-#' correlation, and sample size. Use the t.test function for raw data input.
+#' difference using the estimated means, estimated standard deviations, 
+#' estimated correlation, and sample size. Use the t.test function for 
+#' raw data input.
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
-#' @param  m1     sample mean for measurement 1
-#' @param  m2     sample mean for measurement 2
-#' @param  sd1    sample standard deviation for measurement 1
-#' @param  sd2    sample standard deviation for measurement 2
-#' @param  cor    sample correlation between measurements
+#' @param  m1     estimated mean for measurement 1
+#' @param  m2     estimated mean for measurement 2
+#' @param  sd1    estimated standard deviation for measurement 1
+#' @param  sd2    estimated standard deviation for measurement 2
+#' @param  cor    estimated correlation between measurements
 #' @param  n      sample size
 #'
 #'
@@ -788,11 +790,11 @@ ci.ratio.mean.ps <- function(alpha, y1, y2){
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
-#' @param  m1     sample mean of measurement 1
-#' @param  m2     sample mean of measurement 2
-#' @param  sd1    sample standard deviation in measurement 1
-#' @param  sd2    sample standard deviation in measurement 2
-#' @param  cor    sample correlation between measurements
+#' @param  m1     estimated mean of measurement 1
+#' @param  m2     estimated mean of measurement 2
+#' @param  sd1    estimated standard deviation of measurement 1
+#' @param  sd2    estimated standard deviation of measurement 2
+#' @param  cor    estimated correlation between measurements
 #' @param  n      sample size
 #'
 #'
@@ -869,9 +871,9 @@ ci.stdmean.ps <- function(alpha, m1, m2, sd1, sd2, cor, n) {
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
-#' @param  m      vector of within-subjects sample means
-#' @param  sd     vector of within-subjects sample standard deviations
-#' @param  cor    average correlation of measurement pairs
+#' @param  m      vector of within-subjects estimated means
+#' @param  sd     vector of within-subjects estimated standard deviations
+#' @param  cor    average estimated correlation of all measurement pairs
 #' @param  n      sample size
 #' @param  q      vector of within-subjects contrast coefficients
 #'
@@ -929,7 +931,8 @@ ci.lc.stdmean.ws <- function(alpha, m, sd, cor, n, q) {
 #'
 #' @description
 #' Computes a confidence interval for a population mean absolute deviation 
-#' from the median (MAD). 
+#' from the median (MAD). The MAD is a robust alternative to the standard 
+#' deviation.
 #'
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
@@ -1398,13 +1401,13 @@ ci.ratio.median2 <- function(alpha, y1, y2) {
 #'
 #' @description
 #' Computes a confidence interval for a linear contrast of medians in a  
-#' between-subjects design using sample medians and their standard errors.
+#' between-subjects design using estimated medians and their standard errors.
 #' The sample median and standard error for each group can be computed using
 #' the ci.median1 function.
 #'
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
-#' @param  m       vector of group sample medians
+#' @param  m       vector of group estimated medians
 #' @param  se      vector of group standard errors 
 #' @param  v       vector of between-subjects contrast coefficients
 #'
@@ -1468,7 +1471,7 @@ ci.lc.median.bs <- function(alpha, m, se, v) {
 #' * Median1-Median2 - estimated difference of medians
 #' * SE1 - standard error of median 1
 #' * SE2 - standard error of median 2
-#' * cov - covariance of medians
+#' * COV - covariance of medians
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #'
@@ -1485,7 +1488,7 @@ ci.lc.median.bs <- function(alpha, m, se, v) {
 #' # Should return:
 #' #    Median1 Median2 Median1-Median2       SE        LL        UL  
 #' # [1,]    13      30             -17 3.362289 -23.58996 -10.41004 
-#' #        SE1      SE2      cov
+#' #        SE1      SE2      COV
 #' #   3.085608 4.509735 9.276849
 #'
 #'
@@ -1525,7 +1528,7 @@ ci.median.ps <- function(alpha, y1, y2) {
  ll <- diff - z*se
  ul <- diff + z*se
  out <- t(c(median1, median2, diff, se, ll, ul, se1, se2, cov))
- colnames(out) <- c("Median1", "Median2", "Median1-Median2", "SE", "LL", "UL", "SE1", "SE2", "cov")
+ colnames(out) <- c("Median1", "Median2", "Median1-Median2", "SE", "LL", "UL", "SE1", "SE2", "COV")
  return(out)
 }
 
@@ -1610,7 +1613,7 @@ ci.ratio.median.ps <- function(alpha, y1, y2) {
 
 
 #  ci.mann ====================================================================
-#' Confidence interval for a Mann-Whitney probability
+#' Confidence interval for a Mann-Whitney parameter
 #'
 #'
 #' @description
@@ -1695,8 +1698,8 @@ ci.mann <- function(alpha, y1, y2){
 #'
 #'
 #' @param   alpha  1 - alpha confidence 
-#' @param   m      vector of group sample means 
-#' @param   sd     vector of group standard deviations 
+#' @param   m      vector of group estimated means 
+#' @param   sd     vector of group estimated deviations 
 #' @param   n      sample size per group
 #'
 #'
