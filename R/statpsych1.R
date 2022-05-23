@@ -285,7 +285,7 @@ ci.lc.mean.bs <- function(alpha, m, sd, n, v) {
 #' @return 
 #' Returns a matrix with the number of rows equal to the number
 #' of pairwise comparisons. The columns are:
-#' * Estimate - estimated mean difference
+#' * diff - estimated mean difference
 #' * SE - standard error
 #' * t - t test statistic
 #' * df - degrees of freedom
@@ -305,7 +305,7 @@ ci.lc.mean.bs <- function(alpha, m, sd, n, v) {
 #' ci.tukey(.05, m, sd, n)
 #'
 #' # Should return:
-#' #      Estimate       SE          t     p       df         LL         UL
+#' #          diff       SE          t     p       df         LL         UL
 #' # 1 2     -4.71 1.142459  -4.122686 0.001 36.20303  -7.501842  -1.918158
 #' # 1 3    -13.43 1.104078 -12.163998 0.000 36.95915 -16.125713 -10.734287
 #' # 2 3     -8.72 1.228730  -7.096758 0.000 37.87646 -11.717053  -5.722947
@@ -329,7 +329,6 @@ ci.tukey <-function(alpha, m, sd, n) {
  t <- diff/SE
  q <- qtukey(p = 1 - alpha, nmeans = a, df = df)/sqrt(2)
  p <- 1 - ptukey(sqrt(2)*abs(t), nmeans = a, df = df)
- p <- round(p*1000)/1000
  LL <- diff - q*SE
  UL <- diff + q*SE
  pair <- t(combn(seq(1:a), 2))
