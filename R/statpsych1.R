@@ -285,7 +285,7 @@ ci.lc.mean.bs <- function(alpha, m, sd, n, v) {
 #' @return 
 #' Returns a matrix with the number of rows equal to the number
 #' of pairwise comparisons. The columns are:
-#' * diff - estimated mean difference
+#' * Estimate - estimated mean difference
 #' * SE - standard error
 #' * t - t test statistic
 #' * df - degrees of freedom
@@ -299,16 +299,19 @@ ci.lc.mean.bs <- function(alpha, m, sd, n, v) {
 #'
 #'
 #' @examples
-#' m <- c(12.86, 17.57, 26.29)
-#' sd <- c(3.185, 3.995, 3.773)
-#' n <- c(20, 20, 20)
+#' m <- c(12.86, 17.57, 26.29, 30.21)
+#' sd <- c(13.185, 12.995, 14.773, 15.145)
+#' n <- c(20, 20, 20, 20)
 #' ci.tukey(.05, m, sd, n)
 #'
 #' # Should return:
-#' #          diff       SE          t     p       df         LL         UL
-#' # 1 2     -4.71 1.142459  -4.122686 0.001 36.20303  -7.501842  -1.918158
-#' # 1 3    -13.43 1.104078 -12.163998 0.000 36.95915 -16.125713 -10.734287
-#' # 2 3     -8.72 1.228730  -7.096758 0.000 37.87646 -11.717053  -5.722947
+#' #     Estimate       SE          t       df           p        LL         UL
+#' # 1 2    -4.71 4.139530 -1.1378102 37.99200 0.668806358 -15.83085  6.4108517
+#' # 1 3   -13.43 4.427673 -3.0331960 37.51894 0.021765570 -25.33172 -1.5282764
+#' # 1 4   -17.35 4.490074 -3.8640790 37.29278 0.002333937 -29.42281 -5.2771918
+#' # 2 3    -8.72 4.399497 -1.9820446 37.39179 0.212906199 -20.54783  3.1078269
+#' # 2 4   -12.64 4.462292 -2.8326248 37.14275 0.035716267 -24.64034 -0.6396589
+#' # 3 4    -3.92 4.730817 -0.8286096 37.97652 0.840551420 -16.62958  8.7895768
 #'
 #'
 #' @importFrom stats qtukey
@@ -320,19 +323,19 @@ ci.tukey <-function(alpha, m, sd, n) {
  v1 <- sd^2/n
  v2 <- sd^4/(n^2*(n - 1))
  mean <- outer(m, m, '-')
- diff <- (-1)*mean[lower.tri(mean)]
+ Estimate <- (-1)*mean[lower.tri(mean)]
  v1 <- outer(v1, v1, "+")
  v2 <- outer(v2, v2, "+")
  df = v1^2/v2
  df <- df[lower.tri(df)]
  SE <- sqrt(v1[lower.tri(v1)])
- t <- diff/SE
+ t <- Estimate/SE
  q <- qtukey(p = 1 - alpha, nmeans = a, df = df)/sqrt(2)
  p <- 1 - ptukey(sqrt(2)*abs(t), nmeans = a, df = df)
- LL <- diff - q*SE
- UL <- diff + q*SE
+ LL <- Estimate - q*SE
+ UL <- Estimate + q*SE
  pair <- t(combn(seq(1:a), 2))
- out <- cbind(pair, diff, SE, t, df, p, LL, UL)
+ out <- cbind(pair, Estimate, SE, t, df, p, LL, UL)
  rownames(out) <- rep("", a*(a - 1)/2)
  return(out)
 }
