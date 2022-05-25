@@ -21,13 +21,13 @@ size.equiv.prop2(alpha, pow, p1, p2, h)
 Returns the required sample size per group
 }
 \description{
-Computes the sample size in each group required to perform an equivalence
-test for the difference in population proportions with desired power in a
-2-group design. The value of h specifies a range of practical equivalence,
--h to h, for the difference in population proportions. The absolute
-difference in the proportion planning values must be less than h.
+Computes the sample size in each group (assuming equal sample sizes) required
+to perform an equivalence test for the difference in population proportions
+with desired power in a 2-group design. The value of h specifies a range of
+practical equivalence, -h to h, for the difference in population proportions.
+The absolute difference in the proportion planning values must be less than h.
 Equivalence tests often require a very large sample size. Equivalence tests
-usually use 2 x alpha rather than alpha (e.g., use alpha = .10 rather
+usually use 2 x alpha rather than alpha (e.g., use alpha = .10 rather than
 alpha = .05).
 }
 \examples{

@@ -15,7 +15,7 @@ ci.lc.reg(alpha, est, se, n, s, v)
 
 \item{n}{vector of group sample sizes}
 
-\item{s}{number of predictor variables for within-group model}
+\item{s}{number of predictor variables for each within-group model}
 
 \item{v}{vector of between-subject contrast coefficients}
 }

@@ -11,7 +11,7 @@ License: GPL-3
 Encoding: UTF-8
 Imports: 
   utils, stats, mathjaxr, Rdpack
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.0
 Roxygen: list(markdown = TRUE)
 RdMacros: Rdpack, mathjaxr
 Suggests: 

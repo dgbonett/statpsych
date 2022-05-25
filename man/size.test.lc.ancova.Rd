@@ -11,7 +11,7 @@ size.test.lc.ancova(alpha, pow, evar, es, s, d, v)
 
 \item{pow}{desired power}
 
-\item{evar}{planning value of within group (error) variance}
+\item{evar}{planning value of within-group (error) variance}
 
 \item{es}{planning value of linear contrast}
 
@@ -25,12 +25,12 @@ size.test.lc.ancova(alpha, pow, evar, es, s, d, v)
 Returns the required sample size per group
 }
 \description{
-Computes the sample size for each group required to test a linear contrast
-of means in an ANCOVA model with desired power. In a nonexperimental design,
-the sample size is affected by the magnitude of covariate mean differences
-across groups. The covariate mean differences can be approximated by
-specifying the largest standardized covariate mean difference across all
-pairwise comparisons and for all covariates. In an experiment, this
+Computes the sample size for each group (assuming equal sample sizes) required
+to test a linear contrast of means in an ANCOVA model with desired power. In a
+nonexperimental design, the sample size is affected by the magnitude of
+covariate mean differences across groups. The covariate mean differences can be
+approximated by specifying the largest standardized covariate mean difference
+across all pairwise comparisons and for all covariates. In an experiment, this
 standardized mean difference is set to 0. Set the error variance planning
 value to the largest value within a plausible range for a conservatively
 large sample size.

@@ -10,9 +10,9 @@ ci.lc.mean.bs(alpha, m, sd, n, v)
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
 
-\item{m}{vector of group sample means}
+\item{m}{vector of group estimated means}
 
-\item{sd}{vector of group sample standard deviations}
+\item{sd}{vector of group estimated standard deviations}
 
 \item{n}{vector of sample sizes}
 
@@ -32,8 +32,8 @@ Returns a 2-row matrix. The columns are:
 }
 \description{
 Computes a test statistic and confidence interval for a linear contrast
-of means. This function computes both unequal variance (recommended) and
-equal variance confidence intervals and test statistics. A Satterthwaite
+of means. This function computes both unequal variance and equal
+variance confidence intervals and test statistics. A Satterthwaite
 adjustment to the degrees of freedom is used with the unequal variance
 method.
 }

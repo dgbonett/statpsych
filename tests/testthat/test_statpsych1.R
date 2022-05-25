@@ -49,7 +49,7 @@ test_that("ci.lc.mean.bs returns valid matrix", {
 
 
 test_that("ci.tukey returns valid matrix", {
-  colnames_expected <- c("", "", "diff", "SE", "t", "df", "p", "LL", "UL")
+  colnames_expected <- c("", "", "Estimate", "SE", "t", "df", "p", "LL", "UL")
 
   m <- c(12.86, 17.57, 26.29)
   sd <- c(3.185, 3.995, 3.773)
@@ -269,7 +269,7 @@ test_that("ci.lc.median.bs returns valid matrix", {
 
 test_that("ci.median.ps returns valid matrix", {
   colnames_expected <- c(
-    "Median1", "Median2", "Median1-Median2", "SE", "LL", "UL", "SE1", "SE2", "cov"
+    "Median1", "Median2", "Median1-Median2", "SE", "LL", "UL", "SE1", "SE2", "COV"
   )
   
   y1 <- c(21, 4, 9, 12, 35, 18, 10, 22, 24, 1, 6, 8, 13, 16, 19)

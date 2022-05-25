@@ -9,7 +9,7 @@ ci.fisher(alpha, cor, se)
 \arguments{
 \item{alpha}{alpha value for 1-alpha confidence}
 
-\item{cor}{sample correlation or association coefficient}
+\item{cor}{estimated correlation or association coefficient}
 
 \item{se}{standard error of estimate}
 }

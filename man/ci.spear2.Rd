@@ -9,9 +9,9 @@ ci.spear2(alpha, cor1, cor2, n1, n2)
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
 
-\item{cor1}{sample Spearman correlation in group 1}
+\item{cor1}{estimated Spearman correlation in group 1}
 
-\item{cor2}{sample Spearman correlation in group 2}
+\item{cor2}{estimated Spearman correlation in group 2}
 
 \item{n1}{sample size in group 1}
 

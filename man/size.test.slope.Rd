@@ -11,7 +11,7 @@ size.test.slope(alpha, pow, evar, x, slope, h)
 
 \item{pow}{desired power}
 
-\item{evar}{planning value of within group (error) variance}
+\item{evar}{planning value of within-group (error) variance}
 
 \item{x}{vector of x values of the quantitative factor}
 

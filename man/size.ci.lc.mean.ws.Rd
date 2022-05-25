@@ -25,8 +25,9 @@ Computes the sample size required to estimate a linear contrast of
 population means with desired confidence interval precision in a
 within-subjects design. Set the variance planning value to the
 largest value within a plausible range for a conservatively large
-sample size. Set the correlation planning value to the smallest value
-within a plausible range for a conservatively large sample size.
+sample size. Set the Pearson correlation planning value to the
+smallest value within a plausible range for a conservatively
+large sample size.
 }
 \examples{
 q <- c(.5, .5, -.5, -.5)

@@ -26,8 +26,8 @@ Computes the sample size required to estimate a standardized linear
 contrast of population means with desired confidence interval precision
 in a within-subjects design. Set the standardized mean difference planning
 value to the largest value within a plausible range for a conservatively
-large sample size. Set the correlation planning value to the smallest value
-within a plausible range for a conservatively large sample size.
+large sample size. Set the pearson correlation planning value to the smallest
+value within a plausible range for a conservatively large sample size.
 }
 \examples{
 q <- c(.5, .5, -.5, -.5)

@@ -21,7 +21,7 @@ Returns a 1-row matrix. The columns are:
 \item Median1-Median2 - estimated difference of medians
 \item SE1 - standard error of median 1
 \item SE2 - standard error of median 2
-\item cov - covariance of medians
+\item COV - covariance of medians
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval
 }
@@ -39,7 +39,7 @@ ci.median.ps(.05, y1, y2)
 # Should return:
 #    Median1 Median2 Median1-Median2       SE        LL        UL  
 # [1,]    13      30             -17 3.362289 -23.58996 -10.41004 
-#        SE1      SE2      cov
+#        SE1      SE2      COV
 #   3.085608 4.509735 9.276849
 
 

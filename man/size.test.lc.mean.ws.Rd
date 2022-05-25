@@ -24,10 +24,10 @@ Returns the required sample size
 }
 \description{
 Computes the sample size required to test a linear contrast of population
-means with desired power in a within-subjects design. Set the variance
+means with desired power in a within-subjects design. Set the average variance
 planning value to the largest value within a plausible range for a
-conservatively large sample size. Set the correlation planning value to the
-smallest value within a plausible range for a conservatively large sample
+conservatively large sample size. Set the average correlation planning value to
+the smallest value within a plausible range for a conservatively large sample
 size.
 }
 \examples{

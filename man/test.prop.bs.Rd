@@ -7,7 +7,7 @@
 test.prop.bs(f, n)
 }
 \arguments{
-\item{f}{vector of frequency counts of participants with the attribute}
+\item{f}{vector of frequency counts of participants who have the attribute}
 
 \item{n}{vector of sample sizes}
 }

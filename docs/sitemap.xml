@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://dgbonett.github.io/statpsych/404.html</loc>
+  </url>
+  <url>
+    <loc>https://dgbonett.github.io/statpsych/authors.html</loc>
+  </url>
+  <url>
     <loc>https://dgbonett.github.io/statpsych/index.html</loc>
+  </url>
+  <url>
+    <loc>https://dgbonett.github.io/statpsych/news/index.html</loc>
   </url>
   <url>
     <loc>https://dgbonett.github.io/statpsych/reference/ci.agree.html</loc>
@@ -13,10 +22,10 @@
     <loc>https://dgbonett.github.io/statpsych/reference/ci.cod1.html</loc>
   </url>
   <url>
-    <loc>https://dgbonett.github.io/statpsych/reference/ci.condslope.log.html</loc>
+    <loc>https://dgbonett.github.io/statpsych/reference/ci.condslope.html</loc>
   </url>
   <url>
-    <loc>https://dgbonett.github.io/statpsych/reference/ci.condslope.html</loc>
+    <loc>https://dgbonett.github.io/statpsych/reference/ci.condslope.log.html</loc>
   </url>
   <url>
     <loc>https://dgbonett.github.io/statpsych/reference/ci.cor.dep.html</loc>
@@ -179,6 +188,9 @@
   </url>
   <url>
     <loc>https://dgbonett.github.io/statpsych/reference/etasqr.adj.html</loc>
+  </url>
+  <url>
+    <loc>https://dgbonett.github.io/statpsych/reference/index.html</loc>
   </url>
   <url>
     <loc>https://dgbonett.github.io/statpsych/reference/iqv.html</loc>

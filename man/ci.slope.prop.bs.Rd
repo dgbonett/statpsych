@@ -2,7 +2,8 @@
 % Please edit documentation in R/statpsych3.R
 \name{ci.slope.prop.bs}
 \alias{ci.slope.prop.bs}
-\title{Confidence interval for a slope of a quantitative between-subjects factor}
+\title{Confidence interval for a slope of a proportion in a single-factor desigh
+with a quantitative between-subjects factor}
 \usage{
 ci.slope.prop.bs(alpha, f, n, x)
 }
@@ -27,8 +28,9 @@ Returns a 1-row matrix. The columns are:
 }
 }
 \description{
-Computes an adjusted Wald confidence interval for the slope of a
-quantitative between-subjects factor using contrast coefficients.
+Computes a test statistic and an adjusted Wald confidence interval for the
+slope of proportions in a single-factor design with a quantitative
+between-subjects factor.
 }
 \examples{
 f <- c(14, 27, 38)

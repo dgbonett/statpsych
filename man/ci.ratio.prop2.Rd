@@ -20,7 +20,7 @@ ci.ratio.prop2(alpha, f1, f2, n1, n2)
 \value{
 Returns a 1-row matrix. The columns are:
 \itemize{
-\item Estimate - adjusted ratio of proportion ratio
+\item Estimate - adjusted estimate of proportion ratio
 \item LL - lower limit of the adjusted Wald confidence interval
 \item UL - upper limit of the adjusted Wald confidence interval
 }

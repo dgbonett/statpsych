@@ -24,8 +24,8 @@ Computes the sample size required to estimate a population standardized
 mean difference with desired confidence interval precision in a
 paired-samples design. Set the standardized mean difference planning value
 to the largest value within a plausible range for a conservatively large
-sample size. Set the correlation planning value to the smallest value
-within a plausible range for a conservatively large sample size.
+sample size. Set the pearson correlation planning value to the smallest
+value within a plausible range for a conservatively large sample size.
 }
 \examples{
 size.ci.stdmean.ps(.05, 1, .65, .6)

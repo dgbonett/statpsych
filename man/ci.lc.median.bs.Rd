@@ -10,7 +10,7 @@ ci.lc.median.bs(alpha, m, se, v)
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
 
-\item{m}{vector of group sample medians}
+\item{m}{vector of group estimated medians}
 
 \item{se}{vector of group standard errors}
 
@@ -27,7 +27,7 @@ Returns a 1-row matrix. The columns are:
 }
 \description{
 Computes a confidence interval for a linear contrast of medians in a
-between-subjects design using sample medians and their standard errors.
+between-subjects design using estimated medians and their standard errors.
 The sample median and standard error for each group can be computed using
 the ci.median1 function.
 }

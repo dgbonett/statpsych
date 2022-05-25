@@ -2,7 +2,7 @@
 % Please edit documentation in R/statpsych2.R
 \name{size.ci.lc.ancova}
 \alias{size.ci.lc.ancova}
-\title{Sample size for a mean linear contrast confidence interval in an ANCOVA}
+\title{Sample size for a linear contrast confidence interval in an ANCOVA}
 \usage{
 size.ci.lc.ancova(alpha, evar, s, d, w, v)
 }
@@ -23,16 +23,16 @@ size.ci.lc.ancova(alpha, evar, s, d, w, v)
 Returns the required sample size per group
 }
 \description{
-Computes the sample size for each group required to estimate a linear
-contrast of means in an ANCOVA model with desired confidence interval
-precision. In a nonexperimental design, the sample size is affected by
-the magnitude of covariate mean differences across groups. The covariate
-mean differences can be approximated by specifying the largest
-standardized covariate mean difference across all pairwise group
-differences and for all covariates. In an experiment, this standardized
-mean difference should be set to 0. Set the error variance planning value
-to the largest value within a plausible range for a conservatively large
-sample size.
+Computes the sample size for each group (assuming equal sample sizes)
+required to estimate a linear contrast of means in an ANCOVA model with
+desired confidence interval precision. In a nonexperimental design, the
+sample size is affected by the magnitude of covariate mean differences
+across groups. The covariate mean differences can be approximated by
+specifying the largest standardized covariate mean difference across all
+pairwise group differences and for all covariates. In an experiment, this
+standardized mean difference should be set to 0. Set the error variance
+planning value to the largest value within a plausible range for a
+conservatively large sample size.
 }
 \examples{
 v <- c(1, -1)

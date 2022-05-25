@@ -9,15 +9,15 @@ ci.mean.ps(alpha, m1, m2, sd1, sd2, cor, n)
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
 
-\item{m1}{sample mean for measurement 1}
+\item{m1}{estimated mean for measurement 1}
 
-\item{m2}{sample mean for measurement 2}
+\item{m2}{estimated mean for measurement 2}
 
-\item{sd1}{sample standard deviation for measurement 1}
+\item{sd1}{estimated standard deviation for measurement 1}
 
-\item{sd2}{sample standard deviation for measurement 2}
+\item{sd2}{estimated standard deviation for measurement 2}
 
-\item{cor}{sample correlation between measurements}
+\item{cor}{estimated correlation between measurements}
 
 \item{n}{sample size}
 }
@@ -35,8 +35,9 @@ Returns a 1-row matrix. The columns are:
 }
 \description{
 Computes a confidence interval for a population paired-samples mean
-difference using the sample means, sample standard deviations, sample
-correlation, and sample size. Use the t.test function for raw data input.
+difference using the estimated means, estimated standard deviations,
+estimated correlation, and sample size. Use the t.test function for
+raw data input.
 }
 \examples{
 ci.mean.ps(.05, 58.2, 51.4, 7.43, 8.92, .537, 30)

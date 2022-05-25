@@ -10,7 +10,7 @@ ci.pairs.prop.bs(alpha, f, n)
 \arguments{
 \item{alpha}{alpha level for simultaneous 1-alpha confidence}
 
-\item{f}{vector of frequency counts of participants with attribute}
+\item{f}{vector of frequency counts of participants who have the attribute}
 
 \item{n}{vector of sample sizes}
 }

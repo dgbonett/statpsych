@@ -9,7 +9,7 @@ ci.var.upper(alpha, var, n)
 \arguments{
 \item{alpha}{alpha value for 1-alpha confidence (one-sided)}
 
-\item{var}{sample variance}
+\item{var}{estimated variance}
 
 \item{n}{sample size}
 }
@@ -17,7 +17,7 @@ ci.var.upper(alpha, var, n)
 Returns an upper limit (UL) variance planning value
 }
 \description{
-Computes an upper limit for a population variance using a sample variance
+Computes an upper limit for a population variance using an estimated variance
 from a sample of size n in a prior study. The upper limit can be used as
 a variance planning value in sample size functions that require a variance
 planning value.

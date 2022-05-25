@@ -19,10 +19,10 @@ size.ci.prop2(alpha, p1, p2, w)
 Returns the required sample size per group
 }
 \description{
-Computes the sample size in each group required to estimate a difference of
-proportions with desired confidence interval precision in a 2-group design.
-Set the proportion planning values to .5 for a conservatively large sample
-size.
+Computes the sample size in each group (assuming equal sample sizes) required
+to estimate a difference of proportions with desired confidence interval
+precision in a 2-group design. Set the proportion planning values to .5 for
+a conservatively large sample size.
 }
 \examples{
 size.ci.prop2(.05, .4, .2, .15)

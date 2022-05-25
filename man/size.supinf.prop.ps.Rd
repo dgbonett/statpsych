@@ -16,7 +16,7 @@ size.supinf.prop.ps(alpha, pow, p1, p2, phi, h)
 
 \item{p2}{planning value of proportion for measurement 2}
 
-\item{phi}{planning value of phi coefficient}
+\item{phi}{planning value of phi correlation}
 
 \item{h}{lower or upper limit for range of practical equivalence}
 }
@@ -31,9 +31,9 @@ for the range of practical equivalence and specify values of p1 and p2 such
 that p1 - p2 > h. For an inferiority test, specify the lower limit (-h) for
 the range of practical equivalence and specify values of p1 and p2 such
 that p1 - p2 > -h. This function sets the effect size equal to the
-difference in proportion planning values. Set the phi planning value to the
-smallest value within a plausible range for a conservatively large sample
-size.
+difference in proportion planning values. Set the phi correlation planning
+value to the smallest value within a plausible range for a conservatively
+large sample size.
 }
 \examples{
 size.supinf.prop.ps(.05, .9, .35, .20, .45, .05)
