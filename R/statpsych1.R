@@ -418,12 +418,12 @@ ci.ratio.mean2 <- function(alpha, y1, y2){
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
-#' @param  m1     estimated mean in group 1
-#' @param  m2     estimated mean in group 2
+#' @param  m1     estimated mean for group 1
+#' @param  m2     estimated mean for group 2
 #' @param  sd1    estimated standard deviation in group 1
 #' @param  sd2    estimated standard deviation in group 2
-#' @param  n1     sample size in group 1
-#' @param  n2     sample size in group 2
+#' @param  n1     sample size for group 1
+#' @param  n2     sample size for group 2
 #'
 #'
 #' @return 
@@ -510,12 +510,12 @@ ci.stdmean2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
-#' @param  m1     estimated mean in group 1
-#' @param  m2     estimated mean in group 2
+#' @param  m1     estimated mean for group 1
+#' @param  m2     estimated mean for group 2
 #' @param  sd1    estimated standard deviation in group 1
 #' @param  sd2    estimated standard deviation in group 2
-#' @param  n1     sample size in group 1
-#' @param  n2     sample size in group 2
+#' @param  n1     sample size for group 1
+#' @param  n2     sample size for group 2
 #' @param  p1     proportion of total population in subpopulation 1
 #'
 #'
