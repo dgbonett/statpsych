@@ -61,8 +61,8 @@ ci.mean1 <- function(alpha, m, sd, n) {
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
-#' @param  m	  sample mean 
-#' @param  sd	  sample standard deviation
+#' @param  m	  estimated mean 
+#' @param  sd	  estimated standard deviation
 #' @param  n	  sample size
 #' @param  h      hypothesized value
 #'
@@ -1701,7 +1701,7 @@ ci.mann <- function(alpha, y1, y2){
 #'
 #' @param   alpha  1 - alpha confidence 
 #' @param   m      vector of group estimated means 
-#' @param   sd     vector of group estimated deviations 
+#' @param   sd     vector of group estimated standard deviations 
 #' @param   n      sample size per group
 #'
 #'
@@ -1788,8 +1788,8 @@ ci.random.anova1 <- function(alpha, m, sd, n) {
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
-#' @param  rel    sample value of Cronbach's reliability  
-#' @param  a      number of measurements (items, raters, etc.)
+#' @param  rel    estimate of Cronbach's reliability  
+#' @param  r      number of measurements (items, raters, etc.)
 #' @param  n	  sample size
 #'
 #'
@@ -1813,9 +1813,9 @@ ci.random.anova1 <- function(alpha, m, sd, n) {
 #' 
 #' @importFrom stats qf
 #' @export
-ci.cronbach <- function(alpha, rel, a, n) {
+ci.cronbach <- function(alpha, rel, r, n) {
  df1 = n - 1
- df2 = n*(a - 1)
+ df2 = n*(r - 1)
  f1 = qf(1 - alpha/2, df1, df2)
  f2 = qf(1 - alpha/2, df2, df1)
  f0 <- 1/(1 - rel)
@@ -2355,7 +2355,7 @@ size.ci.lc.stdmean.ws <- function(alpha, d, cor, w, q) {
 #' @importFrom stats qf
 #' @importFrom stats qnorm
 #' @export
-size.ci.cronbach <- function(alpha, rel, r w) {
+size.ci.cronbach <- function(alpha, rel, r, w) {
  z <- qnorm(1 - alpha/2)
  n0 <- ceiling((8*r/(r - 1))*(1 - rel)^2*(z/w)^2 + 2)
  df1 = n0 - 1
