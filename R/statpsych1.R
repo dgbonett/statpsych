@@ -341,6 +341,158 @@ ci.tukey <-function(alpha, m, sd, n) {
 }
 
 
+#  ci.slope.mean.bs ===========================================================
+#' Confidence interval for the slope of means in a single-factor design with a
+#' quantitative between-subjects factor
+#' 
+#' 
+#' @description
+#' Computes a test statistic and confidence interval for the slope of means in 
+#' a single-factor design with a quantitative between-subjects factor. This 
+#' function computes both the unequal variance and equal variance confidence
+#' intervals and test statistics. A Satterthwaite adjustment to the degrees of
+#' freedom is used with the unequal variance method. 
+#'
+#'
+#' @param     alpha  	alpha level for 1-alpha confidence
+#' @param     m     	vector of sample means
+#' @param     sd    	vector of sample standard deviations
+#' @param     n     	vector of sample sizes
+#' @param     x     	vector of numeric predictor variable values
+#' 
+#'
+#' @return 
+#' Returns a 2-row matrix. The columns are:
+#' * Estimate - estimated slope
+#' * SE - standard error
+#' * t - t test statistic
+#' * df - degrees of freedom
+#' * p - p-value
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
+#' 
+#' 
+#' @examples
+#' m <- c(33.5, 37.9, 38.0, 44.1)
+#' sd <- c(3.84, 3.84, 3.65, 4.98)
+#' n <- c(10,10,10,10)
+#' x <- c(5, 10, 20, 30)
+#' ci.slope.mean.bs(.05, m, sd, n, x)
+#'
+#' # Should return:
+#' #                               Estimate         SE        t       df
+#' # Equal Variances Assumed:     0.3664407 0.06770529 5.412290 36.00000
+#' # Equal Variances Not Assumed: 0.3664407 0.07336289 4.994905 18.65826
+#' #                                         p        LL        UL
+#' # Equal Variances Assumed:     4.242080e-06 0.2291280 0.5037534
+#' # Equal Variances Not Assumed: 8.468223e-05 0.2126998 0.5201815
+#'
+#'
+#' @importFrom stats qt
+#' @importFrom stats pt
+#' @export
+ci.slope.mean.bs <- function(alpha, m, sd, n, x) {
+ mx <- mean(x)
+ ssx <- sum((x - mx)^2)
+ v <- (x - mx)/ssx
+ est <- t(v)%*%m 
+ k <- length(m)
+ df1 <- sum(n) - k
+ v1 <- sum((n - 1)*sd^2)/df1
+ se1 <- sqrt(v1*t(v)%*%solve(diag(n))%*%v)
+ t1 <- est/se1
+ p1 <- 2*(1 - pt(abs(t1),df1))
+ tcrit1 <- qt(1 - alpha/2, df1)
+ ll1 <- est - tcrit1*se1
+ ul1 <- est + tcrit1*se1
+ v2 <- diag(sd^2)%*%(solve(diag(n)))
+ se2 <- sqrt(t(v)%*%v2%*%v)
+ t2 <- est/se2
+ df2 <- (se2^4)/sum(((v^4)*(sd^4)/(n^2*(n - 1))))
+ p2 <- 2*(1 - pt(abs(t2),df2))
+ tcrit2 <- qt(1 - alpha/2, df2)
+ ll2 <- est - tcrit2*se2
+ ul2 <- est + tcrit2*se2
+ out1 <- t(c(est, se1, t1, df1, p1, ll1, ul1))
+ out2 <- t(c(est, se2, t2, df2, p2, ll2, ul2))
+ out <- rbind(out1, out2)
+ colnames(out) <- c("Estimate", "SE", "t", "df", "p", "LL", "UL")
+ rownames(out) <- c("Equal Variances Assumed:", "Equal Variances Not Assumed:")
+ return(out)
+}
+
+
+#  test.mono.mean.bs ==========================================================
+#' Test of a monotonic trend in means for an ordered between-subjects factor
+#' 
+#'                     
+#' @description
+#' Computes one-sided simultaneous confidence intervals for all adjacent 
+#' pairwise comparisons of population means using estimated means, estimated 
+#' standard deviations, and samples sizes as input. Equal variances are not 
+#' assumed. A Satterthwaite adjustment to the degrees of freedom is used to 
+#' improve the accuracy of the confidence intervals. If all lower limits are
+#' greater than zero, then conclude that the population means are monotoic 
+#' increasing. If all upper limits are less than zero, then conclude that the
+#' population means are monotoic increasing. Reject the hypothesis of a 
+#' monotonic trend if any lower limit is less than 0 AND any upper limit is 
+#' greater than 0. The test for monotonicity is inconclusive if any confidence 
+#' interval includes 0.
+#'
+#'
+#' @param  alpha   alpha level for simultaneous 1-alpha confidence
+#' @param  m       vector of estimated means
+#' @param  sd      vector of estimated standard deviations
+#' @param  n       vector of sample sizes
+#'
+#'
+#' @return 
+#' Returns a matrix with the number of rows equal to the number
+#' of adjacent pairwise comparisons. The columns are:
+#' * Estimate - estimated mean difference
+#' * SE - standard error
+#' * LL - one-sided lower limit of the confidence interval
+#' * UL - one-sided upper limit of the confidence interval
+#'
+#'
+#' @examples
+#' m <- c(12.86, 24.57, 36.29, 53.21)
+#' sd <- c(13.185, 12.995, 14.773, 15.145)
+#' n <- c(20, 20, 20, 20)
+#' test.mono.mean.bs(.05, m, sd, n)
+#'
+#' # Should return:
+#' #     Estimate       SE        LL        UL
+#' # 1 2   -11.71 4.139530 -20.85121 -2.568790
+#' # 2 3   -11.72 4.399497 -21.44116 -1.998840
+#' # 3 4   -16.92 4.730817 -27.36709 -6.472909
+#'
+#'
+#' @importFrom stats qt
+#' @export
+test.mono.mean.bs <-function(alpha, m, sd, n) {
+ a <- length(m)
+ v <- sd^2
+ m1 <- m[1: a - 1]
+ m2 <- m[2: a]
+ Estimate <- m1 - m2
+ v1 <- v[1: a - 1]
+ v2 <- v[2: a]
+ n1 <- n[1: a - 1]
+ n2 <- n[2: a]
+ SE <- sqrt(v1/n1 + v2/n2)
+ t <- Estimate/SE
+ df <- SE^4/(v1^2/(n1^2*(n1 - 1)) + v2^2/(n2^2*(n2 - 1)))
+ tcrit <- qt(1 - alpha/(a - 1), df)
+ LL <- Estimate - tcrit*SE
+ UL <- Estimate + tcrit*SE
+ pair = cbind(seq(1, a - 1), seq(2, a))
+ out <- cbind(pair, Estimate, SE, LL, UL)
+ rownames(out) <- rep("", a - 1)
+ return(out)
+}
+
+
 # ci.ratio.mean2 ==============================================================
 #' Confidence interval for a 2-group mean ratio
 #'
@@ -1189,6 +1341,103 @@ ci.cod1 <-function(alpha, y) {
 }
 
 
+# ci.cod2 ====================================================================
+#' Confidence interval for a ratio of dispersion coefficients in a 2-group
+#' design
+#'
+#'           
+#' @description
+#' Computes a confidence interval for a ratio of population dispersion
+#' coefficients (MAD/median). Ratio-scale scores are assumed.
+#'
+#' @param  alpha   alpha level for 1-alpha confidence
+#' @param  y1      vector of scores in gorup 1
+#' @param  y2      vector of scores in gorup 2
+#'
+#'
+#' @return 
+#' Returns a 1-row matrix. The columns are:
+#' * COD1 - estimated coefficient of dispersion in group 1
+#' * COD2 - estimated coefficient of dispersion in group 2
+#' * COD1/COD2 - estimated ratio of dispersion coefficients
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
+#'
+#'
+#' @examples
+#' y1 <- c(32, 39, 26, 35, 43, 27, 40, 37, 34, 29)
+#' y2 <- c(36, 44, 47, 42, 49, 39, 46, 31, 33, 48)
+#' ci.cod2(.05, y1, y2)
+#'
+#' # Should return:
+#' #           COD1      COD2 COD1/COD2       LL       UL
+#' # [1,] 0.1333333 0.1232558  1.081761 0.494964 2.282254
+#'
+#'
+#' @importFrom stats qnorm
+#' @export
+ci.cod2 <-function(alpha, y1, y2) {
+ z <- qnorm(1 - alpha/2)
+ n1 <- length(y1)
+ c1 <- n1/(n1 - 1)
+ a1 <- round((n1 + 1)/2 - sqrt(n1))
+ b1 <- n1 - a1 + 1
+ med1 <- median(y1)
+ m1 <- mean(y1)
+ v1 <- var(y1)
+ tau1 <- mean(abs(y1 - med1))
+ del1 <- (m1 - med1)/tau1
+ gam1 <- v1/tau1^2
+ cod1 <- tau1/med1
+ y1 <- sort(y1)
+ vareta1 <- ((log(y1[a1]) - log(y1[b1]))/4)^2
+ se11 <- sqrt(vareta1)
+ vartau1 <- (gam1 + del1^2 - 1)/n1
+ se21 <- sqrt(vartau1)
+ cov1 <- del1*se11/sqrt(n1)
+ k1 <- sqrt(vareta1 + vartau1 - 2*cov1)/(se11 + se21)
+ a21 <- round((n1 + 1)/2 - k1*z*sqrt(n1/4))
+ b21 <- n1 - a21 + 1
+ L21 <- log(y1[a21])
+ U21 <- log(y1[b21])
+ L11 <- log(c1*tau1) - k1*z*se21
+ U11 <- log(c1*tau1) + k1*z*se21
+ LL1 <- L11 - U21
+ UL1 <- U11 - L21
+ n2 <- length(y2)
+ c2 <- n2/(n2 - 1)
+ a2 <- round((n2 + 1)/2 - sqrt(n2))
+ b2 <- n2 - a2 + 1
+ med2 <- median(y2)
+ m2 <- mean(y2)
+ v2 <- var(y2)
+ tau2 <- mean(abs(y2 - med2))
+ del2 <- (m2 - med2)/tau2
+ gam2 <- v2/tau2^2
+ cod2 <- tau2/med2
+ y2 <- sort(y2)
+ vareta2 <- ((log(y2[a1]) - log(y2[b1]))/4)^2
+ se12 <- sqrt(vareta2)
+ vartau2 <- (gam2 + del2^2 - 1)/n2
+ se22 <- sqrt(vartau2)
+ cov2 <- del2*se12/sqrt(n2)
+ k2 <- sqrt(vareta2 + vartau2 - 2*cov2)/(se12 + se22)
+ a22 <- round((n2 + 1)/2 - k2*z*sqrt(n2/4))
+ b22 <- n2 - a22 + 1
+ L22 <- log(y2[a22])
+ U22 <- log(y2[b22])
+ L12 <- log(c2*tau2) - k2*z*se22
+ U12 <- log(c2*tau2) + k2*z*se22
+ LL2 <- L12 - U22
+ UL2 <- U12 - L22
+ LL <- exp(log(cod1/cod2) - sqrt((log(cod1) - LL1)^2 + (log(cod2) - UL2)^2))
+ UL <- exp(log(cod1/cod2) + sqrt((log(cod1) - UL1)^2 + (log(cod2) - LL2)^2))
+ out <- t(c(cod1, cod2, cod1/cod2, LL, UL))
+ colnames(out) <- c("COD1", "COD2", "COD1/COD2", "LL", "UL")
+ return(out)
+}
+
+
 #  ci.median1 =================================================================
 #' Confidence interval for a single median 
 #'
@@ -1614,6 +1863,65 @@ ci.ratio.median.ps <- function(alpha, y1, y2) {
 }
 
 
+#  ci.sign1 ================================================================== 
+#' Confidence interval for the parameter of the one-sample sign test
+#'
+#'
+#' @description
+#' Computes adjusted Wald interval for the population proportion of 
+#' quantitative scores that are greater than the null hypothesis value
+#' of the population median in a one-sample sign test.
+#'
+#'
+#' @param   alpha   alpha level for 1-alpha confidence
+#' @param   y       vector of y scores
+#' @param   h       null hypothesis value for population median
+#'
+#'
+#' @return
+#' Returns a 1-row matrix. The columns are:
+#' * Estimate - adjusted estimate of proportion
+#' * SE - adjusted standard error
+#' * LL - lower limit of adjusted Wald confidence interval
+#' * UL - upper limit of adjusted Wald confidence interval
+#'
+#'
+#' @references
+#' Agresti, A, & Coull, BA (1998) Approximate is better than “exact” for 
+#' interval estimation of binomial proportions. American Statistician, 52,
+#' 119–126. doi: 10.1080/00031305.1998.10480550
+#'
+#'
+#' @examples
+#' y <- c(30, 20, 15, 10, 10, 60, 20, 25, 20, 30, 10, 5, 50, 40, 20, 10,
+#'         0, 20, 50)
+#' ci.sign1(.05, y, 9)
+#'
+#' # Should return:
+#' #      Estimate        SE        LL        UL
+#' # [1,] 0.826087 0.0790342 0.6711828 0.9809911
+#'
+#'
+#' @importFrom stats qnorm
+#' @export
+ci.sign1 <- function(alpha, y, h) {
+ z <- qnorm(1 - alpha/2)
+ f <- sum(as.integer(y > h))
+ n <- length(y)
+ p.mle <- f/n
+ se.mle <- sqrt(p.mle*(1 - p.mle)/n)
+ p.adj <- (f + 2)/(n + 4)
+ se.adj <- sqrt(p.adj*(1 - p.adj)/(n + 4))
+ LL.adj <- p.adj - z*se.adj
+ UL.adj <- p.adj + z*se.adj
+ if (LL.adj < 0) {LL.adj = 0}
+ if (UL.adj > 1) {UL.adj = 1}
+ out <- t(c(p.adj, se.adj, LL.adj, UL.adj))
+ colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ return(out)
+}
+
+
 #  ci.mann ====================================================================
 #' Confidence interval for a Mann-Whitney parameter
 #'
@@ -1823,6 +2131,227 @@ ci.cronbach <- function(alpha, rel, r, n) {
  ul <- 1 - 1/(f0*f2)
  out <- t(c(ll, ul))
  colnames(out) = c("LL", "UL")
+ return(out)
+}
+
+
+#  ci.reliablity =============================================================
+#' Confidence interval for a reliability coefficient
+#'
+#'
+#' @description
+#' Computes a confidence interval for a population reliability coefficient
+#' such as Cronbach's alpha or McDonald's omega using an estimate of the
+#' reliablity and its standard error. The standard error can be a robust
+#' standard error or bootstrap standard error obtained from an SEM program.
+#'
+#'  
+#' @param  alpha  alpha level for 1-alpha confidence
+#' @param  rel    estimated reliability  
+#' @param  se     standard error of reliability
+#' @param  n	  sample size
+#'
+#'
+#' @return 
+#' Returns a 1-row matrix. The columns are:
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
+#' 
+#' 
+#' @examples
+#' ci.reliability(.05, .88, .147, 100)
+#'
+#' # Should return:
+#' # [1,]  0.7971254 0.8931436   
+#'  
+#' 
+#' @importFrom stats qf
+#' @export
+ci.reliability <- function(alpha, rel, se, n) {
+ z <- qnorm(1 - alpha/2)
+ b <- log(n/(n - 1))
+ ll <- 1 - exp(log(1 - rel) - b + z*sqrt(se^2/(1 - rel)^2))
+ ul <- 1 - exp(log(1 - rel) - b - z*sqrt(se^2/(1 - rel)^2))
+ out <- c(ll, ul)
+ return(out)
+}
+
+
+#  ci.etasqr ================================================================= 
+#' Confidence interval for eta-squared
+#'
+#'
+#' @description
+#' Computes a confidence interval for a population eta-squared, partial 
+#' eta-squared, or generalized eta-squared in a fixed-factor between-subjects 
+#' design. An approximate bias adjusted estimate is also computed.
+#'
+#'
+#' @param  alpha    alpha value for 1-alpha confidence
+#' @param  etasqr   estimated eta-squared
+#' @param  df1      degrees of freedom for effect
+#' @param  df2      error degrees of freedom
+#'
+#'
+#' @return 
+#' Returns a 1-row matrix. The columns are:
+#' * Eta-squared - estimate of eta-squared 
+#' * adj Eta-squared - bias adjusted eta-squared estimate
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
+#'
+#'
+#' @examples
+#' ci.etasqr(.05, .241, 3, 116)
+#'
+#' # Should return:
+#' #      Eta-squared adj Eta-squared        LL        UL
+#' # [1,]       0.241       0.2213707 0.1040229 0.3493431
+#'  
+#' 
+#' @importFrom stats pf
+#' @importFrom stats qnorm
+#' @export
+ci.etasqr <- function(alpha, etasqr, df1, df2) {
+ alpha1 <- alpha/2
+ alpha2 <- 1 - alpha1
+ z <- qnorm(alpha2)
+ F <- (etasqr/(1 - etasqr))*(df2/df1)
+ adj <- 1 - (df2 + df1)*(1 - etasqr)/df2
+ ul0 <- 1 - exp(log(1 - etasqr) - z*sqrt(4*etasqr/(df2 - 1)))
+ du <- ul0*(df1 + df2 + 1)/(1 - ul0)
+ nc <- seq(0, du, by  = .001)
+ p <- pf(F, df1, df2, nc)
+ k1 <- which(min(abs(p - alpha2)) == abs(p - alpha2))[[1]]
+ dl <- nc[k1]
+ ll <- dl/(dl + df1 + df2 + 1)
+ k2 <- which(min(abs(p - alpha1)) == abs(p - alpha1))[[1]]
+ du <- nc[k2]
+ ul <- du/(du + df1 + df2 + 1)
+ if (ul == 0) {ul = ul0}
+ out <- t(c(etasqr, adj, ll, ul))
+ colnames(out) <- c("Eta-squared", "adj Eta-squared", "LL", "UL")
+ return(out)
+}
+
+
+#  test.skew =================================================================
+#' Computes p-value for test of skewness
+#'
+#'                          
+#' @description
+#' Computes a Monte Carlo p-value (250,000 replications) for the null 
+#' hypothesis that the sample data come from a normal distribution. If the
+#' p-value is small (e.g., less than .05) and the skewness estimate is 
+#' positive, then the normality assumption can be rejected due to positive
+#' skewness. If the p-value is small (e.g., less than .05) and the skewness
+#' estimate is negative, then the normality assumption can be rejected due 
+#' to negative skewness.
+#'
+#'
+#' @param   y      vector of quantitative scores
+#'  
+#' 
+#' @return
+#' Returns a 1-row matrix. The columns are:
+#' * Skewness - Estimate of skewness coefficient
+#' * p - Monte Carlo two-sided p-value for test of zero skewness
+#'
+#'
+#' @examples
+#' y <- c(30, 20, 15, 10, 10, 60, 20, 25, 20, 30, 10, 5, 50, 40, 95)
+#' test.skew(y)
+#'
+#' # Should return:
+#' #      Skewness       p
+#' # [1,] 1.520102 0.00684
+#'
+#'
+#' @importFrom stats rnorm
+#' @export
+test.skew <- function(y) {
+ rep <- 250000
+ n = length(y)
+ a <- sqrt((n - 1)/n)
+ m <- mean(y)
+ sd <- a*sd(y)
+ z <- (y - m)/sd
+ skew <- mean(z^3)
+ y0 <- matrix(rnorm(rep*n), nrow = rep)
+ m0 <- matrix(rowMeans(y0), nrow = rep, ncol = 1)
+ sd0 <- a*sqrt(apply(y0, 1, var))
+ sd0 <- matrix(sd0, nrow = rep, ncol = 1)
+ j <- replicate(n, 1)
+ z0 <- (y0 - m0%*%j)/(sd0%*%j)
+ skew0 <- rowMeans(z0^3)
+ c1 <- as.integer(skew0 > skew)
+ c2 <- as.integer(skew0 < -skew)
+ e1 <- sum(c1)/rep
+ e2 <- sum(c2)/rep
+ p <- e1 + e2
+ out <- round(t(c(skew, p)), 4)
+ colnames(out) <- c("Skewness", "p")
+ return(out)
+}
+
+
+#  test.kurtosis =================================================================
+#' Computes p-value for test of kurtosis
+#'
+#'                                 
+#' @description
+#' Computes a Monte Carlo p-value (250,000 replications) for the null 
+#' hypothesis that the sample data come from a normal distribution. If the
+#' p-value is small (e.g., less than .05) and excess kurtosis is positive,
+#' then the normality assumption can be rejected due to leptokurtosis. If the
+#' p-value is small (e.g., less than .05) and excess kurtosis is negative,
+#' then the normality assumption can be rejected due to platykurtosis.
+#'
+#'
+#' @param   y      vector of quantitative scores
+#'  
+#' 
+#' @return
+#' Returns a 1-row matrix. The columns are:
+#' * Kurtosis - Estimate of kurtosis coefficient
+#' * Excess - Estimate of excess kurtosis (kurtosis - 3)
+#' * p - Monte Carlo two-sided p-value for test of zero excess kurtosis
+#'
+#'
+#' @examples
+#' y <- c(30, 20, 15, 10, 10, 60, 20, 25, 20, 30, 10, 5, 50, 40, 95)
+#' test.kurtosis(y)
+#'
+#' # Should return:
+#' #      Kurtosis   Excess      p
+#' # [1,]    4.815    1.815  0.019
+#'
+#'
+#' @importFrom stats rnorm
+#' @export
+test.kurtosis <- function(y) {
+ rep <- 250000
+ n = length(y)
+ a <- sqrt((n - 1)/n)
+ m <- mean(y)
+ sd <- a*sd(y)
+ z <- (y - m)/sd
+ kur <- mean(z^4)
+ y0 <- matrix(rnorm(rep*n), nrow = rep)
+ m0 <- matrix(rowMeans(y0), nrow = rep, ncol = 1)
+ sd0 <- a*sqrt(apply(y0, 1, var))
+ sd0 <- matrix(sd0, nrow = rep, ncol = 1)
+ j <- replicate(n, 1)
+ z0 <- (y0 - m0%*%j)/(sd0%*%j)
+ kur0 <- rowMeans(z0^4)
+ if (kur > 3) {
+   c <- as.integer(kur0 > kur)
+ } else {
+   c <- as.integer(kur0 < kur)
+ }
+ p <- 2*sum(c)/rep
+ out <- round(t(c(kur, kur - 3, p)), 4)
+ colnames(out) <- c("Kurtosis", "Excess", "p")
  return(out)
 }
 
@@ -3356,6 +3885,65 @@ test.anova1.bs <- function(m, sd, n) {
   out <- t(c(F, dfa, dfe, p, etasqr, adjetasqr))
   colnames(out) <- c("F", "dfA",  "dfE", "p", "eta-squared", "adj eta-squared")
   return(out)
+}
+
+
+#  etasqr.gen.2way =============================================================== 
+#' Generalized eta-squared estimates in a two-factor design
+#'
+#'
+#' @description
+#' Computes generalized eta-square estimates in a two-factor design where one
+#' or both factors are classification factors. If both factors are treatment
+#' factors, then partial eta-square estimates are typically recommended.
+#' Use the estimates from this function in the etasqr.adj function to obtain
+#' bias adjusted estimates.
+#'
+#'
+#' @param  SSa    sum of squares for factor A
+#' @param  SSb    sum of squares for factor B
+#' @param  SSab   sum of squares for A x B interaction
+#' @param  SSe    error (within) sum of squares
+#'
+#'
+#' @return 
+#' Returns a 3-row matrix. The columns are:
+#' * A - estimate of eta-squared for factor A
+#' * B - estimate of eta-squared for factor B
+#' * AB - estimate of eta-squared for A x B interaction
+#'
+#'
+#' @examples
+#' etasqr.gen.2way(12.3, 15.6, 5.2, 7.9)
+#'
+#' # Should return:
+#' #                                         A         B        AB
+#' # A treatment, B classification:     0.300000 0.5435540 0.1811847
+#' # A classification, B treatment:     0.484252 0.3804878 0.2047244
+#' # A classification, B classiciation: 0.300000 0.3804878 0.1268293
+#'  
+#' 
+#' @export
+etasqr.gen.2way <- function(SSa, SSb, SSab, SSe) {
+ etaA1 <- SSa/(SSa + SSb + SSab + SSe)
+ etaB1 <- SSb/(SSb + SSab + SSe)
+ etaAB1 <- SSab/(SSb + SSab + SSe)
+ etaA2 <- SSa/(SSa + SSab + SSe)
+ etaB2 <- SSb/(SSa + SSb + SSab + SSe)
+ etaAB2 <- SSab/(SSa + SSab + SSe)
+ etaA3 <- SSa/(SSa + SSb + SSab + SSe)
+ etaB3 <- SSb/(SSa + SSb + SSab + SSe)
+ etaAB3 <- SSab/(SSa + SSb + SSab + SSe)
+ out1 <- t(c(etaA1, etaB1, etaAB1))
+ out2 <- t(c(etaA2, etaB2, etaAB2))
+ out3 <- t(c(etaA3, etaB3, etaAB3))
+ out<- rbind(out1, out2, out3)
+ colnames(out) <- c("A", "B", "AB")
+ rownames1 <- c("A treatment, B classification:")
+ rownames2 <- c("A classification, B treatment:")
+ rownames3 <- c("A classification, B classiciation:")
+ rownames(out) <- c(rownames1, rownames2, rownames3)
+ return(out)
 }
 
 
