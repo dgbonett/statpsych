@@ -124,8 +124,8 @@ ci.spcor <- function(alpha, cor, r2, n) {
 #' @param  alpha	alpha level for 1-alpha confidence
 #' @param  cor1	  	estimated Pearson correlation in group 1
 #' @param  cor2	  	estimated Pearson correlation in group 2
-#' @param  n1	  	sample size in group 1
-#' @param  n2	  	sample size in group 2
+#' @param  n1	  	sample size for group 1
+#' @param  n2	  	sample size for group 2
 #'
 #'
 #' @return 
@@ -251,10 +251,10 @@ ci.cor.dep <- function(alpha, cor1, cor2, cor12, n) {
 #' coefficients.
 #'
 #'  
-#' @param  cor1  estimated correlation in group 1 
+#' @param  cor1  estimated correlation for group 1 
 #' @param  ll1   lower limit for group 1 correlation
 #' @param  ul1   upper limit for group 1 correlation
-#' @param  cor2  estimated correlation in group 2
+#' @param  cor2  estimated correlation for group 2
 #' @param  ll2   lower limit for group 2 correlation
 #' @param  ul2   upper limit for group 2 correlation
 #'
@@ -308,8 +308,8 @@ ci.cor2.gen <- function(cor1, ll1, ul1, cor2, ll2, ul2) {
 #' @param  m2     estimated mean for group 2
 #' @param  sd1    estimated standard deviation for group 1
 #' @param  sd2    estimated standard deviation for group 2
-#' @param  n1     sample size in group 1
-#' @param  n2	  sample size in group 2
+#' @param  n1     sample size for group 1
+#' @param  n2	  sample size for group 2
 #'
 #'
 #' @references
@@ -428,10 +428,10 @@ ci.spear <- function(alpha, y, x) {
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
-#' @param  cor1	  estimated Spearman correlation in group 1
-#' @param  cor2	  estimated Spearman correlation in group 2
-#' @param  n1	  sample size in group 1
-#' @param  n2	  sample size in group 2
+#' @param  cor1	  estimated Spearman correlation for group 1
+#' @param  cor2	  estimated Spearman correlation for group 2
+#' @param  n1	  sample size for group 1
+#' @param  n2	  sample size for group 2
 #'
 #'
 #' @return 
