@@ -427,6 +427,72 @@ ci.slope.prop.bs <- function(alpha, f, n, x) {
 }
 
 
+#  test.mono.prop.bs ============================================================
+#' Test of monotonic trend in proportions for an ordered between-subjects
+#' factor
+#'
+#'
+#' @description
+#' Computes one-sided simultaneous confidence intervals for all adjacent pairwise
+#' comparisons of population proportions using group frequency counts and samples 
+#' sizes as input. If all lower limits are greater than zero, then conclude that 
+#' the population proportions are monotoic increasing. If all upper limits are 
+#' less than zero, then conclude that the population proportions are monotoic 
+#' increasing. Reject the hypothesis of a monotonic trend if any lower limit is 
+#' less than 0 AND any upper limit is greater than 0. The test for monotonicity 
+#' is inconclusive if any confidence interval includes 0.
+#'
+#'
+#' @param  alpha   alpha level for simultaneous 1-alpha confidence
+#' @param  f       vector of frequency counts of participants who have the attribute
+#' @param  n       vector of sample sizes
+#'
+#'
+#' @return 
+#' Returns a matrix with the number of rows equal to the number
+#' of adjacent pairwise comparisons. The columns are:
+#' * Estimate - estimated proportion difference
+#' * SE - standard error
+#' * LL - one-sided lower limit of the confidence interval
+#' * UL - one-sided upper limit of the confidence interval
+#'
+#'
+#' @examples
+#' f = c(67, 49, 30, 10)
+#' n = c(100, 100, 100, 100)
+#' test.mono.prop.bs(.05, f, n)
+#'
+#' # Should return:
+#' #      Estimate         SE         LL        UL
+#' # 1 2 0.1764706 0.06803446 0.03169019 0.3212510
+#' # 2 3 0.1862745 0.06726135 0.04313931 0.3294097
+#' # 3 4 0.1960784 0.05493010 0.07918469 0.3129722
+#'
+#'
+#' @importFrom stats qnorm
+#' @export
+test.mono.prop.bs <-function(alpha, f, n) {
+ a <- length(f)
+ p.adj <- (f + 1)/(n + 2)
+ v <- p.adj*(1 - p.adj)/(n + 2)
+ p1 <- p.adj[1: a - 1]
+ p2 <- p.adj[2: a]
+ Estimate <- p1 - p2
+ v1 <- v[1: a - 1]
+ v2 <- v[2: a]
+ n1 <- n[1: a - 1]
+ n2 <- n[2: a]
+ SE <- sqrt(v1 + v2)
+ zcrit <- qnorm(1 - alpha/(a - 1))
+ LL <- Estimate - zcrit*SE
+ UL <- Estimate + zcrit*SE
+ pair = cbind(seq(1, a - 1), seq(2, a))
+ out <- cbind(pair, Estimate, SE, LL, UL)
+ rownames(out) <- rep("", a - 1)
+ return(out)
+}
+
+
 #  ci.prop.ps ================================================================
 #' Confidence interval for a paired-samples proportion difference
 #'
@@ -1024,6 +1090,78 @@ ci.agree <- function(alpha, n, f, k) {
  UL.g <- a*(p.adj + z*sqrt(p.adj*(1 - p.adj)/(n + 4))) - 1/(k - 1) 
  out <- t(c(g.mle, se.g, LL.g, UL.g))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ return(out)
+}
+
+#  ci.agree2 =================================================================
+#' Confidence interval for G-index difference in a 2-group design
+#'
+#'                          
+#' @description
+#' Computes adjusted Wald confidence intervals for the G-index of agreement 
+#' within each group and the difference of G-indices. The point estimates are 
+#' maximum likelihood estimates.
+#'
+#'
+#' @param  alpha   alpha level for simultaneous 1-alpha confidence
+#' @param  n1      sample size (objects) in group 1
+#' @param  f1      number of objects rated in agreement in group 1
+#' @param  n2      sample size (objects) in group 2
+#' @param  f2      number of objects rated in agreement in group 2
+#' @param  r       number of rating categories
+#'
+#'
+#' @return
+#' Returns a 3-row matrix. The rows are:
+#' * Row 1: G-index for group 1
+#' * Row 2: G-index for group 2
+#' * Row 3: G-index difference
+#'
+#'
+#' The columns are:
+#' * Estimate - estimate of G-index (single-group and difference)  
+#' * LL - lower limit of confidence interval
+#' * UL - upper limit of confidence interval
+#'
+#'
+#' @examples
+#' ci.agree2(.05, 75, 70, 60, 45, 2)
+#'
+#' # Should return:
+#' #          Estimate        LL        UL
+#' # G1      0.8666667 0.6974555 0.9481141
+#' # G2      0.5000000 0.2523379 0.6851621
+#' # G1 – G2 0.3666667 0.1117076 0.6088621
+#'
+#'
+#' @importFrom stats qnorm
+#' @export
+ci.agree2 <- function(alpha, n1, f1, n2, f2, r) {
+ z <- qnorm(1 - alpha/2)
+ a <- r/(r - 1)
+ p1.ml <- f1/n1
+ p1 <- (f1 + 2)/(n1 + 4)
+ G1 <- a*p1.ml - 1/(r - 1)
+ se1 <- sqrt(p1*(1 - p1)/(n1 + 4))
+ LL1 <- a*(p1 - z*se1) - 1/(r - 1)
+ UL1 <- a*(p1 + z*se1) - 1/(r - 1) 
+ p2.ml <- f2/n2
+ p2 <- (f2 + 2)/(n2 + 4)
+ G2 <- a*p2.ml - 1/(r - 1)
+ se2 <- sqrt(p2*(1 - p2)/(n2 + 4))
+ LL2 <- a*(p2 - z*se2) - 1/(r - 1)
+ UL2 <- a*(p2 + z*se2) - 1/(r - 1) 
+ p1.d <- (f1 + 1)/(n1 + 2)
+ p2.d <- (f2 + 1)/(n2 + 2)
+ se.d <- sqrt(p1.d*(1 - p1.d)/(n1 + 2) + p2.d*(1 - p2.d)/(n2 + 2))
+ LL3 <- a*(p1.d - p2.d - z*se.d)
+ UL3 <- a*(p1.d - p2.d + z*se.d) 
+ out1 <- t(c(G1, LL1, UL1))
+ out2 <- t(c(G2, LL2, UL2))
+ out3 <- t(c(G1 - G2, LL3, UL3))
+ out <- rbind(out1, out2, out3)
+ colnames(out) <- c("Estimate", "LL", "UL")
+ rownames(out) <- c("G1", "G2", "G1 – G2")
  return(out)
 }
 
