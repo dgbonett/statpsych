@@ -609,7 +609,7 @@ ci.condslope <- function(alpha, b1, b2, se1, se2, cov, lo, hi, dfe) {
 #'  
 #' @description
 #' Compute a confidence interval and test statistic for a linear contrast
-#' of a population regression coefficient (y-intercept or slope) across
+#' of a population regression coefficients (y-intercept or slope) across
 #' groups in a multiple group regression model. Equality of error variances
 #' across groups is not assumed. A Satterthwaite adjustment to the degrees 
 #' of freedom is used to improve the accuracy of the confidence interval. 
@@ -756,6 +756,202 @@ ci.indirect <- function(alpha, b1, b2, se1, se2) {
  ll <- y[c]
  ul <- y[k - c + 1]
  out <- t(c(b1*b2, se, ll, ul))
+ colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ return(out)
+}
+
+
+#  ci.rsqr ===================================================================
+#' Confidence interval for squared multiple correlation
+#'
+#' @description
+#' Computes an approximate confidence interval for a population multiple 
+#' correlation in a linear model with random predictor variables. This 
+#' function uses the scaled central F approximation method.
+#'
+#'
+#' @param  alpha    alpha value for 1-alpha confidence
+#' @param  r2       estimated unadjusted squared multiple correlation
+#' @param  s        number of predictor variables
+#' @param  n        sample size
+#'
+#'
+#' @return 
+#' Returns a 1-row matrix. The columns are:
+#' * R-squared - estimate of unadjusted R-squared 
+#' * adj R-squared - bias adjusted R-squared estimate
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
+#'
+#'
+#' @examples
+#' ci.rsqr(.05, .241, 3, 116)
+#'
+#' # Should return:
+#' #        R-squared    adj R-squared         LL        UL
+#' # [1,]       0.241        0.2206696 0.09827092 0.3630098
+#'  
+#' 
+#' @importFrom stats qf
+#' @export
+ci.rsqr <- function(alpha, r2, s, n) {
+ alpha1 <- alpha/2
+ alpha2 <- 1 - alpha1
+ dfe <- n - s - 1
+ adj <- 1 - (n - 1)*(1 - r2)/dfe
+ b1 <- r2/(1 - r2)
+ b2 <- adj/(1 - adj)
+ v1 <- ((n - 1)*b1 + s)^2/((n - 1)*b1*(b1 + 2) + s)
+ v2 <- ((n - 1)*b2 + s)^2/((n - 1)*b2*(b2 + 2) + s)
+ F1 <- qf(alpha1, v1, dfe)
+ F2 <- qf(alpha2, v2, dfe)
+ ll <- (dfe*r2 - (1 - r2)*s*F2)/(dfe*(r2 + (1 - r2)*F2))
+ ul <- (dfe*r2 - (1 - r2)*s*F1)/(dfe*(r2 + (1 - r2)*F1))
+ b1 <- ul/(1 - ul)
+ b2 <- ll/(1 - ll)
+ v1 <- ((n - 1)*b1 + s)^2/((n - 1)*b1*(b1 + 2) + s)
+ v2 <- ((n - 1)*b2 + s)^2/((n - 1)*b2*(b2 + 2) + s)
+ F1 <- qf(alpha1, v1, dfe)
+ F2 <- qf(alpha2, v2, dfe)
+ ll <- (dfe*r2 - (1 - r2)*s*F2)/(dfe*(r2 + (1 - r2)*F2))
+ ul <- (dfe*r2 - (1 - r2)*s*F1)/(dfe*(r2 + (1 - r2)*F1))
+ b1 <- ul/(1 - ul)
+ b2 <- ll/(1 - ll)
+ v1 <- ((n - 1)*b1 + s)^2/((n - 1)*b1*(b1 + 2) + s)
+ v2 <- ((n - 1)*b2 + s)^2/((n - 1)*b2*(b2 + 2) + s)
+ F1 <- qf(alpha1, v1, dfe)
+ F2 <- qf(alpha2, v2, dfe)
+ ll <- (dfe*r2 - (1 - r2)*s*F2)/(dfe*(r2 + (1 - r2)*F2))
+ ul <- (dfe*r2 - (1 - r2)*s*F1)/(dfe*(r2 + (1 - r2)*F1))
+ b1 <- ul/(1 - ul)
+ b2 <- ll/(1 - ll)
+ v1 <- ((n - 1)*b1 + s)^2/((n - 1)*b1*(b1 + 2) + s) 
+ v2 <- ((n - 1)*b2 + s)^2/((n - 1)*b2*(b2 + 2) + s) 
+ F1 <- qf(alpha1, v1, dfe)
+ F2 <- qf(alpha2, v2, dfe)
+ ll <- (dfe*r2 - (1 - r2)*s*F2)/(dfe*(r2 + (1 - r2)*F2))
+ ul <- (dfe*r2 - (1 - r2)*s*F1)/(dfe*(r2 + (1 - r2)*F1))
+ out <- t(c(r2, adj, ll, ul))
+ colnames(out) <- c("R-squared", "adj R-squared", "LL", "UL")
+ return(out)
+}
+
+
+#  ci.lc.gml ==================================================================
+#' Confidence interval for a linear function of general linear model parameters
+#'
+#'                                  
+#' @description
+#' Computes the estimate, standard error, and confidence interval for a linear
+#' function of parameters in a general linear model using coef(object) and
+#' vcov(object) where "object" is a fitted model object from the lm function.
+#'
+#'
+#' @param   alpha  alpha for 1 - alpha confidence
+#' @param   n      sample size
+#' @param   b      vector of parameter estimates from coef(object)
+#' @param   V      covariance matrix of parameter estimates from vcov(object)
+#' @param   q      vector of coefficients
+#'
+#'
+#' @return 
+#' Returns a 1-row matrix. The columns are:
+#' * Estimate - estimate of linear function 
+#' * SE - standard error
+#' * t - t test statistic 
+#' * df - degrees of freedom
+#' * p - p-value 
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval 
+#'
+#'
+#' @examples
+#' out <- lm(y ~ x1 + x2)
+#' b <- coef(out)
+#' V <- vcov(out)
+#' n <- length(y)
+#' q <- c(0, .5, .5)
+#' b
+#' V
+#' ci.lc.glm(.05, n, b, V, q)
+#'
+#' #  Should return:
+#' # (Intercept)         x1          x2 
+#' #  17.459848    2.051109    2.577426 
+#' #             (Intercept)          x1          x2
+#' # (Intercept)   37.468000 -2.44860753 -1.20770723
+#' # x1            -2.448608  0.22020410 -0.08252115
+#' # x2            -1.207707 -0.08252115  0.58295564
+#' #      Estimate        SE        t df            p       LL       UL
+#' # [1,] 2.314268 0.3994113 5.794198 17 2.157094e-05 1.471584 3.156952
+#'
+#'
+#' @importFrom stats qt
+#' @importFrom stats pt
+#' @export
+ci.lc.glm <-function(alpha, n, b, V, q) {
+ df <- n - length(b)
+ tcrit <- qt(1 - alpha/2, df)
+ est <- t(q)%*%b
+ se <- sqrt(t(q)%*%V%*%q)
+ t <- est/se
+ p <- 2*(1 - pt(abs(t), df))
+ ll <- est - tcrit*se
+ ul <- est + tcrit*se
+ out <- t(c(est, se, t, df, p, ll, ul))
+ colnames(out) <- c("Estimate", "SE", "t", "df", "p", "LL", "UL")
+ return(out)
+}
+
+
+#  ci.lc.gen.bs ===============================================================
+#' Confidence interval for a linear contrast of parameters in a between-subjects
+#' design
+#'
+#'                                              
+#' @description
+#' Computes the estimate, standard error, and approximate confidence interval 
+#' for a linear contrast of any type of parameter (e.g., quartile, ordinal 
+#' regression slope, path coefficient, G-index) where each parameter value has
+#' been estimated from a different sample. The parameter vaues are assumed to 
+#' be of the same type (e.g., all unstandardized path coefficients) and their 
+#' sampling distributions are assumed to be approximately normal.
+#'
+#'
+#' @param  alpha   alpha level for simultaneous 1-alpha confidence
+#' @param  est     vector of parameter estimates
+#' @param  se      vector of standard errors
+#' @param  v       vector of contrast coefficients
+#'
+#'
+#' @return 
+#' Returns a 1-row matrix. The columns are:
+#' * Estimate - estimate of linear contrast
+#' * SE - standard error of linear contrast
+#' * LL - lower limit of confidence interval
+#' * UL - upper limit of confidence interval
+#'
+#'
+#' @examples
+#' est <- c(3.86, 4.57, 2.29, 2.88)
+#' se <- c(0.185, 0.365, 0.275, 0.148)
+#' v <- c(.5, .5, -.5, -.5)
+#' ci.lc.gen.bs(.05, est, se, v)
+#'
+#' # Should return:
+#' #      Estimate        SE       LL       UL
+#' # [1,]     1.63 0.2573806 1.125543 2.134457
+#'
+#'
+#' @importFrom stats qnorm
+#' @export
+ci.lc.gen.bs <- function(alpha, est, se, v) {
+ est.lc <- t(v)%*%est
+ se.lc <- sqrt(t(v)%*%diag(se^2)%*%v)
+ zcrit <- qnorm(1 - alpha/2)
+ ll <- est.lc - zcrit*se.lc
+ ul <- est.lc + zcrit*se.lc
+ out <- t(c(est.lc, se.lc, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  return(out)
 }
