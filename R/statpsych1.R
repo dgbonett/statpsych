@@ -61,8 +61,8 @@ ci.mean1 <- function(alpha, m, sd, n) {
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
-#' @param  m	  sample mean 
-#' @param  sd	  sample standard deviation
+#' @param  m	  estimated mean 
+#' @param  sd	  estimated standard deviation
 #' @param  n	  sample size
 #' @param  h      hypothesized value
 #'
@@ -418,12 +418,12 @@ ci.ratio.mean2 <- function(alpha, y1, y2){
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
-#' @param  m1     estimated mean in group 1
-#' @param  m2     estimated mean in group 2
-#' @param  sd1    estimated standard deviation in group 1
-#' @param  sd2    estimated standard deviation in group 2
-#' @param  n1     sample size in group 1
-#' @param  n2     sample size in group 2
+#' @param  m1     estimated mean for group 1
+#' @param  m2     estimated mean for group 2
+#' @param  sd1    estimated standard deviation for group 1
+#' @param  sd2    estimated standard deviation for group 2
+#' @param  n1     sample size for group 1
+#' @param  n2     sample size for group 2
 #'
 #'
 #' @return 
@@ -510,12 +510,12 @@ ci.stdmean2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
-#' @param  m1     estimated mean in group 1
-#' @param  m2     estimated mean in group 2
-#' @param  sd1    estimated standard deviation in group 1
-#' @param  sd2    estimated standard deviation in group 2
-#' @param  n1     sample size in group 1
-#' @param  n2     sample size in group 2
+#' @param  m1     estimated mean for group 1
+#' @param  m2     estimated mean for group 2
+#' @param  sd1    estimated standard deviation for group 1
+#' @param  sd2    estimated standard deviation for group 2
+#' @param  n1     sample size for group 1
+#' @param  n2     sample size for group 2
 #' @param  p1     proportion of total population in subpopulation 1
 #'
 #'
@@ -1789,7 +1789,7 @@ ci.random.anova1 <- function(alpha, m, sd, n) {
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  rel    sample value of Cronbach's reliability  
-#' @param  a      number of measurements (items, raters, etc.)
+#' @param  r      number of measurements (items, raters, etc.)
 #' @param  n	  sample size
 #'
 #'
@@ -1813,9 +1813,9 @@ ci.random.anova1 <- function(alpha, m, sd, n) {
 #' 
 #' @importFrom stats qf
 #' @export
-ci.cronbach <- function(alpha, rel, a, n) {
+ci.cronbach <- function(alpha, rel, r, n) {
  df1 = n - 1
- df2 = n*(a - 1)
+ df2 = n*(r - 1)
  f1 = qf(1 - alpha/2, df1, df2)
  f2 = qf(1 - alpha/2, df2, df1)
  f0 <- 1/(1 - rel)
