@@ -145,8 +145,8 @@ ci.pairs.prop1 <-function(alpha, f) {
 #' @param   alpha   alpha level for 1-alpha confidence
 #' @param   f1      number of participants in group 1 who have the attribute
 #' @param   f2      number of participants in group 2 who have the attribute
-#' @param   n1      sample size of group 1
-#' @param   n2      sample size of group 2
+#' @param   n1      sample size for group 1
+#' @param   n2      sample size for group 2
 #'
 #'
 #' @return
@@ -196,8 +196,8 @@ ci.prop2 <- function(alpha, f1, f2, n1, n2) {
 #' @param   alpha   alpha level for 1-alpha confidence
 #' @param   f1      number of participants in group 1 who have the attribute
 #' @param   f2      number of participants in group 2 who have the attribute
-#' @param   n1      sample size of group 1
-#' @param   n2      sample size of group 2
+#' @param   n1      sample size for group 1
+#' @param   n2      sample size for group 2
 #'
 #'
 #' @return
@@ -797,8 +797,8 @@ ci.phi <- function(alpha, f00, f01, f10, f11) {
 #' @param   alpha  alpha level for 1-alpha confidence
 #' @param   f1     number of participants in group 1 who have the attribute
 #' @param   f2     number of participants in group 2 who have the attribute
-#' @param   n1     sample size in group 1
-#' @param   n2     sample size in group 2
+#' @param   n1     sample size for group 1
+#' @param   n2     sample size for group 2
 #'
 #'
 #' @return
@@ -1137,8 +1137,8 @@ test.prop1 <- function(f, n, h) {
 #'
 #' @param  f1      number of group 1 participants who have the attribute
 #' @param  f2      number of group 2 participants who have the attribute
-#' @param  n1      sample size in group 1
-#' @param  n2      sample size in group 2
+#' @param  n1      sample size for group 1
+#' @param  n2      sample size for group 2
 #'
 #'
 #' @return
