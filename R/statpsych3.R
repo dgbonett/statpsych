@@ -487,7 +487,7 @@ test.mono.prop.bs <-function(alpha, f, n) {
  zcrit <- qnorm(1 - alpha/(2*(a - 1)))
  LL <- Estimate - zcrit*SE
  UL <- Estimate + zcrit*SE
- pair = cbind(seq(1, a - 1), seq(2, a))
+ pair <- cbind(seq(1, a - 1), seq(2, a))
  out <- cbind(pair, Estimate, SE, LL, UL)
  rownames(out) <- rep("", a - 1)
  return(out)
