@@ -427,17 +427,17 @@ ci.slope.mean.bs <- function(alpha, m, sd, n, x) {
 #' 
 #'                     
 #' @description
-#' Computes one-sided simultaneous confidence intervals for all adjacent 
-#' pairwise comparisons of population means using estimated means, estimated 
+#' Computes simultaneous confidence intervals for all adjacent pairwise
+#' comparisons of population means using estimated means, estimated 
 #' standard deviations, and samples sizes as input. Equal variances are not 
 #' assumed. A Satterthwaite adjustment to the degrees of freedom is used to 
-#' improve the accuracy of the confidence intervals. If all lower limits are
-#' greater than zero, then conclude that the population means are monotoic 
-#' increasing. If all upper limits are less than zero, then conclude that the
-#' population means are monotoic increasing. Reject the hypothesis of a 
-#' monotonic trend if any lower limit is less than 0 AND any upper limit is 
-#' greater than 0. The test for monotonicity is inconclusive if any confidence 
-#' interval includes 0.
+#' improve the accuracy of the confidence intervals. If one or more lower
+#' limits are greater than 0 and no upper limit is less than 0, then conclude
+#' that the population means are monotoic decreasing. If one or more upper 
+#' limits are less than 0 and no lower limits are greater than 0, then
+#' conclude that the population means are monotoic increasing. Reject the 
+#' hypothesis of a monotonic trend if any lower limit is greater than 0 and 
+#' any upper limit is less than 0. 
 #'
 #'
 #' @param  alpha   alpha level for simultaneous 1-alpha confidence
@@ -462,10 +462,10 @@ ci.slope.mean.bs <- function(alpha, m, sd, n, x) {
 #' test.mono.mean.bs(.05, m, sd, n)
 #'
 #' # Should return:
-#' #     Estimate       SE        LL        UL
-#' # 1 2   -11.71 4.139530 -20.85121 -2.568790
-#' # 2 3   -11.72 4.399497 -21.44116 -1.998840
-#' # 3 4   -16.92 4.730817 -27.36709 -6.472909
+#' #     Estimate       SE        LL         UL
+#' # 1 2   -11.71 4.139530 -22.07803 -1.3419744
+#' # 2 3   -11.72 4.399497 -22.74731 -0.6926939
+#' # 3 4   -16.92 4.730817 -28.76921 -5.0707936
 #'
 #'
 #' @importFrom stats qt
@@ -483,7 +483,7 @@ test.mono.mean.bs <-function(alpha, m, sd, n) {
  SE <- sqrt(v1/n1 + v2/n2)
  t <- Estimate/SE
  df <- SE^4/(v1^2/(n1^2*(n1 - 1)) + v2^2/(n2^2*(n2 - 1)))
- tcrit <- qt(1 - alpha/(a - 1), df)
+ tcrit <- qt(1 - alpha/(2*(a - 1)), df)
  LL <- Estimate - tcrit*SE
  UL <- Estimate + tcrit*SE
  pair = cbind(seq(1, a - 1), seq(2, a))
