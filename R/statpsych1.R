@@ -2218,6 +2218,7 @@ ci.etasqr <- function(alpha, etasqr, df1, df2) {
  z <- qnorm(alpha2)
  F <- (etasqr/(1 - etasqr))*(df2/df1)
  adj <- 1 - (df2 + df1)*(1 - etasqr)/df2
+ if (adj < 0) {adj = 0}
  ul0 <- 1 - exp(log(1 - etasqr) - z*sqrt(4*etasqr/(df2 - 1)))
  du <- ul0*(df1 + df2 + 1)/(1 - ul0)
  nc <- seq(0, du, by  = .001)
