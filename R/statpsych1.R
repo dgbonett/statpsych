@@ -3823,6 +3823,7 @@ ci.var.upper <- function(alpha, var, n) {
 #' @export
 etasqr.adj <- function(etasqr, dfeffect, dferror) {
  adj <- 1 - (dferror + dfeffect)*(1 - etasqr)/dferror
+ if (adj < 0) {adj = 0}
  out <- matrix(adj, nrow = 1, ncol = 1)
  colnames(out) <- "Adjusted eta-squared"
  return(out)
