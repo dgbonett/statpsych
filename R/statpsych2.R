@@ -799,6 +799,7 @@ ci.rsqr <- function(alpha, r2, s, n) {
  alpha2 <- 1 - alpha1
  dfe <- n - s - 1
  adj <- 1 - (n - 1)*(1 - r2)/dfe
+ if (adj < 0) {adj = 0}
  b1 <- r2/(1 - r2)
  b2 <- adj/(1 - adj)
  v1 <- ((n - 1)*b1 + s)^2/((n - 1)*b1*(b1 + 2) + s)
