@@ -880,6 +880,74 @@ ci.lc.gen.bs <- function(alpha, est, se, v) {
  return(out)
 }
 
+#  ci.rsqr ===================================================================
+#' Confidence interval for squared multiple correlation
+#'                             
+#' @description
+#' Computes an approximate confidence interval for a population squared 
+#' multiple correlation in a linear model with random predictor variables.  
+#' This function uses the scaled central F approximation method.
+#'
+#'
+#' @param  alpha    alpha value for 1-alpha confidence
+#' @param  r2       estimated unadjusted squared multiple correlation
+#' @param  s        number of predictor variables
+#' @param  n        sample size
+#'
+#'
+#' @return 
+#' Returns a 1-row matrix. The columns are:
+#' * R-squared - estimate of unadjusted R-squared 
+#' * adj R-squared - bias adjusted R-squared estimate
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
+#'
+#'
+#' @examples
+#' ci.rsqr(.05, .241, 3, 116)
+#'
+#' # Should return:
+#' #        R-squared    adj R-squared          LL        UL
+#' # [1,]       0.241        0.2206696  0.09819599 0.3628798
+#'  
+#' 
+#' @importFrom stats qf
+#' @export
+ci.rsqr <- function(alpha, r2, s, n) {
+ alpha1 <- alpha/2
+ alpha2 <- 1 - alpha1
+ dfe <- n - s - 1
+ adj <- 1 - (n - 1)*(1 - r2)/dfe
+ if (adj < 0) {adj = 0}
+ b1 <- r2/(1 - r2)
+ b2 <- adj/(1 - adj)
+ v1 <- ((n - 1)*b1 + s)^2/((n - 1)*b1*(b1 + 2) + s)
+ v2 <- ((n - 1)*b2 + s)^2/((n - 1)*b2*(b2 + 2) + s)
+ F1 <- qf(alpha1, v1, dfe)
+ F2 <- qf(alpha2, v2, dfe)
+ ll <- (dfe*r2 - (1 - r2)*s*F2)/(dfe*(r2 + (1 - r2)*F2))
+ ul <- (dfe*r2 - (1 - r2)*s*F1)/(dfe*(r2 + (1 - r2)*F1))
+ if (ll < 0) {ll = 0}
+ if (ul < 0) {ul = 0}
+ i <- 1
+ while (i < 30) {
+   i <- i + 1
+   b1 <- ul/(1 - ul)
+   b2 <- ll/(1 - ll)
+   v1 <- ((n - 1)*b1 + s)^2/((n - 1)*b1*(b1 + 2) + s)
+   v2 <- ((n - 1)*b2 + s)^2/((n - 1)*b2*(b2 + 2) + s)
+   F1 <- qf(alpha1, v1, dfe)
+   F2 <- qf(alpha2, v2, dfe)
+   ll <- (dfe*r2 - (1 - r2)*s*F2)/(dfe*(r2 + (1 - r2)*F2))
+   ul <- (dfe*r2 - (1 - r2)*s*F1)/(dfe*(r2 + (1 - r2)*F1))
+   if (ll < 0) {ll = 0}
+   if (ul < 0) {ul = 0}
+ }
+ out <- t(c(r2, adj, ll, ul))
+ colnames(out) <- c("R-squared", "adj R-squared", "LL", "UL")
+ return(out)
+}
+
 
 #  =============== File 2: Sample Size for Desire Precision ===================
 #  size.ci.slope ==============================================================
