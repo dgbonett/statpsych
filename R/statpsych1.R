@@ -3439,7 +3439,7 @@ size.test.mann <- function(alpha, pow, p) {
 size.test.sign1 <- function(alpha, pow, p) {
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
- es <- p - .5;
+ es <- p - .5
  n <- ceiling(p*(1 - p)*(za + zb)^2/es^2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
@@ -3484,7 +3484,7 @@ size.test.sign1 <- function(alpha, pow, p) {
 size.test.sign.ps <- function(alpha, pow, p) {
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
- es <- p - .5;
+ es <- p - .5
  n <- ceiling(p*(1 - p)*(za + zb)^2/es^2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
