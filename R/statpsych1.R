@@ -2285,8 +2285,8 @@ test.skew <- function(y) {
  j <- replicate(n, 1)
  z0 <- (y0 - m0%*%j)/(sd0%*%j)
  skew0 <- rowMeans(z0^3)
- c1 <- as.integer(skew0 > skew)
- c2 <- as.integer(skew0 < -skew)
+ c1 <- as.integer(skew0 > abs(skew))
+ c2 <- as.integer(skew0 < -abs(skew))
  e1 <- sum(c1)/rep
  e2 <- sum(c2)/rep
  p <- e1 + e2
@@ -2345,11 +2345,8 @@ test.kurtosis <- function(y) {
  j <- replicate(n, 1)
  z0 <- (y0 - m0%*%j)/(sd0%*%j)
  kur0 <- rowMeans(z0^4)
- if (kur > 3) {
-   c <- as.integer(kur0 > kur)
- } else {
-   c <- as.integer(kur0 < kur)
- }
+ if (kur > 3) {c <- as.integer(kur0 > kur)} 
+ if (kur < 3) {c <- as.integer(kur0 < kur)}
  p <- 2*sum(c)/rep
  out <- round(t(c(kur, kur - 3, p)), 4)
  colnames(out) <- c("Kurtosis", "Excess", "p")
