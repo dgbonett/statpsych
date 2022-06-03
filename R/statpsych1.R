@@ -2264,8 +2264,8 @@ ci.etasqr <- function(alpha, etasqr, df1, df2) {
 #' test.skew(y)
 #'
 #' # Should return:
-#' #      Skewness       p
-#' # [1,] 1.520102 0.00684
+#' #      Skewness      p
+#' # [1,]   1.5201 0.0067
 #'
 #'
 #' @importFrom stats rnorm
@@ -2348,6 +2348,7 @@ test.kurtosis <- function(y) {
  if (kur > 3) {c <- as.integer(kur0 > kur)} 
  if (kur < 3) {c <- as.integer(kur0 < kur)}
  p <- 2*sum(c)/rep
+ if (p > .9999) {p = .9999}
  out <- round(t(c(kur, kur - 3, p)), 4)
  colnames(out) <- c("Kurtosis", "Excess", "p")
  return(out)
