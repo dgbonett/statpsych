@@ -2324,8 +2324,8 @@ test.skew <- function(y) {
 #' test.kurtosis(y)
 #'
 #' # Should return:
-#' #      Kurtosis   Excess      p
-#' # [1,]    4.815    1.815  0.019
+#' #      Kurtosis  Excess      p
+#' # [1,]   4.8149  1.8149 0.0385 
 #'
 #'
 #' @importFrom stats rnorm
