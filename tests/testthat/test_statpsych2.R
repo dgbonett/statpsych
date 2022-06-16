@@ -288,3 +288,15 @@ test_that("random.yx returns valid data.frame", {
   testthat::expect_equal(dim(res), c(10, length(res)))
   testthat::expect_equal(colnames(res), colnames_expected)
 })
+
+test_that("ci.rsqr returns valid matrix", {
+  colnames_expected <- c(
+    "R-squared",    "adj R-squared",          "LL",        "UL"
+  )
+  
+  res <- ci.rsqr(.05, .241, 3, 116)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
