@@ -2009,7 +2009,7 @@ ci.mann <- function(alpha, y1, y2){
 #'
 #' @param   alpha  1 - alpha confidence 
 #' @param   m      vector of group estimated means 
-#' @param   sd     vector of group estimated deviations 
+#' @param   sd     vector of group estimated standard deviations 
 #' @param   n      sample size per group
 #'
 #'
