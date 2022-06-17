@@ -364,7 +364,7 @@ ci.pairs.prop.bs <-function(alpha, f, n) {
 
 
 #  ci.slope.prop.bs ========================================================== 
-#' Confidence interval for a slope of a proportion in a single-factor desigh
+#' Confidence interval for a slope of a proportion in a single-factor design
 #' with a quantitative between-subjects factor
 #'
 #'
