@@ -11,9 +11,9 @@ test.prop2(f1, f2, n1, n2)
 
 \item{f2}{number of group 2 participants who have the attribute}
 
-\item{n1}{sample size in group 1}
+\item{n1}{sample size for group 1}
 
-\item{n2}{sample size in group 2}
+\item{n2}{sample size for group 2}
 }
 \value{
 Returns a 1-row matrix. The columns are:

@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statpsych</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
       </span>
     </div>
 
@@ -55,6 +55,10 @@
         </td>
         <td><p>Confidence interval for a G-index of agreement</p></td>
       </tr><tr><td>
+          <p><code><a href="ci.agree2.html">ci.agree2()</a></code> </p>
+        </td>
+        <td><p>Confidence interval for G-index difference in a 2-group design</p></td>
+      </tr><tr><td>
           <p><code><a href="ci.biphi.html">ci.biphi()</a></code> </p>
         </td>
         <td><p>Confidence interval for a biserial-phi correlation</p></td>
@@ -62,6 +66,11 @@
           <p><code><a href="ci.cod1.html">ci.cod1()</a></code> </p>
         </td>
         <td><p>Confidence interval for a single coefficient of dispersion</p></td>
+      </tr><tr><td>
+          <p><code><a href="ci.cod2.html">ci.cod2()</a></code> </p>
+        </td>
+        <td><p>Confidence interval for a ratio of dispersion coefficients in a 2-group
+design</p></td>
       </tr><tr><td>
           <p><code><a href="ci.condslope.log.html">ci.condslope.log()</a></code> </p>
         </td>
@@ -91,6 +100,10 @@
         </td>
         <td><p>Confidence interval for a Cronbach reliability</p></td>
       </tr><tr><td>
+          <p><code><a href="ci.etasqr.html">ci.etasqr()</a></code> </p>
+        </td>
+        <td><p>Confidence interval for eta-squared</p></td>
+      </tr><tr><td>
           <p><code><a href="ci.fisher.html">ci.fisher()</a></code> </p>
         </td>
         <td><p>Fisher confidence interval</p></td>
@@ -102,6 +115,15 @@
           <p><code><a href="ci.kappa.html">ci.kappa()</a></code> </p>
         </td>
         <td><p>Confidence interval for a kappa reliability</p></td>
+      </tr><tr><td>
+          <p><code><a href="ci.lc.gen.bs.html">ci.lc.gen.bs()</a></code> </p>
+        </td>
+        <td><p>Confidence interval for a linear contrast of parameters in a between-subjects
+design</p></td>
+      </tr><tr><td>
+          <p><code><a href="ci.lc.glm.html">ci.lc.glm()</a></code> </p>
+        </td>
+        <td><p>Confidence interval for a linear function of general linear model parameters</p></td>
       </tr><tr><td>
           <p><code><a href="ci.lc.mean.bs.html">ci.lc.mean.bs()</a></code> </p>
         </td>
@@ -242,6 +264,23 @@ polychotomous variable</p></td>
         </td>
         <td><p>Confidence interval for a 2-group proportion ratio</p></td>
       </tr><tr><td>
+          <p><code><a href="ci.reliability.html">ci.reliability()</a></code> </p>
+        </td>
+        <td><p>Confidence interval for a reliability coefficient</p></td>
+      </tr><tr><td>
+          <p><code><a href="ci.rsqr.html">ci.rsqr()</a></code> </p>
+        </td>
+        <td><p>Confidence interval for squared multiple correlation</p></td>
+      </tr><tr><td>
+          <p><code><a href="ci.sign1.html">ci.sign1()</a></code> </p>
+        </td>
+        <td><p>Confidence interval for the parameter of the one-sample sign test</p></td>
+      </tr><tr><td>
+          <p><code><a href="ci.slope.mean.bs.html">ci.slope.mean.bs()</a></code> </p>
+        </td>
+        <td><p>Confidence interval for the slope of means in a single-factor design with a
+quantitative between-subjects factor</p></td>
+      </tr><tr><td>
           <p><code><a href="ci.slope.prop.bs.html">ci.slope.prop.bs()</a></code> </p>
         </td>
         <td><p>Confidence interval for a slope of a proportion in a single-factor desigh
@@ -301,6 +340,19 @@ betwen-subjects design</p></td>
         </td>
         <td><p>Between-subjects F statistic and eta-squared from summary information</p></td>
       </tr><tr><td>
+          <p><code><a href="test.kurtosis.html">test.kurtosis()</a></code> </p>
+        </td>
+        <td><p>Computes p-value for test of kurtosis</p></td>
+      </tr><tr><td>
+          <p><code><a href="test.mono.mean.bs.html">test.mono.mean.bs()</a></code> </p>
+        </td>
+        <td><p>Test of a monotonic trend in means for an ordered between-subjects factor</p></td>
+      </tr><tr><td>
+          <p><code><a href="test.mono.prop.bs.html">test.mono.prop.bs()</a></code> </p>
+        </td>
+        <td><p>Test of monotonic trend in proportions for an ordered between-subjects
+factor</p></td>
+      </tr><tr><td>
           <p><code><a href="test.prop.bs.html">test.prop.bs()</a></code> </p>
         </td>
         <td><p>Hypothesis test of equal proportions in a between-subjects design</p></td>
@@ -316,6 +368,10 @@ betwen-subjects design</p></td>
           <p><code><a href="test.prop2.html">test.prop2()</a></code> </p>
         </td>
         <td><p>Hypothesis test for a 2-group proportion difference</p></td>
+      </tr><tr><td>
+          <p><code><a href="test.skew.html">test.skew()</a></code> </p>
+        </td>
+        <td><p>Computes p-value for test of skewness</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
           <h2 id="sample-size-planning">Sample-size planning <a href="#sample-size-planning" class="anchor" aria-hidden="true"></a></h2>
           <p class="section-desc"></p><p>Sample sizes for desired precision or power</p>
@@ -530,6 +586,10 @@ proportions</p></td>
           <p class="section-desc"></p><p>Other functions, including functions for simulating data</p>
         </th>
       </tr></tbody><tbody><tr><td>
+          <p><code><a href="etasqr.gen.2way.html">etasqr.gen.2way()</a></code> </p>
+        </td>
+        <td><p>Generalized eta-squared estimates in a two-factor design</p></td>
+      </tr><tr><td>
           <p><code><a href="etasqr.adj.html">etasqr.adj()</a></code> </p>
         </td>
         <td><p>Bias adjusts an eta-squared estimate</p></td>
@@ -578,7 +638,7 @@ proportions</p></td>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>

@@ -33,7 +33,7 @@ Returns a 1-row matrix. The columns are:
 }
 \description{
 Compute a confidence interval and test statistic for a linear contrast
-of a population regression coefficient (y-intercept or slope) across
+of a population regression coefficients (y-intercept or slope) across
 groups in a multiple group regression model. Equality of error variances
 across groups is not assumed. A Satterthwaite adjustment to the degrees
 of freedom is used to improve the accuracy of the confidence interval.

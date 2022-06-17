@@ -26,7 +26,7 @@ be used."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/ma
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statpsych</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
       </span>
     </div>
 
@@ -78,18 +78,29 @@ be used.</p>
     <h2>Arguments</h2>
     <dl><dt>alpha</dt>
 <dd><p>alpha level for 1-alpha confidence</p></dd>
+
+
 <dt>b1</dt>
 <dd><p>unstandardized slope estimate for first path</p></dd>
+
+
 <dt>b2</dt>
 <dd><p>unstandardized slope estimate for second path</p></dd>
+
+
 <dt>se1</dt>
 <dd><p>standard error for b1</p></dd>
+
+
 <dt>se2</dt>
 <dd><p>standard error for b2</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Returns a 1-row matrix. The columns are:</p><ul><li><p>Estimate - estimated indirect effect</p></li>
+    
+
+<p>Returns a 1-row matrix. The columns are:</p><ul><li><p>Estimate - estimated indirect effect</p></li>
 <li><p>SE - standard error of indirect effect</p></li>
 <li><p>LL - lower limit of the confidence interval</p></li>
 <li><p>UL - upper limit of the confidence interval</p></li>
@@ -98,8 +109,8 @@ be used.</p>
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">ci.indirect</span> <span class="op">(</span><span class="fl">.05</span>, <span class="fl">2.48</span>, <span class="fl">1.92</span>, <span class="fl">.586</span>, <span class="fl">.379</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      Estimate       SE      LL       UL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]   4.7616 1.625282 2.16841 7.974871</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      Estimate       SE       LL      UL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]   4.7616 1.625282 2.170195 7.96329</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Should return:</span></span>
 <span class="r-in"><span class="co">#      Estimate       SE       LL       UL</span></span>
@@ -120,7 +131,7 @@ be used.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>

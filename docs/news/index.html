@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statpsych</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
       </span>
     </div>
 
@@ -48,8 +48,37 @@
     </div>
 
     <div class="section level2">
-<h2 class="page-header" data-toc-text="1.0.0" id="statpsych-100">statpsych 1.0.0<small>2021-09-09</small><a class="anchor" aria-label="anchor" href="#statpsych-100"></a></h2>
-<ul><li>Initial release</li></ul></div>
+<h2 class="page-header" data-toc-text="1.1.0" id="statpsych-v110-release-date-20220630">statpsych v1.1.0 (Release date: 2022/06/30)<a class="anchor" aria-label="anchor" href="#statpsych-v110-release-date-20220630"></a></h2>
+<p>Changes:</p>
+<ul><li>New functions:
+<ul><li>ci.agree2 - Confidence interval for G-index difference in a 2-group design</li>
+<li>ci.cod2 - Confidence interval for a ratio of dispersion coefficients in a 2-group</li>
+<li>ci.etasqr - Confidence interval for eta-squared</li>
+<li>ci.lc.gen.bs - Confidence interval for a linear contrast of parameters in a between-subjects design</li>
+<li>ci.lc.glm - Confidence interval for a linear function of general linear model parameters</li>
+<li>ci.reliability - Confidence interval for a reliability coefficient</li>
+<li>ci.rsqr - Confidence interval for squared multiple correlation</li>
+<li>ci.sign1 - Confidence interval for the parameter of the one-sample sign test</li>
+<li>ci.slope.mean.bs - Confidence interval for the slope of means in a single-factor design with a quantitative between-subjects factor</li>
+<li>test.kurtosis - Computes p-value for test of kurtosis</li>
+<li>test.skew - Computes p-value for test of skewness</li>
+<li>test.mono.mean.bs - Test of a monotonic trend in means for an ordered between-subjects factor</li>
+<li>test.mono.prop.bs - Test of monotonic trend in proportions for an ordered between-subjects</li>
+<li>etasqr.gen.2way - Generalized eta-squared estimates in a two-factor design</li>
+</ul></li>
+<li>Updated documentation for consistency</li>
+<li>Changed arguments for some functions for consistency
+<ul><li>size.test.cronbach now takes (alpha, pow, rel, r, h) rather than (alpha, pow, rel, a, h)</li>
+<li>ci.cronbach now takes (alpha, rel, r, n) rather than (alpha, rel, a, n)</li>
+</ul></li>
+<li>Changed some of the column names in returned matrixes for consistency:
+<ul><li>ci.median.ps, the last column is now “COV” rather than “cov”</li>
+</ul></li>
+</ul></div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.0.0" id="statpsych-100-release-date-20210909">statpsych 1.0.0 (Release date: 2021/09/09)<small>2021-09-09</small><a class="anchor" aria-label="anchor" href="#statpsych-100-release-date-20210909"></a></h2>
+<ul><li>Initial release</li>
+</ul></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -64,7 +93,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>

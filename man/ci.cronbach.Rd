@@ -4,14 +4,14 @@
 \alias{ci.cronbach}
 \title{Confidence interval for a Cronbach reliability}
 \usage{
-ci.cronbach(alpha, rel, a, n)
+ci.cronbach(alpha, rel, r, n)
 }
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
 
 \item{rel}{sample value of Cronbach's reliability}
 
-\item{a}{number of measurements (items, raters, etc.)}
+\item{r}{number of measurements (items, raters, etc.)}
 
 \item{n}{sample size}
 }

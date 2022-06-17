@@ -16,10 +16,16 @@
     <loc>https://dgbonett.github.io/statpsych/reference/ci.agree.html</loc>
   </url>
   <url>
+    <loc>https://dgbonett.github.io/statpsych/reference/ci.agree2.html</loc>
+  </url>
+  <url>
     <loc>https://dgbonett.github.io/statpsych/reference/ci.biphi.html</loc>
   </url>
   <url>
     <loc>https://dgbonett.github.io/statpsych/reference/ci.cod1.html</loc>
+  </url>
+  <url>
+    <loc>https://dgbonett.github.io/statpsych/reference/ci.cod2.html</loc>
   </url>
   <url>
     <loc>https://dgbonett.github.io/statpsych/reference/ci.condslope.html</loc>
@@ -43,6 +49,9 @@
     <loc>https://dgbonett.github.io/statpsych/reference/ci.cronbach.html</loc>
   </url>
   <url>
+    <loc>https://dgbonett.github.io/statpsych/reference/ci.etasqr.html</loc>
+  </url>
+  <url>
     <loc>https://dgbonett.github.io/statpsych/reference/ci.fisher.html</loc>
   </url>
   <url>
@@ -50,6 +59,12 @@
   </url>
   <url>
     <loc>https://dgbonett.github.io/statpsych/reference/ci.kappa.html</loc>
+  </url>
+  <url>
+    <loc>https://dgbonett.github.io/statpsych/reference/ci.lc.gen.bs.html</loc>
+  </url>
+  <url>
+    <loc>https://dgbonett.github.io/statpsych/reference/ci.lc.glm.html</loc>
   </url>
   <url>
     <loc>https://dgbonett.github.io/statpsych/reference/ci.lc.mean.bs.html</loc>
@@ -151,6 +166,18 @@
     <loc>https://dgbonett.github.io/statpsych/reference/ci.ratio.prop2.html</loc>
   </url>
   <url>
+    <loc>https://dgbonett.github.io/statpsych/reference/ci.reliability.html</loc>
+  </url>
+  <url>
+    <loc>https://dgbonett.github.io/statpsych/reference/ci.rsqr.html</loc>
+  </url>
+  <url>
+    <loc>https://dgbonett.github.io/statpsych/reference/ci.sign1.html</loc>
+  </url>
+  <url>
+    <loc>https://dgbonett.github.io/statpsych/reference/ci.slope.mean.bs.html</loc>
+  </url>
+  <url>
     <loc>https://dgbonett.github.io/statpsych/reference/ci.slope.prop.bs.html</loc>
   </url>
   <url>
@@ -188,6 +215,9 @@
   </url>
   <url>
     <loc>https://dgbonett.github.io/statpsych/reference/etasqr.adj.html</loc>
+  </url>
+  <url>
+    <loc>https://dgbonett.github.io/statpsych/reference/etasqr.gen.2way.html</loc>
   </url>
   <url>
     <loc>https://dgbonett.github.io/statpsych/reference/index.html</loc>
@@ -370,6 +400,15 @@
     <loc>https://dgbonett.github.io/statpsych/reference/test.anova1.bs.html</loc>
   </url>
   <url>
+    <loc>https://dgbonett.github.io/statpsych/reference/test.kurtosis.html</loc>
+  </url>
+  <url>
+    <loc>https://dgbonett.github.io/statpsych/reference/test.mono.mean.bs.html</loc>
+  </url>
+  <url>
+    <loc>https://dgbonett.github.io/statpsych/reference/test.mono.prop.bs.html</loc>
+  </url>
+  <url>
     <loc>https://dgbonett.github.io/statpsych/reference/test.prop.bs.html</loc>
   </url>
   <url>
@@ -380,5 +419,8 @@
   </url>
   <url>
     <loc>https://dgbonett.github.io/statpsych/reference/test.prop2.html</loc>
+  </url>
+  <url>
+    <loc>https://dgbonett.github.io/statpsych/reference/test.skew.html</loc>
   </url>
 </urlset>

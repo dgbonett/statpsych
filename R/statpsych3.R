@@ -1132,7 +1132,7 @@ ci.agree <- function(alpha, n, f, k) {
 #' #          Estimate        LL        UL
 #' # G1      0.8666667 0.6974555 0.9481141
 #' # G2      0.5000000 0.2523379 0.6851621
-#' # G1 – G2 0.3666667 0.1117076 0.6088621
+#' # G1 - G2 0.3666667 0.1117076 0.6088621
 #'
 #'
 #' @importFrom stats qnorm
@@ -1162,7 +1162,7 @@ ci.agree2 <- function(alpha, n1, f1, n2, f2, r) {
  out3 <- t(c(G1 - G2, LL3, UL3))
  out <- rbind(out1, out2, out3)
  colnames(out) <- c("Estimate", "LL", "UL")
- rownames(out) <- c("G1", "G2", "G1 – G2")
+ rownames(out) <- c("G1", "G2", "G1 - G2")
  return(out)
 }
 
