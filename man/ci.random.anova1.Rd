@@ -11,7 +11,7 @@ ci.random.anova1(alpha, m, sd, n)
 
 \item{m}{vector of group estimated means}
 
-\item{sd}{vector of group estimated deviations}
+\item{sd}{vector of group estimated standard deviations}
 
 \item{n}{sample size per group}
 }
