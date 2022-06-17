@@ -13,7 +13,7 @@ Changes:
     * ci.rsqr - Confidence interval for squared multiple correlation
     * ci.sign1 - Confidence interval for the parameter of the one-sample sign test
     * ci.slope.mean.bs - Confidence interval for the slope of means in a single-factor design with a quantitative between-subjects factor
-    * test.kurtosis - Computes Monte Carlo p-value for test of kurtosis
+    * test.kurtosis - Computes Monte Carlo p-value for test of excess kurtosis
     * test.skew - Computes Monte Carlo p-value for test of skewness
     * test.mono.mean.bs - Test of a monotonic trend in means for an ordered between-subjects factor
     * test.mono.prop.bs - Test of monotonic trend in proportions for an ordered between-subjects
