@@ -10,9 +10,9 @@ ci.tukey(alpha, m, sd, n)
 \arguments{
 \item{alpha}{alpha level for simultaneous 1-alpha confidence}
 
-\item{m}{vector of group sample means}
+\item{m}{vector of group estimated means}
 
-\item{sd}{vector of group sample standard deviations}
+\item{sd}{vector of group estimated standard deviations}
 
 \item{n}{vector of sample sizes}
 }
@@ -32,21 +32,24 @@ of pairwise comparisons. The columns are:
 \description{
 Computes heteroscedastic Tukey-Kramer (also known as Games-Howell)
 confidence intervals for all pairwise comparisons of population means
-using sample means, sample standard deviations, and samples sizes as
+using estimated means, estimatede standard deviations, and samples sizes as
 input. A Satterthwaite adjustment to the degrees of freedom is used to
 improve the accuracy of the confidence intervals.
 }
 \examples{
-m <- c(12.86, 17.57, 26.29)
-sd <- c(3.185, 3.995, 3.773)
-n <- c(20, 20, 20)
+m <- c(12.86, 17.57, 26.29, 30.21)
+sd <- c(13.185, 12.995, 14.773, 15.145)
+n <- c(20, 20, 20, 20)
 ci.tukey(.05, m, sd, n)
 
 # Should return:
-#      Estimate       SE          t     p       df         LL         UL
-# 1 2     -4.71 1.142459  -4.122686 0.001 36.20303  -7.501842  -1.918158
-# 1 3    -13.43 1.104078 -12.163998 0.000 36.95915 -16.125713 -10.734287
-# 2 3     -8.72 1.228730  -7.096758 0.000 37.87646 -11.717053  -5.722947
+#     Estimate       SE          t       df           p        LL         UL
+# 1 2    -4.71 4.139530 -1.1378102 37.99200 0.668806358 -15.83085  6.4108517
+# 1 3   -13.43 4.427673 -3.0331960 37.51894 0.021765570 -25.33172 -1.5282764
+# 1 4   -17.35 4.490074 -3.8640790 37.29278 0.002333937 -29.42281 -5.2771918
+# 2 3    -8.72 4.399497 -1.9820446 37.39179 0.212906199 -20.54783  3.1078269
+# 2 4   -12.64 4.462292 -2.8326248 37.14275 0.035716267 -24.64034 -0.6396589
+# 3 4    -3.92 4.730817 -0.8286096 37.97652 0.840551420 -16.62958  8.7895768
 
 
 }

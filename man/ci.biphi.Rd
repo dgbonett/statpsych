@@ -2,7 +2,7 @@
 % Please edit documentation in R/statpsych3.R
 \name{ci.biphi}
 \alias{ci.biphi}
-\title{Confidence interval for a biserial-phi coefficient}
+\title{Confidence interval for a biserial-phi correlation}
 \usage{
 ci.biphi(alpha, f1, f2, n1, n2)
 }
@@ -13,21 +13,21 @@ ci.biphi(alpha, f1, f2, n1, n2)
 
 \item{f2}{number of participants in group 2 who have the attribute}
 
-\item{n1}{sample size of group 1}
+\item{n1}{sample size for group 1}
 
-\item{n2}{sample size of group 2}
+\item{n2}{sample size for group 2}
 }
 \value{
 Returns a 1-row matrix. The columns are:
 \itemize{
-\item Estimate - estimate of phi coefficient
+\item Estimate - estimate of biserial-phi correlation
 \item SE - standard error
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval
 }
 }
 \description{
-Computes a confidence interval for a biserial-phi coefficient using a
+Computes a confidence interval for a biserial-phi correlation using a
 transformation of a confidence interval for an odds ratio with .5 added to
 each cell frequency. This measure of association assumes the group variable
 is naturally dichotomous and the response variable is artificially

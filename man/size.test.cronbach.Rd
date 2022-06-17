@@ -4,7 +4,7 @@
 \alias{size.test.cronbach}
 \title{Sample size to test a Cronbach reliability}
 \usage{
-size.test.cronbach(alpha, pow, rel, a, h)
+size.test.cronbach(alpha, pow, rel, r, h)
 }
 \arguments{
 \item{alpha}{alpha level for hypothesis test}
@@ -13,7 +13,7 @@ size.test.cronbach(alpha, pow, rel, a, h)
 
 \item{rel}{reliability planning value}
 
-\item{a}{number of measurements}
+\item{r}{number of measurements}
 
 \item{h}{null hypothesis value of reliability}
 }

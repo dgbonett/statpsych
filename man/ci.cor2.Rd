@@ -9,13 +9,13 @@ ci.cor2(alpha, cor1, cor2, n1, n2)
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
 
-\item{cor1}{sample Pearson correlation in group 1}
+\item{cor1}{estimated Pearson correlation in group 1}
 
-\item{cor2}{sample Pearson correlation in group 2}
+\item{cor2}{estimated Pearson correlation in group 2}
 
-\item{n1}{sample size in group 1}
+\item{n1}{sample size for group 1}
 
-\item{n2}{sample size in group 2}
+\item{n2}{sample size for group 2}
 }
 \value{
 Returns a 1-row matrix. The columns are:

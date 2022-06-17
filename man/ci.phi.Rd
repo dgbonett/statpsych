@@ -2,7 +2,7 @@
 % Please edit documentation in R/statpsych3.R
 \name{ci.phi}
 \alias{ci.phi}
-\title{Confidence interval for a phi coefficient}
+\title{Confidence interval for a phi correlation}
 \usage{
 ci.phi(alpha, f00, f01, f10, f11)
 }
@@ -20,14 +20,14 @@ ci.phi(alpha, f00, f01, f10, f11)
 \value{
 Returns a 1-row matrix. The columns are:
 \itemize{
-\item Estimate - estimate of phi coefficient
+\item Estimate - estimate of phi correlation
 \item SE - standard error
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval
 }
 }
 \description{
-Computes a confidence interval for a phi coefficient. This function requires
+Computes a confidence interval for a phi correlation. This function requires
 the frequency counts from a 2 x 2 contingency table for two dichotomous
 variables. This measure of association assumes that both dichotomous
 variables are naturally dichotomous.

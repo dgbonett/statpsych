@@ -15,7 +15,7 @@ ci.lc.reg(alpha, est, se, n, s, v)
 
 \item{n}{vector of group sample sizes}
 
-\item{s}{number of predictor variables for within-group model}
+\item{s}{number of predictor variables for each within-group model}
 
 \item{v}{vector of between-subject contrast coefficients}
 }
@@ -33,7 +33,7 @@ Returns a 1-row matrix. The columns are:
 }
 \description{
 Compute a confidence interval and test statistic for a linear contrast
-of a population regression coefficient (y-intercept or slope) across
+of a population regression coefficients (y-intercept or slope) across
 groups in a multiple group regression model. Equality of error variances
 across groups is not assumed. A Satterthwaite adjustment to the degrees
 of freedom is used to improve the accuracy of the confidence interval.

@@ -9,9 +9,9 @@ ci.mean1(alpha, m, sd, n)
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
 
-\item{m}{sample mean}
+\item{m}{estimated mean}
 
-\item{sd}{sample standard deviation}
+\item{sd}{estimated standard deviation}
 
 \item{n}{sample size}
 }
@@ -25,8 +25,8 @@ Returns a 1-row matrix. The columns are:
 }
 }
 \description{
-Computes a confidence interval for a population mean using the sample
-mean, sample standard deviation, and sample size. Use the t.test function
+Computes a confidence interval for a population mean using the estimated
+mean, estimated standard deviation, and sample size. Use the t.test function
 for raw data input.
 }
 \examples{

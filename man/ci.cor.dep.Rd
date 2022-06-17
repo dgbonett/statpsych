@@ -9,11 +9,11 @@ ci.cor.dep(alpha, cor1, cor2, cor12, n)
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
 
-\item{cor1}{sample Pearson correlation between y and x1}
+\item{cor1}{estimated Pearson correlation between y and x1}
 
-\item{cor2}{sample Pearson correlation between y and x2}
+\item{cor2}{estimated Pearson correlation between y and x2}
 
-\item{cor12}{sample Pearson correlation between x1 and x2}
+\item{cor12}{estimated Pearson correlation between x1 and x2}
 
 \item{n}{sample size}
 }

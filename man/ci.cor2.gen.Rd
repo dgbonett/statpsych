@@ -7,13 +7,13 @@
 ci.cor2.gen(cor1, ll1, ul1, cor2, ll2, ul2)
 }
 \arguments{
-\item{cor1}{sample correlation in group 1}
+\item{cor1}{estimated correlation for group 1}
 
 \item{ll1}{lower limit for group 1 correlation}
 
 \item{ul1}{upper limit for group 1 correlation}
 
-\item{cor2}{sample correlation in group 2}
+\item{cor2}{estimated correlation for group 2}
 
 \item{ll2}{lower limit for group 2 correlation}
 

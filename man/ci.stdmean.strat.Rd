@@ -10,17 +10,17 @@ ci.stdmean.strat(alpha, m1, m2, sd1, sd2, n1, n2, p1)
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
 
-\item{m1}{sample mean in group 1}
+\item{m1}{estimated mean for group 1}
 
-\item{m2}{sample mean in group 2}
+\item{m2}{estimated mean for group 2}
 
-\item{sd1}{sample standard deviation in group 1}
+\item{sd1}{estimated standard deviation for group 1}
 
-\item{sd2}{sample standard deviation in group 2}
+\item{sd2}{estimated standard deviation for group 2}
 
-\item{n1}{sample size in group 1}
+\item{n1}{sample size for group 1}
 
-\item{n2}{sample size in group 2}
+\item{n2}{sample size for group 2}
 
 \item{p1}{proportion of total population in subpopulation 1}
 }
@@ -35,9 +35,10 @@ Returns a 3-row matrix. The columns are:
 }
 \description{
 Computes confidence intervals for a population standardized mean difference
-in a 2-group nonexperimental design with stratified random sampling using a
-square root weighted variance standardizer or single group standard
-deviation standardizer.  Equality of variances is not assumed.
+in a 2-group nonexperimental design with stratified random sampling (a random
+sample of a specificied size from each subpopulation) using a square root
+weighted variance standardizer or single group standard deviation
+standardizer.  Equality of variances is not assumed.
 }
 \examples{
 ci.stdmean.strat(.05, 30.2, 30.8, 10.5, 11.2, 200, 200, .533)

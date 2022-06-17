@@ -9,13 +9,13 @@ ci.pbcor(alpha, m1, m2, sd1, sd2, n1, n2)
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
 
-\item{m1}{sample mean for group 1}
+\item{m1}{estimated mean for group 1}
 
-\item{m2}{sample mean for group 2}
+\item{m2}{estimated mean for group 2}
 
-\item{sd1}{sample standard deviation for group 1}
+\item{sd1}{estimated standard deviation for group 1}
 
-\item{sd2}{sample standard deviation for group 2}
+\item{sd2}{estimated standard deviation for group 2}
 
 \item{n1}{sample size for group 1}
 

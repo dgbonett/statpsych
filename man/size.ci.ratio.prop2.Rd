@@ -19,8 +19,9 @@ size.ci.ratio.prop2(alpha, p1, p2, r)
 Returns the required sample size per group
 }
 \description{
-Computes the sample size in each group required to estimate a ratio of
-proportions with desired confidence interval precision in a 2-group design.
+Computes the sample size in each group (assuming equal sample sizes) required
+to estimate a ratio of proportions with desired confidence interval precision
+in a 2-group design.
 }
 \examples{
 size.ci.ratio.prop2(.05, .2, .1, 2)

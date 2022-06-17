@@ -9,7 +9,7 @@ ci.cor(alpha, cor, s, n)
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
 
-\item{cor}{sample Pearson or partial correlation}
+\item{cor}{estimated Pearson or partial correlation}
 
 \item{s}{number of control variables}
 
@@ -27,7 +27,7 @@ Returns a 1-row matrix. The columns are:
 \description{
 Computes a Fisher confidence interval for a population Pearson correlation
 or partial correlation with s control variables. Set s = 0 for a Pearson
-correlation. This function uses a sample correlation as input. Use the
+correlation. This function uses an estimated correlation as input. Use the
 cor.test function for a Pearson correlation with raw data input.
 }
 \examples{

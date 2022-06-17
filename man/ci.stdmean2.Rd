@@ -9,17 +9,17 @@ ci.stdmean2(alpha, m1, m2, sd1, sd2, n1, n2)
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
 
-\item{m1}{sample mean in group 1}
+\item{m1}{estimated mean for group 1}
 
-\item{m2}{sample mean in group 2}
+\item{m2}{estimated mean for group 2}
 
-\item{sd1}{sample standard deviation in group 1}
+\item{sd1}{estimated standard deviation for group 1}
 
-\item{sd2}{sample standard deviation in group 2}
+\item{sd2}{estimated standard deviation for group 2}
 
-\item{n1}{sample size in group 1}
+\item{n1}{sample size for group 1}
 
-\item{n2}{sample size in group 2}
+\item{n2}{sample size for group 2}
 }
 \value{
 Returns a 4-row matrix. The columns are:

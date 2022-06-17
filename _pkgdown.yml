@@ -27,6 +27,7 @@ reference:
 - title: Miscellaneous
   desc:  Other functions, including functions for simulating data
   contents:
+  - etasqr.gen.2way
   - etasqr.adj
   - iqv
   - pi.score1

@@ -22,10 +22,10 @@ Returns the required sample size
 Computes the sample size required to estimate a difference in population
 means with desired confidence interval precision in a paired-samples
 design. This function requires a planning value for the average of the
-variances for the two measurements. Set the correlation planning value to
-the smallest value within a plausible range for a conservatively large
-sample size. Set the variance planning value to the largest value within
-a plausible range for a conservatively large sample size.
+variances for the two measurements. Set the Pearson correlation planning
+vaklue to the smallest value within a plausible range for a conservatively
+large sample size. Set the variance planning value to the largest value
+within a plausible range for a conservatively large sample size.
 }
 \examples{
 size.ci.mean.ps(.05, 265, .8, 10)

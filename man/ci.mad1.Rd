@@ -21,7 +21,8 @@ Returns a 1-row matrix. The columns are:
 }
 \description{
 Computes a confidence interval for a population mean absolute deviation
-from the median (MAD).
+from the median (MAD). The MAD is a robust alternative to the standard
+deviation.
 }
 \examples{
 y <- c(30, 20, 15, 10, 10, 60, 20, 25, 20, 30, 10, 5, 50, 40, 

@@ -9,9 +9,9 @@ ci.spcor(alpha, cor, r2, n)
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
 
-\item{cor}{sample semipartial correlation}
+\item{cor}{estimated semipartial correlation}
 
-\item{r2}{sample squared multiple correlation in full model}
+\item{r2}{estimated squared multiple correlation in full model}
 
 \item{n}{sample size}
 }

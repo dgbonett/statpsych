@@ -24,8 +24,8 @@ Returns a 1-row matrix. The columns are:
 \description{
 Computes adjusted Wald confidence intervals for pairwise proportion
 differences of a polychotomous variable. These adjusted Wald confidence
-intervals use the same method that is used to compare proportions in a
-paired-samples design.
+intervals use the same method that is used to compare the two proportions
+in a paired-samples design.
 }
 \examples{
 f <- c(125, 82, 92)

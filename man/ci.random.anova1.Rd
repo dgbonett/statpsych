@@ -9,9 +9,9 @@ ci.random.anova1(alpha, m, sd, n)
 \arguments{
 \item{alpha}{1 - alpha confidence}
 
-\item{m}{vector of group sample means}
+\item{m}{vector of group estimated means}
 
-\item{sd}{vector of group standard deviations}
+\item{sd}{vector of group estimated deviations}
 
 \item{n}{sample size per group}
 }

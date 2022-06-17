@@ -288,3 +288,54 @@ test_that("random.yx returns valid data.frame", {
   testthat::expect_equal(dim(res), c(10, length(res)))
   testthat::expect_equal(colnames(res), colnames_expected)
 })
+
+
+test_that("ci.rsqr returns valid matrix", {
+  colnames_expected <- c(
+    "R-squared",    "adj R-squared",          "LL",        "UL"
+  )
+  
+  res <- ci.rsqr(.05, .241, 3, 116)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+test_that("ci.lc.gen.bs returns valid matrix", {
+  colnames_expected <- c(
+    "Estimate", "SE", "LL", "UL"
+  )
+  
+  est <- c(3.86, 4.57, 2.29, 2.88)
+  se <- c(0.185, 0.365, 0.275, 0.148)
+  v <- c(.5, .5, -.5, -.5)
+  res <- ci.lc.gen.bs(.05, est, se, v)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+test_that("ci.lc.glm returns valid matrix", {
+  colnames_expected <- c(
+    "Estimate", "SE", "t", "df", "p", "LL", "UL"
+  )
+  
+  y <- c(43, 62, 49, 60, 36, 79, 55, 42, 67, 50)
+  x1 <- c(3, 6, 4, 6, 2, 7, 4, 2, 7, 5)
+  x2 <- c(4, 6, 3, 7, 1, 9, 3, 3, 8, 4)
+  out <- lm(y ~ x1 + x2)
+  b <- coef(out)
+  V <- vcov(out)
+  n <- length(y)
+  q <- c(0, .5, .5)
+  b
+  res <- ci.lc.glm(.05, n, b, V, q)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})

@@ -13,7 +13,7 @@ size.ci.ratio.prop.ps(alpha, p1, p2, phi, r)
 
 \item{p2}{planning value of proportion for measurement 2}
 
-\item{phi}{planning value of phi coefficient}
+\item{phi}{planning value of phi correlation}
 
 \item{r}{desired upper to lower confidence interval endpoint ratio}
 }

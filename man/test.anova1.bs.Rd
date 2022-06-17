@@ -7,9 +7,9 @@
 test.anova1.bs(m, sd, n)
 }
 \arguments{
-\item{m}{vector of sample means}
+\item{m}{vector of estimated means}
 
-\item{sd}{vector of sample standard deviations}
+\item{sd}{vector of estimated standard deviations}
 
 \item{n}{vector of sample sizes}
 }
@@ -28,7 +28,7 @@ Returns a 1-row matrix. The columns are:
 \description{
 Computes the F statistic, p-value, eta-squared, and adjusted eta-squared
 for the main effect of Factor A in a one-way between-subjects ANOVA using
-the sample means, sample standard deviations, and sample sizes.
+the estimated means, estimated standard deviations, and sample sizes.
 }
 \examples{
 m <- c(12.4, 8.6, 10.5)

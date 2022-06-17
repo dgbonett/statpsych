@@ -13,7 +13,7 @@ size.ci.prop.ps(alpha, p1, p2, phi, w)
 
 \item{p2}{planning value of proportion for group 2}
 
-\item{phi}{planning value of phi coefficient}
+\item{phi}{planning value of phi correlation}
 
 \item{w}{desired confidence interval width}
 }
@@ -24,8 +24,8 @@ Returns the required sample size
 Computes the sample size required to estimate a proportion difference with
 desired confidence interval precision in a paired-samples design. Set the
 proportion planning values to .5 for a conservatively large sample size.
-Set the phi planning value to the smallest value within a plausible range
-for a conservatively large sample size.
+Set the phi correlation planning value to the smallest value within a
+plausible range for a conservatively large sample size.
 }
 \examples{
 size.ci.prop.ps(.05, .2, .3, .8, .1)

@@ -21,14 +21,14 @@ size.supinf.prop2(alpha, pow, p1, p2, h)
 Returns the required sample size per group
 }
 \description{
-Computes the sample size in each group required to perform a superiority
-or inferiority test for the difference in population proportions with
-desired power in a 2-group design. For a superiority test, specify the
-upper limit (h) for the range of practical equivalence and specify values
-of p1 and p2 such that p1 - p2 > h. For an inferiority test, specify the
+Computes the sample size in each group (assuming equal sample sizes) required
+to perform a superiority or inferiority test for the difference in population
+proportions with desired power in a 2-group design. For a superiority test,
+specify the upper limit (h) for the range of practical equivalence and specify
+values of p1 and p2 such that p1 - p2 > h. For an inferiority test, specify the
 lower limit (-h) for the range of practical equivalence and specify values
-of p1 and p2 such that p1 - p2 > -h. This function sets the effect size
-equal to p1 - p2.
+of p1 and p2 such that p1 - p2 > -h. This function sets the effect size equal
+to p1 - p2.
 }
 \examples{
 size.supinf.prop2(.05, .9, .35, .20, .05)

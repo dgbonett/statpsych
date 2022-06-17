@@ -2,7 +2,7 @@
 % Please edit documentation in R/statpsych1.R
 \name{ci.mann}
 \alias{ci.mann}
-\title{Confidence interval for a Mann-Whitney probability}
+\title{Confidence interval for a Mann-Whitney parameter}
 \usage{
 ci.mann(alpha, y1, y2)
 }

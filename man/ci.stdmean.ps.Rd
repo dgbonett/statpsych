@@ -9,15 +9,15 @@ ci.stdmean.ps(alpha, m1, m2, sd1, sd2, cor, n)
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
 
-\item{m1}{sample mean of measurement 1}
+\item{m1}{estimated mean of measurement 1}
 
-\item{m2}{sample mean of measurement 2}
+\item{m2}{estimated mean of measurement 2}
 
-\item{sd1}{sample standard deviation in measurement 1}
+\item{sd1}{estimated standard deviation of measurement 1}
 
-\item{sd2}{sample standard deviation in measurement 2}
+\item{sd2}{estimated standard deviation of measurement 2}
 
-\item{cor}{sample correlation between measurements}
+\item{cor}{estimated correlation between measurements}
 
 \item{n}{sample size}
 }

@@ -455,3 +455,32 @@ test_that("iqv returns valid matrix", {
 })
 
 
+
+test_that("test.mono.prop.bs returns valid matrix", {
+  colnames_expected <- c(
+    "", "", "Estimate",         "SE",         "LL",        "UL"
+  )
+  
+  f <- c(67, 49, 30, 10)
+  n <- c(100, 100, 100, 100)
+  res <- test.mono.prop.bs(.05, f, n)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(3, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+test_that("ci.agree2 returns valid matrix", {
+  colnames_expected <- c(
+    "Estimate",  "LL",  "UL"
+  )
+  
+  res <- ci.agree2(.05, 75, 70, 60, 45, 2)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(3, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+

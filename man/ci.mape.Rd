@@ -23,9 +23,9 @@ Returns a 1-row matrix. The columns are:
 }
 \description{
 Computes a confidence interval for a population mean absolute prediction
-error (MAPE) in a general linear model. The MAPE is a robust alternative
-to the residual standard deviation. This function requires a vector of
-estimated residuals from a general linear model.
+error (MAPE) in a general linear model. The MAPE is a more robust
+alternative to the residual standard deviation. This function requires a
+vector of estimated residuals from a general linear model.
 }
 \examples{
 r <- c(-2.70, -2.69, -1.32, 1.02, 1.23, -1.46, 2.21, -2.10, 2.56,

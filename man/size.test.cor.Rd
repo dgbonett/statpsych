@@ -15,7 +15,7 @@ size.test.cor(alpha, pow, cor, s, h)
 
 \item{s}{number of control variables}
 
-\item{h}{hypothesized value of slope}
+\item{h}{hypothesized value of correlation}
 }
 \value{
 Returns the required sample size

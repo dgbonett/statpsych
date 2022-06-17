@@ -13,14 +13,14 @@ ci.ratio.prop2(alpha, f1, f2, n1, n2)
 
 \item{f2}{number of participants in group 2 who have the attribute}
 
-\item{n1}{sample size of group 1}
+\item{n1}{sample size for group 1}
 
-\item{n2}{sample size of group 2}
+\item{n2}{sample size for group 2}
 }
 \value{
 Returns a 1-row matrix. The columns are:
 \itemize{
-\item Estimate - adjusted ratio of proportion ratio
+\item Estimate - adjusted estimate of proportion ratio
 \item LL - lower limit of the adjusted Wald confidence interval
 \item UL - upper limit of the adjusted Wald confidence interval
 }

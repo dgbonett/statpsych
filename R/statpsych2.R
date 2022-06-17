@@ -124,8 +124,8 @@ ci.spcor <- function(alpha, cor, r2, n) {
 #' @param  alpha	alpha level for 1-alpha confidence
 #' @param  cor1	  	estimated Pearson correlation in group 1
 #' @param  cor2	  	estimated Pearson correlation in group 2
-#' @param  n1	  	sample size in group 1
-#' @param  n2	  	sample size in group 2
+#' @param  n1	  	sample size for group 1
+#' @param  n2	  	sample size for group 2
 #'
 #'
 #' @return 
@@ -251,10 +251,10 @@ ci.cor.dep <- function(alpha, cor1, cor2, cor12, n) {
 #' coefficients.
 #'
 #'  
-#' @param  cor1  estimated correlation in group 1 
+#' @param  cor1  estimated correlation for group 1 
 #' @param  ll1   lower limit for group 1 correlation
 #' @param  ul1   upper limit for group 1 correlation
-#' @param  cor2  estimated correlation in group 2
+#' @param  cor2  estimated correlation for group 2
 #' @param  ll2   lower limit for group 2 correlation
 #' @param  ul2   upper limit for group 2 correlation
 #'
@@ -308,8 +308,8 @@ ci.cor2.gen <- function(cor1, ll1, ul1, cor2, ll2, ul2) {
 #' @param  m2     estimated mean for group 2
 #' @param  sd1    estimated standard deviation for group 1
 #' @param  sd2    estimated standard deviation for group 2
-#' @param  n1     sample size in group 1
-#' @param  n2	  sample size in group 2
+#' @param  n1     sample size for group 1
+#' @param  n2	  sample size for group 2
 #'
 #'
 #' @references
@@ -428,10 +428,10 @@ ci.spear <- function(alpha, y, x) {
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
-#' @param  cor1	  estimated Spearman correlation in group 1
-#' @param  cor2	  estimated Spearman correlation in group 2
-#' @param  n1	  sample size in group 1
-#' @param  n2	  sample size in group 2
+#' @param  cor1	  estimated Spearman correlation for group 1
+#' @param  cor2	  estimated Spearman correlation for group 2
+#' @param  n1	  sample size for group 1
+#' @param  n2	  sample size for group 2
 #'
 #'
 #' @return 
@@ -609,7 +609,7 @@ ci.condslope <- function(alpha, b1, b2, se1, se2, cov, lo, hi, dfe) {
 #'  
 #' @description
 #' Compute a confidence interval and test statistic for a linear contrast
-#' of a population regression coefficient (y-intercept or slope) across
+#' of a population regression coefficients (y-intercept or slope) across
 #' groups in a multiple group regression model. Equality of error variances
 #' across groups is not assumed. A Satterthwaite adjustment to the degrees 
 #' of freedom is used to improve the accuracy of the confidence interval. 
@@ -757,6 +757,195 @@ ci.indirect <- function(alpha, b1, b2, se1, se2) {
  ul <- y[k - c + 1]
  out <- t(c(b1*b2, se, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ return(out)
+}
+
+
+#  ci.lc.gml ==================================================================
+#' Confidence interval for a linear function of general linear model parameters
+#'
+#'                                  
+#' @description
+#' Computes the estimate, standard error, and confidence interval for a linear
+#' function of parameters in a general linear model using coef(object) and
+#' vcov(object) where "object" is a fitted model object from the lm function.
+#'
+#'
+#' @param   alpha  alpha for 1 - alpha confidence
+#' @param   n      sample size
+#' @param   b      vector of parameter estimates from coef(object)
+#' @param   V      covariance matrix of parameter estimates from vcov(object)
+#' @param   q      vector of coefficients
+#'
+#'
+#' @return 
+#' Returns a 1-row matrix. The columns are:
+#' * Estimate - estimate of linear function 
+#' * SE - standard error
+#' * t - t test statistic 
+#' * df - degrees of freedom
+#' * p - p-value 
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval 
+#'
+#'
+#' @examples
+#' y <- c(43, 62, 49, 60, 36, 79, 55, 42, 67, 50)
+#' x1 <- c(3, 6, 4, 6, 2, 7, 4, 2, 7, 5)
+#' x2 <- c(4, 6, 3, 7, 1, 9, 3, 3, 8, 4)
+#' out <- lm(y ~ x1 + x2)
+#' b <- coef(out)
+#' V <- vcov(out)
+#' n <- length(y)
+#' q <- c(0, .5, .5)
+#' b
+#' ci.lc.glm(.05, n, b, V, q)
+#'
+#' #  Should return:
+#' # (Intercept)          x1          x2 
+#' #   26.891111    3.648889    2.213333 
+#' # > ci.lc.glm(.05, n, b, V, q)
+#' #      Estimate        SE       t df           p       LL       UL
+#' # [1,] 2.931111 0.4462518 6.56829  7 0.000313428 1.875893 3.986329
+#'
+#'
+#' @importFrom stats qt
+#' @importFrom stats pt
+#' @export
+ci.lc.glm <-function(alpha, n, b, V, q) {
+ df <- n - length(b)
+ tcrit <- qt(1 - alpha/2, df)
+ est <- t(q)%*%b
+ se <- sqrt(t(q)%*%V%*%q)
+ t <- est/se
+ p <- 2*(1 - pt(abs(t), df))
+ ll <- est - tcrit*se
+ ul <- est + tcrit*se
+ out <- t(c(est, se, t, df, p, ll, ul))
+ colnames(out) <- c("Estimate", "SE", "t", "df", "p", "LL", "UL")
+ return(out)
+}
+
+
+#  ci.lc.gen.bs ===============================================================
+#' Confidence interval for a linear contrast of parameters in a between-subjects
+#' design
+#'
+#'                                              
+#' @description
+#' Computes the estimate, standard error, and approximate confidence interval 
+#' for a linear contrast of any type of parameter (e.g., quartile, ordinal 
+#' regression slope, path coefficient, G-index) where each parameter value has
+#' been estimated from a different sample. The parameter vaues are assumed to 
+#' be of the same type (e.g., all unstandardized path coefficients) and their 
+#' sampling distributions are assumed to be approximately normal.
+#'
+#'
+#' @param  alpha   alpha level for simultaneous 1-alpha confidence
+#' @param  est     vector of parameter estimates
+#' @param  se      vector of standard errors
+#' @param  v       vector of contrast coefficients
+#'
+#'
+#' @return 
+#' Returns a 1-row matrix. The columns are:
+#' * Estimate - estimate of linear contrast
+#' * SE - standard error of linear contrast
+#' * LL - lower limit of confidence interval
+#' * UL - upper limit of confidence interval
+#'
+#'
+#' @examples
+#' est <- c(3.86, 4.57, 2.29, 2.88)
+#' se <- c(0.185, 0.365, 0.275, 0.148)
+#' v <- c(.5, .5, -.5, -.5)
+#' ci.lc.gen.bs(.05, est, se, v)
+#'
+#' # Should return:
+#' #      Estimate        SE       LL       UL
+#' # [1,]     1.63 0.2573806 1.125543 2.134457
+#'
+#'
+#' @importFrom stats qnorm
+#' @export
+ci.lc.gen.bs <- function(alpha, est, se, v) {
+ est.lc <- t(v)%*%est
+ se.lc <- sqrt(t(v)%*%diag(se^2)%*%v)
+ zcrit <- qnorm(1 - alpha/2)
+ ll <- est.lc - zcrit*se.lc
+ ul <- est.lc + zcrit*se.lc
+ out <- t(c(est.lc, se.lc, ll, ul))
+ colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ return(out)
+}
+
+#  ci.rsqr ===================================================================
+#' Confidence interval for squared multiple correlation
+#'                             
+#' @description
+#' Computes an approximate confidence interval for a population squared 
+#' multiple correlation in a linear model with random predictor variables.  
+#' This function uses the scaled central F approximation method.
+#'
+#'
+#' @param  alpha    alpha value for 1-alpha confidence
+#' @param  r2       estimated unadjusted squared multiple correlation
+#' @param  s        number of predictor variables
+#' @param  n        sample size
+#'
+#' @references
+#' \insertRef{Helland1987}{statpsych}
+#'
+#' @return 
+#' Returns a 1-row matrix. The columns are:
+#' * R-squared - estimate of unadjusted R-squared 
+#' * adj R-squared - bias adjusted R-squared estimate
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
+#'
+#'
+#' @examples
+#' ci.rsqr(.05, .241, 3, 116)
+#'
+#' # Should return:
+#' #        R-squared    adj R-squared          LL        UL
+#' # [1,]       0.241        0.2206696  0.09819599 0.3628798
+#'  
+#' 
+#' @importFrom stats qf
+#' @export
+ci.rsqr <- function(alpha, r2, s, n) {
+ alpha1 <- alpha/2
+ alpha2 <- 1 - alpha1
+ dfe <- n - s - 1
+ adj <- 1 - (n - 1)*(1 - r2)/dfe
+ if (adj < 0) {adj = 0}
+ b1 <- r2/(1 - r2)
+ b2 <- adj/(1 - adj)
+ v1 <- ((n - 1)*b1 + s)^2/((n - 1)*b1*(b1 + 2) + s)
+ v2 <- ((n - 1)*b2 + s)^2/((n - 1)*b2*(b2 + 2) + s)
+ F1 <- qf(alpha1, v1, dfe)
+ F2 <- qf(alpha2, v2, dfe)
+ ll <- (dfe*r2 - (1 - r2)*s*F2)/(dfe*(r2 + (1 - r2)*F2))
+ ul <- (dfe*r2 - (1 - r2)*s*F1)/(dfe*(r2 + (1 - r2)*F1))
+ if (ll < 0) {ll = 0}
+ if (ul < 0) {ul = 0}
+ i <- 1
+ while (i < 30) {
+   i <- i + 1
+   b1 <- ul/(1 - ul)
+   b2 <- ll/(1 - ll)
+   v1 <- ((n - 1)*b1 + s)^2/((n - 1)*b1*(b1 + 2) + s)
+   v2 <- ((n - 1)*b2 + s)^2/((n - 1)*b2*(b2 + 2) + s)
+   F1 <- qf(alpha1, v1, dfe)
+   F2 <- qf(alpha2, v2, dfe)
+   ll <- (dfe*r2 - (1 - r2)*s*F2)/(dfe*(r2 + (1 - r2)*F2))
+   ul <- (dfe*r2 - (1 - r2)*s*F1)/(dfe*(r2 + (1 - r2)*F1))
+   if (ll < 0) {ll = 0}
+   if (ul < 0) {ul = 0}
+ }
+ out <- t(c(r2, adj, ll, ul))
+ colnames(out) <- c("R-squared", "adj R-squared", "LL", "UL")
  return(out)
 }
 

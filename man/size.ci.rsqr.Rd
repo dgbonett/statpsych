@@ -23,7 +23,7 @@ Computes the sample size required to estimate a squared multiple correlation
 in a random-x regression model with desired confidence interval precision.
 Set the planning value of squared multiple correlation to 1/3 for a
 conservatively large sample size. This function uses an approximation to
-the standrd error of the squared multiple correlation.
+the standard error of the squared multiple correlation.
 }
 \examples{
 size.ci.rsqr(.05, .333, 2, .2)

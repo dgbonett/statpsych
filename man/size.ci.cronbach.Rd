@@ -4,14 +4,14 @@
 \alias{size.ci.cronbach}
 \title{Sample size for a Cronbach reliability confidence interval}
 \usage{
-size.ci.cronbach(alpha, rel, a, w)
+size.ci.cronbach(alpha, rel, r, w)
 }
 \arguments{
 \item{alpha}{alpha value for 1-alpha confidence}
 
 \item{rel}{reliability planning value}
 
-\item{a}{number of measurements}
+\item{r}{number of measurements}
 
 \item{w}{desired confidence interval width}
 }

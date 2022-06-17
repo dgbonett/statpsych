@@ -9,9 +9,9 @@ pi.score1(alpha, m, sd, n)
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
 
-\item{m}{sample mean}
+\item{m}{estimated mean}
 
-\item{sd}{sample standard deviation}
+\item{sd}{estimated standard deviation}
 
 \item{n}{sample size}
 }

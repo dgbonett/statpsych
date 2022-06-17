@@ -9,15 +9,15 @@ ci.condslope(alpha, b1, b2, se1, se2, cov, lo, hi, dfe)
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
 
-\item{b1}{sample coefficient for predictor variable}
+\item{b1}{estimated slope coefficient for predictor variable}
 
-\item{b2}{sample coefficient for product variable}
+\item{b2}{estimated slope coefficient for product variable}
 
 \item{se1}{standard error for predictor coefficient}
 
 \item{se2}{standard error for product coefficient}
 
-\item{cov}{sample covariance between predictor and product coefficients}
+\item{cov}{estimated covariance between predictor and product coefficients}
 
 \item{lo}{low value of moderator variable}
 
@@ -40,7 +40,7 @@ Computes confidence intervals and test statistics for population
 conditional slopes (simple slopes) in a general linear model that
 includes a predictor variable that is the product of a moderator
 variable and a predictor variable. Conditional slopes are computed
-at low and high values of the moderator variable.
+at specified low and high values of the moderator variable.
 }
 \examples{
 ci.condslope(.05, .132, .154, .031, .021, .015, 5.2, 10.6, 122)
