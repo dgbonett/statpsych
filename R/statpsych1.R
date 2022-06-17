@@ -2297,7 +2297,7 @@ test.skew <- function(y) {
 
 
 #  test.kurtosis =================================================================
-#' Computes p-value for test of kurtosis
+#' Computes p-value for test of excess kurtosis
 #'
 #'                                 
 #' @description
