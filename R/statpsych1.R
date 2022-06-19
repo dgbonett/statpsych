@@ -2297,7 +2297,7 @@ test.skew <- function(y) {
 
 
 #  test.kurtosis =================================================================
-#' Computes p-value for test of kurtosis
+#' Computes p-value for test of excess kurtosis
 #'
 #'                                 
 #' @description
@@ -3917,7 +3917,7 @@ test.anova1.bs <- function(m, sd, n) {
 #' etasqr.gen.2way(12.3, 15.6, 5.2, 7.9)
 #'
 #' # Should return:
-#' #                                         A         B        AB
+#' #                                           A         B        AB
 #' # A treatment, B classification:     0.300000 0.5435540 0.1811847
 #' # A classification, B treatment:     0.484252 0.3804878 0.2047244
 #' # A classification, B classiciation: 0.300000 0.3804878 0.1268293
