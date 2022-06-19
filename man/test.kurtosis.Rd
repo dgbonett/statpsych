@@ -2,7 +2,7 @@
 % Please edit documentation in R/statpsych1.R
 \name{test.kurtosis}
 \alias{test.kurtosis}
-\title{Computes p-value for test of kurtosis}
+\title{Computes p-value for test of excess kurtosis}
 \usage{
 test.kurtosis(y)
 }
