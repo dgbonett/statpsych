@@ -1,5 +1,5 @@
 
-# statpsych: statistical Methods for Psychologists
+# statpsych: Statistical Methods for Psychologists
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/statpsych)](https://CRAN.R-project.org/package=statpsych)
