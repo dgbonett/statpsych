@@ -19,8 +19,7 @@ functions can be used to approximate the sample size needed to estimate
 a parameter or function of parameters with desired confidence interval
 precision or to perform a variety of hypothesis tests (directional
 two-sided, equivalence, superiority, noninferiority) with desired power.
-For details, see:
-<https://csass.ucsc.edu/self-study%20courses/statistical_methods.html>.
+For details, see: <https://dgbonett.sites.ucsc.edu/>.
 
 ## Installation
 
