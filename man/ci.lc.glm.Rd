@@ -2,7 +2,7 @@
 % Please edit documentation in R/statpsych2.R
 \name{ci.lc.glm}
 \alias{ci.lc.glm}
-\title{Confidence interval for a linear function of general linear model parameters}
+\title{Confidence interval for a linear contrast of general linear model parameters}
 \usage{
 ci.lc.glm(alpha, n, b, V, q)
 }
@@ -31,7 +31,7 @@ Returns a 1-row matrix. The columns are:
 }
 \description{
 Computes the estimate, standard error, and confidence interval for a linear
-function of parameters in a general linear model using coef(object) and
+contrast of parameters in a general linear model using coef(object) and
 vcov(object) where "object" is a fitted model object from the lm function.
 }
 \examples{
