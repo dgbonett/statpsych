@@ -762,12 +762,12 @@ ci.indirect <- function(alpha, b1, b2, se1, se2) {
 
 
 #  ci.lc.gml ==================================================================
-#' Confidence interval for a linear function of general linear model parameters
+#' Confidence interval for a linear contrast of general linear model parameters
 #'
 #'                                  
 #' @description
 #' Computes the estimate, standard error, and confidence interval for a linear
-#' function of parameters in a general linear model using coef(object) and
+#' contrast of parameters in a general linear model using coef(object) and
 #' vcov(object) where "object" is a fitted model object from the lm function.
 #'
 #'
