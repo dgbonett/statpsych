@@ -752,7 +752,7 @@ ci.indirect <- function(alpha, b1, b2, se1, se2) {
  y1 <- rnorm(k, b1, se1)
  y2 <- rnorm(k, b2, se2)
  y <- sort(y1*y2)
- se <- sqrt((b1*se1)^2 + (b2*se2)^2)
+ se <- sqrt((b1*se2)^2 + (b2*se1)^2)
  ll <- y[c]
  ul <- y[k - c + 1]
  out <- t(c(b1*b2, se, ll, ul))
