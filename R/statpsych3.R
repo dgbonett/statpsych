@@ -537,11 +537,9 @@ test.mono.prop.bs <-function(alpha, f, n) {
 ci.prop.ps <- function(alpha, f00, f01, f10, f11) {
  z <- qnorm(1 - alpha/2)
  n <- f00 + f01 + f10 + f11
- p1 <- (f01 + f11)/n
- p2 <- (f10 + f11)/n
  p01 <- (f01 + 1)/(n + 2)
  p10 <- (f10 + 1)/(n + 2)
- diff <- p1 - p2
+ diff <- p01 - p10
  se <- sqrt(((p01 + p10) - (p01 - p10)^2)/(n + 2))
  LL <- p01 - p10 - z*se
  UL <- p01 - p10 + z*se
