@@ -6,8 +6,9 @@
 #' @description
 #' Computes a Fisher confidence interval for a population Pearson correlation  
 #' or partial correlation with s control variables. Set s = 0 for a Pearson 
-#' correlation. This function uses an estimated correlation as input. Use the
-#' cor.test function for a Pearson correlation with raw data input.
+#' correlation. A bias adjustment is used to reduce the bias of the Fisher 
+#' transformed correlation. This function uses an estimated correlation as
+#' input. Use the cor.test function for raw data input.
 #'
 #'  
 #' @param  alpha 	alpha level for 1-alpha confidence
@@ -33,7 +34,7 @@
 #'
 #' # Should return:
 #' #      Estimate        SE        LL        UL
-#' # [1,]    0.536 0.1018149 0.3028333 0.7086249
+#' # [1,]    0.536 0.1018149 0.2978573 0.7058914
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -42,7 +43,7 @@ ci.cor <- function(alpha, cor, s, n) {
  z <- qnorm(1 - alpha/2)
  se <- sqrt((1 - cor^2)^2/(n - 1))
  se.z <- sqrt(1/((n - s - 3)))
- zr <- log((1 + cor)/(1 - cor))/2
+ zr <- log((1 + cor)/(1 - cor))/2 - cor/(2*(n - 1))
  ll0 <- zr - z*se.z
  ul0 <- zr + z*se.z
  ll <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
