@@ -6,8 +6,9 @@
 #' @description
 #' Computes a Fisher confidence interval for a population Pearson correlation  
 #' or partial correlation with s control variables. Set s = 0 for a Pearson 
-#' correlation. This function uses an estimated correlation as input. Use the
-#' cor.test function for a Pearson correlation with raw data input.
+#' correlation. A bias adjustmentment is used to reduce the bias of the Fisher
+#' transformed correlation. This function uses an estimated correlation as 
+#' input. Use the cor.test function for raw data input.
 #'
 #'  
 #' @param  alpha 	alpha level for 1-alpha confidence
@@ -33,7 +34,7 @@
 #'
 #' # Should return:
 #' #      Estimate        SE        LL        UL
-#' # [1,]    0.536 0.1018149 0.3028333 0.7086249
+#' # [1,]    0.536 0.1018149 0.2978573 0.7058914
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -42,7 +43,7 @@ ci.cor <- function(alpha, cor, s, n) {
  z <- qnorm(1 - alpha/2)
  se <- sqrt((1 - cor^2)^2/(n - 1))
  se.z <- sqrt(1/((n - s - 3)))
- zr <- log((1 + cor)/(1 - cor))/2
+ zr <- log((1 + cor)/(1 - cor))/2 - cor/(2*(n - 1))
  ll0 <- zr - z*se.z
  ul0 <- zr + z*se.z
  ll <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
@@ -118,7 +119,8 @@ ci.spcor <- function(alpha, cor, r2, n) {
 #'
 #' @description
 #' Computes a confidence interval for a difference in population Pearson 
-#' correlations in a 2-group design.
+#' correlations in a 2-group design. A bias adjustmentment is used to 
+#' reduce the bias of each Fisher transformed correlation. 
 #'
 #'  
 #' @param  alpha	alpha level for 1-alpha confidence
@@ -144,7 +146,7 @@ ci.spcor <- function(alpha, cor, r2, n) {
 #'
 #' # Should return:
 #' #      Estimate         LL        UL
-#' # [1,]    0.084 0.02795506 0.1457103
+#' # [1,]    0.084 0.02803246 0.1463609
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -153,13 +155,13 @@ ci.cor2 <- function(alpha, cor1, cor2, n1, n2) {
  z <- qnorm(1 - alpha/2)
  diff <- cor1 - cor2
  se1 <- sqrt(1/((n1 - 3)))
- zr1 <- log((1 + cor1)/(1 - cor1))/2
+ zr1 <- log((1 + cor1)/(1 - cor1))/2 - cor1/(2*(n1 - 1))
  ll0 <- zr1 - z*se1
  ul0 <- zr1 + z*se1
  ll1 <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
  ul1 <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
  se2 <- sqrt(1/((n2 - 3)))
- zr2 <- log((1 + cor2)/(1 - cor2))/2
+ zr2 <- log((1 + cor2)/(1 - cor2))/2- cor2/(2*(n2 - 1))
  ll0 <- zr2 - z*se2
  ul0 <- zr2 + z*se2
  ll2 <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
@@ -179,7 +181,8 @@ ci.cor2 <- function(alpha, cor1, cor2, n1, n2) {
 #' @description 
 #' Computes a confidence interval for a difference in population Pearson 
 #' correlations that are estimated from the same sample and have one 
-#' variable in common.
+#' variable in common. A bias adjustmentment is used to reduce the bias
+#' of each Fisher transformed correlation. 
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -205,7 +208,7 @@ ci.cor2 <- function(alpha, cor1, cor2, n1, n2) {
 #'
 #' # Should return:
 #' #      Estimate         LL      UL
-#' # [1,]    0.217 0.01366766 0.41594
+#' # [1,]    0.217 0.01323072 0.415802
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -214,13 +217,13 @@ ci.cor.dep <- function(alpha, cor1, cor2, cor12, n) {
  z <- qnorm(1 - alpha/2)
  diff <- cor1 - cor2
  se1 <- sqrt(1/((n - 3)))
- zr1 <- log((1 + cor1)/(1 - cor1))/2
+ zr1 <- log((1 + cor1)/(1 - cor1))/2 - cor1/(2*(n - 1))
  ll0 <- zr1 - z*se1
  ul0 <- zr1 + z*se1
  ll1 <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
  ul1 <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
  se2 <- sqrt(1/((n - 3)))
- zr2 <- log((1 + cor2)/(1 - cor2))/2
+ zr2 <- log((1 + cor2)/(1 - cor2))/2 - cor2/(2*(n - 1))
  ll0 <- zr2 - z*se2
  ul0 <- zr2 + z*se2
  ll2 <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
