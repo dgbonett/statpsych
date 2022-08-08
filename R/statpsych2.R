@@ -742,7 +742,7 @@ ci.fisher <- function(alpha, cor, se) {
 #' @examples
 #' ci.indirect (.05, 2.48, 1.92, .586, .379)
 #'
-#' # Should return:
+#' # Should return (within sampling error for CI):
 #' #      Estimate       SE       LL       UL
 #' # [1,]   4.7616 1.625282 2.178812 7.972262
 #'  
