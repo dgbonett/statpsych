@@ -719,9 +719,9 @@ ci.fisher <- function(alpha, cor, se) {
 #' The Monte Carlo method is general in that the slope estimates and standard 
 #' errors do not need to be OLS estimates with homoscedastic standard errors. 
 #' For example, LAD slope estimates and their standard errors, OLS slope 
-#' estimates and heteroscedastic standard errors, or distribution-free 
-#' Theil-Sen slope estimates with McKean-Schrader standard errors also could
-#' be used. 
+#' estimates and heteroscedastic standard errors, distribution-free 
+#' Theil-Sen slope estimates with McKean-Schrader standard errors, or 
+#' standardized slopes with robust standard errors also could be used.
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence  
