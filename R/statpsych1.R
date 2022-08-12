@@ -1469,7 +1469,7 @@ ci.cod2 <-function(alpha, y1, y2) {
 #'
 #' # Should return:
 #' #      Median       SE LL UL
-#' # [1,]     20 5.390263 10 30
+#' # [1,]     20 4.270922 10 30
 #'
 #'
 #' @importFrom stats qnorm
@@ -1485,7 +1485,7 @@ ci.median1 <- function(alpha, y) {
  if (c1 < 1) {c1 = 1}
  ll <- y[c1]
  ul <- y[n - c1 + 1]
- a <- round((n + 1)/2 - sqrt(n))
+ a <- round(n/2 - sqrt(n))
  if (a < 1) {a = 1}
  ll1 <- y[a]
  ul1 <- y[n - a + 1]
