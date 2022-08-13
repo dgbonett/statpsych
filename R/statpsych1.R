@@ -3946,6 +3946,428 @@ etasqr.gen.2way <- function(SSa, SSb, SSab, SSe) {
  return(out)
 }
 
+#  sim.ci.mean1 ===============================================================
+#' Simulates confidence interval coverage probability for single mean
+#'
+#'                               
+#' @description
+#' Performs a computer simulation (20,000 Monte Carlo samples) of the 
+#' confidence interval performance for a single mean. Sample data can 
+#' be generated from five different population distributions. All 
+#' distributions are scaled to have standard deviations of 1.0.
+#'
+#'
+#' @param   alpha  alpha level for 1-alpha confidence
+#' @param   n      sample size
+#' @param   dist   type of distribution (1, 2, 3, 4,or 5)
+#' * 1 = Gaussian (skewness = 0 and excess kurtosis = 0) 
+#' * 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
+#' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
+#' * 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
+#' * 5 = large skew (skewness = 2 and excess kurtosis = 6)
+#'  
+#' 
+#' @return
+#' Returns a 1-row matrix. The columns are:
+#' * Coverage - probability of confidence interval including population mean  
+#' * Lower Error - probability of lower limit greater than population mean
+#' * Upper Error - probability of upper limit less than population mean
+#' * Ave CI Width - average confidence interval width
+#'
+#'
+#' @examples
+#' sim.ci.mean1(.05, 40, 4)
+#'
+#' # Should return (within sampling error):
+#' #      Coverage Lower Error Upper Error Ave CI Width
+#' # [1,]  0.94722     0.01738      0.0354    0.6333067
+#'
+#'
+#' @importFrom stats qt
+#' @importFrom stats rnorm
+#' @importFrom stats runif
+#' @importFrom stats rt
+#' @importFrom stats rgamma
+#' @export
+sim.ci.mean1 <- function(alpha, n, dist) {
+ tcrit <- qt(1 - alpha/2, n - 1)
+ rep <- 20000
+ if (dist == 1) {
+   y <- matrix(rnorm(rep*n), nrow = rep)
+   popmean <- 0
+ } else if (dist == 2) {
+   y <- matrix(3.464*runif(rep*n), nrow = rep)
+   popmean <- 1.732
+ } else if (dist == 3) {
+   y <- matrix(.7745*rt(rep*n, 5), nrow = rep)
+   popmean <- 0
+ } else if (dist == 4) {
+   y <- matrix(.5*rgamma(rep*n, 4), nrow = rep)
+   popmean <- 2
+ } else {
+   y <- matrix(rgamma(rep*n, 1), nrow = rep)
+   popmean <- 1
+ }
+ m <- rowMeans(y)
+ var <- apply(y, 1, var)
+ se <- sqrt(var/n)
+ ll <- m - tcrit*se
+ ul <- m + tcrit*se
+ w <- ul - ll
+ c1 <- as.integer(ll > popmean)
+ c2 <- as.integer(ul < popmean)
+ e1 <- sum(c1)/rep
+ e2 <- sum(c2)/rep
+ width <- mean(w)
+ cov <- 1 - (e1 + e2)
+ out <- t(c(cov, e1, e2, width))
+ colnames(out) <- c("Coverage", "Lower Error", "Upper Error", "Ave CI Width")
+ return(out)
+}
+
+
+#  sim.ci.mean2 ===============================================================
+#' Simulates confidence interval coverage probability for a two-group mean 
+#' difference
+#'
+#'                               
+#' @description
+#' Performs a computer simulation (20,000 Monte Carlo samples) of separate 
+#' variance and pooled variance confidence interval performance for a mean  
+#' difference in a two-group design. Sample data within each group can be 
+#' generated from five different population distributions. All distributions
+#' are scaled to have a standard deviation of 1.0 in group 1. 
+#'
+#'
+#' @param   alpha     alpha level for 1-alpha confidence
+#' @param   n1        sample size in group 1
+#' @param   n2        sample size in group 2
+#' @param   sd.ratio  ratio of population standard deviations
+#' @param   dist1     type of distribution in group 1 (1, 2, 3, 4, or 5)
+#' @param   dist2     type of distribution in group 2 (1, 2, 3, 4, or 5)
+#' * 1 = Gaussian (skewness = 0 and excess kurtosis = 0) 
+#' * 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
+#' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
+#' * 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
+#' * 5 = large skew (skewness = 2 and excess kurtosis = 6)
+#'  
+#' 
+#' @return
+#' Returns a 1-row matrix. The columns are:
+#' * Coverage - probability of confidence interval including population mean  
+#' * Lower Error - probability of lower limit greater than population mean
+#' * Upper Error - probability of upper limit less than population mean
+#' * Ave CI Width - average confidence interval width
+#'
+#'
+#' @examples
+#' sim.ci.mean2(.05, 30, 25, 1.5, 4, 5)
+#'
+#' # Should return (within sampling error):
+#' #                             Coverage Lower Error Upper Error Ave CI Width
+#' # Equal Variances Assumed:      0.93986     0.04022     0.01992     1.344437
+#' # Equal Variances Not Assumed:  0.94762     0.03862     0.01376     1.401305
+#'
+#'
+#' @importFrom stats qt
+#' @importFrom stats rnorm
+#' @importFrom stats runif
+#' @importFrom stats rt
+#' @importFrom stats rgamma
+#' @export
+sim.ci.mean2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2) {
+ df1 <- n1 + n2 - 2
+ tcrit1 <- qt(1 - alpha/2, df1)
+ rep <- 20000
+ if (dist1 == 1) {
+   y1 <- matrix(rnorm(rep*n1), nrow = rep)
+   popmean1 <- 0
+ } else if (dist1 == 2) {
+   y1 <- matrix(3.464*runif(rep*n1), nrow = rep)
+   popmean1 <- 1.732
+ } else if (dist1 == 3) {
+   y1 <- matrix(.7745*rt(rep*n1, 5), nrow = rep)
+   popmean1 <- 0
+ } else if (dist1 == 4) {
+   y1 <- matrix(.5*rgamma(rep*n1, 4), nrow = rep)
+   popmean1 <- 2
+ } else {
+   y1 <- matrix(rgamma(rep*n1, 1), nrow = rep)
+   popmean1 <- 1
+ }
+ if (dist2 == 1) {
+   y2 <- matrix(sd.ratio*rnorm(rep*n2), nrow = rep)
+   popmean2 <- 0
+ } else if (dist2 == 2) {
+   y2 <- matrix(sd.ratio*3.464*runif(rep*n2), nrow = rep)
+   popmean2 <- sd.ratio*1.732
+ } else if (dist2 == 3) {
+   y2 <- matrix(sd.ratio*.7745*rt(rep*n2, 5), nrow = rep)
+   popmean2 <- 0
+ } else if (dist2 == 4) {
+   y2 <- matrix(sd.ratio*.5*rgamma(rep*n2, 4), nrow = rep)
+   popmean2 <- sd.ratio*2
+ } else {
+   y2 <- matrix(sd.ratio*rgamma(rep*n2, 1), nrow = rep)
+   popmean2<- sd.ratio
+ }
+ popdiff <- popmean1 - popmean2
+ m1 <- rowMeans(y1)
+ m2 <- rowMeans(y2)
+ v1 <- apply(y1, 1, var)
+ v2 <- apply(y2, 1, var)
+ vp <- ((n1 - 1)*v1 + (n2 - 1)*v2)/df1
+ se1 <- sqrt(vp/n1 + vp/n2)
+ se2 <- sqrt(v1/n1 + v2/n2)
+ df2 <- (se2^4)/(v1^2/(n1^3 - n1^2) + v2^2/(n2^3 - n2^2))
+ tcrit2 <- qt(1 - alpha/2, df2)
+ LL1 <- m1 - m2 - tcrit1*se1
+ UL1 <- m1 - m2 + tcrit1*se1
+ w1 <- UL1 - LL1
+ LL2 <- m1 - m2 - tcrit2*se2
+ UL2 <- m1 - m2 + tcrit2*se2
+ w2 <- UL2 - LL2
+ c11 <- as.integer(LL1 > popdiff)
+ c12 <- as.integer(UL1 < popdiff)
+ c21 <- as.integer(LL2 > popdiff)
+ c22 <- as.integer(UL2 < popdiff)
+ e11 <- sum(c11)/rep
+ e12 <- sum(c12)/rep
+ e21 <- sum(c21)/rep
+ e22 <- sum(c22)/rep
+ width1 <- mean(w1)
+ width2 <- mean(w2)
+ cov1 <- 1 - (e11 + e12)
+ cov2 <- 1 - (e21 + e22)
+ out1 <- t(c(cov1, e11, e12, width1))
+ out2 <- t(c(cov2, e21, e22, width2))
+ out <- rbind(out1, out2)
+ colnames(out) <- c("Coverage", "Lower Error", "Upper Error", "Ave CI Width")
+ rownames(out) <- c("Equal Variances Assumed:", "Equal Variances Not Assumed:")
+ return(out)
+}
+
+
+#  sim.ci.mean.ps ===============================================================
+#' Simulates confidence interval coverage probability for a paired-samples mean 
+#' difference
+#'
+#'                               
+#' @description
+#' Performs a computer simulation (20,000 Monte Carlo samples) of confidence
+#' interval performance for a mean difference in a paired-samples design. Sample 
+#' data within each level of the within-subjects factor group can be generated
+#' from bivariate population distributions with five different marginal
+#' distributions. All distributions are scaled to have standard deviations of 
+#' 1.0 at level 1. Bivariate random data with specified marginal skewness and
+#' kurtosis are generated using the unonr function in the mnonr package. 
+#'
+#'
+#' @param   alpha     alpha level for 1-alpha confidence
+#' @param   n         sample size 
+#' @param   sd.ratio  ratio of population standard deviations
+#' @param   cor       population correlation of paired observations
+#' @param   dist1     type of distribution at level 1 (1, 2, 3, 4, or 5)
+#' @param   dist2     type of distribution at level 2 (1, 2, 3, 4, or 5)
+#' * 1 = Gaussian (skewness = 0 and excess kurtosis = 0) 
+#' * 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
+#' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
+#' * 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
+#' * 5 = large skew (skewness = 2 and excess kurtosis = 6)
+#'  
+#' 
+#' @return
+#' Returns a 1-row matrix. The columns are:
+#' * Coverage - probability of confidence interval including population mean  
+#' * Lower Error - probability of lower limit greater than population mean
+#' * Upper Error - probability of upper limit less than population mean
+#' * Ave CI Width - average confidence interval width
+#'
+#'
+#' @examples
+#' library(mnonr)
+#' sim.ci.mean.ps(.05, 30, 1.5, .7, 4, 5)
+#'
+#' # Should return (within sampling error):
+#' #      Coverage Lower Error Upper Error Ave CI Width
+#' # [1,]  0.93815     0.05125      0.0106    0.7778518
+#'
+#'
+#' @importFrom stats qt
+#' @importFrom mnonr unonr
+#' @export
+sim.ci.mean.ps <- function(alpha, n, sd.ratio, cor, dist1, dist2) {
+ tcrit <- qt(1 - alpha/2, n - 1)
+ rep <- 20000
+ if (dist1 == 1) {
+   skw1 <- 0; kur1 <- 0
+ } else if (dist1 == 2) {
+   skw1 <- 0; kur1 <- -1.2
+ } else if (dist1 == 3) {
+   skw1 <- 0; kur1 <- 6
+ } else if (dist1 == 4) {
+   skw1 <- .75; kur1 <- .86
+ } else {
+   skw1 <- 1.41; kur1 <- 3
+ }
+ if (dist2 == 1) {
+   skw2 <- 0; kur2 <- 0
+ } else if (dist2 == 2) {
+   skw2 <- 0; kur2 <- -1.2
+ } else if (dist2 == 3) {
+   skw2 <- 0; kur2 <- 6
+ } else if (dist2 == 4) {
+   skw2 <- 1; kur2 <- 1.5
+ } else {
+   skw2 <- 2; kur2 <- 6
+ }
+ V <- matrix(c(1, cor*sd.ratio, cor*sd.ratio, sd.ratio^2), 2, 2)
+ w <- 0; k <- 0; e1 <-0; e2 <- 0
+ repeat {
+   k <- k + 1
+   y <- unonr(n, c(0, 0), V, skewness = c(skw1, skw2), kurtosis = c(kur1, kur2))
+   q <- c(1, -1)
+   d <- y%*%q
+   m <- mean(d)
+   se <- sqrt(var(d)/n)
+   ll <- m - tcrit*se
+   ul <- m + tcrit*se
+   w0 <- ul - ll
+   c1 <- as.integer(ll > 0)
+   c2 <- as.integer(ul < 0)
+   e1 <- e1 + c1
+   e2 <- e2 + c2
+   w <- w + w0
+   if (k == rep) {break}
+ }
+ width <- w/rep
+ cov <- 1 - (e1 + e2)/rep
+ out <- t(c(cov, e1/rep, e2/rep, width))
+ colnames(out) <- c("Coverage", "Lower Error", "Upper Error", "Ave CI Width")
+ return(out)
+}
+
+
+#  sim.ci.median1 =============================================================
+#' Simulates confidence interval coverage probability for single median
+#'
+#'                                      
+#' @description
+#' Performs a computer simulation (20,000 Monte Carlo samples) of the 
+#' confidence interval performance for a single mean. Sample data can 
+#' be generated from five different population distributions. All 
+#' distributions are scaled to have standard deviations of 1.0.
+#'
+#'
+#' @param   alpha  alpha level for 1-alpha confidence
+#' @param   n      sample size
+#' @param   dist   type of distribution (1, 2, 3, 4, or 5) 
+#' * 1 = Gaussian (skewness = 0 and excess kurtosis = 0) 
+#' * 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
+#' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
+#' * 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
+#' * 5 = large skew (skewness = 2 and excess kurtosis = 6)
+#'  
+#' 
+#' @return
+#' Returns a 1-row matrix. The columns are:
+#' * Coverage - probability of confidence interval including population mean  
+#' * Lower Error - probability of lower limit greater than population mean
+#' * Upper Error - probability of upper limit less than population mean
+#' * Ave CI Width - average confidence interval width
+#'
+#'
+#' @examples
+#' sim.ci.median1(.05, 20, 5)
+#'
+#' # Should return (within sampling error):
+#' #      Coverage Lower Error Upper Error Ave CI Width
+#' # [1,]   0.9589      0.0216      0.0195    0.9735528
+#'
+#'
+#' @importFrom stats qnorm
+#' @importFrom stats rnorm
+#' @importFrom stats runif
+#' @importFrom stats rt
+#' @importFrom stats rgamma
+#' @export
+sim.ci.median1 <- function(alpha, n, dist) {
+ zcrit <- qnorm(1 - alpha/2)
+ rep <- 20000
+ o <- round((n - zcrit*sqrt(n))/2)
+ if (o < 1) {o = 1}
+ k <- 0; w <- 0; e1 <- 0; e2 <- 0
+ repeat {
+   k <- k + 1
+   if (dist == 1) {
+     y <- rnorm(n)
+     popmedian <- 0
+     y <- sort(y)
+     ll <- y[o]
+     ul <- y[n - o + 1]
+     w0 <- ul - ll
+     c1 <- as.integer(ll > popmedian)
+     c2 <- as.integer(ul < popmedian)
+     e1 <- e1 + c1
+     e2 <- e2 + c2
+     w <- w + w0
+   } else if (dist == 2) {
+     y <- 3.464*runif(n)
+     popmedian <- 1.732
+     y <- sort(y)
+     ll <- y[o]
+     ul <- y[n - o + 1]
+     w0 <- ul - ll
+     c1 <- as.integer(ll > popmedian)
+     c2 <- as.integer(ul < popmedian)
+     e1 <- e1 + c1
+     e2 <- e2 + c2
+     w <- w + w0
+   } else if (dist == 3) {
+     y <- .7745*rt(n, 5)
+     popmedian <- 0
+     y <- sort(y)
+     ll <- y[o]
+     ul <- y[n - o + 1]
+     w0 <- ul - ll
+     c1 <- as.integer(ll > popmedian)
+     c2 <- as.integer(ul < popmedian)
+     e1 <- e1 + c1
+     e2 <- e2 + c2
+     w <- w + w0
+   } else if (dist == 4) {
+     y <- .5*rgamma(n, 4)
+     popmedian <- 1.837
+     y <- sort(y)
+     ll <- y[o]
+     ul <- y[n - o + 1]
+     w0 <- ul - ll
+     c1 <- as.integer(ll > popmedian)
+     c2 <- as.integer(ul < popmedian)
+     e1 <- e1 + c1
+     e2 <- e2 + c2
+     w <- w + w0
+   } else {
+     y <- rgamma(n, 1)
+     popmedian <- 0.690
+     y <- sort(y)
+     ll <- y[o]
+     ul <- y[n - o + 1]
+     w0 <- ul - ll
+     c1 <- as.integer(ll > popmedian)
+     c2 <- as.integer(ul < popmedian)
+     e1 <- e1 + c1
+     e2 <- e2 + c2
+     w <- w + w0
+   }
+   if (k == rep) {break}
+  }
+  width <- w/rep
+  cov <- 1 - (e1 + e2)/rep
+  out <- t(c(cov, e1/rep, e2/rep, width))
+  colnames(out) <- c("Coverage", "Lower Error", "Upper Error", "Ave CI Width")
+  return(out)
+}
 
 
  
