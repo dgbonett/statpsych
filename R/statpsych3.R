@@ -1215,6 +1215,70 @@ ci.popsize <- function(alpha, f00, f01, f10) {
  return(out)
 }
 
+#  ci.cramer  ======================================================================
+#' Confidence interval for Cramer's V
+#'
+#'
+#' @description
+#' Computes a confidence interval for a population Cramer's V coefficient
+#' of nominal association for an r x s contingency table and its approximate
+#' standard error. The confidence interval is based on a noncentral chi-square 
+#' distribution, and an approximate standard error is recovered from the
+#' confidence interval.
+#'
+#'
+#' @param  alpha    alpha value for 1-alpha confidence
+#' @param  chisqr   Pearson chi-square test statistic for independence
+#' @param  r        number of rows in contingency table
+#' @param  c        number of columns in contengency table
+#' @param  n        sample size
+#'
+#'
+#' @return 
+#' Returns a 1-row matrix. The columns are:
+#' * Cramer's V - estimate of Cramer's V 
+#' * SE - approximate standard error 
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
+#'
+#'
+#' @references
+#' \insertRef{Smithson2003}{statpsych}
+#'
+#'
+#' @examples
+#' ci.cramer(.05, 19.21, 2, 3, 200)
+#'
+#' # Should return:
+#' #      Cramer's V     SE     LL     UL
+#' # [1,]     0.3099 0.0674 0.1888 0.4529
+#'  
+#' 
+#' @importFrom stats pchisq
+#' @importFrom stats qnorm
+#' @export
+ci.cramer <- function(alpha, chisqr, r, c, n) {
+ alpha1 <- alpha/2
+ alpha2 <- 1 - alpha/2
+ z <- qnorm(1 - alpha/2)
+ k <- min(r - 1, c - 1)
+ df <- (r - 1)*(c - 1)
+ v <- sqrt(chisqr/(n*k))
+ du <- n*k - df
+ nc <- seq(0, du, by = .001)
+ p <- pchisq(chisqr, df, nc)
+ k1 <- which(min(abs(p - alpha2)) == abs(p - alpha2))[[1]]
+ dL <- nc[k1]
+ LL <- sqrt((dL + df)/(n*k))
+ k2 <- which(min(abs(p - alpha1)) == abs(p - alpha1))[[1]]
+ dU <- nc[k2]
+ UL <- sqrt((dU + df)/(n*k))
+ se <- (UL - LL)/(2*z)
+ out <- round(t(c(v, se, LL, UL)), 4)
+ colnames(out) <- c("Cramer's V", "SE", "LL", "UL")
+ return(out)
+}
+
 
 # ======================== File 3: Hypothesis Tests ==========================
 # test.prop1 =================================================================
