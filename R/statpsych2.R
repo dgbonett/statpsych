@@ -1470,3 +1470,209 @@ random.yx <- function(n, my, mx, sdy, sdx, cor, dec) {
  colnames(out) <- c("y", "x")
  return(out)
 }
+
+
+#  sim.ci.cor ===============================================================
+#' Simulates confidence interval coverage probability for a Pearson
+#' correlation
+#'
+#'                               
+#' @description
+#' Performs a computer simulation (20,000 Monte Carlo samples) of confidence
+#' interval performance for a Pearson correlation. A bias adjustment is used
+#' to reduce the bias of the Fisher transformed Pearson correlation. Sample 
+#' data can be generated from bivariate population distributions with five 
+#' different marginal distributions. All distributions are scaled to have 
+#' standard deviations of 1.0 at level 1. Bivariate random data with specified
+#' marginal skewness and kurtosis are generated using the unonr function in
+#' the mnonr package. 
+#'
+#'
+#' @param   alpha     alpha level for 1-alpha confidence
+#' @param   n         sample size 
+#' @param   cor       population Pearson correlation
+#' @param   dist1     type of distribution at level 1 (1, 2, 3, 4, or 5)
+#' @param   dist2     type of distribution at level 2 (1, 2, 3, 4, or 5)
+#' * 1 = Gaussian (skewness = 0 and excess kurtosis = 0) 
+#' * 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
+#' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
+#' * 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
+#' * 5 = large skew (skewness = 2 and excess kurtosis = 6)
+#'  
+#' 
+#' @return
+#' Returns a 1-row matrix. The columns are:
+#' * Coverage - probability of confidence interval including population mean  
+#' * Lower Error - probability of lower limit greater than population mean
+#' * Upper Error - probability of upper limit less than population mean
+#' * Ave CI Width - average confidence interval width
+#'
+#'
+#' @examples
+#' library(mnonr)
+#' sim.ci.cor(.05, 30, .7, 4, 5)
+#'
+#' # Should return (within sampling error):
+#' #      Coverage Lower Error Upper Error Ave CI Width
+#' # [1,]  0.93815     0.05125      0.0106    0.7778518
+#'
+#'
+#' @importFrom stats qt
+#' @importFrom mnonr unonr
+#' @export
+sim.ci.cor <- function(alpha, n, cor, dist1, dist2) {
+ zcrit <- qnorm(1 - alpha/2)
+ rep <- 20000
+ if (dist1 == 1) {
+   skw1 <- 0; kur1 <- 0
+ } else if (dist1 == 2) {
+   skw1 <- 0; kur1 <- -1.2
+ } else if (dist1 == 3) {
+   skw1 <- 0; kur1 <- 6
+ } else if (dist1 == 4) {
+   skw1 <- .75; kur1 <- .86
+ } else {
+   skw1 <- 1.41; kur1 <- 3
+ }
+ if (dist2 == 1) {
+   skw2 <- 0; kur2 <- 0
+ } else if (dist2 == 2) {
+   skw2 <- 0; kur2 <- -1.2
+ } else if (dist2 == 3) {
+   skw2 <- 0; kur2 <- 6
+ } else if (dist2 == 4) {
+   skw2 <- 1; kur2 <- 1.5
+ } else {
+   skw2 <- 2; kur2 <- 6
+ }
+ V <- matrix(c(1, cor, cor, 1), 2, 2)
+ w <- 0; k <- 0; e1 <-0; e2 <- 0
+ repeat {
+   k <- k + 1
+   y <- unonr(n, c(0, 0), V, skewness = c(skw1, skw2), kurtosis = c(kur1, kur2))
+   R <- cor(y)
+   r <- R[1,2]
+   zr <- log((1 + r)/(1 - r))/2 - r/(2*(n - 1))
+   se.z <- sqrt(1/((n - 3)))
+   ll0 <- zr - zcrit*se.z
+   ul0 <- zr + zcrit*se.z
+   ll <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
+   ul <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
+   w0 <- ul - ll
+   c1 <- as.integer(ll > cor)
+   c2 <- as.integer(ul < cor)
+   e1 <- e1 + c1
+   e2 <- e2 + c2
+   w <- w + w0
+   if (k == rep) {break}
+ }
+ width <- w/rep
+ cov <- 1 - (e1 + e2)/rep
+ out <- t(c(cov, e1/rep, e2/rep, width))
+ colnames(out) <- c("Coverage", "Lower Error", "Upper Error", "Ave CI Width")
+ return(out)
+}
+
+
+#  sim.ci.spear ===============================================================
+#' Simulates confidence interval coverage probability for a Spearman
+#' correlation
+#'
+#' @description
+#' Performs a computer simulation (20,000 Monte Carlo samples) of confidence
+#' interval performance for a Spearman correlation. Sample data can be 
+#' generated from bivariate population distributions with five different
+#' marginal distributions. All distributions are scaled to have standard 
+#' deviations of 1.0 at level 1. Bivariate random data with specified marginal
+#' skewness and kurtosis are generated using the unonr function in the mnonr
+#' package. 
+#'
+#'
+#' @param   alpha     alpha level for 1-alpha confidence
+#' @param   n         sample size 
+#' @param   cor       population Spearman correlation
+#' @param   dist1     type of distribution at level 1 (1, 2, 3, 4, or 5)
+#' @param   dist2     type of distribution at level 2 (1, 2, 3, 4, or 5)
+#' * 1 = Gaussian (skewness = 0 and excess kurtosis = 0) 
+#' * 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
+#' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
+#' * 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
+#' * 5 = large skew (skewness = 2 and excess kurtosis = 6)
+#'  
+#' 
+#' @return
+#' Returns a 1-row matrix. The columns are:
+#' * Coverage - probability of confidence interval including population mean  
+#' * Lower Error - probability of lower limit greater than population mean
+#' * Upper Error - probability of upper limit less than population mean
+#' * Ave CI Width - average confidence interval width
+#'
+#'
+#' @examples
+#' library(mnonr)
+#' sim.ci.spear(.05, 30, .7, 4, 5)
+#'
+#' # Should return (within sampling error):
+#' #      Coverage Lower Error Upper Error Ave CI Width
+#' # [1,]  0.96235     0.01255      0.0251    0.4257299
+#'
+#'
+#' @importFrom stats qt
+#' @importFrom mnonr unonr
+#' @export
+sim.ci.spear <- function(alpha, n, cor, dist1, dist2) {
+ zcrit <- qnorm(1 - alpha/2)
+ rep <- 20000
+ if (dist1 == 1) {
+   skw1 <- 0; kur1 <- 0
+ } else if (dist1 == 2) {
+   skw1 <- 0; kur1 <- -1.2
+ } else if (dist1 == 3) {
+   skw1 <- 0; kur1 <- 6
+ } else if (dist1 == 4) {
+   skw1 <- .75; kur1 <- .86
+ } else {
+   skw1 <- 1.41; kur1 <- 3
+ }
+ if (dist2 == 1) {
+   skw2 <- 0; kur2 <- 0
+ } else if (dist2 == 2) {
+   skw2 <- 0; kur2 <- -1.2
+ } else if (dist2 == 3) {
+   skw2 <- 0; kur2 <- 6
+ } else if (dist2 == 4) {
+   skw2 <- 1; kur2 <- 1.5
+ } else {
+   skw2 <- 2; kur2 <- 6
+ }
+ V <- matrix(c(1, cor, cor, 1), 2, 2)
+ y <- unonr(100000, c(0, 0), V, skewness = c(skw1, skw2), kurtosis = c(kur1, kur2))
+ popR <- cor(y, method = "spearman")
+ popspear <- popR[1,2]
+ w <- 0; k <- 0; e1 <-0; e2 <- 0
+ repeat {
+   k <- k + 1
+   y <- unonr(n, c(0, 0), V, skewness = c(skw1, skw2), kurtosis = c(kur1, kur2))
+   R <- cor(y, method = "spearman")
+   r <- R[1,2]
+   zr <- log((1 + r)/(1 - r))/2 
+   se.z <- sqrt((1 + r^2/2)*(1 - r^2)^2/(n - 3))
+   ll0 <- zr - zcrit*se.z/(1 - r^2)
+   ul0 <- zr + zcrit*se.z/(1 - r^2)
+   ll <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
+   ul <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
+   w0 <- ul - ll
+   c1 <- as.integer(ll > popspear)
+   c2 <- as.integer(ul < popspear)
+   e1 <- e1 + c1
+   e2 <- e2 + c2
+   w <- w + w0
+   if (k == rep) {break}
+ }
+ width <- w/rep
+ cov <- 1 - (e1 + e2)/rep
+ out <- t(c(cov, e1/rep, e2/rep, width))
+ colnames(out) <- c("Coverage", "Lower Error", "Upper Error", "Ave CI Width")
+ return(out)
+}
+
