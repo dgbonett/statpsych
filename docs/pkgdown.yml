@@ -2,7 +2,7 @@ pandoc: 2.17.1.1
 pkgdown: 2.0.4
 pkgdown_sha: ~
 articles: {}
-last_built: 2022-06-21T20:32Z
+last_built: 2022-08-14T23:51Z
 urls:
   reference: https://dgbonett.github.io/statpsych/reference
   article: https://dgbonett.github.io/statpsych/articles

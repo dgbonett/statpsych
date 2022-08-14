@@ -27,14 +27,15 @@ Returns a 1-row matrix. The columns are:
 }
 \description{
 Computes a confidence interval for a difference in population Pearson
-correlations in a 2-group design.
+correlations in a 2-group design. A bias adjustmentment is used to
+reduce the bias of each Fisher transformed correlation.
 }
 \examples{
 ci.cor2(.05, .886, .802, 200, 200)
 
 # Should return:
 #      Estimate         LL        UL
-# [1,]    0.084 0.02795506 0.1457103
+# [1,]    0.084 0.02803246 0.1463609
  
 
 }

@@ -23,7 +23,12 @@ reference:
   desc:  Sample sizes for desired precision or power
   contents:
   - starts_with("size.")
-  
+
+- title: Tests
+  desc:  Simulations
+  contents:
+  - starts_with("sim.")
+
 - title: Miscellaneous
   desc:  Other functions, including functions for simulating data
   contents:

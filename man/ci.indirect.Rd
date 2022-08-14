@@ -34,14 +34,14 @@ slope estimates for both paths are less than about .3 in absolute value.
 The Monte Carlo method is general in that the slope estimates and standard
 errors do not need to be OLS estimates with homoscedastic standard errors.
 For example, LAD slope estimates and their standard errors, OLS slope
-estimates and heteroscedastic standard errors, or distribution-free
-Theil-Sen slope estimates with McKean-Schrader standard errors also could
-be used.
+estimates and heteroscedastic standard errors, distribution-free
+Theil-Sen slope estimates with McKean-Schrader standard errors, or
+standardized slopes with robust standard errors also could be used.
 }
 \examples{
 ci.indirect (.05, 2.48, 1.92, .586, .379)
 
-# Should return:
+# Should return (within sampling error for CI):
 #      Estimate       SE       LL       UL
 # [1,]   4.7616 1.625282 2.178812 7.972262
  

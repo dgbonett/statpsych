@@ -30,7 +30,7 @@ ci.median1(.05, y)
 
 # Should return:
 #      Median       SE LL UL
-# [1,]     20 5.390263 10 30
+# [1,]     20 4.270922 10 30
 
 
 }

@@ -28,14 +28,15 @@ Returns a 1-row matrix. The columns are:
 \description{
 Computes a confidence interval for a difference in population Pearson
 correlations that are estimated from the same sample and have one
-variable in common.
+variable in common. A bias adjustmentment is used to reduce the bias
+of each Fisher transformed correlation.
 }
 \examples{
 ci.cor.dep(.05, .396, .179, .088, 166)
 
 # Should return:
 #      Estimate         LL      UL
-# [1,]    0.217 0.01366766 0.41594
+# [1,]    0.217 0.01323072 0.415802
  
 
 }

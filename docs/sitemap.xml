@@ -13,6 +13,21 @@
     <loc>https://dgbonett.github.io/statpsych/news/index.html</loc>
   </url>
   <url>
+    <loc>https://dgbonett.github.io/statpsych/reference/ci.2x2.mean.bs.html</loc>
+  </url>
+  <url>
+    <loc>https://dgbonett.github.io/statpsych/reference/ci.2x2.mean.mixed.html</loc>
+  </url>
+  <url>
+    <loc>https://dgbonett.github.io/statpsych/reference/ci.2x2.mean.ws.html</loc>
+  </url>
+  <url>
+    <loc>https://dgbonett.github.io/statpsych/reference/ci.2x2.prop.bs.html</loc>
+  </url>
+  <url>
+    <loc>https://dgbonett.github.io/statpsych/reference/ci.2x2.prop.mixed.html</loc>
+  </url>
+  <url>
     <loc>https://dgbonett.github.io/statpsych/reference/ci.agree.html</loc>
   </url>
   <url>
@@ -44,6 +59,9 @@
   </url>
   <url>
     <loc>https://dgbonett.github.io/statpsych/reference/ci.cor2.html</loc>
+  </url>
+  <url>
+    <loc>https://dgbonett.github.io/statpsych/reference/ci.cramer.html</loc>
   </url>
   <url>
     <loc>https://dgbonett.github.io/statpsych/reference/ci.cronbach.html</loc>
@@ -242,6 +260,24 @@
   </url>
   <url>
     <loc>https://dgbonett.github.io/statpsych/reference/randomize.html</loc>
+  </url>
+  <url>
+    <loc>https://dgbonett.github.io/statpsych/reference/sim.ci.cor.html</loc>
+  </url>
+  <url>
+    <loc>https://dgbonett.github.io/statpsych/reference/sim.ci.mean.ps.html</loc>
+  </url>
+  <url>
+    <loc>https://dgbonett.github.io/statpsych/reference/sim.ci.mean1.html</loc>
+  </url>
+  <url>
+    <loc>https://dgbonett.github.io/statpsych/reference/sim.ci.mean2.html</loc>
+  </url>
+  <url>
+    <loc>https://dgbonett.github.io/statpsych/reference/sim.ci.median1.html</loc>
+  </url>
+  <url>
+    <loc>https://dgbonett.github.io/statpsych/reference/sim.ci.spear.html</loc>
   </url>
   <url>
     <loc>https://dgbonett.github.io/statpsych/reference/size.ci.agree.html</loc>

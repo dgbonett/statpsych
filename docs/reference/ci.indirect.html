@@ -6,9 +6,9 @@ slope estimates for both paths are less than about .3 in absolute value.
 The Monte Carlo method is general in that the slope estimates and standard
 errors do not need to be OLS estimates with homoscedastic standard errors.
 For example, LAD slope estimates and their standard errors, OLS slope
-estimates and heteroscedastic standard errors, or distribution-free
-Theil-Sen slope estimates with McKean-Schrader standard errors also could
-be used."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
+estimates and heteroscedastic standard errors, distribution-free
+Theil-Sen slope estimates with McKean-Schrader standard errors, or
+standardized slopes with robust standard errors also could be used."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]--></head><body data-spy="scroll" data-target="#toc">
@@ -26,7 +26,7 @@ be used."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/ma
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statpsych</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.0</span>
       </span>
     </div>
 
@@ -65,9 +65,9 @@ slope estimates for both paths are less than about .3 in absolute value.
 The Monte Carlo method is general in that the slope estimates and standard
 errors do not need to be OLS estimates with homoscedastic standard errors.
 For example, LAD slope estimates and their standard errors, OLS slope
-estimates and heteroscedastic standard errors, or distribution-free
-Theil-Sen slope estimates with McKean-Schrader standard errors also could
-be used.</p>
+estimates and heteroscedastic standard errors, distribution-free
+Theil-Sen slope estimates with McKean-Schrader standard errors, or
+standardized slopes with robust standard errors also could be used.</p>
     </div>
 
     <div id="ref-usage">
@@ -110,9 +110,9 @@ be used.</p>
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">ci.indirect</span> <span class="op">(</span><span class="fl">.05</span>, <span class="fl">2.48</span>, <span class="fl">1.92</span>, <span class="fl">.586</span>, <span class="fl">.379</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      Estimate       SE       LL       UL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]   4.7616 1.625282 2.162936 7.960245</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]   4.7616 1.466064 2.174951 7.970339</span>
 <span class="r-in"></span>
-<span class="r-in"><span class="co"># Should return:</span></span>
+<span class="r-in"><span class="co"># Should return (within sampling error for CI):</span></span>
 <span class="r-in"><span class="co">#      Estimate       SE       LL       UL</span></span>
 <span class="r-in"><span class="co"># [1,]   4.7616 1.625282 2.178812 7.972262</span></span>
 <span class="r-in"> </span>
