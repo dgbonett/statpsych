@@ -1215,6 +1215,7 @@ ci.popsize <- function(alpha, f00, f01, f10) {
  return(out)
 }
 
+
 #  ci.cramer  ======================================================================
 #' Confidence interval for Cramer's V
 #'
