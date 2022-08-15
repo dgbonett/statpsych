@@ -1287,7 +1287,7 @@ ci.cramer <- function(alpha, chisqr, r, c, n) {
 #'
 #'
 #' @description
-#' Computes adjusted Wald confidence intervals and p-values for the AB 
+#' Computes adjusted Wald confidence intervals and tests for the AB 
 #' interaction effect, main effect of A, main efect of B, simple main effects
 #' of A, and simple main effects of B in a 2x2 between-subjects factorial 
 #' design with a dichotomous response variable. The input vector of 
@@ -1404,7 +1404,7 @@ ci.2x2.prop.bs <- function(alpha, f, n) {
 #'
 #'
 #' @description
-#' Computes adjusted Wald confidence intervals and p-values for the AB 
+#' Computes adjusted Wald confidence intervals and tests for the AB 
 #' interaction effect, main effect of A, main efect of B, simple main effects
 #' of A, and simple main effects of B in a 2x2 mixed factorial design with a
 #' dichotomous response variable where Factor A is a within-subjects factor 
