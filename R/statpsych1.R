@@ -2253,7 +2253,7 @@ ci.etasqr <- function(alpha, etasqr, df1, df2) {
 #' @param   y11     vector of scores at level 1 in group 1
 #' @param   y12     vector of scores at level 2 in group 1
 #' @param   y21     vector of scores at level 1 in group 2
-#' @param   y21     vector of scores at level 2 in group 2
+#' @param   y22     vector of scores at level 2 in group 2
 #'
 #'
 #' @return
@@ -2274,7 +2274,7 @@ ci.etasqr <- function(alpha, etasqr, df1, df2) {
 #' y22 = c(16, 10, 12,  9, 13, 15)
 #' ci.2x2.mean.mixed(.05, y11, y12, y21, y22)
 #'
-#' Should return:
+#' # Should return:
 #' #            Estimate        SE         t       df            p         LL        UL
 #' # AB:      -3.8333333 0.9803627 -3.910117 8.346534 0.0041247610 -6.0778198 -1.588847
 #' # A:        2.0833333 0.4901814  4.250128 8.346534 0.0025414549  0.9610901  3.205577
@@ -2385,7 +2385,7 @@ ci.2x2.mean.mixed <- function(alpha, y11, y12, y21, y22) {
 #' @param   y11     vector of scores at level 1 of A and level 1 of B
 #' @param   y12     vector of scores at level 1 of A and level 2 of B
 #' @param   y21     vector of scores at level 2 of A and level 1 of B
-#' @param   y21     vector of scores at level 2 of A and level 2 of B
+#' @param   y22     vector of scores at level 2 of A and level 2 of B
 #'
 #'
 #' @return
@@ -2406,7 +2406,7 @@ ci.2x2.mean.mixed <- function(alpha, y11, y12, y21, y22) {
 #' y22 = c(5,6,8,7,8,9,9)
 #' ci.2x2.mean.ws(.05, y11, y12, y21, y22)
 #'
-#' Should return:
+#' # Should return:
 #' #             Estimate        SE          t df            p          LL          UL
 #' # AB:       1.28571429 0.5654449  2.2738102  6 0.0633355395 -0.09787945  2.66930802
 #' # A:       -3.21428571 0.4862042 -6.6109784  6 0.0005765210 -4.40398462 -2.02458681
@@ -2505,7 +2505,7 @@ ci.2x2.mean.ws <- function(alpha, y11, y12, y21, y22) {
 #' @param   y11     vector of scores at level 1 of A and level 1 of B
 #' @param   y12     vector of scores at level 1 of A and level 2 of B
 #' @param   y21     vector of scores at level 2 of A and level 1 of B
-#' @param   y21     vector of scores at level 2 of A and level 2 of B
+#' @param   y22     vector of scores at level 2 of A and level 2 of B
 #'
 #'
 #' @return
@@ -2526,7 +2526,7 @@ ci.2x2.mean.ws <- function(alpha, y11, y12, y21, y22) {
 #' y22 = c(18, 17, 11, 9, 9, 13, 18, 15, 14, 11)
 #' ci.2x2.mean.bs(.05, y11, y12, y21, y22)
 #'
-#' Should return:
+#' # Should return:
 #' #          Estimate       SE           t       df           p         LL         UL
 #' # AB:         -5.10 2.224860 -2.29227953 35.47894 0.027931810 -9.6145264 -0.5854736
 #' # A:           1.65 1.112430  1.48323970 35.47894 0.146840430 -0.6072632  3.9072632

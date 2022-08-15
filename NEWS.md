@@ -2,6 +2,7 @@ statpsych v1.2.0 (Release date: 2022/08/15)
 ==============
 
 Changes:
+
 * New functions:
     * ci.cramer - Confidence interval for Cramer's V
     * ci.2x2.mean.bs - Confidence intervals for effects in a 2x2 between-subjects design for means
@@ -20,6 +21,7 @@ Changes:
     * The ci.cor, ci.cor2, and ci.cor.dep functions now uses a bias adjustment to reduce the bias of the Fisher transformed correlations
 * Error Correction:
     * Corrected an error for the standard error computation in the ci.indirect function
+    
 
 statpsych v1.1.0 (Release date: 2022/06/30)
 ==============

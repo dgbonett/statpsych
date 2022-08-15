@@ -1290,8 +1290,8 @@ ci.cramer <- function(alpha, chisqr, r, c, n) {
 #' interaction effect, main effect of A, main efect of B, simple main effects
 #' of A, and simple main effects of B in a 2x2 between-subjects factorial 
 #' design with a dichotomous response variable. The input vector of 
-#' frequency counts is [f11, f12, f21, f22], and the input vector of 
-#' sample sizes is [n11, n12, n21, n22] where the first subscript represents
+#' frequency counts is f11, f12, f21, f22, and the input vector of 
+#' sample sizes is n11, n12, n21, n22 where the first subscript represents
 #' the levels of Factor A and the second subscript represents the levels of
 #' Factor B.
 #'
@@ -1316,7 +1316,7 @@ ci.cramer <- function(alpha, chisqr, r, c, n) {
 #' n = c(50, 50, 50, 50)
 #' ci.2x2.prop.bs(.05, f, n)
 #'
-#' Should return:
+#' # Should return:
 #' #             Estimate         SE          z           p          LL          UL
 #' # AB:      -0.27450980 0.13692496 -2.0048193 0.044982370 -0.54287780 -0.00614181
 #' # A:       -0.11764706 0.06846248 -1.7184165 0.085720668 -0.25183106  0.01653694
@@ -1408,14 +1408,14 @@ ci.2x2.prop.bs <- function(alpha, f, n) {
 #' of A, and simple main effects of B in a 2x2 mixed factorial design with a
 #' dichotomous response variable where Factor A is a within-subjects factor 
 #' and Factor B is a between-subjects factor. The 4x1 vector of frequency 
-#' counts for Factor A within each group is [f00, f01, f10, f11] where fij is 
+#' counts for Factor A within each group is f00, f01, f10, f11 where fij is 
 #' the number of participants with a response of i = 0 or 1 at level 1 of 
 #' Factor A and a response of j = 0 or 1 at level 2 of Factor A. 
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
 #' @param   group1  2x2 contingency table for Factor A in group 1
-#' @param   group1  2x2 contingency table for Factor A in group 2
+#' @param   group2  2x2 contingency table for Factor A in group 2
 #'
 #'
 #' @return
@@ -1433,7 +1433,7 @@ ci.2x2.prop.bs <- function(alpha, f, n) {
 #' group2 = c(26, 27, 13, 34)
 #' ci.2x2.prop.mixed (.05, group1, group2)
 #'
-#' Should return:
+#' # Should return:
 #' #            Estimate         SE         z           p           LL        UL
 #' # AB:      0.03960396 0.09991818 0.3963639 0.691836584 -0.156232072 0.2354400
 #' # A:       0.15841584 0.04995909 3.1709113 0.001519615  0.060497825 0.2563339

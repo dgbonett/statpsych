@@ -53,7 +53,7 @@ package."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/ma
     <div class="page-header">
     <h1>Simulates confidence interval coverage probability for a Spearman
 correlation</h1>
-    <small class="dont-index">Source: <a href="https://github.com/dgbonett/statpsych/blob/HEAD/R/statpsych4.R" class="external-link"><code>R/statpsych4.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/dgbonett/statpsych/blob/HEAD/R/statpsych2.R" class="external-link"><code>R/statpsych2.R</code></a></small>
     <div class="hidden name"><code>sim.ci.spear.Rd</code></div>
     </div>
 
@@ -110,9 +110,10 @@ package.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">sim.ci.spear</span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">30</span>, <span class="fl">.7</span>, <span class="fl">4</span>, <span class="fl">5</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">mnonr</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu">sim.ci.spear</span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">30</span>, <span class="fl">.7</span>, <span class="fl">4</span>, <span class="fl">5</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      Coverage Lower Error Upper Error Ave CI Width</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  0.96385      0.0134     0.02275    0.4251375</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  0.96545      0.0123     0.02225     0.425237</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Should return (within sampling error):</span></span>
 <span class="r-in"><span class="co">#      Coverage Lower Error Upper Error Ave CI Width</span></span>

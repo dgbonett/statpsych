@@ -24,8 +24,8 @@ reference:
   contents:
   - starts_with("size.")
 
-- title: Tests
-  desc:  Simulations
+- title: Simulations
+  desc:  Test coverage of difference confidence intervals with simulated data
   contents:
   - starts_with("sim.")
 
