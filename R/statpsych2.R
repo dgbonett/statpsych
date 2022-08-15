@@ -43,7 +43,7 @@ ci.cor <- function(alpha, cor, s, n) {
  z <- qnorm(1 - alpha/2)
  se <- sqrt((1 - cor^2)^2/(n - 1))
  se.z <- sqrt(1/((n - s - 3)))
- zr <- log((1 + cor)/(1 - cor))/2 - sign(cor)*cor/(2*(n - 1))
+ zr <- log((1 + cor)/(1 - cor))/2 - cor/(2*(n - 1))
  ll0 <- zr - z*se.z
  ul0 <- zr + z*se.z
  ll <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
@@ -155,13 +155,13 @@ ci.cor2 <- function(alpha, cor1, cor2, n1, n2) {
  z <- qnorm(1 - alpha/2)
  diff <- cor1 - cor2
  se1 <- sqrt(1/((n1 - 3)))
- zr1 <- log((1 + cor1)/(1 - cor1))/2 - sign(cor1)*cor1/(2*(n1 - 1))
+ zr1 <- log((1 + cor1)/(1 - cor1))/2 - cor1/(2*(n1 - 1))
  ll0 <- zr1 - z*se1
  ul0 <- zr1 + z*se1
  ll1 <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
  ul1 <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
  se2 <- sqrt(1/((n2 - 3)))
- zr2 <- log((1 + cor2)/(1 - cor2))/2 - sign(cor2)*cor2/(2*(n2 - 1))
+ zr2 <- log((1 + cor2)/(1 - cor2))/2 - cor2/(2*(n2 - 1))
  ll0 <- zr2 - z*se2
  ul0 <- zr2 + z*se2
  ll2 <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
@@ -217,13 +217,13 @@ ci.cor.dep <- function(alpha, cor1, cor2, cor12, n) {
  z <- qnorm(1 - alpha/2)
  diff <- cor1 - cor2
  se1 <- sqrt(1/((n - 3)))
- zr1 <- log((1 + cor1)/(1 - cor1))/2 - sign(cor1)*cor1/(2*(n - 1))
+ zr1 <- log((1 + cor1)/(1 - cor1))/2 - cor1/(2*(n - 1))
  ll0 <- zr1 - z*se1
  ul0 <- zr1 + z*se1
  ll1 <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
  ul1 <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
  se2 <- sqrt(1/((n - 3)))
- zr2 <- log((1 + cor2)/(1 - cor2))/2 - sign(cor2)*cor2/(2*(n - 1))
+ zr2 <- log((1 + cor2)/(1 - cor2))/2 - cor2/(2*(n - 1))
  ll0 <- zr2 - z*se2
  ul0 <- zr2 + z*se2
  ll2 <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
