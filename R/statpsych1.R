@@ -2241,7 +2241,7 @@ ci.etasqr <- function(alpha, etasqr, df1, df2) {
 #'
 #'
 #' @description
-#' Computes confidence intervals and p-values for the AB interaction effect, 
+#' Computes confidence intervals and tests for the AB interaction effect, 
 #' main effect of A, main efect of B, simple main effects of A, and simple main
 #' effects of B in a 2x2 mixed factorial design with a quantitative response
 #' variable where Factor A is a within-subjects factor, and Factor B is a 
@@ -2375,7 +2375,7 @@ ci.2x2.mean.mixed <- function(alpha, y11, y12, y21, y22) {
 #'
 #'
 #' @description
-#' Computes confidence intervals and p-values for the AB interaction effect, 
+#' Computes confidence intervals and tests for the AB interaction effect, 
 #' main effect of A, main efect of B, simple main effects of A, and simple main
 #' effects of B in a 2x2 within-subjects design with a quantitative response
 #' variable. 
@@ -2494,7 +2494,7 @@ ci.2x2.mean.ws <- function(alpha, y11, y12, y21, y22) {
 #'
 #'
 #' @description
-#' Computes confidence intervals and p-values for the AB interaction effect, 
+#' Computes confidence intervals and tests for the AB interaction effect, 
 #' main effect of A, main efect of B, simple main effects of A, and simple main
 #' effects of B in a 2x2 between-subjects design with a quantitative response
 #' variable. A Satterthwaite adjustment to the degrees of freedom is used and 
