@@ -4583,7 +4583,6 @@ sim.ci.mean2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2) {
 #'
 #'
 #' @examples
-#' library(mnonr)
 #' sim.ci.mean.ps(.05, 30, 1.5, .7, 4, 5)
 #'
 #' # Should return (within sampling error):
