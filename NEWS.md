@@ -19,6 +19,7 @@ Changes:
 * Modifications:
     * The ci.prop.ps function now outputs an adjusted point estimate of the proportion difference, as stated in the documentation, rather than an unadjusted estimate
     * The ci.cor, ci.cor2, and ci.cor.dep functions now uses a bias adjustment to reduce the bias of the Fisher transformed correlations
+    * The ci.median1 function now uses the same standard error formula as the ci.median2, ci.ratio.median2, and ci.median.ps functions
 * Error Correction:
     * Corrected an error for the standard error computation in the ci.indirect function
     
