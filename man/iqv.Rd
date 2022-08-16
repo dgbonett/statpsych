@@ -18,6 +18,7 @@ Computes the Shannon, Berger, and Simpson indices of qualitative variation.
 \examples{
 f <- c(10, 46, 15, 3)
 iqv(f)
+
 # Should return:
 #        Simpson    Berger   Shannon
 # [1,] 0.7367908 0.5045045       0.7

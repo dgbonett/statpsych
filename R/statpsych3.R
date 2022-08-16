@@ -1216,6 +1216,316 @@ ci.popsize <- function(alpha, f00, f01, f10) {
 }
 
 
+#  ci.cramer  ======================================================================
+#' Confidence interval for Cramer's V
+#'
+#'
+#' @description
+#' Computes a confidence interval for a population Cramer's V coefficient
+#' of nominal association for an r x s contingency table and its approximate
+#' standard error. The confidence interval is based on a noncentral chi-square 
+#' distribution, and an approximate standard error is recovered from the
+#' confidence interval.
+#'
+#'
+#' @param  alpha    alpha value for 1-alpha confidence
+#' @param  chisqr   Pearson chi-square test statistic for independence
+#' @param  r        number of rows in contingency table
+#' @param  c        number of columns in contengency table
+#' @param  n        sample size
+#'
+#'
+#' @return 
+#' Returns a 1-row matrix. The columns are:
+#' * Cramer's V - estimate of Cramer's V 
+#' * SE - approximate standard error 
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
+#'
+#'
+#' @references
+#' \insertRef{Smithson2003}{statpsych}
+#'
+#'
+#' @examples
+#' ci.cramer(.05, 19.21, 2, 3, 200)
+#'
+#' # Should return:
+#' #      Cramer's V     SE     LL     UL
+#' # [1,]     0.3099 0.0674 0.1888 0.4529
+#'  
+#' 
+#' @importFrom stats pchisq
+#' @importFrom stats qnorm
+#' @export
+ci.cramer <- function(alpha, chisqr, r, c, n) {
+ alpha1 <- alpha/2
+ alpha2 <- 1 - alpha/2
+ z <- qnorm(1 - alpha/2)
+ k <- min(r - 1, c - 1)
+ df <- (r - 1)*(c - 1)
+ v <- sqrt(chisqr/(n*k))
+ du <- n*k - df
+ nc <- seq(0, du, by = .001)
+ p <- pchisq(chisqr, df, nc)
+ k1 <- which(min(abs(p - alpha2)) == abs(p - alpha2))[[1]]
+ dL <- nc[k1]
+ LL <- sqrt((dL + df)/(n*k))
+ k2 <- which(min(abs(p - alpha1)) == abs(p - alpha1))[[1]]
+ dU <- nc[k2]
+ UL <- sqrt((dU + df)/(n*k))
+ se <- (UL - LL)/(2*z)
+ out <- round(t(c(v, se, LL, UL)), 4)
+ colnames(out) <- c("Cramer's V", "SE", "LL", "UL")
+ return(out)
+}
+
+
+#  ci.2x2.prop.bs ==========================================================
+#' Computes tests and confidence intervals of effects in a 2x2 between-
+#' subjects design for proportions 
+#'
+#'
+#' @description
+#' Computes adjusted Wald confidence intervals and tests for the AB 
+#' interaction effect, main effect of A, main efect of B, simple main effects
+#' of A, and simple main effects of B in a 2x2 between-subjects factorial 
+#' design with a dichotomous response variable. The input vector of 
+#' frequency counts is f11, f12, f21, f22, and the input vector of 
+#' sample sizes is n11, n12, n21, n22 where the first subscript represents
+#' the levels of Factor A and the second subscript represents the levels of
+#' Factor B.
+#'
+#'
+#' @param   alpha   alpha level for 1-alpha confidence
+#' @param   f       vector of frequency counts of participants with attribute
+#' @param   n       vector of sample sizes
+#'
+#'
+#' @return
+#' Returns a 7-row matrix (one row per effect). The columns are:
+#' * Estimate - adjusted estimate of effect
+#' * SE - standard error of estimate
+#' * z - z test statistic for test of null hypothesis
+#' * p - p-value 
+#' * LL - lower limit of the adjusted Wald confidence interval
+#' * UL - upper limit of the adjusted Wald confidence interval
+#'
+#'
+#' @examples
+#' f = c(15, 24, 28, 23)
+#' n = c(50, 50, 50, 50)
+#' ci.2x2.prop.bs(.05, f, n)
+#'
+#' # Should return:
+#' #             Estimate         SE          z           p          LL          UL
+#' # AB:      -0.27450980 0.13692496 -2.0048193 0.044982370 -0.54287780 -0.00614181
+#' # A:       -0.11764706 0.06846248 -1.7184165 0.085720668 -0.25183106  0.01653694
+#' # B:       -0.03921569 0.06846248 -0.5728055 0.566776388 -0.17339968  0.09496831
+#' # A at b1: -0.25000000 0.09402223 -2.6589456 0.007838561 -0.43428019 -0.06571981
+#' # A at b2:  0.01923077 0.09787658  0.1964798 0.844234654 -0.17260380  0.21106534
+#' # B at a1: -0.17307692 0.09432431 -1.8349132 0.066518551 -0.35794917  0.01179533
+#' # B at a2:  0.09615385 0.09758550  0.9853293 0.324462356 -0.09511021  0.28741790
+#'
+#'
+#' @importFrom stats qnorm
+#' @importFrom stats pnorm
+#' @export
+ci.2x2.prop.bs <- function(alpha, f, n) {
+ zcrit <- qnorm(1 - alpha/2)
+ v1 <- c(1, -1, -1, 1)
+ v2 <- c(.5, .5, -.5, -.5)
+ v3 <- c(.5, -.5, .5, -.5)
+ v4 <- c(1, 0, -1, 0)
+ v5 <- c(0, 1, 0, -1)
+ v6 <- c(1, -1, 0, 0)
+ v7 <- c(0, 0, 1, -1)
+ p.4 <- (f + .5)/(n + 1)
+ p.2 <- (f + 1)/(n + 2)
+ est1 <- t(v1)%*%p.4
+ se1 <- sqrt(t(v1)%*%diag(p.4*(1 - p.4))%*%solve(diag(n + 1))%*%v1)
+ z1 <- est1/se1
+ p1 <- 2*(1 - pnorm(abs(z1)))
+ LL1 <- est1 - zcrit*se1
+ UL1 <- est1 + zcrit*se1
+ row1 <- c(est1, se1, z1, p1, LL1, UL1)
+ est2 <- t(v2)%*%p.4
+ se2 <- sqrt(t(v2)%*%diag(p.4*(1 - p.4))%*%solve(diag(n + 1))%*%v2)
+ z2 <- est2/se2
+ p2 <- 2*(1 - pnorm(abs(z2)))
+ LL2 <- est2 - zcrit*se2
+ UL2 <- est2 + zcrit*se2
+ row2 <- c(est2, se2, z2, p2, LL2, UL2)
+ est3 <- t(v3)%*%p.4
+ se3 <- sqrt(t(v3)%*%diag(p.4*(1 - p.4))%*%solve(diag(n + 1))%*%v3)
+ z3 <- est3/se3
+ p3 <- 2*(1 - pnorm(abs(z3)))
+ LL3 <- est3 - zcrit*se3
+ UL3 <- est3 + zcrit*se3
+ row3 <- c(est3, se3, z3, p3, LL3, UL3)
+ est4 <- t(v4)%*%p.2
+ se4 <- sqrt(t(v4)%*%diag(p.2*(1 - p.2))%*%solve(diag(n + 2))%*%v4)
+ z4 <- est4/se4
+ p4 <- 2*(1 - pnorm(abs(z4)))
+ LL4 <- est4 - zcrit*se4
+ UL4 <- est4 + zcrit*se4
+ row4 <- c(est4, se4, z4, p4, LL4, UL4)
+ est5 <- t(v5)%*%p.2
+ se5 <- sqrt(t(v5)%*%diag(p.2*(1 - p.2))%*%solve(diag(n + 2))%*%v5)
+ z5 <- est5/se5
+ p5 <- 2*(1 - pnorm(abs(z5)))
+ LL5 <- est5 - zcrit*se5
+ UL5 <- est5 + zcrit*se5
+ row5 <- c(est5, se5, z5, p5, LL5, UL5)
+ est6 <- t(v6)%*%p.2
+ se6 <- sqrt(t(v6)%*%diag(p.2*(1 - p.2))%*%solve(diag(n + 2))%*%v6)
+ z6 <- est6/se6
+ p6 <- 2*(1 - pnorm(abs(z6)))
+ LL6 <- est6 - zcrit*se6
+ UL6 <- est6 + zcrit*se6
+ row6 <- c(est6, se6, z6, p6, LL6, UL6)
+ est7 <- t(v7)%*%p.2
+ se7 <- sqrt(t(v7)%*%diag(p.2*(1 - p.2))%*%solve(diag(n + 2))%*%v7)
+ z7 <- est7/se7
+ p7 <- 2*(1 - pnorm(abs(z7)))
+ LL7 <- est7 - zcrit*se7
+ UL7 <- est7 + zcrit*se7
+ row7 <- c(est7, se7, z7, p7, LL7, UL7)
+ out <- rbind(row1, row2, row3, row4, row5, row6, row7)
+ rownames(out) <- c("AB:", "A:", "B:", "A at b1:", "A at b2:", "B at a1:", "B at a2:")
+ colnames(out) = c("Estimate", "SE", "z", "p", "LL", "UL")
+ return(out)
+}
+
+
+#  ci.2x2.prop.mixed ==========================================================
+#' Computes tests and confidence intervals of effects in a 2x2 mixed factorial
+#' design for proportions 
+#'
+#'
+#' @description
+#' Computes adjusted Wald confidence intervals and tests for the AB 
+#' interaction effect, main effect of A, main efect of B, simple main effects
+#' of A, and simple main effects of B in a 2x2 mixed factorial design with a
+#' dichotomous response variable where Factor A is a within-subjects factor 
+#' and Factor B is a between-subjects factor. The 4x1 vector of frequency 
+#' counts for Factor A within each group is f00, f01, f10, f11 where fij is 
+#' the number of participants with a response of i = 0 or 1 at level 1 of 
+#' Factor A and a response of j = 0 or 1 at level 2 of Factor A. 
+#'
+#'
+#' @param   alpha   alpha level for 1-alpha confidence
+#' @param   group1  2x2 contingency table for Factor A in group 1
+#' @param   group2  2x2 contingency table for Factor A in group 2
+#'
+#'
+#' @return
+#' Returns a 7-row matrix (one row per effect). The columns are:
+#' * Estimate - adjusted estimate of effect
+#' * SE - standard error of estimate
+#' * z - z test statistic 
+#' * p - p-value
+#' * LL - lower limit of the adjusted Wald confidence interval
+#' * UL - upper limit of the adjusted Wald confidence interval
+#'
+#'
+#' @examples
+#' group1 = c(23, 42, 24, 11)
+#' group2 = c(26, 27, 13, 34)
+#' ci.2x2.prop.mixed (.05, group1, group2)
+#'
+#' # Should return:
+#' #            Estimate         SE         z           p           LL        UL
+#' # AB:      0.03960396 0.09991818 0.3963639 0.691836584 -0.156232072 0.2354400
+#' # A:       0.15841584 0.04995909 3.1709113 0.001519615  0.060497825 0.2563339
+#' # B:       0.09803922 0.04926649 1.9899778 0.046593381  0.001478675 0.1945998
+#' # A at b1: 0.17647059 0.07893437 2.2356621 0.025373912  0.021762060 0.3311791
+#' # A at b2: 0.13725490 0.06206620 2.2114274 0.027006257  0.015607377 0.2589024
+#' # B at a1: 0.11764706 0.06842118 1.7194539 0.085531754 -0.016455982 0.2517501
+#' # B at a2: 0.07843137 0.06913363 1.1344894 0.256589309 -0.057068054 0.2139308
+#'
+#'
+#' @importFrom stats qnorm
+#' @importFrom stats pnorm
+#' @export
+ci.2x2.prop.mixed <- function(alpha, group1, group2) {
+ zcrit <- qnorm(1 - alpha/2)
+ n1 <- sum(group1)
+ n2 <- sum(group2)
+ f11 <- group1[1]; f12 <- group1[2]; f13 <- group1[3]; f14 <- group1[4]
+ f21 <- group2[1]; f22 <- group2[2]; f23 <- group2[3]; f24 <- group2[4]
+ p1 <- (f12 + .5)/(n1 + 1)
+ p2 <- (f13 + .5)/(n1 + 1)
+ p3 <- (f22 + .5)/(n2 + 1)
+ p4 <- (f23 + .5)/(n2 + 1)
+ est1 <- (p1 - p2) - (p3 - p4)
+ v1 <- (p1 + p2 - (p1 - p2)^2)/(n1 + 2)
+ v2 <- (p3 + p4 - (p3 - p4)^2)/(n2 + 2)
+ se1 <- sqrt(v1 + v2)
+ z1 <- est1/se1
+ pval1 <- 2*(1 - pnorm(abs(z1)))
+ LL1 <- est1 - zcrit*se1
+ UL1 <- est1 + zcrit*se1
+ row1 <- c(est1, se1, z1, pval1, LL1, UL1)
+ est2 <- ((p1 - p2) + (p3 - p4))/2
+ se2 <- se1/2
+ z2 <- est2/se2
+ pval2 <- 2*(1 - pnorm(abs(z2)))
+ LL2 <- est2 - zcrit*se2
+ UL2 <- est2 + zcrit*se2
+ row2 <- c(est2, se2, z2, pval2, LL2, UL2)
+ p1 <- (2*f11 + f12 + f13 + 1)/(2*(n1 + 2))
+ p2 <- (2*f21 + f22 + f23 + 1)/(2*(n2 + 2))
+ est3 <- p1 - p2
+ se3 <- sqrt(p1*(1 - p1)/(2*(n1 + 2)) + p2*(1 - p2)/(2*(n2 + 2)))
+ z3 <- est3/se3
+ pval3 <- 2*(1 - pnorm(abs(z3)))
+ LL3 <- est3 - zcrit*se3
+ UL3 <- est3 + zcrit*se3
+ row3 <- c(est3, se3, z3, pval3, LL3, UL3)
+ p1 <- (f12 + 1)/(n1 + 2)
+ p2 <- (f13 + 1)/(n1 + 2)
+ est4 <- p1 - p2
+ se4 <- sqrt((p1 + p2 - (p1 - p2)^2)/(n1 + 2))
+ z4 <- est4/se4
+ pval4 <- 2*(1 - pnorm(abs(z4)))
+ LL4 <- est4 - zcrit*se4
+ UL4 <- est4 + zcrit*se4
+ row4 <- c(est4, se4, z4, pval4, LL4, UL4)
+ p1 <- (f22 + 1)/(n2 + 2)
+ p2 <- (f23 + 1)/(n2 + 2)
+ est5 <- p1 - p2
+ se5 <- sqrt((p1 + p2 - (p1 - p2)^2)/(n2 + 2))
+ z5 <- est5/se5
+ pval5 <- 2*(1 - pnorm(abs(z5)))
+ LL5 <- est5 - zcrit*se5
+ UL5 <- est5 + zcrit*se5
+ row5 <- c(est5, se5, z5, pval5, LL5, UL5)
+ p1 <- (f11 + f12 + 1)/(n1 + 2)
+ p2 <- (f21 + f22 + 1)/(n2 + 2)
+ est6 <- p1 - p2
+ se6 <- sqrt(p1*(1 - p1)/(n1 + 2) + p2*(1 - p2)/(n2 + 2))
+ z6 <- est6/se6
+ pval6 <- 2*(1 - pnorm(abs(z6)))
+ LL6 <- est6 - zcrit*se6
+ UL6 <- est6 + zcrit*se6
+ row6 <- c(est6, se6, z6, pval6, LL6, UL6)
+ p1 <- (f11 + f13 + 1)/(n1 + 2)
+ p2 <- (f21 + f23 + 1)/(n2 + 2)
+ est7 <- p1 - p2
+ se7 <- sqrt(p1*(1 - p1)/(n1 + 2) + p2*(1 - p2)/(n2 + 2))
+ z7 <- est7/se7
+ pval7 <- 2*(1 - pnorm(abs(z7)))
+ LL7 <- est7 - zcrit*se7
+ UL7 <- est7 + zcrit*se7
+ row7 <- c(est7, se7, z7, pval7, LL7, UL7)
+ out <- rbind(row1, row2, row3, row4, row5, row6, row7)
+ rownames(out) <- c("AB:", "A:", "B:", "A at b1:", "A at b2:", "B at a1:", "B at a2:")
+ colnames(out) = c("Estimate", "SE", "z", "p", "LL", "UL")
+ return(out)
+}
+
+
 # ======================== File 3: Hypothesis Tests ==========================
 # test.prop1 =================================================================
 #' Hypothesis test for a single proportion 
@@ -2100,6 +2410,7 @@ size.supinf.prop.ps <- function(alpha, pow, p1, p2, phi, h) {
 #' @examples
 #' f <- c(10, 46, 15, 3)
 #' iqv(f)
+#'
 #' # Should return:
 #' #        Simpson    Berger   Shannon
 #' # [1,] 0.7367908 0.5045045       0.7

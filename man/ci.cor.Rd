@@ -27,15 +27,16 @@ Returns a 1-row matrix. The columns are:
 \description{
 Computes a Fisher confidence interval for a population Pearson correlation
 or partial correlation with s control variables. Set s = 0 for a Pearson
-correlation. This function uses an estimated correlation as input. Use the
-cor.test function for a Pearson correlation with raw data input.
+correlation. A bias adjustmentment is used to reduce the bias of the Fisher
+transformed correlation. This function uses an estimated correlation as
+input. Use the cor.test function for raw data input.
 }
 \examples{
 ci.cor(.05, .536, 0, 50)
 
 # Should return:
 #      Estimate        SE        LL        UL
-# [1,]    0.536 0.1018149 0.3028333 0.7086249
+# [1,]    0.536 0.1018149 0.2978573 0.7058914
  
 
 }

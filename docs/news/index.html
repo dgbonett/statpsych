@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statpsych</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.0</span>
       </span>
     </div>
 
@@ -48,7 +48,32 @@
     </div>
 
     <div class="section level2">
-<h2 class="page-header" data-toc-text="1.1.0" id="statpsych-v110-release-date-20220630">statpsych v1.1.0 (Release date: 2022/06/30)<a class="anchor" aria-label="anchor" href="#statpsych-v110-release-date-20220630"></a></h2>
+<h2 class="page-header" data-toc-text="1.2.0" id="statpsych-v120-release-date-20220815">statpsych v1.2.0 (Release date: 2022/08/15)<a class="anchor" aria-label="anchor" href="#statpsych-v120-release-date-20220815"></a></h2>
+<p>Changes:</p>
+<ul><li>New functions:
+<ul><li>ci.cramer - Confidence interval for Cramer’s V</li>
+<li>ci.2x2.mean.bs - Confidence intervals for effects in a 2x2 between-subjects design for means</li>
+<li>ci.2x2.mean.ws - Confidence intervals for effects in a 2x2 within-subjects design for means</li>
+<li>ci.2x2.mean.mixed - Confidence intervals for effects in a 2x2 mixed design for means</li>
+<li>ci.2x2.prop.bs - Confidence intervals for effects in a 2x2 between-subjects design for proportions</li>
+<li>ci.2x2.prop.mixed - Confidence intervals for effects in a 2x2 mixed design for proportions</li>
+<li>sim.ci.mean1 – Simulation of confidence interval for a single mean</li>
+<li>sim.ci.mean2 – Simulation of confidence interval for mean difference in a two-group design</li>
+<li>sim.ci.mean.ps – Simulation of confidence interval for mean difference in a paired-samples design</li>
+<li>sim.ci.median1 – Simulation of confidence interval for a single median</li>
+<li>sim.ci.cor – Simulation of confidence interval for a Pearson correlation</li>
+<li>sim.ci.spear – Simulation of confidence interval for a Spearman correlation</li>
+</ul></li>
+<li>Modifications:
+<ul><li>The ci.prop.ps function now outputs an adjusted point estimate of the proportion difference, as stated in the documentation, rather than an unadjusted estimate</li>
+<li>The ci.cor, ci.cor2, and ci.cor.dep functions now uses a bias adjustment to reduce the bias of the Fisher transformed correlations</li>
+</ul></li>
+<li>Error Correction:
+<ul><li>Corrected an error for the standard error computation in the ci.indirect function</li>
+</ul></li>
+</ul></div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.1.0" id="statpsych-v110-release-date-20220630">statpsych v1.1.0 (Release date: 2022/06/30)<small>2022-06-22</small><a class="anchor" aria-label="anchor" href="#statpsych-v110-release-date-20220630"></a></h2>
 <p>Changes:</p>
 <ul><li>New functions:
 <ul><li>ci.agree2 - Confidence interval for G-index difference in a 2-group design</li>

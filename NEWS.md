@@ -1,3 +1,29 @@
+statpsych v1.2.0 (Release date: 2022/08/15)
+==============
+
+Changes:
+
+* New functions:
+    * ci.cramer - Confidence interval for Cramer's V
+    * ci.2x2.mean.bs - Confidence intervals for effects in a 2x2 between-subjects design for means
+    * ci.2x2.mean.ws - Confidence intervals for effects in a 2x2 within-subjects design for means
+    * ci.2x2.mean.mixed - Confidence intervals for effects in a 2x2 mixed design for means
+    * ci.2x2.prop.bs - Confidence intervals for effects in a 2x2 between-subjects design for proportions
+    * ci.2x2.prop.mixed - Confidence intervals for effects in a 2x2 mixed design for proportions
+    * sim.ci.mean1 – Simulation of confidence interval for a single mean
+    * sim.ci.mean2 – Simulation of confidence interval for mean difference in a two-group design
+    * sim.ci.mean.ps – Simulation of confidence interval for mean difference in a paired-samples design
+    * sim.ci.median1 – Simulation of confidence interval for a single median
+    * sim.ci.cor – Simulation of confidence interval for a Pearson correlation
+    * sim.ci.spear – Simulation of confidence interval for a Spearman correlation
+* Modifications:
+    * The ci.prop.ps function now outputs an adjusted point estimate of the proportion difference, as stated in the documentation, rather than an unadjusted estimate
+    * The ci.cor, ci.cor2, and ci.cor.dep functions now uses a bias adjustment to reduce the bias of the Fisher transformed correlations
+    * The ci.median1 function now uses the same standard error formula as the ci.median2, ci.ratio.median2, and ci.median.ps functions
+* Error Correction:
+    * Corrected an error for the standard error computation in the ci.indirect function
+    
+
 statpsych v1.1.0 (Release date: 2022/06/30)
 ==============
 

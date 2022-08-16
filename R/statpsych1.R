@@ -1469,7 +1469,7 @@ ci.cod2 <-function(alpha, y1, y2) {
 #'
 #' # Should return:
 #' #      Median       SE LL UL
-#' # [1,]     20 5.390263 10 30
+#' # [1,]     20 4.270922 10 30
 #'
 #'
 #' @importFrom stats qnorm
@@ -1485,7 +1485,7 @@ ci.median1 <- function(alpha, y) {
  if (c1 < 1) {c1 = 1}
  ll <- y[c1]
  ul <- y[n - c1 + 1]
- a <- round((n + 1)/2 - sqrt(n))
+ a <- round(n/2 - sqrt(n))
  if (a < 1) {a = 1}
  ll1 <- y[a]
  ul1 <- y[n - a + 1]
@@ -2235,7 +2235,406 @@ ci.etasqr <- function(alpha, etasqr, df1, df2) {
  return(out)
 }
 
+# ci.2x2.mean.mixed ===========================================================
+#' Computes tests and confidence intervals of effects in a 2x2 mixed design 
+#' for means
+#'
+#'
+#' @description
+#' Computes confidence intervals and tests for the AB interaction effect, 
+#' main effect of A, main efect of B, simple main effects of A, and simple main
+#' effects of B in a 2x2 mixed factorial design with a quantitative response
+#' variable where Factor A is a within-subjects factor, and Factor B is a 
+#' between-subjects factor. A Satterthwaite adjustment to the degrees of 
+#' freedom is used and equality of population variances is not assumed.
+#'
+#'
+#' @param   alpha   alpha level for 1-alpha confidence
+#' @param   y11     vector of scores at level 1 in group 1
+#' @param   y12     vector of scores at level 2 in group 1
+#' @param   y21     vector of scores at level 1 in group 2
+#' @param   y22     vector of scores at level 2 in group 2
+#'
+#'
+#' @return
+#' Returns a 7-row matrix (one row per effect). The columns are:
+#' * Estimate - estimate of effect
+#' * SE - standard error 
+#' * t - t test statistic 
+#' * df - degrees of freedom
+#' * p - p-value 
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
+#'
+#'
+#' @examples
+#' y11 = c(18, 19, 20, 17, 20, 16)
+#' y12 = c(19, 18, 19, 20, 17, 16)
+#' y21 = c(19, 16, 16, 14, 16, 18)
+#' y22 = c(16, 10, 12,  9, 13, 15)
+#' ci.2x2.mean.mixed(.05, y11, y12, y21, y22)
+#'
+#' # Should return:
+#' #            Estimate        SE         t       df            p         LL        UL
+#' # AB:      -3.8333333 0.9803627 -3.910117 8.346534 0.0041247610 -6.0778198 -1.588847
+#' # A:        2.0833333 0.4901814  4.250128 8.346534 0.0025414549  0.9610901  3.205577
+#' # B:        3.7500000 1.0226599  3.666908 7.601289 0.0069250119  1.3700362  6.129964
+#' # A at b1:  0.1666667 0.8333333  0.200000 5.000000 0.8493605140 -1.9754849  2.308818
+#' # A at b2:  4.0000000 0.5163978  7.745967 5.000000 0.0005732451  2.6725572  5.327443
+#' # B at a1:  1.8333333 0.9803627  1.870056 9.943850 0.0911668588 -0.3527241  4.019391
+#' # B at a2:  5.6666667 1.2692955  4.464419 7.666363 0.0023323966  2.7173445  8.615989
+#'
+#'
+#' @importFrom stats qt
+#' @importFrom stats pt
+#' @export
+ci.2x2.mean.mixed <- function(alpha, y11, y12, y21, y22) {
+ n1 <- length(y11)
+ n2 <- length(y21)
+ diff1 <- y11 - y12
+ diff2 <- y21 - y22
+ ave1 <- (y11 + y12)/2
+ ave2 <- (y21 + y22)/2
+ vd1 <- var(diff1)
+ vd2 <- var(diff2)
+ va1 <- var(ave1)
+ va2 <- var(ave2)
+ est1 <- mean(diff1) - mean(diff2)
+ se1 <- sqrt(vd1/n1 + vd2/n2)
+ df1 <- (se1^4)/(vd1^2/(n1^3 - n1^2) + vd2^2/(n2^3 - n2^2))
+ tcrit1 <- qt(1 - alpha/2, df1)
+ t1 <- est1/se1
+ p1 <- 2*(1 - pt(abs(t1), df1))
+ LL1 <- est1 - tcrit1*se1
+ UL1 <- est1 + tcrit1*se1
+ row1 <- c(est1, se1, t1, df1, p1, LL1, UL1)
+ est2 <- (mean(diff1) + mean(diff2))/2
+ se2 <- sqrt(vd1/n1 + vd2/n2)/2
+ df2 <- (se2^4)/(vd1^2/((n1^3 - n1^2)*16) + vd2^2/((n2^3 - n2^2)*16))
+ tcrit2 <- qt(1 - alpha/2, df2)
+ t2 <- est2/se2
+ p2 <- 2*(1 - pt(abs(t2), df2))
+ LL2 <- est2 - tcrit2*se2
+ UL2 <- est2 + tcrit2*se2
+ row2 <- c(est2, se2, t2, df2, p2, LL2, UL2)
+ est3 <- mean(ave1) - mean(ave2)
+ se3 <- sqrt(va1/n1 + va2/n2)
+ df3 <- (se3^4)/(va1^2/(n1^3 - n1^2) + va2^2/(n2^3 - n2^2))
+ tcrit3 <- qt(1 - alpha/2, df3)
+ t3 <- est3/se3
+ p3 <- 2*(1 - pt(abs(t3), df3))
+ LL3 <- est3 - tcrit3*se3
+ UL3 <- est3 + tcrit3*se3
+ row3 <- c(est3, se3, t3, df3, p3, LL3, UL3)
+ est4 <- mean(diff1)
+ se4 <- sqrt(vd1/n1)
+ df4 <- n1 - 1
+ tcrit4 <- qt(1 - alpha/2, df4)
+ t4 <- est4/se4
+ p4 <- 2*(1 - pt(abs(t4), df4))
+ LL4 <- est4 - tcrit4*se4
+ UL4 <- est4 + tcrit4*se4
+ row4 <- c(est4, se4, t4, df4, p4, LL4, UL4)
+ est5 <- mean(diff2)
+ se5 <- sqrt(vd2/n2)
+ df5 <- n2 - 1
+ tcrit5 <- qt(1 - alpha/2, df5)
+ t5 <- est5/se5
+ p5 <- 2*(1 - pt(abs(t5), df5))
+ LL5 <- est5 - tcrit5*se5
+ UL5 <- est5 + tcrit5*se5
+ row5 <- c(est5, se5, t5, df5, p5, LL5, UL5)
+ est6 <- mean(y11) - mean(y21)
+ se6 <- sqrt(var(y11)/n1 + var(y21)/n2)
+ df6 <- (se6^4)/(var(y11)^2/(n1^3 - n1^2) + var(y21)^2/(n2^3 - n2^2))
+ tcrit6 <- qt(1 - alpha/2, df6)
+ t6 <- est6/se6
+ p6 <- 2*(1 - pt(abs(t6), df6))
+ LL6 <- est6 - tcrit6*se6
+ UL6 <- est6 + tcrit6*se6
+ row6 <- c(est6, se6, t6, df6, p6, LL6, UL6)
+ est7 <- mean(y12) - mean(y22)
+ se7 <- sqrt(var(y12)/n1 + var(y22)/n2)
+ df7 <- (se7^4)/(var(y12)^2/(n1^3 - n1^2) + var(y22)^2/(n2^3 - n2^2))
+ tcrit7 <- qt(1 - alpha/2, df7)
+ t7 <- est7/se7
+ p7 <- 2*(1 - pt(abs(t7), df7))
+ LL7 <- est7 - tcrit7*se7
+ UL7 <- est7 + tcrit7*se7
+ row7 <- c(est7, se7, t7, df7, p7, LL7, UL7)
+ out <- rbind(row1, row2, row3, row4, row5, row6, row7)
+ rownames(out) <- c("AB:", "A:", "B:", "A at b1:", "A at b2:", "B at a1:", "B at a2:")
+ colnames(out) = c("Estimate", "SE", "t", "df", "p", "LL", "UL")
+ return(out)
+}
 
+
+# ci.2x2.mean.ws =============================================================
+#' Computes tests and confidence intervals of effects in a 2x2 within-subjects 
+#' design for means
+#'
+#'
+#' @description
+#' Computes confidence intervals and tests for the AB interaction effect, 
+#' main effect of A, main efect of B, simple main effects of A, and simple main
+#' effects of B in a 2x2 within-subjects design with a quantitative response
+#' variable. 
+#'
+#'
+#' @param   alpha   alpha level for 1-alpha confidence
+#' @param   y11     vector of scores at level 1 of A and level 1 of B
+#' @param   y12     vector of scores at level 1 of A and level 2 of B
+#' @param   y21     vector of scores at level 2 of A and level 1 of B
+#' @param   y22     vector of scores at level 2 of A and level 2 of B
+#'
+#'
+#' @return
+#' Returns a 7-row matrix (one row per effect). The columns are:
+#' * Estimate - estimate of effect
+#' * SE - standard error 
+#' * t - t test statistic 
+#' * df - degrees of freedom
+#' * p - p-value 
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
+#'
+#'
+#' @examples
+#' y11 = c(1,2,3,4,5,7,7)
+#' y12 = c(1,0,2,4,3,8,7)
+#' y21 = c(4,5,6,7,8,9,8)
+#' y22 = c(5,6,8,7,8,9,9)
+#' ci.2x2.mean.ws(.05, y11, y12, y21, y22)
+#'
+#' # Should return:
+#' #             Estimate        SE          t df            p          LL          UL
+#' # AB:       1.28571429 0.5654449  2.2738102  6 0.0633355395 -0.09787945  2.66930802
+#' # A:       -3.21428571 0.4862042 -6.6109784  6 0.0005765210 -4.40398462 -2.02458681
+#' # B:       -0.07142857 0.2296107 -0.3110855  6 0.7662600658 -0.63326579  0.49040865
+#' # A at b1: -2.57142857 0.2973809 -8.6469203  6 0.0001318413 -3.29909331 -1.84376383
+#' # A at b2: -3.85714286 0.7377111 -5.2285275  6 0.0019599725 -5.66225692 -2.05202879
+#' # B at a1:  0.57142857 0.4285714  1.3333333  6 0.2308094088 -0.47724794  1.62010508
+#' # B at a2: -0.71428571 0.2857143 -2.5000000  6 0.0465282323 -1.41340339 -0.01516804
+#'
+#'
+#' @importFrom stats qt
+#' @importFrom stats pt
+#' @export
+ci.2x2.mean.ws <- function(alpha, y11, y12, y21, y22) {
+ n <- length(y11)
+ df <- n - 1
+ t <- qt(1 - alpha/2, df)
+ q1 <- c(1, -1, -1, 1)
+ q2 <- c(.5, .5, -.5, -.5)
+ q3 <- c(.5, -.5, .5, -.5)
+ q4 <- c(1, 0, -1, 0)
+ q5 <- c(0, 1, 0, -1)
+ q6 <- c(1, -1, 0, 0)
+ q7 <- c(0, 0, 1, -1)
+ y <- cbind(y11, y12, y21, y22)
+ est1 <- mean(q1%*%t(y))
+ se1 <- sqrt(var(matrix(q1%*%t(y)))/n)
+ t1 <- est1/se1
+ p1 <- 2*(1 - pt(abs(t1), df))
+ LL1 <- est1 - t*se1
+ UL1 <- est1 + t*se1
+ row1 <- c(est1, se1, t1, df, p1, LL1, UL1)
+ est2 <- mean(q2%*%t(y))
+ se2 <- sqrt(var(matrix(q2%*%t(y)))/n)
+ t2 <- est2/se2
+ p2 <- 2*(1 - pt(abs(t2), df))
+ LL2 <- est2 - t*se2
+ UL2 <- est2 + t*se2
+ row2 <- c(est2, se2, t2, df, p2, LL2, UL2)
+ est3 <- mean(q3%*%t(y))
+ se3 <- sqrt(var(matrix(q3%*%t(y)))/n)
+ t3 <- est3/se3
+ p3 <- 2*(1 - pt(abs(t3), df))
+ LL3 <- est3 - t*se3
+ UL3 <- est3 + t*se3
+ row3 <- c(est3, se3, t3, df, p3, LL3, UL3)
+ est4 <- mean(q4%*%t(y))
+ se4 <- sqrt(var(matrix(q4%*%t(y)))/n)
+ t4 <- est4/se4
+ p4 <- 2*(1 - pt(abs(t4), df))
+ LL4 <- est4 - t*se4
+ UL4 <- est4 + t*se4
+ row4 <- c(est4, se4, t4, df, p4, LL4, UL4)
+ est5 <- mean(q5%*%t(y))
+ se5 <- sqrt(var(matrix(q5%*%t(y)))/n)
+ t5 <- est5/se5
+ p5 <- 2*(1 - pt(abs(t5), df))
+ LL5 <- est5 - t*se5
+ UL5 <- est5 + t*se5
+ row5 <- c(est5, se5, t5, df, p5, LL5, UL5)
+ est6 <- mean(q6%*%t(y))
+ se6 <- sqrt(var(matrix(q6%*%t(y)))/n)
+ t6 <- est6/se6
+ p6 <- 2*(1 - pt(abs(t6), df))
+ LL6 <- est6 - t*se6
+ UL6 <- est6 + t*se6
+ row6 <- c(est6, se6, t6, df, p6, LL6, UL6)
+ est7 <- mean(q7%*%t(y))
+ se7 <- sqrt(var(matrix(q7%*%t(y)))/n)
+ t7 <- est7/se7
+ p7 <- 2*(1 - pt(abs(t7), df))
+ LL7 <- est7 - t*se7
+ UL7 <- est7 + t*se7
+ row7 <- c(est7, se7, t7, df, p7, LL7, UL7)
+ out <- rbind(row1, row2, row3, row4, row5, row6, row7)
+ rownames(out) <- c("AB:", "A:", "B:", "A at b1:", "A at b2:", "B at a1:", "B at a2:")
+ colnames(out) = c("Estimate", "SE", "t", "df", "p", "LL", "UL")
+ return(out)
+}
+
+
+# ci.2x2.mean.bs =============================================================
+#' Computes tests and confidence intervals of effects in a 2x2 betwen-subjects 
+#' design for means
+#'
+#'
+#' @description
+#' Computes confidence intervals and tests for the AB interaction effect, 
+#' main effect of A, main efect of B, simple main effects of A, and simple main
+#' effects of B in a 2x2 between-subjects design with a quantitative response
+#' variable. A Satterthwaite adjustment to the degrees of freedom is used and 
+#' equality of population variances is not assumed.
+#'
+#'
+#' @param   alpha   alpha level for 1-alpha confidence
+#' @param   y11     vector of scores at level 1 of A and level 1 of B
+#' @param   y12     vector of scores at level 1 of A and level 2 of B
+#' @param   y21     vector of scores at level 2 of A and level 1 of B
+#' @param   y22     vector of scores at level 2 of A and level 2 of B
+#'
+#'
+#' @return
+#' Returns a 7-row matrix (one row per effect). The columns are:
+#' * Estimate - estimate of effect
+#' * SE - standard error 
+#' * t - t test statistic 
+#' * df - degrees of freedom
+#' * p - p-value 
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
+#'
+#'
+#' @examples
+#' y11 = c(14, 15, 11, 7, 16, 12, 15, 16, 10, 9)
+#' y12 = c(18, 24, 14, 18, 22, 21, 16, 17, 14, 13)
+#' y21 = c(16, 11, 10, 17, 13, 18, 12, 16, 6, 15)
+#' y22 = c(18, 17, 11, 9, 9, 13, 18, 15, 14, 11)
+#' ci.2x2.mean.bs(.05, y11, y12, y21, y22)
+#'
+#' # Should return:
+#' #          Estimate       SE           t       df           p         LL         UL
+#' # AB:         -5.10 2.224860 -2.29227953 35.47894 0.027931810 -9.6145264 -0.5854736
+#' # A:           1.65 1.112430  1.48323970 35.47894 0.146840430 -0.6072632  3.9072632
+#' # B:          -2.65 1.112430 -2.38217285 35.47894 0.022698654 -4.9072632 -0.3927368
+#' # A at b1:    -0.90 1.545244 -0.58243244 17.56296 0.567678242 -4.1522367  2.3522367
+#' # A at b2:     4.20 1.600694  2.62386142 17.93761 0.017246053  0.8362274  7.5637726
+#' # B at a1:    -5.20 1.536952 -3.38331916 17.61093 0.003393857 -8.4341379 -1.9658621
+#' # B at a2:    -0.10 1.608657 -0.06216365 17.91650 0.951120753 -3.4807927  3.2807927
+#'
+#'
+#' @importFrom stats qt
+#' @importFrom stats pt
+#' @export
+ci.2x2.mean.bs <- function(alpha, y11, y12, y21, y22) {
+ n11 <- length(y11)
+ n12 <- length(y12)
+ n21 <- length(y21)
+ n22 <- length(y22)
+ v1 <- c(1, -1, -1, 1)
+ v2 <- c(.5, .5, -.5, -.5)
+ v3 <- c(.5, -.5, .5, -.5)
+ v4 <- c(1, 0, -1, 0)
+ v5 <- c(0, 1, 0, -1)
+ v6 <- c(1, -1, 0, 0)
+ v7 <- c(0, 0, 1, -1)
+ m11 <- mean(y11)
+ m12 <- mean(y12)
+ m21 <- mean(y21)
+ m22 <- mean(y22)
+ sd11 <- sd(y11)
+ sd12 <- sd(y12)
+ sd21 <- sd(y21)
+ sd22 <- sd(y22)
+ m <- c(m11, m12, m21, m22)
+ sd <- c(sd11, sd12, sd21, sd22) 
+ n <- c(n11, n12, n21, n22)
+ var <- diag(sd^2)%*%(solve(diag(n)))
+ est1 <- t(v1)%*%m 
+ se1 <- sqrt(t(v1)%*%var%*%v1)
+ t1 <- est1/se1
+ df1 <- (se1^4)/sum(((v1^4)*(sd^4)/(n^2*(n - 1))))
+ tcrit1 <- qt(1 - alpha/2, df1)
+ p1 <- 2*(1 - pt(abs(t1), df1))
+ LL1 <- est1 - tcrit1*se1
+ UL1 <- est1 + tcrit1*se1
+ row1 <- c(est1, se1, t1, df1, p1, LL1, UL1)
+ est2 <- t(v2)%*%m 
+ se2 <- sqrt(t(v2)%*%var%*%v2)
+ t2 <- est2/se2
+ df2 <- (se2^4)/sum(((v2^4)*(sd^4)/(n^2*(n - 1))))
+ tcrit2 <- qt(1 - alpha/2, df2)
+ p2 <- 2*(1 - pt(abs(t2), df2))
+ LL2 <- est2 - tcrit2*se2
+ UL2 <- est2 + tcrit2*se2
+ row2 <- c(est2, se2, t2, df2, p2, LL2, UL2)
+ est3 <- t(v3)%*%m 
+ se3 <- sqrt(t(v3)%*%var%*%v3)
+ t3 <- est3/se3
+ df3 <- (se3^4)/sum(((v3^4)*(sd^4)/(n^2*(n - 1))))
+ tcrit3 <- qt(1 - alpha/2, df3)
+ p3 <- 2*(1 - pt(abs(t3), df3))
+ LL3 <- est3 - tcrit3*se3
+ UL3 <- est3 + tcrit3*se3
+ row3 <- c(est3, se3, t3, df3, p3, LL3, UL3)
+ est4 <- t(v4)%*%m 
+ se4 <- sqrt(t(v4)%*%var%*%v4)
+ t4 <- est4/se4
+ df4 <- (se4^4)/sum(((v4^4)*(sd^4)/(n^2*(n - 1))))
+ tcrit4 <- qt(1 - alpha/2, df4)
+ p4 <- 2*(1 - pt(abs(t4), df4))
+ LL4 <- est4 - tcrit4*se4
+ UL4 <- est4 + tcrit4*se4
+ row4 <- c(est4, se4, t4, df4, p4, LL4, UL4)
+ est5 <- t(v5)%*%m 
+ se5 <- sqrt(t(v5)%*%var%*%v5)
+ t5 <- est5/se5
+ df5 <- (se5^4)/sum(((v5^4)*(sd^4)/(n^2*(n - 1))))
+ tcrit5 <- qt(1 - alpha/2, df5)
+ p5 <- 2*(1 - pt(abs(t5), df5))
+ LL5 <- est5 - tcrit5*se5
+ UL5 <- est5 + tcrit5*se5
+ row5 <- c(est5, se5, t5, df5, p5, LL5, UL5)
+ est6 <- t(v6)%*%m 
+ se6 <- sqrt(t(v6)%*%var%*%v6)
+ t6 <- est6/se6
+ df6 <- (se6^4)/sum(((v6^4)*(sd^4)/(n^2*(n - 1))))
+ tcrit6 <- qt(1 - alpha/2, df6)
+ p6 <- 2*(1 - pt(abs(t6), df6))
+ LL6 <- est6 - tcrit6*se6
+ UL6 <- est6 + tcrit6*se6
+ row6 <- c(est6, se6, t6, df6, p6, LL6, UL6)
+ est7 <- t(v7)%*%m 
+ se7 <- sqrt(t(v7)%*%var%*%v7)
+ t7 <- est7/se7
+ df7 <- (se7^4)/sum(((v7^4)*(sd^4)/(n^2*(n - 1))))
+ tcrit7 <- qt(1 - alpha/2, df7)
+ p7 <- 2*(1 - pt(abs(t7), df7))
+ LL7 <- est7 - tcrit7*se7
+ UL7 <- est7 + tcrit7*se7
+ row7 <- c(est7, se7, t7, df7, p7, LL7, UL7)
+ out <- rbind(row1, row2, row3, row4, row5, row6, row7)
+ rownames(out) <- c("AB:", "A:", "B:", "A at b1:", "A at b2:", "B at a1:", "B at a2:")
+ colnames(out) = c("Estimate", "SE", "t", "df", "p", "LL", "UL")
+ return(out)
+}
+
+
+#  ======================= File 1:  Hypothesis tests =========================
 #  test.skew =================================================================
 #' Computes p-value for test of skewness
 #'
@@ -2294,7 +2693,6 @@ test.skew <- function(y) {
  colnames(out) <- c("Skewness", "p")
  return(out)
 }
-
 
 #  test.kurtosis =================================================================
 #' Computes p-value for test of excess kurtosis
@@ -3946,6 +4344,427 @@ etasqr.gen.2way <- function(SSa, SSb, SSab, SSe) {
  return(out)
 }
 
+#  sim.ci.mean1 ===============================================================
+#' Simulates confidence interval coverage probability for single mean
+#'
+#'                               
+#' @description
+#' Performs a computer simulation (20,000 Monte Carlo samples) of the 
+#' confidence interval performance for a single mean. Sample data can 
+#' be generated from five different population distributions. All 
+#' distributions are scaled to have standard deviations of 1.0.
+#'
+#'
+#' @param   alpha  alpha level for 1-alpha confidence
+#' @param   n      sample size
+#' @param   dist   type of distribution (1, 2, 3, 4,or 5)
+#' * 1 = Gaussian (skewness = 0 and excess kurtosis = 0) 
+#' * 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
+#' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
+#' * 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
+#' * 5 = large skew (skewness = 2 and excess kurtosis = 6)
+#'  
+#' 
+#' @return
+#' Returns a 1-row matrix. The columns are:
+#' * Coverage - probability of confidence interval including population mean  
+#' * Lower Error - probability of lower limit greater than population mean
+#' * Upper Error - probability of upper limit less than population mean
+#' * Ave CI Width - average confidence interval width
+#'
+#'
+#' @examples
+#' sim.ci.mean1(.05, 40, 4)
+#'
+#' # Should return (within sampling error):
+#' #      Coverage Lower Error Upper Error Ave CI Width
+#' # [1,]  0.94722     0.01738      0.0354    0.6333067
+#'
+#'
+#' @importFrom stats qt
+#' @importFrom stats rnorm
+#' @importFrom stats runif
+#' @importFrom stats rt
+#' @importFrom stats rgamma
+#' @export
+sim.ci.mean1 <- function(alpha, n, dist) {
+ tcrit <- qt(1 - alpha/2, n - 1)
+ rep <- 20000
+ if (dist == 1) {
+   y <- matrix(rnorm(rep*n), nrow = rep)
+   popmean <- 0
+ } else if (dist == 2) {
+   y <- matrix(3.464*runif(rep*n), nrow = rep)
+   popmean <- 1.732
+ } else if (dist == 3) {
+   y <- matrix(.7745*rt(rep*n, 5), nrow = rep)
+   popmean <- 0
+ } else if (dist == 4) {
+   y <- matrix(.5*rgamma(rep*n, 4), nrow = rep)
+   popmean <- 2
+ } else {
+   y <- matrix(rgamma(rep*n, 1), nrow = rep)
+   popmean <- 1
+ }
+ m <- rowMeans(y)
+ var <- apply(y, 1, var)
+ se <- sqrt(var/n)
+ ll <- m - tcrit*se
+ ul <- m + tcrit*se
+ w <- ul - ll
+ c1 <- as.integer(ll > popmean)
+ c2 <- as.integer(ul < popmean)
+ e1 <- sum(c1)/rep
+ e2 <- sum(c2)/rep
+ width <- mean(w)
+ cov <- 1 - (e1 + e2)
+ out <- t(c(cov, e1, e2, width))
+ colnames(out) <- c("Coverage", "Lower Error", "Upper Error", "Ave CI Width")
+ return(out)
+}
+
+
+#  sim.ci.mean2 ===============================================================
+#' Simulates confidence interval coverage probability for a two-group mean 
+#' difference
+#'
+#'                               
+#' @description
+#' Performs a computer simulation (20,000 Monte Carlo samples) of separate 
+#' variance and pooled variance confidence interval performance for a mean  
+#' difference in a two-group design. Sample data within each group can be 
+#' generated from five different population distributions. All distributions
+#' are scaled to have a standard deviation of 1.0 in group 1. 
+#'
+#'
+#' @param   alpha     alpha level for 1-alpha confidence
+#' @param   n1        sample size in group 1
+#' @param   n2        sample size in group 2
+#' @param   sd.ratio  ratio of population standard deviations
+#' @param   dist1     type of distribution in group 1 (1, 2, 3, 4, or 5)
+#' @param   dist2     type of distribution in group 2 (1, 2, 3, 4, or 5)
+#' * 1 = Gaussian (skewness = 0 and excess kurtosis = 0) 
+#' * 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
+#' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
+#' * 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
+#' * 5 = large skew (skewness = 2 and excess kurtosis = 6)
+#'  
+#' 
+#' @return
+#' Returns a 1-row matrix. The columns are:
+#' * Coverage - probability of confidence interval including population mean  
+#' * Lower Error - probability of lower limit greater than population mean
+#' * Upper Error - probability of upper limit less than population mean
+#' * Ave CI Width - average confidence interval width
+#'
+#'
+#' @examples
+#' sim.ci.mean2(.05, 30, 25, 1.5, 4, 5)
+#'
+#' # Should return (within sampling error):
+#' #                             Coverage Lower Error Upper Error Ave CI Width
+#' # Equal Variances Assumed:      0.93986     0.04022     0.01992     1.344437
+#' # Equal Variances Not Assumed:  0.94762     0.03862     0.01376     1.401305
+#'
+#'
+#' @importFrom stats qt
+#' @importFrom stats rnorm
+#' @importFrom stats runif
+#' @importFrom stats rt
+#' @importFrom stats rgamma
+#' @export
+sim.ci.mean2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2) {
+ df1 <- n1 + n2 - 2
+ tcrit1 <- qt(1 - alpha/2, df1)
+ rep <- 20000
+ if (dist1 == 1) {
+   y1 <- matrix(rnorm(rep*n1), nrow = rep)
+   popmean1 <- 0
+ } else if (dist1 == 2) {
+   y1 <- matrix(3.464*runif(rep*n1), nrow = rep)
+   popmean1 <- 1.732
+ } else if (dist1 == 3) {
+   y1 <- matrix(.7745*rt(rep*n1, 5), nrow = rep)
+   popmean1 <- 0
+ } else if (dist1 == 4) {
+   y1 <- matrix(.5*rgamma(rep*n1, 4), nrow = rep)
+   popmean1 <- 2
+ } else {
+   y1 <- matrix(rgamma(rep*n1, 1), nrow = rep)
+   popmean1 <- 1
+ }
+ if (dist2 == 1) {
+   y2 <- matrix(sd.ratio*rnorm(rep*n2), nrow = rep)
+   popmean2 <- 0
+ } else if (dist2 == 2) {
+   y2 <- matrix(sd.ratio*3.464*runif(rep*n2), nrow = rep)
+   popmean2 <- sd.ratio*1.732
+ } else if (dist2 == 3) {
+   y2 <- matrix(sd.ratio*.7745*rt(rep*n2, 5), nrow = rep)
+   popmean2 <- 0
+ } else if (dist2 == 4) {
+   y2 <- matrix(sd.ratio*.5*rgamma(rep*n2, 4), nrow = rep)
+   popmean2 <- sd.ratio*2
+ } else {
+   y2 <- matrix(sd.ratio*rgamma(rep*n2, 1), nrow = rep)
+   popmean2<- sd.ratio
+ }
+ popdiff <- popmean1 - popmean2
+ m1 <- rowMeans(y1)
+ m2 <- rowMeans(y2)
+ v1 <- apply(y1, 1, var)
+ v2 <- apply(y2, 1, var)
+ vp <- ((n1 - 1)*v1 + (n2 - 1)*v2)/df1
+ se1 <- sqrt(vp/n1 + vp/n2)
+ se2 <- sqrt(v1/n1 + v2/n2)
+ df2 <- (se2^4)/(v1^2/(n1^3 - n1^2) + v2^2/(n2^3 - n2^2))
+ tcrit2 <- qt(1 - alpha/2, df2)
+ LL1 <- m1 - m2 - tcrit1*se1
+ UL1 <- m1 - m2 + tcrit1*se1
+ w1 <- UL1 - LL1
+ LL2 <- m1 - m2 - tcrit2*se2
+ UL2 <- m1 - m2 + tcrit2*se2
+ w2 <- UL2 - LL2
+ c11 <- as.integer(LL1 > popdiff)
+ c12 <- as.integer(UL1 < popdiff)
+ c21 <- as.integer(LL2 > popdiff)
+ c22 <- as.integer(UL2 < popdiff)
+ e11 <- sum(c11)/rep
+ e12 <- sum(c12)/rep
+ e21 <- sum(c21)/rep
+ e22 <- sum(c22)/rep
+ width1 <- mean(w1)
+ width2 <- mean(w2)
+ cov1 <- 1 - (e11 + e12)
+ cov2 <- 1 - (e21 + e22)
+ out1 <- t(c(cov1, e11, e12, width1))
+ out2 <- t(c(cov2, e21, e22, width2))
+ out <- rbind(out1, out2)
+ colnames(out) <- c("Coverage", "Lower Error", "Upper Error", "Ave CI Width")
+ rownames(out) <- c("Equal Variances Assumed:", "Equal Variances Not Assumed:")
+ return(out)
+}
+
+
+#  sim.ci.mean.ps ===============================================================
+#' Simulates confidence interval coverage probability for a paired-samples mean 
+#' difference
+#'
+#'                               
+#' @description
+#' Performs a computer simulation (20,000 Monte Carlo samples) of confidence
+#' interval performance for a mean difference in a paired-samples design. Sample 
+#' data within each level of the within-subjects factor group can be generated
+#' from bivariate population distributions with five different marginal
+#' distributions. All distributions are scaled to have standard deviations of 
+#' 1.0 at level 1. Bivariate random data with specified marginal skewness and
+#' kurtosis are generated using the unonr function in the mnonr package. 
+#'
+#'
+#' @param   alpha     alpha level for 1-alpha confidence
+#' @param   n         sample size 
+#' @param   sd.ratio  ratio of population standard deviations
+#' @param   cor       population correlation of paired observations
+#' @param   dist1     type of distribution at level 1 (1, 2, 3, 4, or 5)
+#' @param   dist2     type of distribution at level 2 (1, 2, 3, 4, or 5)
+#' * 1 = Gaussian (skewness = 0 and excess kurtosis = 0) 
+#' * 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
+#' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
+#' * 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
+#' * 5 = large skew (skewness = 2 and excess kurtosis = 6)
+#'  
+#' 
+#' @return
+#' Returns a 1-row matrix. The columns are:
+#' * Coverage - probability of confidence interval including population mean  
+#' * Lower Error - probability of lower limit greater than population mean
+#' * Upper Error - probability of upper limit less than population mean
+#' * Ave CI Width - average confidence interval width
+#'
+#'
+#' @examples
+#' sim.ci.mean.ps(.05, 30, 1.5, .7, 4, 5)
+#'
+#' # Should return (within sampling error):
+#' #      Coverage Lower Error Upper Error Ave CI Width
+#' # [1,]  0.93815     0.05125      0.0106    0.7778518
+#'
+#'
+#' @importFrom stats qt
+#' @importFrom mnonr unonr
+#' @export
+sim.ci.mean.ps <- function(alpha, n, sd.ratio, cor, dist1, dist2) {
+ tcrit <- qt(1 - alpha/2, n - 1)
+ rep <- 20000
+ if (dist1 == 1) {
+   skw1 <- 0; kur1 <- 0
+ } else if (dist1 == 2) {
+   skw1 <- 0; kur1 <- -1.2
+ } else if (dist1 == 3) {
+   skw1 <- 0; kur1 <- 6
+ } else if (dist1 == 4) {
+   skw1 <- .75; kur1 <- .86
+ } else {
+   skw1 <- 1.41; kur1 <- 3
+ }
+ if (dist2 == 1) {
+   skw2 <- 0; kur2 <- 0
+ } else if (dist2 == 2) {
+   skw2 <- 0; kur2 <- -1.2
+ } else if (dist2 == 3) {
+   skw2 <- 0; kur2 <- 6
+ } else if (dist2 == 4) {
+   skw2 <- 1; kur2 <- 1.5
+ } else {
+   skw2 <- 2; kur2 <- 6
+ }
+ V <- matrix(c(1, cor*sd.ratio, cor*sd.ratio, sd.ratio^2), 2, 2)
+ w <- 0; k <- 0; e1 <-0; e2 <- 0
+ repeat {
+   k <- k + 1
+   y <- unonr(n, c(0, 0), V, skewness = c(skw1, skw2), kurtosis = c(kur1, kur2))
+   q <- c(1, -1)
+   d <- y%*%q
+   m <- mean(d)
+   se <- sqrt(var(d)/n)
+   ll <- m - tcrit*se
+   ul <- m + tcrit*se
+   w0 <- ul - ll
+   c1 <- as.integer(ll > 0)
+   c2 <- as.integer(ul < 0)
+   e1 <- e1 + c1
+   e2 <- e2 + c2
+   w <- w + w0
+   if (k == rep) {break}
+ }
+ width <- w/rep
+ cov <- 1 - (e1 + e2)/rep
+ out <- t(c(cov, e1/rep, e2/rep, width))
+ colnames(out) <- c("Coverage", "Lower Error", "Upper Error", "Ave CI Width")
+ return(out)
+}
+
+
+#  sim.ci.median1 =============================================================
+#' Simulates confidence interval coverage probability for single median
+#'
+#'                                      
+#' @description
+#' Performs a computer simulation (20,000 Monte Carlo samples) of the 
+#' confidence interval performance for a single mean. Sample data can 
+#' be generated from five different population distributions. All 
+#' distributions are scaled to have standard deviations of 1.0.
+#'
+#'
+#' @param   alpha  alpha level for 1-alpha confidence
+#' @param   n      sample size
+#' @param   dist   type of distribution (1, 2, 3, 4, or 5) 
+#' * 1 = Gaussian (skewness = 0 and excess kurtosis = 0) 
+#' * 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
+#' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
+#' * 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
+#' * 5 = large skew (skewness = 2 and excess kurtosis = 6)
+#'  
+#' 
+#' @return
+#' Returns a 1-row matrix. The columns are:
+#' * Coverage - probability of confidence interval including population mean  
+#' * Lower Error - probability of lower limit greater than population mean
+#' * Upper Error - probability of upper limit less than population mean
+#' * Ave CI Width - average confidence interval width
+#'
+#'
+#' @examples
+#' sim.ci.median1(.05, 20, 5)
+#'
+#' # Should return (within sampling error):
+#' #      Coverage Lower Error Upper Error Ave CI Width
+#' # [1,]   0.9589      0.0216      0.0195    0.9735528
+#'
+#'
+#' @importFrom stats qnorm
+#' @importFrom stats rnorm
+#' @importFrom stats runif
+#' @importFrom stats rt
+#' @importFrom stats rgamma
+#' @export
+sim.ci.median1 <- function(alpha, n, dist) {
+ zcrit <- qnorm(1 - alpha/2)
+ rep <- 20000
+ o <- round((n - zcrit*sqrt(n))/2)
+ if (o < 1) {o = 1}
+ k <- 0; w <- 0; e1 <- 0; e2 <- 0
+ repeat {
+   k <- k + 1
+   if (dist == 1) {
+     y <- rnorm(n)
+     popmedian <- 0
+     y <- sort(y)
+     ll <- y[o]
+     ul <- y[n - o + 1]
+     w0 <- ul - ll
+     c1 <- as.integer(ll > popmedian)
+     c2 <- as.integer(ul < popmedian)
+     e1 <- e1 + c1
+     e2 <- e2 + c2
+     w <- w + w0
+   } else if (dist == 2) {
+     y <- 3.464*runif(n)
+     popmedian <- 1.732
+     y <- sort(y)
+     ll <- y[o]
+     ul <- y[n - o + 1]
+     w0 <- ul - ll
+     c1 <- as.integer(ll > popmedian)
+     c2 <- as.integer(ul < popmedian)
+     e1 <- e1 + c1
+     e2 <- e2 + c2
+     w <- w + w0
+   } else if (dist == 3) {
+     y <- .7745*rt(n, 5)
+     popmedian <- 0
+     y <- sort(y)
+     ll <- y[o]
+     ul <- y[n - o + 1]
+     w0 <- ul - ll
+     c1 <- as.integer(ll > popmedian)
+     c2 <- as.integer(ul < popmedian)
+     e1 <- e1 + c1
+     e2 <- e2 + c2
+     w <- w + w0
+   } else if (dist == 4) {
+     y <- .5*rgamma(n, 4)
+     popmedian <- 1.837
+     y <- sort(y)
+     ll <- y[o]
+     ul <- y[n - o + 1]
+     w0 <- ul - ll
+     c1 <- as.integer(ll > popmedian)
+     c2 <- as.integer(ul < popmedian)
+     e1 <- e1 + c1
+     e2 <- e2 + c2
+     w <- w + w0
+   } else {
+     y <- rgamma(n, 1)
+     popmedian <- 0.690
+     y <- sort(y)
+     ll <- y[o]
+     ul <- y[n - o + 1]
+     w0 <- ul - ll
+     c1 <- as.integer(ll > popmedian)
+     c2 <- as.integer(ul < popmedian)
+     e1 <- e1 + c1
+     e2 <- e2 + c2
+     w <- w + w0
+   }
+   if (k == rep) {break}
+  }
+  width <- w/rep
+  cov <- 1 - (e1 + e2)/rep
+  out <- t(c(cov, e1/rep, e2/rep, width))
+  colnames(out) <- c("Coverage", "Lower Error", "Upper Error", "Ave CI Width")
+  return(out)
+}
 
 
  
