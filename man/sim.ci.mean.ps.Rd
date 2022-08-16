@@ -46,7 +46,6 @@ distributions. All distributions are scaled to have standard deviations of
 kurtosis are generated using the unonr function in the mnonr package.
 }
 \examples{
-library(mnonr)
 sim.ci.mean.ps(.05, 30, 1.5, .7, 4, 5)
 
 # Should return (within sampling error):
