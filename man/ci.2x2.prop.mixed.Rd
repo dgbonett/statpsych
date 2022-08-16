@@ -26,12 +26,12 @@ Returns a 7-row matrix (one row per effect). The columns are:
 }
 }
 \description{
-Computes adjusted Wald confidence intervals and p-values for the AB
+Computes adjusted Wald confidence intervals and tests for the AB
 interaction effect, main effect of A, main efect of B, simple main effects
 of A, and simple main effects of B in a 2x2 mixed factorial design with a
 dichotomous response variable where Factor A is a within-subjects factor
 and Factor B is a between-subjects factor. The 4x1 vector of frequency
-counts for Factor A within each group is \link{f00, f01, f10, f11} where fij is
+counts for Factor A within each group is f00, f01, f10, f11 where fij is
 the number of participants with a response of i = 0 or 1 at level 1 of
 Factor A and a response of j = 0 or 1 at level 2 of Factor A.
 }

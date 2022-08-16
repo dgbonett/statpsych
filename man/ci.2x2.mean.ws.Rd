@@ -31,7 +31,7 @@ Returns a 7-row matrix (one row per effect). The columns are:
 }
 }
 \description{
-Computes confidence intervals and p-values for the AB interaction effect,
+Computes confidence intervals and tests for the AB interaction effect,
 main effect of A, main efect of B, simple main effects of A, and simple main
 effects of B in a 2x2 within-subjects design with a quantitative response
 variable.

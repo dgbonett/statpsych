@@ -26,7 +26,7 @@ Returns a 7-row matrix (one row per effect). The columns are:
 }
 }
 \description{
-Computes adjusted Wald confidence intervals and p-values for the AB
+Computes adjusted Wald confidence intervals and tests for the AB
 interaction effect, main effect of A, main efect of B, simple main effects
 of A, and simple main effects of B in a 2x2 between-subjects factorial
 design with a dichotomous response variable. The input vector of
