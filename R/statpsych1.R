@@ -4689,7 +4689,7 @@ sim.ci.mean.ps <- function(alpha, n, sd.ratio, cor, dist1, dist2, rep) {
 #' @importFrom stats rt
 #' @importFrom stats rgamma
 #' @export
-sim.ci.median1 <- function(alpha, n, dist) {
+sim.ci.median1 <- function(alpha, n, dist, rep) {
  zcrit <- qnorm(1 - alpha/2)
  o <- round((n - zcrit*sqrt(n))/2)
  if (o < 1) {o = 1}
