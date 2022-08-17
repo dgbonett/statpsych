@@ -1478,14 +1478,13 @@ random.yx <- function(n, my, mx, sdy, sdx, cor, dec) {
 #'
 #'                               
 #' @description
-#' Performs a computer simulation (20,000 Monte Carlo samples) of confidence
-#' interval performance for a Pearson correlation. A bias adjustment is used
-#' to reduce the bias of the Fisher transformed Pearson correlation. Sample 
-#' data can be generated from bivariate population distributions with five 
-#' different marginal distributions. All distributions are scaled to have 
-#' standard deviations of 1.0 at level 1. Bivariate random data with specified
-#' marginal skewness and kurtosis are generated using the unonr function in
-#' the mnonr package. 
+#' Performs a computer simulation of confidence interval performance for a 
+#' Pearson correlation. A bias adjustment is used to reduce the bias of the
+#' Fisher transformed Pearson correlation. Sample data can be generated 
+#' from bivariate population distributions with five different marginal 
+#' distributions. All distributions are scaled to have standard deviations
+#' of 1.0. Bivariate random data with specified marginal skewness and
+#' kurtosis are generated using the unonr function in the mnonr package. 
 #'
 #'
 #' @param   alpha     alpha level for 1-alpha confidence
@@ -1498,6 +1497,7 @@ random.yx <- function(n, my, mx, sdy, sdx, cor, dec) {
 #' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
 #' * 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
 #' * 5 = large skew (skewness = 2 and excess kurtosis = 6)
+#' @param   rep       number of Monte Carlo samples
 #'  
 #' 
 #' @return
@@ -1509,8 +1509,7 @@ random.yx <- function(n, my, mx, sdy, sdx, cor, dec) {
 #'
 #'
 #' @examples
-#' library(mnonr)
-#' sim.ci.cor(.05, 30, .7, 4, 5)
+#' sim.ci.cor(.05, 30, .7, 4, 5, 1000)
 #'
 #' # Should return (within sampling error):
 #' #      Coverage Lower Error Upper Error Ave CI Width
@@ -1520,9 +1519,8 @@ random.yx <- function(n, my, mx, sdy, sdx, cor, dec) {
 #' @importFrom stats qt
 #' @importFrom mnonr unonr
 #' @export
-sim.ci.cor <- function(alpha, n, cor, dist1, dist2) {
+sim.ci.cor <- function(alpha, n, cor, dist1, dist2, rep) {
  zcrit <- qnorm(1 - alpha/2)
- rep <- 20000
  if (dist1 == 1) {
    skw1 <- 0; kur1 <- 0
  } else if (dist1 == 2) {
@@ -1579,13 +1577,12 @@ sim.ci.cor <- function(alpha, n, cor, dist1, dist2) {
 #' correlation
 #'
 #' @description
-#' Performs a computer simulation (20,000 Monte Carlo samples) of confidence
-#' interval performance for a Spearman correlation. Sample data can be 
-#' generated from bivariate population distributions with five different
-#' marginal distributions. All distributions are scaled to have standard 
-#' deviations of 1.0 at level 1. Bivariate random data with specified marginal
-#' skewness and kurtosis are generated using the unonr function in the mnonr
-#' package. 
+#' Performs a computer simulation of confidence interval performance for a 
+#' Spearman correlation. Sample data can be generated from bivariate population
+#' distributions with five different marginal distributions. All distributions
+#' are scaled to have standard deviations of 1.0. Bivariate random data with 
+#' specified marginal skewness and kurtosis are generated using the unonr 
+#' function in the mnonr package. 
 #'
 #'
 #' @param   alpha     alpha level for 1-alpha confidence
@@ -1598,6 +1595,7 @@ sim.ci.cor <- function(alpha, n, cor, dist1, dist2) {
 #' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
 #' * 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
 #' * 5 = large skew (skewness = 2 and excess kurtosis = 6)
+#' @param   rep      number of Monte Carlo samples
 #'  
 #' 
 #' @return
@@ -1609,8 +1607,7 @@ sim.ci.cor <- function(alpha, n, cor, dist1, dist2) {
 #'
 #'
 #' @examples
-#' library(mnonr)
-#' sim.ci.spear(.05, 30, .7, 4, 5)
+#' sim.ci.spear(.05, 30, .7, 4, 5, 1000)
 #'
 #' # Should return (within sampling error):
 #' #      Coverage Lower Error Upper Error Ave CI Width
@@ -1620,9 +1617,8 @@ sim.ci.cor <- function(alpha, n, cor, dist1, dist2) {
 #' @importFrom stats qt
 #' @importFrom mnonr unonr
 #' @export
-sim.ci.spear <- function(alpha, n, cor, dist1, dist2) {
+sim.ci.spear <- function(alpha, n, cor, dist1, dist2, rep) {
  zcrit <- qnorm(1 - alpha/2)
- rep <- 20000
  if (dist1 == 1) {
    skw1 <- 0; kur1 <- 0
  } else if (dist1 == 2) {
