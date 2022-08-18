@@ -5,7 +5,7 @@
 \title{Simulates confidence interval coverage probability for a paired-samples mean
 difference}
 \usage{
-sim.ci.mean.ps(alpha, n, sd.ratio, cor, dist1, dist2)
+sim.ci.mean.ps(alpha, n, sd.ratio, cor, dist1, dist2, rep)
 }
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
@@ -26,6 +26,8 @@ sim.ci.mean.ps(alpha, n, sd.ratio, cor, dist1, dist2)
 \item 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
 \item 5 = large skew (skewness = 2 and excess kurtosis = 6)
 }}
+
+\item{rep}{number of Monte Carlo samples}
 }
 \value{
 Returns a 1-row matrix. The columns are:
@@ -37,16 +39,16 @@ Returns a 1-row matrix. The columns are:
 }
 }
 \description{
-Performs a computer simulation (20,000 Monte Carlo samples) of confidence
-interval performance for a mean difference in a paired-samples design. Sample
-data within each level of the within-subjects factor group can be generated
-from bivariate population distributions with five different marginal
-distributions. All distributions are scaled to have standard deviations of
-1.0 at level 1. Bivariate random data with specified marginal skewness and
-kurtosis are generated using the unonr function in the mnonr package.
+Performs a computer simulation of confidence interval performance for a mean
+difference in a paired-samples design. Sample data within each level of the
+within-subjects factor group can be generated from bivariate population
+distributions with five different marginal distributions. All distributions
+are scaled to have standard deviations of 1.0 at level 1. Bivariate random
+data with specified marginal skewness and kurtosis are generated using the
+unonr function in the mnonr package.
 }
 \examples{
-sim.ci.mean.ps(.05, 30, 1.5, .7, 4, 5)
+sim.ci.mean.ps(.05, 30, 1.5, .7, 4, 5, 1000)
 
 # Should return (within sampling error):
 #      Coverage Lower Error Upper Error Ave CI Width

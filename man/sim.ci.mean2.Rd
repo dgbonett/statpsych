@@ -5,7 +5,7 @@
 \title{Simulates confidence interval coverage probability for a two-group mean
 difference}
 \usage{
-sim.ci.mean2(alpha, n1, n2, sd.ratio, dist1, dist2)
+sim.ci.mean2(alpha, n1, n2, sd.ratio, dist1, dist2, rep)
 }
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
@@ -26,6 +26,8 @@ sim.ci.mean2(alpha, n1, n2, sd.ratio, dist1, dist2)
 \item 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
 \item 5 = large skew (skewness = 2 and excess kurtosis = 6)
 }}
+
+\item{rep}{number of Monte Carlo samples}
 }
 \value{
 Returns a 1-row matrix. The columns are:
@@ -37,14 +39,14 @@ Returns a 1-row matrix. The columns are:
 }
 }
 \description{
-Performs a computer simulation (20,000 Monte Carlo samples) of separate
-variance and pooled variance confidence interval performance for a mean
-difference in a two-group design. Sample data within each group can be
-generated from five different population distributions. All distributions
-are scaled to have a standard deviation of 1.0 in group 1.
+Performs a computer simulation of separate variance and pooled variance
+confidence interval performance for a mean difference in a two-group design.
+Sample data within each group can be generated from five different
+population distributions. All distributions are scaled to have a standard
+deviation of 1.0 in group 1.
 }
 \examples{
-sim.ci.mean2(.05, 30, 25, 1.5, 4, 5)
+sim.ci.mean2(.05, 30, 25, 1.5, 4, 5, 1000)
 
 # Should return (within sampling error):
 #                             Coverage Lower Error Upper Error Ave CI Width

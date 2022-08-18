@@ -4349,10 +4349,10 @@ etasqr.gen.2way <- function(SSa, SSb, SSab, SSe) {
 #'
 #'                               
 #' @description
-#' Performs a computer simulation (20,000 Monte Carlo samples) of the 
-#' confidence interval performance for a single mean. Sample data can 
-#' be generated from five different population distributions. All 
-#' distributions are scaled to have standard deviations of 1.0.
+#' Performs a computer simulation of the confidence interval performance for a 
+#' single mean. Sample data can be generated from five different population 
+#' distributions. All distributions are scaled to have standard deviations
+#' of 1.0.
 #'
 #'
 #' @param   alpha  alpha level for 1-alpha confidence
@@ -4363,6 +4363,7 @@ etasqr.gen.2way <- function(SSa, SSb, SSab, SSe) {
 #' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
 #' * 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
 #' * 5 = large skew (skewness = 2 and excess kurtosis = 6)
+#' @param   rep    number of Monte Carlo samples
 #'  
 #' 
 #' @return
@@ -4374,7 +4375,7 @@ etasqr.gen.2way <- function(SSa, SSb, SSab, SSe) {
 #'
 #'
 #' @examples
-#' sim.ci.mean1(.05, 40, 4)
+#' sim.ci.mean1(.05, 40, 4, 1000)
 #'
 #' # Should return (within sampling error):
 #' #      Coverage Lower Error Upper Error Ave CI Width
@@ -4387,9 +4388,8 @@ etasqr.gen.2way <- function(SSa, SSb, SSab, SSe) {
 #' @importFrom stats rt
 #' @importFrom stats rgamma
 #' @export
-sim.ci.mean1 <- function(alpha, n, dist) {
+sim.ci.mean1 <- function(alpha, n, dist, rep) {
  tcrit <- qt(1 - alpha/2, n - 1)
- rep <- 20000
  if (dist == 1) {
    y <- matrix(rnorm(rep*n), nrow = rep)
    popmean <- 0
@@ -4430,11 +4430,11 @@ sim.ci.mean1 <- function(alpha, n, dist) {
 #'
 #'                               
 #' @description
-#' Performs a computer simulation (20,000 Monte Carlo samples) of separate 
-#' variance and pooled variance confidence interval performance for a mean  
-#' difference in a two-group design. Sample data within each group can be 
-#' generated from five different population distributions. All distributions
-#' are scaled to have a standard deviation of 1.0 in group 1. 
+#' Performs a computer simulation of separate variance and pooled variance 
+#' confidence interval performance for a mean difference in a two-group design.
+#' Sample data within each group can be generated from five different 
+#' population distributions. All distributions are scaled to have a standard 
+#' deviation of 1.0 in group 1. 
 #'
 #'
 #' @param   alpha     alpha level for 1-alpha confidence
@@ -4448,6 +4448,7 @@ sim.ci.mean1 <- function(alpha, n, dist) {
 #' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
 #' * 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
 #' * 5 = large skew (skewness = 2 and excess kurtosis = 6)
+#' @param   rep       number of Monte Carlo samples
 #'  
 #' 
 #' @return
@@ -4459,7 +4460,7 @@ sim.ci.mean1 <- function(alpha, n, dist) {
 #'
 #'
 #' @examples
-#' sim.ci.mean2(.05, 30, 25, 1.5, 4, 5)
+#' sim.ci.mean2(.05, 30, 25, 1.5, 4, 5, 1000)
 #'
 #' # Should return (within sampling error):
 #' #                             Coverage Lower Error Upper Error Ave CI Width
@@ -4473,10 +4474,9 @@ sim.ci.mean1 <- function(alpha, n, dist) {
 #' @importFrom stats rt
 #' @importFrom stats rgamma
 #' @export
-sim.ci.mean2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2) {
+sim.ci.mean2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2, rep) {
  df1 <- n1 + n2 - 2
  tcrit1 <- qt(1 - alpha/2, df1)
- rep <- 20000
  if (dist1 == 1) {
    y1 <- matrix(rnorm(rep*n1), nrow = rep)
    popmean1 <- 0
@@ -4552,13 +4552,13 @@ sim.ci.mean2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2) {
 #'
 #'                               
 #' @description
-#' Performs a computer simulation (20,000 Monte Carlo samples) of confidence
-#' interval performance for a mean difference in a paired-samples design. Sample 
-#' data within each level of the within-subjects factor group can be generated
-#' from bivariate population distributions with five different marginal
-#' distributions. All distributions are scaled to have standard deviations of 
-#' 1.0 at level 1. Bivariate random data with specified marginal skewness and
-#' kurtosis are generated using the unonr function in the mnonr package. 
+#' Performs a computer simulation of confidence interval performance for a mean 
+#' difference in a paired-samples design. Sample data within each level of the 
+#' within-subjects factor group can be generated from bivariate population
+#' distributions with five different marginal distributions. All distributions
+#' are scaled to have standard deviations of 1.0 at level 1. Bivariate random
+#' data with specified marginal skewness and kurtosis are generated using the
+#' unonr function in the mnonr package. 
 #'
 #'
 #' @param   alpha     alpha level for 1-alpha confidence
@@ -4572,6 +4572,7 @@ sim.ci.mean2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2) {
 #' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
 #' * 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
 #' * 5 = large skew (skewness = 2 and excess kurtosis = 6)
+#' @param   rep       number of Monte Carlo samples
 #'  
 #' 
 #' @return
@@ -4583,7 +4584,7 @@ sim.ci.mean2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2) {
 #'
 #'
 #' @examples
-#' sim.ci.mean.ps(.05, 30, 1.5, .7, 4, 5)
+#' sim.ci.mean.ps(.05, 30, 1.5, .7, 4, 5, 1000)
 #'
 #' # Should return (within sampling error):
 #' #      Coverage Lower Error Upper Error Ave CI Width
@@ -4593,9 +4594,8 @@ sim.ci.mean2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2) {
 #' @importFrom stats qt
 #' @importFrom mnonr unonr
 #' @export
-sim.ci.mean.ps <- function(alpha, n, sd.ratio, cor, dist1, dist2) {
+sim.ci.mean.ps <- function(alpha, n, sd.ratio, cor, dist1, dist2, rep) {
  tcrit <- qt(1 - alpha/2, n - 1)
- rep <- 20000
  if (dist1 == 1) {
    skw1 <- 0; kur1 <- 0
  } else if (dist1 == 2) {
@@ -4650,10 +4650,10 @@ sim.ci.mean.ps <- function(alpha, n, sd.ratio, cor, dist1, dist2) {
 #'
 #'                                      
 #' @description
-#' Performs a computer simulation (20,000 Monte Carlo samples) of the 
-#' confidence interval performance for a single mean. Sample data can 
-#' be generated from five different population distributions. All 
-#' distributions are scaled to have standard deviations of 1.0.
+#' Performs a computer simulation of the confidence interval performance for 
+#' a single median. Sample data can be generated from five different 
+#' population distributions. All distributions are scaled to have standard 
+#' deviations of 1.0.
 #'
 #'
 #' @param   alpha  alpha level for 1-alpha confidence
@@ -4664,6 +4664,7 @@ sim.ci.mean.ps <- function(alpha, n, sd.ratio, cor, dist1, dist2) {
 #' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
 #' * 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
 #' * 5 = large skew (skewness = 2 and excess kurtosis = 6)
+#' @param  rep     number of Monte Carlo samples
 #'  
 #' 
 #' @return
@@ -4675,7 +4676,7 @@ sim.ci.mean.ps <- function(alpha, n, sd.ratio, cor, dist1, dist2) {
 #'
 #'
 #' @examples
-#' sim.ci.median1(.05, 20, 5)
+#' sim.ci.median1(.05, 20, 5, 1000)
 #'
 #' # Should return (within sampling error):
 #' #      Coverage Lower Error Upper Error Ave CI Width
@@ -4688,9 +4689,8 @@ sim.ci.mean.ps <- function(alpha, n, sd.ratio, cor, dist1, dist2) {
 #' @importFrom stats rt
 #' @importFrom stats rgamma
 #' @export
-sim.ci.median1 <- function(alpha, n, dist) {
+sim.ci.median1 <- function(alpha, n, dist, rep) {
  zcrit <- qnorm(1 - alpha/2)
- rep <- 20000
  o <- round((n - zcrit*sqrt(n))/2)
  if (o < 1) {o = 1}
  k <- 0; w <- 0; e1 <- 0; e2 <- 0
