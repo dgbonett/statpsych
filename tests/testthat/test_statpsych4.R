@@ -1,95 +1,95 @@
 library(statpsych)
-# 
-# 
-# test_that("ci.cramer returns valid matrix", {
-#   colnames_expected <- c(
-#     "Cramer's V",     "SE",     "LL",     "UL"
-#   )
-#   
-#   res <- ci.cramer(.05, 19.21, 2, 3, 200)
-#   
-#   testthat::expect_equal(class(res), c("matrix", "array"))
-#   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
-#   testthat::expect_equal(colnames(res), colnames_expected)
-# })
-# 
-# 
-# test_that("sim.ci.mean1 returns valid matrix", {
-#   colnames_expected <- c(
-#      "Coverage", "Lower Error", "Upper Error", "Ave CI Width"
-#   )
-# 
-#   res <- sim.ci.mean1(.05, 40, 4)
-# 
-#   testthat::expect_equal(class(res), c("matrix", "array"))
-#   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
-#   testthat::expect_equal(colnames(res), colnames_expected)
-# })
-# 
-# 
-# test_that("sim.ci.mean2 returns valid matrix", {
-#   colnames_expected <- c(
-#     "Coverage", "Lower Error", "Upper Error", "Ave CI Width"
-#   )
-# 
-#   res <- sim.ci.mean2(.05, 30, 25, 1.5, 4, 5)
-# 
-#   testthat::expect_equal(class(res), c("matrix", "array"))
-#   testthat::expect_equal(dim(res), c(2, length(colnames_expected)))
-#   testthat::expect_equal(colnames(res), colnames_expected)
-# })
-# 
-# 
-# test_that("sim.ci.mean.ps returns valid matrix", {
-#   colnames_expected <- c(
-#     "Coverage", "Lower Error", "Upper Error", "Ave CI Width"
-#   )
-# 
-#   res <- sim.ci.mean.ps(.05, 30, 1.5, .7, 4, 5)
-# 
-#   testthat::expect_equal(class(res), c("matrix", "array"))
-#   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
-#   testthat::expect_equal(colnames(res), colnames_expected)
-# })
-# 
-# 
-# test_that("sim.ci.median1 returns valid matrix", {
-#   colnames_expected <- c(
-#     "Coverage", "Lower Error", "Upper Error", "Ave CI Width"
-#   )
-# 
-#   res <- sim.ci.median1(.05, 20, 5)
-# 
-#   testthat::expect_equal(class(res), c("matrix", "array"))
-#   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
-#   testthat::expect_equal(colnames(res), colnames_expected)
-# })
-# 
-# 
-# test_that("sim.ci.cor returns valid matrix", {
-#   colnames_expected <- c(
-#     "Coverage", "Lower Error", "Upper Error", "Ave CI Width"
-#   )
-# 
-#   res <- sim.ci.cor(.05, 30, .7, 4, 5)
-# 
-#   testthat::expect_equal(class(res), c("matrix", "array"))
-#   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
-#   testthat::expect_equal(colnames(res), colnames_expected)
-# })
-# 
-# 
-# test_that("sim.ci.spear returns valid matrix", {
-#   colnames_expected <- c(
-#     "Coverage", "Lower Error", "Upper Error", "Ave CI Width"
-#   )
-# 
-#   res <- sim.ci.spear(.05, 30, .7, 4, 5)
-# 
-#   testthat::expect_equal(class(res), c("matrix", "array"))
-#   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
-#   testthat::expect_equal(colnames(res), colnames_expected)
-# })
+
+
+test_that("ci.cramer returns valid matrix", {
+  colnames_expected <- c(
+    "Cramer's V",     "SE",     "LL",     "UL"
+  )
+
+  res <- ci.cramer(.05, 19.21, 2, 3, 200)
+
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+test_that("sim.ci.mean1 returns valid matrix", {
+  colnames_expected <- c(
+     "Coverage", "Lower Error", "Upper Error", "Ave CI Width"
+  )
+
+  res <- sim.ci.mean1(.05, 40, 4, 100)
+
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+test_that("sim.ci.mean2 returns valid matrix", {
+  colnames_expected <- c(
+    "Coverage", "Lower Error", "Upper Error", "Ave CI Width"
+  )
+
+  res <- sim.ci.mean2(.05, 30, 25, 1.5, 4, 5, 100)
+
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(2, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+test_that("sim.ci.mean.ps returns valid matrix", {
+  colnames_expected <- c(
+    "Coverage", "Lower Error", "Upper Error", "Ave CI Width"
+  )
+
+  res <- sim.ci.mean.ps(.05, 30, 1.5, .7, 4, 5, 100)
+
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+test_that("sim.ci.median1 returns valid matrix", {
+  colnames_expected <- c(
+    "Coverage", "Lower Error", "Upper Error", "Ave CI Width"
+  )
+
+  res <- sim.ci.median1(.05, 20, 5, 100)
+
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+test_that("sim.ci.cor returns valid matrix", {
+  colnames_expected <- c(
+    "Coverage", "Lower Error", "Upper Error", "Ave CI Width"
+  )
+
+  res <- sim.ci.cor(.05, 30, .7, 4, 5, 100)
+
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+test_that("sim.ci.spear returns valid matrix", {
+  colnames_expected <- c(
+    "Coverage", "Lower Error", "Upper Error", "Ave CI Width"
+  )
+
+  res <- sim.ci.spear(.05, 30, .7, 4, 5, 100)
+
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
 
 
 test_that("ci.2x2.mean.mixed returns valid matrix", {

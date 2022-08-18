@@ -4,7 +4,7 @@
 \alias{sim.ci.mean1}
 \title{Simulates confidence interval coverage probability for single mean}
 \usage{
-sim.ci.mean1(alpha, n, dist)
+sim.ci.mean1(alpha, n, dist, rep)
 }
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
@@ -19,6 +19,8 @@ sim.ci.mean1(alpha, n, dist)
 \item 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
 \item 5 = large skew (skewness = 2 and excess kurtosis = 6)
 }}
+
+\item{rep}{number of Monte Carlo samples}
 }
 \value{
 Returns a 1-row matrix. The columns are:
@@ -30,13 +32,13 @@ Returns a 1-row matrix. The columns are:
 }
 }
 \description{
-Performs a computer simulation (20,000 Monte Carlo samples) of the
-confidence interval performance for a single mean. Sample data can
-be generated from five different population distributions. All
-distributions are scaled to have standard deviations of 1.0.
+Performs a computer simulation of the confidence interval performance for a
+single mean. Sample data can be generated from five different population
+distributions. All distributions are scaled to have standard deviations
+of 1.0.
 }
 \examples{
-sim.ci.mean1(.05, 40, 4)
+sim.ci.mean1(.05, 40, 4, 1000)
 
 # Should return (within sampling error):
 #      Coverage Lower Error Upper Error Ave CI Width
