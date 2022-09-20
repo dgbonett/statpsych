@@ -4440,7 +4440,7 @@ sim.ci.mean1 <- function(alpha, n, dist, rep) {
 #' @param   alpha     alpha level for 1-alpha confidence
 #' @param   n1        sample size in group 1
 #' @param   n2        sample size in group 2
-#' @param   sd.ratio  ratio of population standard deviations
+#' @param   sd.ratio  ratio of population standard deviations (sd2/sd1)
 #' @param   dist1     type of distribution in group 1 (1, 2, 3, 4, or 5)
 #' @param   dist2     type of distribution in group 2 (1, 2, 3, 4, or 5)
 #' * 1 = Gaussian (skewness = 0 and excess kurtosis = 0) 
