@@ -1095,7 +1095,7 @@ ci.lc.stdmean.ws <- function(alpha, m, sd, cor, n, q) {
 #'
 #' @return 
 #' Returns a 1-row matrix. The columns are:
-#' * MAD - estimated mean absolute deviation
+#' * Estimate - estimated mean absolute deviation
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #'
@@ -1110,8 +1110,8 @@ ci.lc.stdmean.ws <- function(alpha, m, sd, cor, n, q) {
 #' ci.mad1(.05, y)
 #'
 #' # Should return:
-#' #       MAD       LL       UL
-#' # [1,] 12.5 7.962667 19.62282
+#' #       Estimate       LL       UL
+#' # [1,]      12.5 7.962667 19.62282
 #'
 #'
 #' @importFrom stats qnorm
@@ -1129,7 +1129,7 @@ ci.mad1 <- function(alpha, y) {
  ll <- exp(log(c*mad) - z*se)
  ul <- exp(log(c*mad) + z*se)
  out <- t(c(c*mad, ll, ul))
- colnames(out) <- c("MAD", "LL", "UL")
+ colnames(out) <- c("Estimate", "LL", "UL")
  return(out)
 }
 
@@ -1284,7 +1284,7 @@ ci.ratio.mad.ps <- function(alpha, y1, y2) {
 #'
 #' @return 
 #' Returns a 1-row matrix. The columns are:
-#' * COD - estimated coefficient of dispersion
+#' * Estimate - estimated coefficient of dispersion
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #'
@@ -1299,8 +1299,8 @@ ci.ratio.mad.ps <- function(alpha, y1, y2) {
 #' ci.cod1(.05, y)
 #'
 #' # Should return:
-#' #            COD        LL       UL
-#' # [1,] 0.5921053 0.3813259 1.092679
+#' #        Estimate        LL       UL
+#' # [1,]  0.5921053 0.3813259 1.092679
 #'
 #'
 #' @importFrom stats qnorm
@@ -1336,7 +1336,7 @@ ci.cod1 <-function(alpha, y) {
  LL = exp(L1 - U2)
  UL = exp(U1 - L2)
  out = t(c(cod, LL, UL))
- colnames(out) = c("COD", "LL", "UL")
+ colnames(out) = c("Eestimate", "LL", "UL")
  return(out)
 }
 
@@ -1452,7 +1452,7 @@ ci.cod2 <-function(alpha, y1, y2) {
 #'
 #' @return 
 #' Returns a 1-row matrix. The columns are:
-#' * Median - estimated median
+#' * Estimate - estimated median
 #' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -1468,8 +1468,8 @@ ci.cod2 <-function(alpha, y1, y2) {
 #' ci.median1(.05, y)
 #'
 #' # Should return:
-#' #      Median       SE LL UL
-#' # [1,]     20 4.270922 10 30
+#' #      Estimate       SE LL UL
+#' # [1,]       20 4.270922 10 30
 #'
 #'
 #' @importFrom stats qnorm
@@ -1493,7 +1493,7 @@ ci.median1 <- function(alpha, y) {
  z0 <- qnorm(1 - p)
  se <- (ul1 - ll1)/(2*z0)
  out <- t(c(median, se, ll, ul))
- colnames(out) <- c("Median", "SE", "LL", "UL")
+ colnames(out) <- c("Estimate", "SE", "LL", "UL")
  return(out)
 }
 
