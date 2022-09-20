@@ -502,7 +502,7 @@ ci.spear2 <- function(alpha, cor1, cor2, n1, n2) {
 #'
 #' @return 
 #' Returns a 1-row matrix. The columns are:
-#' * MAPE - estimated mean absolute prediction error
+#' * Estimate - estimated mean absolute prediction error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #' 
@@ -513,8 +513,8 @@ ci.spear2 <- function(alpha, cor1, cor2, n1, n2) {
 #' ci.mape(.05, r, 1)
 #'
 #' # Should return:
-#' #        MAPE       LL       UL
-#' # [1,] 2.3744 1.751678 3.218499
+#' #       Estimate       LL       UL
+#' # [1,]    2.3744 1.751678 3.218499
 #'  
 #' 
 #' @importFrom stats qnorm
