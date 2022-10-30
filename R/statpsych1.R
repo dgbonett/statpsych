@@ -2834,16 +2834,17 @@ size.ci.mean2 <- function(alpha, var, w, R) {
 }
 
 
-#  size.ci.stdmean2 ========================================================== 
+#  size.ci.stdmean2 ===========================================================
 #' Sample size for a 2-group standardized mean difference confidence interval
 #'
 #'
 #' @description
-#' Computes the sample size in each group required to estimate a population 
-#' standardized mean difference with desired confidence interval precision 
-#' in a 2-group design. Set the standardized mean difference planning value 
-#' to the largest value within a plausible range for a conservatively large 
-#' sample size. Set R = 1 for equal sample sizes.
+#' Computes the sample size per group required to estimate two types of 
+#' population standardized mean differences (unweighted standardizer and single
+#' group standardizer) with desired confidence interval precision in a 2-group 
+#' design. Set the standardized mean difference planning value to the largest 
+#' value within a plausible range for a conservatively large sample size. Set
+#' R = 1 for equal sample sizes.
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -2857,25 +2858,31 @@ size.ci.mean2 <- function(alpha, var, w, R) {
 #'
 #'
 #' @return 
-#' Returns the required sample size for each group
+#' Returns the required sample size per each group for each standardizer
 #'
 #'
 #' @examples
 #' size.ci.stdmean2(.05, .75, .5, 1)
 #'
 #' # Should return:
-#' #       n1   n2
-#' # [1,] 132  132
+#' #                              n1  n2
+#' # Unweighted standardizer:    132 132
+#' # Single group standardizer:  141 141
 #'  
 #' 
 #' @importFrom stats qnorm
 #' @export
 size.ci.stdmean2 <- function(alpha, d, w, R) {
  z <- qnorm(1 - alpha/2)
- n1 <- ceiling((d^2*(1 + R)/(2*R) + 4*(1 + R)/R)*(z/w)^2)
- n2 <- ceiling(R*n1)
- out <- t(c(n1, n2))
+ n11 <- ceiling((d^2*(1 + R)/(2*R) + 4*(1 + R)/R)*(z/w)^2)
+ n12 <- ceiling(R*n11)
+ n21 <- ceiling((2*d^2*(1 + R)/(2*R) + 4*(1 + R)/R)*(z/w)^2)
+ n22 <- ceiling(R*n21)
+ out1 <- t(c(n11, n12))
+ out2 <- t(c(n21, n22))
+ out <- rbind(out1, out2)
  colnames(out) <- c("n1", "n2")
+ rownames(out) <- c("Unweighted standardizer:", "Single group standardizer:")
  return(out)
 }
 
@@ -3065,12 +3072,13 @@ size.ci.mean.ps <- function(alpha, var, cor, w) {
 #'
 #'
 #' @description
-#' Computes the sample size required to estimate a population standardized 
-#' mean difference with desired confidence interval precision in a 
-#' paired-samples design. Set the standardized mean difference planning value 
-#' to the largest value within a plausible range for a conservatively large 
-#' sample size. Set the pearson correlation planning value to the smallest
-#' value within a plausible range for a conservatively large sample size.
+#' Computes the sample size required to estimate two types of population 
+#' standardized mean differences (unweighted standardizer and single group
+#' standardizer) with desired confidence interval precision in a paired-samples
+#' design. For a conservatively large sample size, set the standardized mean 
+#' difference planning value to the largest value within a plausible range and 
+#' set the Pearson correlation planning value to the smallest value within a 
+#' plausible range.
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -3084,24 +3092,29 @@ size.ci.mean.ps <- function(alpha, var, cor, w) {
 #'
 #'
 #' @return 
-#' Returns the required sample size 
+#' Returns the required sample size for each standardizer 
 #'
 #'
 #' @examples
 #' size.ci.stdmean.ps(.05, 1, .65, .6)
 #'
 #' # Should return:
-#' #      Sample size
-#' # [1,]          46
+#' #                            Sample Size
+#' # Unweighted standardizer:            46
+#' # Single group standardizer:          52
 #'  
 #' 
 #' @importFrom stats qnorm
 #' @export
 size.ci.stdmean.ps <- function(alpha, d, cor, w) {
  z <- qnorm(1 - alpha/2)
- n <- ceiling(4*(d^2*(1 + cor^2)/4 + 2*(1 - cor))*(z/w)^2)
- out <- matrix(n, nrow = 1, ncol = 1)
+ n1 <- ceiling((d^2*(1 + cor^2) + 8*(1 - cor))*(z/w)^2)
+ n2 <- ceiling((2*d^2 + 8*(1 - cor))*(z/w)^2)
+ out1 <- n1
+ out2 <- n2
+ out <- rbind(out1, out2)
  colnames(out) <- "Sample size"
+ rownames(out) <- c("Unweighted standardizer:", "Single group standardizer:")
  return(out)	
 }
 
