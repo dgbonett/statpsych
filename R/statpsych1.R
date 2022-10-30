@@ -2976,20 +2976,22 @@ size.ci.lc.mean.bs <- function(alpha, var, w, v) {
 
 
 #  size.ci.lc.stdmean.bs ====================================================== 
-#' Sample size for a between-subjects standardized mean linear contrast 
+#' Sample size for a between-subjects standardized linear contrast of means
 #' confidence interval
 #'
-#'
+#'                     
 #' @description
-#' Computes the sample size in each group (assuming equal sample sizes) 
-#' required to estimate a standardized linear contrast of population means 
-#' with desired confidence interval precision in a between-subjects design.
-#' Set the standardized mean contrast planning value to the largest value 
-#' within a plausible range for a conservatively large sample size. 
+#' Computes the sample size per group (assuming equal sample sizes) 
+#' required to estimate two types of standardized linear contrasts of 
+#' population means (unweighted average standardizer and single group
+#' standardizer) with desired confidence interval precision in a 
+#' between-subjects design. Set the standardized linear contrast of
+#' means to the largest value within a plausible range for a conservatively
+#' large sample size. 
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
-#' @param  d      planning value of standardized linear contrast  
+#' @param  d      planning value of standardized linear contrast of means 
 #' @param  w      desired confidence interval width
 #' @param  v      vector of between-subjects contrast coefficients 
 #'
@@ -2999,7 +3001,7 @@ size.ci.lc.mean.bs <- function(alpha, var, w, v) {
 #'
 #'
 #' @return 
-#' Returns the required sample size for each group
+#' Returns the required sample size per group for each standardizer
 #'
 #'
 #' @examples
@@ -3007,8 +3009,9 @@ size.ci.lc.mean.bs <- function(alpha, var, w, v) {
 #' size.ci.lc.stdmean.bs(.05, 1, .6, v)
 #'
 #' # Should return:
-#' #      Sample size per group
-#' # [1,]                    49
+#' #                            Sample size per group
+#' # Unweighted standardizer:                      49
+#' # Single group standardizer:                    65
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -3016,9 +3019,13 @@ size.ci.lc.mean.bs <- function(alpha, var, w, v) {
 size.ci.lc.stdmean.bs <- function(alpha, d, w, v) {
  z <- qnorm(1 - alpha/2)
  a <- length(v)
- n <- ceiling((2*d^2/a + 4*(t(v)%*%v))*(z/w)^2)
- out <- matrix(n, nrow = 1, ncol = 1)
+ n1 <- ceiling((2*d^2/a + 4*(t(v)%*%v))*(z/w)^2)
+ n2 <- ceiling((2*d^2 + 4*(t(v)%*%v))*(z/w)^2)
+ out1 <- n1
+ out2 <- n2
+ out <- rbind(out1, out2)
  colnames(out) <- "Sample size per group"
+ rownames(out) <- c("Unweighted standardizer:", "Single group standardizer:")
  return(out)	
 }
 
