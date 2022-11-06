@@ -3152,48 +3152,58 @@ size.ci.ratio.mean.ps <- function(alpha, var, m1, m2, cor, r) {
 }
 
 
-#  size.ci.lc.mean.ws ========================================================
-#' Sample size for a within-subjects mean linear contrast confidence interval
+#  size.ci.lc.stdmean.ws ======================================================
+#' Sample size for a within-subjects standardized linear contrast of means
+#' confidence interval
 #'
 #'
 #' @description
-#' Computes the sample size required to estimate a linear contrast of 
-#' population means with desired confidence interval precision in a 
-#' within-subjects design. Set the variance planning value to the  
-#' largest value within a plausible range for a conservatively large  
-#' sample size. Set the Pearson correlation planning value to the 
-#' smallest value within a plausible range for a conservatively 
-#' large sample size. 
+#' Computes the sample size required to estimate two types of standardized 
+#' linear contrasts of population means (unweighted standardizer and single
+#' level standardizer) with desired confidence interval precision in a 
+#' within-subjects design. For a conservatively large sample size, set the 
+#' standardized linear contrast of means planning value to the largest value
+#' within a plausible range, and set the Pearson correlation planning value
+#' to the smallest value within a plausible range.
 #'
 #'
-#' @param  alpha  alpha level for 1-alpha confidence 
-#' @param  var    planning value of average variance of the measurements  
+#' @param  alpha  alpha level for 1-alpha confidence
+#' @param  d      planning value of standardized linear contrast  
 #' @param  cor    planning value of average correlation between measurements
 #' @param  w      desired confidence interval width
 #' @param  q      vector of within-subjects contrast coefficients 
 #'
 #'
+#' @references
+#' \insertRef{Bonett2009}{statpsych}
+#'
+#'
 #' @return 
-#' Returns the required sample size 
+#' Returns the required sample size for each standardizer
 #'
 #'
 #' @examples
 #' q <- c(.5, .5, -.5, -.5)
-#' size.ci.lc.mean.ws(.05, 265, .8, 10, q)
+#' size.ci.lc.stdmean.ws(.05, 1, .7, .6, q)
 #'
 #' # Should return:
-#' #      Sample size
-#' # [1,]          11
+#' #                            Sample size
+#' # Unweighted standardizer:            26
+#' # Single level standardizer:          35
 #'  
 #' 
 #' @importFrom stats qnorm
 #' @export
-size.ci.lc.mean.ws <- function(alpha, var, cor, w, q) {
+size.ci.lc.stdmean.ws <- function(alpha, d, cor, w, q) {
  z <- qnorm(1 - alpha/2)
- k <- length(q)
- n <- ceiling(4*(1 - cor)*var*(t(q)%*%q)*(z/w)^2 + z^2/2)
- out <- matrix(n, nrow = 1, ncol = 1)
+ a <- length(q)
+ n1 <- ceiling((2*d^2*(1 + (a - 1)*cor^2)/a + 4*(1 - cor)*(t(q)%*%q))*(z/w)^2)
+ n2 <- ceiling((2*d^2 + 4*(1 - cor)*(t(q)%*%q))*(z/w)^2)
+ out1 <- n1
+ out2 <- n2
+ out <- rbind(out1, out2)
  colnames(out) <- "Sample size"
+ rownames(out) <- c("Unweighted standardizer:", "Single level standardizer:")
  return(out)
 }
 
