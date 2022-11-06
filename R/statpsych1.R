@@ -737,25 +737,25 @@ ci.stdmean.strat <- function(alpha, m1, m2, sd1, sd2, n1, n2, p1) {
 #' Confidence interval for a standardized linear contrast of means in a 
 #' between-subjects design
 #'
-#'
+#'              
 #' @description
 #' Computes confidence intervals for a population standardized linear contrast 
-#' of means in a between-subjects design. The square root weighted variance 
-#' standardizer is recommended in 2-group nonexperimental designs with simple 
-#' random sampling. The square root unweighted variance standardizer is 
-#' recommended in 2-group experimental designs. Equality of variances is not
-#' assumed.
+#' of means in a between-subjects design. The unweighted standardizer is 
+#' recommended in experimental designs. The weighted standardizer is
+#' recommended in nonexperimental designs with simple random sampling. The  
+#' group 1 standardizer is useful in both experimental and nonexperimental
+#' designs. Equality of variances is not assumed.
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
-#' @param  m      vector of group estimated means
-#' @param  sd     vector of group estimated standard deviation
+#' @param  m      vector of estimated group means
+#' @param  sd     vector of estimated group standard deviation
 #' @param  n      vector of sample sizes
 #' @param  v      vector of between-subjects contrast coefficients
 #'
 #'
 #' @return 
-#' Returns a 2-row matrix. The columns are:
+#' Returns a 3-row matrix. The columns are:
 #' * Estimate - bias adjusted standardized linear contrast
 #' * SE - standard error
 #' * LL - lower limit of the confidence interval
@@ -777,6 +777,7 @@ ci.stdmean.strat <- function(alpha, m1, m2, sd1, sd2, n1, n2, p1) {
 #' #                           Estimate        SE        LL         UL
 #' # Unweighted standardizer: -1.273964 0.3692800 -2.025039 -0.5774878
 #' # Weighted standardizer:   -1.273964 0.3514511 -1.990095 -0.6124317
+#' # Group 1 standardizer:    -1.273810 0.4849842 -2.343781 -0.4426775
 #'
 #'
 #' @importFrom stats qnorm
@@ -787,12 +788,17 @@ ci.lc.stdmean.bs <- function(alpha, m, sd, n, v) {
  a <- length(m)
  s <- sqrt(sum(var)/a)
  df <- sum(n) - a
- adj <- 1 - 3/(4*df - 1)
+ n1 <- matrix(n, 1, a)[1,1]
+ s1 <- matrix(sd, 1, a)[1,1]
+ adj1 <- 1 - 3/(4*df - 1)
+ adj2 <- 1 - 3/(4*n1 - 5)
  sp <- sqrt(sum((n - 1)*var)/df)
  est1 <- (t(v)%*%m)/s
  est2 <- (t(v)%*%m)/sp
- est1u <- adj*est1
- est2u <- adj*est2
+ est3 <- (t(v)%*%m)/s1 
+ est1u <- adj1*est1
+ est2u <- adj1*est2
+ est3u <- adj2*est3
  a1 <- est1^2/(2*a^2*s^4)
  a2 <- a1*sum((var^2/(n - 1)))
  a3 <- sum((v^2*var/(n - 1)))/s^2
@@ -805,11 +811,17 @@ ci.lc.stdmean.bs <- function(alpha, m, sd, n, v) {
  se2 <- sqrt(a2 + a3)
  ll2 <- est2 - z*se2
  ul2 <- est2 + z*se2
+ a1 <- est3^2/(2*n1 - 2)
+ a2 <- sum((v^2*var/(n - 1)))/s1^2
+ se3 <- sqrt(a1 + a2)
+ ll3 <- est3 - z*se3
+ ul3 <- est3 + z*se3
  out1 <- t(c(est1u, se1, ll1, ul1))
  out2 <- t(c(est2u, se2, ll2, ul2))
- out <- rbind(out1, out2)
+ out3 <- t(c(est3u, se3, ll3, ul3))
+ out <- rbind(out1, out2, out3)
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
- rownames(out) <- c("Unweighted standardizer:", "Weighted standardizer:")
+ rownames(out) <- c("Unweighted standardizer:", "Weighted standardizer:", "Group 1 standardizer:")
  return(out)
 }
 
