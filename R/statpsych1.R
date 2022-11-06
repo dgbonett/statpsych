@@ -1011,17 +1011,18 @@ ci.stdmean.ps <- function(alpha, m1, m2, sd1, sd2, cor, n) {
  return(out)
 }
 
+
 #  ci.lc.stdmean.ws ==========================================================
 #' Confidence interval for a standardized linear contrast of means in a
 #' within-subjects design
 #'
-#'
+#'                        
 #' @description
-#' Computes a confidence interval for a population standardized linear 
-#' contrast of means in a within-subjects design. A square root unweighted
-#' variance standardizer is used. Equality of variances is not assumed but 
-#' the correlations among the repeated measures are assumed to be 
-#' approximately equal.
+#' Computes confidence intervals for two types of population standardized 
+#' linear contrast of means (unweighted standardizer and level 1 standardizer)
+#' in a within-subjects design. Equality of variances is not assumed, but the
+#' correlations among the repeated measures are assumed to be approximately 
+#' equal.
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -1033,7 +1034,7 @@ ci.stdmean.ps <- function(alpha, m1, m2, sd1, sd2, cor, n) {
 #'
 #'
 #' @return 
-#' Returns a 1-row matrix. The columns are:
+#' Returns a 2-row matrix. The columns are:
 #' * Estimate - bias adjusted standardized linear contrast
 #' * SE - standard error
 #' * LL - lower limit of the confidence interval
@@ -1051,8 +1052,9 @@ ci.stdmean.ps <- function(alpha, m1, m2, sd1, sd2, cor, n) {
 #' ci.lc.stdmean.ws(.05, m, sd, .672, 20, q)
 #'
 #' # Should return:
-#' #       Estimate        SE        LL        UL
-#' # [1,] -1.266557 0.1860897 -1.665992 -0.936534
+#' #                           Estimate        SE        LL         UL
+#' # Unweighted standardizer: -1.266557 0.2096351 -1.712140 -0.8903860
+#' # Level 1 standardizer:    -1.337500 0.2662156 -1.915002 -0.8714561
 #'
 #'
 #' @importFrom stats qnorm
@@ -1061,20 +1063,35 @@ ci.lc.stdmean.ws <- function(alpha, m, sd, cor, n, q) {
  z <- qnorm(1 - alpha/2)
  a <- length(m)
  df <- n - 1
- adj <- sqrt((n - 2)/df)
+ s1 <- matrix(sd, 1, a)[1,1]
+ adj1 <- sqrt((n - 2)/df)
+ adj2 <- 1 - 3/(4*n - 5)
  s <- sqrt(sum(sd^2)/a)
- est <- (t(q)%*%m)/s
- estu <- adj*est
- v1 <- est^2/(2*a^2*s^4*df)
+ est1 <- (t(q)%*%m)/s
+ est1u <- adj1*est1
+ v1 <- est1^2/(2*a^2*s^4*df)
  v2 <- sum(sd^4)
- v3 <- cor^2*t(sd^2)%*%sd^2 
+ v0 <- sd^2%*%t(sd^2)
+ v3 <- cor^2*sum((v0 - diag(diag(v0))))
+ # error in v3 formula corrected in version 1.3
  v4 <- sum(q^2*sd^2)
  v5 <- cor*t(q*sd)%*%(q*sd)
- se <- sqrt(v1*(v2 + v3) + (v4 - v5)/(df*s^2))
- ll <- est - z*se
- ul <- est + z*se
- out <- t(c(estu, se, ll, ul))
+ se1 <- sqrt(v1*(v2 + v3) + (v4 - v5)/(df*s^2))
+ ll1 <- est1 - z*se1
+ ul1 <- est1 + z*se1
+ est2 <- (t(q)%*%m)/s1
+ est2u <- adj2*est2
+ v1 <- est2^2/(2*df)
+ v4 <- sum(q^2*sd^2)
+ v5 <- cor*t(q*sd)%*%(q*sd)
+ se2 <- sqrt(v1 + (v4 - v5)/(df*s1^2))
+ ll2 <- est2 - z*se2
+ ul2 <- est2 + z*se2
+ out1 <- t(c(est1u, se1, ll1, ul1))
+ out2 <- t(c(est2u, se2, ll2, ul2))
+ out <- rbind(out1, out2)
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- c("Unweighted standardizer:", "Level 1 standardizer:")
  return(out)
 }
 
@@ -3218,18 +3235,19 @@ size.ci.lc.mean.ws <- function(alpha, var, cor, w, q) {
 }
 
 
-#  size.ci.lc.stdmean.ws =======================================================
-#' Sample size for a within-subjects standardized mean linear contrast 
+#  size.ci.lc.stdmean.ws ===================================================
+#' Sample size for a within-subjects standardized linear contrast of means
 #' confidence interval
 #'
 #'
 #' @description
-#' Computes the sample size required to estimate a standardized linear 
-#' contrast of population means with desired confidence interval precision
-#' in a within-subjects design. Set the standardized mean difference planning 
-#' value to the largest value within a plausible range for a conservatively 
-#' large sample size. Set the pearson correlation planning value to the smallest
-#' value within a plausible range for a conservatively large sample size.
+#' Computes the sample size required to estimate two types of standardized 
+#' linear contrasts of population means (unweighted standardizer and single
+#' level standardizer) with desired confidence interval precision in a 
+#' within-subjects design. For a conservatively large sample size, set the 
+#' standardized linear contrast of means planning value to the largest value
+#' within a plausible range, and set the Pearson correlation planning value
+#' to the smallest value within a plausible range.
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -3244,7 +3262,7 @@ size.ci.lc.mean.ws <- function(alpha, var, cor, w, q) {
 #'
 #'
 #' @return 
-#' Returns the required sample size 
+#' Returns the required sample size for each standardizer
 #'
 #'
 #' @examples
@@ -3252,8 +3270,9 @@ size.ci.lc.mean.ws <- function(alpha, var, cor, w, q) {
 #' size.ci.lc.stdmean.ws(.05, 1, .7, .6, q)
 #'
 #' # Should return:
-#' #      Sample size
-#' # [1,]          26
+#' #                            Sample size
+#' # Unweighted standardizer:            26
+#' # Single level standardizer:          35
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -3261,9 +3280,13 @@ size.ci.lc.mean.ws <- function(alpha, var, cor, w, q) {
 size.ci.lc.stdmean.ws <- function(alpha, d, cor, w, q) {
  z <- qnorm(1 - alpha/2)
  a <- length(q)
- n <- ceiling(4*(d^2*(1 + (a - 1)*cor^2)/(2*a) + (1 - cor)*(t(q)%*%q))*(z/w)^2)
- out <- matrix(n, nrow = 1, ncol = 1)
+ n1 <- ceiling((2*d^2*(1 + (a - 1)*cor^2)/a + 4*(1 - cor)*(t(q)%*%q))*(z/w)^2)
+ n2 <- ceiling((2*d^2 + 4*(1 - cor)*(t(q)%*%q))*(z/w)^2)
+ out1 <- n1
+ out2 <- n2
+ out <- rbind(out1, out2)
  colnames(out) <- "Sample size"
+ rownames(out) <- c("Unweighted standardizer:", "Single level standardizer:")
  return(out)
 }
 
