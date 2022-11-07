@@ -376,7 +376,7 @@ ci.pbcor <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  y	  vector of y scores 
-#' @param  x	  vector of x scores
+#' @param  x	  vector of x scores (paired with y)
 #'
 #'
 #' @return 
@@ -950,6 +950,73 @@ ci.rsqr <- function(alpha, r2, s, n) {
  out <- t(c(r2, adj, ll, ul))
  colnames(out) <- c("R-squared", "adj R-squared", "LL", "UL")
  return(out)
+}
+
+
+#  ci.theil ===================================================================
+#' Theil-Sen estimate and confidence interval for slope
+#'
+#'                                 
+#' @description
+#' Computes a Theil-Sen estimate and distribution-free confidence interval 
+#' for the slope of a simple linear regression model. An approximate 
+#' standard error is recovered from the confidence interval.
+#'
+#'
+#' @param   alpha   alpha level for 1-alpha confidence
+#' @param   y       vector of response variable scores
+#' @param   x       vector of predictor variable scores (paired with y)
+#'
+#'
+#' @return
+#' Returns a 1-row matrix. The columns are:
+#' * Estimate - Theil-Sen estimate of population slope
+#' * SE - approximate standard error
+#' * LL - lower limit of confidence interval
+#' * UL - upper limit of confidence interval
+#'
+#'
+#' @references
+#' \insertRef{Hollander1999}{statpsych}
+#'
+#'
+#' @examples
+#' y <- c(21, 4, 9, 12, 35, 18, 10, 22, 24, 1, 6, 8, 13, 16, 19)
+#' x <- c(67, 28, 30, 28, 52, 40, 25, 37, 44, 10, 14, 20, 28, 40, 51)
+#' ci.theil(.05, y, x)
+#'
+#' # Should return:
+#' #      Estimate        SE        LL   UL
+#' # [1,]      0.5 0.1085927 0.3243243 0.75
+#'
+#'
+#' @importFrom stats qnorm
+#' @export
+ci.theil <- function(alpha, y, x) {
+  z <- qnorm(1 - alpha/2)
+  n = length(x)
+  x.p <- t(combn(x,2))
+  y.p <- t(combn(y,2))
+  y.d <- y.p[,1] - y.p[,2]
+  x.d <- x.p[,1] - x.p[,2]
+  s = which(x.d != 0, arr.ind = T)
+  x.diff <- x.d[s]
+  y.diff <- y.d[s]
+  k <- length(x.diff)
+  c = z*sqrt(k*(2*n + 5)/9) 
+  o1 <- floor((k - c)/2)
+  if (o1 < 1) {o1 = 1}
+  o2 <- ceiling((k + c)/2 + 1)
+  if (o2 > k) {o2 = k}
+  b <- y.diff/x.diff
+  b <- sort(b)
+  est <- median(b)
+  ll <- b[o1]
+  ul <- b[o2]
+  se <- (ul - ll)/(2*z)
+  out <- t(c(est, se, ll, ul))
+  colnames(out) = c("Estimate", "SE", "LL", "UL")
+  return(out)
 }
 
 
