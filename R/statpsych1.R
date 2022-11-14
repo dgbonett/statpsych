@@ -4609,7 +4609,7 @@ sim.ci.mean2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2, rep) {
 #' @description
 #' Performs a computer simulation of confidence interval performance for a mean 
 #' difference in a paired-samples design. Sample data within each level of the 
-#' within-subjects factor group can be generated from bivariate population
+#' within-subjects factor can be generated from bivariate population
 #' distributions with five different marginal distributions. All distributions
 #' are scaled to have standard deviations of 1.0 at level 1. Bivariate random
 #' data with specified marginal skewness and kurtosis are generated using the
