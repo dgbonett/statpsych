@@ -4822,6 +4822,262 @@ sim.ci.median1 <- function(alpha, n, dist, rep) {
 }
 
 
+#  sim.ci.median2 =============================================================
+#' Simulates confidence interval coverage probability for a median difference
+#' in a two-group design
+#'
+#'                                          
+#' @description
+#' Performs a computer simulation of the confidence interval performance for a 
+#' difference of medians in a two-group design. Sample data for each group can
+#' be generated from five different population distributions. All distributions
+#' are scaled to have standard deviations of 1.0 in group 1.
+#'
+#' @param   alpha     alpha level for 1-alpha confidence
+#' @param   n1        sample size for group 1
+#' @param   n2        sample size for group 2
+#' @param   sd.ratio  ratio of population standard deviations (sd2/sd1)
+#' @param   dist1     type of distribution (1, 2, 3, 4, or 5) 
+#' @param   dist2     type of distribution (1, 2, 3, 4, or 5) 
+#' * 1 = Gaussian (skewness = 0 and excess kurtosis = 0) 
+#' * 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
+#' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
+#' * 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
+#' * 5 = large skew (skewness = 2 and excess kurtosis = 6)
+#' @param   rep       number of Monte Carlo samples
+#'  
+#' 
+#' @return
+#' Returns a 1-row matrix. The columns are:
+#' * Coverage - Probability of confidence interval including population mean  
+#' * Lower Error - Probability of lower limit greater than population mean
+#' * Upper Error - Probability of upper limit less than population mean
+#' * Ave CI Width - Average confidence interval width
+#'
+#'
+#' @examples
+#' sim.ci.median2(.05, 20, 20, 2, 5, 4, 5000)
+#'
+#' # Should return (within sampling error):
+#' #      Coverage Lower Error Upper Error Ave CI Width
+#' # [1,]    0.952       0.027       0.021     2.368914
+#'
+#'
+#' @importFrom stats qnorm
+#' @importFrom stats rnorm
+#' @importFrom stats runif
+#' @importFrom stats rt
+#' @importFrom stats rgamma
+#' @export
+sim.ci.median2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2, rep) {
+ zcrit <- qnorm(1 - alpha/2)
+ o1 <- round((n1/2 - sqrt(n1)))
+ if (o1 < 1) {o1 = 1}
+ o2 <- round((n2/2 - sqrt(n2)))
+ if (o2 < 1) {o2 = 1}
+ p1 <- pbinom(o1 - 1, size = n1, prob = .5)
+ z01 <- qnorm(1 - p1)
+ p2 <- pbinom(o2 - 1, size = n2, prob = .5)
+ z02 <- qnorm(1 - p2)
+ k <- 0; w <- 0; e1 <- 0; e2 <- 0
+ repeat {
+   k <- k + 1
+   if (dist1 == 1) {
+     y1 <- rnorm(n1)
+     popmedian1 <- 0
+   } else if (dist1 == 2) {
+     y1 <- 3.464*runif(n1)
+     popmedian1 <- 1.732
+   } else if (dist1 == 3) {
+     y1 <- .7745*rt(n1, 5)
+     popmedian1 <- 0
+   } else if (dist1 == 4) {
+     y1 <- .5*rgamma(n1, 4)
+     popmedian1 <- 1.837
+   } else {
+     y1 <- rgamma(n1, 1)
+     popmedian1 <- 0.690
+   }
+   if (dist2 == 1) {
+     y2 <- sd.ratio*rnorm(n2)
+     popmedian2 <- 0
+   } else if (dist2 == 2) {
+     y2 <- sd.ratio*3.464*runif(n2)
+     popmedian2 <- sd.ratio*1.732
+   } else if (dist2 == 3) {
+     y2 <- sd.ratio*.7745*rt(n2, 5)
+     popmedian2 <- 0
+   } else if (dist2 == 4) {
+     y2 <- sd.ratio*.5*rgamma(n2, 4)
+     popmedian2 <- sd.ratio*1.837
+   } else {
+     y2 <- sd.ratio*rgamma(n2, 1)
+     popmedian2 <- sd.ratio*0.690
+   }
+   popdiff <- popmedian1 - popmedian2
+   y1 <- sort(y1)
+   LL1 <- y1[o1]
+   UL1 <- y1[n1 - o1 + 1]
+   median1 <- median(y1)
+   se1 <- (UL1 - LL1)/(2*z01)
+   y2 <- sort(y2)
+   LL2 <- y2[o2]
+   UL2 <- y2[n2 - o2 + 1]
+   median2 <- median(y2)
+   se2 <- (UL2 - LL2)/(2*z02)
+   diff <- median1 - median2
+   se <- sqrt(se1^2 + se2^2)
+   ll <- diff - zcrit*se
+   ul <- diff + zcrit*se
+   w0 <- ul - ll
+   c1 <- as.integer(ll > popdiff)
+   c2 <- as.integer(ul < popdiff)
+   e1 <- e1 + c1
+   e2 <- e2 + c2
+   w <- w + w0
+   if (k == rep) {break}
+  }
+  width <- w/rep
+  cov <- 1 - (e1 + e2)/rep
+  out <- t(c(cov, e1/rep, e2/rep, width))
+  colnames(out) <- c("Coverage", "Lower Error", "Upper Error", "Ave CI Width")
+  return(out)
+}
+
+
+#  sim.ci.median.ps ===========================================================
+#' Simulates confidence interval coverage probability for a median difference
+#' in a paired-samples design
+#'
+#'                               
+#' @description
+#' Performs a computer simulation of confidence interval performance for a 
+#' median difference in a paired-samples design. Sample data within each level
+#' of the within-subjects factor can be generated from bivariate population
+#' distributions with five different marginal distributions. All distributions
+#' are scaled to have standard deviations of 1.0 at level 1. Bivariate random 
+#' data with specified marginal skewness and kurtosis are generated using the
+#' unonr function in the mnonr package. 
+#'
+#' @param   alpha     alpha level for 1-alpha confidence
+#' @param   n         sample size 
+#' @param   sd.ratio  ratio of population standard deviations
+#' @param   cor       population correlation of paired observations
+#' @param   dist1     type of distribution at level 1 (1, 2, 3, 4, or 5)
+#' @param   dist2     type of distribution at level 2 (1, 2, 3, 4, or 5)
+#' * 1 = Gaussian (skewness = 0 and excess kurtosis = 0) 
+#' * 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
+#' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
+#' * 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
+#' * 5 = large skew (skewness = 2 and excess kurtosis = 6)
+#' @param   rep       number of Monte Carlo samples
+#'  
+#' 
+#' @return
+#' Returns a 1-row matrix. The columns are:
+#' * Coverage - probability of confidence interval including population mean  
+#' * Lower Error - probability of lower limit greater than population mean
+#' * Upper Error - probability of upper limit less than population mean
+#' * Ave CI Width - average confidence interval width
+#'
+#'
+#' @examples
+#' sim.ci.median.ps(.05, 30, 1.5, .7, 4, 3, 2000)
+#'
+#' # Should return (within sampling error):
+#' #      Coverage Lower Error Upper Error Ave CI Width
+#' # [1,]    0.961       0.026       0.013    0.9435462
+#'
+#'
+#' @importFrom stats qnorm
+#' @importFrom mnonr unonr
+#' @export
+sim.ci.median.ps <- function(alpha, n, sd.ratio, cor, dist1, dist2, rep) {
+ zcrit <- qnorm(1 - alpha/2)
+ o <- round(n/2 - sqrt(n))
+ if (o < 1) {o = 1}
+ p <- pbinom(o - 1, size = n, prob = .5)
+ z0 <- qnorm(1 - p)
+ if (dist1 == 1) {
+   skw1 <- 0; kur1 <- 0
+   popmedian1 <- 0
+ } else if (dist1 == 2) {
+   skw1 <- 0; kur1 <- -1.2
+   popmedian1 <- 0
+ } else if (dist1 == 3) {
+   skw1 <- 0; kur1 <- 6
+   popmedian1 <- 0
+ } else if (dist1 == 4) {
+   skw1 <- .75; kur1 <- .86
+   popmedian1 <- -.163
+ } else {
+   skw1 <- 1.41; kur1 <- 3
+   popmedian1 <- -.313
+ }
+ if (dist2 == 1) {
+   skw2 <- 0; kur2 <- 0
+   popmedian2 <- 0
+ } else if (dist2 == 2) {
+   skw2 <- 0; kur2 <- -1.2
+   popmedian2 <- 0
+ } else if (dist2 == 3) {
+   skw2 <- 0; kur2 <- 6
+   popmedian2 <- 0
+ } else if (dist2 == 4) {
+   skw2 <- 1; kur2 <- 1.5
+   popmedian2 <- -.163*sd.ratio
+ } else {
+   skw2 <- 2; kur2 <- 6
+   popmedian2 <- -.313*sd.ratio
+ }
+ popdiff <- popmedian1 - popmedian2
+ V <- matrix(c(1, cor*sd.ratio, cor*sd.ratio, sd.ratio^2), 2, 2)
+ w <- 0; k <- 0; e1 <- 0; e2 <- 0
+ repeat {
+   k <- k + 1
+   y <- unonr(n, c(0, 0), V, skewness = c(skw1, skw2), kurtosis = c(kur1, kur2))
+   y1 <- y[, 1]
+   y2 <- y[, 2]
+   median1 <- median(y1)
+   median2 <- median(y2)
+   diff <- median1 - median2
+   a1 <- (y1 < median1)
+   a2 <- (y2 < median2)
+   a3 <- a1 + a2
+   a4 <- sum(a3 == 2)
+   y1 <- sort(y1)
+   y2 <- sort(y2)
+   L1 <- y1[o]
+   U1 <- y1[n - o + 1]
+   se1 <- (U1 - L1)/(2*z0)
+   L2 <- y2[o]
+   U2 <- y2[n - o + 1]
+   se2 <- (U2 - L2)/(2*z0)
+   if (n/2 == trunc(n/2)) {
+   p00 <- (sum(a4) + .25)/(n + 1)
+   } else {
+   p00 <- (sum(a4) + .25)/n 
+   }
+   cov <- (4*p00 - 1)*se1*se2
+   se <- sqrt(se1^2 + se2^2 - 2*cov)
+   ll <- diff - zcrit*se
+   ul <- diff + zcrit*se
+   w0 <- ul - ll
+   c1 <- as.integer(ll > popdiff)
+   c2 <- as.integer(ul < popdiff)
+   e1 <- e1 + c1
+   e2 <- e2 + c2
+   w <- w + w0
+   if (k == rep) {break}
+ }
+ width <- w/rep
+ cov <- 1 - (e1 + e2)/rep
+ out <- t(c(cov, e1/rep, e2/rep, width))
+ colnames(out) <- c("Coverage", "Lower Error", "Upper Error", "Ave CI Width")
+ return(out)
+}
+
+
  
  
 
