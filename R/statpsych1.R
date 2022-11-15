@@ -5078,7 +5078,268 @@ sim.ci.median.ps <- function(alpha, n, sd.ratio, cor, dist1, dist2, rep) {
 }
 
 
- 
+#  sim.ci.stdmean2 =============================================================
+#' Simulates confidence interval coverage probability for a standardized mean
+#' difference in a two-group design
+#'
+#'                                      
+#' @description
+#' Performs a computer simulation of confidence interval performance for  
+#' two types of standardized mean differences in a two-group design. Sample 
+#' data for each group can be generated from five different population 
+#' distributions. All distributions are scaled to have standard deviations 
+#' of 1.0 in group 1.
+#'
+#' @param   alpha     alpha level for 1-alpha confidence
+#' @param   n1        sample size for group 1
+#' @param   n2        sample size for group 2
+#' @param   sd.ratio  ratio of population standard deviations (sd2/sd1)
+#' @param   dist1     type of distribution (1, 2, 3, 4, or 5) 
+#' @param   dist2     type of distribution (1, 2, 3, 4, or 5) 
+#' * 1 = Gaussian (skewness = 0 and excess kurtosis = 0) 
+#' * 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
+#' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
+#' * 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
+#' * 5 = large skew (skewness = 2 and excess kurtosis = 6)
+#' @param   d         population standardized mean difference 
+#' @param   rep       number of Monte Carlo samples
+#'  
+#' 
+#' @return
+#' Returns a 1-row matrix. The columns are:
+#' * Coverage - Probability of confidence interval including population mean  
+#' * Lower Error - Probability of lower limit greater than population mean
+#' * Upper Error - Probability of upper limit less than population mean
+#' * Ave CI Width - Average confidence interval width
+#'
+#'
+#' @examples
+#' sim.ci.stdmean2(.05, 20, 20, 1.5, 3, 4, .75, 5000)
+#'
+#' # Should return (within sampling error):
+#' #                         Coverage Lower Error Upper Error Ave CI Width   Ave Est
+#' # Unweighted Standardizer   0.9058      0.0610      0.0332     1.342560 0.7838679
+#' # Group 1 Standardizer      0.9450      0.0322      0.0228     1.827583 0.7862640
+#'
+#'
+#' @importFrom stats qnorm
+#' @importFrom stats rnorm
+#' @importFrom stats runif
+#' @importFrom stats rt
+#' @importFrom stats rgamma
+#' @export
+sim.ci.stdmean2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2, d, rep) {
+ zcrit <- qnorm(1 - alpha/2)
+ df1 <- n1 - 1
+ df2 <- n2 - 1
+ df3 <- n1 + n2 - 2
+ adj1 <- 1 - 3/(4*df3 - 1)
+ adj2 <- 1 - 3/(4*df1 - 1)
+ diff1 <- d*sqrt((1 + sd.ratio^2)/2)
+ diff2 <- d
+ k <- 0; w1 <- 0; w2 <- 0; e11 <- 0; e12 <- 0; e21 <- 0; e22 <- 0
+ est1 <- 0; est2 <- 0;
+ repeat {
+   k <- k + 1
+   if (dist1 == 1) {
+     y1 <- rnorm(n1)  
+   } else if (dist1 == 2) {
+     y1 <- 3.464*runif(n1) - 1.732 
+   } else if (dist1 == 3) {
+     y1 <- .7745*rt(n1, 5) 
+   } else if (dist1 == 4) {
+     y1 <- .5*rgamma(n1, 4) - 2  
+   } else {
+     y1 <- rgamma(n1, 1) - 1 
+   }
+   if (dist2 == 1) {
+     y0 <- sd.ratio*rnorm(n2)
+   } else if (dist2 == 2) {
+     y0 <- sd.ratio*3.464*runif(n2) - sd.ratio*1.734 
+   } else if (dist2 == 3) {
+     y0 <- sd.ratio*.7745*rt(n2, 5) 
+   } else if (dist2 == 4) {
+     y0 <- sd.ratio*.5*rgamma(n2, 4) - sd.ratio*2 
+   } else {
+     y0 <- sd.ratio*rgamma(n2, 1) - sd.ratio  
+   }
+   m1 <- mean(y1) + diff1
+   m2 <- mean(y1) + diff2
+   m0 <- mean(y0)
+   v1 <- var(y1)
+   v2 <- var(y0)
+   s1 <- sqrt((v1 + v2)/2)
+   d1 <- (m1 - m0)/s1
+   se1 <- sqrt(d1^2*(v1^2/df1 + v2^2/df2)/(8*s1^4) + v1/(s1^2*df1) + v2/(s1^2*df2))
+   ll1 <- d1 - zcrit*se1
+   ul1 <- d1 + zcrit*se1
+   est1 <- est1 + adj1*d1
+   s2 <- sqrt(v1)
+   d2 <- (m2 - m0)/s2
+   se2 <- sqrt(d2^2/(2*df1) + 1/df1 + v2/(v1*df2))
+   ll2 <- d2 - zcrit*se2
+   ul2 <- d2 + zcrit*se2
+   est2 <- est2 + adj2*d2
+   w01 <- ul1 - ll1
+   w02 <- ul2 - ll2
+   w1 <- w1 + w01
+   w2 <- w2 + w02
+   c11 <- as.integer(ll1 > d)
+   c21 <- as.integer(ul1 < d)
+   c12 <- as.integer(ll2 > d)
+   c22 <- as.integer(ul2 < d)
+   e11 <- e11 + c11
+   e21 <- e21 + c21
+   e12 <- e12 + c12
+   e22 <- e22 + c22
+   if (k == rep) {break}
+  }
+  width1 <- w1/rep
+  width2 <- w2/rep
+  cov1 <- 1 - (e11 + e21)/rep
+  cov2 <- 1 - (e12 + e22)/rep
+  est1 = est1/rep
+  est2 = est2/rep
+  out1 <- t(c(cov1, e11/rep, e21/rep, width1, est1))
+  out2 <- t(c(cov2, e12/rep, e22/rep, width2, est2))
+  out <- rbind(out1, out2)
+  colnames(out) <- c("Coverage", "Lower Error", "Upper Error", "Ave CI Width", "Ave Est")
+  rownames(out) <- c("Unweighted Standardizer", "Group 1 Standardizer")
+  return(out)
+}
+
+
+#  sim.ci.stdmean.ps ==========================================================
+#' Simulates confidence interval coverage probability for a standardized mean
+#' difference in a paired-samples design
+#'
+#'                                              
+#' @description
+#' Performs a computer simulation of confidence interval performance for  
+#' two types of standardized mean differences in a paired-samples design. 
+#' Sample data for each level of the within-subjects factor can be generated 
+#' from five different population distributions. All distributions are scaled
+#' to have standard deviations of 1.0 at level 1.
+#'
+#' @param   alpha     alpha level for 1-alpha confidence
+#' @param   n         sample size 
+#' @param   sd.ratio  ratio of population standard deviations (sd2/sd1)
+#' @param   cor       correlation between paired measurements
+#' @param   dist1     type of distribution (1, 2, 3, 4, or 5) 
+#' @param   dist2     type of distribution (1, 2, 3, 4, or 5) 
+#' * 1 = Gaussian (skewness = 0 and excess kurtosis = 0) 
+#' * 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
+#' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
+#' * 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
+#' * 5 = large skew (skewness = 2 and excess kurtosis = 6)
+#' @param   popd     population standardized mean difference 
+#' @param   rep      number of Monte Carlo samples
+#'  
+#' 
+#' @return
+#' Returns a 1-row matrix. The columns are:
+#' * Coverage - Probability of confidence interval including population mean  
+#' * Lower Error - Probability of lower limit greater than population mean
+#' * Upper Error - Probability of upper limit less than population mean
+#' * Ave CI Width - Average confidence interval width
+#'
+#'
+#' @examples
+#' sim.ci.stdmean.ps(.05, 20, 1.5, .8, 4, 4, .5, 2000)
+#'
+#' # Should return (within sampling error):
+#' #                         Coverage Lower Error Upper Error Ave CI Width   Ave Est
+#' # Unweighted Standardizer   0.9095      0.0555       0.035    0.7354865 0.5186796
+#' # level 1 Standardizer      0.9525      0.0255       0.022    0.9330036 0.5058198
+#'
+#'
+#' @importFrom stats qnorm
+#' @importFrom mnonr unonr
+#' @export
+sim.ci.stdmean.ps <- function(alpha, n, sd.ratio, cor, dist1, dist2, d, rep) {
+ zcrit <- qnorm(1 - alpha/2)
+ df <- n - 1
+ adj1 <- sqrt((n - 2)/df)
+ adj2 <- 1 - 3/(4*df - 1)
+ diff1 <- d*sqrt((1 + sd.ratio^2)/2)
+ diff2 <- d
+ k <- 0; w1 <- 0; w2 <- 0; e11 <- 0; e12 <- 0; e21 <- 0; e22 <- 0
+ est1 <- 0; est2 <- 0
+ if (dist1 == 1) {
+   skw1 <- 0; kur1 <- 0
+ } else if (dist1 == 2) {
+   skw1 <- 0; kur1 <- -1.2
+ } else if (dist1 == 3) {
+   skw1 <- 0; kur1 <- 6
+ } else if (dist1 == 4) {
+   skw1 <- .75; kur1 <- .86
+ } else {
+   skw1 <- 1.41; kur1 <- 3
+ }
+ if (dist2 == 1) {
+   skw2 <- 0; kur2 <- 0
+ } else if (dist2 == 2) {
+   skw2 <- 0; kur2 <- -1.2
+ } else if (dist2 == 3) {
+   skw2 <- 0; kur2 <- 6
+ } else if (dist2 == 4) {
+   skw2 <- 1; kur2 <- 1.5
+ } else {
+   skw2 <- 2; kur2 <- 6
+ }
+ V <- matrix(c(1, cor*sd.ratio, cor*sd.ratio, sd.ratio^2), 2, 2)
+ repeat {
+   k <- k + 1
+   y <- unonr(n, c(0, 0), V, skewness = c(skw1, skw2), kurtosis = c(kur1, kur2))
+   y1 <- y[, 1] 
+   y0 <- y[, 2]
+   m1 <- mean(y1) + diff1
+   m2 <- mean(y1) + diff2
+   m0 <- mean(y0)
+   v1 <- var(y1)
+   v2 <- var(y0)
+   s <- sqrt((v1 + v2)/2)
+   cor <- cor(y1, y0)
+   vd <- v1 + v2 - 2*cor*sqrt(v1*v2)
+   d1 <- (m1 - m0)/s
+   se1 <- sqrt(d1^2*(v1^2 + v2^2 + 2*cor^2*v1*v2)/(8*df*s^4) + vd/(df*s^2))
+   ll1 <- d1 - zcrit*se1
+   ul1 <- d1 + zcrit*se1
+   est1 <- est1 + adj1*d1
+   d2 <- (m2 - m0)/sqrt(v1)
+   se2 <- sqrt(d2^2/(2*df) + vd/(df*v1))
+   ll2 <- d2 - zcrit*se2
+   ul2 <- d2 + zcrit*se2
+   est2 <- est2 + adj2*d2
+   w01 <- ul1 - ll1
+   w02 <- ul2 - ll2
+   c11 <- as.integer(ll1 > d)
+   c21 <- as.integer(ul1 < d)
+   c12 <- as.integer(ll2 > d)
+   c22 <- as.integer(ul2 < d)
+   e11 <- e11 + c11
+   e21 <- e21 + c21
+   e12 <- e12 + c12
+   e22 <- e22 + c22
+   w1 <- w1 + w01
+   w2 <- w2 + w02
+   if (k == rep) {break}
+ }
+ est1 = est1/rep
+ est2 = est2/rep
+ width1 <- w1/rep
+ width2 <- w2/rep
+ cov1 <- 1 - (e11 + e21)/rep
+ cov2 <- 1 - (e12 + e22)/rep
+ out1 <- t(c(cov1, e11/rep, e21/rep, width1, est1))
+ out2 <- t(c(cov2, e12/rep, e22/rep, width2, est2))
+ out <- rbind(out1, out2)
+ colnames(out) <- c("Coverage", "Lower Error", "Upper Error", "Ave CI Width", "Ave Est")
+ rownames(out) <- c("Unweighted Standardizer", "level 1 Standardizer")
+ return(out)
+}
+
+
  
 
  
