@@ -195,8 +195,8 @@ ci.mean2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #'
 #'
 #' @param     alpha  	alpha level for 1-alpha confidence
-#' @param     m     	vector of group estimated means
-#' @param     sd    	vector of group estimated standard deviations
+#' @param     m     	vector of estimated group means
+#' @param     sd    	vector of estimated group standard deviations
 #' @param     n     	vector of sample sizes
 #' @param     v     	vector of betwen-subjects contrast coefficients
 #' 
@@ -1687,8 +1687,8 @@ ci.ratio.median2 <- function(alpha, y1, y2) {
 #'
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
-#' @param  m       vector of group estimated medians
-#' @param  se      vector of group standard errors 
+#' @param  m       vector of estimated group medians
+#' @param  se      vector of standard errors 
 #' @param  v       vector of between-subjects contrast coefficients
 #'
 #'
