@@ -607,7 +607,8 @@ ci.condslope <- function(alpha, b1, b2, se1, se2, cov, lo, hi, dfe) {
 
 
 #  ci.lc.reg  ==============================================================
-#' Confidence interval for a linear contrast of regression coefficients
+#' Confidence interval for a linear contrast of regression coefficients in
+#' multiple group regression model
 #'
 #'  
 #' @description
@@ -623,7 +624,7 @@ ci.condslope <- function(alpha, b1, b2, se1, se2, cov, lo, hi, dfe) {
 #' @param  se     vector of standard errors
 #' @param  n      vector of group sample sizes
 #' @param  s      number of predictor variables for each within-group model
-#' @param  v      vector of between-subject contrast coefficients
+#' @param  v      vector of contrast coefficients
 #'
 #' 
 #' @return 
