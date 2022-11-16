@@ -1304,8 +1304,9 @@ ci.ratio.mad.ps <- function(alpha, y1, y2) {
 #'
 #' @description
 #' Computes a confidence interval for a population coefficient of dispersion
-#' (COD) which is defined as MAD/median. The COD is a robust alternative to 
-#' the coefficient of variation and assumes ratio-scale scores.
+#' which is defined as a mean absolute deviation from the median divided by a
+#' median. The coefficient of dispersion assumes ratio-scale scores and is a 
+#' robust alternative to the coefficient of variation.
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
 #' @param  y       vector of scores
