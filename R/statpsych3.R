@@ -794,8 +794,8 @@ ci.yule <- function(alpha, f00, f01, f10, f11) {
 #' @description
 #' Computes a confidence interval for a phi correlation. This function requires 
 #' the frequency counts from a 2 x 2 contingency table for two dichotomous 
-#' variables. This measure of association assumes that both dichotomous  
-#' variables are naturally dichotomous.
+#' variables. This measure of association is usally most appropraite when both
+#' dichotomous variables are naturally dichotomous.
 #'
 #'
 #' @param   alpha  alpha level for 1-alpha confidence
