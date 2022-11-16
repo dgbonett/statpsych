@@ -1958,12 +1958,13 @@ ci.sign1 <- function(alpha, y, h) {
 #'
 #' @description
 #' Computes a distribution-free confidence interval for the Mann-Whitney 
-#' parameter. In a 2-group experiment, this parameter is the proportion of 
-#' members in the population with scores that would be higher under treatment 1
-#' than treatment 2. In a 2-group nonexperiment where participants are sampled 
-#' from two subpopulations of sizes N1 and N2, the parameter is the proportion 
-#' of all N1 x N2 pairs in which a member from subpopulation 1 has a larger
-#' score than a member from subpopulation 2.
+#' parameter (a "common language effect size"). In a 2-group experiment, this
+#' parameter is the proportion of members in the population with scores that 
+#' would be higher under treatment 1 than treatment 2. In a 2-group 
+#' nonexperiment where participants are sampled from two subpopulations of 
+#' sizes N1 and N2, the parameter is the proportion of all N1 x N2 pairs in 
+#' which a member from subpopulation 1 has a larger score than a member from 
+#' subpopulation 2.
 #'
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
