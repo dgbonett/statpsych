@@ -109,9 +109,10 @@ ci.stdmean1 <- function(alpha, m, sd, n, h) {
 #'
 #'
 #' @description
-#' Computes a confidence interval for a population 2-group mean difference
-#' using the estimated means, estimated standard deviations, and sample sizes. 
-#' Use the t.test function for raw data input.
+#' Computes equal variance and unequal variance confidence intervals for a 
+#' population 2-group mean difference using the estimated means, estimated 
+#' standard deviations, and sample sizes. Use the t.test function for raw data
+#' input.
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -1737,7 +1738,7 @@ ci.lc.median.bs <- function(alpha, m, se, v) {
 #' @description
 #' Computes a confidence interval for a difference of population medians in 
 #' a paired-samples design. This function also computes the standard errors
-#' for each median and the covariance between the two medians.
+#' for each median and the covariance between the two estimated medians.
 #'
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
@@ -1750,9 +1751,9 @@ ci.lc.median.bs <- function(alpha, m, se, v) {
 #' * Median1 - estimated median for measurement 1
 #' * Median2 - estimated median for measurement 2
 #' * Median1-Median2 - estimated difference of medians
-#' * SE1 - standard error of median 1
-#' * SE2 - standard error of median 2
-#' * COV - covariance of medians
+#' * SE1 - standard error of median 1 
+#' * SE2 - standard error of median 2 
+#' * COV - covariance of the two `estimated medians
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #'
