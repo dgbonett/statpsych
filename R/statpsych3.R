@@ -706,7 +706,7 @@ ci.condslope.log <- function(alpha, b1, b2, se1, se2, cov, lo, hi) {
 #'
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Estimate - estimate of proportion ratio
+#' * Estimate - estimate of odds ratio
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #'
