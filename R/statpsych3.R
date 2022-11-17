@@ -375,7 +375,7 @@ ci.pairs.prop.bs <-function(alpha, f, n) {
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
-#' @param   f       vector of frequency counts of participants with attribute
+#' @param   f       vector of frequency counts of participants who have the attribute
 #' @param   n       vector of sample sizes
 #' @param   x       vector of quantitative factor values
 #'
