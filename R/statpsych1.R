@@ -278,8 +278,8 @@ ci.lc.mean.bs <- function(alpha, m, sd, n, v) {
 #'
 #'
 #' @param  alpha   alpha level for simultaneous 1-alpha confidence
-#' @param  m       vector of group estimated means
-#' @param  sd      vector of group estimated standard deviations
+#' @param  m       vector of estimated group means
+#' @param  sd      vector of estimated group standard deviations
 #' @param  n       vector of sample sizes
 #'
 #'
