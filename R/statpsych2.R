@@ -1312,9 +1312,7 @@ size.test.slope <- function(alpha, pow, evar, x, slope, h) {
 #'
 #' @description
 #' Computes the sample size required to test a Pearson or a partial correlation 
-#' with desired power. Set s = 0 for a Pearson correlation. Set the correlation 
-#' planning value to the smallest value within a plausible range for a 
-#' conservatively large sample size.
+#' with desired power. Set s = 0 for a Pearson correlation. 
 #'
 #'  
 #' @param  alpha   alpha level for hypothesis test
