@@ -3072,7 +3072,7 @@ size.ci.lc.stdmean.bs <- function(alpha, d, w, v) {
 #' means with desired confidence interval precision in a paired-samples 
 #' design. This function requires a planning value for the average of the  
 #' variances for the two measurements. Set the Pearson correlation planning  
-#' vaklue to the smallest value within a plausible range for a conservatively  
+#' value to the smallest value within a plausible range for a conservatively  
 #' large sample size. Set the variance planning value to the largest value 
 #' within a plausible range for a conservatively large sample size. 
 #'
