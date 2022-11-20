@@ -272,7 +272,7 @@ ci.lc.mean.bs <- function(alpha, m, sd, n, v) {
 #' @description
 #' Computes heteroscedastic Tukey-Kramer (also known as Games-Howell) 
 #' confidence intervals for all pairwise comparisons of population means 
-#' using estimated means, estimatede standard deviations, and samples sizes as 
+#' using estimated means, estimated standard deviations, and samples sizes as 
 #' input. A Satterthwaite adjustment to the degrees of freedom is used to 
 #' improve the accuracy of the confidence intervals. 
 #'
@@ -4174,7 +4174,8 @@ randomize <- function(n) {
 #'
 #' @description
 #' Generates a random sample of scores from a normal distribution with a
-#' specified population mean and standard deviation.
+#' specified population mean and standard deviation. Useful for generating
+#' hypothetical data for classroom demonstrations.
 #'
 #'
 #' @param  n     sample size
@@ -4483,13 +4484,13 @@ sim.ci.mean1 <- function(alpha, n, dist, rep) {
 
 
 #  sim.ci.mean2 ===============================================================
-#' Simulates confidence interval coverage probability for a two-group mean 
+#' Simulates confidence interval coverage probability for a 2-group mean 
 #' difference
 #'
 #'                               
 #' @description
 #' Performs a computer simulation of separate variance and pooled variance 
-#' confidence interval performance for a mean difference in a two-group design.
+#' confidence interval performance for a mean difference in a 2-group design.
 #' Sample data within each group can be generated from five different 
 #' population distributions. All distributions are scaled to have a standard 
 #' deviation of 1.0 in group 1. 
@@ -4727,9 +4728,9 @@ sim.ci.mean.ps <- function(alpha, n, sd.ratio, cor, dist1, dist2, rep) {
 #' 
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Coverage - probability of confidence interval including population mean  
-#' * Lower Error - probability of lower limit greater than population mean
-#' * Upper Error - probability of upper limit less than population mean
+#' * Coverage - probability of confidence interval including population median  
+#' * Lower Error - probability of lower limit greater than population mediann
+#' * Upper Error - probability of upper limit less than population median
 #' * Ave CI Width - average confidence interval width
 #'
 #'
