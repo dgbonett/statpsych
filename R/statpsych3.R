@@ -1638,9 +1638,9 @@ test.prop2 <- function(f1, f2, n1, n2) {
 #'
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' Chi-square - chi-square test statistic
-#' df - degrees of freedom 
-#' p - p-value
+#' * Chi-square - chi-square test statistic
+#' * df - degrees of freedom 
+#' * p - p-value
 #'
 #'
 #' @references
@@ -1695,9 +1695,9 @@ test.prop.bs <- function(f, n) {
 #'
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' Estimate - ML estimate of proportion difference
-#' z - z test statistic
-#' p - p-value
+#' * Estimate - ML estimate of proportion difference
+#' * z - z test statistic
+#' * p - p-value
 #'
 #'
 #' @examples
@@ -2018,7 +2018,9 @@ size.ci.agree <- function(alpha, G, w) {
 #' @description
 #' Computes the sample size required to test a single population proportion 
 #' with desired power in a 1-group design. Set the proportion planning value 
-#' to .5 for a conservatively large sample size.
+#' to .5 for a conservatively large sample size. The value of the effect size
+#' (expected population proportion minus hypothesized value) need not be based
+#' on the proportion planning value. 
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test 
@@ -2060,9 +2062,9 @@ size.test.prop1 <- function(alpha, pow, p, es) {
 #' population proportions with desired power in a 2-group design. This 
 #' function requires planning values for both proportions. Set the proportion 
 #' planning values to .5 for a conservatively large sample size. The
-#' planning value for the proportion difference could be set equal to 
-#' the difference of the two proportion planning values or it could be set
-#' equal to a minimally interesting effect size.
+#' planning value for the effect size (proportion difference) could be set 
+#' equal to the difference of the two proportion planning values or it could 
+#' be set equal to a minimally interesting effect size.
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test 
@@ -2105,9 +2107,9 @@ size.test.prop2 <- function(alpha, pow, p1, p2, es) {
 #' to test a linear contrast of population proportions with desired power in a 
 #' between-subjects design. This function requires planning values for all 
 #' proportions. Set the proportion planning values to .5 for a conservatively 
-#' large sample size. The planning value for the linear contrast of proportions 
-#' could be set equal to the linear contrast of proportion planning values or it
-#' could be set equal to a minimally interesting effect size.
+#' large sample size. The planning value for the efect size (linear contrast of 
+#' proportions) could be set equal to the linear contrast of proportion planning
+#' values or it could be set equal to a minimally interesting effect size.
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test 
@@ -2247,11 +2249,11 @@ size.supinf.prop2 <- function(alpha, pow, p1, p2, h) {
 #' requires planning values for both proportions and a phi coefficient that 
 #' describes the correlation between the two dichotomous measurements. The 
 #' proportion planning values can set to .5 for a conservatively large sample 
-#' size. The planning value for the proportion difference could be set equal 
-#' to the difference of the two proportion planning values or it could be set
-#' equal to a minimally interesting effect size. Set the phi correlation 
-#' planning value to the smallest value within a plausible range for a 
-#' conservatively large sample size.
+#' size. The planning value for the effect size (proportion difference) could
+#' be set equal to the difference of the two proportion planning values or it
+#' could be set equal to a minimally interesting effect size. Set the phi 
+#' correlation planning value to the smallest value within a plausible range
+#' for a conservatively large sample size.
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test 
