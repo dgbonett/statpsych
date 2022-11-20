@@ -428,10 +428,10 @@ ci.slope.mean.bs <- function(alpha, m, sd, n, x) {
 #'                     
 #' @description
 #' Computes simultaneous confidence intervals for all adjacent pairwise
-#' comparisons of population means using estimated means, estimated 
-#' standard deviations, and samples sizes as input. Equal variances are not 
-#' assumed. A Satterthwaite adjustment to the degrees of freedom is used to 
-#' improve the accuracy of the confidence intervals. If one or more lower
+#' comparisons of population means using estimated group means, estimated 
+#' group standard deviations, and samples sizes as input. Equal variances are 
+#' not assumed. A Satterthwaite adjustment to the degrees of freedom is used
+#' to improve the accuracy of the confidence intervals. If one or more lower
 #' limits are greater than 0 and no upper limit is less than 0, then conclude
 #' that the population means are monotoic decreasing. If one or more upper 
 #' limits are less than 0 and no lower limits are greater than 0, then
@@ -441,8 +441,8 @@ ci.slope.mean.bs <- function(alpha, m, sd, n, x) {
 #'
 #'
 #' @param  alpha   alpha level for simultaneous 1-alpha confidence
-#' @param  m       vector of estimated means
-#' @param  sd      vector of estimated standard deviations
+#' @param  m       vector of estimated group means
+#' @param  sd      vector of estimated group standard deviations
 #' @param  n       vector of sample sizes
 #'
 #'
@@ -2753,6 +2753,67 @@ test.kurtosis <- function(y) {
 }
 
 
+#  test.anova1.bs =============================================================
+#' Between-subjects F statistic and eta-squared from summary information 
+#'
+#'
+#' @description
+#' Computes the F statistic, p-value, eta-squared, and adjusted eta-squared 
+#' for the main effect of Factor A in a one-way between-subjects ANOVA using
+#' the estimated group means, estimated group standard deviations, and sample
+#' sizes.  
+#'
+#'
+#' @param   m       vector of estimated group means
+#' @param   sd      vector of estimated group standard deviations
+#' @param   n       vector of sample sizes
+#'
+#'
+#' @return 
+#' Returns a 1-row matrix. The columns are:
+#' * F - F statistic for test of null hypothesis
+#' * dfA - degrees of freedom for between-subjects factor
+#' * dfE - error degrees of freedom
+#' * dfA - degrees of freedom for between-subjects factor
+#' * p - p-value for F-test
+#' * eta-squared - estimate of eta-squared
+#' * adj eta-squared - a bias adjusted estimate of eta-squared
+#'
+#'
+#' @examples
+#' m <- c(12.4, 8.6, 10.5)
+#' sd <- c(3.84, 3.12, 3.48)
+#' n <- c(20, 20, 20)
+#' test.anova1.bs(m, sd, n)
+#'
+#' #  Should return:
+#' #             F dfA  dfE           p eta-squared adj eta-squared
+#' # [1,] 5.919585   2   57 0.004614428   0.1719831       0.1429298
+#'  
+#' 
+#' @importFrom stats pf
+#' @export
+test.anova1.bs <- function(m, sd, n) {
+  a <- length(m)
+  nt <- sum(n)
+  dfe <- nt - a
+  dfa <- a - 1
+  v <- sd^2
+  grandmean <- sum(n*m)/nt
+  SSe <- sum((n - 1)*v)
+  MSe <- SSe/dfe
+  SSa <- sum(n*(m - grandmean)^2)
+  MSa <- SSa/dfa
+  F <- MSa/MSe
+  p <- 1 - pf(F, dfa, dfe)
+  etasqr <- SSa/(SSa + SSe)
+  adjetasqr <- 1 - (dfa + dfe)*(1 - etasqr)/dfe
+  out <- t(c(F, dfa, dfe, p, etasqr, adjetasqr))
+  colnames(out) <- c("F", "dfA",  "dfE", "p", "eta-squared", "adj eta-squared")
+  return(out)
+}
+
+
 # ================== File 1: Sample Size for Desired Precision ================
 # size.ci.mean1 ===============================================================
 #' Sample size for a single mean confidence interval
@@ -4233,66 +4294,6 @@ etasqr.adj <- function(etasqr, dfeffect, dferror) {
  out <- matrix(adj, nrow = 1, ncol = 1)
  colnames(out) <- "Adjusted eta-squared"
  return(out)
-}
-
-
-#  test.anova1.bs =============================================================
-#' Between-subjects F statistic and eta-squared from summary information 
-#'
-#'
-#' @description
-#' Computes the F statistic, p-value, eta-squared, and adjusted eta-squared 
-#' for the main effect of Factor A in a one-way between-subjects ANOVA using
-#' the estimated means, estimated standard deviations, and sample sizes.  
-#'
-#'
-#' @param   m       vector of estimated means
-#' @param   sd      vector of estimated standard deviations
-#' @param   n       vector of sample sizes
-#'
-#'
-#' @return 
-#' Returns a 1-row matrix. The columns are:
-#' * F - F statistic for test of null hypothesis
-#' * dfA - degrees of freedom for between-subjects factor
-#' * dfE - error degrees of freedom
-#' * dfA - degrees of freedom for between-subjects factor
-#' * p - p-value for F-test
-#' * eta-squared - estimate of eta-squared
-#' * adj eta-squared - a bias adjusted estimate of eta-squared
-#'
-#'
-#' @examples
-#' m <- c(12.4, 8.6, 10.5)
-#' sd <- c(3.84, 3.12, 3.48)
-#' n <- c(20, 20, 20)
-#' test.anova1.bs(m, sd, n)
-#'
-#' #  Should return:
-#' #             F dfA  dfE           p eta-squared adj eta-squared
-#' # [1,] 5.919585   2   57 0.004614428   0.1719831       0.1429298
-#'  
-#' 
-#' @importFrom stats pf
-#' @export
-test.anova1.bs <- function(m, sd, n) {
-  a <- length(m)
-  nt <- sum(n)
-  dfe <- nt - a
-  dfa <- a - 1
-  v <- sd^2
-  grandmean <- sum(n*m)/nt
-  SSe <- sum((n - 1)*v)
-  MSe <- SSe/dfe
-  SSa <- sum(n*(m - grandmean)^2)
-  MSa <- SSa/dfa
-  F <- MSa/MSe
-  p <- 1 - pf(F, dfa, dfe)
-  etasqr <- SSa/(SSa + SSe)
-  adjetasqr <- 1 - (dfa + dfe)*(1 - etasqr)/dfe
-  out <- t(c(F, dfa, dfe, p, etasqr, adjetasqr))
-  colnames(out) <- c("F", "dfA",  "dfE", "p", "eta-squared", "adj eta-squared")
-  return(out)
 }
 
 
