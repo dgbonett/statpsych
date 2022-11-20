@@ -3399,7 +3399,7 @@ size.test.mean1 <- function(alpha, pow, var, es) {
 #'
 #'
 #' @description
-#' Computes the sample size in each group requires to test a difference in 
+#' Computes the sample size in each group required to test a difference in 
 #' population means with desired power in a 2-group design. Set R =1 for equal 
 #' sample sizes. Set the variance planning value to the largest value within a 
 #' plausible range for a conservatively large sample size.
@@ -3583,10 +3583,10 @@ size.supinf.mean2 <- function(alpha, pow, var, es, h) {
 #'
 #' @description
 #' Computes the sample size required to test a difference in population means
-#' with desired power in a paired-samples design. Set the correlation planning 
-#' value to the smallest value within a plausible range for a conservatively 
-#' large sample size. Set the variance planning value to the largest value 
-#' within a plausible range for a conservatively large sample size.
+#' with desired power in a paired-samples design. Set the Pearson correlation 
+#' planning value to the smallest value within a plausible range, and set the 
+#' variance planning value to the largest value within a plausible range for
+#' a conservatively large sample size.
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test 
