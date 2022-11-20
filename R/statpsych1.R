@@ -4500,8 +4500,8 @@ sim.ci.mean1 <- function(alpha, n, dist, rep) {
 #' @param   n1        sample size in group 1
 #' @param   n2        sample size in group 2
 #' @param   sd.ratio  ratio of population standard deviations (sd2/sd1)
-#' @param   dist1     type of distribution in group 1 (1, 2, 3, 4, or 5)
-#' @param   dist2     type of distribution in group 2 (1, 2, 3, 4, or 5)
+#' @param   dist1     type of distribution for group 1 (1, 2, 3, 4, or 5)
+#' @param   dist2     type of distribution for group 2 (1, 2, 3, 4, or 5)
 #' * 1 = Gaussian (skewness = 0 and excess kurtosis = 0) 
 #' * 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
 #' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
@@ -4512,9 +4512,9 @@ sim.ci.mean1 <- function(alpha, n, dist, rep) {
 #' 
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Coverage - probability of confidence interval including population mean  
-#' * Lower Error - probability of lower limit greater than population mean
-#' * Upper Error - probability of upper limit less than population mean
+#' * Coverage - probability of confidence interval including population mean difference  
+#' * Lower Error - probability of lower limit greater than population mean difference
+#' * Upper Error - probability of upper limit less than population mean difference
 #' * Ave CI Width - average confidence interval width
 #'
 #'
@@ -4636,9 +4636,9 @@ sim.ci.mean2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2, rep) {
 #' 
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Coverage - probability of confidence interval including population mean  
-#' * Lower Error - probability of lower limit greater than population mean
-#' * Upper Error - probability of upper limit less than population mean
+#' * Coverage - probability of confidence interval including population mean difference 
+#' * Lower Error - probability of lower limit greater than population mean difference
+#' * Upper Error - probability of upper limit less than population mean difference
 #' * Ave CI Width - average confidence interval width
 #'
 #'
@@ -4828,12 +4828,12 @@ sim.ci.median1 <- function(alpha, n, dist, rep) {
 
 #  sim.ci.median2 =============================================================
 #' Simulates confidence interval coverage probability for a median difference
-#' in a two-group design
+#' in a 2-group design
 #'
 #'                                          
 #' @description
 #' Performs a computer simulation of the confidence interval performance for a 
-#' difference of medians in a two-group design. Sample data for each group can
+#' difference of medians in a 2-group design. Sample data for each group can
 #' be generated from five different population distributions. All distributions
 #' are scaled to have standard deviations of 1.0 in group 1.
 #'
@@ -4841,8 +4841,8 @@ sim.ci.median1 <- function(alpha, n, dist, rep) {
 #' @param   n1        sample size for group 1
 #' @param   n2        sample size for group 2
 #' @param   sd.ratio  ratio of population standard deviations (sd2/sd1)
-#' @param   dist1     type of distribution (1, 2, 3, 4, or 5) 
-#' @param   dist2     type of distribution (1, 2, 3, 4, or 5) 
+#' @param   dist1     type of distribution for group 1 (1, 2, 3, 4, or 5) 
+#' @param   dist2     type of distribution for group 2 (1, 2, 3, 4, or 5) 
 #' * 1 = Gaussian (skewness = 0 and excess kurtosis = 0) 
 #' * 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
 #' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
@@ -4853,9 +4853,9 @@ sim.ci.median1 <- function(alpha, n, dist, rep) {
 #' 
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Coverage - Probability of confidence interval including population mean  
-#' * Lower Error - Probability of lower limit greater than population mean
-#' * Upper Error - Probability of upper limit less than population mean
+#' * Coverage - Probability of confidence interval including population median difference  
+#' * Lower Error - Probability of lower limit greater than population median difference
+#' * Upper Error - Probability of upper limit less than population median difference
 #' * Ave CI Width - Average confidence interval width
 #'
 #'
@@ -4979,9 +4979,9 @@ sim.ci.median2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2, rep) {
 #' 
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Coverage - probability of confidence interval including population mean  
-#' * Lower Error - probability of lower limit greater than population mean
-#' * Upper Error - probability of upper limit less than population mean
+#' * Coverage - probability of confidence interval including population median difference  
+#' * Lower Error - probability of lower limit greater than population median difference
+#' * Upper Error - probability of upper limit less than population median difference
 #' * Ave CI Width - average confidence interval width
 #'
 #'
@@ -5084,12 +5084,12 @@ sim.ci.median.ps <- function(alpha, n, sd.ratio, cor, dist1, dist2, rep) {
 
 #  sim.ci.stdmean2 =============================================================
 #' Simulates confidence interval coverage probability for a standardized mean
-#' difference in a two-group design
+#' difference in a 2-group design
 #'
 #'                                      
 #' @description
 #' Performs a computer simulation of confidence interval performance for  
-#' two types of standardized mean differences in a two-group design. Sample 
+#' two types of standardized mean differences in a 2-group design. Sample 
 #' data for each group can be generated from five different population 
 #' distributions. All distributions are scaled to have standard deviations 
 #' of 1.0 in group 1.
@@ -5098,8 +5098,8 @@ sim.ci.median.ps <- function(alpha, n, sd.ratio, cor, dist1, dist2, rep) {
 #' @param   n1        sample size for group 1
 #' @param   n2        sample size for group 2
 #' @param   sd.ratio  ratio of population standard deviations (sd2/sd1)
-#' @param   dist1     type of distribution (1, 2, 3, 4, or 5) 
-#' @param   dist2     type of distribution (1, 2, 3, 4, or 5) 
+#' @param   dist1     type of distribution for group 1 (1, 2, 3, 4, or 5) 
+#' @param   dist2     type of distribution for group 2 (1, 2, 3, 4, or 5) 
 #' * 1 = Gaussian (skewness = 0 and excess kurtosis = 0) 
 #' * 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
 #' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
@@ -5111,9 +5111,9 @@ sim.ci.median.ps <- function(alpha, n, sd.ratio, cor, dist1, dist2, rep) {
 #' 
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Coverage - Probability of confidence interval including population mean  
-#' * Lower Error - Probability of lower limit greater than population mean
-#' * Upper Error - Probability of upper limit less than population mean
+#' * Coverage - Probability of confidence interval including population std mean difference  
+#' * Lower Error - Probability of lower limit greater than population std mean difference
+#' * Upper Error - Probability of upper limit less than population std mean difference
 #' * Ave CI Width - Average confidence interval width
 #'
 #'
@@ -5229,8 +5229,8 @@ sim.ci.stdmean2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2, d, rep) {
 #' @param   n         sample size 
 #' @param   sd.ratio  ratio of population standard deviations (sd2/sd1)
 #' @param   cor       correlation between paired measurements
-#' @param   dist1     type of distribution (1, 2, 3, 4, or 5) 
-#' @param   dist2     type of distribution (1, 2, 3, 4, or 5) 
+#' @param   dist1     type of distribution at level 1 (1, 2, 3, 4, or 5) 
+#' @param   dist2     type of distribution at level 2 (1, 2, 3, 4, or 5) 
 #' * 1 = Gaussian (skewness = 0 and excess kurtosis = 0) 
 #' * 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
 #' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
@@ -5242,9 +5242,9 @@ sim.ci.stdmean2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2, d, rep) {
 #' 
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Coverage - Probability of confidence interval including population mean  
-#' * Lower Error - Probability of lower limit greater than population mean
-#' * Upper Error - Probability of upper limit less than population mean
+#' * Coverage - Probability of confidence interval including population std mean difference
+#' * Lower Error - Probability of lower limit greater than population std mean difference
+#' * Upper Error - Probability of upper limit less than population std mean difference
 #' * Ave CI Width - Average confidence interval width
 #'
 #'
