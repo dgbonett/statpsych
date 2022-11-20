@@ -2292,23 +2292,22 @@ size.test.prop.ps <- function(alpha, pow, p1, p2, phi, es) {
 #'
 #'
 #' @description
-#' Computes the sample size in each group (assuming equal sample sizes) required
-#' to perform an equivalence test for the difference in population proportions 
-#' with desired power in a paired-samples design. The value of h specifies a 
-#' range of practical equivalence, -h to h, for the difference in population 
-#' proportions. The absolute difference in the proportion planning values must
-#' be less than h.  Equivalence tests often require a very large sample size. 
-#' Equivalence tests usually use 2 x alpha rather than alpha (e.g., use 
-#' alpha = .10 rather alpha = .05). This function sets the effect size equal to
-#' the difference in proportion planning values. Set the phi correlation planning
-#' value to the smallest value within a plausible range for a conservatively 
-#' large sample size.
+#' Computes the sample size required to perform an equivalence test for the
+#' difference in population proportions with desired power in a paired-samples
+#' design. The value of h specifies a range of practical equivalence, -h to h, 
+#' for the difference in population proportions. The absolute difference in 
+#' the proportion planning values must be less than h.  Equivalence tests often
+#' require a very large sample size. Equivalence tests usually use 2 x alpha 
+#' rather than alpha (e.g., use alpha = .10 rather alpha = .05). This function
+#' sets the effect size equal to the difference in proportion planning values. 
+#' Set the phi correlation planning value to the smallest value within a 
+#' plausible range for a conservatively large sample size.
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test 
 #' @param  pow    desired power
-#' @param  p1     planning value of proportion for group 1
-#' @param  p2     planning value of proportion for group 2
+#' @param  p1     planning value of proportion for measurement 1
+#' @param  p2     planning value of proportion for measurement 2
 #' @param  phi    planning value of phi coefficient
 #' @param  h      upper limit for range of practical equivalence
 #'
