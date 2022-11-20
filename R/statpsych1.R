@@ -2654,7 +2654,7 @@ ci.2x2.mean.bs <- function(alpha, y11, y12, y21, y22) {
 #' 
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Skewness - Estimate of skewness coefficient
+#' * Skewness - estimate of skewness coefficient
 #' * p - Monte Carlo two-sided p-value for test of zero skewness
 #'
 #'
@@ -2712,8 +2712,8 @@ test.skew <- function(y) {
 #' 
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Kurtosis - Estimate of kurtosis coefficient
-#' * Excess - Estimate of excess kurtosis (kurtosis - 3)
+#' * Kurtosis - estimate of kurtosis coefficient
+#' * Excess - estimate of excess kurtosis (kurtosis - 3)
 #' * p - Monte Carlo two-sided p-value for test of zero excess kurtosis
 #'
 #'
