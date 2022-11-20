@@ -4174,8 +4174,8 @@ randomize <- function(n) {
 #'
 #' @description
 #' Generates a random sample of scores from a normal distribution with a
-#' specified population mean and standard deviation. Useful for generating
-#' hypothetical data for classroom demonstrations.
+#' specified population mean and standard deviation. This functions is useful 
+#' for generating hypothetical data for classroom demonstrations.
 #'
 #'
 #' @param  n     sample size
