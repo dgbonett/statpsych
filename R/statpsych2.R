@@ -1495,7 +1495,8 @@ slope.contrast <- function(x) {
 #' @description
 #' Generates a random sample of y scores and x scores from a bivariate normal
 #' distributions with specified population means, standard deviations, and 
-#' correlation.
+#' correlation. This function is useful for generating hypothetical data for
+#' classroom demonstrations.
 #'
 #'  
 #' @param   n     sample size
@@ -1558,8 +1559,8 @@ random.yx <- function(n, my, mx, sdy, sdx, cor, dec) {
 #' @param   alpha     alpha level for 1-alpha confidence
 #' @param   n         sample size 
 #' @param   cor       population Pearson correlation
-#' @param   dist1     type of distribution at level 1 (1, 2, 3, 4, or 5)
-#' @param   dist2     type of distribution at level 2 (1, 2, 3, 4, or 5)
+#' @param   dist1     type of distribution for variable 1 (1, 2, 3, 4, or 5)
+#' @param   dist2     type of distribution for variable 2 (1, 2, 3, 4, or 5)
 #' * 1 = Gaussian (skewness = 0 and excess kurtosis = 0) 
 #' * 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
 #' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
@@ -1570,9 +1571,9 @@ random.yx <- function(n, my, mx, sdy, sdx, cor, dec) {
 #' 
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Coverage - probability of confidence interval including population mean  
-#' * Lower Error - probability of lower limit greater than population mean
-#' * Upper Error - probability of upper limit less than population mean
+#' * Coverage - probability of confidence interval including population correlation  
+#' * Lower Error - probability of lower limit greater than population correlation
+#' * Upper Error - probability of upper limit less than population correlation
 #' * Ave CI Width - average confidence interval width
 #'
 #'
@@ -1656,8 +1657,8 @@ sim.ci.cor <- function(alpha, n, cor, dist1, dist2, rep) {
 #' @param   alpha     alpha level for 1-alpha confidence
 #' @param   n         sample size 
 #' @param   cor       population Spearman correlation
-#' @param   dist1     type of distribution at level 1 (1, 2, 3, 4, or 5)
-#' @param   dist2     type of distribution at level 2 (1, 2, 3, 4, or 5)
+#' @param   dist1     type of distribution for variable 1 (1, 2, 3, 4, or 5)
+#' @param   dist2     type of distribution for variable 2 (1, 2, 3, 4, or 5)
 #' * 1 = Gaussian (skewness = 0 and excess kurtosis = 0) 
 #' * 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
 #' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
@@ -1668,9 +1669,9 @@ sim.ci.cor <- function(alpha, n, cor, dist1, dist2, rep) {
 #' 
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Coverage - probability of confidence interval including population mean  
-#' * Lower Error - probability of lower limit greater than population mean
-#' * Upper Error - probability of upper limit less than population mean
+#' * Coverage - probability of confidence interval including population correlation  
+#' * Lower Error - probability of lower limit greater than population correlation
+#' * Upper Error - probability of upper limit less than population corrrelation
 #' * Ave CI Width - average confidence interval width
 #'
 #'
