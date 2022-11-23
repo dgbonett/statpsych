@@ -1962,11 +1962,11 @@ ci.sign1 <- function(alpha, y, h) {
 #' Computes a distribution-free confidence interval for the Mann-Whitney 
 #' parameter (a "common language effect size"). In a 2-group experiment, this
 #' parameter is the proportion of members in the population with scores that 
-#' would be higher under treatment 2 than treatment 1. In a 2-group 
+#' would be higher under treatment 1 than treatment 2. In a 2-group 
 #' nonexperiment where participants are sampled from two subpopulations of 
 #' sizes N1 and N2, the parameter is the proportion of all N1 x N2 pairs in 
-#' which a member from subpopulation 2 has a larger score than a member from 
-#' subpopulation 1.
+#' which a member from subpopulation 1 has a larger score than a member from 
+#' subpopulation 2.
 #'
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
@@ -1989,7 +1989,7 @@ ci.sign1 <- function(alpha, y, h) {
 #' @examples
 #' y1 <- c(32, 39, 26, 35, 43, 27, 40, 37, 34, 29)
 #' y2 <- c(36, 44, 47, 42, 49, 39, 46, 31, 33, 48)
-#' ci.mann(.05, y1, y2)
+#' ci.mann(.05, y2, y1)
 #'
 #' # Should return:
 #' #      Estimate        SE        LL UL
@@ -2015,7 +2015,7 @@ ci.mann <- function(alpha, y1, y2){
  a2 <- sum((r2 - seq2)^2)
  v1 <- (a1 - n1*(m1 - (n1 + 1)/2)^2)/((n1 - 1)*n^2)
  v2 <- (a2 - n2*(m2 - (n2 + 1)/2)^2)/((n2 - 1)*n^2)
- u <- sum(r2) - n2*(n2 + 1)/2
+ u <- sum(r1) - n1*(n1 + 1)/2
  est <- u/(n1*n2)
  se <- sqrt((n2*v1 + n1*v2)/(n1*n2))
  ll <- est - z*se
