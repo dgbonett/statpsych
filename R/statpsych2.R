@@ -492,7 +492,9 @@ ci.spear2 <- function(alpha, cor1, cor2, n1, n2) {
 #' Computes a confidence interval for a population mean absolute prediction
 #' error (MAPE) in a general linear model. The MAPE is a more robust 
 #' alternative to the residual standard deviation. This function requires a
-#' vector of estimated residuals from a general linear model.
+#' vector of estimated residuals from a general linear model. This confidence
+#' interval does not assume zero excess kurtosis but does assume symmetry of
+#' the population prediction errors.
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -525,14 +527,13 @@ ci.mape <- function(alpha, r, s) {
  df <- n - s - 1
  z <- qt(1 - alpha/2, df)
  c <- n/(n - (s + 2)/2)
- r <- sort(r)
  mape <- mean(abs(r))
  kur <- (sd(r)/mape)^2
  se <- sqrt((kur - 1)/df)
  ll <- exp(log(c*mape) - z*se)
  ul <- exp(log(c*mape) + z*se)
  out <- t(c(c*mape, ll, ul))
- colnames(out) <- c("MAPE", "LL", "UL")
+ colnames(out) <- c("Estimate", "LL", "UL")
  return(out)
 }
 
