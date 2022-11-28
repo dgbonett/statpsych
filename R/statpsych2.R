@@ -519,19 +519,19 @@ ci.spear2 <- function(alpha, cor1, cor2, n1, n2) {
 #' # [1,]    2.3744 1.751678 3.218499
 #'  
 #' 
-#' @importFrom stats qnorm
+#' @importFrom stats qt
 #' @importFrom stats sd
 #' @export
-ci.mape <- function(alpha, r, s) {
- n <- length(r)
+ci.mape <- function(alpha, res, s) {
+ n <- length(res)
  df <- n - s - 1
- z <- qt(1 - alpha/2, df)
+ t <- qt(1 - alpha/2, df)
  c <- n/(n - (s + 2)/2)
- mape <- mean(abs(r))
- kur <- (sd(r)/mape)^2
+ mape <- mean(abs(res))
+ kur <- (sd(res)/mape)^2
  se <- sqrt((kur - 1)/df)
- ll <- exp(log(c*mape) - z*se)
- ul <- exp(log(c*mape) + z*se)
+ ll <- exp(log(c*mape) - t*se)
+ ul <- exp(log(c*mape) + t*se)
  out <- t(c(c*mape, ll, ul))
  colnames(out) <- c("Estimate", "LL", "UL")
  return(out)
