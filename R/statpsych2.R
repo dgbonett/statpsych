@@ -498,7 +498,7 @@ ci.spear2 <- function(alpha, cor1, cor2, n1, n2) {
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
-#' @param  r      vector of residuals 
+#' @param  res    vector of residuals 
 #' @param  s	  number of predictor variables in model
 #'
 #'
@@ -510,9 +510,9 @@ ci.spear2 <- function(alpha, cor1, cor2, n1, n2) {
 #' 
 #' 
 #' @examples
-#' r <- c(-2.70, -2.69, -1.32, 1.02, 1.23, -1.46, 2.21, -2.10, 2.56,
+#' res <- c(-2.70, -2.69, -1.32, 1.02, 1.23, -1.46, 2.21, -2.10, 2.56,
 #'       -3.02, -1.55, 1.46, 4.02, 2.34)
-#' ci.mape(.05, r, 1)
+#' ci.mape(.05, res, 1)
 #'
 #' # Should return:
 #' #       Estimate       LL       UL
