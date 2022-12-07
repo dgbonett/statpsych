@@ -4039,7 +4039,7 @@ pi.score1 <- function(alpha, m, sd, n) {
 
 
 #  pi.score2 ================================================================== 
-#' Prediction interval for a difference of scores
+#' Prediction interval for a difference of scores in a 2-group experiment
 #'
 #'
 #' @description
