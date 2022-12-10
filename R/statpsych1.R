@@ -4106,6 +4106,59 @@ pi.score2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 }
 
 
+#  pi.score.ps ================================================================ 
+#' Prediction interval for difference of scores in a 2-level within-subjects 
+#' experiment
+#'
+#'
+#' @description
+#' For a 2-level within-subjects experiment, this function computes a 
+#' prediction interval for how the response variable score for one randomly 
+#' selected person from the study population would differ under the two 
+#' treatment conditions. 
+#'
+#'
+#' @param  alpha  alpha level for 1-alpha confidence 
+#' @param  m1     estimated mean from group 1
+#' @param  m2     estimated mean from group 2
+#' @param  sd1    estimated standard deviation from group 1
+#' @param  sd2    estimated standard deviation from group 2
+#' @param  cor    estimated correlation of paired scores
+#' @param  n      sample size
+#'
+#'
+#' @return 
+#' Returns a 1-row matrix. The columns are:
+#' * Predicted - predicted difference in scores
+#' * df - degrees of freedom
+#' * LL - lower limit of the prediction interval
+#' * UL - upper limit of the prediction interval
+#'
+#'
+#' @examples
+#' pi.score.ps(.05, 265.1, 208.6, 23.51, 19.94, .814, 30)
+#'
+#' # Should return:
+#' #      Predicted df       LL       UL
+#' # [1,]      56.5 29 28.05936 84.94064
+#'  
+#' 
+#' @importFrom stats qt
+#' @export
+pi.score.ps <- function(alpha, m1, m2, sd1, sd2, cor, n) {
+ df <- n - 1
+ tcrit <- qt(1 - alpha/2, df)
+ est <- m1 - m2
+ var <- sd1^2 + sd2^2 - 2*cor*sd1*sd2
+ se <- sqrt(var + var/n)
+ ll <- est - tcrit*se
+ ul <- est + tcrit*se
+ out <- t(c(est, df, ll, ul))
+ colnames(out) <- c("Predicted", "df", "LL", "UL")
+ return(out)
+}
+
+
 #  random.sample ==============================================================
 #' Generate a random sample
 #'
