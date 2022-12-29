@@ -14,9 +14,9 @@ sim.ci.spear(alpha, n, cor, dist1, dist2, rep)
 
 \item{cor}{population Spearman correlation}
 
-\item{dist1}{type of distribution at level 1 (1, 2, 3, 4, or 5)}
+\item{dist1}{type of distribution for variable 1 (1, 2, 3, 4, or 5)}
 
-\item{dist2}{type of distribution at level 2 (1, 2, 3, 4, or 5)
+\item{dist2}{type of distribution for variable 2 (1, 2, 3, 4, or 5)
 \itemize{
 \item 1 = Gaussian (skewness = 0 and excess kurtosis = 0)
 \item 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
@@ -30,9 +30,9 @@ sim.ci.spear(alpha, n, cor, dist1, dist2, rep)
 \value{
 Returns a 1-row matrix. The columns are:
 \itemize{
-\item Coverage - probability of confidence interval including population mean
-\item Lower Error - probability of lower limit greater than population mean
-\item Upper Error - probability of upper limit less than population mean
+\item Coverage - probability of confidence interval including population correlation
+\item Lower Error - probability of lower limit greater than population correlation
+\item Upper Error - probability of upper limit less than population corrrelation
 \item Ave CI Width - average confidence interval width
 }
 }

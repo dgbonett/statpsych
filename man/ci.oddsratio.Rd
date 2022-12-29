@@ -20,7 +20,7 @@ ci.oddsratio(alpha, f00, f01, f10, f11)
 \value{
 Returns a 1-row matrix. The columns are:
 \itemize{
-\item Estimate - estimate of proportion ratio
+\item Estimate - estimate of odds ratio
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval
 }

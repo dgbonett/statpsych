@@ -10,9 +10,9 @@ ci.lc.mean.bs(alpha, m, sd, n, v)
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
 
-\item{m}{vector of group estimated means}
+\item{m}{vector of estimated group means}
 
-\item{sd}{vector of group estimated standard deviations}
+\item{sd}{vector of estimated group standard deviations}
 
 \item{n}{vector of sample sizes}
 

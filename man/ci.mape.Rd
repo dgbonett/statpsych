@@ -4,19 +4,19 @@
 \alias{ci.mape}
 \title{Confidence interval for a mean absolute prediction error}
 \usage{
-ci.mape(alpha, r, s)
+ci.mape(alpha, res, s)
 }
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
 
-\item{r}{vector of residuals}
+\item{res}{vector of residuals}
 
 \item{s}{number of predictor variables in model}
 }
 \value{
 Returns a 1-row matrix. The columns are:
 \itemize{
-\item MAPE - estimated mean absolute prediction error
+\item Estimate - estimated mean absolute prediction error
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval
 }
@@ -25,16 +25,18 @@ Returns a 1-row matrix. The columns are:
 Computes a confidence interval for a population mean absolute prediction
 error (MAPE) in a general linear model. The MAPE is a more robust
 alternative to the residual standard deviation. This function requires a
-vector of estimated residuals from a general linear model.
+vector of estimated residuals from a general linear model. This confidence
+interval does not assume zero excess kurtosis but does assume symmetry of
+the population prediction errors.
 }
 \examples{
-r <- c(-2.70, -2.69, -1.32, 1.02, 1.23, -1.46, 2.21, -2.10, 2.56,
+res <- c(-2.70, -2.69, -1.32, 1.02, 1.23, -1.46, 2.21, -2.10, 2.56,
       -3.02, -1.55, 1.46, 4.02, 2.34)
-ci.mape(.05, r, 1)
+ci.mape(.05, res, 1)
 
 # Should return:
-#        MAPE       LL       UL
-# [1,] 2.3744 1.751678 3.218499
+#       Estimate       LL       UL
+# [1,]    2.3744 1.751678 3.218499
  
 
 }

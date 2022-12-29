@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statpsych</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.1</span>
       </span>
     </div>
 
@@ -171,7 +171,8 @@ subjects design</p></td>
       </tr><tr><td>
           <p><code><a href="ci.lc.reg.html">ci.lc.reg()</a></code> </p>
         </td>
-        <td><p>Confidence interval for a linear contrast of regression coefficients</p></td>
+        <td><p>Confidence interval for a linear contrast of regression coefficients in
+multiple group regression model</p></td>
       </tr><tr><td>
           <p><code><a href="ci.lc.stdmean.bs.html">ci.lc.stdmean.bs()</a></code> </p>
         </td>
@@ -348,6 +349,10 @@ stratified sampling</p></td>
         </td>
         <td><p>Confidence interval for a tetrachoric correlation</p></td>
       </tr><tr><td>
+          <p><code><a href="ci.theil.html">ci.theil()</a></code> </p>
+        </td>
+        <td><p>Theil-Sen estimate and confidence interval for slope</p></td>
+      </tr><tr><td>
           <p><code><a href="ci.tukey.html">ci.tukey()</a></code> </p>
         </td>
         <td><p>Tukey-Kramer confidence intervals for all pairwise mean differences in a
@@ -360,6 +365,23 @@ betwen-subjects design</p></td>
           <p><code><a href="ci.yule.html">ci.yule()</a></code> </p>
         </td>
         <td><p>Confidence interval for Yule's Q</p></td>
+      </tr></tbody><tbody><tr><th colspan="2">
+          <h2 id="prediction-intervals">Prediction intervals <a href="#prediction-intervals" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p><p>Prediction intervals</p>
+        </th>
+      </tr></tbody><tbody><tr><td>
+          <p><code><a href="pi.score.ps.html">pi.score.ps()</a></code> </p>
+        </td>
+        <td><p>Prediction interval for difference of scores in a 2-level within-subjects
+experiment</p></td>
+      </tr><tr><td>
+          <p><code><a href="pi.score1.html">pi.score1()</a></code> </p>
+        </td>
+        <td><p>Prediction interval for one score</p></td>
+      </tr><tr><td>
+          <p><code><a href="pi.score2.html">pi.score2()</a></code> </p>
+        </td>
+        <td><p>Prediction interval for a difference of scores in a 2-group experiment</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
           <h2 id="tests">Tests <a href="#tests" class="anchor" aria-hidden="true"></a></h2>
           <p class="section-desc"></p><p>Hypothesis tests</p>
@@ -441,12 +463,12 @@ interval</p></td>
       </tr><tr><td>
           <p><code><a href="size.ci.lc.stdmean.bs.html">size.ci.lc.stdmean.bs()</a></code> </p>
         </td>
-        <td><p>Sample size for a between-subjects standardized mean linear contrast
+        <td><p>Sample size for a between-subjects standardized linear contrast of means
 confidence interval</p></td>
       </tr><tr><td>
           <p><code><a href="size.ci.lc.stdmean.ws.html">size.ci.lc.stdmean.ws()</a></code> </p>
         </td>
-        <td><p>Sample size for a within-subjects standardized mean linear contrast
+        <td><p>Sample size for a within-subjects standardized linear contrast of means
 confidence interval</p></td>
       </tr><tr><td>
           <p><code><a href="size.ci.mean.ps.html">size.ci.mean.ps()</a></code> </p>
@@ -631,17 +653,37 @@ difference</p></td>
       </tr><tr><td>
           <p><code><a href="sim.ci.mean2.html">sim.ci.mean2()</a></code> </p>
         </td>
-        <td><p>Simulates confidence interval coverage probability for a two-group mean
+        <td><p>Simulates confidence interval coverage probability for a 2-group mean
 difference</p></td>
+      </tr><tr><td>
+          <p><code><a href="sim.ci.median.ps.html">sim.ci.median.ps()</a></code> </p>
+        </td>
+        <td><p>Simulates confidence interval coverage probability for a median difference
+in a paired-samples design</p></td>
       </tr><tr><td>
           <p><code><a href="sim.ci.median1.html">sim.ci.median1()</a></code> </p>
         </td>
         <td><p>Simulates confidence interval coverage probability for single median</p></td>
       </tr><tr><td>
+          <p><code><a href="sim.ci.median2.html">sim.ci.median2()</a></code> </p>
+        </td>
+        <td><p>Simulates confidence interval coverage probability for a median difference
+in a 2-group design</p></td>
+      </tr><tr><td>
           <p><code><a href="sim.ci.spear.html">sim.ci.spear()</a></code> </p>
         </td>
         <td><p>Simulates confidence interval coverage probability for a Spearman
 correlation</p></td>
+      </tr><tr><td>
+          <p><code><a href="sim.ci.stdmean.ps.html">sim.ci.stdmean.ps()</a></code> </p>
+        </td>
+        <td><p>Simulates confidence interval coverage probability for a standardized mean
+difference in a paired-samples design</p></td>
+      </tr><tr><td>
+          <p><code><a href="sim.ci.stdmean2.html">sim.ci.stdmean2()</a></code> </p>
+        </td>
+        <td><p>Simulates confidence interval coverage probability for a standardized mean
+difference in a 2-group design</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
           <h2 id="miscellaneous">Miscellaneous <a href="#miscellaneous" class="anchor" aria-hidden="true"></a></h2>
           <p class="section-desc"></p><p>Other functions, including functions for simulating data</p>
@@ -665,7 +707,7 @@ correlation</p></td>
       </tr><tr><td>
           <p><code><a href="pi.score2.html">pi.score2()</a></code> </p>
         </td>
-        <td><p>Prediction interval for a difference of scores</p></td>
+        <td><p>Prediction interval for a difference of scores in a 2-group experiment</p></td>
       </tr><tr><td>
           <p><code><a href="random.sample.html">random.sample()</a></code> </p>
         </td>

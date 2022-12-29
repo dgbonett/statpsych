@@ -24,7 +24,8 @@ Returns a vector of randomly generated scores.
 }
 \description{
 Generates a random sample of scores from a normal distribution with a
-specified population mean and standard deviation.
+specified population mean and standard deviation. This functions is useful
+for generating hypothetical data for classroom demonstrations.
 }
 \examples{
 random.y(10, 3.6, 2.8, 1, 7, 0) 

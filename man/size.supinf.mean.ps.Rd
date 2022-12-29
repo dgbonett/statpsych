@@ -11,7 +11,7 @@ size.supinf.mean.ps(alpha, pow, var, es, cor, h)
 
 \item{pow}{desired power}
 
-\item{var}{planning value of average within-group variance}
+\item{var}{planning value of average variance of the two measurements}
 
 \item{es}{planning value of mean difference}
 
@@ -29,10 +29,9 @@ paired-samples design. For a superiority test, specify the upper limit (h)
 for the range of practical equivalence and specify an effect size (es) such
 that es > h. For a noninferiority test, specify the lower limit (-h) for
 the range of practical equivalence and specify an effect size such that
-es > -h.  Set the correlation planning value to the smallest value within a
-plausible range for a conservatively large sample size. Set the variance
-planning value to the largest value within a plausible range for a
-conservatively large sample size.
+es > -h.  Set the Pearson correlation planning value to the smallest value
+within a plausible range, and set the variance planning value to the largest
+value within a plausible range for a conservatively large sample size.
 }
 \examples{
 size.supinf.mean.ps(.05, .80, 225, 9, .75, 4)

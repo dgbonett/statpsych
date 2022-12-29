@@ -26,7 +26,8 @@ Returns a 1-row matrix. The columns are:
 }
 \description{
 Computes a confidence interval for a ratio of population dispersion
-coefficients (MAD/median). Ratio-scale scores are assumed.
+coefficients (MAD/median) in a 2-group design. Ratio-scale scores are
+assumed.
 }
 \examples{
 y1 <- c(32, 39, 26, 35, 43, 27, 40, 37, 34, 29)

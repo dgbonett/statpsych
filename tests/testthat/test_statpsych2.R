@@ -110,7 +110,7 @@ test_that("ci.spear2 returns valid matrix", {
 
 test_that("ci.mape returns valid matrix", {
   colnames_expected <- c(
-    "MAPE", "LL", "UL"
+    "Estimate", "LL", "UL"
   )
   
   r <- c(-2.70, -2.69, -1.32, 1.02, 1.23, -1.46, 2.21, -2.10, 2.56,
@@ -335,6 +335,21 @@ test_that("ci.lc.glm returns valid matrix", {
   b
   res <- ci.lc.glm(.05, n, b, V, q)
   
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+test_that("ci.theil returns valid matrix", {
+  colnames_expected <- c(
+    "Estimate", "SE", "LL", "UL"
+  )
+  
+  y <- c(21, 4, 9, 12, 35, 18, 10, 22, 24, 1, 6, 8, 13, 16, 19)
+  x <- c(67, 28, 30, 28, 52, 40, 25, 37, 44, 10, 14, 20, 28, 40, 51)
+  res <- ci.theil(.05, y, x)
+
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)

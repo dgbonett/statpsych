@@ -25,8 +25,8 @@ Returns a 1-row matrix. The columns are:
 }
 }
 \description{
-Computes a confidence interval for a 2-group difference of population
-medians.
+Computes a confidence interval for a difference of population medians in
+a 2-group design.
 }
 \examples{
 y1 <- c(32, 39, 26, 35, 43, 27, 40, 37, 34, 29)

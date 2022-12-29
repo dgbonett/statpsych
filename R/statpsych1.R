@@ -1367,7 +1367,7 @@ ci.cod1 <-function(alpha, y) {
  LL = exp(L1 - U2)
  UL = exp(U1 - L2)
  out = t(c(cod, LL, UL))
- colnames(out) = c("Eestimate", "LL", "UL")
+ colnames(out) = c("Estimate", "LL", "UL")
  return(out)
 }
 
@@ -1987,8 +1987,8 @@ ci.sign1 <- function(alpha, y, h) {
 #'
 #'
 #' @examples
-#' y1 <- c(36, 44, 47, 42, 49, 39, 46, 31, 33, 48)
-#' y2 <- c(32, 39, 26, 35, 43, 27, 40, 37, 34, 29)
+#' y2 <- c(36, 44, 47, 42, 49, 39, 46, 31, 33, 48)
+#' y1 <- c(32, 39, 26, 35, 43, 27, 40, 37, 34, 29)
 #' ci.mann(.05, y1, y2)
 #'
 #' # Should return:
@@ -5289,7 +5289,7 @@ sim.ci.stdmean2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2, d, rep) {
 #' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
 #' * 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
 #' * 5 = large skew (skewness = 2 and excess kurtosis = 6)
-#' @param   popd     population standardized mean difference 
+#' @param   d     population standardized mean difference 
 #' @param   rep      number of Monte Carlo samples
 #'  
 #' 

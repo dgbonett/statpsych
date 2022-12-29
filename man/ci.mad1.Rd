@@ -14,7 +14,7 @@ ci.mad1(alpha, y)
 \value{
 Returns a 1-row matrix. The columns are:
 \itemize{
-\item MAD - estimated mean absolute deviation
+\item Estimate - estimated mean absolute deviation
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval
 }
@@ -30,8 +30,8 @@ y <- c(30, 20, 15, 10, 10, 60, 20, 25, 20, 30, 10, 5, 50, 40,
 ci.mad1(.05, y)
 
 # Should return:
-#       MAD       LL       UL
-# [1,] 12.5 7.962667 19.62282
+#       Estimate       LL       UL
+# [1,]      12.5 7.962667 19.62282
 
 
 }

@@ -34,9 +34,10 @@ Returns a 2-row matrix. The columns are:
 }
 }
 \description{
-Computes a confidence interval for a population 2-group mean difference
-using the estimated means, estimated standard deviations, and sample sizes.
-Use the t.test function for raw data input.
+Computes equal variance and unequal variance confidence intervals for a
+population 2-group mean difference using the estimated means, estimated
+standard deviations, and sample sizes. Use the t.test function for raw data
+input.
 }
 \examples{
 ci.mean2(.05, 15.4, 10.3, 2.67, 2.15, 30, 20)

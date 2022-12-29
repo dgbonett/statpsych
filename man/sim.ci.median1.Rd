@@ -25,9 +25,9 @@ sim.ci.median1(alpha, n, dist, rep)
 \value{
 Returns a 1-row matrix. The columns are:
 \itemize{
-\item Coverage - probability of confidence interval including population mean
-\item Lower Error - probability of lower limit greater than population mean
-\item Upper Error - probability of upper limit less than population mean
+\item Coverage - probability of confidence interval including population median
+\item Lower Error - probability of lower limit greater than population mediann
+\item Upper Error - probability of upper limit less than population median
 \item Ave CI Width - average confidence interval width
 }
 }

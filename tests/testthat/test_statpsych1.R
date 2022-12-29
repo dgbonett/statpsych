@@ -107,7 +107,7 @@ test_that("ci.lc.stdmean.bs returns valid matrix", {
   res <- ci.lc.stdmean.bs(.05, m, sd, n, v)
   
   testthat::expect_equal(class(res), c("matrix", "array"))
-  testthat::expect_equal(dim(res), c(2, length(colnames_expected)))
+  testthat::expect_equal(dim(res), c(3, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)
 })
 
@@ -156,14 +156,14 @@ test_that("ci.lc.stdmean.ws returns valid matrix", {
   res <- ci.lc.stdmean.ws(.05, m, sd, .672, 20, q)
   
   testthat::expect_equal(class(res), c("matrix", "array"))
-  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(dim(res), c(2, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)
 })
 
 
 
 test_that("ci.mad1 returns valid matrix", {
-  colnames_expected <- c("MAD", "LL", "UL")
+  colnames_expected <- c("Estimate", "LL", "UL")
   
   y <- c(30, 20, 15, 10, 10, 60, 20, 25, 20, 30, 10, 5, 50, 40, 
          20, 10, 0, 20, 50)
@@ -202,7 +202,7 @@ test_that("ci.ratio.mad.ps returns valid matrix", {
 
 
 test_that("ci.cod1 returns valid matrix", {
-  colnames_expected <- c("COD", "LL", "UL")
+  colnames_expected <- c("Estimate", "LL", "UL")
   
   y <- c(30, 20, 15, 10, 10, 60, 20, 25, 20, 30, 10, 5, 50, 40,
          20, 10, 0, 20, 50)
@@ -215,7 +215,7 @@ test_that("ci.cod1 returns valid matrix", {
 
 
 test_that("ci.median1 returns valid matrix", {
-  colnames_expected <- c("Median", "SE", "LL", "UL")
+  colnames_expected <- c("Estimate", "SE", "LL", "UL")
   
   y <- c(30, 20, 15, 10, 10, 60, 20, 25, 20, 30, 10, 5, 50, 40,
          20, 10, 0, 20, 50)
@@ -377,7 +377,7 @@ test_that("size.ci.stdmean2 returns valid matrix", {
   res <- size.ci.stdmean2(.05, .75, .5, 1)
   
   testthat::expect_equal(class(res), c("matrix", "array"))
-  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(dim(res), c(2, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)
 })
 
@@ -432,7 +432,7 @@ test_that("size.ci.ratio.mean.ps returns valid number", {
 test_that("size.ci.lc.stdmean.ws returns valid matrix", {
   q <- c(.5, .5, -.5, -.5)
   res <- size.ci.lc.mean.ws(.05, 265, .8, 10, q)
-  
+
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(res[[1,1]], 11)
 })
@@ -788,3 +788,41 @@ test_that("test.mono.mean.bs returns valid matrix", {
   testthat::expect_equal(dim(res), c(3, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)
 })
+
+# Simulation tests commented out because they take too long for CRAN
+
+# test_that("sim.ci.median2 returns valid matrix", {
+#   colnames_expected <- c(
+#     "Coverage", "Lower Error", "Upper Error", "Ave CI Width"
+#   )
+#   
+#   res <- sim.ci.median2(.05, 20, 20, 2, 5, 4, 5000)
+#   
+#   testthat::expect_equal(class(res), c("matrix", "array"))
+#   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+#   testthat::expect_equal(colnames(res), colnames_expected)
+# })
+
+# test_that("sim.ci.median.ps returns valid matrix", {
+#   colnames_expected <- c(
+#     "Coverage", "Lower Error", "Upper Error", "Ave CI Width"
+#   )
+#   
+#   res <- sim.ci.median.ps(.05, 30, 1.5, .7, 4, 3, 2000)
+#   
+#   testthat::expect_equal(class(res), c("matrix", "array"))
+#   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+#   testthat::expect_equal(colnames(res), colnames_expected)
+# })
+# 
+# test_that("sim.ci.stdmean2 returns valid matrix", {
+#   colnames_expected <- c(
+#     "Coverage", "Lower Error", "Upper Error", "Ave CI Width", "Ave Est"
+#   )
+#   
+#   res <- sim.ci.stdmean2(.05, 20, 20, 1.5, 3, 4, .75, 5000)
+#   
+#   testthat::expect_equal(class(res), c("matrix", "array"))
+#   testthat::expect_equal(dim(res), c(2, length(colnames_expected)))
+#   testthat::expect_equal(colnames(res), colnames_expected)
+# })

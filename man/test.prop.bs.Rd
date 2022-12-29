@@ -13,9 +13,11 @@ test.prop.bs(f, n)
 }
 \value{
 Returns a 1-row matrix. The columns are:
-Chi-square - chi-square test statistic
-df - degrees of freedom
-p - p-value
+\itemize{
+\item Chi-square - chi-square test statistic
+\item df - degrees of freedom
+\item p - p-value
+}
 }
 \description{
 Computes a Pearson chi-square test for equal population proportions for a

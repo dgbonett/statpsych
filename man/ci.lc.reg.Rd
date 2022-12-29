@@ -2,7 +2,8 @@
 % Please edit documentation in R/statpsych2.R
 \name{ci.lc.reg}
 \alias{ci.lc.reg}
-\title{Confidence interval for a linear contrast of regression coefficients}
+\title{Confidence interval for a linear contrast of regression coefficients in
+multiple group regression model}
 \usage{
 ci.lc.reg(alpha, est, se, n, s, v)
 }
@@ -17,7 +18,7 @@ ci.lc.reg(alpha, est, se, n, s, v)
 
 \item{s}{number of predictor variables for each within-group model}
 
-\item{v}{vector of between-subject contrast coefficients}
+\item{v}{vector of contrast coefficients}
 }
 \value{
 Returns a 1-row matrix. The columns are:

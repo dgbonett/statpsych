@@ -28,11 +28,11 @@ proportions with desired power in a paired-samples design. This function
 requires planning values for both proportions and a phi coefficient that
 describes the correlation between the two dichotomous measurements. The
 proportion planning values can set to .5 for a conservatively large sample
-size. The planning value for the proportion difference could be set equal
-to the difference of the two proportion planning values or it could be set
-equal to a minimally interesting effect size. Set the phi correlation
-planning value to the smallest value within a plausible range for a
-conservatively large sample size.
+size. The planning value for the effect size (proportion difference)
+could be set equal to the difference of the two proportion planning values
+or it could be set equal to a minimally interesting effect size. Set the
+phi correlation planning value to the smallest value within a plausible range
+for a conservatively large sample size.
 }
 \examples{
 size.test.prop.ps(.05, .80, .4, .3, .5, .1)

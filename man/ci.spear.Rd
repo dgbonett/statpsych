@@ -11,7 +11,7 @@ ci.spear(alpha, y, x)
 
 \item{y}{vector of y scores}
 
-\item{x}{vector of x scores}
+\item{x}{vector of x scores (paired with y)}
 }
 \value{
 Returns a 1-row matrix. The columns are:

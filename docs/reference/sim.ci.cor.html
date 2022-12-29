@@ -25,7 +25,7 @@ kurtosis are generated using the unonr function in the mnonr package."><!-- math
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statpsych</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.1</span>
       </span>
     </div>
 
@@ -68,7 +68,7 @@ kurtosis are generated using the unonr function in the mnonr package.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">sim.ci.cor</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">n</span>, <span class="va">cor</span>, <span class="va">dist1</span>, <span class="va">dist2</span>, <span class="va">rep</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">sim.ci.cor</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">n</span>, <span class="va">cor</span>, <span class="va">dist1</span>, <span class="va">dist2</span>, <span class="va">rep</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -86,11 +86,11 @@ kurtosis are generated using the unonr function in the mnonr package.</p>
 
 
 <dt>dist1</dt>
-<dd><p>type of distribution at level 1 (1, 2, 3, 4, or 5)</p></dd>
+<dd><p>type of distribution for variable 1 (1, 2, 3, 4, or 5)</p></dd>
 
 
 <dt>dist2</dt>
-<dd><p>type of distribution at level 2 (1, 2, 3, 4, or 5)</p><ul><li><p>1 = Gaussian (skewness = 0 and excess kurtosis = 0)</p></li>
+<dd><p>type of distribution for variable 2 (1, 2, 3, 4, or 5)</p><ul><li><p>1 = Gaussian (skewness = 0 and excess kurtosis = 0)</p></li>
 <li><p>2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)</p></li>
 <li><p>3 = leptokurtic (skewness = 0 and excess kurtsois = 6)</p></li>
 <li><p>4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)</p></li>
@@ -106,23 +106,23 @@ kurtosis are generated using the unonr function in the mnonr package.</p>
     <h2>Value</h2>
     
 
-<p>Returns a 1-row matrix. The columns are:</p><ul><li><p>Coverage - probability of confidence interval including population mean</p></li>
-<li><p>Lower Error - probability of lower limit greater than population mean</p></li>
-<li><p>Upper Error - probability of upper limit less than population mean</p></li>
+<p>Returns a 1-row matrix. The columns are:</p><ul><li><p>Coverage - probability of confidence interval including population correlation</p></li>
+<li><p>Lower Error - probability of lower limit greater than population correlation</p></li>
+<li><p>Upper Error - probability of upper limit less than population correlation</p></li>
 <li><p>Ave CI Width - average confidence interval width</p></li>
 </ul></div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">sim.ci.cor</span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">30</span>, <span class="fl">.7</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">1000</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">sim.ci.cor</span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">30</span>, <span class="fl">.7</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">1000</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      Coverage Lower Error Upper Error Ave CI Width</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]    0.937       0.036       0.027    0.3892392</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Should return (within sampling error):</span></span>
-<span class="r-in"><span class="co">#      Coverage Lower Error Upper Error Ave CI Width</span></span>
-<span class="r-in"><span class="co"># [1,]  0.93815     0.05125      0.0106    0.7778518</span></span>
-<span class="r-in"></span>
-<span class="r-in"></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]    0.926       0.053       0.021    0.3902553</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Should return (within sampling error):</span></span></span>
+<span class="r-in"><span><span class="co">#      Coverage Lower Error Upper Error Ave CI Width</span></span></span>
+<span class="r-in"><span><span class="co"># [1,]  0.93815     0.05125      0.0106    0.7778518</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>

@@ -14,7 +14,7 @@ ci.median1(alpha, y)
 \value{
 Returns a 1-row matrix. The columns are:
 \itemize{
-\item Median - estimated median
+\item Estimate - estimated median
 \item SE - standard error
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval
@@ -29,8 +29,8 @@ y <- c(30, 20, 15, 10, 10, 60, 20, 25, 20, 30, 10, 5, 50, 40,
 ci.median1(.05, y)
 
 # Should return:
-#      Median       SE LL UL
-# [1,]     20 4.270922 10 30
+#      Estimate       SE LL UL
+# [1,]       20 4.270922 10 30
 
 
 }

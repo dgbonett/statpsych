@@ -25,8 +25,8 @@ Computes the sample size in each group required to test a difference in
 population proportions with desired power in a 2-group design. This
 function requires planning values for both proportions. Set the proportion
 planning values to .5 for a conservatively large sample size. The
-planning value for the proportion difference could be set equal to
-the difference of the two proportion planning values or it could be set
+planning value for the effect size (proportion difference) could be set equal
+to the difference of the two proportion planning values or it could be set
 equal to a minimally interesting effect size.
 }
 \examples{

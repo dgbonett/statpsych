@@ -10,9 +10,9 @@ ci.lc.median.bs(alpha, m, se, v)
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
 
-\item{m}{vector of group estimated medians}
+\item{m}{vector of estimated group medians}
 
-\item{se}{vector of group standard errors}
+\item{se}{vector of standard errors}
 
 \item{v}{vector of between-subjects contrast coefficients}
 }

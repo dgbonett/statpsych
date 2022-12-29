@@ -24,16 +24,17 @@ Returns a 1-row matrix. The columns are:
 }
 \description{
 Computes a distribution-free confidence interval for the Mann-Whitney
-parameter. In a 2-group experiment, this parameter is the proportion of
-members in the population with scores that would be higher under treatment 1
-than treatment 2. In a 2-group nonexperiment where participants are sampled
-from two subpopulations of sizes N1 and N2, the parameter is the proportion
-of all N1 x N2 pairs in which a member from subpopulation 1 has a larger
-score than a member from subpopulation 2.
+parameter (a "common language effect size"). In a 2-group experiment, this
+parameter is the proportion of members in the population with scores that
+would be higher under treatment 1 than treatment 2. In a 2-group
+nonexperiment where participants are sampled from two subpopulations of
+sizes N1 and N2, the parameter is the proportion of all N1 x N2 pairs in
+which a member from subpopulation 1 has a larger score than a member from
+subpopulation 2.
 }
 \examples{
-y1 <- c(32, 39, 26, 35, 43, 27, 40, 37, 34, 29)
 y2 <- c(36, 44, 47, 42, 49, 39, 46, 31, 33, 48)
+y1 <- c(32, 39, 26, 35, 43, 27, 40, 37, 34, 29)
 ci.mann(.05, y1, y2)
 
 # Should return:

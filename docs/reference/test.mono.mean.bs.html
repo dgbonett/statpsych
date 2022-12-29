@@ -27,7 +27,7 @@ any upper limit is less than 0."><!-- mathjax --><script src="https://cdnjs.clou
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statpsych</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.1</span>
       </span>
     </div>
 
@@ -73,7 +73,7 @@ any upper limit is less than 0.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">test.mono.mean.bs</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">m</span>, <span class="va">sd</span>, <span class="va">n</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">test.mono.mean.bs</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">m</span>, <span class="va">sd</span>, <span class="va">n</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -107,22 +107,22 @@ of adjacent pairwise comparisons. The columns are:</p><ul><li><p>Estimate - esti
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">12.86</span>, <span class="fl">24.57</span>, <span class="fl">36.29</span>, <span class="fl">53.21</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">sd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">13.185</span>, <span class="fl">12.995</span>, <span class="fl">14.773</span>, <span class="fl">15.145</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">20</span>, <span class="fl">20</span>, <span class="fl">20</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">test.mono.mean.bs</span><span class="op">(</span><span class="fl">.05</span>, <span class="va">m</span>, <span class="va">sd</span>, <span class="va">n</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">12.86</span>, <span class="fl">24.57</span>, <span class="fl">36.29</span>, <span class="fl">53.21</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">sd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">13.185</span>, <span class="fl">12.995</span>, <span class="fl">14.773</span>, <span class="fl">15.145</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">20</span>, <span class="fl">20</span>, <span class="fl">20</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">test.mono.mean.bs</span><span class="op">(</span><span class="fl">.05</span>, <span class="va">m</span>, <span class="va">sd</span>, <span class="va">n</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      Estimate       SE        LL         UL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  1 2   -11.71 4.139530 -22.07803 -1.3419744</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  2 3   -11.72 4.399497 -22.74731 -0.6926939</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  3 4   -16.92 4.730817 -28.76921 -5.0707936</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Should return:</span></span>
-<span class="r-in"><span class="co">#     Estimate       SE        LL         UL</span></span>
-<span class="r-in"><span class="co"># 1 2   -11.71 4.139530 -22.07803 -1.3419744</span></span>
-<span class="r-in"><span class="co"># 2 3   -11.72 4.399497 -22.74731 -0.6926939</span></span>
-<span class="r-in"><span class="co"># 3 4   -16.92 4.730817 -28.76921 -5.0707936</span></span>
-<span class="r-in"></span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Should return:</span></span></span>
+<span class="r-in"><span><span class="co">#     Estimate       SE        LL         UL</span></span></span>
+<span class="r-in"><span><span class="co"># 1 2   -11.71 4.139530 -22.07803 -1.3419744</span></span></span>
+<span class="r-in"><span><span class="co"># 2 3   -11.72 4.399497 -22.74731 -0.6926939</span></span></span>
+<span class="r-in"><span><span class="co"># 3 4   -16.92 4.730817 -28.76921 -5.0707936</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>

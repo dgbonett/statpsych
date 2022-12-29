@@ -223,6 +223,9 @@
     <loc>https://dgbonett.github.io/statpsych/reference/ci.tetra.html</loc>
   </url>
   <url>
+    <loc>https://dgbonett.github.io/statpsych/reference/ci.theil.html</loc>
+  </url>
+  <url>
     <loc>https://dgbonett.github.io/statpsych/reference/ci.tukey.html</loc>
   </url>
   <url>
@@ -242,6 +245,9 @@
   </url>
   <url>
     <loc>https://dgbonett.github.io/statpsych/reference/iqv.html</loc>
+  </url>
+  <url>
+    <loc>https://dgbonett.github.io/statpsych/reference/pi.score.ps.html</loc>
   </url>
   <url>
     <loc>https://dgbonett.github.io/statpsych/reference/pi.score1.html</loc>
@@ -274,10 +280,22 @@
     <loc>https://dgbonett.github.io/statpsych/reference/sim.ci.mean2.html</loc>
   </url>
   <url>
+    <loc>https://dgbonett.github.io/statpsych/reference/sim.ci.median.ps.html</loc>
+  </url>
+  <url>
     <loc>https://dgbonett.github.io/statpsych/reference/sim.ci.median1.html</loc>
   </url>
   <url>
+    <loc>https://dgbonett.github.io/statpsych/reference/sim.ci.median2.html</loc>
+  </url>
+  <url>
     <loc>https://dgbonett.github.io/statpsych/reference/sim.ci.spear.html</loc>
+  </url>
+  <url>
+    <loc>https://dgbonett.github.io/statpsych/reference/sim.ci.stdmean.ps.html</loc>
+  </url>
+  <url>
+    <loc>https://dgbonett.github.io/statpsych/reference/sim.ci.stdmean2.html</loc>
   </url>
   <url>
     <loc>https://dgbonett.github.io/statpsych/reference/size.ci.agree.html</loc>
