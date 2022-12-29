@@ -429,10 +429,10 @@ ci.slope.mean.bs <- function(alpha, m, sd, n, x) {
 #'                     
 #' @description
 #' Computes simultaneous confidence intervals for all adjacent pairwise
-#' comparisons of population means using estimated means, estimated 
-#' standard deviations, and samples sizes as input. Equal variances are not 
-#' assumed. A Satterthwaite adjustment to the degrees of freedom is used to 
-#' improve the accuracy of the confidence intervals. If one or more lower
+#' comparisons of population means using estimated group means, estimated 
+#' group standard deviations, and samples sizes as input. Equal variances are 
+#' not assumed. A Satterthwaite adjustment to the degrees of freedom is used  
+#' to improve the accuracy of the confidence intervals. If one or more lower
 #' limits are greater than 0 and no upper limit is less than 0, then conclude
 #' that the population means are monotoic decreasing. If one or more upper 
 #' limits are less than 0 and no lower limits are greater than 0, then
@@ -442,8 +442,8 @@ ci.slope.mean.bs <- function(alpha, m, sd, n, x) {
 #'
 #'
 #' @param  alpha   alpha level for simultaneous 1-alpha confidence
-#' @param  m       vector of estimated means
-#' @param  sd      vector of estimated standard deviations
+#' @param  m       vector of estimated group means
+#' @param  sd      vector of estimated group standard deviations
 #' @param  n       vector of sample sizes
 #'
 #'
@@ -2687,7 +2687,7 @@ ci.2x2.mean.bs <- function(alpha, y11, y12, y21, y22) {
 #' 
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Skewness - Estimate of skewness coefficient
+#' * Skewness - estimate of skewness coefficient
 #' * p - Monte Carlo two-sided p-value for test of zero skewness
 #'
 #'
@@ -2745,8 +2745,8 @@ test.skew <- function(y) {
 #' 
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Kurtosis - Estimate of kurtosis coefficient
-#' * Excess - Estimate of excess kurtosis (kurtosis - 3)
+#' * Kurtosis - estimate of kurtosis coefficient
+#' * Excess - estimate of excess kurtosis (kurtosis - 3)
 #' * p - Monte Carlo two-sided p-value for test of zero excess kurtosis
 #'
 #'
