@@ -4345,12 +4345,13 @@ etasqr.adj <- function(etasqr, dfeffect, dferror) {
 #' @description
 #' Computes the F statistic, p-value, eta-squared, and adjusted eta-squared 
 #' for the main effect of Factor A in a one-way between-subjects ANOVA using
-#' the estimated means, estimated standard deviations, and sample sizes.  
+#' the estimated group means, estimated group standard deviations, and group
+#' sample sizes.  
 #'
 #'
-#' @param   m       vector of estimated means
-#' @param   sd      vector of estimated standard deviations
-#' @param   n       vector of sample sizes
+#' @param   m       vector of estimated group means
+#' @param   sd      vector of estimated group standard deviations
+#' @param   n       vector of group sample sizes
 #'
 #'
 #' @return 
