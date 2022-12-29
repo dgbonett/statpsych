@@ -3269,56 +3269,6 @@ size.ci.lc.stdmean.ws <- function(alpha, d, cor, w, q) {
 }
 
 
-#  size.ci.lc.stdmean.ws =======================================================
-#' Sample size for a within-subjects standardized mean linear contrast 
-#' confidence interval
-#'
-#'
-#' @description
-#' Computes the sample size required to estimate a standardized linear 
-#' contrast of population means with desired confidence interval precision
-#' in a within-subjects design. Set the standardized mean difference planning 
-#' value to the largest value within a plausible range for a conservatively 
-#' large sample size. Set the pearson correlation planning value to the smallest
-#' value within a plausible range for a conservatively large sample size.
-#'
-#'
-#' @param  alpha  alpha level for 1-alpha confidence
-#' @param  d      planning value of standardized linear contrast  
-#' @param  cor    planning value of average correlation between measurements
-#' @param  w      desired confidence interval width
-#' @param  q      vector of within-subjects contrast coefficients 
-#'
-#'
-#' @references
-#' \insertRef{Bonett2009}{statpsych}
-#'
-#'
-#' @return 
-#' Returns the required sample size 
-#'
-#'
-#' @examples
-#' q <- c(.5, .5, -.5, -.5)
-#' size.ci.lc.stdmean.ws(.05, 1, .7, .6, q)
-#'
-#' # Should return:
-#' #      Sample size
-#' # [1,]          26
-#'  
-#' 
-#' @importFrom stats qnorm
-#' @export
-size.ci.lc.stdmean.ws <- function(alpha, d, cor, w, q) {
- z <- qnorm(1 - alpha/2)
- a <- length(q)
- n <- ceiling(4*(d^2*(1 + (a - 1)*cor^2)/(2*a) + (1 - cor)*(t(q)%*%q))*(z/w)^2)
- out <- matrix(n, nrow = 1, ncol = 1)
- colnames(out) <- "Sample size"
- return(out)
-}
-
-
 #  size.ci.cronbach ========================================================
 #' Sample size for a Cronbach reliability confidence interval
 #'
