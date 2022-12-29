@@ -1579,7 +1579,7 @@ test.prop1 <- function(f, n, h) {
 #'
 #' @description
 #' Computes a continuity-corrected z test for a difference of proportions in  
-#' in a 2-group design.
+#' a 2-group design.
 #'
 #'
 #' @param  f1      number of group 1 participants who have the attribute
