@@ -12,7 +12,7 @@ ci.lc.median.bs(alpha, m, se, v)
 
 \item{m}{vector of estimated group medians}
 
-\item{se}{vector of standard errors}
+\item{se}{vector of group standard errors}
 
 \item{v}{vector of between-subjects contrast coefficients}
 }

@@ -2,43 +2,55 @@ statpsych v1.3.0 (Release date: 2023/01/01)
 ==============
 
 Changes:
-* New functions
-  * ci.theil - Theil-Sen estimate and confidence interval for slope
-	* sim.ci.median2 -- Simulates confidence interval coverage probability for a median difference in a two-group design
-	* sim.ci.median.ps -- Simulates confidence interval coverage probability for a median difference in a paired design
-	* sim.ci.stdmean2 -- Simulates confidence interval coverage probability for a standardized mean difference in a two-group design
-* Updated outputs
-  * ci.lc.stdmean.ws -- first column is 'Estimate', no longer 'MAD'
-	* ci.ratio.mad.ps -- first column is 'Estimate', no longer 'COD'
-	* ci.cod2 -- first column is 'Estimate', no longer 'Median'
-	* ci.popsize -- first column is 'Estimate', no longer 'Cramer's V'
-	* ci.spear2 -- first column is 'Estimate', no longer 'MAPE'
-	* size.ci.mean2 -- now returns two rows, one for each standardizer
-	* size.ci.mean.ps -- now returns two rows, one for each standardizer
-	* size.ci.lc.stdmean.bs -- now returns two rows, one for each standardizer
-	* ci.lc.stdmean.ws -- now returns two rows, one for each standardizer
-	* size.ci.lc.stdmean.ws -- now returns two rows, one for each standardizer
-	* ci.stdmean.strat - now returns 3 rows, adding sample size for group 1 standardizer
-* Updated/tweaked documentation
-  * sim.ci.mean1
-	* sim.ci.mean2
-	* ci.mean2
-	* ci.ratio.median2
-	* ci.condslope
-	* ci.ratio.mad.ps
-	* ci.sign1
-	* ci.stdmean1
-	* ci.lc.median.bs
-	* ci.lc.median.bs
-	* ci.condslope.log
-	* ci.yule
-	* ci.mann
-	* ci.pairs.prop.bs
-	* ci.lc.mean.bs
-	* ci.lc.mean.bs
-	* randomize
-	* sim.ci.mean2
-	* sim.ci.mean.ps
+
+* New functions:
+    * ci.theil - Theil-Sen estimate and confidence interval for slope
+    * sim.ci.median2 -- Simulates confidence interval coverage probability for a median difference in a two-group design
+    * sim.ci.median.ps -- Simulates confidence interval coverage probability for a median difference in a paired design
+    * sim.ci.stdmean2 -- Simulates confidence interval coverage probability for a standardized mean difference in a two-group design
+* Updated outputs:
+    * ci.cod1 -- first column is 'Estimate', no longer 'COD'
+    * ci.cod2 -- first column is 'Estimate', no longer 'COD1'
+    * ci.cramer -- first column is 'Estimate', no longer 'Cramer's V'
+    * ci.lc.stdmean.bs - now returns 3 rows, adding sample size for group 1 standardizer
+    * ci.lc.stdmean.ws -- now returns two rows, one for each standardizer
+    * ci.mad1 -- first column is 'Estimate', no longer 'MAD'
+    * ci.mape -- first column is 'Estimate', no longer 'MAPE'
+    * size.ci.lc.stdmean.bs -- now returns two rows, one for each standardizer
+    * size.ci.lc.stdmean.ws -- now returns two rows, one for each standardizer
+    * size.ci.stdmean2 -- now returns two rows, one for each standardizer
+    * size.ci.stdmean.ps -- now returns two rows, one for each standardizer
+* Updated/tweaked documentation:
+    * ci.condslope
+    * ci.condslope.log
+    * ci.lc.mean.bs
+    * ci.lc.median.bs
+    * ci.mann
+    * ci.mean2
+    * ci.pairs.prop.bs
+    * ci.ratio.median2
+    * ci.ratio.mad.ps
+    * ci.sign1 -- tweaked example
+    * ci.stdmean1
+    * ci.yule
+    * randomize
+    * sim.ci.mean1
+    * sim.ci.mean2
+    * sim.ci.mean.ps
+    * size.supinf.mean2
+    * size.test.lc.prop.bs
+    * size.test.mean1
+    * size.test.prop1
+    * size.test.prop2
+    * size.test.prop.ps
+    * test.anova1.bs
+    * test.kurtosis
+    * test.mono.mean.bs
+    * test.mono.prop.bs
+    * test.prop2
+    * test.prop.bs
+    * test.prop.ps
+    * test.skew	
     
 
 statpsych v1.2.0 (Release date: 2022/08/15)

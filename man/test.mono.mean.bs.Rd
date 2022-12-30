@@ -9,9 +9,9 @@ test.mono.mean.bs(alpha, m, sd, n)
 \arguments{
 \item{alpha}{alpha level for simultaneous 1-alpha confidence}
 
-\item{m}{vector of estimated means}
+\item{m}{vector of estimated group means}
 
-\item{sd}{vector of estimated standard deviations}
+\item{sd}{vector of estimated group standard deviations}
 
 \item{n}{vector of sample sizes}
 }
@@ -27,10 +27,10 @@ of adjacent pairwise comparisons. The columns are:
 }
 \description{
 Computes simultaneous confidence intervals for all adjacent pairwise
-comparisons of population means using estimated means, estimated
-standard deviations, and samples sizes as input. Equal variances are not
-assumed. A Satterthwaite adjustment to the degrees of freedom is used to
-improve the accuracy of the confidence intervals. If one or more lower
+comparisons of population means using estimated group means, estimated
+group standard deviations, and samples sizes as input. Equal variances are
+not assumed. A Satterthwaite adjustment to the degrees of freedom is used
+to improve the accuracy of the confidence intervals. If one or more lower
 limits are greater than 0 and no upper limit is less than 0, then conclude
 that the population means are monotoic decreasing. If one or more upper
 limits are less than 0 and no lower limits are greater than 0, then

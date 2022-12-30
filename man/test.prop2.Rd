@@ -25,7 +25,7 @@ Returns a 1-row matrix. The columns are:
 }
 \description{
 Computes a continuity-corrected z test for a difference of proportions in
-in a 2-group design.
+a 2-group design.
 }
 \examples{
 test.prop2(11, 26, 50, 50)
