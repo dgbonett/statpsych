@@ -1691,7 +1691,7 @@ ci.ratio.median2 <- function(alpha, y1, y2) {
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
 #' @param  m       vector of estimated group medians
-#' @param  se      vector of standard errors 
+#' @param  se      vector of group standard errors 
 #' @param  v       vector of between-subjects contrast coefficients
 #'
 #'
