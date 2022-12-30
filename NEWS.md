@@ -8,6 +8,7 @@ Changes:
     * sim.ci.median2 -- Simulates confidence interval coverage probability for a median difference in a two-group design
     * sim.ci.median.ps -- Simulates confidence interval coverage probability for a median difference in a paired design
     * sim.ci.stdmean2 -- Simulates confidence interval coverage probability for a standardized mean difference in a two-group design
+    * pi.score.ps -- Prediction interval for difference of scores in a 2-level within-subjects experiment
 * Updated outputs:
     * ci.cod1 -- first column is 'Estimate', no longer 'COD'
     * ci.cod2 -- first column is 'Estimate', no longer 'COD1'
@@ -20,6 +21,9 @@ Changes:
     * size.ci.lc.stdmean.ws -- now returns two rows, one for each standardizer
     * size.ci.stdmean2 -- now returns two rows, one for each standardizer
     * size.ci.stdmean.ps -- now returns two rows, one for each standardizer
+    * ci.mann -- now returns a confidence interval for P(y1 > y2) rather than P(y1 < y2).
+* Error Correction:
+    * ci.lc.std.mean.ws -- corrected an error in the standard error
 * Updated/tweaked documentation:
     * ci.condslope
     * ci.condslope.log
