@@ -23,38 +23,7 @@ Changes:
     * size.ci.stdmean.ps -- now returns two rows, one for each standardizer
     * ci.mann -- now returns a confidence interval for P(y1 > y2) rather than P(y1 < y2).
 * Error Correction:
-    * ci.lc.std.mean.ws -- corrected an error in the standard error
-* Updated/tweaked documentation:
-    * ci.condslope
-    * ci.condslope.log
-    * ci.lc.mean.bs
-    * ci.lc.median.bs
-    * ci.mann
-    * ci.mean2
-    * ci.pairs.prop.bs
-    * ci.ratio.median2
-    * ci.ratio.mad.ps
-    * ci.sign1 -- tweaked example
-    * ci.stdmean1
-    * ci.yule
-    * randomize
-    * sim.ci.mean1
-    * sim.ci.mean2
-    * sim.ci.mean.ps
-    * size.supinf.mean2
-    * size.test.lc.prop.bs
-    * size.test.mean1
-    * size.test.prop1
-    * size.test.prop2
-    * size.test.prop.ps
-    * test.anova1.bs
-    * test.kurtosis
-    * test.mono.mean.bs
-    * test.mono.prop.bs
-    * test.prop2
-    * test.prop.bs
-    * test.prop.ps
-    * test.skew	
+    * ci.lc.std.mean.ws -- corrected an error in the standard errord
     
 
 statpsych v1.2.0 (Release date: 2022/08/15)
