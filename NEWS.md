@@ -4,7 +4,7 @@ statpsych v1.3.0 (Release date: 2023/01/01)
 Changes:
 
 * New functions:
-    * ci.theil - Theil-Sen estimate and confidence interval for slope
+    * ci.theil -- Theil-Sen estimate and confidence interval for slope
     * sim.ci.median2 -- Simulates confidence interval coverage probability for a median difference in a two-group design
     * sim.ci.median.ps -- Simulates confidence interval coverage probability for a median difference in a paired design
     * sim.ci.stdmean2 -- Simulates confidence interval coverage probability for a standardized mean difference in a two-group design
@@ -13,7 +13,7 @@ Changes:
     * ci.cod1 -- first column is 'Estimate', no longer 'COD'
     * ci.cod2 -- first column is 'Estimate', no longer 'COD1'
     * ci.cramer -- first column is 'Estimate', no longer 'Cramer's V'
-    * ci.lc.stdmean.bs - now returns 3 rows, adding sample size for group 1 standardizer
+    * ci.lc.stdmean.bs -- now returns 3 rows, adding sample size for group 1 standardizer
     * ci.lc.stdmean.ws -- now returns two rows, one for each standardizer
     * ci.mad1 -- first column is 'Estimate', no longer 'MAD'
     * ci.mape -- first column is 'Estimate', no longer 'MAPE'
