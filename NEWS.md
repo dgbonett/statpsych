@@ -1,4 +1,4 @@
-statpsych v1.3.0 (Release date: 2023/01/01)
+statpsych v1.3.0 (Release date: 2023/01/06)
 ==============
 
 Changes:
@@ -7,23 +7,22 @@ Changes:
     * ci.theil -- Theil-Sen estimate and confidence interval for slope
     * sim.ci.median2 -- Simulates confidence interval coverage probability for a median difference in a two-group design
     * sim.ci.median.ps -- Simulates confidence interval coverage probability for a median difference in a paired design
-    * sim.ci.stdmean2 -- Simulates confidence interval coverage probability for a standardized mean difference in a two-group design
+    * sim.ci.stdmean2 -- Simulates confidence interval coverage probability for a standardized mean difference in a 2-group design
     * pi.score.ps -- Prediction interval for difference of scores in a 2-level within-subjects experiment
 * Updated outputs:
     * ci.cod1 -- first column is 'Estimate', no longer 'COD'
-    * ci.cod2 -- first column is 'Estimate', no longer 'COD1'
     * ci.cramer -- first column is 'Estimate', no longer 'Cramer's V'
-    * ci.lc.stdmean.bs -- now returns 3 rows, adding sample size for group 1 standardizer
-    * ci.lc.stdmean.ws -- now returns two rows, one for each standardizer
     * ci.mad1 -- first column is 'Estimate', no longer 'MAD'
     * ci.mape -- first column is 'Estimate', no longer 'MAPE'
-    * size.ci.lc.stdmean.bs -- now returns two rows, one for each standardizer
-    * size.ci.lc.stdmean.ws -- now returns two rows, one for each standardizer
-    * size.ci.stdmean2 -- now returns two rows, one for each standardizer
-    * size.ci.stdmean.ps -- now returns two rows, one for each standardizer
+    * ci.lc.stdmean.bs -- now returns 3 rows, adding results for group 1 standardizer
+    * ci.lc.stdmean.ws -- now returns two rows, adding results for level 1 standardizer
+    * size.ci.lc.stdmean.bs -- now returns two rows, adding result for  group 1 standardizer
+    * size.ci.lc.stdmean.ws -- now returns two rows, adding result for level 1 standardizer
+    * size.ci.stdmean2 -- now returns two rows, adding result for group 1 standardizer
+    * size.ci.stdmean.ps -- now returns two rows, adding result for level 1 standardizer
     * ci.mann -- now returns a confidence interval for P(y1 > y2) rather than P(y1 < y2).
-* Error Correction:
-    * ci.lc.std.mean.ws -- corrected an error in the standard errord
+* Error correction:
+    * ci.lc.std.mean.ws -- corrected an error in the standard error
     
 
 statpsych v1.2.0 (Release date: 2022/08/15)
@@ -48,7 +47,7 @@ Changes:
     * The ci.prop.ps function now outputs an adjusted point estimate of the proportion difference, as stated in the documentation, rather than an unadjusted estimate
     * The ci.cor, ci.cor2, and ci.cor.dep functions now uses a bias adjustment to reduce the bias of the Fisher transformed correlations
     * The ci.median1 function now uses the same standard error formula as the ci.median2, ci.ratio.median2, and ci.median.ps functions
-* Error Correction:
+* Error correction:
     * Corrected an error for the standard error computation in the ci.indirect function
     
 
