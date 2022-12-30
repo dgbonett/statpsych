@@ -32,16 +32,16 @@ sim.ci.mean.ps(alpha, n, sd.ratio, cor, dist1, dist2, rep)
 \value{
 Returns a 1-row matrix. The columns are:
 \itemize{
-\item Coverage - probability of confidence interval including population mean
-\item Lower Error - probability of lower limit greater than population mean
-\item Upper Error - probability of upper limit less than population mean
+\item Coverage - probability of confidence interval including population mean difference
+\item Lower Error - probability of lower limit greater than population mean difference
+\item Upper Error - probability of upper limit less than population mean difference
 \item Ave CI Width - average confidence interval width
 }
 }
 \description{
 Performs a computer simulation of confidence interval performance for a mean
 difference in a paired-samples design. Sample data within each level of the
-within-subjects factor group can be generated from bivariate population
+within-subjects factor can be generated from bivariate population
 distributions with five different marginal distributions. All distributions
 are scaled to have standard deviations of 1.0 at level 1. Bivariate random
 data with specified marginal skewness and kurtosis are generated using the

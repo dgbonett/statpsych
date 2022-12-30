@@ -10,16 +10,16 @@ ci.lc.stdmean.bs(alpha, m, sd, n, v)
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
 
-\item{m}{vector of group estimated means}
+\item{m}{vector of estimated group means}
 
-\item{sd}{vector of group estimated standard deviation}
+\item{sd}{vector of estimated group standard deviation}
 
 \item{n}{vector of sample sizes}
 
 \item{v}{vector of between-subjects contrast coefficients}
 }
 \value{
-Returns a 2-row matrix. The columns are:
+Returns a 3-row matrix. The columns are:
 \itemize{
 \item Estimate - bias adjusted standardized linear contrast
 \item SE - standard error
@@ -29,11 +29,11 @@ Returns a 2-row matrix. The columns are:
 }
 \description{
 Computes confidence intervals for a population standardized linear contrast
-of means in a between-subjects design. The square root weighted variance
-standardizer is recommended in 2-group nonexperimental designs with simple
-random sampling. The square root unweighted variance standardizer is
-recommended in 2-group experimental designs. Equality of variances is not
-assumed.
+of means in a between-subjects design. The unweighted standardizer is
+recommended in experimental designs. The weighted standardizer is
+recommended in nonexperimental designs with simple random sampling. The
+group 1 standardizer is useful in both experimental and nonexperimental
+designs. Equality of variances is not assumed.
 }
 \examples{
 m <- c(33.5, 37.9, 38.0, 44.1)
@@ -46,6 +46,7 @@ ci.lc.stdmean.bs(.05, m, sd, n, v)
 #                           Estimate        SE        LL         UL
 # Unweighted standardizer: -1.273964 0.3692800 -2.025039 -0.5774878
 # Weighted standardizer:   -1.273964 0.3514511 -1.990095 -0.6124317
+# Group 1 standardizer:    -1.273810 0.4849842 -2.343781 -0.4426775
 
 
 }

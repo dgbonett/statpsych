@@ -2,7 +2,7 @@
 % Please edit documentation in R/statpsych1.R
 \name{sim.ci.mean2}
 \alias{sim.ci.mean2}
-\title{Simulates confidence interval coverage probability for a two-group mean
+\title{Simulates confidence interval coverage probability for a 2-group mean
 difference}
 \usage{
 sim.ci.mean2(alpha, n1, n2, sd.ratio, dist1, dist2, rep)
@@ -14,11 +14,11 @@ sim.ci.mean2(alpha, n1, n2, sd.ratio, dist1, dist2, rep)
 
 \item{n2}{sample size in group 2}
 
-\item{sd.ratio}{ratio of population standard deviations}
+\item{sd.ratio}{ratio of population standard deviations (sd2/sd1)}
 
-\item{dist1}{type of distribution in group 1 (1, 2, 3, 4, or 5)}
+\item{dist1}{type of distribution for group 1 (1, 2, 3, 4, or 5)}
 
-\item{dist2}{type of distribution in group 2 (1, 2, 3, 4, or 5)
+\item{dist2}{type of distribution for group 2 (1, 2, 3, 4, or 5)
 \itemize{
 \item 1 = Gaussian (skewness = 0 and excess kurtosis = 0)
 \item 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
@@ -32,15 +32,15 @@ sim.ci.mean2(alpha, n1, n2, sd.ratio, dist1, dist2, rep)
 \value{
 Returns a 1-row matrix. The columns are:
 \itemize{
-\item Coverage - probability of confidence interval including population mean
-\item Lower Error - probability of lower limit greater than population mean
-\item Upper Error - probability of upper limit less than population mean
+\item Coverage - probability of confidence interval including population mean difference
+\item Lower Error - probability of lower limit greater than population mean difference
+\item Upper Error - probability of upper limit less than population mean difference
 \item Ave CI Width - average confidence interval width
 }
 }
 \description{
 Performs a computer simulation of separate variance and pooled variance
-confidence interval performance for a mean difference in a two-group design.
+confidence interval performance for a mean difference in a 2-group design.
 Sample data within each group can be generated from five different
 population distributions. All distributions are scaled to have a standard
 deviation of 1.0 in group 1.

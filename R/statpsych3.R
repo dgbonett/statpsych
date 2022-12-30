@@ -375,7 +375,7 @@ ci.pairs.prop.bs <-function(alpha, f, n) {
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
-#' @param   f       vector of frequency counts of participants with attribute
+#' @param   f       vector of frequency counts of participants who have the attribute
 #' @param   n       vector of sample sizes
 #' @param   x       vector of quantitative factor values
 #'
@@ -434,7 +434,7 @@ ci.slope.prop.bs <- function(alpha, f, n, x) {
 #'
 #' @description
 #' Computes simultaneous confidence intervals for all adjacent pairwise
-#' comparisons of population proportions using group frequency counts and
+#' comparisons of population proportions using fgroup requency counts and
 #' samples sizes as input. If one or more lower limits are greater than
 #' 0 and no upper limit is less than 0, then conclude that the population
 #' proportions are monotoic decreasing. If one or more upper limits are 
@@ -706,7 +706,7 @@ ci.condslope.log <- function(alpha, b1, b2, se1, se2, cov, lo, hi) {
 #'
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Estimate - estimate of proportion ratio
+#' * Estimate - estimate of odds ratio
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #'
@@ -794,8 +794,8 @@ ci.yule <- function(alpha, f00, f01, f10, f11) {
 #' @description
 #' Computes a confidence interval for a phi correlation. This function requires 
 #' the frequency counts from a 2 x 2 contingency table for two dichotomous 
-#' variables. This measure of association assumes that both dichotomous  
-#' variables are naturally dichotomous.
+#' variables. This measure of association is usually most appropriate when both
+#' dichotomous variables are naturally dichotomous.
 #'
 #'
 #' @param   alpha  alpha level for 1-alpha confidence
@@ -1237,7 +1237,7 @@ ci.popsize <- function(alpha, f00, f01, f10) {
 #'
 #' @return 
 #' Returns a 1-row matrix. The columns are:
-#' * Cramer's V - estimate of Cramer's V 
+#' * Estimate - estimate of Cramer's V 
 #' * SE - approximate standard error 
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -1251,7 +1251,7 @@ ci.popsize <- function(alpha, f00, f01, f10) {
 #' ci.cramer(.05, 19.21, 2, 3, 200)
 #'
 #' # Should return:
-#' #      Cramer's V     SE     LL     UL
+#' #        Estimate     SE     LL     UL
 #' # [1,]     0.3099 0.0674 0.1888 0.4529
 #'  
 #' 
@@ -2018,9 +2018,9 @@ size.ci.agree <- function(alpha, G, w) {
 #' @description
 #' Computes the sample size required to test a single population proportion 
 #' with desired power in a 1-group design. Set the proportion planning value 
-#' to .5 for a conservatively large sample size. The value of the effect size
-#' (expected population proportion minus hypothesized value) need not be based
-#' on the proportion planning value. 
+#' to .5 for a conservatively large sample size. The value of the effect
+#' size (expected population proportion minus hypothesized value) need not
+#' be based on the proportion planning value.
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test 
@@ -2062,9 +2062,9 @@ size.test.prop1 <- function(alpha, pow, p, es) {
 #' population proportions with desired power in a 2-group design. This 
 #' function requires planning values for both proportions. Set the proportion 
 #' planning values to .5 for a conservatively large sample size. The
-#' planning value for the effect size (proportion difference) could be set 
-#' equal to the difference of the two proportion planning values or it could 
-#' be set equal to a minimally interesting effect size.
+#' planning value for the effect size (proportion difference) could be set equal
+#' to the difference of the two proportion planning values or it could be set
+#' equal to a minimally interesting effect size.
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test 
@@ -2107,8 +2107,8 @@ size.test.prop2 <- function(alpha, pow, p1, p2, es) {
 #' to test a linear contrast of population proportions with desired power in a 
 #' between-subjects design. This function requires planning values for all 
 #' proportions. Set the proportion planning values to .5 for a conservatively 
-#' large sample size. The planning value for the efect size (linear contrast of 
-#' proportions) could be set equal to the linear contrast of proportion planning
+#' large sample size. The planning value for the effect size (linear contrast of 
+#' proportions) could be set equal to the linear contrast of proportion planning 
 #' values or it could be set equal to a minimally interesting effect size.
 #'
 #'
@@ -2249,10 +2249,10 @@ size.supinf.prop2 <- function(alpha, pow, p1, p2, h) {
 #' requires planning values for both proportions and a phi coefficient that 
 #' describes the correlation between the two dichotomous measurements. The 
 #' proportion planning values can set to .5 for a conservatively large sample 
-#' size. The planning value for the effect size (proportion difference) could
-#' be set equal to the difference of the two proportion planning values or it
-#' could be set equal to a minimally interesting effect size. Set the phi 
-#' correlation planning value to the smallest value within a plausible range
+#' size. The planning value for the effect size (proportion difference)
+#' could be set equal to the difference of the two proportion planning values 
+#' or it could be set equal to a minimally interesting effect size. Set the
+#' phi correlation planning value to the smallest value within a plausible range
 #' for a conservatively large sample size.
 #'
 #'
@@ -2294,23 +2294,22 @@ size.test.prop.ps <- function(alpha, pow, p1, p2, phi, es) {
 #'
 #'
 #' @description
-#' Computes the sample size in each group (assuming equal sample sizes) required
-#' to perform an equivalence test for the difference in population proportions 
-#' with desired power in a paired-samples design. The value of h specifies a 
-#' range of practical equivalence, -h to h, for the difference in population 
-#' proportions. The absolute difference in the proportion planning values must
-#' be less than h.  Equivalence tests often require a very large sample size. 
-#' Equivalence tests usually use 2 x alpha rather than alpha (e.g., use 
-#' alpha = .10 rather alpha = .05). This function sets the effect size equal to
-#' the difference in proportion planning values. Set the phi correlation planning
-#' value to the smallest value within a plausible range for a conservatively 
-#' large sample size.
+#' Computes the sample size required to perform an equivalence test for the
+#' difference in population proportions with desired power in a paired-samples
+#' design. The value of h specifies a range of practical equivalence, -h to h, 
+#' for the difference in population proportions. The absolute difference in 
+#' the proportion planning values must be less than h.  Equivalence tests often
+#' require a very large sample size. Equivalence tests usually use 2 x alpha 
+#' rather than alpha (e.g., use alpha = .10 rather alpha = .05). This function
+#' sets the effect size equal to the difference in proportion planning values. 
+#' Set the phi correlation planning value to the smallest value within a 
+#' plausible range for a conservatively large sample size.
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test 
 #' @param  pow    desired power
-#' @param  p1     planning value of proportion for group 1
-#' @param  p2     planning value of proportion for group 2
+#' @param  p1     planning value of proportion for measurement 1
+#' @param  p2     planning value of proportion for measurement 2
 #' @param  phi    planning value of phi coefficient
 #' @param  h      upper limit for range of practical equivalence
 #'

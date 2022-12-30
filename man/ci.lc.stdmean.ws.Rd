@@ -21,7 +21,7 @@ ci.lc.stdmean.ws(alpha, m, sd, cor, n, q)
 \item{q}{vector of within-subjects contrast coefficients}
 }
 \value{
-Returns a 1-row matrix. The columns are:
+Returns a 2-row matrix. The columns are:
 \itemize{
 \item Estimate - bias adjusted standardized linear contrast
 \item SE - standard error
@@ -30,11 +30,11 @@ Returns a 1-row matrix. The columns are:
 }
 }
 \description{
-Computes a confidence interval for a population standardized linear
-contrast of means in a within-subjects design. A square root unweighted
-variance standardizer is used. Equality of variances is not assumed but
-the correlations among the repeated measures are assumed to be
-approximately equal.
+Computes confidence intervals for two types of population standardized
+linear contrast of means (unweighted standardizer and level 1 standardizer)
+in a within-subjects design. Equality of variances is not assumed, but the
+correlations among the repeated measures are assumed to be approximately
+equal.
 }
 \examples{
 m <- c(33.5, 37.9, 38.0, 44.1)
@@ -43,8 +43,9 @@ q <- c(.5, .5, -.5, -.5)
 ci.lc.stdmean.ws(.05, m, sd, .672, 20, q)
 
 # Should return:
-#       Estimate        SE        LL        UL
-# [1,] -1.266557 0.1860897 -1.665992 -0.936534
+#                           Estimate        SE        LL         UL
+# Unweighted standardizer: -1.266557 0.2096351 -1.712140 -0.8903860
+# Level 1 standardizer:    -1.337500 0.2662156 -1.915002 -0.8714561
 
 
 }

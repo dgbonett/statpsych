@@ -17,22 +17,24 @@ size.ci.stdmean.ps(alpha, d, cor, w)
 \item{w}{desired confidence interval width}
 }
 \value{
-Returns the required sample size
+Returns the required sample size for each standardizer
 }
 \description{
-Computes the sample size required to estimate a population standardized
-mean difference with desired confidence interval precision in a
-paired-samples design. Set the standardized mean difference planning value
-to the largest value within a plausible range for a conservatively large
-sample size. Set the pearson correlation planning value to the smallest
-value within a plausible range for a conservatively large sample size.
+Computes the sample size required to estimate two types of population
+standardized mean differences (unweighted standardizer and single group
+standardizer) with desired confidence interval precision in a paired-samples
+design. For a conservatively large sample size, set the standardized mean
+difference planning value to the largest value within a plausible range and
+set the Pearson correlation planning value to the smallest value within a
+plausible range.
 }
 \examples{
 size.ci.stdmean.ps(.05, 1, .65, .6)
 
 # Should return:
-#      Sample size
-# [1,]          46
+#                            Sample Size
+# Unweighted standardizer:            46
+# Single group standardizer:          52
  
 
 }

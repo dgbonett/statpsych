@@ -21,7 +21,7 @@ Returns a 1-row matrix. The columns are:
 \item Median1-Median2 - estimated difference of medians
 \item SE1 - standard error of median 1
 \item SE2 - standard error of median 2
-\item COV - covariance of medians
+\item COV - covariance of the two `estimated medians
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval
 }
@@ -29,7 +29,7 @@ Returns a 1-row matrix. The columns are:
 \description{
 Computes a confidence interval for a difference of population medians in
 a paired-samples design. This function also computes the standard errors
-for each median and the covariance between the two medians.
+for each median and the covariance between the two estimated medians.
 }
 \examples{
 y1 <- c(21, 4, 9, 12, 35, 18, 10, 22, 24, 1, 6, 8, 13, 16, 19)

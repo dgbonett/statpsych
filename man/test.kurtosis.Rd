@@ -12,8 +12,8 @@ test.kurtosis(y)
 \value{
 Returns a 1-row matrix. The columns are:
 \itemize{
-\item Kurtosis - Estimate of kurtosis coefficient
-\item Excess - Estimate of excess kurtosis (kurtosis - 3)
+\item Kurtosis - estimate of kurtosis coefficient
+\item Excess - estimate of excess kurtosis (kurtosis - 3)
 \item p - Monte Carlo two-sided p-value for test of zero excess kurtosis
 }
 }

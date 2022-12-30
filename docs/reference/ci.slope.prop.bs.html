@@ -21,7 +21,7 @@ between-subjects factor."><!-- mathjax --><script src="https://cdnjs.cloudflare.
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statpsych</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.0</span>
       </span>
     </div>
 
@@ -60,7 +60,7 @@ between-subjects factor.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ci.slope.prop.bs</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">f</span>, <span class="va">n</span>, <span class="va">x</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ci.slope.prop.bs</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">f</span>, <span class="va">n</span>, <span class="va">x</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -70,7 +70,7 @@ between-subjects factor.</p>
 
 
 <dt>f</dt>
-<dd><p>vector of frequency counts of participants with attribute</p></dd>
+<dd><p>vector of frequency counts of participants who have the attribute</p></dd>
 
 
 <dt>n</dt>
@@ -103,18 +103,18 @@ ISSN 01679473, doi: <a href="https://doi.org/10.1016/S0167-9473(03)00007-0" clas
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">14</span>, <span class="fl">27</span>, <span class="fl">38</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">100</span>, <span class="fl">100</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">20</span>, <span class="fl">40</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">ci.slope.prop.bs</span><span class="op">(</span><span class="fl">.05</span>, <span class="va">f</span>, <span class="va">n</span>, <span class="va">x</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">14</span>, <span class="fl">27</span>, <span class="fl">38</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">100</span>, <span class="fl">100</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">20</span>, <span class="fl">40</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">ci.slope.prop.bs</span><span class="op">(</span><span class="fl">.05</span>, <span class="va">f</span>, <span class="va">n</span>, <span class="va">x</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         Estimate          SE        z           p          LL         UL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 0.007542293 0.002016793 3.739746 0.000184206 0.003589452 0.01149513</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Should return:</span></span>
-<span class="r-in"><span class="co">#         Estimate          SE        z           p          LL         UL</span></span>
-<span class="r-in"><span class="co"># [1,] 0.007542293 0.002016793 3.739746 0.000184206 0.003589452 0.01149513</span></span>
-<span class="r-in"></span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Should return:</span></span></span>
+<span class="r-in"><span><span class="co">#         Estimate          SE        z           p          LL         UL</span></span></span>
+<span class="r-in"><span><span class="co"># [1,] 0.007542293 0.002016793 3.739746 0.000184206 0.003589452 0.01149513</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>

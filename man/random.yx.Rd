@@ -27,7 +27,8 @@ Returns n pairs of y and x scores
 \description{
 Generates a random sample of y scores and x scores from a bivariate normal
 distributions with specified population means, standard deviations, and
-correlation.
+correlation. This function is useful for generating hypothetical data for
+classroom demonstrations.
 }
 \examples{
 random.yx(10, 50, 20, 4, 2, .5, 1)

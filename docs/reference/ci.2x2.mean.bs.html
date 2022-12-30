@@ -23,7 +23,7 @@ equality of population variances is not assumed."><!-- mathjax --><script src="h
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statpsych</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.0</span>
       </span>
     </div>
 
@@ -64,7 +64,7 @@ equality of population variances is not assumed.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ci.2x2.mean.bs</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">y11</span>, <span class="va">y12</span>, <span class="va">y21</span>, <span class="va">y22</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ci.2x2.mean.bs</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">y11</span>, <span class="va">y12</span>, <span class="va">y21</span>, <span class="va">y22</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -104,11 +104,11 @@ equality of population variances is not assumed.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">y11</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">14</span>, <span class="fl">15</span>, <span class="fl">11</span>, <span class="fl">7</span>, <span class="fl">16</span>, <span class="fl">12</span>, <span class="fl">15</span>, <span class="fl">16</span>, <span class="fl">10</span>, <span class="fl">9</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">y12</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">18</span>, <span class="fl">24</span>, <span class="fl">14</span>, <span class="fl">18</span>, <span class="fl">22</span>, <span class="fl">21</span>, <span class="fl">16</span>, <span class="fl">17</span>, <span class="fl">14</span>, <span class="fl">13</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">y21</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">16</span>, <span class="fl">11</span>, <span class="fl">10</span>, <span class="fl">17</span>, <span class="fl">13</span>, <span class="fl">18</span>, <span class="fl">12</span>, <span class="fl">16</span>, <span class="fl">6</span>, <span class="fl">15</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">y22</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">18</span>, <span class="fl">17</span>, <span class="fl">11</span>, <span class="fl">9</span>, <span class="fl">9</span>, <span class="fl">13</span>, <span class="fl">18</span>, <span class="fl">15</span>, <span class="fl">14</span>, <span class="fl">11</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">ci.2x2.mean.bs</span><span class="op">(</span><span class="fl">.05</span>, <span class="va">y11</span>, <span class="va">y12</span>, <span class="va">y21</span>, <span class="va">y22</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">y11</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">14</span>, <span class="fl">15</span>, <span class="fl">11</span>, <span class="fl">7</span>, <span class="fl">16</span>, <span class="fl">12</span>, <span class="fl">15</span>, <span class="fl">16</span>, <span class="fl">10</span>, <span class="fl">9</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">y12</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">18</span>, <span class="fl">24</span>, <span class="fl">14</span>, <span class="fl">18</span>, <span class="fl">22</span>, <span class="fl">21</span>, <span class="fl">16</span>, <span class="fl">17</span>, <span class="fl">14</span>, <span class="fl">13</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">y21</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">16</span>, <span class="fl">11</span>, <span class="fl">10</span>, <span class="fl">17</span>, <span class="fl">13</span>, <span class="fl">18</span>, <span class="fl">12</span>, <span class="fl">16</span>, <span class="fl">6</span>, <span class="fl">15</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">y22</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">18</span>, <span class="fl">17</span>, <span class="fl">11</span>, <span class="fl">9</span>, <span class="fl">9</span>, <span class="fl">13</span>, <span class="fl">18</span>, <span class="fl">15</span>, <span class="fl">14</span>, <span class="fl">11</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">ci.2x2.mean.bs</span><span class="op">(</span><span class="fl">.05</span>, <span class="va">y11</span>, <span class="va">y12</span>, <span class="va">y21</span>, <span class="va">y22</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          Estimate       SE           t       df           p         LL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> AB:         -5.10 2.224860 -2.29227953 35.47894 0.027931810 -9.6145264</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> A:           1.65 1.112430  1.48323970 35.47894 0.146840430 -0.6072632</span>
@@ -125,18 +125,18 @@ equality of population variances is not assumed.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> A at b2:  7.5637726</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> B at a1: -1.9658621</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> B at a2:  3.2807927</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Should return:</span></span>
-<span class="r-in"><span class="co">#          Estimate       SE           t       df           p         LL         UL</span></span>
-<span class="r-in"><span class="co"># AB:         -5.10 2.224860 -2.29227953 35.47894 0.027931810 -9.6145264 -0.5854736</span></span>
-<span class="r-in"><span class="co"># A:           1.65 1.112430  1.48323970 35.47894 0.146840430 -0.6072632  3.9072632</span></span>
-<span class="r-in"><span class="co"># B:          -2.65 1.112430 -2.38217285 35.47894 0.022698654 -4.9072632 -0.3927368</span></span>
-<span class="r-in"><span class="co"># A at b1:    -0.90 1.545244 -0.58243244 17.56296 0.567678242 -4.1522367  2.3522367</span></span>
-<span class="r-in"><span class="co"># A at b2:     4.20 1.600694  2.62386142 17.93761 0.017246053  0.8362274  7.5637726</span></span>
-<span class="r-in"><span class="co"># B at a1:    -5.20 1.536952 -3.38331916 17.61093 0.003393857 -8.4341379 -1.9658621</span></span>
-<span class="r-in"><span class="co"># B at a2:    -0.10 1.608657 -0.06216365 17.91650 0.951120753 -3.4807927  3.2807927</span></span>
-<span class="r-in"></span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Should return:</span></span></span>
+<span class="r-in"><span><span class="co">#          Estimate       SE           t       df           p         LL         UL</span></span></span>
+<span class="r-in"><span><span class="co"># AB:         -5.10 2.224860 -2.29227953 35.47894 0.027931810 -9.6145264 -0.5854736</span></span></span>
+<span class="r-in"><span><span class="co"># A:           1.65 1.112430  1.48323970 35.47894 0.146840430 -0.6072632  3.9072632</span></span></span>
+<span class="r-in"><span><span class="co"># B:          -2.65 1.112430 -2.38217285 35.47894 0.022698654 -4.9072632 -0.3927368</span></span></span>
+<span class="r-in"><span><span class="co"># A at b1:    -0.90 1.545244 -0.58243244 17.56296 0.567678242 -4.1522367  2.3522367</span></span></span>
+<span class="r-in"><span><span class="co"># A at b2:     4.20 1.600694  2.62386142 17.93761 0.017246053  0.8362274  7.5637726</span></span></span>
+<span class="r-in"><span><span class="co"># B at a1:    -5.20 1.536952 -3.38331916 17.61093 0.003393857 -8.4341379 -1.9658621</span></span></span>
+<span class="r-in"><span><span class="co"># B at a2:    -0.10 1.608657 -0.06216365 17.91650 0.951120753 -3.4807927  3.2807927</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>

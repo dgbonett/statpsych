@@ -14,15 +14,16 @@ ci.cod1(alpha, y)
 \value{
 Returns a 1-row matrix. The columns are:
 \itemize{
-\item COD - estimated coefficient of dispersion
+\item Estimate - estimated coefficient of dispersion
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval
 }
 }
 \description{
 Computes a confidence interval for a population coefficient of dispersion
-(COD) which is defined as MAD/median. The COD is a robust alternative to
-the coefficient of variation and assumes ratio-scale scores.
+which is defined as a mean absolute deviation from the median divided by a
+median. The coefficient of dispersion assumes ratio-scale scores and is a
+robust alternative to the coefficient of variation.
 }
 \examples{
 y <- c(30, 20, 15, 10, 10, 60, 20, 25, 20, 30, 10, 5, 50, 40,
@@ -30,8 +31,8 @@ y <- c(30, 20, 15, 10, 10, 60, 20, 25, 20, 30, 10, 5, 50, 40,
 ci.cod1(.05, y)
 
 # Should return:
-#            COD        LL       UL
-# [1,] 0.5921053 0.3813259 1.092679
+#        Estimate        LL       UL
+# [1,]  0.5921053 0.3813259 1.092679
 
 
 }

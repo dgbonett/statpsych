@@ -25,9 +25,9 @@ Computes the sample size in each group (assuming equal sample sizes) required
 to test a linear contrast of population proportions with desired power in a
 between-subjects design. This function requires planning values for all
 proportions. Set the proportion planning values to .5 for a conservatively
-large sample size. The planning value for the linear contrast of proportions
-could be set equal to the linear contrast of proportion planning values or it
-could be set equal to a minimally interesting effect size.
+large sample size. The planning value for the effect size (linear contrast of
+proportions) could be set equal to the linear contrast of proportion planning
+values or it could be set equal to a minimally interesting effect size.
 }
 \examples{
 p <- c(.25, .30, .50, .50)

@@ -10,9 +10,9 @@ ci.tukey(alpha, m, sd, n)
 \arguments{
 \item{alpha}{alpha level for simultaneous 1-alpha confidence}
 
-\item{m}{vector of group estimated means}
+\item{m}{vector of estimated group means}
 
-\item{sd}{vector of group estimated standard deviations}
+\item{sd}{vector of estimated group standard deviations}
 
 \item{n}{vector of sample sizes}
 }
@@ -32,7 +32,7 @@ of pairwise comparisons. The columns are:
 \description{
 Computes heteroscedastic Tukey-Kramer (also known as Games-Howell)
 confidence intervals for all pairwise comparisons of population means
-using estimated means, estimatede standard deviations, and samples sizes as
+using estimated means, estimated standard deviations, and samples sizes as
 input. A Satterthwaite adjustment to the degrees of freedom is used to
 improve the accuracy of the confidence intervals.
 }

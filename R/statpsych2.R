@@ -376,7 +376,7 @@ ci.pbcor <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  y	  vector of y scores 
-#' @param  x	  vector of x scores
+#' @param  x	  vector of x scores (paired with y)
 #'
 #'
 #' @return 
@@ -492,47 +492,48 @@ ci.spear2 <- function(alpha, cor1, cor2, n1, n2) {
 #' Computes a confidence interval for a population mean absolute prediction
 #' error (MAPE) in a general linear model. The MAPE is a more robust 
 #' alternative to the residual standard deviation. This function requires a
-#' vector of estimated residuals from a general linear model.
+#' vector of estimated residuals from a general linear model. This confidence
+#' interval does not assume zero excess kurtosis but does assume symmetry of
+#' the population prediction errors.
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
-#' @param  r      vector of residuals 
+#' @param  res    vector of residuals 
 #' @param  s	  number of predictor variables in model
 #'
 #'
 #' @return 
 #' Returns a 1-row matrix. The columns are:
-#' * MAPE - estimated mean absolute prediction error
+#' * Estimate - estimated mean absolute prediction error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #' 
 #' 
 #' @examples
-#' r <- c(-2.70, -2.69, -1.32, 1.02, 1.23, -1.46, 2.21, -2.10, 2.56,
+#' res <- c(-2.70, -2.69, -1.32, 1.02, 1.23, -1.46, 2.21, -2.10, 2.56,
 #'       -3.02, -1.55, 1.46, 4.02, 2.34)
-#' ci.mape(.05, r, 1)
+#' ci.mape(.05, res, 1)
 #'
 #' # Should return:
-#' #        MAPE       LL       UL
-#' # [1,] 2.3744 1.751678 3.218499
+#' #       Estimate       LL       UL
+#' # [1,]    2.3744 1.751678 3.218499
 #'  
 #' 
-#' @importFrom stats qnorm
+#' @importFrom stats qt
 #' @importFrom stats sd
 #' @export
-ci.mape <- function(alpha, r, s) {
- n <- length(r)
+ci.mape <- function(alpha, res, s) {
+ n <- length(res)
  df <- n - s - 1
- z <- qt(1 - alpha/2, df)
+ t <- qt(1 - alpha/2, df)
  c <- n/(n - (s + 2)/2)
- r <- sort(r)
- mape <- mean(abs(r))
- kur <- (sd(r)/mape)^2
+ mape <- mean(abs(res))
+ kur <- (sd(res)/mape)^2
  se <- sqrt((kur - 1)/df)
- ll <- exp(log(c*mape) - z*se)
- ul <- exp(log(c*mape) + z*se)
+ ll <- exp(log(c*mape) - t*se)
+ ul <- exp(log(c*mape) + t*se)
  out <- t(c(c*mape, ll, ul))
- colnames(out) <- c("MAPE", "LL", "UL")
+ colnames(out) <- c("Estimate", "LL", "UL")
  return(out)
 }
 
@@ -607,7 +608,8 @@ ci.condslope <- function(alpha, b1, b2, se1, se2, cov, lo, hi, dfe) {
 
 
 #  ci.lc.reg  ==============================================================
-#' Confidence interval for a linear contrast of regression coefficients
+#' Confidence interval for a linear contrast of regression coefficients in
+#' multiple group regression model
 #'
 #'  
 #' @description
@@ -623,7 +625,7 @@ ci.condslope <- function(alpha, b1, b2, se1, se2, cov, lo, hi, dfe) {
 #' @param  se     vector of standard errors
 #' @param  n      vector of group sample sizes
 #' @param  s      number of predictor variables for each within-group model
-#' @param  v      vector of between-subject contrast coefficients
+#' @param  v      vector of contrast coefficients
 #'
 #' 
 #' @return 
@@ -742,7 +744,7 @@ ci.fisher <- function(alpha, cor, se) {
 #' @examples
 #' ci.indirect (.05, 2.48, 1.92, .586, .379)
 #'
-#' # Should return (within sampling error for CI):
+#' # Should return (within sampling error):
 #' #      Estimate       SE       LL       UL
 #' # [1,]   4.7616 1.625282 2.178812 7.972262
 #'  
@@ -953,6 +955,73 @@ ci.rsqr <- function(alpha, r2, s, n) {
 }
 
 
+#  ci.theil ===================================================================
+#' Theil-Sen estimate and confidence interval for slope
+#'
+#'                                 
+#' @description
+#' Computes a Theil-Sen estimate and distribution-free confidence interval 
+#' for the slope of a simple linear regression model. An approximate 
+#' standard error is recovered from the confidence interval.
+#'
+#'
+#' @param   alpha   alpha level for 1-alpha confidence
+#' @param   y       vector of response variable scores
+#' @param   x       vector of predictor variable scores (paired with y)
+#'
+#'
+#' @return
+#' Returns a 1-row matrix. The columns are:
+#' * Estimate - Theil-Sen estimate of population slope
+#' * SE - approximate standard error
+#' * LL - lower limit of confidence interval
+#' * UL - upper limit of confidence interval
+#'
+#'
+#' @references
+#' \insertRef{Hollander1999}{statpsych}
+#'
+#'
+#' @examples
+#' y <- c(21, 4, 9, 12, 35, 18, 10, 22, 24, 1, 6, 8, 13, 16, 19)
+#' x <- c(67, 28, 30, 28, 52, 40, 25, 37, 44, 10, 14, 20, 28, 40, 51)
+#' ci.theil(.05, y, x)
+#'
+#' # Should return:
+#' #      Estimate        SE        LL   UL
+#' # [1,]      0.5 0.1085927 0.3243243 0.75
+#'
+#'
+#' @importFrom stats qnorm
+#' @export
+ci.theil <- function(alpha, y, x) {
+  z <- qnorm(1 - alpha/2)
+  n = length(x)
+  x.p <- t(combn(x,2))
+  y.p <- t(combn(y,2))
+  y.d <- y.p[,1] - y.p[,2]
+  x.d <- x.p[,1] - x.p[,2]
+  s = which(x.d != 0, arr.ind = T)
+  x.diff <- x.d[s]
+  y.diff <- y.d[s]
+  k <- length(x.diff)
+  c = z*sqrt(k*(2*n + 5)/9) 
+  o1 <- floor((k - c)/2)
+  if (o1 < 1) {o1 = 1}
+  o2 <- ceiling((k + c)/2 + 1)
+  if (o2 > k) {o2 = k}
+  b <- y.diff/x.diff
+  b <- sort(b)
+  est <- median(b)
+  ll <- b[o1]
+  ul <- b[o2]
+  se <- (ul - ll)/(2*z)
+  out <- t(c(est, se, ll, ul))
+  colnames(out) = c("Estimate", "SE", "LL", "UL")
+  return(out)
+}
+
+
 #  =============== File 2: Sample Size for Desire Precision ===================
 #  size.ci.slope ==============================================================
 #' Sample size for a slope confidence interval
@@ -1059,7 +1128,7 @@ size.ci.cor <- function(alpha, cor, s, w) {
 #' @description
 #' Computes the sample size required to estimate a squared multiple correlation
 #' in a random-x regression model with desired confidence interval precision.
-#' Set the planning value of squared multiple correlation to 1/3 for a 
+#' Set the planning value of the squared multiple correlation to 1/3 for a 
 #' conservatively large sample size. This function uses an approximation to
 #' the standard error of the squared multiple correlation.
 #'
@@ -1244,9 +1313,7 @@ size.test.slope <- function(alpha, pow, evar, x, slope, h) {
 #'
 #' @description
 #' Computes the sample size required to test a Pearson or a partial correlation 
-#' with desired power. Set s = 0 for a Pearson correlation. Set the correlation 
-#' planning value to the smallest value within a plausible range for a 
-#' conservatively large sample size.
+#' with desired power. Set s = 0 for a Pearson correlation. 
 #'
 #'  
 #' @param  alpha   alpha level for hypothesis test
@@ -1427,7 +1494,8 @@ slope.contrast <- function(x) {
 #' @description
 #' Generates a random sample of y scores and x scores from a bivariate normal
 #' distributions with specified population means, standard deviations, and 
-#' correlation.
+#' correlation. This function is useful for generating hypothetical data for
+#' classroom demonstrations.
 #'
 #'  
 #' @param   n     sample size
@@ -1490,8 +1558,8 @@ random.yx <- function(n, my, mx, sdy, sdx, cor, dec) {
 #' @param   alpha     alpha level for 1-alpha confidence
 #' @param   n         sample size 
 #' @param   cor       population Pearson correlation
-#' @param   dist1     type of distribution at level 1 (1, 2, 3, 4, or 5)
-#' @param   dist2     type of distribution at level 2 (1, 2, 3, 4, or 5)
+#' @param   dist1     type of distribution for variable 1 (1, 2, 3, 4, or 5)
+#' @param   dist2     type of distribution for variable 2 (1, 2, 3, 4, or 5)
 #' * 1 = Gaussian (skewness = 0 and excess kurtosis = 0) 
 #' * 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
 #' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
@@ -1502,9 +1570,9 @@ random.yx <- function(n, my, mx, sdy, sdx, cor, dec) {
 #' 
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Coverage - probability of confidence interval including population mean  
-#' * Lower Error - probability of lower limit greater than population mean
-#' * Upper Error - probability of upper limit less than population mean
+#' * Coverage - probability of confidence interval including population correlation  
+#' * Lower Error - probability of lower limit greater than population correlation
+#' * Upper Error - probability of upper limit less than population correlation
 #' * Ave CI Width - average confidence interval width
 #'
 #'
@@ -1588,8 +1656,8 @@ sim.ci.cor <- function(alpha, n, cor, dist1, dist2, rep) {
 #' @param   alpha     alpha level for 1-alpha confidence
 #' @param   n         sample size 
 #' @param   cor       population Spearman correlation
-#' @param   dist1     type of distribution at level 1 (1, 2, 3, 4, or 5)
-#' @param   dist2     type of distribution at level 2 (1, 2, 3, 4, or 5)
+#' @param   dist1     type of distribution for variable 1 (1, 2, 3, 4, or 5)
+#' @param   dist2     type of distribution for variable 2 (1, 2, 3, 4, or 5)
 #' * 1 = Gaussian (skewness = 0 and excess kurtosis = 0) 
 #' * 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
 #' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
@@ -1600,9 +1668,9 @@ sim.ci.cor <- function(alpha, n, cor, dist1, dist2, rep) {
 #' 
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Coverage - probability of confidence interval including population mean  
-#' * Lower Error - probability of lower limit greater than population mean
-#' * Upper Error - probability of upper limit less than population mean
+#' * Coverage - probability of confidence interval including population correlation  
+#' * Lower Error - probability of lower limit greater than population correlation
+#' * Upper Error - probability of upper limit less than population corrrelation
 #' * Ave CI Width - average confidence interval width
 #'
 #'

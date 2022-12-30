@@ -17,9 +17,11 @@ test.prop.ps(f00, f01, f10, f11)
 }
 \value{
 Returns a 1-row matrix. The columns are:
-Estimate - ML estimate of proportion difference
-z - z test statistic
-p - p-value
+\itemize{
+\item Estimate - ML estimate of proportion difference
+\item z - z test statistic
+\item p - p-value
+}
 }
 \description{
 Computes a continuity-corrected McNemar test for equality of proportions

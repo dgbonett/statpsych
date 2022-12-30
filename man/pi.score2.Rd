@@ -2,7 +2,7 @@
 % Please edit documentation in R/statpsych1.R
 \name{pi.score2}
 \alias{pi.score2}
-\title{Prediction interval for a difference of scores}
+\title{Prediction interval for a difference of scores in a 2-group experiment}
 \usage{
 pi.score2(alpha, m1, m2, sd1, sd2, n1, n2)
 }

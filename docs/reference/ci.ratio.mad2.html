@@ -18,7 +18,7 @@ deviation from median) in a 2-group design."><!-- mathjax --><script src="https:
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statpsych</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.0</span>
       </span>
     </div>
 
@@ -55,7 +55,7 @@ deviation from median) in a 2-group design.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ci.ratio.mad2</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">y1</span>, <span class="va">y2</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ci.ratio.mad2</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">y1</span>, <span class="va">y2</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -93,17 +93,17 @@ ISSN 0003-1305, doi: <a href="https://doi.org/10.1198/0003130032323" class="exte
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">y1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">32</span>, <span class="fl">39</span>, <span class="fl">26</span>, <span class="fl">35</span>, <span class="fl">43</span>, <span class="fl">27</span>, <span class="fl">40</span>, <span class="fl">37</span>, <span class="fl">34</span>, <span class="fl">29</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">y2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">36</span>, <span class="fl">44</span>, <span class="fl">47</span>, <span class="fl">42</span>, <span class="fl">49</span>, <span class="fl">39</span>, <span class="fl">46</span>, <span class="fl">31</span>, <span class="fl">33</span>, <span class="fl">48</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">ci.ratio.mad2</span><span class="op">(</span><span class="fl">.05</span>, <span class="va">y1</span>, <span class="va">y2</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">y1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">32</span>, <span class="fl">39</span>, <span class="fl">26</span>, <span class="fl">35</span>, <span class="fl">43</span>, <span class="fl">27</span>, <span class="fl">40</span>, <span class="fl">37</span>, <span class="fl">34</span>, <span class="fl">29</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">y2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">36</span>, <span class="fl">44</span>, <span class="fl">47</span>, <span class="fl">42</span>, <span class="fl">49</span>, <span class="fl">39</span>, <span class="fl">46</span>, <span class="fl">31</span>, <span class="fl">33</span>, <span class="fl">48</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">ci.ratio.mad2</span><span class="op">(</span><span class="fl">.05</span>, <span class="va">y1</span>, <span class="va">y2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          MAD1     MAD2 MAD1/MAD2        LL       UL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 5.111111 5.888889 0.8679245 0.4520879 1.666253</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Should return:</span></span>
-<span class="r-in"><span class="co">#          MAD1     MAD2  MAD1/MAD2        LL       UL</span></span>
-<span class="r-in"><span class="co"># [1,] 5.111111 5.888889  0.8679245 0.4520879 1.666253</span></span>
-<span class="r-in"></span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Should return:</span></span></span>
+<span class="r-in"><span><span class="co">#          MAD1     MAD2  MAD1/MAD2        LL       UL</span></span></span>
+<span class="r-in"><span><span class="co"># [1,] 5.111111 5.888889  0.8679245 0.4520879 1.666253</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>

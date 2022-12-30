@@ -16,21 +16,23 @@ size.ci.stdmean2(alpha, d, w, R)
 \item{R}{n2/n1 ratio}
 }
 \value{
-Returns the required sample size for each group
+Returns the required sample size per each group for each standardizer
 }
 \description{
-Computes the sample size in each group required to estimate a population
-standardized mean difference with desired confidence interval precision
-in a 2-group design. Set the standardized mean difference planning value
-to the largest value within a plausible range for a conservatively large
-sample size. Set R = 1 for equal sample sizes.
+Computes the sample size per group required to estimate two types of
+population standardized mean differences (unweighted standardizer and single
+group standardizer) with desired confidence interval precision in a 2-group
+design. Set the standardized mean difference planning value to the largest
+value within a plausible range for a conservatively large sample size. Set
+R = 1 for equal sample sizes.
 }
 \examples{
 size.ci.stdmean2(.05, .75, .5, 1)
 
 # Should return:
-#       n1   n2
-# [1,] 132  132
+#                              n1  n2
+# Unweighted standardizer:    132 132
+# Single group standardizer:  141 141
  
 
 }

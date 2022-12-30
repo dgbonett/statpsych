@@ -41,7 +41,7 @@ standardized slopes with robust standard errors also could be used.
 \examples{
 ci.indirect (.05, 2.48, 1.92, .586, .379)
 
-# Should return (within sampling error for CI):
+# Should return (within sampling error):
 #      Estimate       SE       LL       UL
 # [1,]   4.7616 1.625282 2.178812 7.972262
  

@@ -21,7 +21,9 @@ Returns the required sample size
 \description{
 Computes the sample size required to test a single population proportion
 with desired power in a 1-group design. Set the proportion planning value
-to .5 for a conservatively large sample size.
+to .5 for a conservatively large sample size. The value of the effect
+size (expected population proportion minus hypothesized value) need not
+be based on the proportion planning value.
 }
 \examples{
 size.test.prop1(.05, .9, .5, .2)

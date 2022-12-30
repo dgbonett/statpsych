@@ -22,9 +22,7 @@ Returns the required sample size
 }
 \description{
 Computes the sample size required to test a Pearson or a partial correlation
-with desired power. Set s = 0 for a Pearson correlation. Set the correlation
-planning value to the smallest value within a plausible range for a
-conservatively large sample size.
+with desired power. Set s = 0 for a Pearson correlation.
 }
 \examples{
 size.test.cor(.05, .9, .45, 0, 0)

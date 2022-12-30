@@ -109,9 +109,10 @@ ci.stdmean1 <- function(alpha, m, sd, n, h) {
 #'
 #'
 #' @description
-#' Computes a confidence interval for a population 2-group mean difference
-#' using the estimated means, estimated standard deviations, and sample sizes. 
-#' Use the t.test function for raw data input.
+#' Computes equal variance and unequal variance confidence intervals for a 
+#' population 2-group mean difference using the estimated means, estimated 
+#' standard deviations, and sample sizes. Use the t.test function for raw data
+#' input.
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -195,8 +196,8 @@ ci.mean2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #'
 #'
 #' @param     alpha  	alpha level for 1-alpha confidence
-#' @param     m     	vector of group estimated means
-#' @param     sd    	vector of group estimated standard deviations
+#' @param     m     	vector of estimated group means
+#' @param     sd    	vector of estimated group standard deviations
 #' @param     n     	vector of sample sizes
 #' @param     v     	vector of betwen-subjects contrast coefficients
 #' 
@@ -271,14 +272,14 @@ ci.lc.mean.bs <- function(alpha, m, sd, n, v) {
 #' @description
 #' Computes heteroscedastic Tukey-Kramer (also known as Games-Howell) 
 #' confidence intervals for all pairwise comparisons of population means 
-#' using estimated means, estimatede standard deviations, and samples sizes as 
+#' using estimated means, estimated standard deviations, and samples sizes as 
 #' input. A Satterthwaite adjustment to the degrees of freedom is used to 
 #' improve the accuracy of the confidence intervals. 
 #'
 #'
 #' @param  alpha   alpha level for simultaneous 1-alpha confidence
-#' @param  m       vector of group estimated means
-#' @param  sd      vector of group estimated standard deviations
+#' @param  m       vector of estimated group means
+#' @param  sd      vector of estimated group standard deviations
 #' @param  n       vector of sample sizes
 #'
 #'
@@ -430,7 +431,7 @@ ci.slope.mean.bs <- function(alpha, m, sd, n, x) {
 #' Computes simultaneous confidence intervals for all adjacent pairwise
 #' comparisons of population means using estimated group means, estimated 
 #' group standard deviations, and samples sizes as input. Equal variances are 
-#' not assumed. A Satterthwaite adjustment to the degrees of freedom is used
+#' not assumed. A Satterthwaite adjustment to the degrees of freedom is used  
 #' to improve the accuracy of the confidence intervals. If one or more lower
 #' limits are greater than 0 and no upper limit is less than 0, then conclude
 #' that the population means are monotoic decreasing. If one or more upper 
@@ -737,25 +738,25 @@ ci.stdmean.strat <- function(alpha, m1, m2, sd1, sd2, n1, n2, p1) {
 #' Confidence interval for a standardized linear contrast of means in a 
 #' between-subjects design
 #'
-#'
+#'              
 #' @description
 #' Computes confidence intervals for a population standardized linear contrast 
-#' of means in a between-subjects design. The square root weighted variance 
-#' standardizer is recommended in 2-group nonexperimental designs with simple 
-#' random sampling. The square root unweighted variance standardizer is 
-#' recommended in 2-group experimental designs. Equality of variances is not
-#' assumed.
+#' of means in a between-subjects design. The unweighted standardizer is 
+#' recommended in experimental designs. The weighted standardizer is
+#' recommended in nonexperimental designs with simple random sampling. The  
+#' group 1 standardizer is useful in both experimental and nonexperimental
+#' designs. Equality of variances is not assumed.
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
-#' @param  m      vector of group estimated means
-#' @param  sd     vector of group estimated standard deviation
+#' @param  m      vector of estimated group means
+#' @param  sd     vector of estimated group standard deviation
 #' @param  n      vector of sample sizes
 #' @param  v      vector of between-subjects contrast coefficients
 #'
 #'
 #' @return 
-#' Returns a 2-row matrix. The columns are:
+#' Returns a 3-row matrix. The columns are:
 #' * Estimate - bias adjusted standardized linear contrast
 #' * SE - standard error
 #' * LL - lower limit of the confidence interval
@@ -777,6 +778,7 @@ ci.stdmean.strat <- function(alpha, m1, m2, sd1, sd2, n1, n2, p1) {
 #' #                           Estimate        SE        LL         UL
 #' # Unweighted standardizer: -1.273964 0.3692800 -2.025039 -0.5774878
 #' # Weighted standardizer:   -1.273964 0.3514511 -1.990095 -0.6124317
+#' # Group 1 standardizer:    -1.273810 0.4849842 -2.343781 -0.4426775
 #'
 #'
 #' @importFrom stats qnorm
@@ -787,12 +789,17 @@ ci.lc.stdmean.bs <- function(alpha, m, sd, n, v) {
  a <- length(m)
  s <- sqrt(sum(var)/a)
  df <- sum(n) - a
- adj <- 1 - 3/(4*df - 1)
+ n1 <- matrix(n, 1, a)[1,1]
+ s1 <- matrix(sd, 1, a)[1,1]
+ adj1 <- 1 - 3/(4*df - 1)
+ adj2 <- 1 - 3/(4*n1 - 5)
  sp <- sqrt(sum((n - 1)*var)/df)
  est1 <- (t(v)%*%m)/s
  est2 <- (t(v)%*%m)/sp
- est1u <- adj*est1
- est2u <- adj*est2
+ est3 <- (t(v)%*%m)/s1 
+ est1u <- adj1*est1
+ est2u <- adj1*est2
+ est3u <- adj2*est3
  a1 <- est1^2/(2*a^2*s^4)
  a2 <- a1*sum((var^2/(n - 1)))
  a3 <- sum((v^2*var/(n - 1)))/s^2
@@ -805,11 +812,17 @@ ci.lc.stdmean.bs <- function(alpha, m, sd, n, v) {
  se2 <- sqrt(a2 + a3)
  ll2 <- est2 - z*se2
  ul2 <- est2 + z*se2
+ a1 <- est3^2/(2*n1 - 2)
+ a2 <- sum((v^2*var/(n - 1)))/s1^2
+ se3 <- sqrt(a1 + a2)
+ ll3 <- est3 - z*se3
+ ul3 <- est3 + z*se3
  out1 <- t(c(est1u, se1, ll1, ul1))
  out2 <- t(c(est2u, se2, ll2, ul2))
- out <- rbind(out1, out2)
+ out3 <- t(c(est3u, se3, ll3, ul3))
+ out <- rbind(out1, out2, out3)
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
- rownames(out) <- c("Unweighted standardizer:", "Weighted standardizer:")
+ rownames(out) <- c("Unweighted standardizer:", "Weighted standardizer:", "Group 1 standardizer:")
  return(out)
 }
 
@@ -1011,17 +1024,18 @@ ci.stdmean.ps <- function(alpha, m1, m2, sd1, sd2, cor, n) {
  return(out)
 }
 
+
 #  ci.lc.stdmean.ws ==========================================================
 #' Confidence interval for a standardized linear contrast of means in a
 #' within-subjects design
 #'
-#'
+#'                        
 #' @description
-#' Computes a confidence interval for a population standardized linear 
-#' contrast of means in a within-subjects design. A square root unweighted
-#' variance standardizer is used. Equality of variances is not assumed but 
-#' the correlations among the repeated measures are assumed to be 
-#' approximately equal.
+#' Computes confidence intervals for two types of population standardized 
+#' linear contrast of means (unweighted standardizer and level 1 standardizer)
+#' in a within-subjects design. Equality of variances is not assumed, but the
+#' correlations among the repeated measures are assumed to be approximately 
+#' equal.
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -1033,7 +1047,7 @@ ci.stdmean.ps <- function(alpha, m1, m2, sd1, sd2, cor, n) {
 #'
 #'
 #' @return 
-#' Returns a 1-row matrix. The columns are:
+#' Returns a 2-row matrix. The columns are:
 #' * Estimate - bias adjusted standardized linear contrast
 #' * SE - standard error
 #' * LL - lower limit of the confidence interval
@@ -1051,8 +1065,9 @@ ci.stdmean.ps <- function(alpha, m1, m2, sd1, sd2, cor, n) {
 #' ci.lc.stdmean.ws(.05, m, sd, .672, 20, q)
 #'
 #' # Should return:
-#' #       Estimate        SE        LL        UL
-#' # [1,] -1.266557 0.1860897 -1.665992 -0.936534
+#' #                           Estimate        SE        LL         UL
+#' # Unweighted standardizer: -1.266557 0.2096351 -1.712140 -0.8903860
+#' # Level 1 standardizer:    -1.337500 0.2662156 -1.915002 -0.8714561
 #'
 #'
 #' @importFrom stats qnorm
@@ -1061,20 +1076,35 @@ ci.lc.stdmean.ws <- function(alpha, m, sd, cor, n, q) {
  z <- qnorm(1 - alpha/2)
  a <- length(m)
  df <- n - 1
- adj <- sqrt((n - 2)/df)
+ s1 <- matrix(sd, 1, a)[1,1]
+ adj1 <- sqrt((n - 2)/df)
+ adj2 <- 1 - 3/(4*n - 5)
  s <- sqrt(sum(sd^2)/a)
- est <- (t(q)%*%m)/s
- estu <- adj*est
- v1 <- est^2/(2*a^2*s^4*df)
+ est1 <- (t(q)%*%m)/s
+ est1u <- adj1*est1
+ v1 <- est1^2/(2*a^2*s^4*df)
  v2 <- sum(sd^4)
- v3 <- cor^2*t(sd^2)%*%sd^2 
+ v0 <- sd^2%*%t(sd^2)
+ v3 <- cor^2*sum((v0 - diag(diag(v0))))
+ # error in v3 formula corrected in version 1.3
  v4 <- sum(q^2*sd^2)
  v5 <- cor*t(q*sd)%*%(q*sd)
- se <- sqrt(v1*(v2 + v3) + (v4 - v5)/(df*s^2))
- ll <- est - z*se
- ul <- est + z*se
- out <- t(c(estu, se, ll, ul))
+ se1 <- sqrt(v1*(v2 + v3) + (v4 - v5)/(df*s^2))
+ ll1 <- est1 - z*se1
+ ul1 <- est1 + z*se1
+ est2 <- (t(q)%*%m)/s1
+ est2u <- adj2*est2
+ v1 <- est2^2/(2*df)
+ v4 <- sum(q^2*sd^2)
+ v5 <- cor*t(q*sd)%*%(q*sd)
+ se2 <- sqrt(v1 + (v4 - v5)/(df*s1^2))
+ ll2 <- est2 - z*se2
+ ul2 <- est2 + z*se2
+ out1 <- t(c(est1u, se1, ll1, ul1))
+ out2 <- t(c(est2u, se2, ll2, ul2))
+ out <- rbind(out1, out2)
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- c("Unweighted standardizer:", "Level 1 standardizer:")
  return(out)
 }
 
@@ -1095,7 +1125,7 @@ ci.lc.stdmean.ws <- function(alpha, m, sd, cor, n, q) {
 #'
 #' @return 
 #' Returns a 1-row matrix. The columns are:
-#' * MAD - estimated mean absolute deviation
+#' * Estimate - estimated mean absolute deviation
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #'
@@ -1110,8 +1140,8 @@ ci.lc.stdmean.ws <- function(alpha, m, sd, cor, n, q) {
 #' ci.mad1(.05, y)
 #'
 #' # Should return:
-#' #       MAD       LL       UL
-#' # [1,] 12.5 7.962667 19.62282
+#' #       Estimate       LL       UL
+#' # [1,]      12.5 7.962667 19.62282
 #'
 #'
 #' @importFrom stats qnorm
@@ -1129,7 +1159,7 @@ ci.mad1 <- function(alpha, y) {
  ll <- exp(log(c*mad) - z*se)
  ul <- exp(log(c*mad) + z*se)
  out <- t(c(c*mad, ll, ul))
- colnames(out) <- c("MAD", "LL", "UL")
+ colnames(out) <- c("Estimate", "LL", "UL")
  return(out)
 }
 
@@ -1275,8 +1305,9 @@ ci.ratio.mad.ps <- function(alpha, y1, y2) {
 #'
 #' @description
 #' Computes a confidence interval for a population coefficient of dispersion
-#' (COD) which is defined as MAD/median. The COD is a robust alternative to 
-#' the coefficient of variation and assumes ratio-scale scores.
+#' which is defined as a mean absolute deviation from the median divided by a
+#' median. The coefficient of dispersion assumes ratio-scale scores and is a 
+#' robust alternative to the coefficient of variation.
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
 #' @param  y       vector of scores
@@ -1284,7 +1315,7 @@ ci.ratio.mad.ps <- function(alpha, y1, y2) {
 #'
 #' @return 
 #' Returns a 1-row matrix. The columns are:
-#' * COD - estimated coefficient of dispersion
+#' * Estimate - estimated coefficient of dispersion
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #'
@@ -1299,8 +1330,8 @@ ci.ratio.mad.ps <- function(alpha, y1, y2) {
 #' ci.cod1(.05, y)
 #'
 #' # Should return:
-#' #            COD        LL       UL
-#' # [1,] 0.5921053 0.3813259 1.092679
+#' #        Estimate        LL       UL
+#' # [1,]  0.5921053 0.3813259 1.092679
 #'
 #'
 #' @importFrom stats qnorm
@@ -1336,7 +1367,7 @@ ci.cod1 <-function(alpha, y) {
  LL = exp(L1 - U2)
  UL = exp(U1 - L2)
  out = t(c(cod, LL, UL))
- colnames(out) = c("COD", "LL", "UL")
+ colnames(out) = c("Estimate", "LL", "UL")
  return(out)
 }
 
@@ -1348,7 +1379,8 @@ ci.cod1 <-function(alpha, y) {
 #'           
 #' @description
 #' Computes a confidence interval for a ratio of population dispersion
-#' coefficients (MAD/median). Ratio-scale scores are assumed.
+#' coefficients (MAD/median) in a 2-group design. Ratio-scale scores are
+#' assumed.
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
 #' @param  y1      vector of scores in gorup 1
@@ -1452,7 +1484,7 @@ ci.cod2 <-function(alpha, y1, y2) {
 #'
 #' @return 
 #' Returns a 1-row matrix. The columns are:
-#' * Median - estimated median
+#' * Estimate - estimated median
 #' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -1468,8 +1500,8 @@ ci.cod2 <-function(alpha, y1, y2) {
 #' ci.median1(.05, y)
 #'
 #' # Should return:
-#' #      Median       SE LL UL
-#' # [1,]     20 4.270922 10 30
+#' #      Estimate       SE LL UL
+#' # [1,]       20 4.270922 10 30
 #'
 #'
 #' @importFrom stats qnorm
@@ -1493,7 +1525,7 @@ ci.median1 <- function(alpha, y) {
  z0 <- qnorm(1 - p)
  se <- (ul1 - ll1)/(2*z0)
  out <- t(c(median, se, ll, ul))
- colnames(out) <- c("Median", "SE", "LL", "UL")
+ colnames(out) <- c("Estimate", "SE", "LL", "UL")
  return(out)
 }
 
@@ -1503,8 +1535,8 @@ ci.median1 <- function(alpha, y) {
 #'
 #'
 #' @description
-#' Computes a confidence interval for a 2-group difference of population 
-#' medians.
+#' Computes a confidence interval for a difference of population medians in
+#' a 2-group design.
 #'
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
@@ -1658,7 +1690,7 @@ ci.ratio.median2 <- function(alpha, y1, y2) {
 #'
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
-#' @param  m       vector of group estimated medians
+#' @param  m       vector of estimated group medians
 #' @param  se      vector of group standard errors 
 #' @param  v       vector of between-subjects contrast coefficients
 #'
@@ -1707,7 +1739,7 @@ ci.lc.median.bs <- function(alpha, m, se, v) {
 #' @description
 #' Computes a confidence interval for a difference of population medians in 
 #' a paired-samples design. This function also computes the standard errors
-#' for each median and the covariance between the two medians.
+#' for each median and the covariance between the two estimated medians.
 #'
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
@@ -1720,9 +1752,9 @@ ci.lc.median.bs <- function(alpha, m, se, v) {
 #' * Median1 - estimated median for measurement 1
 #' * Median2 - estimated median for measurement 2
 #' * Median1-Median2 - estimated difference of medians
-#' * SE1 - standard error of median 1
-#' * SE2 - standard error of median 2
-#' * COV - covariance of medians
+#' * SE1 - standard error of median 1 
+#' * SE2 - standard error of median 2 
+#' * COV - covariance of the two `estimated medians
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #'
@@ -1928,12 +1960,13 @@ ci.sign1 <- function(alpha, y, h) {
 #'
 #' @description
 #' Computes a distribution-free confidence interval for the Mann-Whitney 
-#' parameter. In a 2-group experiment, this parameter is the proportion of 
-#' members in the population with scores that would be higher under treatment 1
-#' than treatment 2. In a 2-group nonexperiment where participants are sampled 
-#' from two subpopulations of sizes N1 and N2, the parameter is the proportion 
-#' of all N1 x N2 pairs in which a member from subpopulation 1 has a larger
-#' score than a member from subpopulation 2.
+#' parameter (a "common language effect size"). In a 2-group experiment, this
+#' parameter is the proportion of members in the population with scores that 
+#' would be higher under treatment 1 than treatment 2. In a 2-group 
+#' nonexperiment where participants are sampled from two subpopulations of 
+#' sizes N1 and N2, the parameter is the proportion of all N1 x N2 pairs in 
+#' which a member from subpopulation 1 has a larger score than a member from 
+#' subpopulation 2.
 #'
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
@@ -1954,8 +1987,8 @@ ci.sign1 <- function(alpha, y, h) {
 #'
 #'
 #' @examples
-#' y2 <- c(32, 39, 26, 35, 43, 27, 40, 37, 34, 29)
-#' y1 <- c(36, 44, 47, 42, 49, 39, 46, 31, 33, 48)
+#' y2 <- c(36, 44, 47, 42, 49, 39, 46, 31, 33, 48)
+#' y1 <- c(32, 39, 26, 35, 43, 27, 40, 37, 34, 29)
 #' ci.mann(.05, y1, y2)
 #'
 #' # Should return:
@@ -1982,7 +2015,7 @@ ci.mann <- function(alpha, y1, y2){
  a2 <- sum((r2 - seq2)^2)
  v1 <- (a1 - n1*(m1 - (n1 + 1)/2)^2)/((n1 - 1)*n^2)
  v2 <- (a2 - n2*(m2 - (n2 + 1)/2)^2)/((n2 - 1)*n^2)
- u <- sum(r2) - n2*(n2 + 1)/2
+ u <- sum(r1) - n1*(n1 + 1)/2
  est <- u/(n1*n2)
  se <- sqrt((n2*v1 + n1*v2)/(n1*n2))
  ll <- est - z*se
@@ -2008,8 +2041,8 @@ ci.mann <- function(alpha, y1, y2){
 #'
 #'
 #' @param   alpha  1 - alpha confidence 
-#' @param   m      vector of group estimated means 
-#' @param   sd     vector of group estimated standard deviations 
+#' @param   m      vector of estimated group means 
+#' @param   sd     vector of estimated group standard deviations 
 #' @param   n      sample size per group
 #'
 #'
@@ -2753,67 +2786,6 @@ test.kurtosis <- function(y) {
 }
 
 
-#  test.anova1.bs =============================================================
-#' Between-subjects F statistic and eta-squared from summary information 
-#'
-#'
-#' @description
-#' Computes the F statistic, p-value, eta-squared, and adjusted eta-squared 
-#' for the main effect of Factor A in a one-way between-subjects ANOVA using
-#' the estimated group means, estimated group standard deviations, and sample
-#' sizes.  
-#'
-#'
-#' @param   m       vector of estimated group means
-#' @param   sd      vector of estimated group standard deviations
-#' @param   n       vector of sample sizes
-#'
-#'
-#' @return 
-#' Returns a 1-row matrix. The columns are:
-#' * F - F statistic for test of null hypothesis
-#' * dfA - degrees of freedom for between-subjects factor
-#' * dfE - error degrees of freedom
-#' * dfA - degrees of freedom for between-subjects factor
-#' * p - p-value for F-test
-#' * eta-squared - estimate of eta-squared
-#' * adj eta-squared - a bias adjusted estimate of eta-squared
-#'
-#'
-#' @examples
-#' m <- c(12.4, 8.6, 10.5)
-#' sd <- c(3.84, 3.12, 3.48)
-#' n <- c(20, 20, 20)
-#' test.anova1.bs(m, sd, n)
-#'
-#' #  Should return:
-#' #             F dfA  dfE           p eta-squared adj eta-squared
-#' # [1,] 5.919585   2   57 0.004614428   0.1719831       0.1429298
-#'  
-#' 
-#' @importFrom stats pf
-#' @export
-test.anova1.bs <- function(m, sd, n) {
-  a <- length(m)
-  nt <- sum(n)
-  dfe <- nt - a
-  dfa <- a - 1
-  v <- sd^2
-  grandmean <- sum(n*m)/nt
-  SSe <- sum((n - 1)*v)
-  MSe <- SSe/dfe
-  SSa <- sum(n*(m - grandmean)^2)
-  MSa <- SSa/dfa
-  F <- MSa/MSe
-  p <- 1 - pf(F, dfa, dfe)
-  etasqr <- SSa/(SSa + SSe)
-  adjetasqr <- 1 - (dfa + dfe)*(1 - etasqr)/dfe
-  out <- t(c(F, dfa, dfe, p, etasqr, adjetasqr))
-  colnames(out) <- c("F", "dfA",  "dfE", "p", "eta-squared", "adj eta-squared")
-  return(out)
-}
-
-
 # ================== File 1: Sample Size for Desired Precision ================
 # size.ci.mean1 ===============================================================
 #' Sample size for a single mean confidence interval
@@ -2895,16 +2867,17 @@ size.ci.mean2 <- function(alpha, var, w, R) {
 }
 
 
-#  size.ci.stdmean2 ========================================================== 
+#  size.ci.stdmean2 ===========================================================
 #' Sample size for a 2-group standardized mean difference confidence interval
 #'
 #'
 #' @description
-#' Computes the sample size in each group required to estimate a population 
-#' standardized mean difference with desired confidence interval precision 
-#' in a 2-group design. Set the standardized mean difference planning value 
-#' to the largest value within a plausible range for a conservatively large 
-#' sample size. Set R = 1 for equal sample sizes.
+#' Computes the sample size per group required to estimate two types of 
+#' population standardized mean differences (unweighted standardizer and single
+#' group standardizer) with desired confidence interval precision in a 2-group 
+#' design. Set the standardized mean difference planning value to the largest 
+#' value within a plausible range for a conservatively large sample size. Set
+#' R = 1 for equal sample sizes.
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -2918,25 +2891,31 @@ size.ci.mean2 <- function(alpha, var, w, R) {
 #'
 #'
 #' @return 
-#' Returns the required sample size for each group
+#' Returns the required sample size per each group for each standardizer
 #'
 #'
 #' @examples
 #' size.ci.stdmean2(.05, .75, .5, 1)
 #'
 #' # Should return:
-#' #       n1   n2
-#' # [1,] 132  132
+#' #                              n1  n2
+#' # Unweighted standardizer:    132 132
+#' # Single group standardizer:  141 141
 #'  
 #' 
 #' @importFrom stats qnorm
 #' @export
 size.ci.stdmean2 <- function(alpha, d, w, R) {
  z <- qnorm(1 - alpha/2)
- n1 <- ceiling((d^2*(1 + R)/(2*R) + 4*(1 + R)/R)*(z/w)^2)
- n2 <- ceiling(R*n1)
- out <- t(c(n1, n2))
+ n11 <- ceiling((d^2*(1 + R)/(2*R) + 4*(1 + R)/R)*(z/w)^2)
+ n12 <- ceiling(R*n11)
+ n21 <- ceiling((2*d^2*(1 + R)/(2*R) + 4*(1 + R)/R)*(z/w)^2)
+ n22 <- ceiling(R*n21)
+ out1 <- t(c(n11, n12))
+ out2 <- t(c(n21, n22))
+ out <- rbind(out1, out2)
  colnames(out) <- c("n1", "n2")
+ rownames(out) <- c("Unweighted standardizer:", "Single group standardizer:")
  return(out)
 }
 
@@ -3030,20 +3009,22 @@ size.ci.lc.mean.bs <- function(alpha, var, w, v) {
 
 
 #  size.ci.lc.stdmean.bs ====================================================== 
-#' Sample size for a between-subjects standardized mean linear contrast 
+#' Sample size for a between-subjects standardized linear contrast of means
 #' confidence interval
 #'
-#'
+#'                     
 #' @description
-#' Computes the sample size in each group (assuming equal sample sizes) 
-#' required to estimate a standardized linear contrast of population means 
-#' with desired confidence interval precision in a between-subjects design.
-#' Set the standardized mean contrast planning value to the largest value 
-#' within a plausible range for a conservatively large sample size. 
+#' Computes the sample size per group (assuming equal sample sizes) 
+#' required to estimate two types of standardized linear contrasts of 
+#' population means (unweighted average standardizer and single group
+#' standardizer) with desired confidence interval precision in a 
+#' between-subjects design. Set the standardized linear contrast of
+#' means to the largest value within a plausible range for a conservatively
+#' large sample size. 
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
-#' @param  d      planning value of standardized linear contrast  
+#' @param  d      planning value of standardized linear contrast of means 
 #' @param  w      desired confidence interval width
 #' @param  v      vector of between-subjects contrast coefficients 
 #'
@@ -3053,7 +3034,7 @@ size.ci.lc.mean.bs <- function(alpha, var, w, v) {
 #'
 #'
 #' @return 
-#' Returns the required sample size for each group
+#' Returns the required sample size per group for each standardizer
 #'
 #'
 #' @examples
@@ -3061,8 +3042,9 @@ size.ci.lc.mean.bs <- function(alpha, var, w, v) {
 #' size.ci.lc.stdmean.bs(.05, 1, .6, v)
 #'
 #' # Should return:
-#' #      Sample size per group
-#' # [1,]                    49
+#' #                            Sample size per group
+#' # Unweighted standardizer:                      49
+#' # Single group standardizer:                    65
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -3070,9 +3052,13 @@ size.ci.lc.mean.bs <- function(alpha, var, w, v) {
 size.ci.lc.stdmean.bs <- function(alpha, d, w, v) {
  z <- qnorm(1 - alpha/2)
  a <- length(v)
- n <- ceiling((2*d^2/a + 4*(t(v)%*%v))*(z/w)^2)
- out <- matrix(n, nrow = 1, ncol = 1)
+ n1 <- ceiling((2*d^2/a + 4*(t(v)%*%v))*(z/w)^2)
+ n2 <- ceiling((2*d^2 + 4*(t(v)%*%v))*(z/w)^2)
+ out1 <- n1
+ out2 <- n2
+ out <- rbind(out1, out2)
  colnames(out) <- "Sample size per group"
+ rownames(out) <- c("Unweighted standardizer:", "Single group standardizer:")
  return(out)	
 }
 
@@ -3086,7 +3072,7 @@ size.ci.lc.stdmean.bs <- function(alpha, d, w, v) {
 #' means with desired confidence interval precision in a paired-samples 
 #' design. This function requires a planning value for the average of the  
 #' variances for the two measurements. Set the Pearson correlation planning  
-#' vaklue to the smallest value within a plausible range for a conservatively  
+#' value to the smallest value within a plausible range for a conservatively  
 #' large sample size. Set the variance planning value to the largest value 
 #' within a plausible range for a conservatively large sample size. 
 #'
@@ -3126,12 +3112,13 @@ size.ci.mean.ps <- function(alpha, var, cor, w) {
 #'
 #'
 #' @description
-#' Computes the sample size required to estimate a population standardized 
-#' mean difference with desired confidence interval precision in a 
-#' paired-samples design. Set the standardized mean difference planning value 
-#' to the largest value within a plausible range for a conservatively large 
-#' sample size. Set the pearson correlation planning value to the smallest
-#' value within a plausible range for a conservatively large sample size.
+#' Computes the sample size required to estimate two types of population 
+#' standardized mean differences (unweighted standardizer and single group
+#' standardizer) with desired confidence interval precision in a paired-samples
+#' design. For a conservatively large sample size, set the standardized mean 
+#' difference planning value to the largest value within a plausible range and 
+#' set the Pearson correlation planning value to the smallest value within a 
+#' plausible range.
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -3145,24 +3132,29 @@ size.ci.mean.ps <- function(alpha, var, cor, w) {
 #'
 #'
 #' @return 
-#' Returns the required sample size 
+#' Returns the required sample size for each standardizer 
 #'
 #'
 #' @examples
 #' size.ci.stdmean.ps(.05, 1, .65, .6)
 #'
 #' # Should return:
-#' #      Sample size
-#' # [1,]          46
+#' #                            Sample Size
+#' # Unweighted standardizer:            46
+#' # Single group standardizer:          52
 #'  
 #' 
 #' @importFrom stats qnorm
 #' @export
 size.ci.stdmean.ps <- function(alpha, d, cor, w) {
  z <- qnorm(1 - alpha/2)
- n <- ceiling(4*(d^2*(1 + cor^2)/4 + 2*(1 - cor))*(z/w)^2)
- out <- matrix(n, nrow = 1, ncol = 1)
+ n1 <- ceiling((d^2*(1 + cor^2) + 8*(1 - cor))*(z/w)^2)
+ n2 <- ceiling((2*d^2 + 8*(1 - cor))*(z/w)^2)
+ out1 <- n1
+ out2 <- n2
+ out <- rbind(out1, out2)
  colnames(out) <- "Sample size"
+ rownames(out) <- c("Unweighted standardizer:", "Single group standardizer:")
  return(out)	
 }
 
@@ -3213,7 +3205,53 @@ size.ci.ratio.mean.ps <- function(alpha, var, m1, m2, cor, r) {
 }
 
 
-#  size.ci.lc.stdmean.ws ======================================================
+#  size.ci.lc.mean.ws ========================================================
+#' Sample size for a within-subjects mean linear contrast confidence interval
+#'
+#'
+#' @description
+#' Computes the sample size required to estimate a linear contrast of 
+#' population means with desired confidence interval precision in a 
+#' within-subjects design. Set the variance planning value to the  
+#' largest value within a plausible range for a conservatively large  
+#' sample size. Set the Pearson correlation planning value to the 
+#' smallest value within a plausible range for a conservatively 
+#' large sample size. 
+#'
+#'
+#' @param  alpha  alpha level for 1-alpha confidence 
+#' @param  var    planning value of average variance of the measurements  
+#' @param  cor    planning value of average correlation between measurements
+#' @param  w      desired confidence interval width
+#' @param  q      vector of within-subjects contrast coefficients 
+#'
+#'
+#' @return 
+#' Returns the required sample size 
+#'
+#'
+#' @examples
+#' q <- c(.5, .5, -.5, -.5)
+#' size.ci.lc.mean.ws(.05, 265, .8, 10, q)
+#'
+#' # Should return:
+#' #      Sample size
+#' # [1,]          11
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export
+size.ci.lc.mean.ws <- function(alpha, var, cor, w, q) {
+ z <- qnorm(1 - alpha/2)
+ k <- length(q)
+ n <- ceiling(4*(1 - cor)*var*(t(q)%*%q)*(z/w)^2 + z^2/2)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size"
+ return(out)
+}
+
+
+#  size.ci.lc.stdmean.ws ===================================================
 #' Sample size for a within-subjects standardized linear contrast of means
 #' confidence interval
 #'
@@ -3410,7 +3448,7 @@ size.test.mean1 <- function(alpha, pow, var, es) {
 #'
 #'
 #' @description
-#' Computes the sample size in each group required to test a difference in 
+#' Computes the sample size in each group required  to test a difference in 
 #' population means with desired power in a 2-group design. Set R =1 for equal 
 #' sample sizes. Set the variance planning value to the largest value within a 
 #' plausible range for a conservatively large sample size.
@@ -3594,10 +3632,10 @@ size.supinf.mean2 <- function(alpha, pow, var, es, h) {
 #'
 #' @description
 #' Computes the sample size required to test a difference in population means
-#' with desired power in a paired-samples design. Set the Pearson correlation 
-#' planning value to the smallest value within a plausible range, and set the 
-#' variance planning value to the largest value within a plausible range for
-#' a conservatively large sample size.
+#' with desired power in a paired-samples design. Set the Pearson correlation  
+#' planning value to the smallest value within a plausible range, and set the
+#' variance planning value to the largest value within a plausible range for a
+#' conservatively large sample size.
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test 
@@ -3688,15 +3726,15 @@ size.test.lc.mean.ws <- function(alpha, pow, var, es, cor, q) {
 #' for the difference in population means. The planning value for the absolute
 #' mean difference must be less than h. Equivalence tests often require a 
 #' very large sample size. Equivalence tests usually use 2 x alpha rather than
-#' alpha (e.g., use alpha = .10 rather alpha = .05). Set the correlation 
-#' value to the smallest value within a plausible range for a conservatively 
-#' large sample size. Set the variance planning value to the largest value 
-#' within a plausible range for a conservatively large sample size.
+#' alpha (e.g., use alpha = .10 rather alpha = .05). Set the Pearson correlation 
+#' value to the smallest value within a plausible range, and set the variance
+#' planning value to the largest value within a plausible range for a
+#' conservatively large sample size.
 #'
 #'
 #' @param   alpha  alpha level for hypothesis test 
 #' @param   pow    desired power
-#' @param   var    planning value of average within-group variance
+#' @param   var    planning value of average variance of the two measurements
 #' @param   es     planning value of mean difference
 #' @param   cor    planning value of the correlation between measurements
 #' @param   h      upper limit for range of practical equivalence
@@ -3737,15 +3775,14 @@ size.equiv.mean.ps <- function(alpha, pow, var, es, cor, h) {
 #' for the range of practical equivalence and specify an effect size (es) such
 #' that es > h. For a noninferiority test, specify the lower limit (-h) for 
 #' the range of practical equivalence and specify an effect size such that 
-#' es > -h.  Set the correlation planning value to the smallest value within a
-#' plausible range for a conservatively large sample size. Set the variance 
-#' planning value to the largest value within a plausible range for a 
-#' conservatively large sample size.
+#' es > -h.  Set the Pearson correlation planning value to the smallest value
+#' within a plausible range, and set the variance planning value to the largest
+#' value within a plausible range for a conservatively large sample size.
 #'
 #'
 #' @param   alpha  alpha level for hypothesis test 
 #' @param   pow    desired power
-#' @param   var    planning value of average within-group variance
+#' @param   var    planning value of average variance of the two measurements
 #' @param   es     planning value of mean difference
 #' @param   cor    planning value of the correlation between measurements
 #' @param   h      upper or lower limit for range of practical equivalence
@@ -4002,7 +4039,7 @@ pi.score1 <- function(alpha, m, sd, n) {
 
 
 #  pi.score2 ================================================================== 
-#' Prediction interval for a difference of scores
+#' Prediction interval for a difference of scores in a 2-group experiment
 #'
 #'
 #' @description
@@ -4066,6 +4103,59 @@ pi.score2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
  colnames(out) <- c("Predicted", "df", "LL", "UL")
  rownames(out) <- c("Equal Variances Assumed:", "Equal Variances Not Assumed:")
  return(out) 
+}
+
+
+#  pi.score.ps ================================================================ 
+#' Prediction interval for difference of scores in a 2-level within-subjects 
+#' experiment
+#'
+#'
+#' @description
+#' For a 2-level within-subjects experiment, this function computes a 
+#' prediction interval for how the response variable score for one randomly 
+#' selected person from the study population would differ under the two 
+#' treatment conditions. 
+#'
+#'
+#' @param  alpha  alpha level for 1-alpha confidence 
+#' @param  m1     estimated mean from group 1
+#' @param  m2     estimated mean from group 2
+#' @param  sd1    estimated standard deviation from group 1
+#' @param  sd2    estimated standard deviation from group 2
+#' @param  cor    estimated correlation of paired scores
+#' @param  n      sample size
+#'
+#'
+#' @return 
+#' Returns a 1-row matrix. The columns are:
+#' * Predicted - predicted difference in scores
+#' * df - degrees of freedom
+#' * LL - lower limit of the prediction interval
+#' * UL - upper limit of the prediction interval
+#'
+#'
+#' @examples
+#' pi.score.ps(.05, 265.1, 208.6, 23.51, 19.94, .814, 30)
+#'
+#' # Should return:
+#' #      Predicted df       LL       UL
+#' # [1,]      56.5 29 28.05936 84.94064
+#'  
+#' 
+#' @importFrom stats qt
+#' @export
+pi.score.ps <- function(alpha, m1, m2, sd1, sd2, cor, n) {
+ df <- n - 1
+ tcrit <- qt(1 - alpha/2, df)
+ est <- m1 - m2
+ var <- sd1^2 + sd2^2 - 2*cor*sd1*sd2
+ se <- sqrt(var + var/n)
+ ll <- est - tcrit*se
+ ul <- est + tcrit*se
+ out <- t(c(est, df, ll, ul))
+ colnames(out) <- c("Predicted", "df", "LL", "UL")
+ return(out)
 }
 
 
@@ -4137,7 +4227,8 @@ randomize <- function(n) {
 #'
 #' @description
 #' Generates a random sample of scores from a normal distribution with a
-#' specified population mean and standard deviation.
+#' specified population mean and standard deviation. This functions is useful 
+#' for generating hypothetical data for classroom demonstrations.
 #'
 #'
 #' @param  n     sample size
@@ -4244,6 +4335,67 @@ etasqr.adj <- function(etasqr, dfeffect, dferror) {
  out <- matrix(adj, nrow = 1, ncol = 1)
  colnames(out) <- "Adjusted eta-squared"
  return(out)
+}
+
+
+#  test.anova1.bs =============================================================
+#' Between-subjects F statistic and eta-squared from summary information 
+#'
+#'
+#' @description
+#' Computes the F statistic, p-value, eta-squared, and adjusted eta-squared 
+#' for the main effect of Factor A in a one-way between-subjects ANOVA using
+#' the estimated group means, estimated group standard deviations, and group
+#' sample sizes.  
+#'
+#'
+#' @param   m       vector of estimated group means
+#' @param   sd      vector of estimated group standard deviations
+#' @param   n       vector of group sample sizes
+#'
+#'
+#' @return 
+#' Returns a 1-row matrix. The columns are:
+#' * F - F statistic for test of null hypothesis
+#' * dfA - degrees of freedom for between-subjects factor
+#' * dfE - error degrees of freedom
+#' * dfA - degrees of freedom for between-subjects factor
+#' * p - p-value for F-test
+#' * eta-squared - estimate of eta-squared
+#' * adj eta-squared - a bias adjusted estimate of eta-squared
+#'
+#'
+#' @examples
+#' m <- c(12.4, 8.6, 10.5)
+#' sd <- c(3.84, 3.12, 3.48)
+#' n <- c(20, 20, 20)
+#' test.anova1.bs(m, sd, n)
+#'
+#' #  Should return:
+#' #             F dfA  dfE           p eta-squared adj eta-squared
+#' # [1,] 5.919585   2   57 0.004614428   0.1719831       0.1429298
+#'  
+#' 
+#' @importFrom stats pf
+#' @export
+test.anova1.bs <- function(m, sd, n) {
+  a <- length(m)
+  nt <- sum(n)
+  dfe <- nt - a
+  dfa <- a - 1
+  v <- sd^2
+  grandmean <- sum(n*m)/nt
+  SSe <- sum((n - 1)*v)
+  MSe <- SSe/dfe
+  SSa <- sum(n*(m - grandmean)^2)
+  MSa <- SSa/dfa
+  F <- MSa/MSe
+  p <- 1 - pf(F, dfa, dfe)
+  etasqr <- SSa/(SSa + SSe)
+  adjetasqr <- 1 - (dfa + dfe)*(1 - etasqr)/dfe
+  out <- t(c(F, dfa, dfe, p, etasqr, adjetasqr))
+  colnames(out) <- c("F", "dfA",  "dfE", "p", "eta-squared", "adj eta-squared")
+  return(out)
 }
 
 
@@ -4386,13 +4538,13 @@ sim.ci.mean1 <- function(alpha, n, dist, rep) {
 
 
 #  sim.ci.mean2 ===============================================================
-#' Simulates confidence interval coverage probability for a two-group mean 
+#' Simulates confidence interval coverage probability for a 2-group mean 
 #' difference
 #'
 #'                               
 #' @description
 #' Performs a computer simulation of separate variance and pooled variance 
-#' confidence interval performance for a mean difference in a two-group design.
+#' confidence interval performance for a mean difference in a 2-group design.
 #' Sample data within each group can be generated from five different 
 #' population distributions. All distributions are scaled to have a standard 
 #' deviation of 1.0 in group 1. 
@@ -4401,9 +4553,9 @@ sim.ci.mean1 <- function(alpha, n, dist, rep) {
 #' @param   alpha     alpha level for 1-alpha confidence
 #' @param   n1        sample size in group 1
 #' @param   n2        sample size in group 2
-#' @param   sd.ratio  ratio of population standard deviations
-#' @param   dist1     type of distribution in group 1 (1, 2, 3, 4, or 5)
-#' @param   dist2     type of distribution in group 2 (1, 2, 3, 4, or 5)
+#' @param   sd.ratio  ratio of population standard deviations (sd2/sd1)
+#' @param   dist1     type of distribution for group 1 (1, 2, 3, 4, or 5)
+#' @param   dist2     type of distribution for group 2 (1, 2, 3, 4, or 5)
 #' * 1 = Gaussian (skewness = 0 and excess kurtosis = 0) 
 #' * 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
 #' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
@@ -4414,9 +4566,9 @@ sim.ci.mean1 <- function(alpha, n, dist, rep) {
 #' 
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Coverage - probability of confidence interval including population mean  
-#' * Lower Error - probability of lower limit greater than population mean
-#' * Upper Error - probability of upper limit less than population mean
+#' * Coverage - probability of confidence interval including population mean difference  
+#' * Lower Error - probability of lower limit greater than population mean difference
+#' * Upper Error - probability of upper limit less than population mean difference
 #' * Ave CI Width - average confidence interval width
 #'
 #'
@@ -4515,7 +4667,7 @@ sim.ci.mean2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2, rep) {
 #' @description
 #' Performs a computer simulation of confidence interval performance for a mean 
 #' difference in a paired-samples design. Sample data within each level of the 
-#' within-subjects factor group can be generated from bivariate population
+#' within-subjects factor can be generated from bivariate population
 #' distributions with five different marginal distributions. All distributions
 #' are scaled to have standard deviations of 1.0 at level 1. Bivariate random
 #' data with specified marginal skewness and kurtosis are generated using the
@@ -4538,9 +4690,9 @@ sim.ci.mean2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2, rep) {
 #' 
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Coverage - probability of confidence interval including population mean  
-#' * Lower Error - probability of lower limit greater than population mean
-#' * Upper Error - probability of upper limit less than population mean
+#' * Coverage - probability of confidence interval including population mean difference 
+#' * Lower Error - probability of lower limit greater than population mean difference
+#' * Upper Error - probability of upper limit less than population mean difference
 #' * Ave CI Width - average confidence interval width
 #'
 #'
@@ -4630,9 +4782,9 @@ sim.ci.mean.ps <- function(alpha, n, sd.ratio, cor, dist1, dist2, rep) {
 #' 
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Coverage - probability of confidence interval including population mean  
-#' * Lower Error - probability of lower limit greater than population mean
-#' * Upper Error - probability of upper limit less than population mean
+#' * Coverage - probability of confidence interval including population median  
+#' * Lower Error - probability of lower limit greater than population mediann
+#' * Upper Error - probability of upper limit less than population median
 #' * Ave CI Width - average confidence interval width
 #'
 #'
@@ -4728,7 +4880,524 @@ sim.ci.median1 <- function(alpha, n, dist, rep) {
 }
 
 
- 
+#  sim.ci.median2 =============================================================
+#' Simulates confidence interval coverage probability for a median difference
+#' in a 2-group design
+#'
+#'                                          
+#' @description
+#' Performs a computer simulation of the confidence interval performance for a 
+#' difference of medians in a 2-group design. Sample data for each group can
+#' be generated from five different population distributions. All distributions
+#' are scaled to have standard deviations of 1.0 in group 1.
+#'
+#' @param   alpha     alpha level for 1-alpha confidence
+#' @param   n1        sample size for group 1
+#' @param   n2        sample size for group 2
+#' @param   sd.ratio  ratio of population standard deviations (sd2/sd1)
+#' @param   dist1     type of distribution for group 1 (1, 2, 3, 4, or 5) 
+#' @param   dist2     type of distribution for group 2 (1, 2, 3, 4, or 5) 
+#' * 1 = Gaussian (skewness = 0 and excess kurtosis = 0) 
+#' * 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
+#' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
+#' * 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
+#' * 5 = large skew (skewness = 2 and excess kurtosis = 6)
+#' @param   rep       number of Monte Carlo samples
+#'  
+#' 
+#' @return
+#' Returns a 1-row matrix. The columns are:
+#' * Coverage - Probability of confidence interval including population median difference  
+#' * Lower Error - Probability of lower limit greater than population median difference
+#' * Upper Error - Probability of upper limit less than population median difference
+#' * Ave CI Width - Average confidence interval width
+#'
+#'
+#' @examples
+#' sim.ci.median2(.05, 20, 20, 2, 5, 4, 5000)
+#'
+#' # Should return (within sampling error):
+#' #      Coverage Lower Error Upper Error Ave CI Width
+#' # [1,]    0.952       0.027       0.021     2.368914
+#'
+#'
+#' @importFrom stats qnorm
+#' @importFrom stats rnorm
+#' @importFrom stats runif
+#' @importFrom stats rt
+#' @importFrom stats rgamma
+#' @export
+sim.ci.median2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2, rep) {
+ zcrit <- qnorm(1 - alpha/2)
+ o1 <- round((n1/2 - sqrt(n1)))
+ if (o1 < 1) {o1 = 1}
+ o2 <- round((n2/2 - sqrt(n2)))
+ if (o2 < 1) {o2 = 1}
+ p1 <- pbinom(o1 - 1, size = n1, prob = .5)
+ z01 <- qnorm(1 - p1)
+ p2 <- pbinom(o2 - 1, size = n2, prob = .5)
+ z02 <- qnorm(1 - p2)
+ k <- 0; w <- 0; e1 <- 0; e2 <- 0
+ repeat {
+   k <- k + 1
+   if (dist1 == 1) {
+     y1 <- rnorm(n1)
+     popmedian1 <- 0
+   } else if (dist1 == 2) {
+     y1 <- 3.464*runif(n1)
+     popmedian1 <- 1.732
+   } else if (dist1 == 3) {
+     y1 <- .7745*rt(n1, 5)
+     popmedian1 <- 0
+   } else if (dist1 == 4) {
+     y1 <- .5*rgamma(n1, 4)
+     popmedian1 <- 1.837
+   } else {
+     y1 <- rgamma(n1, 1)
+     popmedian1 <- 0.690
+   }
+   if (dist2 == 1) {
+     y2 <- sd.ratio*rnorm(n2)
+     popmedian2 <- 0
+   } else if (dist2 == 2) {
+     y2 <- sd.ratio*3.464*runif(n2)
+     popmedian2 <- sd.ratio*1.732
+   } else if (dist2 == 3) {
+     y2 <- sd.ratio*.7745*rt(n2, 5)
+     popmedian2 <- 0
+   } else if (dist2 == 4) {
+     y2 <- sd.ratio*.5*rgamma(n2, 4)
+     popmedian2 <- sd.ratio*1.837
+   } else {
+     y2 <- sd.ratio*rgamma(n2, 1)
+     popmedian2 <- sd.ratio*0.690
+   }
+   popdiff <- popmedian1 - popmedian2
+   y1 <- sort(y1)
+   LL1 <- y1[o1]
+   UL1 <- y1[n1 - o1 + 1]
+   median1 <- median(y1)
+   se1 <- (UL1 - LL1)/(2*z01)
+   y2 <- sort(y2)
+   LL2 <- y2[o2]
+   UL2 <- y2[n2 - o2 + 1]
+   median2 <- median(y2)
+   se2 <- (UL2 - LL2)/(2*z02)
+   diff <- median1 - median2
+   se <- sqrt(se1^2 + se2^2)
+   ll <- diff - zcrit*se
+   ul <- diff + zcrit*se
+   w0 <- ul - ll
+   c1 <- as.integer(ll > popdiff)
+   c2 <- as.integer(ul < popdiff)
+   e1 <- e1 + c1
+   e2 <- e2 + c2
+   w <- w + w0
+   if (k == rep) {break}
+  }
+  width <- w/rep
+  cov <- 1 - (e1 + e2)/rep
+  out <- t(c(cov, e1/rep, e2/rep, width))
+  colnames(out) <- c("Coverage", "Lower Error", "Upper Error", "Ave CI Width")
+  return(out)
+}
+
+
+#  sim.ci.median.ps ===========================================================
+#' Simulates confidence interval coverage probability for a median difference
+#' in a paired-samples design
+#'
+#'                               
+#' @description
+#' Performs a computer simulation of confidence interval performance for a 
+#' median difference in a paired-samples design. Sample data within each level
+#' of the within-subjects factor can be generated from bivariate population
+#' distributions with five different marginal distributions. All distributions
+#' are scaled to have standard deviations of 1.0 at level 1. Bivariate random 
+#' data with specified marginal skewness and kurtosis are generated using the
+#' unonr function in the mnonr package. 
+#'
+#' @param   alpha     alpha level for 1-alpha confidence
+#' @param   n         sample size 
+#' @param   sd.ratio  ratio of population standard deviations
+#' @param   cor       population correlation of paired observations
+#' @param   dist1     type of distribution at level 1 (1, 2, 3, 4, or 5)
+#' @param   dist2     type of distribution at level 2 (1, 2, 3, 4, or 5)
+#' * 1 = Gaussian (skewness = 0 and excess kurtosis = 0) 
+#' * 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
+#' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
+#' * 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
+#' * 5 = large skew (skewness = 2 and excess kurtosis = 6)
+#' @param   rep       number of Monte Carlo samples
+#'  
+#' 
+#' @return
+#' Returns a 1-row matrix. The columns are:
+#' * Coverage - probability of confidence interval including population median difference  
+#' * Lower Error - probability of lower limit greater than population median difference
+#' * Upper Error - probability of upper limit less than population median difference
+#' * Ave CI Width - average confidence interval width
+#'
+#'
+#' @examples
+#' sim.ci.median.ps(.05, 30, 1.5, .7, 4, 3, 2000)
+#'
+#' # Should return (within sampling error):
+#' #      Coverage Lower Error Upper Error Ave CI Width
+#' # [1,]    0.961       0.026       0.013    0.9435462
+#'
+#'
+#' @importFrom stats qnorm
+#' @importFrom mnonr unonr
+#' @export
+sim.ci.median.ps <- function(alpha, n, sd.ratio, cor, dist1, dist2, rep) {
+ zcrit <- qnorm(1 - alpha/2)
+ o <- round(n/2 - sqrt(n))
+ if (o < 1) {o = 1}
+ p <- pbinom(o - 1, size = n, prob = .5)
+ z0 <- qnorm(1 - p)
+ if (dist1 == 1) {
+   skw1 <- 0; kur1 <- 0
+   popmedian1 <- 0
+ } else if (dist1 == 2) {
+   skw1 <- 0; kur1 <- -1.2
+   popmedian1 <- 0
+ } else if (dist1 == 3) {
+   skw1 <- 0; kur1 <- 6
+   popmedian1 <- 0
+ } else if (dist1 == 4) {
+   skw1 <- .75; kur1 <- .86
+   popmedian1 <- -.163
+ } else {
+   skw1 <- 1.41; kur1 <- 3
+   popmedian1 <- -.313
+ }
+ if (dist2 == 1) {
+   skw2 <- 0; kur2 <- 0
+   popmedian2 <- 0
+ } else if (dist2 == 2) {
+   skw2 <- 0; kur2 <- -1.2
+   popmedian2 <- 0
+ } else if (dist2 == 3) {
+   skw2 <- 0; kur2 <- 6
+   popmedian2 <- 0
+ } else if (dist2 == 4) {
+   skw2 <- 1; kur2 <- 1.5
+   popmedian2 <- -.163*sd.ratio
+ } else {
+   skw2 <- 2; kur2 <- 6
+   popmedian2 <- -.313*sd.ratio
+ }
+ popdiff <- popmedian1 - popmedian2
+ V <- matrix(c(1, cor*sd.ratio, cor*sd.ratio, sd.ratio^2), 2, 2)
+ w <- 0; k <- 0; e1 <- 0; e2 <- 0
+ repeat {
+   k <- k + 1
+   y <- unonr(n, c(0, 0), V, skewness = c(skw1, skw2), kurtosis = c(kur1, kur2))
+   y1 <- y[, 1]
+   y2 <- y[, 2]
+   median1 <- median(y1)
+   median2 <- median(y2)
+   diff <- median1 - median2
+   a1 <- (y1 < median1)
+   a2 <- (y2 < median2)
+   a3 <- a1 + a2
+   a4 <- sum(a3 == 2)
+   y1 <- sort(y1)
+   y2 <- sort(y2)
+   L1 <- y1[o]
+   U1 <- y1[n - o + 1]
+   se1 <- (U1 - L1)/(2*z0)
+   L2 <- y2[o]
+   U2 <- y2[n - o + 1]
+   se2 <- (U2 - L2)/(2*z0)
+   if (n/2 == trunc(n/2)) {
+   p00 <- (sum(a4) + .25)/(n + 1)
+   } else {
+   p00 <- (sum(a4) + .25)/n 
+   }
+   cov <- (4*p00 - 1)*se1*se2
+   se <- sqrt(se1^2 + se2^2 - 2*cov)
+   ll <- diff - zcrit*se
+   ul <- diff + zcrit*se
+   w0 <- ul - ll
+   c1 <- as.integer(ll > popdiff)
+   c2 <- as.integer(ul < popdiff)
+   e1 <- e1 + c1
+   e2 <- e2 + c2
+   w <- w + w0
+   if (k == rep) {break}
+ }
+ width <- w/rep
+ cov <- 1 - (e1 + e2)/rep
+ out <- t(c(cov, e1/rep, e2/rep, width))
+ colnames(out) <- c("Coverage", "Lower Error", "Upper Error", "Ave CI Width")
+ return(out)
+}
+
+
+#  sim.ci.stdmean2 =============================================================
+#' Simulates confidence interval coverage probability for a standardized mean
+#' difference in a 2-group design
+#'
+#'                                      
+#' @description
+#' Performs a computer simulation of confidence interval performance for  
+#' two types of standardized mean differences in a 2-group design. Sample 
+#' data for each group can be generated from five different population 
+#' distributions. All distributions are scaled to have standard deviations 
+#' of 1.0 in group 1.
+#'
+#' @param   alpha     alpha level for 1-alpha confidence
+#' @param   n1        sample size for group 1
+#' @param   n2        sample size for group 2
+#' @param   sd.ratio  ratio of population standard deviations (sd2/sd1)
+#' @param   dist1     type of distribution for group 1 (1, 2, 3, 4, or 5) 
+#' @param   dist2     type of distribution for group 2 (1, 2, 3, 4, or 5) 
+#' * 1 = Gaussian (skewness = 0 and excess kurtosis = 0) 
+#' * 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
+#' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
+#' * 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
+#' * 5 = large skew (skewness = 2 and excess kurtosis = 6)
+#' @param   d         population standardized mean difference 
+#' @param   rep       number of Monte Carlo samples
+#'  
+#' 
+#' @return
+#' Returns a 1-row matrix. The columns are:
+#' * Coverage - Probability of confidence interval including population std mean difference  
+#' * Lower Error - Probability of lower limit greater than population std mean difference
+#' * Upper Error - Probability of upper limit less than population std mean difference
+#' * Ave CI Width - Average confidence interval width
+#'
+#'
+#' @examples
+#' sim.ci.stdmean2(.05, 20, 20, 1.5, 3, 4, .75, 5000)
+#'
+#' # Should return (within sampling error):
+#' #                         Coverage Lower Error Upper Error Ave CI Width   Ave Est
+#' # Unweighted Standardizer   0.9058      0.0610      0.0332     1.342560 0.7838679
+#' # Group 1 Standardizer      0.9450      0.0322      0.0228     1.827583 0.7862640
+#'
+#'
+#' @importFrom stats qnorm
+#' @importFrom stats rnorm
+#' @importFrom stats runif
+#' @importFrom stats rt
+#' @importFrom stats rgamma
+#' @export
+sim.ci.stdmean2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2, d, rep) {
+ zcrit <- qnorm(1 - alpha/2)
+ df1 <- n1 - 1
+ df2 <- n2 - 1
+ df3 <- n1 + n2 - 2
+ adj1 <- 1 - 3/(4*df3 - 1)
+ adj2 <- 1 - 3/(4*df1 - 1)
+ diff1 <- d*sqrt((1 + sd.ratio^2)/2)
+ diff2 <- d
+ k <- 0; w1 <- 0; w2 <- 0; e11 <- 0; e12 <- 0; e21 <- 0; e22 <- 0
+ est1 <- 0; est2 <- 0;
+ repeat {
+   k <- k + 1
+   if (dist1 == 1) {
+     y1 <- rnorm(n1)  
+   } else if (dist1 == 2) {
+     y1 <- 3.464*runif(n1) - 1.732 
+   } else if (dist1 == 3) {
+     y1 <- .7745*rt(n1, 5) 
+   } else if (dist1 == 4) {
+     y1 <- .5*rgamma(n1, 4) - 2  
+   } else {
+     y1 <- rgamma(n1, 1) - 1 
+   }
+   if (dist2 == 1) {
+     y0 <- sd.ratio*rnorm(n2)
+   } else if (dist2 == 2) {
+     y0 <- sd.ratio*3.464*runif(n2) - sd.ratio*1.734 
+   } else if (dist2 == 3) {
+     y0 <- sd.ratio*.7745*rt(n2, 5) 
+   } else if (dist2 == 4) {
+     y0 <- sd.ratio*.5*rgamma(n2, 4) - sd.ratio*2 
+   } else {
+     y0 <- sd.ratio*rgamma(n2, 1) - sd.ratio  
+   }
+   m1 <- mean(y1) + diff1
+   m2 <- mean(y1) + diff2
+   m0 <- mean(y0)
+   v1 <- var(y1)
+   v2 <- var(y0)
+   s1 <- sqrt((v1 + v2)/2)
+   d1 <- (m1 - m0)/s1
+   se1 <- sqrt(d1^2*(v1^2/df1 + v2^2/df2)/(8*s1^4) + v1/(s1^2*df1) + v2/(s1^2*df2))
+   ll1 <- d1 - zcrit*se1
+   ul1 <- d1 + zcrit*se1
+   est1 <- est1 + adj1*d1
+   s2 <- sqrt(v1)
+   d2 <- (m2 - m0)/s2
+   se2 <- sqrt(d2^2/(2*df1) + 1/df1 + v2/(v1*df2))
+   ll2 <- d2 - zcrit*se2
+   ul2 <- d2 + zcrit*se2
+   est2 <- est2 + adj2*d2
+   w01 <- ul1 - ll1
+   w02 <- ul2 - ll2
+   w1 <- w1 + w01
+   w2 <- w2 + w02
+   c11 <- as.integer(ll1 > d)
+   c21 <- as.integer(ul1 < d)
+   c12 <- as.integer(ll2 > d)
+   c22 <- as.integer(ul2 < d)
+   e11 <- e11 + c11
+   e21 <- e21 + c21
+   e12 <- e12 + c12
+   e22 <- e22 + c22
+   if (k == rep) {break}
+  }
+  width1 <- w1/rep
+  width2 <- w2/rep
+  cov1 <- 1 - (e11 + e21)/rep
+  cov2 <- 1 - (e12 + e22)/rep
+  est1 = est1/rep
+  est2 = est2/rep
+  out1 <- t(c(cov1, e11/rep, e21/rep, width1, est1))
+  out2 <- t(c(cov2, e12/rep, e22/rep, width2, est2))
+  out <- rbind(out1, out2)
+  colnames(out) <- c("Coverage", "Lower Error", "Upper Error", "Ave CI Width", "Ave Est")
+  rownames(out) <- c("Unweighted Standardizer", "Group 1 Standardizer")
+  return(out)
+}
+
+
+#  sim.ci.stdmean.ps ==========================================================
+#' Simulates confidence interval coverage probability for a standardized mean
+#' difference in a paired-samples design
+#'
+#'                                              
+#' @description
+#' Performs a computer simulation of confidence interval performance for  
+#' two types of standardized mean differences in a paired-samples design. 
+#' Sample data for each level of the within-subjects factor can be generated 
+#' from five different population distributions. All distributions are scaled
+#' to have standard deviations of 1.0 at level 1.
+#'
+#' @param   alpha     alpha level for 1-alpha confidence
+#' @param   n         sample size 
+#' @param   sd.ratio  ratio of population standard deviations (sd2/sd1)
+#' @param   cor       correlation between paired measurements
+#' @param   dist1     type of distribution at level 1 (1, 2, 3, 4, or 5) 
+#' @param   dist2     type of distribution at level 2 (1, 2, 3, 4, or 5) 
+#' * 1 = Gaussian (skewness = 0 and excess kurtosis = 0) 
+#' * 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
+#' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
+#' * 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
+#' * 5 = large skew (skewness = 2 and excess kurtosis = 6)
+#' @param   d     population standardized mean difference 
+#' @param   rep      number of Monte Carlo samples
+#'  
+#' 
+#' @return
+#' Returns a 1-row matrix. The columns are:
+#' * Coverage - Probability of confidence interval including population std mean difference
+#' * Lower Error - Probability of lower limit greater than population std mean difference
+#' * Upper Error - Probability of upper limit less than population std mean difference
+#' * Ave CI Width - Average confidence interval width
+#'
+#'
+#' @examples
+#' sim.ci.stdmean.ps(.05, 20, 1.5, .8, 4, 4, .5, 2000)
+#'
+#' # Should return (within sampling error):
+#' #                         Coverage Lower Error Upper Error Ave CI Width   Ave Est
+#' # Unweighted Standardizer   0.9095      0.0555       0.035    0.7354865 0.5186796
+#' # level 1 Standardizer      0.9525      0.0255       0.022    0.9330036 0.5058198
+#'
+#'
+#' @importFrom stats qnorm
+#' @importFrom mnonr unonr
+#' @export
+sim.ci.stdmean.ps <- function(alpha, n, sd.ratio, cor, dist1, dist2, d, rep) {
+ zcrit <- qnorm(1 - alpha/2)
+ df <- n - 1
+ adj1 <- sqrt((n - 2)/df)
+ adj2 <- 1 - 3/(4*df - 1)
+ diff1 <- d*sqrt((1 + sd.ratio^2)/2)
+ diff2 <- d
+ k <- 0; w1 <- 0; w2 <- 0; e11 <- 0; e12 <- 0; e21 <- 0; e22 <- 0
+ est1 <- 0; est2 <- 0
+ if (dist1 == 1) {
+   skw1 <- 0; kur1 <- 0
+ } else if (dist1 == 2) {
+   skw1 <- 0; kur1 <- -1.2
+ } else if (dist1 == 3) {
+   skw1 <- 0; kur1 <- 6
+ } else if (dist1 == 4) {
+   skw1 <- .75; kur1 <- .86
+ } else {
+   skw1 <- 1.41; kur1 <- 3
+ }
+ if (dist2 == 1) {
+   skw2 <- 0; kur2 <- 0
+ } else if (dist2 == 2) {
+   skw2 <- 0; kur2 <- -1.2
+ } else if (dist2 == 3) {
+   skw2 <- 0; kur2 <- 6
+ } else if (dist2 == 4) {
+   skw2 <- 1; kur2 <- 1.5
+ } else {
+   skw2 <- 2; kur2 <- 6
+ }
+ V <- matrix(c(1, cor*sd.ratio, cor*sd.ratio, sd.ratio^2), 2, 2)
+ repeat {
+   k <- k + 1
+   y <- unonr(n, c(0, 0), V, skewness = c(skw1, skw2), kurtosis = c(kur1, kur2))
+   y1 <- y[, 1] 
+   y0 <- y[, 2]
+   m1 <- mean(y1) + diff1
+   m2 <- mean(y1) + diff2
+   m0 <- mean(y0)
+   v1 <- var(y1)
+   v2 <- var(y0)
+   s <- sqrt((v1 + v2)/2)
+   cor <- cor(y1, y0)
+   vd <- v1 + v2 - 2*cor*sqrt(v1*v2)
+   d1 <- (m1 - m0)/s
+   se1 <- sqrt(d1^2*(v1^2 + v2^2 + 2*cor^2*v1*v2)/(8*df*s^4) + vd/(df*s^2))
+   ll1 <- d1 - zcrit*se1
+   ul1 <- d1 + zcrit*se1
+   est1 <- est1 + adj1*d1
+   d2 <- (m2 - m0)/sqrt(v1)
+   se2 <- sqrt(d2^2/(2*df) + vd/(df*v1))
+   ll2 <- d2 - zcrit*se2
+   ul2 <- d2 + zcrit*se2
+   est2 <- est2 + adj2*d2
+   w01 <- ul1 - ll1
+   w02 <- ul2 - ll2
+   c11 <- as.integer(ll1 > d)
+   c21 <- as.integer(ul1 < d)
+   c12 <- as.integer(ll2 > d)
+   c22 <- as.integer(ul2 < d)
+   e11 <- e11 + c11
+   e21 <- e21 + c21
+   e12 <- e12 + c12
+   e22 <- e22 + c22
+   w1 <- w1 + w01
+   w2 <- w2 + w02
+   if (k == rep) {break}
+ }
+ est1 = est1/rep
+ est2 = est2/rep
+ width1 <- w1/rep
+ width2 <- w2/rep
+ cov1 <- 1 - (e11 + e21)/rep
+ cov2 <- 1 - (e12 + e22)/rep
+ out1 <- t(c(cov1, e11/rep, e21/rep, width1, est1))
+ out2 <- t(c(cov2, e12/rep, e22/rep, width2, est2))
+ out <- rbind(out1, out2)
+ colnames(out) <- c("Coverage", "Lower Error", "Upper Error", "Ave CI Width", "Ave Est")
+ rownames(out) <- c("Unweighted Standardizer", "level 1 Standardizer")
+ return(out)
+}
+
+
  
 
  

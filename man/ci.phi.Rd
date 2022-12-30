@@ -29,8 +29,8 @@ Returns a 1-row matrix. The columns are:
 \description{
 Computes a confidence interval for a phi correlation. This function requires
 the frequency counts from a 2 x 2 contingency table for two dichotomous
-variables. This measure of association assumes that both dichotomous
-variables are naturally dichotomous.
+variables. This measure of association is usually most appropriate when both
+dichotomous variables are naturally dichotomous.
 }
 \examples{
 ci.phi(.05, 229, 28, 96, 24)
