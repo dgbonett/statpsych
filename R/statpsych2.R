@@ -1,4 +1,4 @@
-#  ======================= File 2: Confidence Intervals ======================
+#  ======================= Confidence Intervals ==============================
 #  ci.cor  ===================================================================
 #' Confidence interval for a Pearson or partial correlation
 #'
@@ -884,6 +884,7 @@ ci.lc.gen.bs <- function(alpha, est, se, v) {
  return(out)
 }
 
+
 #  ci.rsqr ===================================================================
 #' Confidence interval for squared multiple correlation
 #'                             
@@ -1022,7 +1023,7 @@ ci.theil <- function(alpha, y, x) {
 }
 
 
-#  =============== File 2: Sample Size for Desire Precision ===================
+#  =================== Sample Size for Desire Precision =======================
 #  size.ci.slope ==============================================================
 #' Sample size for a slope confidence interval
 #'
@@ -1256,7 +1257,7 @@ size.ci.lc.ancova <- function(alpha, evar, s, d, w, v) {
 }
 
 
-# =================== File 2: Sample Size for Desired Power ===================
+# ======================= Sample Size for Desired Power =======================
 #  size.test.slope ============================================================
 #' Sample size for a test of a slope
 #'
@@ -1446,7 +1447,7 @@ size.test.lc.ancova <- function(alpha, pow, evar, es, s, d, v) {
 }
 
 
-# ========================= File 2: Miscellaneous =============================
+# ============================= Miscellaneous =================================
 #  slope.contrast =============================================================
 #' Contrast coefficients for the slope of a quantitative factor
 #'
