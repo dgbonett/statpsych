@@ -2192,10 +2192,11 @@ ci.cronbach <- function(alpha, rel, r, n) {
 #' 
 #' 
 #' @examples
-#' ci.reliability(.05, .88, .147, 100)
+#' ci.reliability(.05, .88, .0147, 100)
 #'
 #' # Should return:
-#' # [1,]  0.7971254 0.8931436   
+#' #             LL        UL
+#' # [1,] 0.8489612 0.9065575
 #'  
 #' 
 #' @importFrom stats qf
@@ -2205,7 +2206,8 @@ ci.reliability <- function(alpha, rel, se, n) {
  b <- log(n/(n - 1))
  ll <- 1 - exp(log(1 - rel) - b + z*sqrt(se^2/(1 - rel)^2))
  ul <- 1 - exp(log(1 - rel) - b - z*sqrt(se^2/(1 - rel)^2))
- out <- c(ll, ul)
+ out <- t(c(ll, ul))
+ colnames(out) = c("LL", "UL")
  return(out)
 }
 
