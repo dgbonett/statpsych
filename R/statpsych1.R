@@ -2704,6 +2704,7 @@ ci.2x2.mean.bs <- function(alpha, y11, y12, y21, y22) {
 #'
 #'
 #' @importFrom stats rnorm
+#' @importFrom stats sd
 #' @export
 test.skew <- function(y) {
  rep <- 250000
@@ -2764,6 +2765,7 @@ test.skew <- function(y) {
 #'
 #'
 #' @importFrom stats rnorm
+#' @importFrom stats sd
 #' @export
 test.kurtosis <- function(y) {
  rep <- 250000
