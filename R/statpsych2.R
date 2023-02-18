@@ -891,7 +891,8 @@ ci.lc.gen.bs <- function(alpha, est, se, v) {
 #' @description
 #' Computes an approximate confidence interval for a population squared 
 #' multiple correlation in a linear model with random predictor variables.  
-#' This function uses the scaled central F approximation method.
+#' This function uses the scaled central F approximation method. An
+#' approximate standard error is recovered from the confidence interval.
 #'
 #'
 #' @param  alpha    alpha value for 1-alpha confidence
@@ -906,6 +907,7 @@ ci.lc.gen.bs <- function(alpha, est, se, v) {
 #' Returns a 1-row matrix. The columns are:
 #' * R-squared - estimate of unadjusted R-squared 
 #' * adj R-squared - bias adjusted R-squared estimate
+#' * SE - recovered standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #'
@@ -914,8 +916,8 @@ ci.lc.gen.bs <- function(alpha, est, se, v) {
 #' ci.rsqr(.05, .241, 3, 116)
 #'
 #' # Should return:
-#' #        R-squared    adj R-squared          LL        UL
-#' # [1,]       0.241        0.2206696  0.09819599 0.3628798
+#' #      R-squared adj R-squared         SE         LL        UL  
+#' # [1,]     0.241     0.2206696 0.06752263 0.09819599 0.3628798
 #'  
 #' 
 #' @importFrom stats qf
@@ -923,6 +925,7 @@ ci.lc.gen.bs <- function(alpha, est, se, v) {
 ci.rsqr <- function(alpha, r2, s, n) {
  alpha1 <- alpha/2
  alpha2 <- 1 - alpha1
+ z0 <- qnorm(1 - alpha1)
  dfe <- n - s - 1
  adj <- 1 - (n - 1)*(1 - r2)/dfe
  if (adj < 0) {adj = 0}
@@ -950,8 +953,9 @@ ci.rsqr <- function(alpha, r2, s, n) {
    if (ll < 0) {ll = 0}
    if (ul < 0) {ul = 0}
  }
- out <- t(c(r2, adj, ll, ul))
- colnames(out) <- c("R-squared", "adj R-squared", "LL", "UL")
+ se <- (ul - ll)/(2*z0)
+ out <- t(c(r2, adj, se, ll, ul))
+ colnames(out) <- c("R-squared", "adj R-squared", "SE", "LL", "UL")
  return(out)
 }
 
