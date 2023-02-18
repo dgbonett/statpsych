@@ -1,4 +1,4 @@
-# ======================== File 3:  Confidence Intervals =====================
+# ======================== Confidence Intervals ==============================
 #  ci.prop1 ================================================================== 
 #' Confidence interval for a single proportion
 #'
@@ -423,73 +423,6 @@ ci.slope.prop.bs <- function(alpha, f, n, x) {
  UL <- slope + z*se
  out <- t(c(slope, se, t, pval, LL, UL))
  colnames(out) <- c("Estimate", "SE", "z", "p", "LL", "UL")
- return(out)
-}
-
-
-#  test.mono.prop.bs ============================================================
-#' Test of monotonic trend in proportions for an ordered between-subjects
-#' factor
-#'
-#'
-#' @description
-#' Computes simultaneous confidence intervals for all adjacent pairwise
-#' comparisons of population proportions using group frequency counts and
-#' samples sizes as input. If one or more lower limits are greater than
-#' 0 and no upper limit is less than 0, then conclude that the population
-#' proportions are monotoic decreasing. If one or more upper limits are 
-#' less than 0 and no lower limits are greater than 0, then conclude that
-#' the population proportions are monotoic increasing. Reject the hypothesis
-#' of a monotonic trend if any lower limit is greater than 0 and any upper 
-#' limit is less than 0. 
-#'
-#'
-#' @param  alpha   alpha level for simultaneous 1-alpha confidence
-#' @param  f       vector of frequency counts of participants who have the attribute
-#' @param  n       vector of sample sizes
-#'
-#'
-#' @return 
-#' Returns a matrix with the number of rows equal to the number
-#' of adjacent pairwise comparisons. The columns are:
-#' * Estimate - estimated proportion difference
-#' * SE - standard error
-#' * LL - one-sided lower limit of the confidence interval
-#' * UL - one-sided upper limit of the confidence interval
-#'
-#'
-#' @examples
-#' f <- c(67, 49, 30, 10)
-#' n <- c(100, 100, 100, 100)
-#' test.mono.prop.bs(.05, f, n)
-#'
-#' # Should return:
-#' #      Estimate         SE         LL        UL
-#' # 1 2 0.1764706 0.06803446 0.01359747 0.3393437
-#' # 2 3 0.1862745 0.06726135 0.02525219 0.3472968
-#' # 3 4 0.1960784 0.05493010 0.06457688 0.3275800
-#'
-#'
-#' @importFrom stats qnorm
-#' @export
-test.mono.prop.bs <-function(alpha, f, n) {
- a <- length(f)
- p.adj <- (f + 1)/(n + 2)
- v <- p.adj*(1 - p.adj)/(n + 2)
- p1 <- p.adj[1: a - 1]
- p2 <- p.adj[2: a]
- Estimate <- p1 - p2
- v1 <- v[1: a - 1]
- v2 <- v[2: a]
- n1 <- n[1: a - 1]
- n2 <- n[2: a]
- SE <- sqrt(v1 + v2)
- zcrit <- qnorm(1 - alpha/(2*(a - 1)))
- LL <- Estimate - zcrit*SE
- UL <- Estimate + zcrit*SE
- pair <- cbind(seq(1, a - 1), seq(2, a))
- out <- cbind(pair, Estimate, SE, LL, UL)
- rownames(out) <- rep("", a - 1)
  return(out)
 }
 
@@ -1096,6 +1029,7 @@ ci.agree <- function(alpha, n, f, k) {
  return(out)
 }
 
+
 #  ci.agree2 =================================================================
 #' Confidence interval for G-index difference in a 2-group design
 #'
@@ -1246,7 +1180,7 @@ ci.popsize <- function(alpha, f00, f01, f10) {
 #' @return 
 #' Returns a 1-row matrix. The columns are:
 #' * Estimate - estimate of Cramer's V 
-#' * SE - approximate standard error 
+#' * SE - recovered standard error 
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #'
@@ -1534,7 +1468,7 @@ ci.2x2.prop.mixed <- function(alpha, group1, group2) {
 }
 
 
-# ======================== File 3: Hypothesis Tests ==========================
+# ======================== Hypothesis Tests ==================================
 # test.prop1 =================================================================
 #' Hypothesis test for a single proportion 
 #'
@@ -1734,8 +1668,75 @@ test.prop.ps <- function(f00, f01, f10, f11) {
 }
 
 
-# ================= File 3: Sample Size for Desired Precision ================
-#  size.ci.prop1 
+#  test.mono.prop.bs ============================================================
+#' Test of monotonic trend in proportions for an ordered between-subjects
+#' factor
+#'
+#'
+#' @description
+#' Computes simultaneous confidence intervals for all adjacent pairwise
+#' comparisons of population proportions using group frequency counts and
+#' samples sizes as input. If one or more lower limits are greater than
+#' 0 and no upper limit is less than 0, then conclude that the population
+#' proportions are monotoic decreasing. If one or more upper limits are 
+#' less than 0 and no lower limits are greater than 0, then conclude that
+#' the population proportions are monotoic increasing. Reject the hypothesis
+#' of a monotonic trend if any lower limit is greater than 0 and any upper 
+#' limit is less than 0. 
+#'
+#'
+#' @param  alpha   alpha level for simultaneous 1-alpha confidence
+#' @param  f       vector of frequency counts of participants who have the attribute
+#' @param  n       vector of sample sizes
+#'
+#'
+#' @return 
+#' Returns a matrix with the number of rows equal to the number
+#' of adjacent pairwise comparisons. The columns are:
+#' * Estimate - estimated proportion difference
+#' * SE - standard error
+#' * LL - one-sided lower limit of the confidence interval
+#' * UL - one-sided upper limit of the confidence interval
+#'
+#'
+#' @examples
+#' f <- c(67, 49, 30, 10)
+#' n <- c(100, 100, 100, 100)
+#' test.mono.prop.bs(.05, f, n)
+#'
+#' # Should return:
+#' #      Estimate         SE         LL        UL
+#' # 1 2 0.1764706 0.06803446 0.01359747 0.3393437
+#' # 2 3 0.1862745 0.06726135 0.02525219 0.3472968
+#' # 3 4 0.1960784 0.05493010 0.06457688 0.3275800
+#'
+#'
+#' @importFrom stats qnorm
+#' @export
+test.mono.prop.bs <-function(alpha, f, n) {
+ a <- length(f)
+ p.adj <- (f + 1)/(n + 2)
+ v <- p.adj*(1 - p.adj)/(n + 2)
+ p1 <- p.adj[1: a - 1]
+ p2 <- p.adj[2: a]
+ Estimate <- p1 - p2
+ v1 <- v[1: a - 1]
+ v2 <- v[2: a]
+ n1 <- n[1: a - 1]
+ n2 <- n[2: a]
+ SE <- sqrt(v1 + v2)
+ zcrit <- qnorm(1 - alpha/(2*(a - 1)))
+ LL <- Estimate - zcrit*SE
+ UL <- Estimate + zcrit*SE
+ pair <- cbind(seq(1, a - 1), seq(2, a))
+ out <- cbind(pair, Estimate, SE, LL, UL)
+ rownames(out) <- rep("", a - 1)
+ return(out)
+}
+
+
+# ================= Sample Size for Desired Precision =======================
+#  size.ci.prop1 ============================================================
 #' Sample size for a single proportion confidence interval  
 #'
 #'
@@ -2019,7 +2020,7 @@ size.ci.agree <- function(alpha, G, w) {
 }
 
 
-# ===================== File 3: Sample Size for Desired Power ================
+# ===================== Sample Size for Desired Power ========================
 #  size.test.prop1 =========================================================== 
 #' Sample size for a test of a single proportion 
 #'
@@ -2400,7 +2401,7 @@ size.supinf.prop.ps <- function(alpha, pow, p1, p2, phi, h) {
 }
 
 
-# ======================== File 3: Miscellaneous =============================
+# ======================== Miscellaneous =====================================
 #  iqv =======================================================================
 #' Indices of qualitative variation 
 #'
