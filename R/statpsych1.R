@@ -2220,7 +2220,8 @@ ci.reliability <- function(alpha, rel, se, n) {
 #' @description
 #' Computes a confidence interval for a population eta-squared, partial 
 #' eta-squared, or generalized eta-squared in a fixed-factor between-subjects 
-#' design. An approximate bias adjusted estimate is also computed.
+#' design. An approximate bias adjusted estimate is computed, and an
+#' approximate standard error is recovered from the confidence interval.
 #'
 #'
 #' @param  alpha    alpha value for 1-alpha confidence
@@ -2233,6 +2234,7 @@ ci.reliability <- function(alpha, rel, se, n) {
 #' Returns a 1-row matrix. The columns are:
 #' * Eta-squared - estimate of eta-squared 
 #' * adj Eta-squared - bias adjusted eta-squared estimate
+#' * SE - recovered standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #'
@@ -2241,8 +2243,8 @@ ci.reliability <- function(alpha, rel, se, n) {
 #' ci.etasqr(.05, .241, 3, 116)
 #'
 #' # Should return:
-#' #      Eta-squared adj Eta-squared        LL        UL
-#' # [1,]       0.241       0.2213707 0.1040229 0.3493431
+#' #      Eta-squared adj Eta-squared         SE        LL        UL
+#' # [1,]       0.241       0.2213707 0.06258283 0.1040229 0.3493431
 #'  
 #' 
 #' @importFrom stats pf
@@ -2251,6 +2253,7 @@ ci.reliability <- function(alpha, rel, se, n) {
 ci.etasqr <- function(alpha, etasqr, df1, df2) {
  alpha1 <- alpha/2
  alpha2 <- 1 - alpha1
+ z0 <- qnorm(1 - alpha1)
  z <- qnorm(alpha2)
  F <- (etasqr/(1 - etasqr))*(df2/df1)
  adj <- 1 - (df2 + df1)*(1 - etasqr)/df2
@@ -2266,8 +2269,9 @@ ci.etasqr <- function(alpha, etasqr, df1, df2) {
  du <- nc[k2]
  ul <- du/(du + df1 + df2 + 1)
  if (ul == 0) {ul = ul0}
- out <- t(c(etasqr, adj, ll, ul))
- colnames(out) <- c("Eta-squared", "adj Eta-squared", "LL", "UL")
+ se <- (ul - ll)/(2*z0)
+ out <- t(c(etasqr, adj, se, ll, ul))
+ colnames(out) <- c("Eta-squared", "adj Eta-squared", "SE", "LL", "UL")
  return(out)
 }
 
