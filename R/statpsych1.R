@@ -1,4 +1,4 @@
-# ======================= File 1: Confidence Intervals =======================
+# =========================== Confidence Intervals ===========================
 #  ci.mean1  =================================================================
 #' Confidence interval for a single mean
 #'
@@ -2670,7 +2670,7 @@ ci.2x2.mean.bs <- function(alpha, y11, y12, y21, y22) {
 }
 
 
-#  ======================= File 1:  Hypothesis tests =========================
+#  =========================== Hypothesis tests ==============================
 #  test.skew =================================================================
 #' Computes p-value for test of skewness
 #'
@@ -2729,6 +2729,7 @@ test.skew <- function(y) {
  colnames(out) <- c("Skewness", "p")
  return(out)
 }
+
 
 #  test.kurtosis =================================================================
 #' Computes p-value for test of excess kurtosis
@@ -2789,7 +2790,7 @@ test.kurtosis <- function(y) {
 }
 
 
-# ================== File 1: Sample Size for Desired Precision ================
+# ====================== Sample Size for Desired Precision ====================
 # size.ci.mean1 ===============================================================
 #' Sample size for a single mean confidence interval
 #'
@@ -3404,7 +3405,7 @@ size.ci.second <- function(n0, w0, w) {
 }
 
 
-# ==================== File 1: Sample Size for Desired Power ==================
+# ======================== Sample Size for Desired Power ======================
 #  size.test.mean1 ============================================================
 #' Sample size for a test of a single mean
 #'
@@ -3995,7 +3996,7 @@ size.test.cronbach <- function(alpha, pow, rel, r, h) {
 }
 
 
-# ==========================  File 1: Miscellaneous ==========================
+# ============================== Miscellaneous ===============================
 #  pi.score1 ================================================================= 
 #' Prediction interval for one score
 #'
@@ -4459,6 +4460,7 @@ etasqr.gen.2way <- function(SSa, SSb, SSab, SSe) {
  rownames(out) <- c(rownames1, rownames2, rownames3)
  return(out)
 }
+
 
 #  sim.ci.mean1 ===============================================================
 #' Simulates confidence interval coverage probability for single mean
@@ -5401,6 +5403,3 @@ sim.ci.stdmean.ps <- function(alpha, n, sd.ratio, cor, dist1, dist2, d, rep) {
 }
 
 
- 
-
- 
