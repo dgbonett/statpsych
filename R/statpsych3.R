@@ -639,8 +639,8 @@ ci.ratio.prop.ps <- function(alpha, f00, f10, f01, f11) {
 #'
 #' @return 
 #' Returns a 2-row matrix. The columns are:
-#' * Estimate - estimated condition slope
-#' * exp(Estimate) - estimated exponentiated condition slope
+#' * Estimate - estimated conditional slope
+#' * exp(Estimate) - estimated exponentiated conditional slope
 #' * z - z test statistic
 #' * p - p-value
 #' * LL - lower limit of the confidence interval
