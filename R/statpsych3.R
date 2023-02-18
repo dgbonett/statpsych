@@ -1068,6 +1068,10 @@ ci.kappa <- function(alpha, f00, f01, f10, f11) {
 #' * UL - upper limit of the confidence interval
 #'
 #'
+#' @references
+#' \insertRef{Bonett2022}{statpsych}
+#'
+#'
 #' @examples
 #' ci.agree(.05, 100, 80, 4)
 #'
@@ -1121,6 +1125,10 @@ ci.agree <- function(alpha, n, f, k) {
 #' * Estimate - estimate of G-index (single-group and difference)  
 #' * LL - lower limit of confidence interval
 #' * UL - upper limit of confidence interval
+#'
+#'
+#' @references
+#' \insertRef{Bonett2022}{statpsych}
 #'
 #'
 #' @examples
