@@ -2148,13 +2148,14 @@ ci.random.anova1 <- function(alpha, m, sd, n) {
 #' ci.cronbach(.05, .85, 7, 89)
 #'
 #' # Should return:
-#' #              LL        UL
-#' # [1,]  0.7971254 0.8931436   
+#' #               SE        LL        UL
+#' # [1,]  0.02456518 0.7971254 0.8931436   
 #'  
 #' 
 #' @importFrom stats qf
 #' @export
 ci.cronbach <- function(alpha, rel, r, n) {
+ se <- sqrt((2*r*(1 - rel)^2)/((r - 1)*(n - 2)))
  df1 = n - 1
  df2 = n*(r - 1)
  f1 = qf(1 - alpha/2, df1, df2)
@@ -2162,8 +2163,8 @@ ci.cronbach <- function(alpha, rel, r, n) {
  f0 <- 1/(1 - rel)
  ll <- 1 - f1/f0
  ul <- 1 - 1/(f0*f2)
- out <- t(c(ll, ul))
- colnames(out) = c("LL", "UL")
+ out <- t(c(se, ll, ul))
+ colnames(out) = c("SE", "LL", "UL")
  return(out)
 }
 
