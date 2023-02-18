@@ -1305,7 +1305,7 @@ ci.cramer <- function(alpha, chisqr, r, c, n) {
 #' @return
 #' Returns a 7-row matrix (one row per effect). The columns are:
 #' * Estimate - adjusted estimate of effect
-#' * SE - standard error of estimate
+#' * SE - standard error 
 #' * z - z test statistic for test of null hypothesis
 #' * p - p-value 
 #' * LL - lower limit of the adjusted Wald confidence interval
@@ -1422,7 +1422,7 @@ ci.2x2.prop.bs <- function(alpha, f, n) {
 #' @return
 #' Returns a 7-row matrix (one row per effect). The columns are:
 #' * Estimate - adjusted estimate of effect
-#' * SE - standard error of estimate
+#' * SE - standard error
 #' * z - z test statistic 
 #' * p - p-value
 #' * LL - lower limit of the adjusted Wald confidence interval
