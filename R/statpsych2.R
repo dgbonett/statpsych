@@ -978,7 +978,7 @@ ci.rsqr <- function(alpha, r2, s, n) {
 #' @return
 #' Returns a 1-row matrix. The columns are:
 #' * Estimate - Theil-Sen estimate of population slope
-#' * SE - approximate standard error
+#' * SE - recovered standard error
 #' * LL - lower limit of confidence interval
 #' * UL - upper limit of confidence interval
 #'
