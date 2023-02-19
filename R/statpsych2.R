@@ -120,7 +120,8 @@ ci.spcor <- function(alpha, cor, r2, n) {
 #' @description
 #' Computes a confidence interval for a difference in population Pearson 
 #' correlations in a 2-group design. A bias adjustmentment is used to 
-#' reduce the bias of each Fisher transformed correlation. 
+#' reduce the bias of each Fisher transformed correlation. An approximate
+#' standard error is recovered from the confidence interval. 
 #'
 #'  
 #' @param  alpha	alpha level for 1-alpha confidence
@@ -133,6 +134,7 @@ ci.spcor <- function(alpha, cor, r2, n) {
 #' @return 
 #' Returns a 1-row matrix. The columns are:
 #' * Estimate - estimated correlation difference
+#' * SE - recovered standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #' 
@@ -145,8 +147,8 @@ ci.spcor <- function(alpha, cor, r2, n) {
 #' ci.cor2(.05, .886, .802, 200, 200)
 #'
 #' # Should return:
-#' #      Estimate         LL        UL
-#' # [1,]    0.084 0.02803246 0.1463609
+#' #      Estimate         SE         LL        UL
+#' # [1,]    0.084 0.03018638 0.02803246 0.1463609
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -168,8 +170,9 @@ ci.cor2 <- function(alpha, cor1, cor2, n1, n2) {
  ul2 <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
  ll <- diff - sqrt((cor1 - ll1)^2 + (ul2 - cor2)^2)
  ul <- diff + sqrt((ul1 - cor1)^2 + (cor2 - ll2)^2)
- out <- t(c(diff, ll, ul))
- colnames(out) <- c("Estimate", "LL", "UL")
+ se <- (ul - ll)/(2*z)
+ out <- t(c(diff, se, ll, ul))
+ colnames(out) <- c("Estimate", "SE", "LL", "UL")
  return(out)
 }
 
@@ -249,9 +252,8 @@ ci.cor.dep <- function(alpha, cor1, cor2, cor12, n) {
 #' population correlations in a 2-group design. The correlations can be 
 #' Pearson, Spearman, partial, semipartial, or point-biserial correlations. 
 #' The function requires 100(1 - alpha)% confidence intervals for each 
-#' correlation as input. This function also can be used to compute a 
-#' confidence interval for the difference of two Cronbach reliability
-#' coefficients.
+#' correlation as input. An approximate standard error is recovered from 
+#' the confidence interval. 
 #'
 #'  
 #' @param  cor1  estimated correlation for group 1 
@@ -265,6 +267,7 @@ ci.cor.dep <- function(alpha, cor1, cor2, cor12, n) {
 #' @return 
 #' Returns a 1-row matrix. The columns are:
 #' * Estimate - estimated correlation difference
+#' * SE - recovered standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #' 
@@ -287,8 +290,9 @@ ci.cor2.gen <- function(cor1, ll1, ul1, cor2, ll2, ul2) {
  diff <- cor1 - cor2
  ll <- diff - sqrt((cor1 - ll1)^2 + (ul2 - cor2)^2)
  ul <- diff + sqrt((ul1 - cor1)^2 + (cor2 - ll2)^2)
- out <- t(c(diff, ll, ul))
- colnames(out) <- c("Estimate", "LL", "UL")
+ se <- (ul - ll)/(2*z)
+ out <- t(c(diff, se, ll, ul))
+ colnames(out) <- c("Estimate", "SE", "LL", "UL")
  return(out)
 }
 
