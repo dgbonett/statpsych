@@ -427,7 +427,8 @@ ci.spear <- function(alpha, y, x) {
 #'
 #' @description
 #' Computes a confidence interval for a difference in population Spearman 
-#' correlations in a 2-group design.
+#' correlations in a 2-group design. An approximate standard error of the
+#' difference is recovered from the confidence interval.
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -440,6 +441,7 @@ ci.spear <- function(alpha, y, x) {
 #' @return 
 #' Returns a 1-row matrix. The columns are:
 #' * Estimate - estimated correlation difference
+#' * SE - recovered standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #' 
@@ -455,8 +457,8 @@ ci.spear <- function(alpha, y, x) {
 #' ci.spear2(.05, .54, .48, 180, 200)
 #'
 #' # Should return:
-#' #      Estimate         LL        UL
-#' # [1,]     0.06 -0.1003977 0.2185085     
+#' #      Estimate         SE         LL        UL
+#' # [1,]     0.06 0.08135513 -0.1003977 0.2185085     
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -478,8 +480,9 @@ ci.spear2 <- function(alpha, cor1, cor2, n1, n2) {
  cor.dif <- cor1 - cor2
  ll.dif <- cor.dif - sqrt((cor1 - ll1)^2 + (ul2 - cor2)^2)
  ul.dif <- cor.dif + sqrt((ul1 - cor1)^2 + (cor2 - ll2)^2)
- out <- cbind(cor.dif, ll.dif, ul.dif)
- colnames(out) <- c("Estimate", "LL", "UL")
+ se <- (ul.dif - ll.dif)/(2*z)
+ out <- cbind(cor.dif, se, ll.dif, ul.dif)
+ colnames(out) <- c("Estimate", "SE", "LL", "UL")
  return (out)
 }
 	
