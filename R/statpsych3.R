@@ -707,6 +707,7 @@ ci.condslope.log <- function(alpha, b1, b2, se1, se2, cov, lo, hi) {
 #' @return
 #' Returns a 1-row matrix. The columns are:
 #' * Estimate - estimate of odds ratio
+#' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #'
@@ -719,8 +720,9 @@ ci.condslope.log <- function(alpha, b1, b2, se1, se2, cov, lo, hi) {
 #' ci.oddsratio(.05, 229, 28, 96, 24)
 #'
 #' # Should return:
-#' #      Estimate       LL       UL
-#' # [1,] 2.044451 1.133267 3.688254
+#' #      Estimate        SE       LL       UL
+#' # [1,] 2.044451 0.6154578 1.133267 3.688254
+
 #'
 #'
 #' @importFrom stats qnorm
@@ -729,10 +731,11 @@ ci.oddsratio <- function(alpha, f00, f01, f10, f11) {
  z <- qnorm(1 - alpha/2)
  or <- (f11 + .5)*(f00 + .5)/((f01 + .5)*(f10 + .5))
  se.lor <- sqrt(1/(f00 + .5) + 1/(f01 + .5) + 1/(f10 + .5) + 1/(f11 + .5))
+ se.or <- or*se.lor
  LL <- exp(log(or) - z*se.lor)
  UL <- exp(log(or) + z*se.lor)
- out <- t(c(or, LL, UL))
- colnames(out) <- c("Estimate", "LL", "UL")
+ out <- t(c(or, se.or, LL, UL))
+ colnames(out) <- c("Estimate", "SE", "LL", "UL")
  return(out)
 }
 
@@ -758,6 +761,7 @@ ci.oddsratio <- function(alpha, f00, f01, f10, f11) {
 #' @return
 #' Returns a 1-row matrix. The columns are:
 #' * Estimate - estimate of Yule's Q
+#' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #'
@@ -766,8 +770,8 @@ ci.oddsratio <- function(alpha, f00, f01, f10, f11) {
 #' ci.yule(.05, 229, 28, 96, 24)
 #'
 #' # Should return:
-#' #      Estimate         LL       UL
-#' # [1,] 0.343067 0.06247099 0.573402
+#' #      Estimate        SE         LL       UL
+#' # [1,] 0.343067 0.1328038 0.06247099 0.573402
 #'
 #'
 #' @importFrom stats qnorm
@@ -779,10 +783,11 @@ ci.yule <- function(alpha, f00, f01, f10, f11) {
  LLor <- exp(log(or) - z*se.lor)
  ULor <- exp(log(or) + z*se.lor)
  Q <- (or - 1)/(or + 1)
+ se.Q <- .5*(1 - Q^2)*se.lor
  LL <- (LLor - 1)/(LLor + 1)
  UL <- (ULor - 1)/(ULor + 1)
- out <- t(c(Q, LL, UL))
- colnames(out) <- c("Estimate", "LL", "UL")
+ out <- t(c(Q, se.Q, LL, UL))
+ colnames(out) <- c("Estimate", "SE", "LL", "UL")
  return(out)
 }
 
