@@ -1122,7 +1122,8 @@ ci.agree2 <- function(alpha, n1, f1, n2, f2, r) {
 #' 2 x 2 contingency table for the two samples (f11 is the unknown number
 #' of people who were not observed in either sample). This method sets the
 #' estimated odds ratio (with .5 added to each cell) to 1 and solves for
-#' unobserved cell frequency.
+#' unobserved cell frequency. An approximate standard error is recovered
+#' from the confidence interval.
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -1134,6 +1135,7 @@ ci.agree2 <- function(alpha, n1, f1, n2, f2, r) {
 #' @return
 #' Returns a 1-row matrix. The columns are:
 #' * Estimate - estimate of the unknown population size 
+#' * SE - recovered standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #'
@@ -1142,8 +1144,8 @@ ci.agree2 <- function(alpha, n1, f1, n2, f2, r) {
 #' ci.popsize(.05, 794, 710, 741)
 #'
 #' # Should return:
-#' #      Estimate   LL   UL
-#' # [1,]     2908 2818 3012
+#' #      Estimate       SE   LL   UL
+#' # [1,]     2908 49.49071 2818 3012
 #'
 #'
 #' @importFrom stats qnorm
@@ -1154,10 +1156,11 @@ ci.popsize <- function(alpha, f00, f01, f10) {
  f11 <- (f01 + .5)*(f10 + .5)/(f00 + .5) - .5
  se <- sqrt(1/(f00 + .5) + 1/(f01 + .5) + 1/(f10 + .5) + 1/f11)
  N <- round(n0 + f11)
- LL <- round(n0 + exp(log(f11) - z*se))
- UL <- round(n0 + exp(log(f11) + z*se))
- out <- t(c(N, LL, UL))
- colnames(out) <- c("Estimate", "LL", "UL")
+ ll <- round(n0 + exp(log(f11) - z*se))
+ ul <- round(n0 + exp(log(f11) + z*se))
+ se <- (ul - ll)/(2*z)
+ out <- t(c(N, se, ll, ul))
+ colnames(out) <- c("Estimate", "SE", "LL", "UL")
  return(out)
 }
 
