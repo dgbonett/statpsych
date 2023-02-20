@@ -1055,6 +1055,7 @@ ci.lc.stdmean.ws <- function(alpha, m, sd, cor, n, q) {
 #' @return 
 #' Returns a 1-row matrix. The columns are:
 #' * Estimate - estimated mean absolute deviation
+#' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #'
@@ -1069,8 +1070,8 @@ ci.lc.stdmean.ws <- function(alpha, m, sd, cor, n, q) {
 #' ci.mad1(.05, y)
 #'
 #' # Should return:
-#' #       Estimate       LL       UL
-#' # [1,]      12.5 7.962667 19.62282
+#' #       Estimate       SE       LL       UL
+#' # [1,]      12.5 2.876103 7.962667 19.62282
 #'
 #'
 #' @importFrom stats qnorm
@@ -1087,8 +1088,9 @@ ci.mad1 <- function(alpha, y) {
  se <- sqrt((skw^2 + kur - 1)/n)
  ll <- exp(log(c*mad) - z*se)
  ul <- exp(log(c*mad) + z*se)
- out <- t(c(c*mad, ll, ul))
- colnames(out) <- c("Estimate", "LL", "UL")
+ se.mad <- c*mad*se
+ out <- t(c(c*mad, se.mad, ll, ul))
+ colnames(out) <- c("Estimate", "SE", "LL", "UL")
  return(out)
 }
 
