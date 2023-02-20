@@ -857,7 +857,8 @@ ci.biphi <- function(alpha, f1, f2, n1, n2) {
 #' correlation. This function requires the frequency counts from a 2 x 2 
 #' contingency table for two dichotomous variables. This measure of 
 #' association assumes both of the dichotomous variables are artificially 
-#' dichotomous. 
+#' dichotomous. An approximate standard error is recovered from the
+#' confidence interval.
 #'
 #'
 #' @param   alpha  alpha level for 1-alpha confidence
@@ -874,6 +875,7 @@ ci.biphi <- function(alpha, f1, f2, n1, n2) {
 #' @return
 #' Returns a 1-row matrix. The columns are:
 #' * Estimate - estimate of tetrachoric approximation
+#' * SE - recovered standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #'
@@ -882,8 +884,8 @@ ci.biphi <- function(alpha, f1, f2, n1, n2) {
 #' ci.tetra(.05, 46, 15, 54, 85)
 #'
 #' # Should return:
-#' #       Estimate        LL        UL
-#' # [1,] 0.5135167 0.3102345 0.6748546
+#' #       Estimate         SE        LL        UL
+#' # [1,] 0.5135167 0.09301703 0.3102345 0.6748546
 #'
 #'
 #' @importFrom stats qnorm
@@ -905,8 +907,9 @@ ci.tetra <- function(alpha, f00, f01, f10, f11) {
  tetra <- cos(3.14159/(1 + or^c))
  ll <- cos(3.14159/(1 + LL1^c))
  ul <- cos(3.14159/(1 + UL1^c))
- out <- t(c(tetra, ll, ul))
- colnames(out) <- c("Estimate", "LL", "UL")
+ se <- (ul - ll)/(2*z)
+ out <- t(c(tetra, se, ll, ul))
+ colnames(out) <- c("Estimate", "SE", "LL", "UL")
  return(out)
 }
 
