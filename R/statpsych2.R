@@ -328,6 +328,7 @@ ci.cor2.gen <- function(cor1, ll1, ul1, cor2, ll2, ul2) {
 #' @return 
 #' Returns a 2-row matrix. The columns are:
 #' * Estimate - estimated point-biserial correlation
+#' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #' 
@@ -336,37 +337,42 @@ ci.cor2.gen <- function(cor1, ll1, ul1, cor2, ll2, ul2) {
 #' ci.pbcor(.05, 28.32, 21.48, 3.81, 3.09, 40, 40)
 #'
 #' # Should return:
-#' #              Estimate        LL        UL
-#' # Weighted:   0.7065799 0.5885458 0.7854471
-#' # Unweighted: 0.7020871 0.5808366 0.7828948
+#' #              Estimate         SE        LL        UL
+#' # Weighted:   0.7065799 0.04890959 0.5885458 0.7854471
+#' # Unweighted: 0.7020871 0.05018596 0.5808366 0.7828948
 #'  
 #' 
 #' @importFrom stats qnorm
 #' @export 
 ci.pbcor <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
  z <- qnorm(1 - alpha/2)
- s <- sqrt((sd1^2 + sd2^2)/2)
- d1 <- (m1 - m2)/sqrt(((n1 - 1)*sd1^2 + (n2 - 1)*sd2^2)/(n1 + n2 - 2))
- d2 <- (m1 - m2)/s
+ df1 <- n1 - 1
+ df2 <- n2 - 1
  n <- n1 + n2
  p <- n1/n
- k <- (n1 + n2 - 2)/(n*p*(1 - p))
+ s1 <- sqrt((df1*sd1^2 + df2*sd2^2)/(n - 2))
+ s2 <- sqrt((sd1^2 + sd2^2)/2)
+ d1 <- (m1 - m2)/s1
+ d2 <- (m1 - m2)/s2
+ k <- (n - 2)/(n*p*(1 - p))
  cor1 <- d1/sqrt(d1^2 + k)
  cor2 <- d2/sqrt(d2^2 + 4)
- sed1 <- sqrt(d1^2*(1/n1 + 1/n2)/8 + (sd1^2/n1 + sd2^2/n2)/s^2)
- sed2 <- sqrt(d2^2*(sd1^4/(n1-1) + sd2^4/(n2-1))/(8*s^4) + (sd1^2/(n1-1) + sd2^2/(n2-1))/s^2) 
- lld1 <- d1 - z*sed1
- uld1 <- d1 + z*sed1
- lld2 <- d2 - z*sed2
- uld2 <- d2 + z*sed2
+ se.d1 <- sqrt(d1^2*(1/n1 + 1/n2)/8 + (sd1^2/n1 + sd2^2/n2)/s1^2)
+ se.d2 <- sqrt(d2^2*(sd1^4/df1 + sd2^4/df2)/(8*s2^4) + (sd1^2/df1 + sd2^2/df2)/s2^2) 
+ se.cor1 <- (k/(d1^2 + k)^(3/2))*se.d1
+ se.cor2 <- (4/(d2^2 + 4)^(3/2))*se.d2
+ lld1 <- d1 - z*se.d1
+ uld1 <- d1 + z*se.d1
+ lld2 <- d2 - z*se.d2
+ uld2 <- d2 + z*se.d2
  llc1 <- lld1/sqrt(lld1^2 + k)
  ulc1 <- uld1/sqrt(uld1^2 + k)
  llc2 <- lld2/sqrt(lld2^2 + 4)
  ulc2 <- uld2/sqrt(uld2^2 + 4)
- out1 <- t(c(cor1, llc1, ulc1))
- out2 <- t(c(cor2, llc2, ulc2))
+ out1 <- t(c(cor1, se.cor1, llc1, ulc1))
+ out2 <- t(c(cor2, se.cor2, llc2, ulc2))
  out <- rbind(out1, out2)
- colnames(out) <- c("Estimate", "LL", "UL")
+ colnames(out) <- c("Estimate", "SE", "LL", "UL")
  rownames(out) <- c("Weighted:", "Unweighted:")
  return(out)
 }
