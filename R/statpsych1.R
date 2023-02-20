@@ -423,77 +423,6 @@ ci.slope.mean.bs <- function(alpha, m, sd, n, x) {
 }
 
 
-#  test.mono.mean.bs ==========================================================
-#' Test of a monotonic trend in means for an ordered between-subjects factor
-#' 
-#'                     
-#' @description
-#' Computes simultaneous confidence intervals for all adjacent pairwise
-#' comparisons of population means using estimated group means, estimated 
-#' group standard deviations, and samples sizes as input. Equal variances are 
-#' not assumed. A Satterthwaite adjustment to the degrees of freedom is used  
-#' to improve the accuracy of the confidence intervals. If one or more lower
-#' limits are greater than 0 and no upper limit is less than 0, then conclude
-#' that the population means are monotoic decreasing. If one or more upper 
-#' limits are less than 0 and no lower limits are greater than 0, then
-#' conclude that the population means are monotoic increasing. Reject the 
-#' hypothesis of a monotonic trend if any lower limit is greater than 0 and 
-#' any upper limit is less than 0. 
-#'
-#'
-#' @param  alpha   alpha level for simultaneous 1-alpha confidence
-#' @param  m       vector of estimated group means
-#' @param  sd      vector of estimated group standard deviations
-#' @param  n       vector of sample sizes
-#'
-#'
-#' @return 
-#' Returns a matrix with the number of rows equal to the number
-#' of adjacent pairwise comparisons. The columns are:
-#' * Estimate - estimated mean difference
-#' * SE - standard error
-#' * LL - one-sided lower limit of the confidence interval
-#' * UL - one-sided upper limit of the confidence interval
-#'
-#'
-#' @examples
-#' m <- c(12.86, 24.57, 36.29, 53.21)
-#' sd <- c(13.185, 12.995, 14.773, 15.145)
-#' n <- c(20, 20, 20, 20)
-#' test.mono.mean.bs(.05, m, sd, n)
-#'
-#' # Should return:
-#' #     Estimate       SE        LL         UL
-#' # 1 2   -11.71 4.139530 -22.07803 -1.3419744
-#' # 2 3   -11.72 4.399497 -22.74731 -0.6926939
-#' # 3 4   -16.92 4.730817 -28.76921 -5.0707936
-#'
-#'
-#' @importFrom stats qt
-#' @export
-test.mono.mean.bs <-function(alpha, m, sd, n) {
- a <- length(m)
- v <- sd^2
- m1 <- m[1: a - 1]
- m2 <- m[2: a]
- Estimate <- m1 - m2
- v1 <- v[1: a - 1]
- v2 <- v[2: a]
- n1 <- n[1: a - 1]
- n2 <- n[2: a]
- SE <- sqrt(v1/n1 + v2/n2)
- t <- Estimate/SE
- df <- SE^4/(v1^2/(n1^2*(n1 - 1)) + v2^2/(n2^2*(n2 - 1)))
- tcrit <- qt(1 - alpha/(2*(a - 1)), df)
- LL <- Estimate - tcrit*SE
- UL <- Estimate + tcrit*SE
- pair = cbind(seq(1, a - 1), seq(2, a))
- out <- cbind(pair, Estimate, SE, LL, UL)
- rownames(out) <- rep("", a - 1)
- return(out)
-}
-
-
 # ci.ratio.mean2 ==============================================================
 #' Confidence interval for a 2-group mean ratio
 #'
@@ -1307,7 +1236,8 @@ ci.ratio.mad.ps <- function(alpha, y1, y2) {
 #' Computes a confidence interval for a population coefficient of dispersion
 #' which is defined as a mean absolute deviation from the median divided by a
 #' median. The coefficient of dispersion assumes ratio-scale scores and is a 
-#' robust alternative to the coefficient of variation.
+#' robust alternative to the coefficient of variation. An approximate
+#' standard error is recovered from the confidence interval.
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
 #' @param  y       vector of scores
@@ -1316,6 +1246,7 @@ ci.ratio.mad.ps <- function(alpha, y1, y2) {
 #' @return 
 #' Returns a 1-row matrix. The columns are:
 #' * Estimate - estimated coefficient of dispersion
+#' * SE - recovered standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #'
@@ -1330,8 +1261,8 @@ ci.ratio.mad.ps <- function(alpha, y1, y2) {
 #' ci.cod1(.05, y)
 #'
 #' # Should return:
-#' #        Estimate        LL       UL
-#' # [1,]  0.5921053 0.3813259 1.092679
+#' #        Estimate        SE        LL       UL
+#' # [1,]  0.5921053 0.1814708 0.3813259 1.092679
 #'
 #'
 #' @importFrom stats qnorm
@@ -1364,10 +1295,11 @@ ci.cod1 <-function(alpha, y) {
  U2 = log(y[b2])
  L1 = log(c*tau) - k*z*se2
  U1 = log(c*tau) + k*z*se2
- LL = exp(L1 - U2)
- UL = exp(U1 - L2)
- out = t(c(cod, LL, UL))
- colnames(out) = c("Estimate", "LL", "UL")
+ ll = exp(L1 - U2)
+ ul = exp(U1 - L2)
+ se <- (ul - ll)/(2*z)
+ out = t(c(cod, se, ll, ul))
+ colnames(out) = c("Estimate", "SE", "LL", "UL")
  return(out)
 }
 
@@ -2792,6 +2724,77 @@ test.kurtosis <- function(y) {
  if (p > .9999) {p = .9999}
  out <- round(t(c(kur, kur - 3, p)), 4)
  colnames(out) <- c("Kurtosis", "Excess", "p")
+ return(out)
+}
+
+
+#  test.mono.mean.bs ==========================================================
+#' Test of a monotonic trend in means for an ordered between-subjects factor
+#' 
+#'                     
+#' @description
+#' Computes simultaneous confidence intervals for all adjacent pairwise
+#' comparisons of population means using estimated group means, estimated 
+#' group standard deviations, and samples sizes as input. Equal variances are 
+#' not assumed. A Satterthwaite adjustment to the degrees of freedom is used  
+#' to improve the accuracy of the confidence intervals. If one or more lower
+#' limits are greater than 0 and no upper limit is less than 0, then conclude
+#' that the population means are monotoic decreasing. If one or more upper 
+#' limits are less than 0 and no lower limits are greater than 0, then
+#' conclude that the population means are monotoic increasing. Reject the 
+#' hypothesis of a monotonic trend if any lower limit is greater than 0 and 
+#' any upper limit is less than 0. 
+#'
+#'
+#' @param  alpha   alpha level for simultaneous 1-alpha confidence
+#' @param  m       vector of estimated group means
+#' @param  sd      vector of estimated group standard deviations
+#' @param  n       vector of sample sizes
+#'
+#'
+#' @return 
+#' Returns a matrix with the number of rows equal to the number
+#' of adjacent pairwise comparisons. The columns are:
+#' * Estimate - estimated mean difference
+#' * SE - standard error
+#' * LL - one-sided lower limit of the confidence interval
+#' * UL - one-sided upper limit of the confidence interval
+#'
+#'
+#' @examples
+#' m <- c(12.86, 24.57, 36.29, 53.21)
+#' sd <- c(13.185, 12.995, 14.773, 15.145)
+#' n <- c(20, 20, 20, 20)
+#' test.mono.mean.bs(.05, m, sd, n)
+#'
+#' # Should return:
+#' #     Estimate       SE        LL         UL
+#' # 1 2   -11.71 4.139530 -22.07803 -1.3419744
+#' # 2 3   -11.72 4.399497 -22.74731 -0.6926939
+#' # 3 4   -16.92 4.730817 -28.76921 -5.0707936
+#'
+#'
+#' @importFrom stats qt
+#' @export
+test.mono.mean.bs <-function(alpha, m, sd, n) {
+ a <- length(m)
+ v <- sd^2
+ m1 <- m[1: a - 1]
+ m2 <- m[2: a]
+ Estimate <- m1 - m2
+ v1 <- v[1: a - 1]
+ v2 <- v[2: a]
+ n1 <- n[1: a - 1]
+ n2 <- n[2: a]
+ SE <- sqrt(v1/n1 + v2/n2)
+ t <- Estimate/SE
+ df <- SE^4/(v1^2/(n1^2*(n1 - 1)) + v2^2/(n2^2*(n2 - 1)))
+ tcrit <- qt(1 - alpha/(2*(a - 1)), df)
+ LL <- Estimate - tcrit*SE
+ UL <- Estimate + tcrit*SE
+ pair = cbind(seq(1, a - 1), seq(2, a))
+ out <- cbind(pair, Estimate, SE, LL, UL)
+ rownames(out) <- rep("", a - 1)
  return(out)
 }
 
