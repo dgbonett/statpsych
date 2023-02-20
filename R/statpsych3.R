@@ -176,9 +176,9 @@ ci.prop2 <- function(alpha, f1, f2, n1, n2) {
  p1 <- (f1 + 1)/(n1 + 2)
  p2 <- (f2 + 1)/(n2 + 2)
  se <- sqrt(p1*(1 - p1)/(n1 + 2) + p2*(1 - p2)/(n2 + 2))
- LL <- p1 - p2 - z*se
- UL <- p1 - p2 + z*se
- out <- t(c(p1-p2, se, LL, UL))
+ ll <- p1 - p2 - z*se
+ ul <- p1 - p2 + z*se
+ out <- t(c(p1-p2, se, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  return(out)
 }
@@ -228,9 +228,9 @@ ci.ratio.prop2 <- function(alpha, f1, f2, n1, n2) {
  v1 <- 1/(f1 + 1/4 + (f1 + 1/4)^2/(n1 - f1 + 3/2))
  v2 <- 1/(f2 + 1/4 + (f2 + 1/4)^2/(n2 - f2 + 3/2))
  se <- sqrt(v1 + v2)
- LL <- exp(log(p1/p2) - z*se)
- UL <- exp(log(p1/p2) + z*se)
- out <- t(c(p1/p2, LL, UL))
+ ll <- exp(log(p1/p2) - z*se)
+ ul <- exp(log(p1/p2) + z*se)
+ out <- t(c(p1/p2, ll, ul))
  colnames(out) <- c("Estimate", "LL", "UL")
  return(out)
 }
@@ -288,10 +288,9 @@ ci.lc.prop.bs <- function(alpha, f, n, v) {
  se <- sqrt(t(v)%*%diag(p*(1 - p))%*%solve(diag(n + 4/m))%*%v)
  zval <- est/se
  pval <- 2*(1 - pnorm(abs(zval)))
- LL <- est - z*se
- UL <- est + z*se
- CI <- c(LL, UL)
- out <- t(c(est, se, zval, pval, LL, UL))
+ ll <- est - z*se
+ ul <- est + z*se
+ out <- t(c(est, se, zval, pval, ll, ul))
  colnames(out) <- c("Estimate", "SE", "z", "p", "LL", "UL")
  return(out)
 }
@@ -354,10 +353,10 @@ ci.pairs.prop.bs <-function(alpha, f, n) {
   SE <- sqrt(v[upper.tri(v)])
   z <- Estimate/SE
   p <- 2*(1 - pnorm(abs(z)))
-  LL <- Estimate - zcrit*SE
-  UL <- Estimate + zcrit*SE
+  ll <- Estimate - zcrit*SE
+  ul <- Estimate + zcrit*SE
   pair <- t(combn(seq(1:a), 2))
-  out <- cbind(pair, Estimate, SE, z, p, LL, UL)
+  out <- cbind(pair, Estimate, SE, z, p, ll, ul)
   rownames(out) <- rep("", a*(a - 1)/2)
   return(out)
 }
@@ -419,9 +418,9 @@ ci.slope.prop.bs <- function(alpha, f, n, x) {
  se <- sqrt(t(c)%*%diag(p*(1 - p))%*%solve(diag(n + 4/m))%*%c)
  t <- slope/se
  pval <- 2*(1 - pnorm(abs(t)))
- LL <- slope - z*se
- UL <- slope + z*se
- out <- t(c(slope, se, t, pval, LL, UL))
+ ll <- slope - z*se
+ ul <- slope + z*se
+ out <- t(c(slope, se, t, pval, ll, ul))
  colnames(out) <- c("Estimate", "SE", "z", "p", "LL", "UL")
  return(out)
 }
@@ -474,9 +473,9 @@ ci.prop.ps <- function(alpha, f00, f01, f10, f11) {
  p10 <- (f10 + 1)/(n + 2)
  diff <- p01 - p10
  se <- sqrt(((p01 + p10) - (p01 - p10)^2)/(n + 2))
- LL <- p01 - p10 - z*se
- UL <- p01 - p10 + z*se
- out <- t(c(diff, se, LL, UL))
+ ll <- p01 - p10 - z*se
+ ul <- p01 - p10 + z*se
+ out <- t(c(diff, se, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  return(out)
 }
@@ -540,9 +539,9 @@ ci.ratio.prop.ps <- function(alpha, f00, f10, f01, f11) {
  UL1 <- (2*f1 + z0^2 + z0*sqrt(z0^2 + 4*f1*(1 - p1)))/b
  LL2 <- (2*f2 + z0^2 - z0*sqrt(z0^2 + 4*f2*(1 - p2)))/b
  UL2 <- (2*f2 + z0^2 + z0*sqrt(z0^2 + 4*f2*(1 - p2)))/b
- LL <- exp(log(LL1) - log(UL2))
- UL <- exp(log(UL1) - log(LL2))
- out <- t(c(ratio, LL, UL))
+ ll <- exp(log(LL1) - log(UL2))
+ ul <- exp(log(UL1) - log(LL2))
+ out <- t(c(ratio, ll, ul))
  colnames(out) <- c("Estimate", "LL", "UL")
  return(out)
 }
@@ -664,9 +663,9 @@ ci.oddsratio <- function(alpha, f00, f01, f10, f11) {
  or <- (f11 + .5)*(f00 + .5)/((f01 + .5)*(f10 + .5))
  se.lor <- sqrt(1/(f00 + .5) + 1/(f01 + .5) + 1/(f10 + .5) + 1/(f11 + .5))
  se.or <- or*se.lor
- LL <- exp(log(or) - z*se.lor)
- UL <- exp(log(or) + z*se.lor)
- out <- t(c(or, se.or, LL, UL)
+ ll <- exp(log(or) - z*se.lor)
+ ul <- exp(log(or) + z*se.lor)
+ out <- t(c(or, se.or, ll, ul)
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  return(out)
 }
@@ -716,9 +715,9 @@ ci.yule <- function(alpha, f00, f01, f10, f11) {
  ULor <- exp(log(or) + z*se.lor)
  Q <- (or - 1)/(or + 1)
  se.Q <- .5*(1 - Q^2)*se.lor
- LL <- (LLor - 1)/(LLor + 1)
- UL <- (ULor - 1)/(ULor + 1)
- out <- t(c(Q, se.Q, LL, UL))
+ ll <- (LLor - 1)/(LLor + 1)
+ ul <- (ULor - 1)/(ULor + 1)
+ out <- t(c(Q, se.Q, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  return(out)
 }
@@ -776,9 +775,9 @@ ci.phi <- function(alpha, f00, f01, f10, f11) {
  v3 <- (p0x - p1x)*(px0 - px1)/sqrt(p0x*p1x*px0*px1) 
  v4 <- (.75*phi^2)*((p0x - p1x)^2/(p0x*p1x) + (px0 - px1)^2/(px0*px1))
  se <- sqrt((v1 + v2*v3 + v4)/n)
- LL <- phi - z*se
- UL <- phi + z*se
- out <- t(c(phi, se, LL, UL))
+ ll <- phi - z*se
+ ul <- phi + z*se
+ out <- t(c(phi, se, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  return(out)
 }
@@ -841,9 +840,9 @@ ci.biphi <- function(alpha, f1, f2, n1, n2) {
  c <- 2.89/(p1*p2)
  biphi <- lor/sqrt(lor^2 + c)
  se.biphi <- sqrt(c^2/(lor^2 + c)^3)*se.lor
- LL <- LL1/sqrt(LL1^2 + 2.89/(p1*p2))
- UL <- UL1/sqrt(UL1^2 + 2.89/(p1*p2))
- out <- t(c(biphi, se.biphi, LL, UL))
+ ll <- LL1/sqrt(LL1^2 + 2.89/(p1*p2))
+ ul <- UL1/sqrt(UL1^2 + 2.89/(p1*p2))
+ out <- t(c(biphi, se.biphi, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  return(out)
 }
@@ -904,9 +903,9 @@ ci.tetra <- function(alpha, f00, f01, f10, f11) {
  LL1 <- exp(lor - z*se.lor)
  UL1 <- exp(lor + z*se.lor)
  tetra <- cos(3.14159/(1 + or^c))
- LL <- cos(3.14159/(1 + LL1^c))
- UL <- cos(3.14159/(1 + UL1^c))
- out <- t(c(tetra, LL, UL))
+ ll <- cos(3.14159/(1 + LL1^c))
+ ul <- cos(3.14159/(1 + UL1^c))
+ out <- t(c(tetra, ll, ul))
  colnames(out) <- c("Estimate", "LL", "UL")
  return(out)
 }
@@ -999,7 +998,7 @@ ci.kappa <- function(alpha, f00, f01, f10, f11) {
 #'
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Estimate - estimate of G-index of agreement 
+#' * Estimate - maximum likelihood estimate of G-index 
 #' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -1040,8 +1039,7 @@ ci.agree <- function(alpha, n, f, k) {
 #'                          
 #' @description
 #' Computes adjusted Wald confidence intervals for the G-index of agreement 
-#' within each group and the difference of G-indices. The point estimates are 
-#' maximum likelihood estimates.
+#' within each group and the difference of G-indices. 
 #'
 #'
 #' @param  alpha   alpha level for simultaneous 1-alpha confidence
@@ -1060,7 +1058,8 @@ ci.agree <- function(alpha, n, f, k) {
 #'
 #'
 #' The columns are:
-#' * Estimate - estimate of G-index (single-group and difference)  
+#' * Estimate - maximum likelihood estimate of G-index and difference  
+#' * SE - standard error
 #' * LL - lower limit of confidence interval
 #' * UL - upper limit of confidence interval
 #'
@@ -1073,10 +1072,10 @@ ci.agree <- function(alpha, n, f, k) {
 #' ci.agree2(.05, 75, 70, 60, 45, 2)
 #'
 #' # Should return:
-#' #          Estimate        LL        UL
-#' # G1      0.8666667 0.6974555 0.9481141
-#' # G2      0.5000000 0.2523379 0.6851621
-#' # G1 - G2 0.3666667 0.1117076 0.6088621
+#' #          Estimate         SE        LL        UL
+#' # G1      0.8666667 0.02880329 0.6974555 0.9481141
+#' # G2      0.5000000 0.05590170 0.2523379 0.6851621
+#' # G1 - G2 0.3666667 0.06288585 0.1117076 0.6088621
 #'
 #'
 #' @importFrom stats qnorm
@@ -1088,28 +1087,31 @@ ci.agree2 <- function(alpha, n1, f1, n2, f2, r) {
  p1 <- (f1 + 2)/(n1 + 4)
  G1 <- a*p1.ml - 1/(r - 1)
  se1 <- sqrt(p1*(1 - p1)/(n1 + 4))
+ se1.ml <- sqrt(p1.ml*(1 - p1.ml)/n1)
  LL1 <- a*(p1 - z*se1) - 1/(r - 1)
  UL1 <- a*(p1 + z*se1) - 1/(r - 1) 
  p2.ml <- f2/n2
  p2 <- (f2 + 2)/(n2 + 4)
  G2 <- a*p2.ml - 1/(r - 1)
  se2 <- sqrt(p2*(1 - p2)/(n2 + 4))
+ se2.ml <- sqrt(p2.ml*(1 - p2.ml)/n2)
  LL2 <- a*(p2 - z*se2) - 1/(r - 1)
  UL2 <- a*(p2 + z*se2) - 1/(r - 1) 
  p1.d <- (f1 + 1)/(n1 + 2)
  p2.d <- (f2 + 1)/(n2 + 2)
  se.d <- sqrt(p1.d*(1 - p1.d)/(n1 + 2) + p2.d*(1 - p2.d)/(n2 + 2))
+ se.d.ml <- sqrt(se1.ml^2 + se2.ml^2)
  LL3 <- a*(p1.d - p2.d - z*se.d)
  UL3 <- a*(p1.d - p2.d + z*se.d) 
- out1 <- t(c(G1, LL1, UL1))
- out2 <- t(c(G2, LL2, UL2))
- out3 <- t(c(G1 - G2, LL3, UL3))
+ out1 <- t(c(G1, se1.ml, LL1, UL1))
+ out2 <- t(c(G2, se2.ml, LL2, UL2))
+ out3 <- t(c(G1 - G2, se.d.ml, LL3, UL3))
  out <- rbind(out1, out2, out3)
- colnames(out) <- c("Estimate", "LL", "UL")
+ colnames(out) <- c("Estimate", "SE", "LL", "UL")
  rownames(out) <- c("G1", "G2", "G1 - G2")
  return(out)
 }
-
+          
 
 # ci.popsize ================================================================= 
 #' Confidence interval for an unknown population size
@@ -1219,12 +1221,12 @@ ci.cramer <- function(alpha, chisqr, r, c, n) {
  p <- pchisq(chisqr, df, nc)
  k1 <- which(min(abs(p - alpha2)) == abs(p - alpha2))[[1]]
  dL <- nc[k1]
- LL <- sqrt((dL + df)/(n*k))
+ ll <- sqrt((dL + df)/(n*k))
  k2 <- which(min(abs(p - alpha1)) == abs(p - alpha1))[[1]]
  dU <- nc[k2]
- UL <- sqrt((dU + df)/(n*k))
- se <- (UL - LL)/(2*z)
- out <- round(t(c(v, se, LL, UL)), 4)
+ ul <- sqrt((dU + df)/(n*k))
+ se <- (ul - ll)/(2*z)
+ out <- round(t(c(v, se, ll, ul)), 4)
  colnames(out) <- c("Cramer's V", "SE", "LL", "UL")
  return(out)
 }
