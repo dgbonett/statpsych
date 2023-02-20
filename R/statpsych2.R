@@ -184,7 +184,8 @@ ci.cor2 <- function(alpha, cor1, cor2, n1, n2) {
 #' Computes a confidence interval for a difference in population Pearson 
 #' correlations that are estimated from the same sample and have one 
 #' variable in common. A bias adjustmentment is used to reduce the bias
-#' of each Fisher transformed correlation. 
+#' of each Fisher transformed correlation. An approximate standard error
+#' is recovered from the confidence interval.
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -197,6 +198,7 @@ ci.cor2 <- function(alpha, cor1, cor2, n1, n2) {
 #' @return 
 #' Returns a 1-row matrix. The columns are:
 #' * Estimate - estimated correlation difference
+#' * SE - recovered standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #' 
@@ -209,8 +211,8 @@ ci.cor2 <- function(alpha, cor1, cor2, n1, n2) {
 #' ci.cor.dep(.05, .396, .179, .088, 166)
 #'
 #' # Should return:
-#' #      Estimate         LL      UL
-#' # [1,]    0.217 0.01323072 0.415802
+#' #      Estimate       SE         LL       UL
+#' # [1,]   0.217 0.1026986 0.01323072 0.415802
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -236,8 +238,9 @@ ci.cor.dep <- function(alpha, cor1, cor2, cor12, n) {
  d2 <- 2*c*(cor1 - ul1)*(cor2 - ll2)
  ll <- diff - sqrt((cor1 - ll1)^2 + (ul2 - cor2)^2 - d1)
  ul <- diff + sqrt((ul1 - cor1)^2 + (cor2 - ll2)^2 - d2)
- out <- t(c(diff, ll, ul))
- colnames(out) <- c("Estimate", "LL", "UL")
+ se <- (ul - ll)/(2*z)
+ out <- t(c(diff, se, ll, ul))
+ colnames(out) <- c("Estimate", "SE", "LL", "UL")
  return(out)
 }
 
