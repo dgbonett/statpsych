@@ -27,7 +27,7 @@ You can install the currently-released version from CRAN with this R
 command:
 
 ``` r
-install.packages("stapsych")
+install.packages("statpsych")
 ```
 
 Alternatively, you can install the latest development version from
