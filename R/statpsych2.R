@@ -732,14 +732,13 @@ ci.fisher <- function(alpha, cor, se) {
 #' @description
 #' Computes a Monte Carlo confidence interval (500,000 trials) for a population
 #' unstandardized indirect effect in a path model and a Sobel standard error. 
-#' This function is not recommended for a standardized indirect effect unless 
-#' the standardized slope estimates for both paths are less than about .3 in 
-#' absolute value. The Monte Carlo method is general in that the slope estimates
-#' and standard errors do not need to be OLS estimates with homoscedastic 
-#' standard errors. For example, LAD slope estimates and their standard errors,
-#' OLS slope estimates and heteroscedastic standard errors, distribution-free 
-#' Theil-Sen slope estimates with McKean-Schrader standard errors, or 
-#' standardized slopes with robust standard errors also could be used.
+#' This function is not recommended for a standardized indirect effect. The 
+#' Monte Carlo method is general in that the slope estimates and standard 
+#' errors do not need to be OLS estimates with homoscedastic standard errors. 
+#' For example, LAD slope estimates and their standard errors, OLS slope
+#' estimates and heteroscedastic-consistent standard errors, and (in models 
+#' with no direct effects) distribution-free Theil-Sen slope estimates with
+#' recovered standard errors also could be used.
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence  
