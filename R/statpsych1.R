@@ -5324,7 +5324,7 @@ sim.ci.stdmean2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2, d, rep) {
 #' # Should return (within sampling error):
 #' #                         Coverage Lower Error Upper Error Ave CI Width   Ave Est
 #' # Unweighted Standardizer   0.9095      0.0555       0.035    0.7354865 0.5186796
-#' # level 1 Standardizer      0.9525      0.0255       0.022    0.9330036 0.5058198
+#' # Level 1 Standardizer      0.9525      0.0255       0.022    0.9330036 0.5058198
 #'
 #'
 #' @importFrom stats qnorm
@@ -5409,7 +5409,7 @@ sim.ci.stdmean.ps <- function(alpha, n, sd.ratio, cor, dist1, dist2, d, rep) {
  out2 <- t(c(cov2, e12/rep, e22/rep, width2, est2))
  out <- rbind(out1, out2)
  colnames(out) <- c("Coverage", "Lower Error", "Upper Error", "Ave CI Width", "Ave Est")
- rownames(out) <- c("Unweighted Standardizer", "level 1 Standardizer")
+ rownames(out) <- c("Unweighted Standardizer", "Level 1 Standardizer")
  return(out)
 }
 
