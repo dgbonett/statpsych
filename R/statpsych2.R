@@ -253,9 +253,8 @@ ci.cor.dep <- function(alpha, cor1, cor2, cor12, n) {
 #' Computes a 100(1 - alpha)% confidence interval for a difference in 
 #' population correlations in a 2-group design. The correlations can be 
 #' Pearson, Spearman, partial, semipartial, or point-biserial correlations. 
-#' The function requires 100(1 - alpha)% confidence intervals for each 
-#' correlation as input. An approximate standard error is recovered from 
-#' the confidence interval. 
+#' The function requires a point estimate and a 100(1 - alpha)% confidence
+#' interval for each correlation as input. 
 #'
 #'  
 #' @param  cor1  estimated correlation for group 1 
@@ -269,7 +268,6 @@ ci.cor.dep <- function(alpha, cor1, cor2, cor12, n) {
 #' @return 
 #' Returns a 1-row matrix. The columns are:
 #' * Estimate - estimated correlation difference
-#' * SE - recovered standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #' 
@@ -292,9 +290,8 @@ ci.cor2.gen <- function(cor1, ll1, ul1, cor2, ll2, ul2) {
  diff <- cor1 - cor2
  ll <- diff - sqrt((cor1 - ll1)^2 + (ul2 - cor2)^2)
  ul <- diff + sqrt((ul1 - cor1)^2 + (cor2 - ll2)^2)
- se <- (ul - ll)/(2*z)
- out <- t(c(diff, se, ll, ul))
- colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ out <- t(c(diff, ll, ul))
+ colnames(out) <- c("Estimate", "LL", "UL")
  return(out)
 }
 
