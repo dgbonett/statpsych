@@ -2782,6 +2782,57 @@ power.prop2 <- function(alpha, n1, n2, p1, p2, es) {
  return(out)
 }
 
+
+#  power.prop.ps ==============================================================
+#' Approximates the power of a paired-samples test of equal porportions for a
+#' planned sample size
+#'
+#'                     
+#' @description
+#' Computes the approximate power of a test for equal population proportions in
+#' a paired-samples design (the McNemar test). This function requires planning 
+#' values for both proportions and a phi coefficient that describes the 
+#' correlation between the two dichotomous measurements. The proportion planning 
+#' values can set to .5 for a conservatively low power estimate. The planning 
+#' value for the proportion difference (effect size) could be set to the
+#' difference of the two proportion planning values or it could be set to a
+#' minimally interesting effect size. Set the phi correlation planning value 
+#' to the smallest value within a plausible range for a conservatively low power
+#' estimate. 
+#'
+#'
+#' @param  alpha  alpha level for hypothesis test 
+#' @param  n      planned sample size
+#' @param  p1     planning value of proportion for measurement 1
+#' @param  p2     planning value of proportion for measurement 2
+#' @param  phi    planning value of phi correlation
+#' @param  es     planning value of proportion difference
+#'
+#'
+#' @return
+#' Returns the approximate power of the test
+#'
+#'
+#' @examples
+#' power.prop.ps(.05, 45, .5, .5, .4, .2)
+#'
+#' # Should return:
+#' #          Power
+#' # [1,] 0.6877652
+#'
+#'
+#' @importFrom stats qnorm
+#' @export
+power.prop.ps <- function(alpha, n, p1, p2, phi, es) {
+ za <- qnorm(1 - alpha/2)
+ v <- 2*phi*sqrt(p1*(1 - p1)*p2*(1 - p2))
+ z <- abs(es)/sqrt((p1*(1 - p1) + p2*(1 - p2) - v)/n) - za
+ pow <- pnorm(z)
+ out <- matrix(pow, nrow = 1, ncol = 1)
+ colnames(out) <- "Power"
+ return(out)
+}
+
           
 # ======================== Miscellaneous =====================================
 #  iqv =======================================================================
