@@ -2693,7 +2693,50 @@ size.supinf.prop.ps <- function(alpha, pow, p1, p2, phi, h) {
  return(out)
 }
 
-
+          
+# ===================== Power for Planned Sample Size  ========================
+#  power.prop1 ================================================================
+#' Approximates the power of a one-sample proportion test for a planned sample
+#' size
+#'
+#'
+#' @description
+#' Computes the approximate power of a one-sample proportion test for a
+#' planned sample size. Set the proportion planning value to .5 for a 
+#' conservatively low power estimate. The value of the effect size need
+#' not be based on the proportion planning value.
+#'
+#'
+#' @param  alpha  alpha level for hypothesis test 
+#' @param  n      planned sample size
+#' @param  p      planning value of proportion 
+#' @param  es     planning value of proportion minus hypothesized value
+#'
+#'
+#' @return
+#' Returns the approximate power of the test
+#'
+#'
+#' @examples
+#' power.prop1(.05, 40, .5, .2)
+#'
+#' # Should return:
+#' #         Power
+#' # [1,] 0.715613
+#'
+#'
+#' @importFrom stats qnorm
+#' @export
+power.prop1 <- function(alpha, n, p, es) {
+ za <- qnorm(1 - alpha/2)
+ z <- abs(es)/sqrt(p*(1 - p)/n) - za
+ pow <- pnorm(z)
+ out <- matrix(pow, nrow = 1, ncol = 1)
+ colnames(out) <- "Power"
+ return(out)
+}
+         
+          
 # ======================== Miscellaneous =====================================
 #  iqv =======================================================================
 #' Indices of qualitative variation 
