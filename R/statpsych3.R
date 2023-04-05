@@ -1116,6 +1116,141 @@ ci.agree2 <- function(alpha, n1, f1, n2, f2, r) {
 }
           
 
+# ci.agree.3rater =============================================================
+#' Computes confidence intervals for a 3-rater design with dichotomous ratings
+#'
+#'     
+#' @description
+#' Computes adjusted Wald confidence intervals for a G-index of agreement for 
+#' all pairs of raters in a 3-rater design with a dichotomous rating, and 
+#' computes adjusted Wald confidence intervals for differences of all pairs of 
+#' G agreement. An adjusted Wald confidence interval for unanimous G agreement 
+#' among the three raters also is computed. In the three-rater design, 
+#' unanimous G agreement is equal to the average of all pairs of G agreement. 
+#'
+#'  
+#' @param  alpha    alpha level for 1-alpha confidence
+#' @param  f        vector of frequency counts from 2x2x2 table where
+#'                  f = [f111, f112, f121, f122, f211, f212, f221, f222],
+#'                  first subscript represents rating of rater 1,
+#'                  second subscript represents rating of rater 2,
+#'                  third subscript represents rating of rater 3
+#'
+#' 
+#' @references
+#' \insertRef{Bonett2022}{statpsych}
+#'
+#'
+#' @return 
+#' Returns a 3-row matrix. The rows are:
+#' * G{1,2}: G-index for raters 1 and 2
+#' * G{1,3}: G-index for raters 1 and 3
+#' * G{2,3}: G-index for raters 2 and 3
+#' * G{1,2}–G{1,3}: difference in G{1,2} and G{1,3}
+#' * G{1,2}–G{2,3}: difference in G{1,2} and G{2,3}
+#' * G{2,3}–G{1,3}: difference in G{2,3} and G{1,3}
+#' * G(3): G-index of unanimous agreement for all three raters
+#'
+#'
+#' The columns are:
+#' * Estimate - estimate of G-index (two-rater, difference, or unanimous)  
+#' * LL - lower limit of confidence interval
+#' * UL - upper limit of confidence interval
+#'
+#' 
+#' 
+#' @examples
+#' f <- c(100, 6, 4, 40, 20, 1, 9, 120)
+#' ci.agree.3rater(.05, f)
+#'
+#' # Should return:
+#' #                  Estimate          LL         UL
+#' # G{1,2}         0.56666667  0.46601839  0.6524027
+#' # G{1,3}         0.50000000  0.39564646  0.5911956
+#' # G{2,3}         0.86666667  0.79701213  0.9135142
+#' # G{1,2}–G{1,3}  0.06666667  0.00580397  0.1266464
+#' # G{1,2}–G{2,3} -0.30000000 -0.40683919 -0.1891873
+#' # G{2,3}–G{1,3} -0.36666667 -0.46222023 -0.2662566
+#' # G(3)           0.64444444  0.57382971  0.7068720
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export         
+ci.agree.3rater <- function(alpha, f) {
+ z <- qnorm(1 - alpha/2)
+ n <- sum(f)
+ f111 <- f[1]
+ f112 <- f[2]
+ f121 <- f[3]
+ f122 <- f[4]
+ f211 <- f[5]
+ f212 <- f[6]
+ f221 <- f[7]
+ f222 <- f[8]
+ p12.ml <- (f111 + f112 + f221 + f222)/n 
+ p12 <- (f111 + f112 + f221 + f222 + 2)/(n + 4)
+ p13.ml <- (f111 + f121 + f212 + f222)/n
+ p13 <- (f111 + f121 + f212 + f222 + 2)/(n + 4)
+ p23.ml <- (f111 + f211 + f122 + f222)/n
+ p23 <- (f111 + f211 + f122 + f222 + 2)/(n + 4)
+ G12.ml <- 2*p12.ml - 1
+ G12 <- 2*p12 - 1
+ G13.ml <- 2*p13.ml - 1
+ G13 <- 2*p13 - 1
+ G23.ml <- 2*p23.ml - 1
+ G23 <- 2*p23 - 1
+ se.G12 <- sqrt(p12*(1 - p12)/(n + 4))
+ se.G13 <- sqrt(p13*(1 - p13)/(n + 4))
+ se.G23 <- sqrt(p23*(1 - p23)/(n + 4))
+ p1.ml <- (f112 + f221)/n
+ p1 <- (f112 + f221 + 1)/(n + 2)
+ p2.ml <- (f121 + f212)/n
+ p2 <- (f121 + f212 + 1)/(n + 2)
+ p3.ml <- (f211 + f122)/n
+ p3 <- (f211 + f122 + 1)/(n + 2)
+ G12_13.ml <- 2*(p1.ml - p2.ml)
+ G12_13 <- 2*(p1 - p2)
+ G12_23.ml <- 2*(p1.ml - p3.ml)
+ G12_23 <- 2*(p1 - p3)
+ G13_23.ml <- 2*(p2.ml - p3.ml)
+ G13_23 <- 2*(p2 - p3)
+ se.G12_13 <- sqrt((p1 + p2 - (p1 - p2)^2)/(n + 2))
+ se.G12_23 <- sqrt((p1 + p3 - (p1 - p3)^2)/(n + 2))
+ se.G13_23 <- sqrt((p2 + p3 - (p2 - p3)^2)/(n + 2))
+ p123.ml <- (f111 + f222)/n
+ p123 <- (f111 + f222 + 2)/(n + 4)
+ G3.ml <- (4*p123.ml - 1)/3
+ G3 <- (4*p123 - 1)/3
+ se.G3 <- sqrt(p123*(1 - p123)/(n + 4))
+ LL.G12 <- 2*(p12 - z*se.G12) - 1
+ UL.G12 <- 2*(p12 + z*se.G12) - 1
+ LL.G13 <- 2*(p13 - z*se.G13) - 1
+ UL.G13 <- 2*(p13 + z*se.G13) - 1
+ LL.G23 <- 2*(p23 - z*se.G23) - 1
+ UL.G23 <- 2*(p23 + z*se.G23) - 1
+ LL.G12_13 <- 2*(p1 - p2 - z*se.G12_13)
+ UL.G12_13 <- 2*(p1 - p2 + z*se.G12_13)
+ LL.G12_23 <- 2*(p1 - p3 - z*se.G12_23)
+ UL.G12_23 <- 2*(p1 - p3 + z*se.G12_23)
+ LL.G13_23 <- 2*(p2 - p3 - z*se.G13_23)
+ UL.G13_23 <- 2*(p2 - p3 + z*se.G13_23)
+ LL.G3 <- (4/3)*(p123 - z*se.G3) - 1/3
+ UL.G3 <- (4/3)*(p123 + z*se.G3) - 1/3
+ out1 <- t(c(G12.ml, LL.G12, UL.G12))
+ out2 <- t(c(G13.ml, LL.G13, UL.G13))
+ out3 <- t(c(G23.ml, LL.G23, UL.G23))
+ out4 <- t(c(G12_13.ml, LL.G12_13, UL.G12_13))
+ out5 <- t(c(G12_23.ml, LL.G12_23, UL.G12_23))
+ out6 <- t(c(G13_23.ml, LL.G13_23, UL.G13_23))
+ out7 <- t(c(G3.ml, LL.G3, UL.G3))
+ out <- rbind(out1, out2, out3, out4, out5, out6, out7)
+ colnames(out) <- c("Estimate", "LL", "UL")
+ rownames(out) <- c("G{1,2}", "G{1,3}", "G{2,3}", "G{1,2}–G{1,3}", "G{1,2}–G{2,3}",
+ "G{2,3}–G{1,3}","G(3)")
+ return(out)
+}
+
+          
 # ci.popsize ================================================================= 
 #' Confidence interval for an unknown population size
 #'
