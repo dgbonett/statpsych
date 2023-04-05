@@ -134,6 +134,69 @@ ci.pairs.prop1 <-function(alpha, f) {
 }
 
 
+#  ci.prop1.inv =============================================================== 
+#' Confidence interval for a single proportion using inverse sampling
+#'
+#'
+#' @description
+#' Computes an exact confidence interval for a single population proportion 
+#' when inverse sampling has been used. An approximate standard error is 
+#' recovered from the confidence interval. With inverse sampling, the number 
+#' of participants who have the attribute (f) is predetermined and sampling 
+#' continues until f attains its prespecified value. With inverse sampling, 
+#' the sample size (n) will not be known in advance.
+#'
+#'
+#' @param   alpha   alpha level for 1-alpha confidence
+#' @param   f       number of participants who have the attribute
+#' @param   n       sample size
+#'
+#'
+#' @return
+#' Returns a 1-row matrix. The columns are:
+#' * Estimate - estimate of proportion
+#' * SE - standard error
+#' * LL - lower limit of confidence interval
+#' * UL - upper limit of confidence interval
+#'
+#'
+#' @references
+#' \insertRef{Zou2010}{statpsych}
+#'
+#'
+#' @examples
+#' ci.prop1.inv(.05, 5, 67)
+#'
+#' # Should return:
+#' #        Estimate         SE         LL        UL
+#' # [1,] 0.07462687 0.03145284 0.02467471 0.1479676
+#'
+#'
+#' @importFrom stats qnorm
+#' @importFrom stats qf
+#' @export
+ci.prop1.inv <- function(alpha, f, n) {
+  z <- qnorm(1 - alpha/2)
+  y <- n - f
+  est <- f/n
+  df1 <- 2*(y + 1)
+  df2 <- 2*f
+  df3 <- 2*y
+  fcritL <- qf(1 - alpha/2, df1, df2)
+  ll <- 1/(1 + fcritL*(y + 1)/f)
+  if (y == 0) {
+    ul <- 1
+  } else {
+    fcritU <- qf(alpha/2, df3, df2)
+    ul <- 1/(1 + fcritU*(y/f))
+  }
+  se <- (ul - ll)/(2*z)
+  out <- t(c(est, se, ll, ul))
+  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+  return(out)
+}
+
+
 #  ci.prop2 ==================================================================
 #' Confidence interval for a 2-group proportion difference
 #'
@@ -181,6 +244,89 @@ ci.prop2 <- function(alpha, f1, f2, n1, n2) {
  out <- t(c(p1-p2, se, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  return(out)
+}
+
+
+# ci.prop2.inv ================================================================
+#' Confidence interval for a 2-group proportion difference using inverse 
+#' sampling
+#'
+#'
+#' @description
+#' Computes an approximate confidence interval for a population proportion 
+#' difference when inverse sampling has been used. An approximate standard  
+#' error is recovered from the confidence interval. With inverse sampling, the  
+#' number of participants who have the attribute within group 1(f1) and group 2
+#' (f2) are predetermined, and sampling continues within each group until f1 
+#' and f2 attain their prespecified values. With inverse sampling, the sample 
+#' sizes (n1 and n2) will not be known in advance.
+#'
+#'
+#' @param   alpha   alpha level for 1-alpha confidence
+#' @param   f1      number of participants in group 1 who have the attribute
+#' @param   f2      number of participants in group 2 who have the attribute
+#' @param   n1      sample size for group 1
+#' @param   n2      sample size for group 2
+#'
+#'
+#' @return
+#' Returns a 1-row matrix. The columns are:
+#' * Estimate - estimate of proportion difference
+#' * SE - standard error 
+#' * LL - lower limit of confidence interval
+#' * UL - upper limit of confidence interval
+#'
+#'
+#' @references
+#' \insertRef{Zou2010}{statpsych}
+#'
+#'
+#' @examples
+#' ci.prop2.inv(.05, 10, 10, 48, 213)
+#'
+#' # Should return:
+#' #       Estimate         SE         LL        UL
+#' # [1,]  0.161385 0.05997618 0.05288277 0.2879851
+#'
+#'
+#' @importFrom stats qnorm
+#' @importFrom stats qf
+#' @export
+ci.prop2.inv <- function(alpha, f1, f2, n1, n2) {
+  z <- qnorm(1 - alpha/2)
+  y1 <- n1 - f1
+  est1 <- f1/n1
+  df1 <- 2*(y1 + 1)
+  df2 <- 2*f1
+  df3 <- 2*y1
+  fcritL <- qf(1 - alpha/2, df1, df2)
+  ll1 <- 1/(1 + fcritL*(y1 + 1)/f1)
+  if (y1 == 0) {
+    ul1 <- 1
+  } else {
+    fcritU <- qf(alpha/2, df3, df2)
+    ul1 <- 1/(1 + fcritU*(y1/f1))
+  }
+  y2 <- n2 - f2
+  est2 <- f2/n2
+  df1 <- 2*(y2 + 1)
+  df2 <- 2*f2
+  df3 <- 2*y2
+  fcritL <- qf(1 - alpha/2, df1, df2)
+  ll2 <- 1/(1 + fcritL*(y2 + 1)/f2)
+  if (y2 == 0) {
+    ul2 <- 1
+  } else {
+    fcritU <- qf(alpha/2, df3, df2)
+    ul2 <- 1/(1 + fcritU*(y2/f2))
+  }
+  diff <- est1 - est2
+  ll <- diff - sqrt((est1 - ll1)^2 + (ul2 - est2)^2)
+  ul <- diff + sqrt((ul1 - est1)^2 + (est2 - ll2)^2)
+  se <- (ul - ll)/(2*z)
+  out <- t(c(diff, se, ll, ul))
+  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+  return(out)
 }
 
 
