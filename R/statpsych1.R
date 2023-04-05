@@ -1039,7 +1039,7 @@ ci.lc.stdmean.ws <- function(alpha, m, sd, cor, n, q) {
 
 
 #  ci.mad1 ====================================================================
-#' Confidence interval for a single MAD
+#' Confidence interval for a single mean absolute deviation 
 #'
 #'
 #' @description
@@ -1096,7 +1096,7 @@ ci.mad1 <- function(alpha, y) {
 
 
 #  ci.ratio.mad2 ==============================================================
-#' Confidence interval for a 2-group MAD ratio
+#' Confidence interval for a 2-group ratio of mean absolute deviations
 #'
 #'
 #' @description
