@@ -1256,46 +1256,6 @@ size.ci.lc.ancova <- function(alpha, evar, s, d, w, v) {
 }
 
 
-#  size.ci.indirect ===========================================================
-#' Sample size for an indirect effect confidence interval 
-#'
-#'
-#' @description
-#' Computes the approximate sample size required to estimate the indirect effect  
-#' in a simple mediation model. The direct effect of the independent variable on 
-#' the dependent variable, controlling for the mediator variable, is assumed to 
-#' be negligible. 
-#'
-#'  
-#' @param  alpha  alpha level for 1-alpha confidence
-#' @param  cor1   planning value of correlation between the independent and mediator variables
-#' @param  cor2   planning value of correlation between the mediator and dependent variables 
-#' @param  w      desired confidence interval width
-#'
-#' 
-#' @return 
-#' Returns the required sample size
-#' 
-#' 
-#' @examples
-#' size.ci.indirect(.05, .4, .5, .2)
-#'
-#' # Should return:
-#' #      Sample size
-#' # [1,]         106
-#'  
-#' 
-#' @importFrom stats qnorm
-#' @export  
-size.ci.indirect <- function(alpha, cor1, cor2, w) {
- z <- qnorm(1 - alpha/2)
- n <- ceiling(4*(cor2^2*(1 - cor1^2)^2 + cor1^2*(1 - cor2^2)^2)*(z/w)^2 + 3)
- out <- matrix(n, nrow = 1, ncol = 1)
- colnames(out) <- "Sample size"
- return(out)
-}
-
-
 # =================== File 2: Sample Size for Desired Power ===================
 #  size.test.slope ============================================================
 #' Sample size for a test of a slope
