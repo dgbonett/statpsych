@@ -1504,6 +1504,50 @@ slope.contrast <- function(x) {
 }
 
 
+#  ======================= Power for Planned Sample Size ======================
+#  power.cor1 =================================================================
+#' Approximates the power of a correlation test for a planned sample size
+#'
+#'
+#' @description
+#' Computes the approximate power of a Pearson or partial correlation test for 
+#' a planned sample size. Set s = 0 for a Pearson correlation. 
+#'
+#'
+#' @param  alpha  alpha level for hypothesis test 
+#' @param  n      planned sample size
+#' @param  cor    planning value of correlation 
+#' @param  h      hypothesized value of correlation 
+#' @param  s      number of control variables
+#'
+#'
+#' @return
+#' Returns the approximate power of the test
+#'
+#'
+#' @examples
+#' power.cor1(.05, 80, .3, 0, 0)
+#'
+#' # Should return:
+#' #          Power
+#' # [1,] 0.7751932
+#'
+#'
+#' @importFrom stats qnorm
+#' @importFrom stats pnorm
+#' @export
+power.cor1 <- function(alpha, n, cor, h, s) {
+ za <- qnorm(1 - alpha/2)
+ f1 = log((1 + cor)/(1 - cor))/2
+ f2 = log((1 + h)/(1 - h))/2
+ z <- abs(f1 - f2)*sqrt(n - 3 - s) - za
+ pow <- pnorm(z)
+ out <- matrix(pow, nrow = 1, ncol = 1)
+ colnames(out) <- "Power"
+ return(out)
+}
+
+
 #  random.yx =================================================================
 #' Generates random bivariate scores 
 #'
