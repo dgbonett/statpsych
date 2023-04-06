@@ -2726,6 +2726,7 @@ size.supinf.prop.ps <- function(alpha, pow, p1, p2, phi, h) {
 #'
 #'
 #' @importFrom stats qnorm
+#' @importFrom stats pnorm
 #' @export
 power.prop1 <- function(alpha, n, p, es) {
  za <- qnorm(1 - alpha/2)
@@ -2772,6 +2773,7 @@ power.prop1 <- function(alpha, n, p, es) {
 #'
 #'
 #' @importFrom stats qnorm
+#' @importFrom stats pnorm
 #' @export
 power.prop2 <- function(alpha, n1, n2, p1, p2, es) {
  za <- qnorm(1 - alpha/2)
@@ -2822,6 +2824,7 @@ power.prop2 <- function(alpha, n1, n2, p1, p2, es) {
 #'
 #'
 #' @importFrom stats qnorm
+#' @importFrom stats pnorm
 #' @export
 power.prop.ps <- function(alpha, n, p1, p2, phi, es) {
  za <- qnorm(1 - alpha/2)
