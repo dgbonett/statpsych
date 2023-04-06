@@ -1412,6 +1412,51 @@ size.interval.cor <- function(alpha, pow, cor, s, h) {
 }
 
 
+#  size.test.cor2 ==============================================================
+#' Sample size for a test of equal Pearson or partial correlation in a 2-group
+#' design
+#'
+#'
+#' @description
+#' Computes the sample size required to test equality of two Pearson or partial
+#' correlation with desired power in a 2-group design. Set s = 0 for a Pearson 
+#' correlation. 
+#'
+#'  
+#' @param  alpha   alpha level for hypothesis test
+#' @param  pow     desired power
+#' @param  cor1    planning value of correlation
+#' @param  cor2    planning value of correlation
+#' @param  s       number of control variables
+#'
+#' 
+#' @return 
+#' Returns the required sample size per group
+#' 
+#' 
+#' @examples
+#' size.test.cor2(.05, .8, .4, .2, 0)
+#'
+#' # Should return:
+#' #      Sample size per group
+#' # [1,]                   325
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export  
+size.test.cor2 <- function(alpha, pow, cor1, cor2, s) {
+ za <- qnorm(1 - alpha/2)
+ zb <- qnorm(pow)
+ zr1 <- log((1 + cor1)/(1 - cor1))/2
+ zr2 <- log((1 + cor2)/(1 - cor2))/2
+ es <- zr1 - zr2
+ n <- ceiling(2*(za + zb)^2/es^2 + s + 3)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size per group"
+ return(out)
+}
+
+
 #  size.test.lc.ancova ==========================================================
 #' Sample size for a mean linear contrast test in an ANCOVA 
 #'
@@ -1463,47 +1508,6 @@ size.test.lc.ancova <- function(alpha, pow, evar, es, s, d, v) {
 }
 
 
-# ============================= Miscellaneous =================================
-#  slope.contrast =============================================================
-#' Contrast coefficients for the slope of a quantitative factor
-#'
-#'
-#' @description
-#' Computes the contrast coefficients to estimate the slope of a line in a
-#' single factor design with a quantitative factor.
-#'
-#'
-#' @param   x      vector of numeric factor levels
-#'
-#'
-#' @return 
-#' Returns the vector of contrast coefficients
-#'
-#'
-#' @examples
-#' x <- c(25, 50, 75, 100)
-#' slope.contrast(x)
-#'
-#' # Should return:
-#' #      Coefficient
-#' # [1,]      -0.012
-#' # [2,]      -0.004
-#' # [3,]       0.004
-#' # [4,]       0.012
-#'  
-#' 
-#' @export
-slope.contrast <- function(x) {
- a <- length(x)
- m <- matrix(1, a, 1)*mean(x)
- ss <- sum((x - m)^2)
- coef <- (x - m)/ss
- out <- matrix(coef, nrow = a, ncol = 1)
- colnames(out) = "Coefficient"
- return(out)
-}
-
-
 #  ======================= Power for Planned Sample Size ======================
 #  power.cor1 =================================================================
 #' Approximates the power of a correlation test for a planned sample size
@@ -1544,6 +1548,93 @@ power.cor1 <- function(alpha, n, cor, h, s) {
  pow <- pnorm(z)
  out <- matrix(pow, nrow = 1, ncol = 1)
  colnames(out) <- "Power"
+ return(out)
+}
+
+
+#  power.cor2 =================================================================
+#' Approximates the power of a test for equal correlations in a 2-group design
+#' for planned sample sizes
+#'
+#'
+#' @description
+#' Computes the approximate power of a test for equal population Pearson or
+#' partial correlations in a 2-group design for planned sample sizes. Set
+#' s = 0 for a Pearson correlation. 
+#'
+#'
+#' @param  alpha  alpha level for hypothesis test 
+#' @param  n1     planned sample size for group 1
+#' @param  n2     planned sample size for group 2
+#' @param  cor1   planning value of correlation for group 1 
+#' @param  cor2   planning value of correlation for group 1 
+#' @param  s      number of control variables
+#'
+#'
+#' @return
+#' Returns the approximate power of the test
+#'
+#'
+#' @examples
+#' power.cor2(.05, 200, 200, .4, .2, 0)
+#'
+#' # Should return:
+#' #          Power
+#' # [1,] 0.5919517
+#'
+#'
+#' @importFrom stats qnorm
+#' @importFrom stats pnorm
+#' @export
+power.cor2 <- function(alpha, n1, n2, cor1, cor2, s) {
+ za <- qnorm(1 - alpha/2)
+ f1 = log((1 + cor1)/(1 - cor1))/2
+ f2 = log((1 + cor2)/(1 - cor2))/2
+ z <- abs(f1 - f2)/sqrt(1/(n1 - 3 - s) + 1/(n2 - 3 - s)) - za
+ pow <- pnorm(z)
+ out <- matrix(pow, nrow = 1, ncol = 1)
+ colnames(out) <- "Power"
+ return(out)
+}
+
+
+# ============================= Miscellaneous =================================
+#  slope.contrast =============================================================
+#' Contrast coefficients for the slope of a quantitative factor
+#'
+#'
+#' @description
+#' Computes the contrast coefficients to estimate the slope of a line in a
+#' single factor design with a quantitative factor.
+#'
+#'
+#' @param   x      vector of numeric factor levels
+#'
+#'
+#' @return 
+#' Returns the vector of contrast coefficients
+#'
+#'
+#' @examples
+#' x <- c(25, 50, 75, 100)
+#' slope.contrast(x)
+#'
+#' # Should return:
+#' #      Coefficient
+#' # [1,]      -0.012
+#' # [2,]      -0.004
+#' # [3,]       0.004
+#' # [4,]       0.012
+#'  
+#' 
+#' @export
+slope.contrast <- function(x) {
+ a <- length(x)
+ m <- matrix(1, a, 1)*mean(x)
+ ss <- sum((x - m)^2)
+ coef <- (x - m)/ss
+ out <- matrix(coef, nrow = a, ncol = 1)
+ colnames(out) = "Coefficient"
  return(out)
 }
 
