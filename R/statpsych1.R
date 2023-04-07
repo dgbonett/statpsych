@@ -4316,6 +4316,51 @@ ci.var.upper <- function(alpha, var, n) {
 }
 
 
+#  pi.var.upper =============================================================== 
+#' Prediction limit for an estimated variance
+#'
+#'                        
+#' @description
+#' Computes an approximate upper prediction limit for the estimated variance 
+#' in a future study for a planned sample size using a variance estimate from 
+#' a prior study. The upper variance prediction limit is useful as a variance 
+#' planning value for the sample size required to obtain a confidence interval
+#' with desired width. This strategy for specifying a variance planning value
+#' is useful in applications where the population variance in the prior study
+#' is assumed to be similar to the population variance in the planned study. 
+#' This variance planning value can be used to revise the planned sample size
+#' in the future study.
+#'
+#'
+#' @param  alpha  alpha value for upper 1-alpha confidence 
+#' @param  var    estimated variance from prior study
+#' @param  n1     sample size used to estimate variance
+#' @param  n2     planned sample size of future study
+#'
+#'
+#' @return 
+#' Returns an upper prediction estimate (UL) of an estimated variance in a future study
+#'
+#'
+#' @examples
+#' pi.var.upper(.2, 15, 40, 100)
+#'
+#' # Should return:
+#' #           UL
+#' # [1] 18.78522
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export
+pi.var.upper <- function(alpha, var, n1, n2) {
+ z <- qnorm(1 - alpha)
+ ul <- exp(log(var) + z*sqrt(2/(n1 - 1) + 2/(n2 - 1)))
+ out <- matrix(ul, nrow = 1, ncol = 1)
+ colnames(out) <- c("UL")
+ return(out)
+}
+
+
 #  etasqr.adj =================================================================
 #' Bias adjusts an eta-squared estimate
 #'
