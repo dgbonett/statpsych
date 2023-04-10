@@ -1107,6 +1107,58 @@ ci.theil <- function(alpha, y, x) {
 }
 
 
+#  ci.rel2 ================================================================
+#' Confidence interval for a 2-group reliability difference
+#'
+#'
+#' @description 
+#' Computes a 100(1 - alpha)% confidence interval for a difference in 
+#' population reliabilities in a 2-group design. This function can be
+#' used with any type of reliablity coefficient (e.g., Cronbach alpha,
+#' McDonald omega, intraclass reliablities). The function requires 
+#' point estimates and 100(1 - alpha)% confidence intervals for each
+#' reliability as input. 
+#'
+#'  
+#' @param  rel1  estimated eliability for group 1 
+#' @param  ll1   lower limit for group 1 reliability
+#' @param  ul1   upper limit for group 1 reliability
+#' @param  rel2  estimated correlation for group 2
+#' @param  ll2   lower limit for group 2 reliability
+#' @param  ul2   upper limit for group 2 reliability
+#'
+#'
+#' @return 
+#' Returns a 1-row matrix. The columns are:
+#' * Estimate - estimated reliability difference
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
+#' 
+#' 
+#' @references
+#' \insertRef{Bonett2015}{statpsych}
+#'
+#'
+#' @examples
+#' ci.rel2(.4, .35, .47, .2, .1, .32)
+#'
+#' # Should return:
+#' #      Estimate   LL        UL
+#' # [1,]      0.2 0.07 0.3220656
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export 
+ci.rel2 <- function(rel1, ll1, ul1, rel2, ll2, ul2) {
+ diff <- rel1 - rel2
+ ll <- diff - sqrt((rel1 - ll1)^2 + (ul2 - rel2)^2)
+ ul <- diff + sqrt((ul1 - rel1)^2 + (rel2 - ll2)^2)
+ out <- t(c(diff, ll, ul))
+ colnames(out) <- c("Estimate", "LL", "UL")
+ return(out)
+}
+
+
 #  =================== Sample Size for Desire Precision =======================
 #  size.ci.slope ==============================================================
 #' Sample size for a slope confidence interval
