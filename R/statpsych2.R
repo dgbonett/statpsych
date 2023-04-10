@@ -551,6 +551,74 @@ ci.mape <- function(alpha, res, s) {
 }
 
 
+#  ci.mape2  ===================================================================
+#' Confidence interval for a ratio of mean absolute prediction errors in a
+#' 2-group design
+#'
+#'                      
+#' @description
+#' Computes a confidence interval for a ratio of population mean absolute 
+#' prediction errors (MAPEs) from in a general linear model in two independent 
+#' groups. The number of predictor variables can differ across groups and the 
+#' two models can be non-nested. This function requires a vector of estimated 
+#' residuals from each group. This function does not assume zero excess 
+#' kurtosis but does assume symmetry in the population prediction errors.
+#'
+#'  
+#' @param  alpha  alpha level for 1-alpha confidence
+#' @param  res1   vector of residuals from group 1
+#' @param  res2   vector of residuals from group 2
+#' @param  s1	  number of predictor variables used in group 1
+#' @param  s2	  number of predictor variables used in group 2
+#'
+#'
+#' @return 
+#' Returns a 1-row matrix. The columns are:
+#' * MAPE1 - bias adjusted mean absolute prediction error for group 1
+#' * MAPE2 - bias adjusted mean absolute prediction error for group 2
+#' * MAPE1/MAPE2 - ratio of bias adjusted mean absolute prediction errors
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
+#' 
+#' 
+#' @examples
+#' res1 <- c(-2.70, -2.69, -1.32, 1.02, 1.23, -1.46, 2.21, -2.10, 2.56, -3.02
+#'         -1.55, 1.46, 4.02, 2.34)
+#' res2 <- c(-0.71, -0.89, 0.72, -0.35, 0.33 -0.92, 2.37, 0.51, 0.68, -0.85,
+#'         -0.15, 0.77, -1.52, 0.89, -0.29, -0.23, -0.94, 0.93, -0.31 -0.04)
+#' ci.mape2(.05, res1, res2, 1, 1)
+#'
+#' # Should return:
+#' #        MAPE1     MAPE2 MAPE1/MAPE2       LL       UL
+#' # [1,] 2.58087 0.8327273    3.099298 1.917003 5.010761
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @importFrom stats sd
+#' @export
+ci.mape2 <- function(alpha, res1, res2, s1, s2) {
+ z <- qnorm(1 - alpha/2)
+ n1 <- length(res1)
+ df1 <- n1 - s1 - 1
+ c1 <- n1/(n1 - (s1 + 2)/2)
+ mape1 <- mean(abs(res1))
+ kur1 <- (sd(res1)/mape1)^2
+ se1 <- sqrt((kur1 - 1)/df1)
+ n2 <- length(res2)
+ df2 <- n2 - s2 - 1
+ c2 <- n2/(n2 - (s2 + 2)/2)
+ mape2 <- mean(abs(res2))
+ kur2 <- (sd(res2)/mape2)^2
+ se2 <- sqrt((kur2 - 1)/df2)
+ se <- sqrt(se1^2 + se2^2)
+ ll <- exp(log(c1*mape1) - log(c2*mape2) - z*se)
+ ul <- exp(log(c1*mape1) - log(c2*mape2) + z*se)
+ out <- t(c(c1*mape1, c2*mape2,(c1*mape1)/(c2*mape2), ll, ul))
+ colnames(out) <- c("MAPE1", "MAPE2", "MAPE1/MAPE2", "LL", "UL")
+ return(out)
+}
+
+
 #  ci.condslope  ==============================================================
 #' Confidence interval for conditional (simple) slopes in a linear model
 #'
