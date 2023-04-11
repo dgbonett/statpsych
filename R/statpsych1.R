@@ -3373,6 +3373,59 @@ size.ci.cronbach <- function(alpha, rel, r, w) {
 }
 
 
+#  size.ci.etasqr =============================================================
+#' Sample size for an eta-squared confidence interval 
+#'
+#'     
+#' @description
+#' Computes the sample size required to estimate an eta-squared coefficient
+#' in a one-way ANOVA with desired confidence interval precision. Set the 
+#' planning value of eta-squared to 1/3 for a conservatively large sample
+#' size. 
+#'
+#'  
+#' @param  alpha    alpha level for 1-alpha confidence
+#' @param  etasqr   planning value of squared multiple correlation
+#' @param  groups   number of groups
+#' @param  w        desired confidence interval width
+#'
+#' 
+#' @return 
+#' Returns the total sample size requirement
+#' 
+#' 
+#' @examples
+#' size.ci.etasqr(.05, .333, 3, .2)
+#'
+#' # Should return:
+#' #      Total sample size
+#' # [1,]               189
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export                                                                  
+size.ci.etasqr <- function(alpha, etasqr, groups, w) {
+ alpha1 <- alpha/2
+ alpha2 <- 1 - alpha1
+ df1 <- groups - 1
+ z <- qnorm(alpha2)
+ n1 <- 16*etasqr*(1 - etasqr)*(z/w)^2 + groups + 1
+ df2 <- n1 - groups
+ ci <- ci.etasqr(alpha, etasqr, df1, df2)
+ ll <- ci[1,4]                                  
+ ul <- ci[1,5]                                  
+ n2 <- ceiling(n1*((ul - ll)/w)^2)
+ df2 <- n2 - groups
+ ci <- ci.etasqr(alpha, etasqr, df1, df2)
+ ll <- ci[1,4]                                  
+ ul <- ci[1,5]
+ n <- ceiling(n2*((ul - ll)/w)^2)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Total sample size"
+ return(out)
+}
+
+
 #  size.ci.second =============================================================
 #' Sample size for a second-stage confidence interval
 #'
