@@ -1107,6 +1107,71 @@ ci.theil <- function(alpha, y, x) {
 }
 
 
+#  ci.cronbach2 ===============================================================
+#' Confidence interval for a difference in Cronbach reliabilities in a 2-group 
+#' design
+#'
+#'
+#' @description
+#' Computes a confidence interval for a difference in population Cronbach 
+#' reliability coefficicents in a 2-group design. The number of measurements
+#' (e.g., items or raters) used in each group need not be equal.
+#'
+#'  
+#' @param  alpha    alpha level for 1-alpha confidence
+#' @param  rel1     estimated Cronbach reliablity for group 1
+#' @param  rel2     estimated Cronbach reliablity for group 2
+#' @param  n1       sample size for group 1
+#' @param  n2       sample size for group 2
+#' @param  r1       number of measurements used in group 1
+#' @param  r1       number of measurements used in group 1
+#'
+#' 
+#' @return 
+#' Returns a 1-row matrix. The columns are:
+#' * Estimate - estimated reliability difference
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
+#' 
+#' 
+#' @references
+#' \insertRef{Bonett2015}{statpsych}
+#'
+#'
+#' @examples
+#' ci.cronbach2(.05, .88, .76, 200, 250, 8, 8)
+#'
+#' # Should return:
+#' #      Estimate         LL       UL
+#' # [1,]     0.12 0.06973411 0.173236
+#'  
+#' 
+#' @importFrom stats qf
+#' @export
+ci.cronbach2 <- function(alpha, rel1, rel2, n1, n2, r1, r2) {
+ df11 <- n1 - 1
+ df21 <- n1*(r1 - 1)
+ f11 <- qf(1 - alpha/2, df11, df21)
+ f21 <- qf(1 - alpha/2, df21, df11)
+ f01 <- 1/(1 - rel1)
+ LL1 <- 1 - f11/f01
+ UL1 <- 1 - 1/(f01*f21)
+ df12 <- n2 - 1
+ df22 <- n2*(r2 - 1)
+ f12 <- qf(1 - alpha/2, df12, df22)
+ f22 <- qf(1 - alpha/2, df22, df12)
+ f02 <- 1/(1 - rel2)
+ LL2 <- 1 - f12/f02
+ UL2 <- 1 - 1/(f02*f22)
+ d <- rel1 - rel2
+ ll <- d - sqrt((rel1 - LL1)^2 + (UL2 - rel2)^2)
+ ul <- d + sqrt((UL1 - rel1)^2 + (rel2 - LL2)^2)
+ out <- t(c(d, ll, ul))
+ colnames(out) <- c("Estimate", "LL", "UL")
+ return(out)
+}
+
+
 #  ci.rel2 ================================================================
 #' Confidence interval for a 2-group reliability difference
 #'
@@ -1120,10 +1185,10 @@ ci.theil <- function(alpha, y, x) {
 #' reliability as input. 
 #'
 #'  
-#' @param  rel1  estimated eliability for group 1 
+#' @param  rel1  estimated reliability for group 1 
 #' @param  ll1   lower limit for group 1 reliability
 #' @param  ul1   upper limit for group 1 reliability
-#' @param  rel2  estimated correlation for group 2
+#' @param  rel2  estimated reliability for group 2
 #' @param  ll2   lower limit for group 2 reliability
 #' @param  ul2   upper limit for group 2 reliability
 #'
