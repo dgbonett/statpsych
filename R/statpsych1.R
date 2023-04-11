@@ -4006,6 +4006,49 @@ size.test.cronbach <- function(alpha, pow, rel, r, h) {
  return(out)
 }
 
+# ======================= Power for PLanned Sample Size =======================
+#  power.mean1 ================================================================
+#' Approximates the power of a one-sample t-test for a planned sample size
+#'
+#'
+#' @description
+#' Computes the approximate power of a one-sample t-test for a planned sample
+#' size. For a conservatively low power approximation, set the variance 
+#' planning value to the largest value within its plausible range, and set the 
+#' effect size to a minimally interesting value.
+#'
+#'
+#' @param  alpha  alpha level for hypothesis test 
+#' @param  n      planned sample size
+#' @param  var    planning value of response variable variance 
+#' @param  es     planning value of mean minus hypothesized value
+#'
+#'
+#' @return
+#' Returns the approximate power of the test
+#'
+#'
+#' @examples
+#' power.mean1(.05, 15, 80.5, 7)
+#'
+#' # Should return:
+#' #          Power
+#' # [1,] 0.8021661
+#'
+#'
+#' @importFrom stats qt
+#' @importFrom stats pt
+#' @export
+power.mean1 <- function(alpha, n, var, es) { 
+ df <- n - 1
+ t <- qt(1 - alpha/2, df)
+ z <- abs(es)/sqrt(var/n)
+ pow <- 1 - pt(t, df, z)
+ out <- matrix(pow, nrow = 1, ncol = 1)
+ colnames(out) <- "Power"
+ return(out)
+}
+
 
 # ============================== Miscellaneous ===============================
 #  pi.score1 ================================================================= 
