@@ -1121,10 +1121,10 @@ ci.theil <- function(alpha, y, x) {
 #' @param  alpha    alpha level for 1-alpha confidence
 #' @param  rel1     estimated Cronbach reliablity for group 1
 #' @param  rel2     estimated Cronbach reliablity for group 2
+#' @param  r1       number of measurements used in group 1
+#' @param  r1       number of measurements used in group 2
 #' @param  n1       sample size for group 1
 #' @param  n2       sample size for group 2
-#' @param  r1       number of measurements used in group 1
-#' @param  r1       number of measurements used in group 1
 #'
 #' 
 #' @return 
@@ -1139,7 +1139,7 @@ ci.theil <- function(alpha, y, x) {
 #'
 #'
 #' @examples
-#' ci.cronbach2(.05, .88, .76, 200, 250, 8, 8)
+#' ci.cronbach2(.05, .88, .76, 8, 8, 200, 250)
 #'
 #' # Should return:
 #' #      Estimate         LL       UL
@@ -1148,7 +1148,7 @@ ci.theil <- function(alpha, y, x) {
 #' 
 #' @importFrom stats qf
 #' @export
-ci.cronbach2 <- function(alpha, rel1, rel2, n1, n2, r1, r2) {
+ci.cronbach2 <- function(alpha, rel1, rel2, r1, r2, n1, n2) {
  df11 <- n1 - 1
  df21 <- n1*(r1 - 1)
  f11 <- qf(1 - alpha/2, df11, df21)
