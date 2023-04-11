@@ -4059,7 +4059,7 @@ size.test.cronbach <- function(alpha, pow, rel, r, h) {
  return(out)
 }
 
-# ======================= Power for PLanned Sample Size =======================
+# ======================= Power for Planned Sample Size =======================
 #  power.mean1 ================================================================
 #' Approximates the power of a one-sample t-test for a planned sample size
 #'
