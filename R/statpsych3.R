@@ -87,7 +87,7 @@ ci.prop1 <- function(alpha, f, n) {
 #'
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Estimate - adjusted difference of proportions
+#' * Estimate - adjusted estimate of proportion difference
 #' * SE - adjusted standard error
 #' * LL - lower limit of the adjusted Wald confidence interval
 #' * UL - upper limit of the adjusted Wald confidence interval
