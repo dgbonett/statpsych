@@ -4150,6 +4150,60 @@ power.mean2 <- function(alpha, n1, n2, var1, var2, es) {
 }
 
 
+#  power.lc.mean.bs ===========================================================
+#' Approximates the power of a test for a linear contrast of means for planned 
+#' sample sizes in a between-subjects design
+#'
+#'
+#' @description
+#' Computes the approximate power of a test for a linear contrast of population
+#' mean for planned sample sizes in a between-subject design. The groups can be
+#' the factor levels of a single factor design or the combinations of factors 
+#' in a factorial design. For a conservatively low power approximation, set the
+#' variance planning values to the largest values within their plausible ranges,
+#' and set the effect size to a minimally interesting value. The within-group 
+#' variances can be unequal across groups and a Satterthwaite degree of freedom 
+#' adjustment is used to improve the accuracy of the power approximation.
+#'
+#'
+#' @param  alpha  alpha level for hypothesis test 
+#' @param  n      vector of planned sample sizes
+#' @param  var    vector of within-group variance planning values
+#' @param  es     planning value of linear contrast of means
+#' @param  v      vector of contrast coefficients
+#'
+#'
+#' @return
+#' Returns the approximate power of the test
+#'
+#'
+#' @examples
+#' n <- c(20, 20, 20, 20)
+#' var <- c(70, 70, 80, 80)
+#' v <- c(.5, .5, -.5, -.5)
+#' power.lc.mean.bs(.05, n, var, 5, v)
+#'
+#' # Should return:
+#' #          Power
+#' # [1,] 0.7221139
+#'
+#'
+#' @importFrom stats qt
+#' @importFrom stats pt
+#' @export
+power.lc.mean.bs <- function(alpha, n, var, es, v) {
+ S <- diag(var)%*%(solve(diag(n)))
+ se <- sqrt(t(v)%*%S%*%v)
+ df <- (se^4)/sum(((v^4)*(var^2)/(n^2*(n - 1))))
+ t <- qt(1 - alpha/2, df)
+ z <- abs(es)/se
+ pow <- 1 - pt(t, df, z)
+ out <- matrix(pow, nrow = 1, ncol = 1)
+ colnames(out) <- "Power"
+ return(out)
+}
+
+
 #  power.mean.ps ==============================================================
 #' Approximates the power of a paired-samples t-test for a planned sample size
 #'
