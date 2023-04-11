@@ -1498,6 +1498,59 @@ size.ci.indirect <- function(alpha, cor1, cor2, w) {
 }
 
 
+#  size.ci.cronbach2 =======================================================
+#' Sample size for a 2-group Cronbach reliability difference confidence
+#' interval
+#'
+#'
+#' Computes the sample size required to estimate a difference in population
+#' Cronbach reliability coefficients with desired precision in a 2-group
+#' design. 
+#'
+#'
+#' @param  alpha  alpha level for hypothesis test 
+#' @param  rel1   group 1 reliability planning value
+#' @param  rel2   group 2 reliability planning value
+#' @param  r      number of measurements (items, raters)
+#' @param  w      desired confidence interval width
+#'
+#'
+#' @return 
+#' Returns the required sample size per group
+#'
+#'
+#' @references
+#' \insertRef{Bonett2015}{statpsych}
+#'
+#'
+#' @examples
+#' size.ci.cronbach2(.05, .85, .70, 8, .15)
+#'
+#' # Should return:
+#' #      Sample size per group
+#' # [1,]                   180
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export
+size.ci.cronbach2 <- function(alpha, rel1, rel2, r, w) {
+ z <- qnorm(1 - alpha/2)
+ n0 <- ceiling((8*r/(r - 1))*((1 - rel1)^2 + (1 - rel2)^2)*(z/w)^2 + 2)
+ b <- log(n0/(n0 - 1))
+ LL1 <- 1 - exp(log(1 - rel1) - b + z*sqrt(2*r/((r - 1)*(n0 - 2))))
+ UL1 <- 1 - exp(log(1 - rel1) - b - z*sqrt(2*r/((r - 1)*(n0 - 2))))
+ LL2 <- 1 - exp(log(1 - rel2) - b + z*sqrt(2*r/((r - 1)*(n0 - 2))))
+ UL2 <- 1 - exp(log(1 - rel2) - b - z*sqrt(2*r/((r - 1)*(n0 - 2))))
+ ll <- rel1 - rel2 - sqrt((rel1 - LL1)^2 + (UL2 - rel2)^2)
+ ul <- rel1 - rel2 + sqrt((UL1 - rel1)^2 + (rel2 - LL2)^2)
+ w0 <- ul - ll
+ n <- ceiling((n0 - 2)*(w0/w)^2 + 2)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size per group"
+ return(out)
+}
+
+
 # ======================= Sample Size for Desired Power =======================
 #  size.test.slope ============================================================
 #' Sample size for a test of a slope
@@ -1727,6 +1780,52 @@ size.test.lc.ancova <- function(alpha, pow, evar, es, s, d, v) {
  zb <- qnorm(pow)
  k <- length(v)
  n <- ceiling((evar*(1 + d^2/4)*t(v)%*%v)*(za + zb)^2/es^2 + s + za^2/k)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size per group"
+ return(out)
+}
+
+
+#  size.test.cronbach2 ========================================================
+#' Sample size to test equality of Cronbach reliability coefficients in a 
+#' 2-group design
+#'
+#'
+#' @description
+#' Computes the sample size required to test a difference in population
+#' Cronbach reliability coefficients with desired power in a 2-group design. 
+#'
+#'
+#' @param  alpha  alpha level for hypothesis test 
+#' @param  pow    desired power
+#' @param  rel1   group 1 reliability planning value
+#' @param  rel2   group 2 reliability planning value
+#' @param  r      number of measurements (items, raters)
+#'
+#'
+#' @return 
+#' Returns the required sample size per group
+#'
+#'
+#' @references
+#' \insertRef{Bonett2015}{statpsych}
+#'
+#'
+#' @examples
+#' size.test.cronbach2(.05, .80, .85, .70, 8)
+#'
+#' # Should return:
+#' #      Sample size per group
+#' # [1,]                    77
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export
+size.test.cronbach2 <- function(alpha, pow, rel1, rel2, r) {
+ za <- qnorm(1 - alpha/2)
+ zb <- qnorm(pow)
+ e <- (1 - rel1)/(1 - rel2)
+ n <- ceiling((4*r/(r - 1))*(za + zb)^2/log(e)^2 + 2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size per group"
  return(out)
