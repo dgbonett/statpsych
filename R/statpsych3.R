@@ -818,14 +818,19 @@ ci.oddsratio <- function(alpha, f00, f01, f10, f11) {
 
 
 #  ci.yule ==================================================================== 
-#' Confidence interval for Yule's Q
+#' Confidence intervals for generalized Yule coefficients
 #'
-#'
+#'                            
 #' @description
-#' Computes a confidence interval for Yule's Q measure of association using a
-#' transformation of a confidence interval for an odds ratio with .5 added to
+#' Computes confidence intervals for four generalized Yule measures of 
+#' association (Yule Q, Yule Y, Digby H, and Bonett-Price Y*) using a 
+#' transformation of a confidence interval for an odds ratio with .5 added to 
 #' each cell frequency. This function requires the frequency counts from a 
-#' 2 x 2 contingency table for two dichotomous variables.
+#' 2 x 2 contingency table for two dichotomous variables. Digby H is sometimes
+#' used as a crude approximation to the tetrachoric correlation. Yule Y is 
+#' equal to the phi coefficient only when all marginal frequencies are equal.
+#' Bonett-Price Y* is a better approximation to the phi coeffiient when the
+#; marginal frequencies are not equal.
 #'
 #'
 #' @param   alpha  alpha level for 1-alpha confidence
@@ -835,40 +840,71 @@ ci.oddsratio <- function(alpha, f00, f01, f10, f11) {
 #' @param   f11    number of participants with y = 1 and x = 1
 #'
 #'
+#' @references
+#' \insertRef{Bonett2007}{statpsych}                   
+#'
+#'
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Estimate - estimate of Yule's Q
+#' * Estimate - estimate of generalized Yule coefficient
 #' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #'
-#'
+#'                                                       
 #' @examples
 #' ci.yule(.05, 229, 28, 96, 24)
 #'
 #' # Should return:
-#' #      Estimate        SE         LL       UL
-#' # [1,] 0.343067 0.1328038 0.06247099 0.573402
+#' #      Estimate         SE         LL        UL
+#' # Q:  0.3430670 0.13280379 0.06247099 0.5734020
+#' # Y:  0.1769015 0.07290438 0.03126603 0.3151817
+#' # H:  0.2619244 0.10514465 0.04687994 0.4537659
+#' # Y*: 0.1311480 0.05457236 0.02307188 0.2361941
 #'
 #'
 #' @importFrom stats qnorm
 #' @export
 ci.yule <- function(alpha, f00, f01, f10, f11) {
  z <- qnorm(1 - alpha/2)
+ n <- f00 + f01 + f10 + f11
+ f1 <- f00 + f01
+ f2 <- f10 + f11
+ f3 <- f00 + f10
+ f4 <- f01 + f11
+ min <- min(f1, f2, f3, f4)/n
  or <- (f11 + .5)*(f00 + .5)/((f01 + .5)*(f10 + .5))
  se.lor <- sqrt(1/(f00 + .5) + 1/(f01 + .5) + 1/(f10 + .5) + 1/(f11 + .5))
- LLor <- exp(log(or) - z*se.lor)
- ULor <- exp(log(or) + z*se.lor)
+ ll.or <- exp(log(or) - z*se.lor)
+ ul.or <- exp(log(or) + z*se.lor)
  Q <- (or - 1)/(or + 1)
  se.Q <- .5*(1 - Q^2)*se.lor
- ll <- (LLor - 1)/(LLor + 1)
- ul <- (ULor - 1)/(ULor + 1)
- out <- t(c(Q, se.Q, ll, ul))
+ ll.Q <- (ll.or - 1)/(ll.or + 1)
+ ul.Q <- (ul.or - 1)/(ul.or + 1)
+ Y <- (or^.5 - 1)/(or^.5 + 1)
+ se.Y <- .25*(1 - Y^2)*se.lor
+ ll.Y <- (ll.or^.5 - 1)/(ll.or^.5 + 1)
+ ul.Y <- (ul.or^.5 - 1)/(ul.or^.5 + 1)
+ H <- (or^.75 - 1)/(or^.75 + 1)
+ se.H <- .375*(1 - H^2)*se.lor
+ ll.H <- (ll.or^.75 - 1)/(ll.or^.75 + 1)
+ ul.H <- (ul.or^.75 - 1)/(ul.or^.75 + 1)
+ c <- .5 - (.5 - min)^2
+ Y2 <- (or^c - 1)/(or^c + 1)
+ se.Y2 <- (c/2)*(1 - Y2^2)*se.lor
+ ll.Y2 <- (ll.or^c - 1)/(ll.or^c + 1)
+ ul.Y2 <- (ul.or^c - 1)/(ul.or^c + 1)
+ out1 <- t(c(Q, se.Q, ll.Q, ul.Q))
+ out2 <- t(c(Y, se.Y, ll.Y, ul.Y))
+ out3 <- t(c(H, se.H, ll.H, ul.H))
+ out4 <- t(c(Y2, se.Y2, ll.Y2, ul.Y2))
+ out <- rbind(out1, out2, out3, out4)
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- c("Q:", "Y:", "H:", "Y*:")
  return(out)
 }
-
-
+          
+       
 #  ci.phi ====================================================================
 #' Confidence interval for a phi correlation
 #'
