@@ -4150,6 +4150,53 @@ power.mean2 <- function(alpha, n1, n2, var1, var2, es) {
 }
 
 
+#  power.mean.ps ==============================================================
+#' Approximates the power of a paired-samples t-test for a planned sample size
+#'
+#'
+#' @description
+#' Computes the approximate power of a paired-samples t-test for a planned 
+#' sample size. For a conservatively low power approximation, set the variance 
+#' planning values to the largest values within their plausible ranges, set the
+#' correlation planning value to the smallest value within its plausible range, 
+#' and set the effect size to a minimally interesting value. The variances of
+#' the two measurements can be unequal.
+#'
+#'
+#' @param  alpha  alpha level for hypothesis test 
+#' @param  n      planned sample size 
+#' @param  var1   planning value of measurement 1 variance
+#' @param  var2   planning value of measurement 2 variance
+#' @param  es     planning value of mean difference
+#' @param  cor    planning value of correlation between measurements
+#'
+#'
+#' @return
+#' Returns the approximate power of the test
+#'
+#'
+#' @examples
+#' power.mean.ps(.05, 20, 10.0, 12.0, 2, .7)
+#'
+#' # Should return:
+#' #          Power
+#' # [1,] 0.9074353
+#'
+#'
+#' @importFrom stats qt
+#' @importFrom stats pt
+#' @export
+power.mean.ps <- function(alpha, n, var1, var2, es, cor) {
+ df <- n - 1
+ t <- qt(1 - alpha/2, df)
+ z <- abs(es)/sqrt((var1 + var2 - 2*cor*sqrt(var1*var2))/n)
+ pow <- 1 - pt(t, df, z)
+ out <- matrix(pow, nrow = 1, ncol = 1)
+ colnames(out) <- "Power"
+ return(out)
+}
+
+
 # ============================== Miscellaneous ===============================
 #  pi.score1 ================================================================= 
 #' Prediction interval for one score
