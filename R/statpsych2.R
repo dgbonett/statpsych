@@ -1325,14 +1325,13 @@ size.ci.cor <- function(alpha, cor, s, w) {
 
 #  size.ci.rsqr ==============================================================
 #' Sample size for a squared multiple correlation confidence interval
-#'
+#'                       
 #'
 #' @description
 #' Computes the sample size required to estimate a squared multiple correlation
 #' in a random-x regression model with desired confidence interval precision.
 #' Set the planning value of the squared multiple correlation to 1/3 for a 
-#' conservatively large sample size. This function uses an approximation to
-#' the standard error of the squared multiple correlation.
+#' conservatively large sample size. 
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -1346,18 +1345,26 @@ size.ci.cor <- function(alpha, cor, s, w) {
 #' 
 #' 
 #' @examples
-#' size.ci.rsqr(.05, .333, 2, .2)
+#' 
 #'
 #' # Should return:
 #' #      Sample size
-#' # [1,]         232
+#' # [1,]         226
 #'  
 #' 
 #' @importFrom stats qnorm
 #' @export  
 size.ci.rsqr <- function(alpha, r2, s, w) {
  z <- qnorm(1 - alpha/2)
- n <- ceiling(16*(r2*(1 - r2)^2)*(z/w)^2 + s + 2)
+ n1 <- ceiling(16*(r2*(1 - r2)^2)*(z/w)^2 + s + 2)
+ ci <- ci.rsqr(alpha, r2, s, n1)
+ ll <- ci[1,4]                           
+ ul <- ci[1,5]
+ n2 <- ceiling(n1*((ul - ll)/w)^2)
+ ci <- ci.rsqr(alpha, r2, s, n2)
+ ll <- ci[1,4]                          
+ ul <- ci[1,5]
+ n <- ceiling(n2*((ul - ll)/w)^2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
  return(out)
