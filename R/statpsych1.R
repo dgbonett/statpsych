@@ -4050,6 +4050,53 @@ power.mean1 <- function(alpha, n, var, es) {
 }
 
 
+#  power.mean2 ================================================================
+#' Approximates the power of a two-sample t-test for planned sample sizes
+#'
+#'
+#' @description
+#' Computes the approximate power of a two-sample t-test for planned sample
+#' sizes. For a conservatively low power approximation, set the variance 
+#' planning values to the largest values within their plausible ranges, 
+#' and set the effect size to a minimally interesting value. The within-group 
+#' variances can be unequal across groups and a Satterthwaite degree of freedom 
+#' adjustment is used to improve the accuracy of the power approximation.
+#'
+#'
+#' @param  alpha  alpha level for hypothesis test 
+#' @param  n1     planned sample size for group 1
+#' @param  n2     planned sample size for group 2
+#' @param  var1   planning value of within-group variance for group 1
+#' @param  var2   planning value of within-group variance for group 2
+#' @param  es     planning value of mean difference
+#'
+#'
+#' @return
+#' Returns the approximate power of the test
+#'
+#'
+#' @examples
+#' power.mean2(.05, 25, 25, 5.0, 6.0, 2)
+#'
+#' # Should return:
+#' #          Power
+#' # [1,] 0.8398413
+#'
+#'
+#' @importFrom stats qt
+#' @importFrom stats pt
+#' @export
+power.mean2 <- function(alpha, n1, n2, var1, var2, es) {
+ df <- (var1/n1 + var2/n2)^2/(var1^2/(n1^2*(n1 - 1)) + var2^2/(n2^2*(n2 - 1)))
+ t <- qt(1 - alpha/2, df)
+ z <- abs(es)/sqrt(var1/n1 + var2/n2)
+ pow <- 1 - pt(t, df, z)
+ out <- matrix(pow, nrow = 1, ncol = 1)
+ colnames(out) <- "Power"
+ return(out)
+}
+
+
 # ============================== Miscellaneous ===============================
 #  pi.score1 ================================================================= 
 #' Prediction interval for one score
