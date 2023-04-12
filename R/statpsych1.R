@@ -1163,6 +1163,92 @@ ci.ratio.mad2 <- function(alpha, y1, y2) {
 }
 
 
+#  ci.ratio.sd2 ================================================================
+#' Confidence interval for a 2-group ratio of standard deviations 
+#'
+#'
+#' @description
+#' Computes a robust confidence interval for a ratio of population standard 
+#' deviations in a 2-group design. This function is a modification of the
+#' confidence interval proposed by Bonett (2006). The original Bonett method 
+#' used a pooled kurtosis estimate in the standard error that assumed equal 
+#' variances, which limited the confidence interval's use to tests of equal 
+#' population variances and equivalence tests. This function uses a pooled 
+#' kurtosis estimate that does not assume equal variances and provides a 
+#' useful confidence interval for a ratio of standard deviations under general 
+#' conditions. This function requires of minimum sample size of four per
+#' group but sample sizes of at least 10 per group are recommended.
+#'
+#'
+#' @param  alpha   alpha level for 1-alpha confidence
+#' @param  y1      vector of scores for group 1
+#' @param  y2      vector of scores for group 2
+#'
+#'
+#' @return 
+#' Returns a 1-row matrix. The columns are:
+#' * SD1 - estimated SD from group 1
+#' * SD2 - estimated SD from group 2
+#' * SD1/SD2 - estimate of SD ratio
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
+#' 
+#'
+#' @references
+#' \insertRef{Bonett2006b}{statpsych}                   
+#'
+#'
+#' @examples
+#' y1 <- c(32, 39, 26, 35, 43, 27, 40, 37, 34, 29)
+#' y2 <- c(36, 44, 47, 42, 49, 39, 46, 31, 33, 48)
+#' ci.ratio.sd2(.05, y1, y2)
+#'
+#' # Should return:
+#' #           SD1      SD2    SD1/SD2       LL       UL
+#' # [1,] 5.711587 6.450667  0.8854257 0.486279 1.728396
+#'
+#'
+#' @importFrom stats qnorm
+#' @importFrom stats sd
+#' @export
+ci.ratio.sd2 <- function(alpha, y1, y2) {
+  z <- qnorm(1 - alpha/2)
+  sd1 <- sd(y1)
+  sd2 <- sd(y2)
+  v1 <- sd1^2
+  v2 <- sd2^2
+  n1 <- length(y1)
+  n2 <- length(y2)
+  if (min(n1, n2) < 5) {stop("sample size too small")}
+  n <- n1 + n2 
+  t1 <- 1/(2*sqrt(n1 - 4))
+  t2 <- 1/(2*sqrt(n2 - 4))
+  m1 <- mean(y1, trim = t1)
+  m2 <- mean(y2, trim = t2)
+  c0 <- (n1/(n1 - z))*((n2 - z)/n2)
+  c1 <- (n1 - 3)/n1
+  c2 <- (n2 - 3)/n2
+  a1 <- sum((y1 - m1)^4)
+  a2 <- sum((y2 - m2)^4)
+  rL <- 1
+  rU <- 1
+  for(i in 1:10) {
+    kurL <- n*(a1 + rL^4*a2)/((n1 - 1)*v1 + rL^2*(n2 - 1)*v2)^2
+    kurU <- n*(a1 + rU^4*a2)/((n1 - 1)*v1 + rU^2*(n2 - 1)*v2)^2
+    seL <- sqrt((kurL - c1)/(n1 - 1) + (kurL - c2)/(n2 - 1))
+    seU <- sqrt((kurU - c1)/(n1 - 1) + (kurU - c2)/(n2 - 1))
+    lr <- log(c0*v1/v2)
+    ll <- sqrt(exp(lr - z*seL))
+    ul <- sqrt(exp(lr + z*seU))
+    rL <- ll
+    rU <- ul
+  }
+ out <- t(c(sd1, sd2, sd1/sd2, ll, ul))
+ colnames(out) <- c("SD1", "SD2", "SD1/SD2", "LL", "UL")
+ return(out)
+}
+  
+
 #  ci.ratio.mad.ps ========================================================== 
 #' Confidence interval for a paired-sample MAD ratio 
 #'
@@ -2463,7 +2549,7 @@ ci.2x2.mean.ws <- function(alpha, y11, y12, y21, y22) {
 
 
 # ci.2x2.mean.bs =============================================================
-#' Computes tests and confidence intervals of effects in a 2x2 betwen-subjects 
+#' Computes tests and confidence intervals of effects in a 2x2 between-subjects 
 #' design for means
 #'
 #'
@@ -2604,6 +2690,161 @@ ci.2x2.mean.bs <- function(alpha, y11, y12, y21, y22) {
  out <- rbind(row1, row2, row3, row4, row5, row6, row7)
  rownames(out) <- c("AB:", "A:", "B:", "A at b1:", "A at b2:", "B at a1:", "B at a2:")
  colnames(out) = c("Estimate", "SE", "t", "df", "p", "LL", "UL")
+ return(out)
+}
+
+
+# ci.2x2.stdmean.bs ============================================================
+#' Computes confidence intervals of standardized effects in a 2x2 
+#' between-subjects design for means 
+#'
+#'
+#' @description
+#' Computes confidence intervals for standardized linear constrasts of means
+#' (AB interaction, main effect of A, main efect of B, simple main effects
+#' of A, and simple main effects of B) in a 2x2 between-subjects design with  
+#' a quantitative response variable. Equality of population variances is not 
+#' assumed. An unweigthed variance standardizer is used, which is the 
+#' recommended standarizer when both factors are treatment factors.
+#'
+#'
+#' @param   alpha   alpha level for 1-alpha confidence
+#' @param   y11     vector of scores at level 1 of A and level 1 of B
+#' @param   y12     vector of scores at level 1 of A and level 2 of B
+#' @param   y21     vector of scores at level 2 of A and level 1 of B
+#' @param   y22     vector of scores at level 2 of A and level 2 of B
+#'
+#'
+#' @return
+#' Returns a 7-row matrix (one row per effect). The columns are:
+#' * Estimate - bias adjusted estimate of standardized effect
+#' * SE - standard error 
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
+#'
+#'
+#' @examples
+#' y11 = c(14, 15, 11, 7, 16, 12, 15, 16, 10, 9)
+#' y12 = c(18, 24, 14, 18, 22, 21, 16, 17, 14, 13)
+#' y21 = c(16, 11, 10, 17, 13, 18, 12, 16, 6, 15)
+#' y22 = c(18, 17, 11, 9, 9, 13, 18, 15, 14, 11)
+#' ci.2x2.stdmean.bs(.05, y11, y12, y21, y22)
+#'
+#' # Should return:
+#' #            Estimate        SE         LL         UL
+#' # AB:      -1.4193502 0.6885238 -2.7992468 -0.1002829
+#' # A:        0.4592015 0.3379520 -0.1933321  1.1314153
+#' # B:       -0.7375055 0.3451209 -1.4297338 -0.0768846
+#' # A at b1: -0.2504736 0.4640186 -1.1653006  0.6536189
+#' # A at b2:  1.1688767 0.5001423  0.2136630  2.1741850
+#' # B at a1: -1.4471806 0.4928386 -2.4441376 -0.5122457
+#' # B at a2: -0.0278304 0.4820369 -0.9732017  0.9163482
+#'
+#'
+#' @importFrom stats qnorm
+#' @export
+ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
+ z <- qnorm(1 - alpha/2)
+ n11 <- length(y11)
+ n12 <- length(y12)
+ n21 <- length(y21)
+ n22 <- length(y22)
+ v1 <- c(1, -1, -1, 1)
+ v2 <- c(.5, .5, -.5, -.5)
+ v3 <- c(.5, -.5, .5, -.5)
+ v4 <- c(1, 0, -1, 0)
+ v5 <- c(0, 1, 0, -1)
+ v6 <- c(1, -1, 0, 0)
+ v7 <- c(0, 0, 1, -1)
+ m11 <- mean(y11)
+ m12 <- mean(y12)
+ m21 <- mean(y21)
+ m22 <- mean(y22)
+ sd11 <- sd(y11)
+ sd12 <- sd(y12)
+ sd21 <- sd(y21)
+ sd22 <- sd(y22)
+ s <- sqrt((sd11^2 + sd12^2 + sd21^2 + sd22^2)/4)
+ m <- c(m11, m12, m21, m22)
+ sd <- c(sd11, sd12, sd21, sd22) 
+ n <- c(n11, n12, n21, n22)
+ var <- sd^2
+ a <- 4
+ df <- sum(n) - a
+ adj <- 1 - 3/(4*df - 1)
+ # AB 
+ est1 <- (t(v1)%*%m)/s
+ est1u <- adj*est1
+ a1 <- est1^2/(2*a^2*s^4)
+ a2 <- a1*sum((var^2/(n - 1)))
+ a3 <- sum((v1^2*var/(n - 1)))/s^2
+ se1 <- sqrt(a2 + a3)
+ LL1 <- est1 - z*se1
+ UL1 <- est1 + z*se1
+ row1 <- c(est1u, se1, LL1, UL1)
+# A 
+ est2 <- (t(v2)%*%m)/s
+ est2u <- adj*est2
+ a1 <- est2^2/(2*a^2*s^4)
+ a2 <- a1*sum((var^2/(n - 1)))
+ a3 <- sum((v2^2*var/(n - 1)))/s^2
+ se2 <- sqrt(a2 + a3)
+ LL2 <- est2 - z*se2
+ UL2 <- est2 + z*se2
+ row2 <- c(est2u, se2, LL2, UL2)
+# B 
+ est3 <- (t(v3)%*%m)/s
+ est3u <- adj*est3
+ a1 <- est3^2/(2*a^2*s^4)
+ a2 <- a1*sum((var^2/(n - 1)))
+ a3 <- sum((v3^2*var/(n - 1)))/s^2
+ se3 <- sqrt(a2 + a3)
+ LL3 <- est3 - z*se3
+ UL3 <- est3 + z*se3
+ row3 <- c(est3u, se3, LL3, UL3)
+# A at b1 
+ est4 <- (t(v4)%*%m)/s
+ est4u <- adj*est4
+ a1 <- est4^2/(2*a^2*s^4)
+ a2 <- a1*sum((var^2/(n - 1)))
+ a3 <- sum((v4^2*var/(n - 1)))/s^2
+ se4 <- sqrt(a2 + a3)
+ LL4 <- est4 - z*se4
+ UL4 <- est4 + z*se4
+ row4 <- c(est4u, se4, LL4, UL4)
+# A at b2 
+ est5 <- (t(v5)%*%m)/s
+ est5u <- adj*est5
+ a1 <- est5^2/(2*a^2*s^4)
+ a2 <- a1*sum((var^2/(n - 1)))
+ a3 <- sum((v5^2*var/(n - 1)))/s^2
+ se5 <- sqrt(a2 + a3)
+ LL5 <- est5 - z*se5
+ UL5 <- est5 + z*se5
+ row5 <- c(est5u, se5, LL5, UL5)
+# B at a1 
+ est6 <- (t(v6)%*%m)/s
+ est6u <- adj*est6
+ a1 <- est6^2/(2*a^2*s^4)
+ a2 <- a1*sum((var^2/(n - 1)))
+ a3 <- sum((v6^2*var/(n - 1)))/s^2
+ se6 <- sqrt(a2 + a3)
+ LL6 <- est6 - z*se6
+ UL6 <- est6 + z*se6
+ row6 <- c(est6u, se6, LL6, UL6)
+# B at a2 
+ est7 <- (t(v7)%*%m)/s
+ est7u <- adj*est7
+ a1 <- est7^2/(2*a^2*s^4)
+ a2 <- a1*sum((var^2/(n - 1)))
+ a3 <- sum((v7^2*var/(n - 1)))/s^2
+ se7 <- sqrt(a2 + a3)
+ LL7 <- est7 - z*se7
+ UL7 <- est7 + z*se7
+ row7 <- c(est7u, se7, LL7, UL7)
+ out <- rbind(row1, row2, row3, row4, row5, row6, row7)
+ rownames(out) <- c("AB:", "A:", "B:", "A at b1:", "A at b2:", "B at a1:", "B at a2:")
+ colnames(out) = c("Estimate", "SE", "LL", "UL")
  return(out)
 }
 
