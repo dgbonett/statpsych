@@ -2849,6 +2849,156 @@ ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
 }
 
 
+# ci.2x2.median.bs =============================================================
+#' Computes tests and confidence intervals of effects in a 2x2 betwen-subjects 
+#' design for medians
+#'
+#'
+#' @description
+#' Computes confidence intervals for the AB interaction effect, main effect of
+#' A, main efect of B, simple main effects of A, and simple main effects of B 
+#' in a 2x2 between-subjects design with a quantitative response variable. The
+#' effects are defined in terms of medians rather than means.
+#'
+#'
+#' @param   alpha   alpha level for 1-alpha confidence
+#' @param   y11     vector of scores at level 1 of A and level 1 of B
+#' @param   y12     vector of scores at level 1 of A and level 2 of B
+#' @param   y21     vector of scores at level 2 of A and level 1 of B
+#' @param   y22     vector of scores at level 2 of A and level 2 of B
+#'
+#'
+#' @return
+#' Returns a 7-row matrix (one row per effect). The columns are:
+#' * Estimate - estimate of effect
+#' * SE - standard error 
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
+#'
+#'
+#' @examples
+#' y11 = c(14, 15, 11, 7, 16, 12, 15, 16, 10, 9)
+#' y12 = c(18, 24, 14, 18, 22, 21, 16, 17, 14, 13)
+#' y21 = c(16, 11, 10, 17, 13, 18, 12, 16, 6, 15)
+#' y22 = c(18, 17, 11, 9, 9, 13, 18, 15, 14, 11)
+#' ci.2x2.median.bs(.05, y11, y12, y21, y22)
+#'
+#' # Should return:
+#' #          Estimate       SE         LL         UL
+#' # AB:          -5.0 3.389735 -11.643758 1.64375833
+#' # A:            1.5 1.694867  -1.821879 4.82187916
+#' # B:           -2.0 1.694867  -5.321879 1.32187916
+#' # A at b1:     -1.0 2.152661  -5.219138 3.21913797
+#' # A at b2:      4.0 2.618464  -1.132095 9.13209504
+#' # B at a1:     -4.5 2.311542  -9.030539 0.03053939
+#' # B at a2:      0.5 2.479330  -4.359397 5.35939682
+#'
+#'
+#' @importFrom stats qnorm
+#' @importFrom stats pbinom
+#' @importFrom stats median
+#' @export
+ci.2x2.median.bs <- function(alpha, y11, y12, y21, y22) {
+ zcrit <- qnorm(1 - alpha/2)
+ n11 <- length(y11)
+ n12 <- length(y12)
+ n21 <- length(y21)
+ n22 <- length(y22)
+ v1 <- c(1, -1, -1, 1)
+ v2 <- c(.5, .5, -.5, -.5)
+ v3 <- c(.5, -.5, .5, -.5)
+ v4 <- c(1, 0, -1, 0)
+ v5 <- c(0, 1, 0, -1)
+ v6 <- c(1, -1, 0, 0)
+ v7 <- c(0, 0, 1, -1)
+ m11 <- median(y11)
+ m12 <- median(y12)
+ m21 <- median(y21)
+ m22 <- median(y22)
+ m <- c(m11, m12, m21, m22)
+ n <- c(n11, n12, n21, n22)
+ y11 <- sort(y11)
+ y12 <- sort(y12)
+ y21 <- sort(y21)
+ y22 <- sort(y22)
+ a <- round(n11/2 - sqrt(n11))
+ if (a < 1) {a = 1}
+ ll <- y11[a]
+ ul <- y11[n11 - a + 1]
+ p <- pbinom(a - 1, size = n11, prob = .5)
+ z0 <- qnorm(1 - p)
+ se11 <- (ul - ll)/(2*z0)
+ a <- round(n12/2 - sqrt(n12))
+ if (a < 1) {a = 1}
+ ll <- y12[a]
+ ul <- y12[n12 - a + 1]
+ p <- pbinom(a - 1, size = n12, prob = .5)
+ z0 <- qnorm(1 - p)
+ se12 <- (ul - ll)/(2*z0)
+ a <- round(n21/2 - sqrt(n21))
+ if (a < 1) {a = 1}
+ ll <- y21[a]
+ ul <- y21[n21 - a + 1]
+ p <- pbinom(a - 1, size = n21, prob = .5)
+ z0 <- qnorm(1 - p)
+ se21 <- (ul - ll)/(2*z0)
+ a <- round(n22/2 - sqrt(n22))
+ if (a < 1) {a = 1}
+ ll <- y22[a]
+ ul <- y22[n22 - a + 1]
+ p <- pbinom(a - 1, size = n22, prob = .5)
+ z0 <- qnorm(1 - p)
+ se22 <- (ul - ll)/(2*z0)
+ se <- c(se11, se12, se21, se22)
+ # AB
+ est1 <- t(v1)%*%m
+ se1 <- sqrt(t(v1)%*%diag(se^2)%*%v1)
+ LL1 <- est1 - zcrit*se1
+ UL1 <- est1 + zcrit*se1
+ row1 <- c(est1, se1, LL1, UL1)
+ # A
+ est2 <- t(v2)%*%m
+ se2 <- sqrt(t(v2)%*%diag(se^2)%*%v2)
+ LL2 <- est2 - zcrit*se2
+ UL2 <- est2 + zcrit*se2
+ row2 <- c(est2, se2, LL2, UL2)
+ # B
+ est3 <- t(v3)%*%m
+ se3 <- sqrt(t(v3)%*%diag(se^2)%*%v3)
+ LL3 <- est3 - zcrit*se3
+ UL3 <- est3 + zcrit*se3
+ row3 <- c(est3, se3, LL3, UL3)
+ # A at b1
+ est4 <- t(v4)%*%m
+ se4 <- sqrt(t(v4)%*%diag(se^2)%*%v4)
+ LL4 <- est4 - zcrit*se4
+ UL4 <- est4 + zcrit*se4
+ row4 <- c(est4, se4, LL4, UL4)
+ # A at b2
+ est5 <- t(v5)%*%m
+ se5 <- sqrt(t(v5)%*%diag(se^2)%*%v5)
+ LL5 <- est5 - zcrit*se5
+ UL5 <- est5 + zcrit*se5
+ row5 <- c(est5, se5, LL5, UL5)
+ # B at a1
+ est6 <- t(v6)%*%m
+ se6 <- sqrt(t(v6)%*%diag(se^2)%*%v6)
+ LL6 <- est6 - zcrit*se6
+ UL6 <- est6 + zcrit*se6
+ row6 <- c(est6, se6, LL6, UL6)
+ # B at a2
+ est7 <- t(v7)%*%m
+ se7 <- sqrt(t(v7)%*%diag(se^2)%*%v7)
+ LL7 <- est7 - zcrit*se7
+ UL7 <- est7 + zcrit*se7
+ row7 <- c(est7, se7, LL7, UL7)
+ out <- rbind(row1, row2, row3, row4, row5, row6, row7)
+ rownames(out) <- c("AB:", "A:", "B:", "A at b1:", "A at b2:", "B at a1:", "B at a2:")
+ colnames(out) = c("Estimate", "SE", "LL", "UL")
+ return(out)
+}
+
+
 #  =========================== Hypothesis tests ==============================
 #  test.skew =================================================================
 #' Computes p-value for test of skewness
