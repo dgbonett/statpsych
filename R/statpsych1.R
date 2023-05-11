@@ -1427,6 +1427,8 @@ ci.cod1 <-function(alpha, y) {
 #'
 #'
 #' @importFrom stats qnorm
+#' @importFrom stats var
+#' @importFrom stats median
 #' @export
 ci.cod2 <-function(alpha, y1, y2) {
  z <- qnorm(1 - alpha/2)
