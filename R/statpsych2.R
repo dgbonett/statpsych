@@ -1685,6 +1685,7 @@ size.test.cor <- function(alpha, pow, cor, s, h) {
 #' @importFrom stats qnorm
 #' @export  
 size.interval.cor <- function(alpha, pow, cor, s, h) {
+ if (h <= abs(cor)) {stop("cor must be between -h and h")}
  za <- qnorm(1 - alpha)
  zb <- qnorm(1 - (1 - pow)/2)
  zr <- log((1 + cor)/(1 - cor))/2
