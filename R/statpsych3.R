@@ -2520,6 +2520,7 @@ size.test.lc.prop.bs <- function(alpha, pow, p, es, v) {
 #' @importFrom stats qnorm
 #' @export
 size.equiv.prop2 <- function(alpha, pow, p1, p2, h) {
+ if (h <= abs(p1 - p2)) {stop("|p1 - p2| must be less than h")}
  za <- qnorm(1 - alpha)
  zb <- qnorm(1 - (1 - pow)/2)
  es <- p1 - p2
@@ -2667,6 +2668,7 @@ size.test.prop.ps <- function(alpha, pow, p1, p2, phi, es) {
 #' @importFrom stats qnorm
 #' @export
 size.equiv.prop.ps <- function(alpha, pow, p1, p2, phi, h) {
+ if (h <= abs(p1 - p2)) {stop("|p1 - p2| must be less than h")}
  za <- qnorm(1 - alpha)
  zb <- qnorm(1 - (1 - pow)/2)
  cov <- phi*sqrt(p1*p2*(1 - p1)*(1 - p2))
