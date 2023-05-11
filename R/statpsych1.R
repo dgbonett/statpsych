@@ -4030,7 +4030,8 @@ size.test.lc.mean.bs <- function(alpha, pow, var, es, v) {
 #' 
 #' @importFrom stats qnorm
 #' @export
- size.equiv.mean2 <- function(alpha, pow, var, es, h) {
+size.equiv.mean2 <- function(alpha, pow, var, es, h) {
+ if (h <= abs(es)) {stop("|es| must be less than h")}
  za <- qnorm(1 - alpha)
  zb <- qnorm(1 - (1 - pow)/2)
  n <- ceiling(var*2*(za + zb)^2/(abs(h) - abs(es))^2 + za^2/4)
@@ -4216,6 +4217,7 @@ size.test.lc.mean.ws <- function(alpha, pow, var, es, cor, q) {
 #' @importFrom stats qnorm
 #' @export
 size.equiv.mean.ps <- function(alpha, pow, var, es, cor, h) {
+ if (h <= abs(es)) {stop("|es| must be less than h")}
  za <- qnorm(1 - alpha)
  zb <- qnorm(1 - (1 - pow)/2)
  n <- ceiling(2*var*(1 - cor)*(za + zb)^2/(h - abs(es))^2 + za^2/2)
