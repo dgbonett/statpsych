@@ -3001,6 +3001,60 @@ ci.2x2.median.bs <- function(alpha, y11, y12, y21, y22) {
 }
 
 
+# ci.mean1.bayes ==============================================================
+#' Bayesian credible interval for a single mean
+#'
+#'
+#' @description
+#' Computes a Bayesian credible interval for a single mean using the mean and
+#' standard deviation of a prior Normal distribution along with sample
+#' information. The mean and standard deviation of the posterior Normal 
+#' distribution are also reported. 
+#'
+#'
+#' @param   alpha        alpha level for 1-alpha credibility interval
+#' @param   prior.mean   mean of prior Normal distribution    
+#' @param   prior.sd     standard deviation of prior Normal distribution 
+#' @param   m            sample mean
+#' @param   sd           sample standard deviation
+#' @param   n            sample size
+#'
+#'
+#' @return
+#' Returns a 1-row matrix. The columns are:
+#' * Posterior mean - posterior mean of Normal distributoin 
+#' * Posterior SD - posterior standard deviation of Normal distributoin 
+#' * LL - lower limit of the credible interval
+#' * UL - upper limit of the credible interval
+#'
+#'
+#' @references
+#' \insertRef{Gelman2004}{statpsych}                            
+#'
+#'
+#' @examples
+#' ci.mean1.bayes(.05, 30, 2, 24.5, 3.65, 40)
+#'
+#' # Should return:
+#' #      Posterior mean Posterior SD       LL       UL
+#' # [1,]       24.92276    0.5544921 23.83597 26.00954
+#'
+#'
+#' @importFrom stats qnorm
+#' @export
+ci.mean1.bayes <- function(alpha, prior.mean, prior.sd, m, sd, n) {
+ zcrit <- qnorm(1 - alpha/2)
+ se <- sd/sqrt(n)
+ post.sd <- sqrt(1/(1/prior.sd^2 + 1/se^2))
+ post.mean <- ((prior.mean/prior.sd^2) + m/se^2)/(1/prior.sd^2 + 1/se^2)
+ ll <- post.mean - zcrit*post.sd
+ ul <- post.mean + zcrit*post.sd
+ out <- t(c(post.mean, post.sd, ll, ul))
+ colnames(out) <- c("Posterior mean", "Posterior SD", "LL", "UL")
+ return(out)
+}
+
+
 #  =========================== Hypothesis tests ==============================
 #  test.skew =================================================================
 #' Computes p-value for test of skewness
