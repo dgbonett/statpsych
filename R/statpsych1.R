@@ -1515,7 +1515,7 @@ ci.cod2 <-function(alpha, y1, y2) {
 #'
 #'
 #' @references
-#' \insertRef{Bonett2005}{statpsych}                    # add reference
+#' \insertRef{Bonett2006}{statpsych}                    
 #'
 #'
 #' @examples
