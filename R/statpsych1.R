@@ -1492,6 +1492,87 @@ ci.cod2 <-function(alpha, y1, y2) {
 }
 
 
+#  ci.cqv1 =====================================================================
+#' Confidence interval for a single coefficient of quartile variation 
+#'
+#'
+#' @description
+#' Computes a distribution-free confidence interval for a population coefficient 
+#' of quartile variation which is defined as (Q3 - Q1)/(Q3 + Q1) where Q1 is the 
+#' 25th percentile and Q3 is the 75th percentile. The coefficient of quartile
+#' variation is a robust alternative to the coefficient of variation. 
+#'
+#' @param  alpha   alpha level for 1-alpha confidence
+#' @param  y       vector of scores
+#'
+#'
+#' @return 
+#' Returns a 1-row matrix. The columns are:
+#' * Estimate - estimated coefficient of quartile variation 
+#' * SE - standard error
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
+#'
+#'
+#' @references
+#' \insertRef{Bonett2005}{statpsych}                    # add reference
+#'
+#'
+#' @examples
+#' y <- c(30, 20, 15, 10, 10, 60, 20, 25, 20, 30, 10, 5, 50, 40,
+#'        20, 10, 0, 20, 50)
+#' ci.cqv1(.05, y)
+#'
+#' # Should return:
+#' #        Estimate        SE        LL       UL
+#' # [1,]        0.5 0.1552485 0.2617885 0.8841821
+#'
+#'
+#' @importFrom stats qnorm
+#' @importFrom stats quantile
+#' @importFrom stats pbinom
+#' @export
+ci.cqv1 <- function(alpha, y) {
+ n <- length(y)
+ c <- n/(n - 1)
+ y <- sort(y)
+ z <- qnorm(1 - alpha/2)
+ result <- quantile(y, .25, T, type = 2)
+ Q1 = result[[1]]
+ result <- quantile(y, .75, T, type = 2)
+ Q3 = result[[1]]
+ est <- (Q3 - Q1)/(Q3 + Q1)
+ c1 <- ceiling(n/4 - 1.96*sqrt(3*n/16))
+ if (c1 < 1) {c1 = 1}
+ c2 <- ceiling(n/4 + 1.96*sqrt(3*n/16))
+ if (c2 > n) {c2 = n}
+ LL1 <- y[c1]
+ UL1 <- y[c2]
+ c3 <- n + 1 - c2                                     
+ c4 <- n + 1 - c1                                     
+ LL2 <- y[c3]
+ UL2 <- y[c4]
+ p1 <- pbinom(c2 - 1, size = n, prob = .25)
+ p2 <- pbinom(c1, size = n, prob = .25)
+ p <- (1 - (p1 - p2))/2
+ z0 <- qnorm(1 - p/2)
+ f1 <- sqrt(3*z0^2/(4*n*(UL1 - LL1)^2))
+ f3 <- sqrt(3*z0^2/(4*n*(UL2 - LL2)^2))
+ D <- Q3 - Q1
+ S <- Q3 + Q1
+ v1 <- 1/(16*n)
+ v2 <- (3/f1^2 + 3/f3^2 - 2/(f1*f3))/D^2
+ v3 <- (3/f1^2 + 3/f3^2 + 2/(f1*f3))/S^2
+ v4 <- (3/f3^2 - 3/f1^2)/(D*S)
+ se <- sqrt(v1*(v2 + v3 - 2*v4))
+ ll <- exp(c*log(est) - z*se)
+ ul <- exp(c*log(est) + z*se)
+ out <- t(c(est, est*se, ll, ul))
+ colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ return(out)
+}
+
+
 #  ci.median1 =================================================================
 #' Confidence interval for a single median 
 #'
