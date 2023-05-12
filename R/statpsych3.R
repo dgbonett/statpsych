@@ -1797,6 +1797,67 @@ ci.2x2.prop.mixed <- function(alpha, group1, group2) {
 }
 
 
+# ci.prop1.bayes ==============================================================
+#' Bayesian credible interval for a single proportion
+#'
+#'
+#' @description
+#' Computes a Bayesian credible interval for a single proportion using the 
+#' mean and standard deviation of a prior Beta distribution along with sample
+#' information. The mean and standard deviation of the posterior Beta 
+#' distribution are also reported. For a noninformative prior, set the prior 
+#' mean to .5 and the prior standard deviation to .289 (which corresponds 
+#' approximately to a Beta(1,1) distribution). The prior standard deviation 
+#' must be less than the prior mean.
+#'
+#'
+#' @param   alpha        alpha level for 1-alpha credibility interval
+#' @param   prior.mean   mean of prior Beta distribution    
+#' @param   prior.sd     standard deviation of prior Beta distribution 
+#' @param   f            number of participants who have the attribute
+#' @param   n            sample size
+#'
+#'
+#' @return
+#' Returns a 1-row matrix. The columns are:
+#' * Posterior mean - posterior mean of Beta distributoin 
+#' * Posterior SD - posterior standard deviation of Beta distributoin 
+#' * LL - lower limit of the credible interval
+#' * UL - upper limit of the credible interval
+#'
+#'
+#' @references
+#' \insertRef{Gelman2004}{statpsych}                            
+#'
+#'
+#' @examples
+#' ci.prop1.bayes(.05, .4, .1, 12, 100)
+#'
+#' # Should return:
+#' #      Posterior mean Posterior SD       LL        UL
+#' # [1,]           0.15   0.03273268  0.09218 0.2188484
+#'
+#'
+#' @importFrom stats qnorm
+#' @importFrom stats qbeta
+#' @export
+ci.prop1.bayes <- function(alpha, prior.mean, prior.sd, f, n) {
+ if (prior.sd >= prior.mean) {stop("prior SD must be less than prior mean")}
+ zcrit <- qnorm(1 - alpha/2)
+ a <- ((1 - prior.mean)/prior.sd^2 - 1/prior.mean)*prior.mean^2
+ b <- a*(1/prior.mean - 1)
+ post.mean <- (f + a)/(n + a + b)
+ post.sd <- sqrt((f + a)*(n - f + b)/((n + a + b)^2*(a + b + n - 1)))
+ post.a <- a + f
+ post.b <- b + n - f
+ ll <- qbeta(alpha/2, post.a, post.b)
+ ul <- qbeta(1 - alpha/2, post.a, post.b)
+ out <- t(c(post.mean, post.sd, ll, ul))
+ colnames(out) <- c("Posterior mean", "Posterior SD", "LL", "UL")
+ return(out)
+}
+
+
 # ======================== Hypothesis Tests ==================================
 # test.prop1 =================================================================
 #' Hypothesis test for a single proportion 
