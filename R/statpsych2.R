@@ -1224,6 +1224,60 @@ ci.rel2 <- function(rel1, ll1, ul1, rel2, ll2, ul2) {
 }
 
 
+# ci.slope1.bayes ==============================================================
+#' Bayesian credible interval for a single slope
+#'
+#'
+#' @description
+#' Computes a Bayesian credible interval for a single slope coefficient using 
+#' the mean and standard deviation of a prior Normal distribution along with 
+#' sample information. The mean and standard deviation of the posterior Normal 
+#' distribution are also reported. The slope coefficient can be for a simple
+#' linear regresion model or for a particular predictor variable in a general 
+#' linear model.
+#'
+#'
+#' @param   alpha        alpha level for 1-alpha credibility interval
+#' @param   prior.mean   mean of prior Normal distribution    
+#' @param   prior.sd     standard deviation of prior Normal distribution 
+#' @param   b            sample slope coefficient
+#' @param   se           standard error of sample slope coefficient
+#'
+#'
+#' @return
+#' Returns a 1-row matrix. The columns are:
+#' * Posterior mean - posterior mean of Normal distributoin 
+#' * Posterior SD - posterior standard deviation of Normal distributoin 
+#' * LL - lower limit of the credible interval
+#' * UL - upper limit of the credible interval
+#'
+#'
+#' @references
+#' \insertRef{Gelman2004}{statpsych}                            
+#'
+#'
+#' @examples
+#' ci.slope1.bayes(.05, .5, .25, .348, .152)
+#'
+#' # Should return:
+#' #      Posterior mean Posterior SD        LL        UL
+#' # [1,]      0.3890239    0.1298783 0.1344671 0.6435807
+#'
+#'
+#' @importFrom stats qnorm
+#' @export
+ci.slope1.bayes <- function(alpha, prior.mean, prior.sd, b, se) {
+ zcrit <- qnorm(1 - alpha/2)
+ post.sd <- sqrt(1/(1/prior.sd^2 + 1/se^2))
+ post.mean <- ((prior.mean/prior.sd^2) + b/se^2)/(1/prior.sd^2 + 1/se^2)
+ ll <- post.mean - zcrit*post.sd
+ ul <- post.mean + zcrit*post.sd
+ out <- t(c(post.mean, post.sd, ll, ul))
+ colnames(out) <- c("Posterior mean", "Posterior SD", "LL", "UL")
+ return(out)
+}
+
+
 #  =================== Sample Size for Desire Precision =======================
 #  size.ci.slope ==============================================================
 #' Sample size for a slope confidence interval
