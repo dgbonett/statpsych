@@ -1500,7 +1500,9 @@ ci.cod2 <-function(alpha, y1, y2) {
 #' Computes a distribution-free confidence interval for a population coefficient 
 #' of quartile variation which is defined as (Q3 - Q1)/(Q3 + Q1) where Q1 is the 
 #' 25th percentile and Q3 is the 75th percentile. The coefficient of quartile
-#' variation is a robust alternative to the coefficient of variation. 
+#' variation assumes ratio-scale scores and is a robust alternative to the 
+#' coefficient of variation. The 25th and 75th percentiles are computed using 
+#' the type = 2 method (SAS default).
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
 #' @param  y       vector of scores
