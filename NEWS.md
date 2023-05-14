@@ -46,6 +46,7 @@ Changes:
         * ci.mean1.bayes -- Computes Bayesian credible interval for single mean
         * ci.prop1.bayes -- Computes Bayesian credible interval for single proportion
         * ci.slope1.bayes -- Computes Bayesian credible interval for single slope
+        
 * Modifications:
          * Corrected the Example output in ci.reliability
          * SE added to output in:  ci.cronbach, ci.oddsratio, ci.yule, ci.etasqr, ci.rsqr, ci.spear2, 
