@@ -48,6 +48,7 @@ Changes:
         * ci.slope1.bayes -- Computes Bayesian credible interval for single slope
         
 * Modifications:
+
          * Corrected the Example output in ci.reliability
          * SE added to output in:  ci.cronbach, ci.oddsratio, ci.yule, ci.etasqr, ci.rsqr, ci.spear2, 
            ci.cor2, ci.cor.dep, ci.cod1, ci.mad1, ci.mape, ci.agree2, ci.pbcor, and ci.tetra
