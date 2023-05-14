@@ -1,3 +1,58 @@
+statpsych version 1.4.0 (Release date: 2023/xx/05)
+===========
+
+Changes:
+    * New functions:
+        * power.prop1 -- Computes power for 1-sample test of proportion for a planned sample size
+        * power.prop2 -- Computes power for 2-sample test of proportion for planned sample sizes
+        * power.prop.ps -- Computes power for paired-samples test of proportion for a planned 
+          sample size
+        * power.mean1 -- Computes power for 1-sample t-test for a planned sample size
+        * power.mean2 -- Computes power for 2-sample t-test for planned sample sizes
+        * power.mean.ps -- Computes power for paired-samples t-test for a planned sample size
+        * power.lc.mean.bs -- Computes power of a test for a linear contrast of means for planned 
+          sample sizes in a between-subjects design
+        * power.cor1 -- Computes power for 1-sample test of correlation for a planned sample size
+        * power.cor2 -- Computes power for 2-sample test of correlations for planned sample sizes
+        * ci.cqv1 -- Computes confidence interval for a population coefficient of qualitative 
+          variation 
+        * ci.prop1.inv -- Computes confidence interval for a population proportion using inverse  
+          sampling
+        * ci.prop2.inv -- Computes confidence interval for a difference in population proportions 
+          using inverse sampling
+        * ci.agree.3rater -- Computes confidence intervals for a 3-rater design with dichotomous
+          ratings
+        * ci.ratio.sd2 -- Computes robust confidence interval for ratio of standard deviations in a 
+          2-group design
+        * size.test.cor2 -- Computes sample size for a test of equal Pearson or partial correlation in a 
+          2-group design
+        * size.test.cronbach2 -- Computes sample size to test equality of Cronbach reliability    
+          coefficients in a 2-group design
+        * size.ci.cronbach2 -- Computes sample size for a 2-group Cronbach reliability difference 
+          confidence interval
+        * size.ci.etasqr -- Computes sample size for an eta-squared confidence interval
+        * size.ci.indirect -- Computes sample size for an indirect effect confidence interval
+        * ci.mape2 -- Computes confidence interval for a ratio of mean absolute prediction errors in
+          a 2-group design
+        * ci.rel2 -- Computes confidence interval for a 2-group reliability difference
+        * ci.cronbach2 -- Computes confidence interval for a difference in Cronbach reliabilities in  
+          a 2-group design
+        * ci.2x2.stdmean.bs -- Computes confidence intervals of standardized effects in a 2x2 
+          between-subjects design for means
+        * ci.2x2.median.bs -- Computes confidence intervals of effects in a 2x2 between-subjects 
+          design for medians
+        * pi.var.upper -- Computes upper prediction limit for an estimated variance
+        * ci.mean1.bayes -- Computes Bayesian credible interval for single mean
+        * ci.prop1.bayes -- Computes Bayesian credible interval for single proportion
+        * ci.slope1.bayes -- Computes Bayesian credible interval for single slope
+* Modifications:
+         * Corrected the Example output in ci.reliability
+         * SE added to output in:  ci.cronbach, ci.oddsratio, ci.yule, ci.etasqr, ci.rsqr, ci.spear2, 
+           ci.cor2, ci.cor.dep, ci.cod1, ci.mad1, ci.mape, ci.agree2, ci.pbcor, and ci.tetra
+         * Improved accuracy in size.ci.rsqr
+         * Three generalized Yule coefficients added to ci.yule
+
+
 statpsych v1.3.0 (Release date: 2023/01/06)
 ==============
 
