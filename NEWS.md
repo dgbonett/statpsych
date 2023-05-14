@@ -2,6 +2,7 @@ statpsych version 1.4.0 (Release date: 2023/xx/05)
 ===========
 
 Changes:
+
     * New functions:
         * power.prop1 -- Computes power for 1-sample test of proportion for a planned sample size
         * power.prop2 -- Computes power for 2-sample test of proportion for planned sample sizes
