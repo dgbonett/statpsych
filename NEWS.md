@@ -15,7 +15,7 @@ Changes:
        sample sizes in a between-subjects design
      * power.cor1 -- Computes power for 1-sample test of correlation for a planned sample size
      * power.cor2 -- Computes power for 2-sample test of correlations for planned sample sizes
-     * ci.cqv1 -- Computes confidence interval for a population coefficient of qualitative 
+     * ci.cqv1 -- Computes confidence interval for a population coefficient of quartile 
        variation 
      * ci.prop1.inv -- Computes confidence interval for a population proportion using inverse  
        sampling
