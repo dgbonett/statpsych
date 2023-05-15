@@ -43,10 +43,9 @@ Changes:
     * ci.2x2.median.bs -- Computes confidence intervals of effects in a 2x2 between-subjects 
       design for medians
     * pi.var.upper -- Computes upper prediction limit for an estimated variance
-    * ci.mean1.bayes -- Computes Bayesian credible interval for single mean
-    * ci.prop1.bayes -- Computes Bayesian credible interval for single proportion
-    * ci.slope1.bayes -- Computes Bayesian credible interval for single slope
-* Modifications:
+    * ci.bayes.normal -- Computes Bayesian credible interval for single mean
+    * ci.bayes.prop1 -- Computes Bayesian credible interval for single proportion
+*  Modifications:
     * Corrected Example output in ci.reliability
     * SE added to output in:  ci.cronbach, ci.oddsratio, ci.yule, ci.etasqr, ci.rsqr, ci.spear2, 
       ci.cor2, ci.cor.dep, ci.cod1, ci.mad1, ci.mape, ci.agree2, ci.pbcor, and ci.tetra
