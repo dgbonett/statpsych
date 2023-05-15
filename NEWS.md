@@ -43,7 +43,7 @@ Changes:
     * ci.2x2.median.bs -- Computes confidence intervals of effects in a 2x2 between-subjects 
       design for medians
     * pi.var.upper -- Computes upper prediction limit for an estimated variance
-    * ci.bayes.normal -- Computes Bayesian credible interval for single mean
+    * ci.bayes.normal -- Computes Bayesian credible interval for a normal prior distribution
     * ci.bayes.prop1 -- Computes Bayesian credible interval for single proportion
 *  Modifications:
     * Corrected Example output in ci.reliability
