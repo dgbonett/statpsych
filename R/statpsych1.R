@@ -3084,23 +3084,23 @@ ci.2x2.median.bs <- function(alpha, y11, y12, y21, y22) {
 }
 
 
-# ci.mean1.bayes ==============================================================
-#' Bayesian credible interval for a single mean
+# ci.bayes.normal ============================================================
+#' Bayesian credible interval for a normal prior distribution
 #'
 #'
 #' @description
-#' Computes a Bayesian credible interval for a single mean using the mean and
-#' standard deviation of a prior Normal distribution along with sample
-#' information. The mean and standard deviation of the posterior Normal 
-#' distribution are also reported. 
+#' Computes a Bayesian credible interval for a normal prior distribution. This
+#' function can be used with any parameter estimate (e.g., mean, mean 
+#' difference, standardized mean difference, linear contrast of means, slope 
+#' coefficient) that has a normal sampling distribution. The mean and standard
+#' deviation of the posterior normal distribution are also reported. 
 #'
 #'
 #' @param   alpha        alpha level for 1-alpha credibility interval
 #' @param   prior.mean   mean of prior Normal distribution    
 #' @param   prior.sd     standard deviation of prior Normal distribution 
-#' @param   m            sample mean
-#' @param   sd           sample standard deviation
-#' @param   n            sample size
+#' @param   est          sample estimate
+#' @param   se           standard error of sample estimate
 #'
 #'
 #' @return
@@ -3116,20 +3116,19 @@ ci.2x2.median.bs <- function(alpha, y11, y12, y21, y22) {
 #'
 #'
 #' @examples
-#' ci.mean1.bayes(.05, 30, 2, 24.5, 3.65, 40)
+#' ci.bayes.normal(.05, 30, 2, 24.5, 0.577)
 #'
 #' # Should return:
 #' #      Posterior mean Posterior SD       LL       UL
-#' # [1,]       24.92276    0.5544921 23.83597 26.00954
+#' # [1,]        24.9226    0.5543895 23.83602 26.00919
 #'
 #'
 #' @importFrom stats qnorm
 #' @export
-ci.mean1.bayes <- function(alpha, prior.mean, prior.sd, m, sd, n) {
+ci.bayes.normal <- function(alpha, prior.mean, prior.sd, est, se) {
  zcrit <- qnorm(1 - alpha/2)
- se <- sd/sqrt(n)
  post.sd <- sqrt(1/(1/prior.sd^2 + 1/se^2))
- post.mean <- ((prior.mean/prior.sd^2) + m/se^2)/(1/prior.sd^2 + 1/se^2)
+ post.mean <- ((prior.mean/prior.sd^2) + est/se^2)/(1/prior.sd^2 + 1/se^2)
  ll <- post.mean - zcrit*post.sd
  ul <- post.mean + zcrit*post.sd
  out <- t(c(post.mean, post.sd, ll, ul))
