@@ -1797,7 +1797,7 @@ ci.2x2.prop.mixed <- function(alpha, group1, group2) {
 }
 
 
-# ci.prop1.bayes ==============================================================
+# ci.bayes.prop1 ==============================================================
 #' Bayesian credible interval for a single proportion
 #'
 #'
@@ -1831,7 +1831,7 @@ ci.2x2.prop.mixed <- function(alpha, group1, group2) {
 #'
 #'
 #' @examples
-#' ci.prop1.bayes(.05, .4, .1, 12, 100)
+#' ci.bayes.prop1(.05, .4, .1, 12, 100)
 #'
 #' # Should return:
 #' #      Posterior mean Posterior SD       LL        UL
@@ -1841,7 +1841,7 @@ ci.2x2.prop.mixed <- function(alpha, group1, group2) {
 #' @importFrom stats qnorm
 #' @importFrom stats qbeta
 #' @export
-ci.prop1.bayes <- function(alpha, prior.mean, prior.sd, f, n) {
+ci.bayes.prop1 <- function(alpha, prior.mean, prior.sd, f, n) {
  if (prior.sd >= prior.mean) {stop("prior SD must be less than prior mean")}
  zcrit <- qnorm(1 - alpha/2)
  a <- ((1 - prior.mean)/prior.sd^2 - 1/prior.mean)*prior.mean^2
