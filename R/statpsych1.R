@@ -3089,11 +3089,11 @@ ci.2x2.median.bs <- function(alpha, y11, y12, y21, y22) {
 #'
 #'
 #' @description
-#' Computes a Bayesian credible interval for a normal prior distribution. This
-#' function can be used with any parameter estimate (e.g., mean, mean 
-#' difference, linear contrast of means, slope coefficient) that has a normal
-#' sampling distribution. The mean and standard deviation of the posterior 
-#' normal distribution are also reported. 
+#' Computes an approximate Bayesian credible interval for a normal prior 
+#' distribution. This function can be used with any parameter estimator 
+#' (e.g., mean, mean difference, linear contrast of means, slope coefficient) 
+#' that has a normal sampling distribution. The mean and standard deviation 
+#' of the posterior normal distribution are also reported. 
 #'
 #'
 #' @param   alpha        alpha level for 1-alpha credibility interval
