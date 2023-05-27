@@ -1807,8 +1807,8 @@ ci.2x2.prop.mixed <- function(alpha, group1, group2) {
 #' information. The mean and standard deviation of the posterior Beta 
 #' distribution are also reported. For a noninformative prior, set the prior 
 #' mean to .5 and the prior standard deviation to .289 (which corresponds 
-#' approximately to a Beta(1,1) distribution). The prior standard deviation 
-#' must be less than the prior mean.
+#' approximately to a Beta(1,1) distribution). The prior variance must be 
+#' less than x91 - x) where x is the prior mean.
 #'
 #'
 #' @param   alpha        alpha level for 1-alpha credibility interval
@@ -1842,7 +1842,7 @@ ci.2x2.prop.mixed <- function(alpha, group1, group2) {
 #' @importFrom stats qbeta
 #' @export
 ci.bayes.prop1 <- function(alpha, prior.mean, prior.sd, f, n) {
- if (prior.sd >= prior.mean) {stop("prior SD must be less than prior mean")}
+ if (prior.sd^2 >= prior.mean*(1 - prior.mean)) {stop("prior SD is too large")}
  zcrit <- qnorm(1 - alpha/2)
  a <- ((1 - prior.mean)/prior.sd^2 - 1/prior.mean)*prior.mean^2
  b <- a*(1/prior.mean - 1)
