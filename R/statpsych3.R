@@ -1806,9 +1806,9 @@ ci.2x2.prop.mixed <- function(alpha, group1, group2) {
 #' mean and standard deviation of a prior Beta distribution along with sample
 #' information. The mean and standard deviation of the posterior Beta 
 #' distribution are also reported. For a noninformative prior, set the prior 
-#' mean to .5 and the prior standard deviation to .289 (which corresponds 
-#' approximately to a Beta(1,1) distribution). The prior variance must be 
-#' less than x91 - x) where x is the prior mean.
+#' mean to .5 and the prior standard deviation to 1/sqrt(12) (which 
+#' corresponds to a Beta(1,1) distribution). The prior variance must be 
+#' less than m(1 - m) where m is the prior mean.
 #'
 #'
 #' @param   alpha        alpha level for 1-alpha credibility interval
