@@ -52,6 +52,7 @@ Changes:
       ci.cor2, ci.cor.dep, ci.cod1, ci.mad1, ci.mape, ci.agree2, ci.pbcor, and ci.tetra
     * Improved accuracy in size.ci.rsqr
     * Three generalized Yule coefficients added to ci.yule
+    * Corrected the standard errors for AB and A effects in ci.2x2.prop.mixed
 
 
 statpsych v1.3.0 (Release date: 2023/01/06)
