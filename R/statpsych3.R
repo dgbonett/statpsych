@@ -45,6 +45,7 @@
 #' @importFrom stats qnorm
 #' @export
 ci.prop1 <- function(alpha, f, n) {
+ if (f > n) {stop("f cannot be greater than n")}
  z <- qnorm(1 - alpha/2)
  p.mle <- f/n
  se.mle <- sqrt(p.mle*(1 - p.mle)/n)
@@ -176,24 +177,25 @@ ci.pairs.prop1 <-function(alpha, f) {
 #' @importFrom stats qf
 #' @export
 ci.prop1.inv <- function(alpha, f, n) {
-  z <- qnorm(1 - alpha/2)
-  y <- n - f
-  est <- f/n
-  df1 <- 2*(y + 1)
-  df2 <- 2*f
-  df3 <- 2*y
-  fcritL <- qf(1 - alpha/2, df1, df2)
-  ll <- 1/(1 + fcritL*(y + 1)/f)
-  if (y == 0) {
-    ul <- 1
-  } else {
-    fcritU <- qf(alpha/2, df3, df2)
-    ul <- 1/(1 + fcritU*(y/f))
-  }
-  se <- (ul - ll)/(2*z)
-  out <- t(c(est, se, ll, ul))
-  colnames(out) <- c("Estimate", "SE", "LL", "UL")
-  return(out)
+ if (f > n) {stop("f cannot be greater than n")}
+ z <- qnorm(1 - alpha/2)
+ y <- n - f
+ est <- f/n
+ df1 <- 2*(y + 1)
+ df2 <- 2*f
+ df3 <- 2*y
+ fcritL <- qf(1 - alpha/2, df1, df2)
+ ll <- 1/(1 + fcritL*(y + 1)/f)
+ if (y == 0) {
+   ul <- 1
+ } else {
+   fcritU <- qf(alpha/2, df3, df2)
+   ul <- 1/(1 + fcritU*(y/f))
+ }
+ se <- (ul - ll)/(2*z)
+ out <- t(c(est, se, ll, ul))
+ colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ return(out)
 }
 
 
@@ -235,6 +237,8 @@ ci.prop1.inv <- function(alpha, f, n) {
 #' @importFrom stats qnorm
 #' @export
 ci.prop2 <- function(alpha, f1, f2, n1, n2) {
+ if (f1 > n1) {stop("f cannot be greater than n")}
+ if (f2 > n2) {stop("f cannot be greater than n")}
  z <- qnorm(1 - alpha/2)
  p1 <- (f1 + 1)/(n1 + 2)
  p2 <- (f2 + 1)/(n2 + 2)
@@ -293,40 +297,42 @@ ci.prop2 <- function(alpha, f1, f2, n1, n2) {
 #' @importFrom stats qf
 #' @export
 ci.prop2.inv <- function(alpha, f1, f2, n1, n2) {
-  z <- qnorm(1 - alpha/2)
-  y1 <- n1 - f1
-  est1 <- f1/n1
-  df1 <- 2*(y1 + 1)
-  df2 <- 2*f1
-  df3 <- 2*y1
-  fcritL <- qf(1 - alpha/2, df1, df2)
-  ll1 <- 1/(1 + fcritL*(y1 + 1)/f1)
-  if (y1 == 0) {
-    ul1 <- 1
-  } else {
-    fcritU <- qf(alpha/2, df3, df2)
-    ul1 <- 1/(1 + fcritU*(y1/f1))
-  }
-  y2 <- n2 - f2
-  est2 <- f2/n2
-  df1 <- 2*(y2 + 1)
-  df2 <- 2*f2
-  df3 <- 2*y2
-  fcritL <- qf(1 - alpha/2, df1, df2)
-  ll2 <- 1/(1 + fcritL*(y2 + 1)/f2)
-  if (y2 == 0) {
-    ul2 <- 1
-  } else {
-    fcritU <- qf(alpha/2, df3, df2)
-    ul2 <- 1/(1 + fcritU*(y2/f2))
-  }
-  diff <- est1 - est2
-  ll <- diff - sqrt((est1 - ll1)^2 + (ul2 - est2)^2)
-  ul <- diff + sqrt((ul1 - est1)^2 + (est2 - ll2)^2)
-  se <- (ul - ll)/(2*z)
-  out <- t(c(diff, se, ll, ul))
-  colnames(out) <- c("Estimate", "SE", "LL", "UL")
-  return(out)
+ if (f1 > n1) {stop("f cannot be greater than n")}
+ if (f2 > n2) {stop("f cannot be greater than n")}
+ z <- qnorm(1 - alpha/2)
+ y1 <- n1 - f1
+ est1 <- f1/n1
+ df1 <- 2*(y1 + 1)
+ df2 <- 2*f1
+ df3 <- 2*y1
+ fcritL <- qf(1 - alpha/2, df1, df2)
+ ll1 <- 1/(1 + fcritL*(y1 + 1)/f1)
+ if (y1 == 0) {
+   ul1 <- 1
+ } else {
+   fcritU <- qf(alpha/2, df3, df2)
+   ul1 <- 1/(1 + fcritU*(y1/f1))
+ }
+ y2 <- n2 - f2
+ est2 <- f2/n2
+ df1 <- 2*(y2 + 1)
+ df2 <- 2*f2
+ df3 <- 2*y2
+ fcritL <- qf(1 - alpha/2, df1, df2)
+ ll2 <- 1/(1 + fcritL*(y2 + 1)/f2)
+ if (y2 == 0) {
+   ul2 <- 1
+ } else {
+   fcritU <- qf(alpha/2, df3, df2)
+   ul2 <- 1/(1 + fcritU*(y2/f2))
+ }
+ diff <- est1 - est2
+ ll <- diff - sqrt((est1 - ll1)^2 + (ul2 - est2)^2)
+ ul <- diff + sqrt((ul1 - est1)^2 + (est2 - ll2)^2)
+ se <- (ul - ll)/(2*z)
+ out <- t(c(diff, se, ll, ul))
+ colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ return(out)
 }
 
 
@@ -368,6 +374,8 @@ ci.prop2.inv <- function(alpha, f1, f2, n1, n2) {
 #' @importFrom stats qnorm
 #' @export
 ci.ratio.prop2 <- function(alpha, f1, f2, n1, n2) {
+ if (f1 > n1) {stop("f cannot be greater than n")}
+ if (f2 > n2) {stop("f cannot be greater than n")}
  z <- qnorm(1 - alpha/2)
  p1 <- (f1 + 1/4)/(n1 + 7/4)
  p2 <- (f2 + 1/4)/(n2 + 7/4)
@@ -1007,6 +1015,8 @@ ci.phi <- function(alpha, f00, f01, f10, f11) {
 #' @importFrom stats qnorm
 #' @export
 ci.biphi <- function(alpha, f1, f2, n1, n2) {
+ if (f1 > n1) {stop("f cannot be greater than n")}
+ if (f2 > n2) {stop("f cannot be greater than n")}
  z <- qnorm(1 - alpha/2)
  f00 <- f1
  f10 <- n1 - f1
@@ -1204,6 +1214,7 @@ ci.kappa <- function(alpha, f00, f01, f10, f11) {
 #' @importFrom stats qnorm
 #' @export
 ci.agree <- function(alpha, n, f, k) {
+ if (f > n) {stop("f cannot be greater than n")}
  z <- qnorm(1 - alpha/2)
  a <- k/(k - 1)
  g.mle <- a*f/n - 1/(k - 1)
@@ -1266,6 +1277,8 @@ ci.agree <- function(alpha, n, f, k) {
 #' @importFrom stats qnorm
 #' @export
 ci.agree2 <- function(alpha, n1, f1, n2, f2, r) {
+ if (f1 > n1) {stop("f cannot be greater than n")}
+ if (f2 > n2) {stop("f cannot be greater than n")}
  z <- qnorm(1 - alpha/2)
  a <- r/(r - 1)
  p1.ml <- f1/n1
@@ -1706,14 +1719,14 @@ ci.2x2.prop.bs <- function(alpha, f, n) {
 #' ci.2x2.prop.mixed (.05, group1, group2)
 #'
 #' # Should return:
-#' #            Estimate         SE         z           p           LL        UL
-#' # AB:      0.03960396 0.09991818 0.3963639 0.691836584 -0.156232072 0.2354400
-#' # A:       0.15841584 0.04995909 3.1709113 0.001519615  0.060497825 0.2563339
-#' # B:       0.09803922 0.04926649 1.9899778 0.046593381  0.001478675 0.1945998
-#' # A at b1: 0.17647059 0.07893437 2.2356621 0.025373912  0.021762060 0.3311791
-#' # A at b2: 0.13725490 0.06206620 2.2114274 0.027006257  0.015607377 0.2589024
-#' # B at a1: 0.11764706 0.06842118 1.7194539 0.085531754 -0.016455982 0.2517501
-#' # B at a2: 0.07843137 0.06913363 1.1344894 0.256589309 -0.057068054 0.2139308
+#' #            Estimate         SE         z          p           LL        UL
+#' # AB:      0.03960396 0.10041161 0.3944162 0.69327381 -0.157199169 0.2364071
+#' # A:       0.15841584 0.05020580 3.1553293 0.00160317  0.060014277 0.2568174
+#' # B:       0.09803922 0.04926649 1.9899778 0.04659338  0.001478675 0.1945998
+#' # A at b1: 0.17647059 0.07893437 2.2356621 0.02537391  0.021762060 0.3311791
+#' # A at b2: 0.13725490 0.06206620 2.2114274 0.02700626  0.015607377 0.2589024
+#' # B at a1: 0.11764706 0.06842118 1.7194539 0.08553175 -0.016455982 0.2517501
+#' # B at a2: 0.07843137 0.06913363 1.1344894 0.25658931 -0.057068054 0.2139308
 #'
 #'
 #' @importFrom stats qnorm
@@ -1730,8 +1743,8 @@ ci.2x2.prop.mixed <- function(alpha, group1, group2) {
  p3 <- (f22 + .5)/(n2 + 1)
  p4 <- (f23 + .5)/(n2 + 1)
  est1 <- (p1 - p2) - (p3 - p4)
- v1 <- (p1 + p2 - (p1 - p2)^2)/(n1 + 2)
- v2 <- (p3 + p4 - (p3 - p4)^2)/(n2 + 2)
+ v1 <- (p1 + p2 - (p1 - p2)^2)/(n1 + 1)
+ v2 <- (p3 + p4 - (p3 - p4)^2)/(n2 + 1)
  se1 <- sqrt(v1 + v2)
  z1 <- est1/se1
  pval1 <- 2*(1 - pnorm(abs(z1)))
@@ -1843,6 +1856,7 @@ ci.2x2.prop.mixed <- function(alpha, group1, group2) {
 #' @export
 ci.bayes.prop1 <- function(alpha, prior.mean, prior.sd, f, n) {
  if (prior.sd^2 >= prior.mean*(1 - prior.mean)) {stop("prior SD is too large")}
+ if (f > n) {stop("f cannot be greater than n")}
  zcrit <- qnorm(1 - alpha/2)
  a <- ((1 - prior.mean)/prior.sd^2 - 1/prior.mean)*prior.mean^2
  b <- a*(1/prior.mean - 1)
@@ -1895,6 +1909,7 @@ ci.bayes.prop1 <- function(alpha, prior.mean, prior.sd, f, n) {
 #' @importFrom stats pnorm
 #' @export
 test.prop1 <- function(f, n, h) {
+ if (f > n) {stop("f cannot be greater than n")}
  p <- f/n
  se <- sqrt(h*(1 - h)/n)
  z <- (abs(p - h) - 1/(2*n))/se
@@ -1942,6 +1957,8 @@ test.prop1 <- function(f, n, h) {
 #' @importFrom stats pnorm
 #' @export
 test.prop2 <- function(f1, f2, n1, n2) {
+ if (f1 > n1) {stop("f cannot be greater than n")}
+ if (f2 > n2) {stop("f cannot be greater than n")}
  p1 <- f1/n1
  p2 <- f2/n2
  diff <- p1 - p2
