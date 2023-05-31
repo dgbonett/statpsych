@@ -615,7 +615,7 @@ ci.slope.prop.bs <- function(alpha, f, n, x) {
 #'
 #' # Should return:
 #' #       Estimate         SE        LL        UL
-#' # [1,] 0.4583333 0.09448809 0.2548067 0.6251933
+#' # [1,]      0.44 0.09448809 0.2548067 0.6251933
 #'
 #'
 #' @importFrom stats qnorm
