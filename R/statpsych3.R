@@ -611,7 +611,7 @@ ci.slope.prop.bs <- function(alpha, f, n, x) {
 #'
 #'
 #' @examples
-#' ci.prop.ps(.05, 12, 26, 4, 6)
+#' ci.prop.ps(.05, 12, 4, 26, 6)
 #'
 #' # Should return:
 #' #       Estimate         SE        LL        UL
@@ -625,10 +625,10 @@ ci.prop.ps <- function(alpha, f00, f01, f10, f11) {
  n <- f00 + f01 + f10 + f11
  p01 <- (f01 + 1)/(n + 2)
  p10 <- (f10 + 1)/(n + 2)
- diff <- p01 - p10
+ diff <- p10 - p01
  se <- sqrt(((p01 + p10) - (p01 - p10)^2)/(n + 2))
- ll <- p01 - p10 - z*se
- ul <- p01 - p10 + z*se
+ ll <- p10 - p01 - z*se
+ ul <- p10 - p01 + z*se
  out <- t(c(diff, se, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  return(out)
@@ -1706,7 +1706,7 @@ ci.2x2.prop.bs <- function(alpha, f, n) {
 #' @return
 #' Returns a 7-row matrix (one row per effect). The columns are:
 #' * Estimate - adjusted estimate of effect
-#' * SE - standard error
+#' * SE - standard error of estimate
 #' * z - z test statistic 
 #' * p - p-value
 #' * LL - lower limit of the adjusted Wald confidence interval
@@ -1714,19 +1714,19 @@ ci.2x2.prop.bs <- function(alpha, f, n) {
 #'
 #'
 #' @examples
-#' group1 = c(23, 42, 24, 11)
-#' group2 = c(26, 27, 13, 34)
+#' group1 = c(125, 14, 10, 254)
+#' group2 = c(100, 16, 9, 275)
 #' ci.2x2.prop.mixed (.05, group1, group2)
 #'
 #' # Should return:
-#' #            Estimate         SE         z          p           LL        UL
-#' # AB:      0.03960396 0.10041161 0.3944162 0.69327381 -0.157199169 0.2364071
-#' # A:       0.15841584 0.05020580 3.1553293 0.00160317  0.060014277 0.2568174
-#' # B:       0.09803922 0.04926649 1.9899778 0.04659338  0.001478675 0.1945998
-#' # A at b1: 0.17647059 0.07893437 2.2356621 0.02537391  0.021762060 0.3311791
-#' # A at b2: 0.13725490 0.06206620 2.2114274 0.02700626  0.015607377 0.2589024
-#' # B at a1: 0.11764706 0.06842118 1.7194539 0.08553175 -0.016455982 0.2517501
-#' # B at a2: 0.07843137 0.06913363 1.1344894 0.25658931 -0.057068054 0.2139308
+#' #              Estimate          SE          z          p          LL           UL
+#' # AB:       0.007555369 0.017716073  0.4264697 0.66976559 -0.02716750  0.042278234
+#' # A:       -0.013678675 0.008858036 -1.5442107 0.12253730 -0.03104011  0.003682758
+#' # B:       -0.058393219 0.023032656 -2.5352360 0.01123716 -0.10353640 -0.013250043
+#' # A at b1: -0.009876543 0.012580603 -0.7850612 0.43241768 -0.03453407  0.014780985
+#' # A at b2: -0.017412935 0.012896543 -1.3502018 0.17695126 -0.04268969  0.007863824
+#' # B at a1: -0.054634236 0.032737738 -1.6688458 0.09514794 -0.11879902  0.009530550
+#' # B at a2: -0.062170628 0.032328556 -1.9230871 0.05446912 -0.12553343  0.001192177
 #'
 #'
 #' @importFrom stats qnorm
@@ -1742,7 +1742,7 @@ ci.2x2.prop.mixed <- function(alpha, group1, group2) {
  p2 <- (f13 + .5)/(n1 + 1)
  p3 <- (f22 + .5)/(n2 + 1)
  p4 <- (f23 + .5)/(n2 + 1)
- est1 <- (p1 - p2) - (p3 - p4)
+ est1 <- (p2 - p1) - (p4 - p3)
  v1 <- (p1 + p2 - (p1 - p2)^2)/(n1 + 1)
  v2 <- (p3 + p4 - (p3 - p4)^2)/(n2 + 1)
  se1 <- sqrt(v1 + v2)
@@ -1751,15 +1751,15 @@ ci.2x2.prop.mixed <- function(alpha, group1, group2) {
  LL1 <- est1 - zcrit*se1
  UL1 <- est1 + zcrit*se1
  row1 <- c(est1, se1, z1, pval1, LL1, UL1)
- est2 <- ((p1 - p2) + (p3 - p4))/2
+ est2 <- ((p2 - p1) + (p4 - p3))/2
  se2 <- se1/2
  z2 <- est2/se2
  pval2 <- 2*(1 - pnorm(abs(z2)))
  LL2 <- est2 - zcrit*se2
  UL2 <- est2 + zcrit*se2
  row2 <- c(est2, se2, z2, pval2, LL2, UL2)
- p1 <- (2*f11 + f12 + f13 + 1)/(2*(n1 + 2))
- p2 <- (2*f21 + f22 + f23 + 1)/(2*(n2 + 2))
+ p1 <- (2*f14 + f12 + f13 + 1)/(2*(n1 + 2))
+ p2 <- (2*f24 + f22 + f23 + 1)/(2*(n2 + 2))
  est3 <- p1 - p2
  se3 <- sqrt(p1*(1 - p1)/(2*(n1 + 2)) + p2*(1 - p2)/(2*(n2 + 2)))
  z3 <- est3/se3
@@ -1769,7 +1769,7 @@ ci.2x2.prop.mixed <- function(alpha, group1, group2) {
  row3 <- c(est3, se3, z3, pval3, LL3, UL3)
  p1 <- (f12 + 1)/(n1 + 2)
  p2 <- (f13 + 1)/(n1 + 2)
- est4 <- p1 - p2
+ est4 <- p2 - p1
  se4 <- sqrt((p1 + p2 - (p1 - p2)^2)/(n1 + 2))
  z4 <- est4/se4
  pval4 <- 2*(1 - pnorm(abs(z4)))
@@ -1778,15 +1778,15 @@ ci.2x2.prop.mixed <- function(alpha, group1, group2) {
  row4 <- c(est4, se4, z4, pval4, LL4, UL4)
  p1 <- (f22 + 1)/(n2 + 2)
  p2 <- (f23 + 1)/(n2 + 2)
- est5 <- p1 - p2
+ est5 <- p2 - p1
  se5 <- sqrt((p1 + p2 - (p1 - p2)^2)/(n2 + 2))
  z5 <- est5/se5
  pval5 <- 2*(1 - pnorm(abs(z5)))
  LL5 <- est5 - zcrit*se5
  UL5 <- est5 + zcrit*se5
  row5 <- c(est5, se5, z5, pval5, LL5, UL5)
- p1 <- (f11 + f12 + 1)/(n1 + 2)
- p2 <- (f21 + f22 + 1)/(n2 + 2)
+ p1 <- (f14 + f13 + 1)/(n1 + 2)
+ p2 <- (f24 + f23 + 1)/(n2 + 2)
  est6 <- p1 - p2
  se6 <- sqrt(p1*(1 - p1)/(n1 + 2) + p2*(1 - p2)/(n2 + 2))
  z6 <- est6/se6
@@ -1794,8 +1794,8 @@ ci.2x2.prop.mixed <- function(alpha, group1, group2) {
  LL6 <- est6 - zcrit*se6
  UL6 <- est6 + zcrit*se6
  row6 <- c(est6, se6, z6, pval6, LL6, UL6)
- p1 <- (f11 + f13 + 1)/(n1 + 2)
- p2 <- (f21 + f23 + 1)/(n2 + 2)
+ p1 <- (f14 + f12 + 1)/(n1 + 2)
+ p2 <- (f24 + f22 + 1)/(n2 + 2)
  est7 <- p1 - p2
  se7 <- sqrt(p1*(1 - p1)/(n1 + 2) + p2*(1 - p2)/(n2 + 2))
  z7 <- est7/se7
