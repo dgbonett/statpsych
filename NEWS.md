@@ -46,7 +46,7 @@ Changes:
     * ci.bayes.normal -- Computes Bayesian credible interval for a normal prior distribution
     * ci.bayes.prop1 -- Computes Bayesian credible interval for single proportion
 *  Modifications:
-    * Corrected Example output in ci.reliability
+    * Corrected Example output in ci.reliability and ci.prop.ps
     * SE added to output in:  ci.cronbach, ci.oddsratio, ci.yule, ci.etasqr, ci.rsqr, ci.spear2, 
       ci.cor2, ci.cor.dep, ci.cod1, ci.mad1, ci.mape, ci.agree2, ci.pbcor, and ci.tetra
     * Improved accuracy in size.ci.rsqr
