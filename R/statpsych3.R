@@ -664,20 +664,20 @@ ci.prop.ps <- function(alpha, f00, f01, f10, f11) {
 #'
 #'
 #' @examples
-#' ci.ratio.prop.ps(.05, 12, 26, 4, 6)
+#' ci.ratio.prop.ps(.05, 12, 4, 26, 6)
 #'
 #' # Should return:
 #' #      Estimate       LL       UL
-#' # [1,]    2.375 1.537157 3.669518
+#' # [1,]      3.2 1.766544 5.796628
 #'
 #'
 #' @importFrom stats qnorm
 #' @export
-ci.ratio.prop.ps <- function(alpha, f00, f10, f01, f11) {
+ci.ratio.prop.ps <- function(alpha, f00, f01, f10, f11) {
  z <- qnorm(1 - alpha/2)
- f1 <- f00 + f10
- f2 <- f00 + f01
- n0 <- f00 + f01 + f10
+ f1 <- f11 + f10
+ f2 <- f11 + f01
+ n0 <- f11 + f01 + f10
  p1 <- f1/n0
  p2 <- f2/n0
  ratio <- f1/f2
