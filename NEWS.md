@@ -45,7 +45,7 @@ Changes:
     * pi.var.upper -- Computes upper prediction limit for an estimated variance
     * ci.bayes.normal -- Computes Bayesian credible interval for any parameter estimator with 
       a normal sampling distributuion using a Normal prior distribution
-    * ci.bayes.prop1 -- Computes Bayesian credible interval for single proportion with a Beta
+    * ci.bayes.prop1 -- Computes Bayesian credible interval for a single proportion using a Beta
       prior distribution
 *  Modifications:
     * Corrected Example output in ci.reliability and ci.prop.ps
