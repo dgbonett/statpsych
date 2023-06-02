@@ -1,4 +1,4 @@
-statpsych version 1.4.0 (Release date: 2023/05/xx)
+statpsych version 1.4.0 (Release date: 2023/06/xx)
 ===========
 
 Changes:
@@ -51,6 +51,8 @@ Changes:
       ci.cor2, ci.cor.dep, ci.cod1, ci.mad1, ci.mape, ci.agree2, ci.pbcor, and ci.tetra
     * Improved accuracy in size.ci.rsqr
     * Three generalized Yule coefficients added to ci.yule
+    * The ci.prop.ps, ci.ratio.prop.ps, and ci.2x2.prop.mixed functions now define proportions 
+      for the y = 1 category rather than the y = 0 category.
 
 
 statpsych v1.3.0 (Release date: 2023/01/01)
