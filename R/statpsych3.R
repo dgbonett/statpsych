@@ -435,6 +435,8 @@ ci.ratio.prop2 <- function(alpha, f1, f2, n1, n2) {
 #' @importFrom stats pnorm
 #' @export
 ci.lc.prop.bs <- function(alpha, f, n, v) {
+ s <- sum(as.integer(as.logical(n < f)))
+ if (s > 0) {stop("f cannot be greater than n")}
  z <- qnorm(1 - alpha/2)
  m <- length(v) - length(which(v==0))
  p <- (f + 2/m)/(n + 4/m)
@@ -496,23 +498,25 @@ ci.lc.prop.bs <- function(alpha, f, n, v) {
 #' @importFrom stats pnorm
 #' @export
 ci.pairs.prop.bs <-function(alpha, f, n) {
-  a <- length(f)
-  adjalpha <- 2*alpha/(a*(a - 1))
-  zcrit <- qnorm(1 - adjalpha/2)
-  p.adj <- (f + 1)/(n + 2)
-  v <- p.adj*(1 - p.adj)/(n + 2)
-  p.adj <- outer(p.adj, p.adj, '-')
-  Estimate <- p.adj[upper.tri(p.adj)]
-  v <- outer(v, v, "+")
-  SE <- sqrt(v[upper.tri(v)])
-  z <- Estimate/SE
-  p <- 2*(1 - pnorm(abs(z)))
-  ll <- Estimate - zcrit*SE
-  ul <- Estimate + zcrit*SE
-  pair <- t(combn(seq(1:a), 2))
-  out <- cbind(pair, Estimate, SE, z, p, ll, ul)
-  rownames(out) <- rep("", a*(a - 1)/2)
-  return(out)
+ s <- sum(as.integer(as.logical(n < f)))
+ if (s > 0) {stop("f cannot be greater than n")}
+ a <- length(f)
+ adjalpha <- 2*alpha/(a*(a - 1))
+ zcrit <- qnorm(1 - adjalpha/2)
+ p.adj <- (f + 1)/(n + 2)
+ v <- p.adj*(1 - p.adj)/(n + 2)
+ p.adj <- outer(p.adj, p.adj, '-')
+ Estimate <- p.adj[upper.tri(p.adj)]
+ v <- outer(v, v, "+")
+ SE <- sqrt(v[upper.tri(v)])
+ z <- Estimate/SE
+ p <- 2*(1 - pnorm(abs(z)))
+ ll <- Estimate - zcrit*SE
+ ul <- Estimate + zcrit*SE
+ pair <- t(combn(seq(1:a), 2))
+ out <- cbind(pair, Estimate, SE, z, p, ll, ul)
+ rownames(out) <- rep("", a*(a - 1)/2)
+ return(out)
 }
 
 
@@ -562,6 +566,8 @@ ci.pairs.prop.bs <-function(alpha, f, n) {
 #' @importFrom stats pnorm
 #' @export
 ci.slope.prop.bs <- function(alpha, f, n, x) {
+ s <- sum(as.integer(as.logical(n < f)))
+ if (s > 0) {stop("f cannot be greater than n")}
  z <- qnorm(1 - alpha/2)
  xmean <- mean(x)
  ssx <- sum((x - xmean)^2)
@@ -1616,6 +1622,8 @@ ci.cramer <- function(alpha, chisqr, r, c, n) {
 #' @importFrom stats pnorm
 #' @export
 ci.2x2.prop.bs <- function(alpha, f, n) {
+ s <- sum(as.integer(as.logical(n < f)))
+ if (s > 0) {stop("f cannot be greater than n")}
  zcrit <- qnorm(1 - alpha/2)
  v1 <- c(1, -1, -1, 1)
  v2 <- c(.5, .5, -.5, -.5)
@@ -2009,6 +2017,8 @@ test.prop2 <- function(f1, f2, n1, n2) {
 #' @importFrom stats pchisq
 #' @export
 test.prop.bs <- function(f, n) {
+ s <- sum(as.integer(as.logical(n < f)))
+ if (s > 0) {stop("f cannot be greater than n")}
  p0 <- sum(f)/sum(n)
  df <- length(f) - 1
  a <- 1/(p0*(1 - p0))
@@ -2121,6 +2131,8 @@ test.prop.ps <- function(f00, f01, f10, f11) {
 #' @importFrom stats qnorm
 #' @export
 test.mono.prop.bs <-function(alpha, f, n) {
+ s <- sum(as.integer(as.logical(n < f)))
+ if (s > 0) {stop("f cannot be greater than n")}
  a <- length(f)
  p.adj <- (f + 1)/(n + 2)
  v <- p.adj*(1 - p.adj)/(n + 2)
