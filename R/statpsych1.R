@@ -855,6 +855,7 @@ ci.mean.ps <- function(alpha, m1, m2, sd1, sd2, cor, n) {
 #' @importFrom stats cor
 #' @export
 ci.ratio.mean.ps <- function(alpha, y1, y2){
+ if (length(y1) != length(y2)) {stop("length of y1 must equal length of y2")}
  n <- length(y1)
  m1 <- mean(y1)
  m2 <- mean(y2)
@@ -1290,6 +1291,7 @@ ci.ratio.sd2 <- function(alpha, y1, y2) {
 #' @importFrom stats median
 #' @export
 ci.ratio.mad.ps <- function(alpha, y1, y2) {
+ if (length(y1) != length(y2)) {stop("length of y1 must equal length of y2")}
  z <- qnorm(1 - alpha/2)
  n <- length(y1); 
  c <- n/(n - 1)
@@ -1885,6 +1887,7 @@ ci.lc.median.bs <- function(alpha, m, se, v) {
 #' @importFrom stats median
 #' @export
 ci.median.ps <- function(alpha, y1, y2) {
+ if (length(y1) != length(y2)) {stop("length of y1 must equal length of y2")}
  z <- qnorm(1 - alpha/2)
  n <- length(y1)
  median1 <- median(y1)
@@ -1963,6 +1966,7 @@ ci.median.ps <- function(alpha, y1, y2) {
 #' @importFrom stats median
 #' @export
 ci.ratio.median.ps <- function(alpha, y1, y2) {
+ if (length(y1) != length(y2)) {stop("length of y1 must equal length of y2")}
  z <- qnorm(1 - alpha/2)
  n <- length(y1)
  med1 <- median(y1)
@@ -2434,6 +2438,8 @@ ci.etasqr <- function(alpha, etasqr, df1, df2) {
 #' @importFrom stats pt
 #' @export
 ci.2x2.mean.mixed <- function(alpha, y11, y12, y21, y22) {
+ if (length(y11) != length(y12)) {stop("length of y11 must equal length of y12")}
+ if (length(y21) != length(y22)) {stop("length of y21 must equal length of y22")}
  n1 <- length(y11)
  n2 <- length(y21)
  diff1 <- y11 - y12
@@ -2566,6 +2572,9 @@ ci.2x2.mean.mixed <- function(alpha, y11, y12, y21, y22) {
 #' @importFrom stats pt
 #' @export
 ci.2x2.mean.ws <- function(alpha, y11, y12, y21, y22) {
+ if (length(y11) != length(y12)) {stop("all score vectors must have same length")}
+ if (length(y11) != length(y21)) {stop("all score vectors must have same length")}
+ if (length(y11) != length(y22)) {stop("all score vectors must have same length")}
  n <- length(y11)
  df <- n - 1
  t <- qt(1 - alpha/2, df)
