@@ -1699,8 +1699,8 @@ ci.2x2.prop.bs <- function(alpha, f, n) {
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
-#' @param   group1  2x2 contingency table for Factor A in group 1
-#' @param   group2  2x2 contingency table for Factor A in group 2
+#' @param   group1  frequency counts for 2x2 contingency table for Factor A in group 1
+#' @param   group2  frequency counts for 2x2 contingency table for Factor A in group 2
 #'
 #'
 #' @return
