@@ -53,7 +53,7 @@ sim.ci.stdmean.ps(.05, 20, 1.5, .8, 4, 4, .5, 2000)
 # Should return (within sampling error):
 #                         Coverage Lower Error Upper Error Ave CI Width   Ave Est
 # Unweighted Standardizer   0.9095      0.0555       0.035    0.7354865 0.5186796
-# level 1 Standardizer      0.9525      0.0255       0.022    0.9330036 0.5058198
+# Level 1 Standardizer      0.9525      0.0255       0.022    0.9330036 0.5058198
 
 
 }

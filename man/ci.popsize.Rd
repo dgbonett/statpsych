@@ -19,6 +19,7 @@ ci.popsize(alpha, f00, f01, f10)
 Returns a 1-row matrix. The columns are:
 \itemize{
 \item Estimate - estimate of the unknown population size
+\item SE - recovered standard error
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval
 }
@@ -30,14 +31,15 @@ samples. This function requires the frequency counts from an incomplete
 2 x 2 contingency table for the two samples (f11 is the unknown number
 of people who were not observed in either sample). This method sets the
 estimated odds ratio (with .5 added to each cell) to 1 and solves for
-unobserved cell frequency.
+unobserved cell frequency. An approximate standard error is recovered
+from the confidence interval.
 }
 \examples{
 ci.popsize(.05, 794, 710, 741)
 
 # Should return:
-#      Estimate   LL   UL
-# [1,]     2908 2818 3012
+#      Estimate       SE   LL   UL
+# [1,]     2908 49.49071 2818 3012
 
 
 }

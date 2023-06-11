@@ -18,7 +18,7 @@ ci.agree(alpha, n, f, k)
 \value{
 Returns a 1-row matrix. The columns are:
 \itemize{
-\item Estimate - estimate of G-index of agreement
+\item Estimate - maximum likelihood estimate of G-index
 \item SE - standard error
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval
@@ -37,4 +37,7 @@ ci.agree(.05, 100, 80, 4)
 # [1,] 0.7333333 0.05333333 0.6132949 0.8226025
 
 
+}
+\references{
+\insertRef{Bonett2022}{statpsych}
 }

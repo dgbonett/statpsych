@@ -31,10 +31,8 @@ Returns a 1-row matrix. The columns are:
 Computes a 100(1 - alpha)\% confidence interval for a difference in
 population correlations in a 2-group design. The correlations can be
 Pearson, Spearman, partial, semipartial, or point-biserial correlations.
-The function requires 100(1 - alpha)\% confidence intervals for each
-correlation as input. This function also can be used to compute a
-confidence interval for the difference of two Cronbach reliability
-coefficients.
+The function requires a point estimate and a 100(1 - alpha)\% confidence
+interval for each correlation as input.
 }
 \examples{
 ci.cor2.gen(.4, .35, .47, .2, .1, .32)

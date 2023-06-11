@@ -21,6 +21,7 @@ ci.spear2(alpha, cor1, cor2, n1, n2)
 Returns a 1-row matrix. The columns are:
 \itemize{
 \item Estimate - estimated correlation difference
+\item SE - standard error
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval
 }
@@ -33,8 +34,8 @@ correlations in a 2-group design.
 ci.spear2(.05, .54, .48, 180, 200)
 
 # Should return:
-#      Estimate         LL        UL
-# [1,]     0.06 -0.1003977 0.2185085     
+#      Estimate         SE         LL        UL
+# [1,]     0.06 0.08124926 -0.1003977 0.2185085     
  
 
 }

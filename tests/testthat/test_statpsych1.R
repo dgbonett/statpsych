@@ -163,7 +163,7 @@ test_that("ci.lc.stdmean.ws returns valid matrix", {
 
 
 test_that("ci.mad1 returns valid matrix", {
-  colnames_expected <- c("Estimate", "LL", "UL")
+  colnames_expected <- c("Estimate", "SE", "LL", "UL")
   
   y <- c(30, 20, 15, 10, 10, 60, 20, 25, 20, 30, 10, 5, 50, 40, 
          20, 10, 0, 20, 50)
@@ -202,7 +202,7 @@ test_that("ci.ratio.mad.ps returns valid matrix", {
 
 
 test_that("ci.cod1 returns valid matrix", {
-  colnames_expected <- c("Estimate", "LL", "UL")
+  colnames_expected <- c("Estimate", "SE", "LL", "UL")
   
   y <- c(30, 20, 15, 10, 10, 60, 20, 25, 20, 30, 10, 5, 50, 40,
          20, 10, 0, 20, 50)
@@ -329,7 +329,7 @@ test_that("ci.random.anova1 returns valid matrix", {
 
 test_that("ci.cronbach returns valid matrix", {
   colnames_expected <- c(
-    "LL", "UL"
+   "SE", "LL", "UL"
   )
   
   res <- ci.cronbach(.05, .85, 7, 89)
@@ -694,7 +694,7 @@ test_that("ci.cod2 returns valid matrix", {
 
 test_that("ci.etasqr returns valid matrix", {
   colnames_expected <- c(
-    "Eta-squared", "adj Eta-squared",        "LL",        "UL"
+    "Eta-squared", "adj Eta-squared",     "SE",   "LL",        "UL"
   )
   
   res <- ci.etasqr(.05, .241, 3, 116)
@@ -706,10 +706,16 @@ test_that("ci.etasqr returns valid matrix", {
 
 
 test_that("ci.reliability returns valid vector", {
+  colnames_expected <- c(
+    "LL",        "UL"
+  )
+  
+  
   res <- ci.reliability(.05, .88, .147, 100)
   
-  testthat::expect_equal(class(res), c("numeric"))
-  testthat::expect_equal(length(res), 2)
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, 2))
+  testthat::expect_equal(colnames(res), colnames_expected)
 
 })
 

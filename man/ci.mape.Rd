@@ -17,6 +17,7 @@ ci.mape(alpha, res, s)
 Returns a 1-row matrix. The columns are:
 \itemize{
 \item Estimate - estimated mean absolute prediction error
+\item SE - standard error
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval
 }
@@ -35,8 +36,8 @@ res <- c(-2.70, -2.69, -1.32, 1.02, 1.23, -1.46, 2.21, -2.10, 2.56,
 ci.mape(.05, res, 1)
 
 # Should return:
-#       Estimate       LL       UL
-# [1,]    2.3744 1.751678 3.218499
+#       Estimate        SE       LL       UL
+# [1,]    2.3744 0.3314752 1.751678 3.218499
  
 
 }

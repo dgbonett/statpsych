@@ -29,10 +29,11 @@ reliablity and its standard error. The standard error can be a robust
 standard error or bootstrap standard error obtained from an SEM program.
 }
 \examples{
-ci.reliability(.05, .88, .147, 100)
+ci.reliability(.05, .88, .0147, 100)
 
 # Should return:
-# [1,]  0.7971254 0.8931436   
+#             LL        UL
+# [1,] 0.8489612 0.9065575
  
 
 }

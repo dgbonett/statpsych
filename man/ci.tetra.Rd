@@ -21,6 +21,7 @@ ci.tetra(alpha, f00, f01, f10, f11)
 Returns a 1-row matrix. The columns are:
 \itemize{
 \item Estimate - estimate of tetrachoric approximation
+\item SE - recovered standard error
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval
 }
@@ -30,14 +31,15 @@ Computes a confidence interval for an approximation to the tetrachoric
 correlation. This function requires the frequency counts from a 2 x 2
 contingency table for two dichotomous variables. This measure of
 association assumes both of the dichotomous variables are artificially
-dichotomous.
+dichotomous. An approximate standard error is recovered from the
+confidence interval.
 }
 \examples{
 ci.tetra(.05, 46, 15, 54, 85)
 
 # Should return:
-#       Estimate        LL        UL
-# [1,] 0.5135167 0.3102345 0.6748546
+#       Estimate         SE        LL        UL
+# [1,] 0.5135167 0.09301703 0.3102345 0.6748546
 
 
 }

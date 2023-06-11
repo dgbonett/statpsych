@@ -21,6 +21,7 @@ ci.cor2(alpha, cor1, cor2, n1, n2)
 Returns a 1-row matrix. The columns are:
 \itemize{
 \item Estimate - estimated correlation difference
+\item SE - standard error
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval
 }
@@ -34,8 +35,8 @@ reduce the bias of each Fisher transformed correlation.
 ci.cor2(.05, .886, .802, 200, 200)
 
 # Should return:
-#      Estimate         LL        UL
-# [1,]    0.084 0.02803246 0.1463609
+#      Estimate         SE         LL        UL
+# [1,]    0.084 0.02967934 0.02803246 0.1463609
  
 
 }

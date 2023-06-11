@@ -15,7 +15,7 @@ ci.pairs.prop1(alpha, f)
 \value{
 Returns a 1-row matrix. The columns are:
 \itemize{
-\item Estimate - adjusted difference of proportions
+\item Estimate - adjusted estimate of proportion difference
 \item SE - adjusted standard error
 \item LL - lower limit of the adjusted Wald confidence interval
 \item UL - upper limit of the adjusted Wald confidence interval

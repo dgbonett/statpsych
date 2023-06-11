@@ -1342,7 +1342,7 @@ ci.ratio.mad.ps <- function(alpha, y1, y2) {
 #'
 #'
 #' @references
-#' \insertRef{Bonett2006}{statpsych}
+#' \insertRef{Bonett2006c}{statpsych}
 #'
 #'
 #' @examples

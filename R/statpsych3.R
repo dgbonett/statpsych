@@ -511,10 +511,10 @@ ci.pairs.prop.bs <-function(alpha, f, n) {
  SE <- sqrt(v[upper.tri(v)])
  z <- Estimate/SE
  p <- 2*(1 - pnorm(abs(z)))
- ll <- Estimate - zcrit*SE
- ul <- Estimate + zcrit*SE
+ LL <- Estimate - zcrit*SE
+ UL <- Estimate + zcrit*SE
  pair <- t(combn(seq(1:a), 2))
- out <- cbind(pair, Estimate, SE, z, p, ll, ul)
+ out <- cbind(pair, Estimate, SE, z, p, LL, UL)
  rownames(out) <- rep("", a*(a - 1)/2)
  return(out)
 }
@@ -825,7 +825,7 @@ ci.oddsratio <- function(alpha, f00, f01, f10, f11) {
  se.or <- or*se.lor
  ll <- exp(log(or) - z*se.lor)
  ul <- exp(log(or) + z*se.lor)
- out <- t(c(or, se.or, ll, ul)
+ out <- t(c(or, se.or, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  return(out)
 }

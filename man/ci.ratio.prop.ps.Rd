@@ -4,16 +4,16 @@
 \alias{ci.ratio.prop.ps}
 \title{Confidence interval for a paired-samples proportion ratio}
 \usage{
-ci.ratio.prop.ps(alpha, f00, f10, f01, f11)
+ci.ratio.prop.ps(alpha, f00, f01, f10, f11)
 }
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
 
 \item{f00}{number of participants with y = 0 and x = 0}
 
-\item{f10}{number of participants with y = 1 and x = 0}
-
 \item{f01}{number of participants with y = 0 and x = 1}
+
+\item{f10}{number of participants with y = 1 and x = 0}
 
 \item{f11}{number of participants with y = 1 and x = 1}
 }
@@ -31,11 +31,11 @@ paired-samples design. This function requires the frequency counts from
 a 2 x 2 contingency table for two repeated dichotomous measurements.
 }
 \examples{
-ci.ratio.prop.ps(.05, 12, 26, 4, 6)
+ci.ratio.prop.ps(.05, 12, 4, 26, 6)
 
 # Should return:
 #      Estimate       LL       UL
-# [1,]    2.375 1.537157 3.669518
+# [1,]      3.2 1.766544 5.796628
 
 
 }

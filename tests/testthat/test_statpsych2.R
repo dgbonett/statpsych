@@ -28,7 +28,7 @@ test_that("ci.spcor returns valid matrix", {
 
 test_that("ci.cor2 returns valid matrix", {
   colnames_expected <- c(
-    "Estimate", "LL", "UL"
+    "Estimate", "SE", "LL", "UL"
   )
   
   res <- ci.cor2(.05, .886, .802, 200, 200)
@@ -41,7 +41,7 @@ test_that("ci.cor2 returns valid matrix", {
 
 test_that("ci.cor.dep returns valid matrix", {
   colnames_expected <- c(
-    "Estimate", "LL", "UL"
+    "Estimate", "SE", "LL", "UL"
   )
   
   res <- ci.cor.dep(.05, .396, .179, .088, 166)
@@ -67,7 +67,7 @@ test_that("ci.cor2.gen returns valid matrix", {
 
 test_that("ci.pbcor returns valid matrix", {
   colnames_expected <- c(
-    "Estimate", "LL", "UL"
+    "Estimate", "SE", "LL", "UL"
   )
   
   res <- ci.pbcor(.05, 28.32, 21.48, 3.81, 3.09, 40, 40)
@@ -95,7 +95,7 @@ test_that("ci.spear returns valid matrix", {
 
 test_that("ci.spear2 returns valid matrix", {
   colnames_expected <- c(
-    "Estimate", "LL", "UL"
+    "Estimate", "SE", "LL", "UL"
   )
   
   y <- c(21, 4, 9, 12, 35, 18, 10, 22, 24, 1, 6, 8, 13, 16, 19)
@@ -110,7 +110,7 @@ test_that("ci.spear2 returns valid matrix", {
 
 test_that("ci.mape returns valid matrix", {
   colnames_expected <- c(
-    "Estimate", "LL", "UL"
+    "Estimate", "SE", "LL", "UL"
   )
   
   r <- c(-2.70, -2.69, -1.32, 1.02, 1.23, -1.46, 2.21, -2.10, 2.56,
@@ -203,7 +203,7 @@ test_that("size.ci.rsqr returns valid numeric", {
   res <- size.ci.rsqr(.05, .333, 2, .2)
   
   testthat::expect_equal(class(res), c("matrix", "array"))
-  testthat::expect_equal(res[[1,1]], 232)
+  testthat::expect_equal(res[[1,1]], 226)
 })
 
 
@@ -292,7 +292,7 @@ test_that("random.yx returns valid data.frame", {
 
 test_that("ci.rsqr returns valid matrix", {
   colnames_expected <- c(
-    "R-squared",    "adj R-squared",          "LL",        "UL"
+    "R-squared",    "adj R-squared",  "SE",        "LL",        "UL"
   )
   
   res <- ci.rsqr(.05, .241, 3, 116)

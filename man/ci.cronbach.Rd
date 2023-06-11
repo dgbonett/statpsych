@@ -32,8 +32,8 @@ measurements.
 ci.cronbach(.05, .85, 7, 89)
 
 # Should return:
-#              LL        UL
-# [1,]  0.7971254 0.8931436   
+#               SE        LL        UL
+# [1,]  0.02456518 0.7971254 0.8931436   
  
 
 }

@@ -26,8 +26,8 @@ ci.condslope.log(alpha, b1, b2, se1, se2, cov, lo, hi)
 \value{
 Returns a 2-row matrix. The columns are:
 \itemize{
-\item Estimate - estimated condition slope
-\item exp(Estimate) - estimated exponentiated condition slope
+\item Estimate - estimated conditional slope
+\item exp(Estimate) - estimated exponentiated conditional slope
 \item z - z test statistic
 \item p - p-value
 \item LL - lower limit of the confidence interval

@@ -143,7 +143,7 @@ test_that("ci.condslope.log returns valid matrix", {
 
 test_that("ci.oddsratio returns valid matrix", {
   colnames_expected <- c(
-    "Estimate", "LL", "UL"
+    "Estimate", "SE", "LL", "UL"
   )
   
   res <- ci.oddsratio(.05, 229, 28, 96, 24)
@@ -156,13 +156,13 @@ test_that("ci.oddsratio returns valid matrix", {
 
 test_that("ci.yule returns valid matrix", {
   colnames_expected <- c(
-    "Estimate", "LL", "UL"
+    "Estimate", "SE", "LL", "UL"
   )
   
   res <- ci.yule(.05, 229, 28, 96, 24)
   
   testthat::expect_equal(class(res), c("matrix", "array"))
-  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(dim(res), c(4, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)
 })
 
@@ -195,7 +195,7 @@ test_that("ci.biphi returns valid matrix", {
 
 test_that("ci.tetra returns valid matrix", {
   colnames_expected <- c(
-    "Estimate", "LL", "UL"
+    "Estimate", "SE", "LL", "UL"
   )
   
   res <- ci.tetra(.05, 46, 15, 54, 85)
@@ -234,7 +234,7 @@ test_that("ci.agree returns valid matrix", {
 
 test_that("ci.popsize returns valid matrix", {
   colnames_expected <- c(
-    "Estimate", "LL", "UL"
+    "Estimate", "SE", "LL", "UL"
   )
   
   res <- ci.popsize(.05, 794, 710, 741)
@@ -473,7 +473,7 @@ test_that("test.mono.prop.bs returns valid matrix", {
 
 test_that("ci.agree2 returns valid matrix", {
   colnames_expected <- c(
-    "Estimate",  "LL",  "UL"
+    "Estimate", "SE", "LL",  "UL"
   )
   
   res <- ci.agree2(.05, 75, 70, 60, 45, 2)
