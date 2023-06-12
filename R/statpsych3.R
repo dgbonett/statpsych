@@ -830,7 +830,6 @@ ci.oddsratio <- function(alpha, f00, f01, f10, f11) {
  return(out)
 }
 
-
 #  ci.yule ==================================================================== 
 #' Confidence intervals for generalized Yule coefficients
 #'
