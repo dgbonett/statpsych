@@ -48,7 +48,8 @@ data with specified marginal skewness and kurtosis are generated using the
 unonr function in the mnonr package.
 }
 \examples{
-sim.ci.median.ps(.05, 30, 1.5, .7, 4, 3, 2000)
+# Only 1000 reps because CRAN runs all examples and requires short execution time.
+sim.ci.median.ps(.05, 30, 1.5, .7, 4, 3, 1000)
 
 # Should return (within sampling error):
 #      Coverage Lower Error Upper Error Ave CI Width

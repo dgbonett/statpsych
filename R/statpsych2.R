@@ -1122,7 +1122,7 @@ ci.theil <- function(alpha, y, x) {
 #' @param  rel1     estimated Cronbach reliablity for group 1
 #' @param  rel2     estimated Cronbach reliablity for group 2
 #' @param  r1       number of measurements used in group 1
-#' @param  r1       number of measurements used in group 2
+#' @param  r2       number of measurements used in group 2
 #' @param  n1       sample size for group 1
 #' @param  n2       sample size for group 2
 #'

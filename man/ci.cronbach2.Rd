@@ -14,7 +14,9 @@ ci.cronbach2(alpha, rel1, rel2, r1, r2, n1, n2)
 
 \item{rel2}{estimated Cronbach reliablity for group 2}
 
-\item{r1}{number of measurements used in group 2}
+\item{r1}{number of measurements used in group 1}
+
+\item{r2}{number of measurements used in group 2}
 
 \item{n1}{sample size for group 1}
 

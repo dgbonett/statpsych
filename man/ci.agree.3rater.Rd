@@ -10,7 +10,7 @@ ci.agree.3rater(alpha, f)
 \item{alpha}{alpha level for 1-alpha confidence}
 
 \item{f}{vector of frequency counts from 2x2x2 table where
-f = \link{f111, f112, f121, f122, f211, f212, f221, f222},
+f = f111, f112, f121, f122, f211, f212, f221, f222,
 first subscript represents rating of rater 1,
 second subscript represents rating of rater 2,
 third subscript represents rating of rater 3}
@@ -21,9 +21,9 @@ Returns a 3-row matrix. The rows are:
 \item G{1,2}: G-index for raters 1 and 2
 \item G{1,3}: G-index for raters 1 and 3
 \item G{2,3}: G-index for raters 2 and 3
-\item G{1,2}\U2212G{1,3}: difference in G{1,2} and G{1,3}
-\item G{1,2}\U2212G{2,3}: difference in G{1,2} and G{2,3}
-\item G{2,3}\U2212G{1,3}: difference in G{2,3} and G{1,3}
+\item G{1,2}-{1,3}: difference in G{1,2} and G{1,3}
+\item G{1,2}-{2,3}: difference in G{1,2} and G{2,3}
+\item G{2,3}-{1,3}: difference in G{2,3} and G{1,3}
 \item G(3): G-index of unanimous agreement for all three raters
 }
 
@@ -51,9 +51,9 @@ ci.agree.3rater(.05, f)
 # G{1,2}         0.56666667  0.46601839  0.6524027
 # G{1,3}         0.50000000  0.39564646  0.5911956
 # G{2,3}         0.86666667  0.79701213  0.9135142
-# G{1,2}\U2212G{1,3}  0.06666667  0.00580397  0.1266464
-# G{1,2}\U2212G{2,3} -0.30000000 -0.40683919 -0.1891873
-# G{2,3}\U2212G{1,3} -0.36666667 -0.46222023 -0.2662566
+# G{1,2}-{1,3}  0.06666667  0.00580397  0.1266464
+# G{1,2}-{2,3} -0.30000000 -0.40683919 -0.1891873
+# G{2,3}-{1,3} -0.36666667 -0.46222023 -0.2662566
 # G(3)           0.64444444  0.57382971  0.7068720
  
 
