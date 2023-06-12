@@ -10,7 +10,7 @@ ci.agree.3rater(alpha, f)
 \item{alpha}{alpha level for 1-alpha confidence}
 
 \item{f}{vector of frequency counts from 2x2x2 table where
-f = f111, f112, f121, f122, f211, f212, f221, f222,
+f = {\code{[}}f111, f112, f121, f122, f211, f212, f221, f222{\verb{]}}
 first subscript represents rating of rater 1,
 second subscript represents rating of rater 2,
 third subscript represents rating of rater 3}

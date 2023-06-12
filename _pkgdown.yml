@@ -14,26 +14,6 @@ reference:
   contents:
   - starts_with("ci.")
 
-- title: Prediction intervals
-  desc:  Prediction intervals
-  contents:
-  - starts_with("pi.")
-
-- title: Tests
-  desc:  Hypothesis tests
-  contents:
-  - starts_with("test.")
-
-- title: Sample-size planning
-  desc:  Sample sizes for desired precision or power
-  contents:
-  - starts_with("size.")
-
-- title: Simulations
-  desc:  Test coverage of difference confidence intervals with simulated data
-  contents:
-  - starts_with("sim.")
-
 - title: Miscellaneous
   desc:  Other functions, including functions for simulating data
   contents:
@@ -47,3 +27,28 @@ reference:
   - random.yx
   - randomize
   - slope.contrast
+
+- title: Power
+  desc:  Compute power for a given sample size for various designs
+  contents:
+  - starts_with("power.")
+
+- title: Prediction intervals
+  desc:  Prediction intervals
+  contents:
+  - starts_with("pi.")
+
+- title: Sample-size planning
+  desc:  Sample sizes for desired precision or power
+  contents:
+  - starts_with("size.")
+
+- title: Simulations
+  desc:  Test coverage of difference confidence intervals with simulated data
+  contents:
+  - starts_with("sim.")
+
+- title: Tests
+  desc:  Hypothesis tests
+  contents:
+  - starts_with("test.")

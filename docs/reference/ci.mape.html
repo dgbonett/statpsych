@@ -22,7 +22,7 @@ the population prediction errors."><!-- mathjax --><script src="https://cdnjs.cl
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statpsych</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.0</span>
       </span>
     </div>
 
@@ -85,6 +85,7 @@ the population prediction errors.</p>
     
 
 <p>Returns a 1-row matrix. The columns are:</p><ul><li><p>Estimate - estimated mean absolute prediction error</p></li>
+<li><p>SE - standard error</p></li>
 <li><p>LL - lower limit of the confidence interval</p></li>
 <li><p>UL - upper limit of the confidence interval</p></li>
 </ul></div>
@@ -94,12 +95,12 @@ the population prediction errors.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2.70</span>, <span class="op">-</span><span class="fl">2.69</span>, <span class="op">-</span><span class="fl">1.32</span>, <span class="fl">1.02</span>, <span class="fl">1.23</span>, <span class="op">-</span><span class="fl">1.46</span>, <span class="fl">2.21</span>, <span class="op">-</span><span class="fl">2.10</span>, <span class="fl">2.56</span>,</span></span>
 <span class="r-in"><span>      <span class="op">-</span><span class="fl">3.02</span>, <span class="op">-</span><span class="fl">1.55</span>, <span class="fl">1.46</span>, <span class="fl">4.02</span>, <span class="fl">2.34</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">ci.mape</span><span class="op">(</span><span class="fl">.05</span>, <span class="va">res</span>, <span class="fl">1</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      Estimate       LL       UL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]   2.3744 1.751678 3.218499</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      Estimate        SE       LL       UL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]   2.3744 0.3314752 1.806022 3.121654</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Should return:</span></span></span>
-<span class="r-in"><span><span class="co">#       Estimate       LL       UL</span></span></span>
-<span class="r-in"><span><span class="co"># [1,]    2.3744 1.751678 3.218499</span></span></span>
+<span class="r-in"><span><span class="co">#       Estimate        SE       LL       UL</span></span></span>
+<span class="r-in"><span><span class="co"># [1,]    2.3744 0.3314752 1.751678 3.218499</span></span></span>
 <span class="r-in"><span> </span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
@@ -116,7 +117,7 @@ the population prediction errors.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

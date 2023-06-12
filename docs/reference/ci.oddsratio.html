@@ -19,7 +19,7 @@ cell frequency. This function requires the frequency counts from a
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statpsych</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.0</span>
       </span>
     </div>
 
@@ -87,6 +87,7 @@ cell frequency. This function requires the frequency counts from a
     
 
 <p>Returns a 1-row matrix. The columns are:</p><ul><li><p>Estimate - estimate of odds ratio</p></li>
+<li><p>SE - standard error</p></li>
 <li><p>LL - lower limit of the confidence interval</p></li>
 <li><p>UL - upper limit of the confidence interval</p></li>
 </ul></div>
@@ -100,12 +101,12 @@ Wiley.</p>
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">ci.oddsratio</span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">229</span>, <span class="fl">28</span>, <span class="fl">96</span>, <span class="fl">24</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      Estimate       LL       UL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 2.044451 1.133267 3.688254</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      Estimate        SE       LL       UL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 2.044451 0.6154578 1.133267 3.688254</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Should return:</span></span></span>
-<span class="r-in"><span><span class="co">#      Estimate       LL       UL</span></span></span>
-<span class="r-in"><span><span class="co"># [1,] 2.044451 1.133267 3.688254</span></span></span>
+<span class="r-in"><span><span class="co">#      Estimate        SE       LL       UL</span></span></span>
+<span class="r-in"><span><span class="co"># [1,] 2.044451 0.6154578 1.133267 3.688254</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
@@ -122,7 +123,7 @@ Wiley.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

@@ -22,7 +22,7 @@ Equality of variances is not assumed for either type."><!-- mathjax --><script s
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statpsych</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.0</span>
       </span>
     </div>
 
@@ -101,6 +101,7 @@ Equality of variances is not assumed for either type.</p>
     
 
 <p>Returns a 2-row matrix. The columns are:</p><ul><li><p>Estimate - estimated point-biserial correlation</p></li>
+<li><p>SE - standard error</p></li>
 <li><p>LL - lower limit of the confidence interval</p></li>
 <li><p>UL - upper limit of the confidence interval</p></li>
 </ul></div>
@@ -109,21 +110,21 @@ Equality of variances is not assumed for either type.</p>
     <p>Bonett DG (2020).
 “Point-biserial correlation: Interval estimation, hypothesis testing, meta-analysis, and sample size determination.”
 <em>British Journal of Mathematical and Statistical Psychology</em>, <b>73</b>(S1), 113--144.
-ISSN 0007-1102, doi: <a href="https://doi.org/10.1111/bmsp.12189" class="external-link">10.1111/bmsp.12189</a>
+ISSN 0007-1102, <a href="https://doi.org/10.1111/bmsp.12189" class="external-link">doi:10.1111/bmsp.12189</a>
 .</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">ci.pbcor</span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">28.32</span>, <span class="fl">21.48</span>, <span class="fl">3.81</span>, <span class="fl">3.09</span>, <span class="fl">40</span>, <span class="fl">40</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>              Estimate        LL        UL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Weighted:   0.7065799 0.5885458 0.7854471</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Unweighted: 0.7020871 0.5808366 0.7828948</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              Estimate         SE        LL        UL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Weighted:   0.7065799 0.04890959 0.5885458 0.7854471</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Unweighted: 0.7020871 0.05018596 0.5808366 0.7828948</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Should return:</span></span></span>
-<span class="r-in"><span><span class="co">#              Estimate        LL        UL</span></span></span>
-<span class="r-in"><span><span class="co"># Weighted:   0.7065799 0.5885458 0.7854471</span></span></span>
-<span class="r-in"><span><span class="co"># Unweighted: 0.7020871 0.5808366 0.7828948</span></span></span>
+<span class="r-in"><span><span class="co">#              Estimate         SE        LL        UL</span></span></span>
+<span class="r-in"><span><span class="co"># Weighted:   0.7065799 0.04890959 0.5885458 0.7854471</span></span></span>
+<span class="r-in"><span><span class="co"># Unweighted: 0.7020871 0.05018596 0.5808366 0.7828948</span></span></span>
 <span class="r-in"><span> </span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
@@ -140,7 +141,7 @@ ISSN 0007-1102, doi: <a href="https://doi.org/10.1111/bmsp.12189" class="externa
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>
