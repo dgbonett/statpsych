@@ -28,7 +28,7 @@ ci.condslope(alpha, b1, b2, se1, se2, cov, lo, hi, dfe)
 \value{
 Returns a 2-row matrix. The columns are:
 \itemize{
-\item Estimate - estimated condition slope
+\item Estimate - estimated conditional slope
 \item t - t test statistic
 \item p - p-value
 \item LL - lower limit of the confidence interval

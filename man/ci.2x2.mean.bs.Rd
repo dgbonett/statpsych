@@ -2,7 +2,7 @@
 % Please edit documentation in R/statpsych1.R
 \name{ci.2x2.mean.bs}
 \alias{ci.2x2.mean.bs}
-\title{Computes tests and confidence intervals of effects in a 2x2 betwen-subjects
+\title{Computes tests and confidence intervals of effects in a 2x2 between-subjects
 design for means}
 \usage{
 ci.2x2.mean.bs(alpha, y11, y12, y21, y22)

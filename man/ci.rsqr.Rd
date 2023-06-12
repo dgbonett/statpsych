@@ -20,6 +20,7 @@ Returns a 1-row matrix. The columns are:
 \itemize{
 \item R-squared - estimate of unadjusted R-squared
 \item adj R-squared - bias adjusted R-squared estimate
+\item SE - recovered standard error
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval
 }
@@ -27,14 +28,15 @@ Returns a 1-row matrix. The columns are:
 \description{
 Computes an approximate confidence interval for a population squared
 multiple correlation in a linear model with random predictor variables.
-This function uses the scaled central F approximation method.
+This function uses the scaled central F approximation method. An
+approximate standard error is recovered from the confidence interval.
 }
 \examples{
 ci.rsqr(.05, .241, 3, 116)
 
 # Should return:
-#        R-squared    adj R-squared          LL        UL
-# [1,]       0.241        0.2206696  0.09819599 0.3628798
+#      R-squared adj R-squared         SE         LL        UL  
+# [1,]     0.241     0.2206696 0.06752263 0.09819599 0.3628798
  
 
 }

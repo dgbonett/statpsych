@@ -21,22 +21,21 @@ ci.indirect(alpha, b1, b2, se1, se2)
 Returns a 1-row matrix. The columns are:
 \itemize{
 \item Estimate - estimated indirect effect
-\item SE - standard error of indirect effect
+\item SE - standard error
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval
 }
 }
 \description{
 Computes a Monte Carlo confidence interval (500,000 trials) for a population
-unstandardized indirect effect in a path model. This function is not
-recommended for a standardized indirect effect unless the standardized
-slope estimates for both paths are less than about .3 in absolute value.
-The Monte Carlo method is general in that the slope estimates and standard
+unstandardized indirect effect in a path model and a Sobel standard error.
+This function is not recommended for a standardized indirect effect. The
+Monte Carlo method is general in that the slope estimates and standard
 errors do not need to be OLS estimates with homoscedastic standard errors.
 For example, LAD slope estimates and their standard errors, OLS slope
-estimates and heteroscedastic standard errors, distribution-free
-Theil-Sen slope estimates with McKean-Schrader standard errors, or
-standardized slopes with robust standard errors also could be used.
+estimates and heteroscedastic-consistent standard errors, and (in models
+with no direct effects) distribution-free Theil-Sen slope estimates with
+recovered standard errors also could be used.
 }
 \examples{
 ci.indirect (.05, 2.48, 1.92, .586, .379)

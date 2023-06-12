@@ -18,7 +18,7 @@ ci.2x2.prop.bs(alpha, f, n)
 Returns a 7-row matrix (one row per effect). The columns are:
 \itemize{
 \item Estimate - adjusted estimate of effect
-\item SE - standard error of estimate
+\item SE - standard error
 \item z - z test statistic for test of null hypothesis
 \item p - p-value
 \item LL - lower limit of the adjusted Wald confidence interval

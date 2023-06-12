@@ -25,6 +25,7 @@ ci.pbcor(alpha, m1, m2, sd1, sd2, n1, n2)
 Returns a 2-row matrix. The columns are:
 \itemize{
 \item Estimate - estimated point-biserial correlation
+\item SE - standard error
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval
 }
@@ -41,9 +42,9 @@ Equality of variances is not assumed for either type.
 ci.pbcor(.05, 28.32, 21.48, 3.81, 3.09, 40, 40)
 
 # Should return:
-#              Estimate        LL        UL
-# Weighted:   0.7065799 0.5885458 0.7854471
-# Unweighted: 0.7020871 0.5808366 0.7828948
+#              Estimate         SE        LL        UL
+# Weighted:   0.7065799 0.04890959 0.5885458 0.7854471
+# Unweighted: 0.7020871 0.05018596 0.5808366 0.7828948
  
 
 }

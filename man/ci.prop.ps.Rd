@@ -33,11 +33,11 @@ frequency counts from a 2 x 2 contingency table for two repeated
 dichtomous measurements.
 }
 \examples{
-ci.prop.ps(.05, 12, 26, 4, 6)
+ci.prop.ps(.05, 12, 4, 26, 6)
 
 # Should return:
 #       Estimate         SE        LL        UL
-# [1,] 0.4583333 0.09448809 0.2548067 0.6251933
+# [1,]      0.44 0.09448809 0.2548067 0.6251933
 
 
 }

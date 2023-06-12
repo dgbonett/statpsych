@@ -17,7 +17,7 @@ ci.theil(alpha, y, x)
 Returns a 1-row matrix. The columns are:
 \itemize{
 \item Estimate - Theil-Sen estimate of population slope
-\item SE - approximate standard error
+\item SE - recovered standard error
 \item LL - lower limit of confidence interval
 \item UL - upper limit of confidence interval
 }

@@ -29,24 +29,27 @@ Returns a 3-row matrix. The rows are:
 
 The columns are:
 \itemize{
-\item Estimate - estimate of G-index (single-group and difference)
+\item Estimate - maximum likelihood estimate of G-index and difference
+\item SE - standard error
 \item LL - lower limit of confidence interval
 \item UL - upper limit of confidence interval
 }
 }
 \description{
 Computes adjusted Wald confidence intervals for the G-index of agreement
-within each group and the difference of G-indices. The point estimates are
-maximum likelihood estimates.
+within each group and the difference of G-indices.
 }
 \examples{
 ci.agree2(.05, 75, 70, 60, 45, 2)
 
 # Should return:
-#          Estimate        LL        UL
-# G1      0.8666667 0.6974555 0.9481141
-# G2      0.5000000 0.2523379 0.6851621
-# G1 - G2 0.3666667 0.1117076 0.6088621
+#          Estimate         SE        LL        UL
+# G1      0.8666667 0.02880329 0.6974555 0.9481141
+# G2      0.5000000 0.05590170 0.2523379 0.6851621
+# G1 - G2 0.3666667 0.06288585 0.1117076 0.6088621
 
 
+}
+\references{
+\insertRef{Bonett2022}{statpsych}
 }

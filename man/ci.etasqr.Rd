@@ -20,6 +20,7 @@ Returns a 1-row matrix. The columns are:
 \itemize{
 \item Eta-squared - estimate of eta-squared
 \item adj Eta-squared - bias adjusted eta-squared estimate
+\item SE - recovered standard error
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval
 }
@@ -27,14 +28,15 @@ Returns a 1-row matrix. The columns are:
 \description{
 Computes a confidence interval for a population eta-squared, partial
 eta-squared, or generalized eta-squared in a fixed-factor between-subjects
-design. An approximate bias adjusted estimate is also computed.
+design. An approximate bias adjusted estimate is computed, and an
+approximate standard error is recovered from the confidence interval.
 }
 \examples{
 ci.etasqr(.05, .241, 3, 116)
 
 # Should return:
-#      Eta-squared adj Eta-squared        LL        UL
-# [1,]       0.241       0.2213707 0.1040229 0.3493431
+#      Eta-squared adj Eta-squared         SE        LL        UL
+# [1,]       0.241       0.2213707 0.06258283 0.1040229 0.3493431
  
 
 }

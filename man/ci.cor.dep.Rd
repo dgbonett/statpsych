@@ -21,6 +21,7 @@ ci.cor.dep(alpha, cor1, cor2, cor12, n)
 Returns a 1-row matrix. The columns are:
 \itemize{
 \item Estimate - estimated correlation difference
+\item SE - recovered standard error
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval
 }
@@ -29,14 +30,15 @@ Returns a 1-row matrix. The columns are:
 Computes a confidence interval for a difference in population Pearson
 correlations that are estimated from the same sample and have one
 variable in common. A bias adjustmentment is used to reduce the bias
-of each Fisher transformed correlation.
+of each Fisher transformed correlation. An approximate standard error
+is recovered from the confidence interval.
 }
 \examples{
 ci.cor.dep(.05, .396, .179, .088, 166)
 
 # Should return:
-#      Estimate         LL      UL
-# [1,]    0.217 0.01323072 0.415802
+#      Estimate       SE         LL       UL
+# [1,]   0.217 0.1026986 0.01323072 0.415802
  
 
 }

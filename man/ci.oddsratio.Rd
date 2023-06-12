@@ -21,6 +21,7 @@ ci.oddsratio(alpha, f00, f01, f10, f11)
 Returns a 1-row matrix. The columns are:
 \itemize{
 \item Estimate - estimate of odds ratio
+\item SE - standard error
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval
 }
@@ -34,8 +35,8 @@ cell frequency. This function requires the frequency counts from a
 ci.oddsratio(.05, 229, 28, 96, 24)
 
 # Should return:
-#      Estimate       LL       UL
-# [1,] 2.044451 1.133267 3.688254
+#      Estimate        SE       LL       UL
+# [1,] 2.044451 0.6154578 1.133267 3.688254
 
 
 }

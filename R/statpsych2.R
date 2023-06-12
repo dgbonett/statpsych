@@ -1,4 +1,4 @@
-#  ======================= File 2: Confidence Intervals ======================
+#  ======================= Confidence Intervals ==============================
 #  ci.cor  ===================================================================
 #' Confidence interval for a Pearson or partial correlation
 #'
@@ -120,7 +120,7 @@ ci.spcor <- function(alpha, cor, r2, n) {
 #' @description
 #' Computes a confidence interval for a difference in population Pearson 
 #' correlations in a 2-group design. A bias adjustmentment is used to 
-#' reduce the bias of each Fisher transformed correlation. 
+#' reduce the bias of each Fisher transformed correlation.  
 #'
 #'  
 #' @param  alpha	alpha level for 1-alpha confidence
@@ -133,6 +133,7 @@ ci.spcor <- function(alpha, cor, r2, n) {
 #' @return 
 #' Returns a 1-row matrix. The columns are:
 #' * Estimate - estimated correlation difference
+#' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #' 
@@ -145,8 +146,8 @@ ci.spcor <- function(alpha, cor, r2, n) {
 #' ci.cor2(.05, .886, .802, 200, 200)
 #'
 #' # Should return:
-#' #      Estimate         LL        UL
-#' # [1,]    0.084 0.02803246 0.1463609
+#' #      Estimate         SE         LL        UL
+#' # [1,]    0.084 0.02967934 0.02803246 0.1463609
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -154,13 +155,13 @@ ci.spcor <- function(alpha, cor, r2, n) {
 ci.cor2 <- function(alpha, cor1, cor2, n1, n2) {
  z <- qnorm(1 - alpha/2)
  diff <- cor1 - cor2
- se1 <- sqrt(1/((n1 - 3)))
+ se1 <- sqrt(1/(n1 - 3))
  zr1 <- log((1 + cor1)/(1 - cor1))/2 - cor1/(2*(n1 - 1))
  ll0 <- zr1 - z*se1
  ul0 <- zr1 + z*se1
  ll1 <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
  ul1 <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
- se2 <- sqrt(1/((n2 - 3)))
+ se2 <- sqrt(1/(n2 - 3))
  zr2 <- log((1 + cor2)/(1 - cor2))/2 - cor2/(2*(n2 - 1))
  ll0 <- zr2 - z*se2
  ul0 <- zr2 + z*se2
@@ -168,8 +169,9 @@ ci.cor2 <- function(alpha, cor1, cor2, n1, n2) {
  ul2 <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
  ll <- diff - sqrt((cor1 - ll1)^2 + (ul2 - cor2)^2)
  ul <- diff + sqrt((ul1 - cor1)^2 + (cor2 - ll2)^2)
- out <- t(c(diff, ll, ul))
- colnames(out) <- c("Estimate", "LL", "UL")
+ se <- sqrt((1 - cor1^2)^2/(n1 - 3) + (1 - cor2^2)^2/((n2 - 3)))
+ out <- t(c(diff, se, ll, ul))
+ colnames(out) <- c("Estimate", "SE", "LL", "UL")
  return(out)
 }
 
@@ -182,7 +184,8 @@ ci.cor2 <- function(alpha, cor1, cor2, n1, n2) {
 #' Computes a confidence interval for a difference in population Pearson 
 #' correlations that are estimated from the same sample and have one 
 #' variable in common. A bias adjustmentment is used to reduce the bias
-#' of each Fisher transformed correlation. 
+#' of each Fisher transformed correlation. An approximate standard error
+#' is recovered from the confidence interval.
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -195,6 +198,7 @@ ci.cor2 <- function(alpha, cor1, cor2, n1, n2) {
 #' @return 
 #' Returns a 1-row matrix. The columns are:
 #' * Estimate - estimated correlation difference
+#' * SE - recovered standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #' 
@@ -207,8 +211,8 @@ ci.cor2 <- function(alpha, cor1, cor2, n1, n2) {
 #' ci.cor.dep(.05, .396, .179, .088, 166)
 #'
 #' # Should return:
-#' #      Estimate         LL      UL
-#' # [1,]    0.217 0.01323072 0.415802
+#' #      Estimate       SE         LL       UL
+#' # [1,]   0.217 0.1026986 0.01323072 0.415802
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -234,8 +238,9 @@ ci.cor.dep <- function(alpha, cor1, cor2, cor12, n) {
  d2 <- 2*c*(cor1 - ul1)*(cor2 - ll2)
  ll <- diff - sqrt((cor1 - ll1)^2 + (ul2 - cor2)^2 - d1)
  ul <- diff + sqrt((ul1 - cor1)^2 + (cor2 - ll2)^2 - d2)
- out <- t(c(diff, ll, ul))
- colnames(out) <- c("Estimate", "LL", "UL")
+ se <- (ul - ll)/(2*z)
+ out <- t(c(diff, se, ll, ul))
+ colnames(out) <- c("Estimate", "SE", "LL", "UL")
  return(out)
 }
 
@@ -248,10 +253,8 @@ ci.cor.dep <- function(alpha, cor1, cor2, cor12, n) {
 #' Computes a 100(1 - alpha)% confidence interval for a difference in 
 #' population correlations in a 2-group design. The correlations can be 
 #' Pearson, Spearman, partial, semipartial, or point-biserial correlations. 
-#' The function requires 100(1 - alpha)% confidence intervals for each 
-#' correlation as input. This function also can be used to compute a 
-#' confidence interval for the difference of two Cronbach reliability
-#' coefficients.
+#' The function requires a point estimate and a 100(1 - alpha)% confidence
+#' interval for each correlation as input. 
 #'
 #'  
 #' @param  cor1  estimated correlation for group 1 
@@ -322,6 +325,7 @@ ci.cor2.gen <- function(cor1, ll1, ul1, cor2, ll2, ul2) {
 #' @return 
 #' Returns a 2-row matrix. The columns are:
 #' * Estimate - estimated point-biserial correlation
+#' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #' 
@@ -330,37 +334,42 @@ ci.cor2.gen <- function(cor1, ll1, ul1, cor2, ll2, ul2) {
 #' ci.pbcor(.05, 28.32, 21.48, 3.81, 3.09, 40, 40)
 #'
 #' # Should return:
-#' #              Estimate        LL        UL
-#' # Weighted:   0.7065799 0.5885458 0.7854471
-#' # Unweighted: 0.7020871 0.5808366 0.7828948
+#' #              Estimate         SE        LL        UL
+#' # Weighted:   0.7065799 0.04890959 0.5885458 0.7854471
+#' # Unweighted: 0.7020871 0.05018596 0.5808366 0.7828948
 #'  
 #' 
 #' @importFrom stats qnorm
 #' @export 
 ci.pbcor <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
  z <- qnorm(1 - alpha/2)
- s <- sqrt((sd1^2 + sd2^2)/2)
- d1 <- (m1 - m2)/sqrt(((n1 - 1)*sd1^2 + (n2 - 1)*sd2^2)/(n1 + n2 - 2))
- d2 <- (m1 - m2)/s
+ df1 <- n1 - 1
+ df2 <- n2 - 1
  n <- n1 + n2
  p <- n1/n
- k <- (n1 + n2 - 2)/(n*p*(1 - p))
+ s1 <- sqrt((df1*sd1^2 + df2*sd2^2)/(n - 2))
+ s2 <- sqrt((sd1^2 + sd2^2)/2)
+ d1 <- (m1 - m2)/s1
+ d2 <- (m1 - m2)/s2
+ k <- (n - 2)/(n*p*(1 - p))
  cor1 <- d1/sqrt(d1^2 + k)
  cor2 <- d2/sqrt(d2^2 + 4)
- sed1 <- sqrt(d1^2*(1/n1 + 1/n2)/8 + (sd1^2/n1 + sd2^2/n2)/s^2)
- sed2 <- sqrt(d2^2*(sd1^4/(n1-1) + sd2^4/(n2-1))/(8*s^4) + (sd1^2/(n1-1) + sd2^2/(n2-1))/s^2) 
- lld1 <- d1 - z*sed1
- uld1 <- d1 + z*sed1
- lld2 <- d2 - z*sed2
- uld2 <- d2 + z*sed2
+ se.d1 <- sqrt(d1^2*(1/n1 + 1/n2)/8 + (sd1^2/n1 + sd2^2/n2)/s1^2)
+ se.d2 <- sqrt(d2^2*(sd1^4/df1 + sd2^4/df2)/(8*s2^4) + (sd1^2/df1 + sd2^2/df2)/s2^2) 
+ se.cor1 <- (k/(d1^2 + k)^(3/2))*se.d1
+ se.cor2 <- (4/(d2^2 + 4)^(3/2))*se.d2
+ lld1 <- d1 - z*se.d1
+ uld1 <- d1 + z*se.d1
+ lld2 <- d2 - z*se.d2
+ uld2 <- d2 + z*se.d2
  llc1 <- lld1/sqrt(lld1^2 + k)
  ulc1 <- uld1/sqrt(uld1^2 + k)
  llc2 <- lld2/sqrt(lld2^2 + 4)
  ulc2 <- uld2/sqrt(uld2^2 + 4)
- out1 <- t(c(cor1, llc1, ulc1))
- out2 <- t(c(cor2, llc2, ulc2))
+ out1 <- t(c(cor1, se.cor1, llc1, ulc1))
+ out2 <- t(c(cor2, se.cor2, llc2, ulc2))
  out <- rbind(out1, out2)
- colnames(out) <- c("Estimate", "LL", "UL")
+ colnames(out) <- c("Estimate", "SE", "LL", "UL")
  rownames(out) <- c("Weighted:", "Unweighted:")
  return(out)
 }
@@ -427,7 +436,7 @@ ci.spear <- function(alpha, y, x) {
 #'
 #' @description
 #' Computes a confidence interval for a difference in population Spearman 
-#' correlations in a 2-group design.
+#' correlations in a 2-group design. 
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -440,6 +449,7 @@ ci.spear <- function(alpha, y, x) {
 #' @return 
 #' Returns a 1-row matrix. The columns are:
 #' * Estimate - estimated correlation difference
+#' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #' 
@@ -455,8 +465,8 @@ ci.spear <- function(alpha, y, x) {
 #' ci.spear2(.05, .54, .48, 180, 200)
 #'
 #' # Should return:
-#' #      Estimate         LL        UL
-#' # [1,]     0.06 -0.1003977 0.2185085     
+#' #      Estimate         SE         LL        UL
+#' # [1,]     0.06 0.08124926 -0.1003977 0.2185085     
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -478,8 +488,9 @@ ci.spear2 <- function(alpha, cor1, cor2, n1, n2) {
  cor.dif <- cor1 - cor2
  ll.dif <- cor.dif - sqrt((cor1 - ll1)^2 + (ul2 - cor2)^2)
  ul.dif <- cor.dif + sqrt((ul1 - cor1)^2 + (cor2 - ll2)^2)
- out <- cbind(cor.dif, ll.dif, ul.dif)
- colnames(out) <- c("Estimate", "LL", "UL")
+ se <- sqrt(se1^2 + se2^2)
+ out <- cbind(cor.dif, se, ll.dif, ul.dif)
+ colnames(out) <- c("Estimate", "SE", "LL", "UL")
  return (out)
 }
 	
@@ -505,6 +516,7 @@ ci.spear2 <- function(alpha, cor1, cor2, n1, n2) {
 #' @return 
 #' Returns a 1-row matrix. The columns are:
 #' * Estimate - estimated mean absolute prediction error
+#' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #' 
@@ -515,25 +527,94 @@ ci.spear2 <- function(alpha, cor1, cor2, n1, n2) {
 #' ci.mape(.05, res, 1)
 #'
 #' # Should return:
-#' #       Estimate       LL       UL
-#' # [1,]    2.3744 1.751678 3.218499
+#' #       Estimate        SE       LL       UL
+#' # [1,]    2.3744 0.3314752 1.751678 3.218499
 #'  
 #' 
-#' @importFrom stats qt
+#' @importFrom stats qnorm
 #' @importFrom stats sd
 #' @export
 ci.mape <- function(alpha, res, s) {
  n <- length(res)
  df <- n - s - 1
- t <- qt(1 - alpha/2, df)
+ z <- qnorm(1 - alpha/2)
  c <- n/(n - (s + 2)/2)
  mape <- mean(abs(res))
  kur <- (sd(res)/mape)^2
  se <- sqrt((kur - 1)/df)
- ll <- exp(log(c*mape) - t*se)
- ul <- exp(log(c*mape) + t*se)
- out <- t(c(c*mape, ll, ul))
- colnames(out) <- c("Estimate", "LL", "UL")
+ ll <- exp(log(c*mape) - z*se)
+ ul <- exp(log(c*mape) + z*se)
+ se.mape <- c*mape*se
+ out <- t(c(c*mape, se.mape, ll, ul))
+ colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ return(out)
+}
+
+
+#  ci.mape2  ===================================================================
+#' Confidence interval for a ratio of mean absolute prediction errors in a
+#' 2-group design
+#'
+#'                      
+#' @description
+#' Computes a confidence interval for a ratio of population mean absolute 
+#' prediction errors (MAPEs) from in a general linear model in two independent 
+#' groups. The number of predictor variables can differ across groups and the 
+#' two models can be non-nested. This function requires a vector of estimated 
+#' residuals from each group. This function does not assume zero excess 
+#' kurtosis but does assume symmetry in the population prediction errors.
+#'
+#'  
+#' @param  alpha  alpha level for 1-alpha confidence
+#' @param  res1   vector of residuals from group 1
+#' @param  res2   vector of residuals from group 2
+#' @param  s1	  number of predictor variables used in group 1
+#' @param  s2	  number of predictor variables used in group 2
+#'
+#'
+#' @return 
+#' Returns a 1-row matrix. The columns are:
+#' * MAPE1 - bias adjusted mean absolute prediction error for group 1
+#' * MAPE2 - bias adjusted mean absolute prediction error for group 2
+#' * MAPE1/MAPE2 - ratio of bias adjusted mean absolute prediction errors
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
+#' 
+#' 
+#' @examples
+#' res1 <- c(-2.70, -2.69, -1.32, 1.02, 1.23, -1.46, 2.21, -2.10, 2.56, -3.02
+#'         -1.55, 1.46, 4.02, 2.34)
+#' res2 <- c(-0.71, -0.89, 0.72, -0.35, 0.33 -0.92, 2.37, 0.51, 0.68, -0.85,
+#'         -0.15, 0.77, -1.52, 0.89, -0.29, -0.23, -0.94, 0.93, -0.31 -0.04)
+#' ci.mape2(.05, res1, res2, 1, 1)
+#'
+#' # Should return:
+#' #        MAPE1     MAPE2 MAPE1/MAPE2       LL       UL
+#' # [1,] 2.58087 0.8327273    3.099298 1.917003 5.010761
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @importFrom stats sd
+#' @export
+ci.mape2 <- function(alpha, res1, res2, s1, s2) {
+ z <- qnorm(1 - alpha/2)
+ n1 <- length(res1)
+ df1 <- n1 - s1 - 1
+ c1 <- n1/(n1 - (s1 + 2)/2)
+ mape1 <- mean(abs(res1))
+ kur1 <- (sd(res1)/mape1)^2
+ se1 <- sqrt((kur1 - 1)/df1)
+ n2 <- length(res2)
+ df2 <- n2 - s2 - 1
+ c2 <- n2/(n2 - (s2 + 2)/2)
+ mape2 <- mean(abs(res2))
+ kur2 <- (sd(res2)/mape2)^2
+ se2 <- sqrt((kur2 - 1)/df2)
+ se <- sqrt(se1^2 + se2^2)
+ ll <- exp(log(c1*mape1) - log(c2*mape2) - z*se)
+ ul <- exp(log(c1*mape1) - log(c2*mape2) + z*se)
+ out <- t(c(c1*mape1, c2*mape2,(c1*mape1)/(c2*mape2), ll, ul))
+ colnames(out) <- c("MAPE1", "MAPE2", "MAPE1/MAPE2", "LL", "UL")
  return(out)
 }
 
@@ -563,7 +644,7 @@ ci.mape <- function(alpha, res, s) {
 #'
 #' @return 
 #' Returns a 2-row matrix. The columns are:
-#' * Estimate - estimated condition slope
+#' * Estimate - estimated conditional slope
 #' * t - t test statistic
 #' * p - p-value
 #' * LL - lower limit of the confidence interval
@@ -715,15 +796,14 @@ ci.fisher <- function(alpha, cor, se) {
 #'
 #' @description
 #' Computes a Monte Carlo confidence interval (500,000 trials) for a population
-#' unstandardized indirect effect in a path model. This function is not
-#' recommended for a standardized indirect effect unless the standardized
-#' slope estimates for both paths are less than about .3 in absolute value. 
-#' The Monte Carlo method is general in that the slope estimates and standard 
+#' unstandardized indirect effect in a path model and a Sobel standard error. 
+#' This function is not recommended for a standardized indirect effect. The 
+#' Monte Carlo method is general in that the slope estimates and standard 
 #' errors do not need to be OLS estimates with homoscedastic standard errors. 
-#' For example, LAD slope estimates and their standard errors, OLS slope 
-#' estimates and heteroscedastic standard errors, distribution-free 
-#' Theil-Sen slope estimates with McKean-Schrader standard errors, or 
-#' standardized slopes with robust standard errors also could be used.
+#' For example, LAD slope estimates and their standard errors, OLS slope
+#' estimates and heteroscedastic-consistent standard errors, and (in models 
+#' with no direct effects) distribution-free Theil-Sen slope estimates with
+#' recovered standard errors also could be used.
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence  
@@ -736,7 +816,7 @@ ci.fisher <- function(alpha, cor, se) {
 #' @return 
 #' Returns a 1-row matrix. The columns are:
 #' * Estimate - estimated indirect effect
-#' * SE - standard error of indirect effect
+#' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #' 
@@ -884,13 +964,15 @@ ci.lc.gen.bs <- function(alpha, est, se, v) {
  return(out)
 }
 
+
 #  ci.rsqr ===================================================================
 #' Confidence interval for squared multiple correlation
 #'                             
 #' @description
 #' Computes an approximate confidence interval for a population squared 
 #' multiple correlation in a linear model with random predictor variables.  
-#' This function uses the scaled central F approximation method.
+#' This function uses the scaled central F approximation method. An
+#' approximate standard error is recovered from the confidence interval.
 #'
 #'
 #' @param  alpha    alpha value for 1-alpha confidence
@@ -905,6 +987,7 @@ ci.lc.gen.bs <- function(alpha, est, se, v) {
 #' Returns a 1-row matrix. The columns are:
 #' * R-squared - estimate of unadjusted R-squared 
 #' * adj R-squared - bias adjusted R-squared estimate
+#' * SE - recovered standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #'
@@ -913,8 +996,8 @@ ci.lc.gen.bs <- function(alpha, est, se, v) {
 #' ci.rsqr(.05, .241, 3, 116)
 #'
 #' # Should return:
-#' #        R-squared    adj R-squared          LL        UL
-#' # [1,]       0.241        0.2206696  0.09819599 0.3628798
+#' #      R-squared adj R-squared         SE         LL        UL  
+#' # [1,]     0.241     0.2206696 0.06752263 0.09819599 0.3628798
 #'  
 #' 
 #' @importFrom stats qf
@@ -922,6 +1005,7 @@ ci.lc.gen.bs <- function(alpha, est, se, v) {
 ci.rsqr <- function(alpha, r2, s, n) {
  alpha1 <- alpha/2
  alpha2 <- 1 - alpha1
+ z0 <- qnorm(1 - alpha1)
  dfe <- n - s - 1
  adj <- 1 - (n - 1)*(1 - r2)/dfe
  if (adj < 0) {adj = 0}
@@ -949,8 +1033,9 @@ ci.rsqr <- function(alpha, r2, s, n) {
    if (ll < 0) {ll = 0}
    if (ul < 0) {ul = 0}
  }
- out <- t(c(r2, adj, ll, ul))
- colnames(out) <- c("R-squared", "adj R-squared", "LL", "UL")
+ se <- (ul - ll)/(2*z0)
+ out <- t(c(r2, adj, se, ll, ul))
+ colnames(out) <- c("R-squared", "adj R-squared", "SE", "LL", "UL")
  return(out)
 }
 
@@ -973,7 +1058,7 @@ ci.rsqr <- function(alpha, r2, s, n) {
 #' @return
 #' Returns a 1-row matrix. The columns are:
 #' * Estimate - Theil-Sen estimate of population slope
-#' * SE - approximate standard error
+#' * SE - recovered standard error
 #' * LL - lower limit of confidence interval
 #' * UL - upper limit of confidence interval
 #'
@@ -1022,7 +1107,124 @@ ci.theil <- function(alpha, y, x) {
 }
 
 
-#  =============== File 2: Sample Size for Desire Precision ===================
+#  ci.cronbach2 ===============================================================
+#' Confidence interval for a difference in Cronbach reliabilities in a 2-group 
+#' design
+#'
+#'
+#' @description
+#' Computes a confidence interval for a difference in population Cronbach 
+#' reliability coefficicents in a 2-group design. The number of measurements
+#' (e.g., items or raters) used in each group need not be equal.
+#'
+#'  
+#' @param  alpha    alpha level for 1-alpha confidence
+#' @param  rel1     estimated Cronbach reliablity for group 1
+#' @param  rel2     estimated Cronbach reliablity for group 2
+#' @param  r1       number of measurements used in group 1
+#' @param  r2       number of measurements used in group 2
+#' @param  n1       sample size for group 1
+#' @param  n2       sample size for group 2
+#'
+#' 
+#' @return 
+#' Returns a 1-row matrix. The columns are:
+#' * Estimate - estimated reliability difference
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
+#' 
+#' 
+#' @references
+#' \insertRef{Bonett2015}{statpsych}
+#'
+#'
+#' @examples
+#' ci.cronbach2(.05, .88, .76, 8, 8, 200, 250)
+#'
+#' # Should return:
+#' #      Estimate         LL       UL
+#' # [1,]     0.12 0.06973411 0.173236
+#'  
+#' 
+#' @importFrom stats qf
+#' @export
+ci.cronbach2 <- function(alpha, rel1, rel2, r1, r2, n1, n2) {
+ df11 <- n1 - 1
+ df21 <- n1*(r1 - 1)
+ f11 <- qf(1 - alpha/2, df11, df21)
+ f21 <- qf(1 - alpha/2, df21, df11)
+ f01 <- 1/(1 - rel1)
+ LL1 <- 1 - f11/f01
+ UL1 <- 1 - 1/(f01*f21)
+ df12 <- n2 - 1
+ df22 <- n2*(r2 - 1)
+ f12 <- qf(1 - alpha/2, df12, df22)
+ f22 <- qf(1 - alpha/2, df22, df12)
+ f02 <- 1/(1 - rel2)
+ LL2 <- 1 - f12/f02
+ UL2 <- 1 - 1/(f02*f22)
+ d <- rel1 - rel2
+ ll <- d - sqrt((rel1 - LL1)^2 + (UL2 - rel2)^2)
+ ul <- d + sqrt((UL1 - rel1)^2 + (rel2 - LL2)^2)
+ out <- t(c(d, ll, ul))
+ colnames(out) <- c("Estimate", "LL", "UL")
+ return(out)
+}
+
+
+#  ci.rel2 ================================================================
+#' Confidence interval for a 2-group reliability difference
+#'
+#'
+#' @description 
+#' Computes a 100(1 - alpha)% confidence interval for a difference in 
+#' population reliabilities in a 2-group design. This function can be
+#' used with any type of reliablity coefficient (e.g., Cronbach alpha,
+#' McDonald omega, intraclass reliablities). The function requires 
+#' point estimates and 100(1 - alpha)% confidence intervals for each
+#' reliability as input. 
+#'
+#'  
+#' @param  rel1  estimated reliability for group 1 
+#' @param  ll1   lower limit for group 1 reliability
+#' @param  ul1   upper limit for group 1 reliability
+#' @param  rel2  estimated reliability for group 2
+#' @param  ll2   lower limit for group 2 reliability
+#' @param  ul2   upper limit for group 2 reliability
+#'
+#'
+#' @return 
+#' Returns a 1-row matrix. The columns are:
+#' * Estimate - estimated reliability difference
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
+#' 
+#' 
+#' @references
+#' \insertRef{Bonett2015}{statpsych}
+#'
+#'
+#' @examples
+#' ci.rel2(.4, .35, .47, .2, .1, .32)
+#'
+#' # Should return:
+#' #      Estimate   LL        UL
+#' # [1,]      0.2 0.07 0.3220656
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export 
+ci.rel2 <- function(rel1, ll1, ul1, rel2, ll2, ul2) {
+ diff <- rel1 - rel2
+ ll <- diff - sqrt((rel1 - ll1)^2 + (ul2 - rel2)^2)
+ ul <- diff + sqrt((ul1 - rel1)^2 + (rel2 - ll2)^2)
+ out <- t(c(diff, ll, ul))
+ colnames(out) <- c("Estimate", "LL", "UL")
+ return(out)
+}
+
+
+#  =================== Sample Size for Desire Precision =======================
 #  size.ci.slope ==============================================================
 #' Sample size for a slope confidence interval
 #'
@@ -1123,14 +1325,13 @@ size.ci.cor <- function(alpha, cor, s, w) {
 
 #  size.ci.rsqr ==============================================================
 #' Sample size for a squared multiple correlation confidence interval
-#'
+#'                       
 #'
 #' @description
 #' Computes the sample size required to estimate a squared multiple correlation
 #' in a random-x regression model with desired confidence interval precision.
 #' Set the planning value of the squared multiple correlation to 1/3 for a 
-#' conservatively large sample size. This function uses an approximation to
-#' the standard error of the squared multiple correlation.
+#' conservatively large sample size. 
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -1144,18 +1345,26 @@ size.ci.cor <- function(alpha, cor, s, w) {
 #' 
 #' 
 #' @examples
-#' size.ci.rsqr(.05, .333, 2, .2)
+#' 
 #'
 #' # Should return:
 #' #      Sample size
-#' # [1,]         232
+#' # [1,]         226
 #'  
 #' 
 #' @importFrom stats qnorm
 #' @export  
 size.ci.rsqr <- function(alpha, r2, s, w) {
  z <- qnorm(1 - alpha/2)
- n <- ceiling(16*(r2*(1 - r2)^2)*(z/w)^2 + s + 2)
+ n1 <- ceiling(16*(r2*(1 - r2)^2)*(z/w)^2 + s + 2)
+ ci <- ci.rsqr(alpha, r2, s, n1)
+ ll <- ci[1,4]                           
+ ul <- ci[1,5]
+ n2 <- ceiling(n1*((ul - ll)/w)^2)
+ ci <- ci.rsqr(alpha, r2, s, n2)
+ ll <- ci[1,4]                          
+ ul <- ci[1,5]
+ n <- ceiling(n2*((ul - ll)/w)^2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
  return(out)
@@ -1256,7 +1465,100 @@ size.ci.lc.ancova <- function(alpha, evar, s, d, w, v) {
 }
 
 
-# =================== File 2: Sample Size for Desired Power ===================
+#  size.ci.indirect ===========================================================
+#' Sample size for an indirect effect confidence interval 
+#'
+#'
+#' @description
+#' Computes the approximate sample size required to estimate the indirect effect  
+#' in a simple mediation model. The direct effect of the independent variable on 
+#' the dependent variable, controlling for the mediator variable, is assumed to 
+#' be negligible. 
+#'
+#'  
+#' @param  alpha  alpha level for 1-alpha confidence
+#' @param  cor1   planning value of correlation between the independent and mediator variables
+#' @param  cor2   planning value of correlation between the mediator and dependent variables 
+#' @param  w      desired confidence interval width
+#'
+#' 
+#' @return 
+#' Returns the required sample size
+#' 
+#' 
+#' @examples
+#' size.ci.indirect(.05, .4, .5, .2)
+#'
+#' # Should return:
+#' #      Sample size
+#' # [1,]         106
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export  
+size.ci.indirect <- function(alpha, cor1, cor2, w) {
+ z <- qnorm(1 - alpha/2)
+ n <- ceiling(4*(cor2^2*(1 - cor1^2)^2 + cor1^2*(1 - cor2^2)^2)*(z/w)^2 + 3)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size"
+ return(out)
+}
+
+
+#  size.ci.cronbach2 =======================================================
+#' Sample size for a 2-group Cronbach reliability difference confidence
+#' interval
+#'
+#'
+#' Computes the sample size required to estimate a difference in population
+#' Cronbach reliability coefficients with desired precision in a 2-group
+#' design. 
+#'
+#'
+#' @param  alpha  alpha level for hypothesis test 
+#' @param  rel1   group 1 reliability planning value
+#' @param  rel2   group 2 reliability planning value
+#' @param  r      number of measurements (items, raters)
+#' @param  w      desired confidence interval width
+#'
+#'
+#' @return 
+#' Returns the required sample size per group
+#'
+#'
+#' @references
+#' \insertRef{Bonett2015}{statpsych}
+#'
+#'
+#' @examples
+#' size.ci.cronbach2(.05, .85, .70, 8, .15)
+#'
+#' # Should return:
+#' #      Sample size per group
+#' # [1,]                   180
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export
+size.ci.cronbach2 <- function(alpha, rel1, rel2, r, w) {
+ z <- qnorm(1 - alpha/2)
+ n0 <- ceiling((8*r/(r - 1))*((1 - rel1)^2 + (1 - rel2)^2)*(z/w)^2 + 2)
+ b <- log(n0/(n0 - 1))
+ LL1 <- 1 - exp(log(1 - rel1) - b + z*sqrt(2*r/((r - 1)*(n0 - 2))))
+ UL1 <- 1 - exp(log(1 - rel1) - b - z*sqrt(2*r/((r - 1)*(n0 - 2))))
+ LL2 <- 1 - exp(log(1 - rel2) - b + z*sqrt(2*r/((r - 1)*(n0 - 2))))
+ UL2 <- 1 - exp(log(1 - rel2) - b - z*sqrt(2*r/((r - 1)*(n0 - 2))))
+ ll <- rel1 - rel2 - sqrt((rel1 - LL1)^2 + (UL2 - rel2)^2)
+ ul <- rel1 - rel2 + sqrt((UL1 - rel1)^2 + (rel2 - LL2)^2)
+ w0 <- ul - ll
+ n <- ceiling((n0 - 2)*(w0/w)^2 + 2)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size per group"
+ return(out)
+}
+
+
+# ======================= Sample Size for Desired Power =======================
 #  size.test.slope ============================================================
 #' Sample size for a test of a slope
 #'
@@ -1383,6 +1685,7 @@ size.test.cor <- function(alpha, pow, cor, s, h) {
 #' @importFrom stats qnorm
 #' @export  
 size.interval.cor <- function(alpha, pow, cor, s, h) {
+ if (h <= abs(cor)) {stop("cor must be between -h and h")}
  za <- qnorm(1 - alpha)
  zb <- qnorm(1 - (1 - pow)/2)
  zr <- log((1 + cor)/(1 - cor))/2
@@ -1391,6 +1694,51 @@ size.interval.cor <- function(alpha, pow, cor, s, h) {
  n <- ceiling((za + zb)^2/es^2 + s + 3)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
+ return(out)
+}
+
+
+#  size.test.cor2 ==============================================================
+#' Sample size for a test of equal Pearson or partial correlation in a 2-group
+#' design
+#'
+#'
+#' @description
+#' Computes the sample size required to test equality of two Pearson or partial
+#' correlation with desired power in a 2-group design. Set s = 0 for a Pearson 
+#' correlation. 
+#'
+#'  
+#' @param  alpha   alpha level for hypothesis test
+#' @param  pow     desired power
+#' @param  cor1    planning value of correlation
+#' @param  cor2    planning value of correlation
+#' @param  s       number of control variables
+#'
+#' 
+#' @return 
+#' Returns the required sample size per group
+#' 
+#' 
+#' @examples
+#' size.test.cor2(.05, .8, .4, .2, 0)
+#'
+#' # Should return:
+#' #      Sample size per group
+#' # [1,]                   325
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export  
+size.test.cor2 <- function(alpha, pow, cor1, cor2, s) {
+ za <- qnorm(1 - alpha/2)
+ zb <- qnorm(pow)
+ zr1 <- log((1 + cor1)/(1 - cor1))/2
+ zr2 <- log((1 + cor2)/(1 - cor2))/2
+ es <- zr1 - zr2
+ n <- ceiling(2*(za + zb)^2/es^2 + s + 3)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size per group"
  return(out)
 }
 
@@ -1446,7 +1794,143 @@ size.test.lc.ancova <- function(alpha, pow, evar, es, s, d, v) {
 }
 
 
-# ========================= File 2: Miscellaneous =============================
+#  size.test.cronbach2 ========================================================
+#' Sample size to test equality of Cronbach reliability coefficients in a 
+#' 2-group design
+#'
+#'
+#' @description
+#' Computes the sample size required to test a difference in population
+#' Cronbach reliability coefficients with desired power in a 2-group design. 
+#'
+#'
+#' @param  alpha  alpha level for hypothesis test 
+#' @param  pow    desired power
+#' @param  rel1   group 1 reliability planning value
+#' @param  rel2   group 2 reliability planning value
+#' @param  r      number of measurements (items, raters)
+#'
+#'
+#' @return 
+#' Returns the required sample size per group
+#'
+#'
+#' @references
+#' \insertRef{Bonett2015}{statpsych}
+#'
+#'
+#' @examples
+#' size.test.cronbach2(.05, .80, .85, .70, 8)
+#'
+#' # Should return:
+#' #      Sample size per group
+#' # [1,]                    77
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export
+size.test.cronbach2 <- function(alpha, pow, rel1, rel2, r) {
+ za <- qnorm(1 - alpha/2)
+ zb <- qnorm(pow)
+ e <- (1 - rel1)/(1 - rel2)
+ n <- ceiling((4*r/(r - 1))*(za + zb)^2/log(e)^2 + 2)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size per group"
+ return(out)
+}
+
+
+#  ======================= Power for Planned Sample Size ======================
+#  power.cor1 =================================================================
+#' Approximates the power of a correlation test for a planned sample size
+#'
+#'
+#' @description
+#' Computes the approximate power of a Pearson or partial correlation test for 
+#' a planned sample size. Set s = 0 for a Pearson correlation. 
+#'
+#'
+#' @param  alpha  alpha level for hypothesis test 
+#' @param  n      planned sample size
+#' @param  cor    planning value of correlation 
+#' @param  h      hypothesized value of correlation 
+#' @param  s      number of control variables
+#'
+#'
+#' @return
+#' Returns the approximate power of the test
+#'
+#'
+#' @examples
+#' power.cor1(.05, 80, .3, 0, 0)
+#'
+#' # Should return:
+#' #          Power
+#' # [1,] 0.7751932
+#'
+#'
+#' @importFrom stats qnorm
+#' @importFrom stats pnorm
+#' @export
+power.cor1 <- function(alpha, n, cor, h, s) {
+ za <- qnorm(1 - alpha/2)
+ f1 = log((1 + cor)/(1 - cor))/2
+ f2 = log((1 + h)/(1 - h))/2
+ z <- abs(f1 - f2)*sqrt(n - 3 - s) - za
+ pow <- pnorm(z)
+ out <- matrix(pow, nrow = 1, ncol = 1)
+ colnames(out) <- "Power"
+ return(out)
+}
+
+
+#  power.cor2 =================================================================
+#' Approximates the power of a test for equal correlations in a 2-group design
+#' for planned sample sizes
+#'
+#'
+#' @description
+#' Computes the approximate power of a test for equal population Pearson or
+#' partial correlations in a 2-group design for planned sample sizes. Set
+#' s = 0 for a Pearson correlation. 
+#'
+#'
+#' @param  alpha  alpha level for hypothesis test 
+#' @param  n1     planned sample size for group 1
+#' @param  n2     planned sample size for group 2
+#' @param  cor1   planning value of correlation for group 1 
+#' @param  cor2   planning value of correlation for group 1 
+#' @param  s      number of control variables
+#'
+#'
+#' @return
+#' Returns the approximate power of the test
+#'
+#'
+#' @examples
+#' power.cor2(.05, 200, 200, .4, .2, 0)
+#'
+#' # Should return:
+#' #          Power
+#' # [1,] 0.5919517
+#'
+#'
+#' @importFrom stats qnorm
+#' @importFrom stats pnorm
+#' @export
+power.cor2 <- function(alpha, n1, n2, cor1, cor2, s) {
+ za <- qnorm(1 - alpha/2)
+ f1 = log((1 + cor1)/(1 - cor1))/2
+ f2 = log((1 + cor2)/(1 - cor2))/2
+ z <- abs(f1 - f2)/sqrt(1/(n1 - 3 - s) + 1/(n2 - 3 - s)) - za
+ pow <- pnorm(z)
+ out <- matrix(pow, nrow = 1, ncol = 1)
+ colnames(out) <- "Power"
+ return(out)
+}
+
+
+# ============================= Miscellaneous =================================
 #  slope.contrast =============================================================
 #' Contrast coefficients for the slope of a quantitative factor
 #'

@@ -10,9 +10,9 @@ ci.2x2.prop.mixed(alpha, group1, group2)
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
 
-\item{group1}{2x2 contingency table for Factor A in group 1}
+\item{group1}{vector of frequency counts from 2x2 contingency table for Factor A in group 1}
 
-\item{group2}{2x2 contingency table for Factor A in group 2}
+\item{group2}{vector of frequency counts from 2x2 contingency table for Factor A in group 2}
 }
 \value{
 Returns a 7-row matrix (one row per effect). The columns are:
@@ -36,19 +36,19 @@ the number of participants with a response of i = 0 or 1 at level 1 of
 Factor A and a response of j = 0 or 1 at level 2 of Factor A.
 }
 \examples{
-group1 = c(23, 42, 24, 11)
-group2 = c(26, 27, 13, 34)
+group1 = c(125, 14, 10, 254)
+group2 = c(100, 16, 9, 275)
 ci.2x2.prop.mixed (.05, group1, group2)
 
 # Should return:
-#            Estimate         SE         z           p           LL        UL
-# AB:      0.03960396 0.09991818 0.3963639 0.691836584 -0.156232072 0.2354400
-# A:       0.15841584 0.04995909 3.1709113 0.001519615  0.060497825 0.2563339
-# B:       0.09803922 0.04926649 1.9899778 0.046593381  0.001478675 0.1945998
-# A at b1: 0.17647059 0.07893437 2.2356621 0.025373912  0.021762060 0.3311791
-# A at b2: 0.13725490 0.06206620 2.2114274 0.027006257  0.015607377 0.2589024
-# B at a1: 0.11764706 0.06842118 1.7194539 0.085531754 -0.016455982 0.2517501
-# B at a2: 0.07843137 0.06913363 1.1344894 0.256589309 -0.057068054 0.2139308
+#              Estimate          SE          z          p          LL           UL
+# AB:       0.007555369 0.017716073  0.4264697 0.66976559 -0.02716750  0.042278234
+# A:       -0.013678675 0.008858036 -1.5442107 0.12253730 -0.03104011  0.003682758
+# B:       -0.058393219 0.023032656 -2.5352360 0.01123716 -0.10353640 -0.013250043
+# A at b1: -0.009876543 0.012580603 -0.7850612 0.43241768 -0.03453407  0.014780985
+# A at b2: -0.017412935 0.012896543 -1.3502018 0.17695126 -0.04268969  0.007863824
+# B at a1: -0.054634236 0.032737738 -1.6688458 0.09514794 -0.11879902  0.009530550
+# B at a2: -0.062170628 0.032328556 -1.9230871 0.05446912 -0.12553343  0.001192177
 
 
 }

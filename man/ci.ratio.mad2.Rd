@@ -2,7 +2,7 @@
 % Please edit documentation in R/statpsych1.R
 \name{ci.ratio.mad2}
 \alias{ci.ratio.mad2}
-\title{Confidence interval for a 2-group MAD ratio}
+\title{Confidence interval for a 2-group ratio of mean absolute deviations}
 \usage{
 ci.ratio.mad2(alpha, y1, y2)
 }

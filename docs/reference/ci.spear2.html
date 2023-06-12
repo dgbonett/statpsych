@@ -18,7 +18,7 @@ correlations in a 2-group design."><!-- mathjax --><script src="https://cdnjs.cl
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statpsych</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.0</span>
       </span>
     </div>
 
@@ -85,6 +85,7 @@ correlations in a 2-group design.</p>
     
 
 <p>Returns a 1-row matrix. The columns are:</p><ul><li><p>Estimate - estimated correlation difference</p></li>
+<li><p>SE - standard error</p></li>
 <li><p>LL - lower limit of the confidence interval</p></li>
 <li><p>UL - upper limit of the confidence interval</p></li>
 </ul></div>
@@ -93,24 +94,24 @@ correlations in a 2-group design.</p>
     <p>Bonett DG, Wright TA (2000).
 “Sample size requirements for estimating Pearson, Kendall and Spearman correlations.”
 <em>Psychometrika</em>, <b>65</b>(1), 23--28.
-ISSN 0033-3123, doi: <a href="https://doi.org/10.1007/BF02294183" class="external-link">10.1007/BF02294183</a>
+ISSN 0033-3123, <a href="https://doi.org/10.1007/BF02294183" class="external-link">doi:10.1007/BF02294183</a>
 .</p>
 <p>Zou GY (2007).
 “Toward using confidence intervals to compare correlations.”
 <em>Psychological Methods</em>, <b>12</b>(4), 399--413.
-ISSN 1939-1463, doi: <a href="https://doi.org/10.1037/1082-989X.12.4.399" class="external-link">10.1037/1082-989X.12.4.399</a>
+ISSN 1939-1463, <a href="https://doi.org/10.1037/1082-989X.12.4.399" class="external-link">doi:10.1037/1082-989X.12.4.399</a>
 .</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">ci.spear2</span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">.54</span>, <span class="fl">.48</span>, <span class="fl">180</span>, <span class="fl">200</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      Estimate         LL        UL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]     0.06 -0.1003977 0.2185085</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      Estimate         SE         LL        UL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]     0.06 0.08124926 -0.1003977 0.2185085</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Should return:</span></span></span>
-<span class="r-in"><span><span class="co">#      Estimate         LL        UL</span></span></span>
-<span class="r-in"><span><span class="co"># [1,]     0.06 -0.1003977 0.2185085     </span></span></span>
+<span class="r-in"><span><span class="co">#      Estimate         SE         LL        UL</span></span></span>
+<span class="r-in"><span><span class="co"># [1,]     0.06 0.08124926 -0.1003977 0.2185085     </span></span></span>
 <span class="r-in"><span> </span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
@@ -127,7 +128,7 @@ ISSN 1939-1463, doi: <a href="https://doi.org/10.1037/1082-989X.12.4.399" class=
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

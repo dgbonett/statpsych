@@ -15,6 +15,7 @@ ci.cod1(alpha, y)
 Returns a 1-row matrix. The columns are:
 \itemize{
 \item Estimate - estimated coefficient of dispersion
+\item SE - recovered standard error
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval
 }
@@ -23,7 +24,8 @@ Returns a 1-row matrix. The columns are:
 Computes a confidence interval for a population coefficient of dispersion
 which is defined as a mean absolute deviation from the median divided by a
 median. The coefficient of dispersion assumes ratio-scale scores and is a
-robust alternative to the coefficient of variation.
+robust alternative to the coefficient of variation. An approximate
+standard error is recovered from the confidence interval.
 }
 \examples{
 y <- c(30, 20, 15, 10, 10, 60, 20, 25, 20, 30, 10, 5, 50, 40,
@@ -31,11 +33,11 @@ y <- c(30, 20, 15, 10, 10, 60, 20, 25, 20, 30, 10, 5, 50, 40,
 ci.cod1(.05, y)
 
 # Should return:
-#        Estimate        LL       UL
-# [1,]  0.5921053 0.3813259 1.092679
+#        Estimate        SE        LL       UL
+# [1,]  0.5921053 0.1814708 0.3813259 1.092679
 
 
 }
 \references{
-\insertRef{Bonett2006}{statpsych}
+\insertRef{Bonett2006c}{statpsych}
 }

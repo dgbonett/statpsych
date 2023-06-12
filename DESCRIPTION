@@ -1,7 +1,7 @@
 Package: statpsych
 Type: Package
 Title: Statistical Methods for Psychologists
-Version: 1.3.0
+Version: 1.4.0
 Authors@R: c(
     person("Douglas G.", "Bonett", email = "dgbonett@ucsc.edu", role = c("aut", "cre")),
     person("Robert J.", "Calin-Jageman", email = "rcalinjageman@dom.edu", role = c("ctb")))
@@ -10,8 +10,8 @@ BugReports: https://github.com/dgbonett/statpsych/issues
 License: GPL-3
 Encoding: UTF-8
 Imports: 
-  utils, stats, mathjaxr, Rdpack, mnonr
-RoxygenNote: 7.2.1
+  utils, stats, mnonr, Rdpack, mathjaxr
+RoxygenNote: 7.2.3
 Roxygen: list(markdown = TRUE)
 RdMacros: Rdpack, mathjaxr
 Suggests: 
