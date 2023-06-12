@@ -354,3 +354,122 @@ test_that("ci.theil returns valid matrix", {
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)
 })
+
+
+test_that("power.cor1 returns valid matrix", {
+  colnames_expected <- c(
+    "Power"
+  )
+  
+  res <- power.cor1(.05, 80, .3, 0, 0)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+test_that("power.cor2 returns valid matrix", {
+  colnames_expected <- c(
+    "Power"
+  )
+  
+  res <- power.cor2(.05, 200, 200, .4, .2, 0)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+test_that("size.test.cor2 returns valid matrix", {
+  colnames_expected <- c(
+    "Sample size per group"
+  )
+  
+  res <- size.test.cor2(.05, .8, .4, .2, 0)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+test_that("size.test.cronbach2 returns valid matrix", {
+  colnames_expected <- c(
+    "Sample size per group"
+  )
+  
+  res <- size.test.cronbach2(.05, .80, .85, .70, 8)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+test_that("size.ci.cronbach2 returns valid matrix", {
+  colnames_expected <- c(
+    "Sample size per group"
+  )
+  
+  res <- size.ci.cronbach2(.05, .85, .70, 8, .15)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+test_that("size.ci.indirect returns valid matrix", {
+  colnames_expected <- c(
+    "Sample size"
+  )
+  
+  res <- size.ci.indirect(.05, .4, .5, .2)
+
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+test_that("ci.mape2 returns valid matrix", {
+  colnames_expected <- c(
+    "MAPE1", "MAPE2", "MAPE1/MAPE2", "LL", "UL"
+  )
+  
+  res1 <- c(-2.70, -2.69, -1.32, 1.02, 1.23, -1.46, 2.21, -2.10, 2.56, -3.02
+          -1.55, 1.46, 4.02, 2.34)
+  res2 <- c(-0.71, -0.89, 0.72, -0.35, 0.33 -0.92, 2.37, 0.51, 0.68, -0.85,
+          -0.15, 0.77, -1.52, 0.89, -0.29, -0.23, -0.94, 0.93, -0.31 -0.04)
+  res <- ci.mape2(.05, res1, res2, 1, 1)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+test_that("ci.rel2 returns valid matrix", {
+  colnames_expected <- c(
+    "Estimate", "LL", "UL"
+  )
+  
+  res <- ci.rel2(.4, .35, .47, .2, .1, .32)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+test_that("ci.cronbach2 returns valid matrix", {
+  colnames_expected <- c(
+    "Estimate", "LL", "UL"
+  )
+  
+  res <- ci.cronbach2(.05, .88, .76, 8, 8, 200, 250)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})

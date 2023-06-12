@@ -484,3 +484,96 @@ test_that("ci.agree2 returns valid matrix", {
 })
 
 
+test_that("power.prop1 returns valid matrix", {
+  colnames_expected <- c(
+    "Power"
+  )
+  
+  res <- power.prop1(.05, 40, .5, .2)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+test_that("power.prop2 returns valid matrix", {
+  colnames_expected <- c(
+    "Power"
+  )
+  
+  res <- power.prop2(.05, 60, 40, .5, .5, .2)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+test_that("power.prop.ps returns valid matrix", {
+  colnames_expected <- c(
+    "Power"
+  )
+  
+  res <- power.prop.ps(.05, 45, .5, .5, .4, .2)
+
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+test_that("ci.prop1.inv returns valid matrix", {
+  colnames_expected <- c(
+    "Estimate", "SE",        "LL",        "UL"
+  )
+  
+  res <- ci.prop1.inv(.05, 5, 67)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+test_that("ci.prop2.inv returns valid matrix", {
+  colnames_expected <- c(
+    "Estimate", "SE",        "LL",        "UL"
+  )
+  
+  res <- ci.prop2.inv(.05, 10, 10, 48, 213)
+
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+test_that("ci.agree.3rater returns valid matrix", {
+  colnames_expected <- c(
+    "Estimate", "LL",        "UL"
+  )
+  
+  f <- c(100, 6, 4, 40, 20, 1, 9, 120)
+  res <- ci.agree.3rater(.05, f)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(7, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+
+test_that("ci.bayes.prop1 returns valid matrix", {
+  colnames_expected <- c(
+    "Posterior mean", "Posterior SD", "LL",        "UL"
+  )
+  
+  res <- ci.bayes.prop1(.05, .4, .1, 12, 100)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
