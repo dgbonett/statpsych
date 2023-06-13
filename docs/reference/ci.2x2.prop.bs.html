@@ -70,7 +70,7 @@ Factor B.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ci.2x2.prop.bs</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">f</span>, <span class="va">n</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ci.2x2.prop.bs</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">f</span>, <span class="va">n</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -101,9 +101,9 @@ Factor B.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">f</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">15</span>, <span class="fl">24</span>, <span class="fl">28</span>, <span class="fl">23</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">n</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">50</span>, <span class="fl">50</span>, <span class="fl">50</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">ci.2x2.prop.bs</span><span class="op">(</span><span class="fl">.05</span>, <span class="va">f</span>, <span class="va">n</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">f</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">15</span>, <span class="fl">24</span>, <span class="fl">28</span>, <span class="fl">23</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">n</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">50</span>, <span class="fl">50</span>, <span class="fl">50</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu">ci.2x2.prop.bs</span><span class="op">(</span><span class="fl">.05</span>, <span class="va">f</span>, <span class="va">n</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             Estimate         SE          z           p          LL          UL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> AB:      -0.27450980 0.13692496 -2.0048193 0.044982370 -0.54287780 -0.00614181</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> A:       -0.11764706 0.06846248 -1.7184165 0.085720668 -0.25183106  0.01653694</span>
@@ -112,18 +112,18 @@ Factor B.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> A at b2:  0.01923077 0.09787658  0.1964798 0.844234654 -0.17260380  0.21106534</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> B at a1: -0.17307692 0.09432431 -1.8349132 0.066518551 -0.35794917  0.01179533</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> B at a2:  0.09615385 0.09758550  0.9853293 0.324462356 -0.09511021  0.28741790</span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Should return:</span></span></span>
-<span class="r-in"><span><span class="co">#             Estimate         SE          z           p          LL          UL</span></span></span>
-<span class="r-in"><span><span class="co"># AB:      -0.27450980 0.13692496 -2.0048193 0.044982370 -0.54287780 -0.00614181</span></span></span>
-<span class="r-in"><span><span class="co"># A:       -0.11764706 0.06846248 -1.7184165 0.085720668 -0.25183106  0.01653694</span></span></span>
-<span class="r-in"><span><span class="co"># B:       -0.03921569 0.06846248 -0.5728055 0.566776388 -0.17339968  0.09496831</span></span></span>
-<span class="r-in"><span><span class="co"># A at b1: -0.25000000 0.09402223 -2.6589456 0.007838561 -0.43428019 -0.06571981</span></span></span>
-<span class="r-in"><span><span class="co"># A at b2:  0.01923077 0.09787658  0.1964798 0.844234654 -0.17260380  0.21106534</span></span></span>
-<span class="r-in"><span><span class="co"># B at a1: -0.17307692 0.09432431 -1.8349132 0.066518551 -0.35794917  0.01179533</span></span></span>
-<span class="r-in"><span><span class="co"># B at a2:  0.09615385 0.09758550  0.9853293 0.324462356 -0.09511021  0.28741790</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span></span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># Should return:</span></span>
+<span class="r-in"><span class="co">#             Estimate         SE          z           p          LL          UL</span></span>
+<span class="r-in"><span class="co"># AB:      -0.27450980 0.13692496 -2.0048193 0.044982370 -0.54287780 -0.00614181</span></span>
+<span class="r-in"><span class="co"># A:       -0.11764706 0.06846248 -1.7184165 0.085720668 -0.25183106  0.01653694</span></span>
+<span class="r-in"><span class="co"># B:       -0.03921569 0.06846248 -0.5728055 0.566776388 -0.17339968  0.09496831</span></span>
+<span class="r-in"><span class="co"># A at b1: -0.25000000 0.09402223 -2.6589456 0.007838561 -0.43428019 -0.06571981</span></span>
+<span class="r-in"><span class="co"># A at b2:  0.01923077 0.09787658  0.1964798 0.844234654 -0.17260380  0.21106534</span></span>
+<span class="r-in"><span class="co"># B at a1: -0.17307692 0.09432431 -1.8349132 0.066518551 -0.35794917  0.01179533</span></span>
+<span class="r-in"><span class="co"># B at a2:  0.09615385 0.09758550  0.9853293 0.324462356 -0.09511021  0.28741790</span></span>
+<span class="r-in"></span>
+<span class="r-in"></span>
 </code></pre></div>
     </div>
   </div>

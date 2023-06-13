@@ -64,7 +64,7 @@ of freedom is used to improve the accuracy of the confidence interval.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ci.lc.reg</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">est</span>, <span class="va">se</span>, <span class="va">n</span>, <span class="va">s</span>, <span class="va">v</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ci.lc.reg</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">est</span>, <span class="va">se</span>, <span class="va">n</span>, <span class="va">s</span>, <span class="va">v</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -108,19 +108,19 @@ of freedom is used to improve the accuracy of the confidence interval.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">est</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1.74</span>, <span class="fl">1.83</span>, <span class="fl">0.482</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">se</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.483</span>, <span class="fl">.421</span>, <span class="fl">.395</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">40</span>, <span class="fl">40</span>, <span class="fl">40</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">v</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.5</span>, <span class="fl">.5</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">ci.lc.reg</span><span class="op">(</span><span class="fl">.05</span>, <span class="va">est</span>, <span class="va">se</span>, <span class="va">n</span>, <span class="fl">4</span>, <span class="va">v</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">est</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1.74</span>, <span class="fl">1.83</span>, <span class="fl">0.482</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">se</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.483</span>, <span class="fl">.421</span>, <span class="fl">.395</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">40</span>, <span class="fl">40</span>, <span class="fl">40</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">v</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.5</span>, <span class="fl">.5</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu">ci.lc.reg</span><span class="op">(</span><span class="fl">.05</span>, <span class="va">est</span>, <span class="va">se</span>, <span class="va">n</span>, <span class="fl">4</span>, <span class="va">v</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      Estimate        SE        t      df          p        LL       UL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,]    1.303 0.5085838 2.562016 78.8197 0.01231256 0.2906532 2.315347</span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Should return:</span></span></span>
-<span class="r-in"><span><span class="co">#      Estimate        SE        t      df          p        LL       UL</span></span></span>
-<span class="r-in"><span><span class="co"># [1,]    1.303 0.5085838 2.562016 78.8197 0.01231256 0.2906532 2.315347</span></span></span>
-<span class="r-in"><span> </span></span>
-<span class="r-in"><span></span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># Should return:</span></span>
+<span class="r-in"><span class="co">#      Estimate        SE        t      df          p        LL       UL</span></span>
+<span class="r-in"><span class="co"># [1,]    1.303 0.5085838 2.562016 78.8197 0.01231256 0.2906532 2.315347</span></span>
+<span class="r-in"> </span>
+<span class="r-in"></span>
 </code></pre></div>
     </div>
   </div>

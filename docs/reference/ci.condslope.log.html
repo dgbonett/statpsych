@@ -61,7 +61,7 @@ at low and high values of the moderator variable.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ci.condslope.log</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">b1</span>, <span class="va">b2</span>, <span class="va">se1</span>, <span class="va">se2</span>, <span class="va">cov</span>, <span class="va">lo</span>, <span class="va">hi</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ci.condslope.log</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">b1</span>, <span class="va">b2</span>, <span class="va">se1</span>, <span class="va">se2</span>, <span class="va">cov</span>, <span class="va">lo</span>, <span class="va">hi</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -112,23 +112,23 @@ at low and high values of the moderator variable.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">ci.condslope.log</span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">.132</span>, <span class="fl">.154</span>, <span class="fl">.031</span>, <span class="fl">.021</span>, <span class="fl">.015</span>, <span class="fl">5.2</span>, <span class="fl">10.6</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">ci.condslope.log</span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">.132</span>, <span class="fl">.154</span>, <span class="fl">.031</span>, <span class="fl">.021</span>, <span class="fl">.015</span>, <span class="fl">5.2</span>, <span class="fl">10.6</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                   Estimate exp(Estimate)        z           p       LL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> At low moderator    0.9328      2.541616 2.269824 0.023218266 1.135802</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> At high moderator   1.7644      5.838068 2.906507 0.003654887 1.776421</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                          UL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> At low moderator   5.687444</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> At high moderator 19.186357</span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Should return:</span></span></span>
-<span class="r-in"><span><span class="co">#                   Estimate exp(Estimate)        z           p </span></span></span>
-<span class="r-in"><span><span class="co"># At low moderator    0.9328      2.541616 2.269824 0.023218266 </span></span></span>
-<span class="r-in"><span><span class="co"># At high moderator   1.7644      5.838068 2.906507 0.003654887 </span></span></span>
-<span class="r-in"><span><span class="co">#                          LL        UL</span></span></span>
-<span class="r-in"><span><span class="co"># At low moderator   1.135802  5.687444</span></span></span>
-<span class="r-in"><span><span class="co"># At high moderator  1.776421 19.186357</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span></span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># Should return:</span></span>
+<span class="r-in"><span class="co">#                   Estimate exp(Estimate)        z           p </span></span>
+<span class="r-in"><span class="co"># At low moderator    0.9328      2.541616 2.269824 0.023218266 </span></span>
+<span class="r-in"><span class="co"># At high moderator   1.7644      5.838068 2.906507 0.003654887 </span></span>
+<span class="r-in"><span class="co">#                          LL        UL</span></span>
+<span class="r-in"><span class="co"># At low moderator   1.135802  5.687444</span></span>
+<span class="r-in"><span class="co"># At high moderator  1.776421 19.186357</span></span>
+<span class="r-in"></span>
+<span class="r-in"></span>
 </code></pre></div>
     </div>
   </div>

@@ -68,7 +68,7 @@ unonr function in the mnonr package.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">sim.ci.median.ps</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">n</span>, <span class="va">sd.ratio</span>, <span class="va">cor</span>, <span class="va">dist1</span>, <span class="va">dist2</span>, <span class="va">rep</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">sim.ci.median.ps</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">n</span>, <span class="va">sd.ratio</span>, <span class="va">cor</span>, <span class="va">dist1</span>, <span class="va">dist2</span>, <span class="va">rep</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -118,16 +118,16 @@ unonr function in the mnonr package.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Only 1000 reps because CRAN runs all examples and requires short execution time.</span></span></span>
-<span class="r-in"><span><span class="fu">sim.ci.median.ps</span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">30</span>, <span class="fl">1.5</span>, <span class="fl">.7</span>, <span class="fl">4</span>, <span class="fl">3</span>, <span class="fl">1000</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Only 1000 reps because CRAN runs all examples and requires short execution time.</span></span>
+<span class="r-in"><span class="fu">sim.ci.median.ps</span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">30</span>, <span class="fl">1.5</span>, <span class="fl">.7</span>, <span class="fl">4</span>, <span class="fl">3</span>, <span class="fl">1000</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      Coverage Lower Error Upper Error Ave CI Width</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]     0.96       0.032       0.008    0.9459518</span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Should return (within sampling error):</span></span></span>
-<span class="r-in"><span><span class="co">#      Coverage Lower Error Upper Error Ave CI Width</span></span></span>
-<span class="r-in"><span><span class="co"># [1,]    0.961       0.026       0.013    0.9435462</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]    0.966       0.022       0.012    0.9538315</span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># Should return (within sampling error):</span></span>
+<span class="r-in"><span class="co">#      Coverage Lower Error Upper Error Ave CI Width</span></span>
+<span class="r-in"><span class="co"># [1,]    0.961       0.026       0.013    0.9435462</span></span>
+<span class="r-in"></span>
+<span class="r-in"></span>
 </code></pre></div>
     </div>
   </div>
