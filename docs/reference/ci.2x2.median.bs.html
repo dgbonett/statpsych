@@ -62,7 +62,7 @@ effects are defined in terms of medians rather than means.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ci.2x2.median.bs</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">y11</span>, <span class="va">y12</span>, <span class="va">y21</span>, <span class="va">y22</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ci.2x2.median.bs</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">y11</span>, <span class="va">y12</span>, <span class="va">y21</span>, <span class="va">y22</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -99,11 +99,11 @@ effects are defined in terms of medians rather than means.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">y11</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">14</span>, <span class="fl">15</span>, <span class="fl">11</span>, <span class="fl">7</span>, <span class="fl">16</span>, <span class="fl">12</span>, <span class="fl">15</span>, <span class="fl">16</span>, <span class="fl">10</span>, <span class="fl">9</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">y12</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">18</span>, <span class="fl">24</span>, <span class="fl">14</span>, <span class="fl">18</span>, <span class="fl">22</span>, <span class="fl">21</span>, <span class="fl">16</span>, <span class="fl">17</span>, <span class="fl">14</span>, <span class="fl">13</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">y21</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">16</span>, <span class="fl">11</span>, <span class="fl">10</span>, <span class="fl">17</span>, <span class="fl">13</span>, <span class="fl">18</span>, <span class="fl">12</span>, <span class="fl">16</span>, <span class="fl">6</span>, <span class="fl">15</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">y22</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">18</span>, <span class="fl">17</span>, <span class="fl">11</span>, <span class="fl">9</span>, <span class="fl">9</span>, <span class="fl">13</span>, <span class="fl">18</span>, <span class="fl">15</span>, <span class="fl">14</span>, <span class="fl">11</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">ci.2x2.median.bs</span><span class="op">(</span><span class="fl">.05</span>, <span class="va">y11</span>, <span class="va">y12</span>, <span class="va">y21</span>, <span class="va">y22</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">y11</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">14</span>, <span class="fl">15</span>, <span class="fl">11</span>, <span class="fl">7</span>, <span class="fl">16</span>, <span class="fl">12</span>, <span class="fl">15</span>, <span class="fl">16</span>, <span class="fl">10</span>, <span class="fl">9</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">y12</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">18</span>, <span class="fl">24</span>, <span class="fl">14</span>, <span class="fl">18</span>, <span class="fl">22</span>, <span class="fl">21</span>, <span class="fl">16</span>, <span class="fl">17</span>, <span class="fl">14</span>, <span class="fl">13</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">y21</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">16</span>, <span class="fl">11</span>, <span class="fl">10</span>, <span class="fl">17</span>, <span class="fl">13</span>, <span class="fl">18</span>, <span class="fl">12</span>, <span class="fl">16</span>, <span class="fl">6</span>, <span class="fl">15</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">y22</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">18</span>, <span class="fl">17</span>, <span class="fl">11</span>, <span class="fl">9</span>, <span class="fl">9</span>, <span class="fl">13</span>, <span class="fl">18</span>, <span class="fl">15</span>, <span class="fl">14</span>, <span class="fl">11</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu">ci.2x2.median.bs</span><span class="op">(</span><span class="fl">.05</span>, <span class="va">y11</span>, <span class="va">y12</span>, <span class="va">y21</span>, <span class="va">y22</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          Estimate       SE         LL         UL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> AB:          -5.0 3.389735 -11.643758 1.64375833</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> A:            1.5 1.694867  -1.821879 4.82187916</span>
@@ -112,18 +112,18 @@ effects are defined in terms of medians rather than means.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> A at b2:      4.0 2.618464  -1.132095 9.13209504</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> B at a1:     -4.5 2.311542  -9.030539 0.03053939</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> B at a2:      0.5 2.479330  -4.359397 5.35939682</span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Should return:</span></span></span>
-<span class="r-in"><span><span class="co">#          Estimate       SE         LL         UL</span></span></span>
-<span class="r-in"><span><span class="co"># AB:          -5.0 3.389735 -11.643758 1.64375833</span></span></span>
-<span class="r-in"><span><span class="co"># A:            1.5 1.694867  -1.821879 4.82187916</span></span></span>
-<span class="r-in"><span><span class="co"># B:           -2.0 1.694867  -5.321879 1.32187916</span></span></span>
-<span class="r-in"><span><span class="co"># A at b1:     -1.0 2.152661  -5.219138 3.21913797</span></span></span>
-<span class="r-in"><span><span class="co"># A at b2:      4.0 2.618464  -1.132095 9.13209504</span></span></span>
-<span class="r-in"><span><span class="co"># B at a1:     -4.5 2.311542  -9.030539 0.03053939</span></span></span>
-<span class="r-in"><span><span class="co"># B at a2:      0.5 2.479330  -4.359397 5.35939682</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span></span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># Should return:</span></span>
+<span class="r-in"><span class="co">#          Estimate       SE         LL         UL</span></span>
+<span class="r-in"><span class="co"># AB:          -5.0 3.389735 -11.643758 1.64375833</span></span>
+<span class="r-in"><span class="co"># A:            1.5 1.694867  -1.821879 4.82187916</span></span>
+<span class="r-in"><span class="co"># B:           -2.0 1.694867  -5.321879 1.32187916</span></span>
+<span class="r-in"><span class="co"># A at b1:     -1.0 2.152661  -5.219138 3.21913797</span></span>
+<span class="r-in"><span class="co"># A at b2:      4.0 2.618464  -1.132095 9.13209504</span></span>
+<span class="r-in"><span class="co"># B at a1:     -4.5 2.311542  -9.030539 0.03053939</span></span>
+<span class="r-in"><span class="co"># B at a2:      0.5 2.479330  -4.359397 5.35939682</span></span>
+<span class="r-in"></span>
+<span class="r-in"></span>
 </code></pre></div>
     </div>
   </div>

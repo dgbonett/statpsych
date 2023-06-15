@@ -55,7 +55,7 @@ paired-samples design.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ci.ratio.median.ps</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">y1</span>, <span class="va">y2</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ci.ratio.median.ps</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">y1</span>, <span class="va">y2</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -87,23 +87,23 @@ paired-samples design.</p>
     <p>Bonett DG, Price RM (2020).
 “Confidence intervals for ratios of means and medians.”
 <em>Journal of Educational and Behavioral Statistics</em>, <b>45</b>(6), 750--770.
-ISSN 1076-9986, <a href="https://doi.org/10.3102/1076998620934125" class="external-link">doi:10.3102/1076998620934125</a>
+ISSN 1076-9986, doi: <a href="https://doi.org/10.3102/1076998620934125" class="external-link">10.3102/1076998620934125</a>
 .</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">y1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">21</span>, <span class="fl">4</span>, <span class="fl">9</span>, <span class="fl">12</span>, <span class="fl">35</span>, <span class="fl">18</span>, <span class="fl">10</span>, <span class="fl">22</span>, <span class="fl">24</span>, <span class="fl">1</span>, <span class="fl">6</span>, <span class="fl">8</span>, <span class="fl">13</span>, <span class="fl">16</span>, <span class="fl">19</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">y2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">67</span>, <span class="fl">28</span>, <span class="fl">30</span>, <span class="fl">28</span>, <span class="fl">52</span>, <span class="fl">40</span>, <span class="fl">25</span>, <span class="fl">37</span>, <span class="fl">44</span>, <span class="fl">10</span>, <span class="fl">14</span>, <span class="fl">20</span>, <span class="fl">28</span>, <span class="fl">40</span>, <span class="fl">51</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">ci.ratio.median.ps</span><span class="op">(</span><span class="fl">.05</span>, <span class="va">y1</span>, <span class="va">y2</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">y1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">21</span>, <span class="fl">4</span>, <span class="fl">9</span>, <span class="fl">12</span>, <span class="fl">35</span>, <span class="fl">18</span>, <span class="fl">10</span>, <span class="fl">22</span>, <span class="fl">24</span>, <span class="fl">1</span>, <span class="fl">6</span>, <span class="fl">8</span>, <span class="fl">13</span>, <span class="fl">16</span>, <span class="fl">19</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">y2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">67</span>, <span class="fl">28</span>, <span class="fl">30</span>, <span class="fl">28</span>, <span class="fl">52</span>, <span class="fl">40</span>, <span class="fl">25</span>, <span class="fl">37</span>, <span class="fl">44</span>, <span class="fl">10</span>, <span class="fl">14</span>, <span class="fl">20</span>, <span class="fl">28</span>, <span class="fl">40</span>, <span class="fl">51</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu">ci.ratio.median.ps</span><span class="op">(</span><span class="fl">.05</span>, <span class="va">y1</span>, <span class="va">y2</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      Median1 Median2 Median1/Median2        LL        UL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,]      13      30       0.4333333 0.3094838 0.6067451</span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Should return:</span></span></span>
-<span class="r-in"><span><span class="co">#         Median1  Median2   Median1/Median2        LL        UL</span></span></span>
-<span class="r-in"><span><span class="co"># [1,]         13       30         0.4333333 0.3094838 0.6067451</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span></span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># Should return:</span></span>
+<span class="r-in"><span class="co">#         Median1  Median2   Median1/Median2        LL        UL</span></span>
+<span class="r-in"><span class="co"># [1,]         13       30         0.4333333 0.3094838 0.6067451</span></span>
+<span class="r-in"></span>
+<span class="r-in"></span>
 </code></pre></div>
     </div>
   </div>

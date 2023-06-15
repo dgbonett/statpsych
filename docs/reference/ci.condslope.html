@@ -61,7 +61,7 @@ at specified low and high values of the moderator variable.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ci.condslope</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">b1</span>, <span class="va">b2</span>, <span class="va">se1</span>, <span class="va">se2</span>, <span class="va">cov</span>, <span class="va">lo</span>, <span class="va">hi</span>, <span class="va">dfe</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ci.condslope</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">b1</span>, <span class="va">b2</span>, <span class="va">se1</span>, <span class="va">se2</span>, <span class="va">cov</span>, <span class="va">lo</span>, <span class="va">hi</span>, <span class="va">dfe</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -115,23 +115,23 @@ at specified low and high values of the moderator variable.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">ci.condslope</span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">.132</span>, <span class="fl">.154</span>, <span class="fl">.031</span>, <span class="fl">.021</span>, <span class="fl">.015</span>, <span class="fl">5.2</span>, <span class="fl">10.6</span>, <span class="fl">122</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">ci.condslope</span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">.132</span>, <span class="fl">.154</span>, <span class="fl">.031</span>, <span class="fl">.021</span>, <span class="fl">.015</span>, <span class="fl">5.2</span>, <span class="fl">10.6</span>, <span class="fl">122</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                   Estimate        SE        t  df           p        LL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> At low moderator    0.9328 0.4109570 2.269824 122 0.024973618 0.1192696</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> At high moderator   1.7644 0.6070517 2.906507 122 0.004342076 0.5626805</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                         UL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> At low moderator  1.746330</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> At high moderator 2.966119</span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Should return:</span></span></span>
-<span class="r-in"><span><span class="co">#                   Estimate        SE        t  df           p </span></span></span>
-<span class="r-in"><span><span class="co"># At low moderator    0.9328 0.4109570 2.269824 122 0.024973618 </span></span></span>
-<span class="r-in"><span><span class="co"># At high moderator   1.7644 0.6070517 2.906507 122 0.004342076 </span></span></span>
-<span class="r-in"><span><span class="co">#                           LL       UL</span></span></span>
-<span class="r-in"><span><span class="co"># At low moderator   0.1192696 1.746330</span></span></span>
-<span class="r-in"><span><span class="co"># At high moderator  0.5626805 2.966119</span></span></span>
-<span class="r-in"><span> </span></span>
-<span class="r-in"><span></span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># Should return:</span></span>
+<span class="r-in"><span class="co">#                   Estimate        SE        t  df           p </span></span>
+<span class="r-in"><span class="co"># At low moderator    0.9328 0.4109570 2.269824 122 0.024973618 </span></span>
+<span class="r-in"><span class="co"># At high moderator   1.7644 0.6070517 2.906507 122 0.004342076 </span></span>
+<span class="r-in"><span class="co">#                           LL       UL</span></span>
+<span class="r-in"><span class="co"># At low moderator   0.1192696 1.746330</span></span>
+<span class="r-in"><span class="co"># At high moderator  0.5626805 2.966119</span></span>
+<span class="r-in"> </span>
+<span class="r-in"></span>
 </code></pre></div>
     </div>
   </div>

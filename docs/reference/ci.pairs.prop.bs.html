@@ -60,7 +60,7 @@ level.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ci.pairs.prop.bs</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">f</span>, <span class="va">n</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ci.pairs.prop.bs</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">f</span>, <span class="va">n</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -93,27 +93,27 @@ level.</p>
     <p>Agresti A, Caffo B (2000).
 “Simple and effective confidence intervals for proportions and differences of proportions result from adding two successes and two failures.”
 <em>The American Statistician</em>, <b>54</b>(4), 280.
-ISSN 00031305, <a href="https://doi.org/10.2307/2685779" class="external-link">doi:10.2307/2685779</a>
+ISSN 00031305, doi: <a href="https://doi.org/10.2307/2685779" class="external-link">10.2307/2685779</a>
 .</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">111</span>, <span class="fl">161</span>, <span class="fl">132</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">200</span>, <span class="fl">200</span>, <span class="fl">200</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">ci.pairs.prop.bs</span><span class="op">(</span><span class="fl">.05</span>, <span class="va">f</span>, <span class="va">n</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">111</span>, <span class="fl">161</span>, <span class="fl">132</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">200</span>, <span class="fl">200</span>, <span class="fl">200</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu">ci.pairs.prop.bs</span><span class="op">(</span><span class="fl">.05</span>, <span class="va">f</span>, <span class="va">n</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        Estimate         SE         z            p          LL          UL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  1 2 -0.2475248 0.04482323 -5.522243 3.346989e-08 -0.35483065 -0.14021885</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  1 3 -0.1039604 0.04833562 -2.150803 3.149174e-02 -0.21967489  0.01175409</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  2 3  0.1435644 0.04358401  3.293968 9.878366e-04  0.03922511  0.24790360</span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Should return:</span></span></span>
-<span class="r-in"><span><span class="co">#        Estimate         SE         z            p          LL          UL</span></span></span>
-<span class="r-in"><span><span class="co"># 1 2  -0.2475248 0.04482323 -5.522243 3.346989e-08 -0.35483065 -0.14021885</span></span></span>
-<span class="r-in"><span><span class="co"># 1 3  -0.1039604 0.04833562 -2.150803 3.149174e-02 -0.21967489  0.01175409</span></span></span>
-<span class="r-in"><span><span class="co"># 2 3   0.1435644 0.04358401  3.293968 9.878366e-04  0.03922511  0.24790360</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span></span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># Should return:</span></span>
+<span class="r-in"><span class="co">#        Estimate         SE         z            p          LL          UL</span></span>
+<span class="r-in"><span class="co"># 1 2  -0.2475248 0.04482323 -5.522243 3.346989e-08 -0.35483065 -0.14021885</span></span>
+<span class="r-in"><span class="co"># 1 3  -0.1039604 0.04833562 -2.150803 3.149174e-02 -0.21967489  0.01175409</span></span>
+<span class="r-in"><span class="co"># 2 3   0.1435644 0.04358401  3.293968 9.878366e-04  0.03922511  0.24790360</span></span>
+<span class="r-in"></span>
+<span class="r-in"></span>
 </code></pre></div>
     </div>
   </div>

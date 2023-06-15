@@ -61,7 +61,7 @@ standard error is recovered from the confidence interval.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ci.cod1</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">y</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ci.cod1</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">y</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -88,23 +88,23 @@ standard error is recovered from the confidence interval.</p>
     <p>Bonett DG (2006).
 “Confidence interval for a coefficient of quartile variation.”
 <em>Computational Statistics and Data Analysis</em>, <b>50</b>(11), 2953--2957.
-<a href="https://doi.org/doi.org/10.1016/j.csda.2005.05.007" class="external-link">doi:doi.org/10.1016/j.csda.2005.05.007</a>
+doi: <a href="https://doi.org/doi.org/10.1016/j.csda.2005.05.007" class="external-link">doi.org/10.1016/j.csda.2005.05.007</a>
 .</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fl">20</span>, <span class="fl">15</span>, <span class="fl">10</span>, <span class="fl">10</span>, <span class="fl">60</span>, <span class="fl">20</span>, <span class="fl">25</span>, <span class="fl">20</span>, <span class="fl">30</span>, <span class="fl">10</span>, <span class="fl">5</span>, <span class="fl">50</span>, <span class="fl">40</span>,</span></span>
-<span class="r-in"><span>       <span class="fl">20</span>, <span class="fl">10</span>, <span class="fl">0</span>, <span class="fl">20</span>, <span class="fl">50</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">ci.cod1</span><span class="op">(</span><span class="fl">.05</span>, <span class="va">y</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fl">20</span>, <span class="fl">15</span>, <span class="fl">10</span>, <span class="fl">10</span>, <span class="fl">60</span>, <span class="fl">20</span>, <span class="fl">25</span>, <span class="fl">20</span>, <span class="fl">30</span>, <span class="fl">10</span>, <span class="fl">5</span>, <span class="fl">50</span>, <span class="fl">40</span>,</span>
+<span class="r-in">       <span class="fl">20</span>, <span class="fl">10</span>, <span class="fl">0</span>, <span class="fl">20</span>, <span class="fl">50</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu">ci.cod1</span><span class="op">(</span><span class="fl">.05</span>, <span class="va">y</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       Estimate        SE        LL       UL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 0.5921053 0.1814708 0.3813259 1.092679</span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Should return:</span></span></span>
-<span class="r-in"><span><span class="co">#        Estimate        SE        LL       UL</span></span></span>
-<span class="r-in"><span><span class="co"># [1,]  0.5921053 0.1814708 0.3813259 1.092679</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span></span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># Should return:</span></span>
+<span class="r-in"><span class="co">#        Estimate        SE        LL       UL</span></span>
+<span class="r-in"><span class="co"># [1,]  0.5921053 0.1814708 0.3813259 1.092679</span></span>
+<span class="r-in"></span>
+<span class="r-in"></span>
 </code></pre></div>
     </div>
   </div>
