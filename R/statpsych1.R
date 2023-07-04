@@ -327,7 +327,7 @@ ci.tukey <-function(alpha, m, sd, n) {
  Estimate <- (-1)*mean[lower.tri(mean)]
  v1 <- outer(v1, v1, "+")
  v2 <- outer(v2, v2, "+")
- df = v1^2/v2
+ df <- v1^2/v2
  df <- df[lower.tri(df)]
  SE <- sqrt(v1[lower.tri(v1)])
  t <- Estimate/SE
@@ -1360,36 +1360,36 @@ ci.ratio.mad.ps <- function(alpha, y1, y2) {
 #' @importFrom stats median
 #' @export
 ci.cod1 <-function(alpha, y) {
- z = qnorm(1 - alpha/2)
- n = length(y)
- c = n/(n - 1)
- a1 = round((n + 1)/2 - sqrt(n))
- b1 = n - a1 + 1
- med = median(y)
- m = mean(y)
- v = var(y)
- tau = mean(abs(y - med))
- del = (m - med)/tau
- gam = v/tau^2
- cod = tau/med
- y = sort(y)
- vareta = ((log(y[a1]) - log(y[b1]))/4)^2
- se1 = sqrt(vareta)
- vartau = (gam + del^2 - 1)/n
- se2 = sqrt(vartau)
- cov = del*se1/sqrt(n)
- k = sqrt(vareta + vartau - 2*cov)/(se1 + se2)
- a2 = round((n + 1)/2 - k*z*sqrt(n/4))
- b2 = n - a2 + 1
- L2 = log(y[a2])
- U2 = log(y[b2])
- L1 = log(c*tau) - k*z*se2
- U1 = log(c*tau) + k*z*se2
- ll = exp(L1 - U2)
- ul = exp(U1 - L2)
+ z <- qnorm(1 - alpha/2)
+ n <- length(y)
+ c <- n/(n - 1)
+ a1 <- round((n + 1)/2 - sqrt(n))
+ b1 <- n - a1 + 1
+ med <- median(y)
+ m <- mean(y)
+ v <- var(y)
+ tau <- mean(abs(y - med))
+ del <- (m - med)/tau
+ gam <- v/tau^2
+ cod <- tau/med
+ y <- sort(y)
+ vareta <- ((log(y[a1]) - log(y[b1]))/4)^2
+ se1 <- sqrt(vareta)
+ vartau <- (gam + del^2 - 1)/n
+ se2 <- sqrt(vartau)
+ cov <- del*se1/sqrt(n)
+ k <- sqrt(vareta + vartau - 2*cov)/(se1 + se2)
+ a2 <- round((n + 1)/2 - k*z*sqrt(n/4))
+ b2 <- n - a2 + 1
+ L2 <- log(y[a2])
+ U2 <- log(y[b2])
+ L1 <- log(c*tau) - k*z*se2
+ U1 <- log(c*tau) + k*z*se2
+ ll <- exp(L1 - U2)
+ ul <- exp(U1 - L2)
  se <- (ul - ll)/(2*z)
- out = t(c(cod, se, ll, ul))
- colnames(out) = c("Estimate", "SE", "LL", "UL")
+ out <- t(c(cod, se, ll, ul))
+ colnames(out) <- c("Estimate", "SE", "LL", "UL")
  return(out)
 }
 
@@ -1542,9 +1542,9 @@ ci.cqv1 <- function(alpha, y) {
  y <- sort(y)
  z <- qnorm(1 - alpha/2)
  result <- quantile(y, .25, T, type = 2)
- Q1 = result[[1]]
+ Q1 <- result[[1]]
  result <- quantile(y, .75, T, type = 2)
- Q3 = result[[1]]
+ Q3 <- result[[1]]
  est <- (Q3 - Q1)/(Q3 + Q1)
  c1 <- ceiling(n/4 - 1.96*sqrt(3*n/16))
  if (c1 < 1) {c1 = 1}
@@ -2265,10 +2265,10 @@ ci.random.anova1 <- function(alpha, m, sd, n) {
 #' @export
 ci.cronbach <- function(alpha, rel, r, n) {
  se <- sqrt((2*r*(1 - rel)^2)/((r - 1)*(n - 2)))
- df1 = n - 1
- df2 = n*(r - 1)
- f1 = qf(1 - alpha/2, df1, df2)
- f2 = qf(1 - alpha/2, df2, df1)
+ df1 <- n - 1
+ df2 <- n*(r - 1)
+ f1 <- qf(1 - alpha/2, df1, df2)
+ f2 <- qf(1 - alpha/2, df2, df1)
  f0 <- 1/(1 - rel)
  ll <- 1 - f1/f0
  ul <- 1 - 1/(f0*f2)
@@ -2417,10 +2417,10 @@ ci.etasqr <- function(alpha, etasqr, df1, df2) {
 #'
 #'
 #' @examples
-#' y11 = c(18, 19, 20, 17, 20, 16)
-#' y12 = c(19, 18, 19, 20, 17, 16)
-#' y21 = c(19, 16, 16, 14, 16, 18)
-#' y22 = c(16, 10, 12,  9, 13, 15)
+#' y11 <- c(18, 19, 20, 17, 20, 16)
+#' y12 <- c(19, 18, 19, 20, 17, 16)
+#' y21 <- c(19, 16, 16, 14, 16, 18)
+#' y22 <- c(16, 10, 12,  9, 13, 15)
 #' ci.2x2.mean.mixed(.05, y11, y12, y21, y22)
 #'
 #' # Should return:
@@ -2515,7 +2515,7 @@ ci.2x2.mean.mixed <- function(alpha, y11, y12, y21, y22) {
  row7 <- c(est7, se7, t7, df7, p7, LL7, UL7)
  out <- rbind(row1, row2, row3, row4, row5, row6, row7)
  rownames(out) <- c("AB:", "A:", "B:", "A at b1:", "A at b2:", "B at a1:", "B at a2:")
- colnames(out) = c("Estimate", "SE", "t", "df", "p", "LL", "UL")
+ colnames(out) <- c("Estimate", "SE", "t", "df", "p", "LL", "UL")
  return(out)
 }
 
@@ -2551,10 +2551,10 @@ ci.2x2.mean.mixed <- function(alpha, y11, y12, y21, y22) {
 #'
 #'
 #' @examples
-#' y11 = c(1,2,3,4,5,7,7)
-#' y12 = c(1,0,2,4,3,8,7)
-#' y21 = c(4,5,6,7,8,9,8)
-#' y22 = c(5,6,8,7,8,9,9)
+#' y11 <- c(1,2,3,4,5,7,7)
+#' y12 <- c(1,0,2,4,3,8,7)
+#' y21 <- c(4,5,6,7,8,9,8)
+#' y22 <- c(5,6,8,7,8,9,9)
 #' ci.2x2.mean.ws(.05, y11, y12, y21, y22)
 #'
 #' # Should return:
@@ -2637,7 +2637,7 @@ ci.2x2.mean.ws <- function(alpha, y11, y12, y21, y22) {
  row7 <- c(est7, se7, t7, df, p7, LL7, UL7)
  out <- rbind(row1, row2, row3, row4, row5, row6, row7)
  rownames(out) <- c("AB:", "A:", "B:", "A at b1:", "A at b2:", "B at a1:", "B at a2:")
- colnames(out) = c("Estimate", "SE", "t", "df", "p", "LL", "UL")
+ colnames(out) <- c("Estimate", "SE", "t", "df", "p", "LL", "UL")
  return(out)
 }
 
@@ -2674,10 +2674,10 @@ ci.2x2.mean.ws <- function(alpha, y11, y12, y21, y22) {
 #'
 #'
 #' @examples
-#' y11 = c(14, 15, 11, 7, 16, 12, 15, 16, 10, 9)
-#' y12 = c(18, 24, 14, 18, 22, 21, 16, 17, 14, 13)
-#' y21 = c(16, 11, 10, 17, 13, 18, 12, 16, 6, 15)
-#' y22 = c(18, 17, 11, 9, 9, 13, 18, 15, 14, 11)
+#' y11 <- c(14, 15, 11, 7, 16, 12, 15, 16, 10, 9)
+#' y12 <- c(18, 24, 14, 18, 22, 21, 16, 17, 14, 13)
+#' y21 <- c(16, 11, 10, 17, 13, 18, 12, 16, 6, 15)
+#' y22 <- c(18, 17, 11, 9, 9, 13, 18, 15, 14, 11)
 #' ci.2x2.mean.bs(.05, y11, y12, y21, y22)
 #'
 #' # Should return:
@@ -2783,7 +2783,7 @@ ci.2x2.mean.bs <- function(alpha, y11, y12, y21, y22) {
  row7 <- c(est7, se7, t7, df7, p7, LL7, UL7)
  out <- rbind(row1, row2, row3, row4, row5, row6, row7)
  rownames(out) <- c("AB:", "A:", "B:", "A at b1:", "A at b2:", "B at a1:", "B at a2:")
- colnames(out) = c("Estimate", "SE", "t", "df", "p", "LL", "UL")
+ colnames(out) <- c("Estimate", "SE", "t", "df", "p", "LL", "UL")
  return(out)
 }
 
@@ -2818,10 +2818,10 @@ ci.2x2.mean.bs <- function(alpha, y11, y12, y21, y22) {
 #'
 #'
 #' @examples
-#' y11 = c(14, 15, 11, 7, 16, 12, 15, 16, 10, 9)
-#' y12 = c(18, 24, 14, 18, 22, 21, 16, 17, 14, 13)
-#' y21 = c(16, 11, 10, 17, 13, 18, 12, 16, 6, 15)
-#' y22 = c(18, 17, 11, 9, 9, 13, 18, 15, 14, 11)
+#' y11 <- c(14, 15, 11, 7, 16, 12, 15, 16, 10, 9)
+#' y12 <- c(18, 24, 14, 18, 22, 21, 16, 17, 14, 13)
+#' y21 <- c(16, 11, 10, 17, 13, 18, 12, 16, 6, 15)
+#' y22 <- c(18, 17, 11, 9, 9, 13, 18, 15, 14, 11)
 #' ci.2x2.stdmean.bs(.05, y11, y12, y21, y22)
 #'
 #' # Should return:
@@ -2938,7 +2938,7 @@ ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
  row7 <- c(est7u, se7, LL7, UL7)
  out <- rbind(row1, row2, row3, row4, row5, row6, row7)
  rownames(out) <- c("AB:", "A:", "B:", "A at b1:", "A at b2:", "B at a1:", "B at a2:")
- colnames(out) = c("Estimate", "SE", "LL", "UL")
+ colnames(out) <- c("Estimate", "SE", "LL", "UL")
  return(out)
 }
 
@@ -2971,10 +2971,10 @@ ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
 #'
 #'
 #' @examples
-#' y11 = c(14, 15, 11, 7, 16, 12, 15, 16, 10, 9)
-#' y12 = c(18, 24, 14, 18, 22, 21, 16, 17, 14, 13)
-#' y21 = c(16, 11, 10, 17, 13, 18, 12, 16, 6, 15)
-#' y22 = c(18, 17, 11, 9, 9, 13, 18, 15, 14, 11)
+#' y11 <- c(14, 15, 11, 7, 16, 12, 15, 16, 10, 9)
+#' y12 <- c(18, 24, 14, 18, 22, 21, 16, 17, 14, 13)
+#' y21 <- c(16, 11, 10, 17, 13, 18, 12, 16, 6, 15)
+#' y22 <- c(18, 17, 11, 9, 9, 13, 18, 15, 14, 11)
 #' ci.2x2.median.bs(.05, y11, y12, y21, y22)
 #'
 #' # Should return:
@@ -3088,7 +3088,7 @@ ci.2x2.median.bs <- function(alpha, y11, y12, y21, y22) {
  row7 <- c(est7, se7, LL7, UL7)
  out <- rbind(row1, row2, row3, row4, row5, row6, row7)
  rownames(out) <- c("AB:", "A:", "B:", "A at b1:", "A at b2:", "B at a1:", "B at a2:")
- colnames(out) = c("Estimate", "SE", "LL", "UL")
+ colnames(out) <- c("Estimate", "SE", "LL", "UL")
  return(out)
 }
 
@@ -3896,10 +3896,10 @@ size.ci.lc.stdmean.ws <- function(alpha, d, cor, w, q) {
 size.ci.cronbach <- function(alpha, rel, r, w) {
  z <- qnorm(1 - alpha/2)
  n0 <- ceiling((8*r/(r - 1))*(1 - rel)^2*(z/w)^2 + 2)
- df1 = n0 - 1
- df2 = n0*(r - 1)
- f1 = qf(1 - alpha/2, df1, df2)
- f2 = qf(1 - alpha/2, df2, df1)
+ df1 <- n0 - 1
+ df2 <- n0*(r - 1)
+ f1 <- qf(1 - alpha/2, df1, df2)
+ f2 <- qf(1 - alpha/2, df2, df1)
  f0 <- 1/(1 - rel)
  ll <- 1 - f1/f0
  ul <- 1 - 1/(f0*f2)
@@ -6102,8 +6102,8 @@ sim.ci.stdmean2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2, d, rep) {
   width2 <- w2/rep
   cov1 <- 1 - (e11 + e21)/rep
   cov2 <- 1 - (e12 + e22)/rep
-  est1 = est1/rep
-  est2 = est2/rep
+  est1 <- est1/rep
+  est2 <- est2/rep
   out1 <- t(c(cov1, e11/rep, e21/rep, width1, est1))
   out2 <- t(c(cov2, e12/rep, e22/rep, width2, est2))
   out <- rbind(out1, out2)
