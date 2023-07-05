@@ -1721,8 +1721,8 @@ ci.2x2.prop.bs <- function(alpha, f, n) {
 #'
 #'
 #' @examples
-#' group1 = c(125, 14, 10, 254)
-#' group2 = c(100, 16, 9, 275)
+#' group1 <- c(125, 14, 10, 254)
+#' group2 <- c(100, 16, 9, 275)
 #' ci.2x2.prop.mixed (.05, group1, group2)
 #'
 #' # Should return:
