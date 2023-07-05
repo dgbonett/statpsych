@@ -1874,8 +1874,8 @@ size.test.cronbach2 <- function(alpha, pow, rel1, rel2, r) {
 #' @export
 power.cor1 <- function(alpha, n, cor, h, s) {
  za <- qnorm(1 - alpha/2)
- f1 = log((1 + cor)/(1 - cor))/2
- f2 = log((1 + h)/(1 - h))/2
+ f1 <- log((1 + cor)/(1 - cor))/2
+ f2 <- log((1 + h)/(1 - h))/2
  z <- abs(f1 - f2)*sqrt(n - 3 - s) - za
  pow <- pnorm(z)
  out <- matrix(pow, nrow = 1, ncol = 1)
@@ -1920,8 +1920,8 @@ power.cor1 <- function(alpha, n, cor, h, s) {
 #' @export
 power.cor2 <- function(alpha, n1, n2, cor1, cor2, s) {
  za <- qnorm(1 - alpha/2)
- f1 = log((1 + cor1)/(1 - cor1))/2
- f2 = log((1 + cor2)/(1 - cor2))/2
+ f1 <- log((1 + cor1)/(1 - cor1))/2
+ f2 <- log((1 + cor2)/(1 - cor2))/2
  z <- abs(f1 - f2)/sqrt(1/(n1 - 3 - s) + 1/(n2 - 3 - s)) - za
  pow <- pnorm(z)
  out <- matrix(pow, nrow = 1, ncol = 1)
