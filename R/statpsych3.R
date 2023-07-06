@@ -1518,7 +1518,7 @@ ci.popsize <- function(alpha, f00, f01, f10) {
 #'
 #'
 #' @param  alpha    alpha value for 1-alpha confidence
-#' @param  chisqr   Pearson chi-square test statistic for independence
+#' @param  chisqr   Pearson chi-square test statistic of independence
 #' @param  r        number of rows in contingency table
 #' @param  c        number of columns in contengency table
 #' @param  n        sample size
@@ -1554,12 +1554,12 @@ ci.cramer <- function(alpha, chisqr, r, c, n) {
  k <- min(r - 1, c - 1)
  df <- (r - 1)*(c - 1)
  v <- sqrt(chisqr/(n*k))
- du <- n*k - df
+ du <- n*k 
  nc <- seq(0, du, by = .001)
  p <- pchisq(chisqr, df, nc)
  k1 <- which(min(abs(p - alpha2)) == abs(p - alpha2))[[1]]
  dL <- nc[k1]
- # version 1.5 corrects error in Smithson CI equation  
+ # version 1.5 corrects error in Smithson CI equation 4.13 
  ll <- sqrt(dL/(n*k))
  k2 <- which(min(abs(p - alpha1)) == abs(p - alpha1))[[1]]
  dU <- nc[k2]
@@ -1603,8 +1603,8 @@ ci.cramer <- function(alpha, chisqr, r, c, n) {
 #'
 #'
 #' @examples
-#' f = c(15, 24, 28, 23)
-#' n = c(50, 50, 50, 50)
+#' f <- c(15, 24, 28, 23)
+#' n <- c(50, 50, 50, 50)
 #' ci.2x2.prop.bs(.05, f, n)
 #'
 #' # Should return:
