@@ -1541,7 +1541,7 @@ ci.popsize <- function(alpha, f00, f01, f10) {
 #'
 #' # Should return:
 #' #        Estimate     SE     LL     UL
-#' # [1,]     0.3099 0.0674 0.1888 0.4529
+#' # [1,]     0.3099 0.0718 0.1601 0.4417
 #'  
 #' 
 #' @importFrom stats pchisq
@@ -1559,13 +1559,14 @@ ci.cramer <- function(alpha, chisqr, r, c, n) {
  p <- pchisq(chisqr, df, nc)
  k1 <- which(min(abs(p - alpha2)) == abs(p - alpha2))[[1]]
  dL <- nc[k1]
- ll <- sqrt((dL + df)/(n*k))
+ # version 1.5 corrects error in Smithson CI equation  
+ ll <- sqrt(dL/(n*k))
  k2 <- which(min(abs(p - alpha1)) == abs(p - alpha1))[[1]]
  dU <- nc[k2]
- ul <- sqrt((dU + df)/(n*k))
+ ul <- sqrt(dU/(n*k))
  se <- (ul - ll)/(2*z)
  out <- round(t(c(v, se, ll, ul)), 4)
- colnames(out) <- c("Cramer's V", "SE", "LL", "UL")
+ colnames(out) <- c("Estimate", "SE", "LL", "UL")
  return(out)
 }
 
