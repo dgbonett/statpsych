@@ -3918,7 +3918,7 @@ size.ci.cronbach <- function(alpha, rel, r, w) {
 #' @description
 #' Computes the sample size required to estimate an eta-squared coefficient
 #' in a one-way ANOVA with desired confidence interval precision. Set the 
-#' planning value of eta-squared to 1/3 for a conservatively large sample
+#' planning value of eta-squared to about 1/3 for a conservatively large sample
 #' size. 
 #'
 #'  
@@ -3929,15 +3929,15 @@ size.ci.cronbach <- function(alpha, rel, r, w) {
 #'
 #' 
 #' @return 
-#' Returns the total sample size requirement
+#' Returns the required sample size for each group
 #' 
 #' 
 #' @examples
 #' size.ci.etasqr(.05, .333, 3, .2)
 #'
 #' # Should return:
-#' #      Total sample size
-#' # [1,]               189
+#' #      Sample size per group 
+#' # [1,]                    63
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -3945,21 +3945,28 @@ size.ci.cronbach <- function(alpha, rel, r, w) {
 size.ci.etasqr <- function(alpha, etasqr, groups, w) {
  alpha1 <- alpha/2
  alpha2 <- 1 - alpha1
+ if (etasqr <= .001) {stop("etasqr must be greater than .001")}
+ if (w >= .999) {stop("CI width must be less than .999")}
+ if (w <= .001) {stop("CI width must be greater than .001")}
  df1 <- groups - 1
  z <- qnorm(alpha2)
- n1 <- 16*etasqr*(1 - etasqr)*(z/w)^2 + groups + 1
+ n1 <- ceiling(16*etasqr*(1 - etasqr)*(z/w)^2 + groups + 1)
  df2 <- n1 - groups
+ if (df2 < groups) {df2 = groups}
  ci <- ci.etasqr(alpha, etasqr, df1, df2)
  ll <- ci[1,4]                                  
  ul <- ci[1,5]                                  
  n2 <- ceiling(n1*((ul - ll)/w)^2)
  df2 <- n2 - groups
+ if (df2 < groups) {df2 = groups}
  ci <- ci.etasqr(alpha, etasqr, df1, df2)
  ll <- ci[1,4]                                  
  ul <- ci[1,5]
  n <- ceiling(n2*((ul - ll)/w)^2)
- out <- matrix(n, nrow = 1, ncol = 1)
- colnames(out) <- "Total sample size"
+ n0 <- ceiling(n/groups)
+ if (n0 < 2) {n0 = 2}
+ out <- matrix(n0, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size per group"
  return(out)
 }
 
