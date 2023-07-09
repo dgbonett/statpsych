@@ -1345,11 +1345,11 @@ size.ci.cor <- function(alpha, cor, s, w) {
 #' 
 #' 
 #' @examples
+#' size.ci.rsqr(.05, .25, 5, .2)
 #' 
-#'
 #' # Should return:
 #' #      Sample size
-#' # [1,]         226
+#' # [1,]         214
 #'  
 #' 
 #' @importFrom stats qnorm
