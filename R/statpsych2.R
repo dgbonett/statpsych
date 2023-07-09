@@ -1013,6 +1013,8 @@ ci.rsqr <- function(alpha, r2, s, n) {
  b2 <- adj/(1 - adj)
  v1 <- ((n - 1)*b1 + s)^2/((n - 1)*b1*(b1 + 2) + s)
  v2 <- ((n - 1)*b2 + s)^2/((n - 1)*b2*(b2 + 2) + s)
+ if (v1 < 1) {v1 = 1}
+ if (v2 < 1) {v2 = 1}
  F1 <- qf(alpha1, v1, dfe)
  F2 <- qf(alpha2, v2, dfe)
  ll <- (dfe*r2 - (1 - r2)*s*F2)/(dfe*(r2 + (1 - r2)*F2))
@@ -1026,6 +1028,8 @@ ci.rsqr <- function(alpha, r2, s, n) {
    b2 <- ll/(1 - ll)
    v1 <- ((n - 1)*b1 + s)^2/((n - 1)*b1*(b1 + 2) + s)
    v2 <- ((n - 1)*b2 + s)^2/((n - 1)*b2*(b2 + 2) + s)
+   if (v1 < 1) {v1 = 1}
+   if (v2 < 1) {v2 = 1}
    F1 <- qf(alpha1, v1, dfe)
    F2 <- qf(alpha2, v2, dfe)
    ll <- (dfe*r2 - (1 - r2)*s*F2)/(dfe*(r2 + (1 - r2)*F2))
@@ -1361,10 +1365,12 @@ size.ci.rsqr <- function(alpha, r2, s, w) {
  ll <- ci[1,4]                           
  ul <- ci[1,5]
  n2 <- ceiling(n1*((ul - ll)/w)^2)
+ if (n2 < s + 2) {n2 = s + 2}
  ci <- ci.rsqr(alpha, r2, s, n2)
  ll <- ci[1,4]                          
  ul <- ci[1,5]
  n <- ceiling(n2*((ul - ll)/w)^2)
+ if (n < s + 2) {n = s + 2}
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
  return(out)
