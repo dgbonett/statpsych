@@ -2799,7 +2799,7 @@ ci.2x2.mean.bs <- function(alpha, y11, y12, y21, y22) {
 #' of A, and simple main effects of B) in a 2x2 between-subjects design with  
 #' a quantitative response variable. Equality of population variances is not 
 #' assumed. An unweigthed variance standardizer is used, which is the 
-#' recommended standarizer when both factors are treatment factors.
+#' recommended standardizer when both factors are treatment factors.
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
