@@ -2718,6 +2718,7 @@ ci.2x2.mean.bs <- function(alpha, y11, y12, y21, y22) {
  sd <- c(sd11, sd12, sd21, sd22) 
  n <- c(n11, n12, n21, n22)
  var <- diag(sd^2)%*%(solve(diag(n)))
+ # AB
  est1 <- t(v1)%*%m 
  se1 <- sqrt(t(v1)%*%var%*%v1)
  t1 <- est1/se1
@@ -2727,6 +2728,7 @@ ci.2x2.mean.bs <- function(alpha, y11, y12, y21, y22) {
  LL1 <- est1 - tcrit1*se1
  UL1 <- est1 + tcrit1*se1
  row1 <- c(est1, se1, t1, df1, p1, LL1, UL1)
+ # A
  est2 <- t(v2)%*%m 
  se2 <- sqrt(t(v2)%*%var%*%v2)
  t2 <- est2/se2
@@ -2736,6 +2738,7 @@ ci.2x2.mean.bs <- function(alpha, y11, y12, y21, y22) {
  LL2 <- est2 - tcrit2*se2
  UL2 <- est2 + tcrit2*se2
  row2 <- c(est2, se2, t2, df2, p2, LL2, UL2)
+ # B
  est3 <- t(v3)%*%m 
  se3 <- sqrt(t(v3)%*%var%*%v3)
  t3 <- est3/se3
@@ -2745,6 +2748,7 @@ ci.2x2.mean.bs <- function(alpha, y11, y12, y21, y22) {
  LL3 <- est3 - tcrit3*se3
  UL3 <- est3 + tcrit3*se3
  row3 <- c(est3, se3, t3, df3, p3, LL3, UL3)
+ # A at b1 	
  est4 <- t(v4)%*%m 
  se4 <- sqrt(t(v4)%*%var%*%v4)
  t4 <- est4/se4
@@ -2754,6 +2758,7 @@ ci.2x2.mean.bs <- function(alpha, y11, y12, y21, y22) {
  LL4 <- est4 - tcrit4*se4
  UL4 <- est4 + tcrit4*se4
  row4 <- c(est4, se4, t4, df4, p4, LL4, UL4)
+ # A at b2 
  est5 <- t(v5)%*%m 
  se5 <- sqrt(t(v5)%*%var%*%v5)
  t5 <- est5/se5
@@ -2763,6 +2768,7 @@ ci.2x2.mean.bs <- function(alpha, y11, y12, y21, y22) {
  LL5 <- est5 - tcrit5*se5
  UL5 <- est5 + tcrit5*se5
  row5 <- c(est5, se5, t5, df5, p5, LL5, UL5)
+ # B at a1 
  est6 <- t(v6)%*%m 
  se6 <- sqrt(t(v6)%*%var%*%v6)
  t6 <- est6/se6
@@ -2772,6 +2778,7 @@ ci.2x2.mean.bs <- function(alpha, y11, y12, y21, y22) {
  LL6 <- est6 - tcrit6*se6
  UL6 <- est6 + tcrit6*se6
  row6 <- c(est6, se6, t6, df6, p6, LL6, UL6)
+ # B at a2 
  est7 <- t(v7)%*%m 
  se7 <- sqrt(t(v7)%*%var%*%v7)
  t7 <- est7/se7
@@ -2796,10 +2803,10 @@ ci.2x2.mean.bs <- function(alpha, y11, y12, y21, y22) {
 #' @description
 #' Computes confidence intervals for standardized linear constrasts of means
 #' (AB interaction, main effect of A, main efect of B, simple main effects
-#' of A, and simple main effects of B) in a 2x2 between-subjects design with  
-#' a quantitative response variable. Equality of population variances is not 
-#' assumed. An unweigthed variance standardizer is used, which is the 
-#' recommended standardizer when both factors are treatment factors.
+#' of A, and simple main effects of B) in a 2x2 between-subjects design.
+#' Equality of population variances is not assumed. An unweigthed variance 
+#' standardizer is used, which is the recommended standardizer when both 
+#' factors are treatment factors.
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
@@ -2876,7 +2883,7 @@ ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
  LL1 <- est1 - z*se1
  UL1 <- est1 + z*se1
  row1 <- c(est1u, se1, LL1, UL1)
-# A 
+ # A 
  est2 <- (t(v2)%*%m)/s
  est2u <- adj*est2
  a1 <- est2^2/(2*a^2*s^4)
@@ -2886,7 +2893,7 @@ ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
  LL2 <- est2 - z*se2
  UL2 <- est2 + z*se2
  row2 <- c(est2u, se2, LL2, UL2)
-# B 
+ # B 
  est3 <- (t(v3)%*%m)/s
  est3u <- adj*est3
  a1 <- est3^2/(2*a^2*s^4)
@@ -2896,7 +2903,7 @@ ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
  LL3 <- est3 - z*se3
  UL3 <- est3 + z*se3
  row3 <- c(est3u, se3, LL3, UL3)
-# A at b1 
+ # A at b1 
  est4 <- (t(v4)%*%m)/s
  est4u <- adj*est4
  a1 <- est4^2/(2*a^2*s^4)
@@ -2906,7 +2913,7 @@ ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
  LL4 <- est4 - z*se4
  UL4 <- est4 + z*se4
  row4 <- c(est4u, se4, LL4, UL4)
-# A at b2 
+ # A at b2 
  est5 <- (t(v5)%*%m)/s
  est5u <- adj*est5
  a1 <- est5^2/(2*a^2*s^4)
@@ -2916,7 +2923,7 @@ ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
  LL5 <- est5 - z*se5
  UL5 <- est5 + z*se5
  row5 <- c(est5u, se5, LL5, UL5)
-# B at a1 
+ # B at a1 
  est6 <- (t(v6)%*%m)/s
  est6u <- adj*est6
  a1 <- est6^2/(2*a^2*s^4)
@@ -2926,7 +2933,7 @@ ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
  LL6 <- est6 - z*se6
  UL6 <- est6 + z*se6
  row6 <- c(est6u, se6, LL6, UL6)
-# B at a2 
+ # B at a2 
  est7 <- (t(v7)%*%m)/s
  est7u <- adj*est7
  a1 <- est7^2/(2*a^2*s^4)
