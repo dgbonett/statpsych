@@ -996,8 +996,8 @@ ci.stdmean.ps <- function(alpha, m1, m2, sd1, sd2, cor, n) {
 #'
 #' # Should return:
 #' #                           Estimate        SE        LL         UL
-#' # Unweighted standardizer: -1.266557 0.2096351 -1.712140 -0.8903860
-#' # Level 1 standardizer:    -1.337500 0.2662156 -1.915002 -0.8714561
+#' # Unweighted standardizer: -1.266557 0.3147937 -1.918248 -0.6842788
+#' # Level 1 standardizer:    -1.337500 0.3661824 -2.110934 -0.6755248
 #'
 #'
 #' @importFrom stats qnorm
@@ -1015,19 +1015,18 @@ ci.lc.stdmean.ws <- function(alpha, m, sd, cor, n, q) {
  v1 <- est1^2/(2*a^2*s^4*df)
  v2 <- sum(sd^4)
  v0 <- sd^2%*%t(sd^2)
- v3 <- cor^2*sum((v0 - diag(diag(v0))))
  # error in v3 formula corrected in version 1.3
+ # error in v5 formula corrected in version 1.5
+ v3 <- cor^2*sum((v0 - diag(diag(v0))))
  v4 <- sum(q^2*sd^2)
- v5 <- cor*t(q*sd)%*%(q*sd)
- se1 <- sqrt(v1*(v2 + v3) + (v4 - v5)/(df*s^2))
+ v5 <- cor*sum(q[1:a-1]*sd[1:a-1]*q[2:a]*sd[2:a])
+ se1 <- sqrt(v1*(v2 + v3) + (v4 + 2*v5)/(df*s^2))
  ll1 <- est1 - z*se1
  ul1 <- est1 + z*se1
  est2 <- (t(q)%*%m)/s1
  est2u <- adj2*est2
  v1 <- est2^2/(2*df)
- v4 <- sum(q^2*sd^2)
- v5 <- cor*t(q*sd)%*%(q*sd)
- se2 <- sqrt(v1 + (v4 - v5)/(df*s1^2))
+ se2 <- sqrt(v1 + (v4 + 2*v5)/(df*s1^2))
  ll2 <- est2 - z*se2
  ul2 <- est2 + z*se2
  out1 <- t(c(est1u, se1, ll1, ul1))
@@ -1213,37 +1212,37 @@ ci.ratio.mad2 <- function(alpha, y1, y2) {
 #' @importFrom stats sd
 #' @export
 ci.ratio.sd2 <- function(alpha, y1, y2) {
-  z <- qnorm(1 - alpha/2)
-  sd1 <- sd(y1)
-  sd2 <- sd(y2)
-  v1 <- sd1^2
-  v2 <- sd2^2
-  n1 <- length(y1)
-  n2 <- length(y2)
-  if (min(n1, n2) < 5) {stop("sample size too small")}
-  n <- n1 + n2 
-  t1 <- 1/(2*sqrt(n1 - 4))
-  t2 <- 1/(2*sqrt(n2 - 4))
-  m1 <- mean(y1, trim = t1)
-  m2 <- mean(y2, trim = t2)
-  c0 <- (n1/(n1 - z))*((n2 - z)/n2)
-  c1 <- (n1 - 3)/n1
-  c2 <- (n2 - 3)/n2
-  a1 <- sum((y1 - m1)^4)
-  a2 <- sum((y2 - m2)^4)
-  rL <- 1
-  rU <- 1
-  for(i in 1:10) {
-    kurL <- n*(a1 + rL^4*a2)/((n1 - 1)*v1 + rL^2*(n2 - 1)*v2)^2
-    kurU <- n*(a1 + rU^4*a2)/((n1 - 1)*v1 + rU^2*(n2 - 1)*v2)^2
-    seL <- sqrt((kurL - c1)/(n1 - 1) + (kurL - c2)/(n2 - 1))
-    seU <- sqrt((kurU - c1)/(n1 - 1) + (kurU - c2)/(n2 - 1))
-    lr <- log(c0*v1/v2)
-    ll <- sqrt(exp(lr - z*seL))
-    ul <- sqrt(exp(lr + z*seU))
-    rL <- ll
-    rU <- ul
-  }
+ z <- qnorm(1 - alpha/2)
+ sd1 <- sd(y1)
+ sd2 <- sd(y2)
+ v1 <- sd1^2
+ v2 <- sd2^2
+ n1 <- length(y1)
+ n2 <- length(y2)
+ if (min(n1, n2) < 5) {stop("sample size too small")}
+ n <- n1 + n2 
+ t1 <- 1/(2*sqrt(n1 - 4))
+ t2 <- 1/(2*sqrt(n2 - 4))
+ m1 <- mean(y1, trim = t1)
+ m2 <- mean(y2, trim = t2)
+ c0 <- (n1/(n1 - z))*((n2 - z)/n2)
+ c1 <- (n1 - 3)/n1
+ c2 <- (n2 - 3)/n2
+ a1 <- sum((y1 - m1)^4)
+ a2 <- sum((y2 - m2)^4)
+ rL <- 1
+ rU <- 1
+ for(i in 1:10) {
+   kurL <- n*(a1 + rL^4*a2)/((n1 - 1)*v1 + rL^2*(n2 - 1)*v2)^2
+   kurU <- n*(a1 + rU^4*a2)/((n1 - 1)*v1 + rU^2*(n2 - 1)*v2)^2
+   seL <- sqrt((kurL - c1)/(n1 - 1) + (kurL - c2)/(n2 - 1))
+   seU <- sqrt((kurU - c1)/(n1 - 1) + (kurU - c2)/(n2 - 1))
+   lr <- log(c0*v1/v2)
+   ll <- sqrt(exp(lr - z*seL))
+   ul <- sqrt(exp(lr + z*seU))
+   rL <- ll
+   rU <- ul
+ }
  out <- t(c(sd1, sd2, sd1/sd2, ll, ul))
  colnames(out) <- c("SD1", "SD2", "SD1/SD2", "LL", "UL")
  return(out)
@@ -2876,7 +2875,7 @@ ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
  LL1 <- est1 - z*se1
  UL1 <- est1 + z*se1
  row1 <- c(est1u, se1, LL1, UL1)
-# A 
+ # A 
  est2 <- (t(v2)%*%m)/s
  est2u <- adj*est2
  a1 <- est2^2/(2*a^2*s^4)
@@ -2886,7 +2885,7 @@ ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
  LL2 <- est2 - z*se2
  UL2 <- est2 + z*se2
  row2 <- c(est2u, se2, LL2, UL2)
-# B 
+ # B 
  est3 <- (t(v3)%*%m)/s
  est3u <- adj*est3
  a1 <- est3^2/(2*a^2*s^4)
@@ -2896,7 +2895,7 @@ ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
  LL3 <- est3 - z*se3
  UL3 <- est3 + z*se3
  row3 <- c(est3u, se3, LL3, UL3)
-# A at b1 
+ # A at b1 
  est4 <- (t(v4)%*%m)/s
  est4u <- adj*est4
  a1 <- est4^2/(2*a^2*s^4)
@@ -2906,7 +2905,7 @@ ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
  LL4 <- est4 - z*se4
  UL4 <- est4 + z*se4
  row4 <- c(est4u, se4, LL4, UL4)
-# A at b2 
+ # A at b2 
  est5 <- (t(v5)%*%m)/s
  est5u <- adj*est5
  a1 <- est5^2/(2*a^2*s^4)
@@ -2916,7 +2915,7 @@ ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
  LL5 <- est5 - z*se5
  UL5 <- est5 + z*se5
  row5 <- c(est5u, se5, LL5, UL5)
-# B at a1 
+ # B at a1 
  est6 <- (t(v6)%*%m)/s
  est6u <- adj*est6
  a1 <- est6^2/(2*a^2*s^4)
@@ -2926,7 +2925,7 @@ ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
  LL6 <- est6 - z*se6
  UL6 <- est6 + z*se6
  row6 <- c(est6u, se6, LL6, UL6)
-# B at a2 
+ # B at a2 
  est7 <- (t(v7)%*%m)/s
  est7u <- adj*est7
  a1 <- est7^2/(2*a^2*s^4)
@@ -4605,6 +4604,7 @@ size.test.cronbach <- function(alpha, pow, rel, r, h) {
  colnames(out) <- "Sample size"
  return(out)
 }
+
 
 # ======================= Power for Planned Sample Size =======================
 #  power.mean1 ================================================================
