@@ -1882,6 +1882,90 @@ ci.bayes.prop1 <- function(alpha, prior.mean, prior.sd, f, n) {
 }
 
 
+#  ci.pv =====================================================================
+#' Confidence interval for positive and negative predictive values with 
+#' retrospective sampling
+#'
+#'                                 
+#' @description
+#' Computes adjusted Wald confidence intervals for positive and negative
+#' predictive values (PPV and NPV)) of a diagnostic test with retrospective 
+#' sampling where the population prevalence rate is assumed to be known. With 
+#' retrospective sampling, one random sample is obtained from a subpopulation
+#' that is known to have a "positive" outcome, a second random sample is
+#' obtained from a subpopulation that is known to have a "negative" outcome,
+#' and then the diagnostic test (scored "pass" or "fail") is given in each 
+#' sample. PPV and NPV can be expressed as a function of proportion ratios 
+#' and the known population prevalence rate (the population proportion who 
+#' would "pass"). The confidence intervals for PPV and NPV are based on the 
+#' Price-Bonett adjusted Wald confidence interval for a proportion ratio.
+#'
+#'
+#' @param   alpha   alpha level for 1-alpha confidence
+#' @param   f1      number of participants with a positive outcome who pass the test
+#' @param   f2      number of participants with a negative outcome who fail the test
+#' @param   n1      sample size for the positive outcome group
+#' @param   n2      sample size for the negative outcome group
+#' @param   prev    known population proportion with a positive outcome
+#'
+#'
+#' @return
+#' Returns a 2-row matrix. The columns are:
+#' * Estimate - adjusted estimate of the predictive value
+#' * LL - lower limit of the adjusted Wald confidence interval
+#' * UL - upper limit of the adjusted Wald confidence interval
+#'
+#'
+#' @references
+#' \insertRef{Price2008}{statpsych}
+#'
+#'
+#' @examples
+#' ci.pv(.05, 89, 5, 100, 100, .16)
+#'
+#' # Should return:
+#' #        Estimate        LL        UL
+#' # PPV:  0.7640449 0.5838940 0.8819671
+#' # NPV:  0.9779978 0.9623406 0.9872318
+#'
+#'
+#' @importFrom stats qnorm
+#' @export
+ci.pv <- function(alpha, f1, f2, n1, n2, prev) {
+ z <- qnorm(1 - alpha/2)
+ k1 <- (1 - prev)/prev
+ p1 <- (f1 + 1/4)/(n1 + 7/4)
+ p2 <- (f2 + 1/4)/(n2 + 7/4)
+ v1 <- 1/(f1 + 1/4 + (f1 + 1/4)^2/(n1 - f1 + 3/2))
+ v2 <- 1/(f2 + 1/4 + (f2 + 1/4)^2/(n2 - f2 + 3/2))
+ se <- sqrt(v1 + v2)
+ LL0 <- exp(log(p2/p1) - z*se)
+ UL0 <- exp(log(p2/p1) + z*se)
+ ppv <- 1/(1 + (p2/p1)*k1)
+ LL1 <- 1/(1 + UL0*k1)
+ UL1 <- 1/(1 + LL0*k1)
+ out1 <- t(c(ppv, LL1, UL1))
+ k2 <- prev/(1 - prev)
+ f3 <- n1 - f1
+ f4 <- n2 - f2
+ p3 <- (f3 + 1/4)/(n1 + 7/4)
+ p4 <- (f4 + 1/4)/(n2 + 7/4)
+ v1 <- 1/(f3 + 1/4 + (f3 + 1/4)^2/(n1 - f3 + 3/2))
+ v2 <- 1/(f2 + 1/4 + (f4 + 1/4)^2/(n2 - f4 + 3/2))
+ se <- sqrt(v1 + v2)
+ LL0 <- exp(log(p3/p4) - z*se)
+ UL0 <- exp(log(p3/p4) + z*se)
+ npv <- 1/(1 + (p3/p4)*k2)
+ LL2 <- 1/(1 + UL0*k2)
+ UL2 <- 1/(1 + LL0*k2)
+ out2 <- t(c(npv, LL2, UL2))
+ out <- rbind(out1, out2)
+ colnames(out) <- c("Estimate", "LL", "UL")
+ rownames(out) <- c("PPV: ", "NPV: ")
+ return(out)
+}
+
+
 # ======================== Hypothesis Tests ==================================
 # test.prop1 =================================================================
 #' Hypothesis test for a single proportion 
