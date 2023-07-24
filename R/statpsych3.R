@@ -87,7 +87,8 @@ ci.prop1 <- function(alpha, f, n) {
 #'
 #'
 #' @return
-#' Returns a 1-row matrix. The columns are:
+#' Returns a matrix with the number of rows equal to the number
+#' of pairwise comparisons. The columns are:
 #' * Estimate - adjusted estimate of proportion difference
 #' * SE - adjusted standard error
 #' * LL - lower limit of the adjusted Wald confidence interval
@@ -469,7 +470,8 @@ ci.lc.prop.bs <- function(alpha, f, n, v) {
 #'
 #'
 #' @return
-#' Returns a 1-row matrix. The columns are:
+#' Returns a matrix with the number of rows equal to the number
+#' of pairwise comparisons. The columns are:
 #' * Estimate - adjusted estimate of proportion difference
 #' * SE - adjusted standard error
 #' * z - z test statistic
