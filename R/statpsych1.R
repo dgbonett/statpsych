@@ -6251,3 +6251,40 @@ sim.ci.stdmean.ps <- function(alpha, n, sd.ratio, cor, dist1, dist2, d, rep) {
 }
 
 
+# spearmanbrown ===============================================================
+#' Computes the reliability of a scale with r2 measurements given the 
+#' reliability of a scale with r1 measurements
+#'
+#'
+#' @description
+#' Computes the reliability of a scale that is the sum or average of r2 
+#' parallel measurements given the reliability of a scale that is the sum or
+#' average of r1 parallel measurements. The "measurements" can be items, 
+#' trials, raters, or occasions.
+#'
+#'
+#' @param   rel     reliability of the sum or average of r1 measurements
+#' @param   r1      number of measurements in the orginal scale 
+#' @param   r2      number of measurements in the new scale
+#'
+#'
+#' @return
+#' Returns the reliability of the sum or average of r2 measurements
+#'
+#'
+#' @examples
+#' spearmanbrown(.6, 10, 20)
+#'
+#' # Should return:
+          Reliability of r2 measurements
+#' # [1,]                            .75
+#'
+#'
+#' @export
+spearmanbrown <- function(rel, r1, r2) {
+ rel.r2 <- (r2/r1)*rel/(1 + (r2/r1 - 1)*rel)
+ out <- matrix(rel.r2, nrow = 1, ncol = 1)
+ colnames(out) <- "Reliability of r2 measurements"
+ return(out)
+}
+
