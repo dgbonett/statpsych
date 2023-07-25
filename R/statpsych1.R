@@ -1314,6 +1314,7 @@ ci.ratio.mad.ps <- function(alpha, y1, y2) {
  return(out)
 }
 
+
 #  ci.cv1  ====================================================================
 #' Confidence interval for a single coefficient of variation
 #'
@@ -1340,10 +1341,6 @@ ci.ratio.mad.ps <- function(alpha, y1, y2) {
 #' * UL - upper limit of the confidence interval
 #' 
 #' 
-#' @references
-#' \insertRef{Bonett2008}{statpsych}
-#'
-#'
 #' @examples
 #' ci.cv1(.05, 24.5, 3.65, 40)
 #'
