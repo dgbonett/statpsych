@@ -1354,7 +1354,6 @@ ci.ratio.mad.ps <- function(alpha, y1, y2) {
 ci.cv1 <- function(alpha, m, sd, n) {
  z <- qnorm(1 - alpha/2)
  df <- n - 1
- adj <- 1 - 3/(4*df - 1)
  est.d <- m/sd
  se.d <- sqrt(est.d^2/(2*df) + 1/df)
  ul <- 1/(est.d - z*se.d)
