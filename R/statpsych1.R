@@ -1356,7 +1356,11 @@ ci.cv1 <- function(alpha, m, sd, n) {
  df <- n - 1
  est.d <- m/sd
  se.d <- sqrt(est.d^2/(2*df) + 1/df)
- ul <- 1/(est.d - z*se.d)
+ if (est.d - z*se.d > 0) { 
+  ul <- 1/(est.d - z*se.d)
+ } else {
+  ul <- 999999
+ }
  ll <- 1/(est.d + z*se.d)
  est <- 1/est.d
  se <- (ul - ll)/(2*z)
