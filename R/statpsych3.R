@@ -1604,6 +1604,10 @@ ci.cramer <- function(alpha, chisqr, r, c, n) {
 #' * UL - upper limit of the adjusted Wald confidence interval
 #'
 #'
+#' @references
+#' \insertRef{Price2004}{statpsych}
+#'
+#'
 #' @examples
 #' f <- c(15, 24, 28, 23)
 #' n <- c(50, 50, 50, 50)
