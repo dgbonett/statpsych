@@ -55,9 +55,7 @@ ci.mean1 <- function(alpha, m, sd, n) {
 #'
 #' @description
 #' Computes a confidence interval for a population standardized mean 
-#' difference from a hypothesized value. If the hypothesized value is set
-#' to 0, the reciprocals of the confidence interval endpoints gives a 
-#' confidence interval for the coefficient of variation.
+#' difference from a hypothesized value. 
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -87,7 +85,7 @@ ci.mean1 <- function(alpha, m, sd, n) {
 #' # [1,] 1.209015 0.2124335 0.8165146 1.649239
 #'  
 #' 
-#' @importFrom stats qt
+#' @importFrom stats qnorm
 #' @export
 ci.stdmean1 <- function(alpha, m, sd, n, h) {
  z <- qnorm(1 - alpha/2)
@@ -1313,6 +1311,61 @@ ci.ratio.mad.ps <- function(alpha, y1, y2) {
  ul <- exp(log(est) + z*se)
  out <- t(c(c*mad1, c*mad2, est, ll, ul))
  colnames(out) <- c("MAD1", "MAD2", "MAD1/MAD2", "LL", "UL")
+ return(out)
+}
+
+#  ci.cv1  ====================================================================
+#' Confidence interval for a single coefficient of variation
+#'
+#'
+#' @description
+#' Computes a confidence interval for a population coefficient of variation
+#' (standard deviation divided by mean). This confidence interval is the
+#' reciprocal of a confidence interval for a standardized mean. An approximate 
+#' standard error is recovered from the confidence interval. The coefficient 
+#' of variation assumes ratio-scale scores.
+#'
+#'  
+#' @param  alpha  alpha level for 1-alpha confidence
+#' @param  m	  estimated mean 
+#' @param  sd	  estimated standard deviation
+#' @param  n	  sample size
+#'
+#'
+#' @return 
+#' Returns a 1-row matrix. The columns are:
+#' * Estimate - estimated coefficient of variation 
+#' * SE - recovered standard error
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
+#' 
+#' 
+#' @references
+#' \insertRef{Bonett2008}{statpsych}
+#'
+#'
+#' @examples
+#' ci.cv1(.05, 24.5, 3.65, 40)
+#'
+#' # Should return:
+#' #       Estimate        SE        LL       UL
+#' # [1,] 0.1489796 0.01817373 0.1214381 0.1926778
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export
+ci.cv1 <- function(alpha, m, sd, n) {
+ z <- qnorm(1 - alpha/2)
+ df <- n - 1
+ adj <- 1 - 3/(4*df - 1)
+ est.d <- m/sd
+ se.d <- sqrt(est.d^2/(2*df) + 1/df)
+ ul <- 1/(est.d - z*se.d)
+ ll <- 1/(est.d + z*se.d)
+ est <- 1/est.d
+ se <- (ul - ll)/(2*z)
+ out <- t(c(est, se, ll, ul))
+ colnames(out) <- c("Estimate", "SE", "LL", "UL")
  return(out)
 }
 
