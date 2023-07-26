@@ -1322,9 +1322,10 @@ ci.ratio.mad.ps <- function(alpha, y1, y2) {
 #' @description
 #' Computes a confidence interval for a population coefficient of variation
 #' (standard deviation divided by mean). This confidence interval is the
-#' reciprocal of a confidence interval for a standardized mean. An approximate 
-#' standard error is recovered from the confidence interval. The coefficient 
-#' of variation assumes ratio-scale scores.
+#' reciprocal of a confidence interval for a standardized mean (see description
+#' of ci.stdmean1 function). An approximate standard error is recovered from
+#' the confidence interval. The coefficient of variation assumes ratio-scale
+#' scores.
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
