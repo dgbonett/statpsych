@@ -3957,6 +3957,7 @@ size.ci.lc.stdmean.ws <- function(alpha, d, cor, w, q) {
 #' @importFrom stats qnorm
 #' @export
 size.ci.cronbach <- function(alpha, rel, r, w) {
+ if (rel > .999 || rel < .001) {stop("reliability must be between .001 and .999")}
  z <- qnorm(1 - alpha/2)
  n0 <- ceiling((8*r/(r - 1))*(1 - rel)^2*(z/w)^2 + 2)
  df1 <- n0 - 1
