@@ -40,6 +40,7 @@
 #' @importFrom stats qnorm
 #' @export
 ci.cor <- function(alpha, cor, s, n) {
+ if (cor > .999 || cor < -.999) {stop("correlation must be between -.999 and .999")}
  z <- qnorm(1 - alpha/2)
  se <- sqrt((1 - cor^2)^2/(n - 1))
  se.z <- sqrt(1/((n - s - 3)))
@@ -97,6 +98,7 @@ ci.cor <- function(alpha, cor, s, n) {
 #' @importFrom stats qnorm
 #' @export
 ci.spcor <- function(alpha, cor, r2, n) {
+ if (cor > .999 || cor < -.999) {stop("correlation must be between -.999 and .999")}
  z <- qnorm(1 - alpha/2)
  r0 <- r2 - cor^2
  zr <- log((1 + cor)/(1 - cor))/2
@@ -778,6 +780,7 @@ ci.lc.reg <- function(alpha, est, se, n, s, v) {
 #' @importFrom stats qnorm
 #' @export
 ci.fisher <- function(alpha, cor, se) {
+ if (cor > .999 || cor < -.999) {stop("correlation must be between -.999 and .999")}
  z <- qnorm(1 - alpha/2)
  zr <- log((1 + cor)/(1 - cor))/2
  ll0 <- zr - z*se/(1 - cor^2)
@@ -1003,6 +1006,7 @@ ci.lc.gen.bs <- function(alpha, est, se, v) {
 #' @importFrom stats qf
 #' @export
 ci.rsqr <- function(alpha, r2, s, n) {
+ if (r2 > .999 || r2 < .001) {stop("squared multiple correlation must be between .001 and .999")}
  alpha1 <- alpha/2
  alpha2 <- 1 - alpha1
  z0 <- qnorm(1 - alpha1)
@@ -1312,6 +1316,7 @@ size.ci.slope <- function(alpha, evar, x, w) {
 #' @importFrom stats qnorm
 #' @export  
 size.ci.cor <- function(alpha, cor, s, w) {
+ if (cor > .999 || cor < -.999) {stop("correlation must be between -.999 and .999")}
  z <- qnorm(1 - alpha/2)
  n1 <- ceiling(4*(1 - cor^2)^2*(z/w)^2 + s + 3)
  zr <- log((1 + cor)/(1 - cor))/2
@@ -1359,6 +1364,7 @@ size.ci.cor <- function(alpha, cor, s, w) {
 #' @importFrom stats qnorm
 #' @export  
 size.ci.rsqr <- function(alpha, r2, s, w) {
+ if (r2 > .999 || r2 < .001) {stop("squared multiple correlation must be between .001 and .999")}
  z <- qnorm(1 - alpha/2)
  n1 <- ceiling(16*(r2*(1 - r2)^2)*(z/w)^2 + s + 2)
  ci <- ci.rsqr(alpha, r2, s, n1)
@@ -1646,6 +1652,7 @@ size.test.slope <- function(alpha, pow, evar, x, slope, h) {
 #' @importFrom stats qnorm
 #' @export  
 size.test.cor <- function(alpha, pow, cor, s, h) {
+ if (cor > .999 || cor < -.999) {stop("correlation must be between -.999 and .999")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
  zr <- log((1 + cor)/(1 - cor))/2
@@ -1691,6 +1698,7 @@ size.test.cor <- function(alpha, pow, cor, s, h) {
 #' @importFrom stats qnorm
 #' @export  
 size.interval.cor <- function(alpha, pow, cor, s, h) {
+ if (cor > .999 || cor < -.999) {stop("correlation must be between -.999 and .999")}
  if (h <= abs(cor)) {stop("cor must be between -h and h")}
  za <- qnorm(1 - alpha)
  zb <- qnorm(1 - (1 - pow)/2)
@@ -1879,6 +1887,7 @@ size.test.cronbach2 <- function(alpha, pow, rel1, rel2, r) {
 #' @importFrom stats pnorm
 #' @export
 power.cor1 <- function(alpha, n, cor, h, s) {
+ if (cor > .999 || cor < -.999) {stop("correlation must be between -.999 and .999")}
  za <- qnorm(1 - alpha/2)
  f1 <- log((1 + cor)/(1 - cor))/2
  f2 <- log((1 + h)/(1 - h))/2
@@ -2078,6 +2087,7 @@ random.yx <- function(n, my, mx, sdy, sdx, cor, dec) {
 #' @importFrom mnonr unonr
 #' @export
 sim.ci.cor <- function(alpha, n, cor, dist1, dist2, rep) {
+ if (cor > .999 || cor < -.999) {stop("correlation must be between -.999 and .999")}
  zcrit <- qnorm(1 - alpha/2)
  if (dist1 == 1) {
    skw1 <- 0; kur1 <- 0
@@ -2176,6 +2186,7 @@ sim.ci.cor <- function(alpha, n, cor, dist1, dist2, rep) {
 #' @importFrom mnonr unonr
 #' @export
 sim.ci.spear <- function(alpha, n, cor, dist1, dist2, rep) {
+ if (cor > .999 || cor < -.999) {stop("correlation must be between -.999 and .999")}
  zcrit <- qnorm(1 - alpha/2)
  if (dist1 == 1) {
    skw1 <- 0; kur1 <- 0
