@@ -1760,6 +1760,8 @@ size.interval.cor <- function(alpha, pow, cor, s, h) {
 #' @importFrom stats qnorm
 #' @export  
 size.test.cor2 <- function(alpha, pow, cor1, cor2, s) {
+ if (cor1 > .999 || cor1 < -.999) {stop("correlation must be between -.999 and .999")}
+ if (cor2 > .999 || cor2 < -.999) {stop("correlation must be between -.999 and .999")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
  zr1 <- log((1 + cor1)/(1 - cor1))/2
