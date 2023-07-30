@@ -2523,6 +2523,7 @@ size.ci.ratio.prop.ps <- function(alpha, p1, p2, phi, r) {
 #' @importFrom stats qnorm
 #' @export
 size.ci.agree <- function(alpha, G, w) {
+ if (G > .999 || G < .001) {stop("G must be between .001 and .999")}
  z <- qnorm(1 - alpha/2)
  n <- ceiling(4*(1 - G^2)*(z/w)^2)
  out <- matrix(n, nrow = 1, ncol = 1)
