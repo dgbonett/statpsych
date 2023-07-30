@@ -2439,6 +2439,7 @@ size.ci.lc.prop.bs <- function(alpha, p, w, v) {
 #' @importFrom stats qnorm
 #' @export  
 size.ci.prop.ps <- function(alpha, p1, p2, phi, w) {
+ if (phi > .999 || phi < -.999) {stop("phi must be between -.999 and .999")}
  z <- qnorm(1 - alpha/2)
  cov <- phi*sqrt(p1*p2*(1 - p1)*(1 - p2))
  n <- ceiling((4*(p1*(1 - p1) + p2*(1 - p2) - 2*cov))*(z/w)^2)
@@ -2481,6 +2482,7 @@ size.ci.prop.ps <- function(alpha, p1, p2, phi, w) {
 #' @importFrom stats qnorm
 #' @export  
 size.ci.ratio.prop.ps <- function(alpha, p1, p2, phi, r) {
+ if (phi > .999 || phi < -.999) {stop("phi must be between -.999 and .999")}
  z <- qnorm(1 - alpha/2)
  cov <- phi*sqrt((1 - p1)*(1 - p2)/(p1*p2))
  n <- ceiling(4*((1 - p1)/p1 + (1 - p2)/p2 - 2*cov)*(z/log(r))^2)
@@ -2798,6 +2800,7 @@ size.supinf.prop2 <- function(alpha, pow, p1, p2, h) {
 #' @importFrom stats qnorm
 #' @export
 size.test.prop.ps <- function(alpha, pow, p1, p2, phi, es) {
+ if (phi > .999 || phi < -.999) {stop("phi must be between -.999 and .999")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
  cov <- phi*sqrt(p1*p2*(1 - p1)*(1 - p2))
@@ -2848,6 +2851,7 @@ size.test.prop.ps <- function(alpha, pow, p1, p2, phi, es) {
 #' @importFrom stats qnorm
 #' @export
 size.equiv.prop.ps <- function(alpha, pow, p1, p2, phi, h) {
+ if (phi > .999 || phi < -.999) {stop("phi must be between -.999 and .999")}
  if (h <= abs(p1 - p2)) {stop("|p1 - p2| must be less than h")}
  za <- qnorm(1 - alpha)
  zb <- qnorm(1 - (1 - pow)/2)
@@ -2901,6 +2905,7 @@ size.equiv.prop.ps <- function(alpha, pow, p1, p2, phi, h) {
 #' @importFrom stats qnorm
 #' @export
 size.supinf.prop.ps <- function(alpha, pow, p1, p2, phi, h) {
+ if (phi > .999 || phi < -.999) {stop("phi must be between -.999 and .999")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
  cov <- phi*sqrt(p1*p2*(1 - p1)*(1 - p2))
@@ -3045,6 +3050,7 @@ power.prop2 <- function(alpha, n1, n2, p1, p2, es) {
 #' @importFrom stats pnorm
 #' @export
 power.prop.ps <- function(alpha, n, p1, p2, phi, es) {
+ if (phi > .999 || phi < -.999) {stop("phi must be between -.999 and .999")}
  za <- qnorm(1 - alpha/2)
  v <- 2*phi*sqrt(p1*(1 - p1)*p2*(1 - p2))
  z <- abs(es)/sqrt((p1*(1 - p1) + p2*(1 - p2) - v)/n) - za
