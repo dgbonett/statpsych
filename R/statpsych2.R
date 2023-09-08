@@ -1495,15 +1495,15 @@ size.ci.lc.ancova <- function(alpha, evar, s, d, w, v) {
 #'
 #'
 #' @description
-#' Computes the approximate sample size required to estimate the indirect effect  
-#' in a simple mediation model. The direct effect of the independent variable on 
-#' the dependent variable, controlling for the mediator variable, is assumed to 
-#' be negligible. 
+#' Computes the approximate sample size required to estimate a standardized 
+#' indirect effect in a simple mediation model. The direct effect of the 
+#' independent (exogenous) variable on the response variable, controlling for
+#' the mediator variable, is assumed to be negligible. 
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  cor1   planning value of correlation between the independent and mediator variables
-#' @param  cor2   planning value of correlation between the mediator and dependent variables 
+#' @param  cor2   planning value of correlation between the mediator and response variables 
 #' @param  w      desired confidence interval width
 #'
 #' 
