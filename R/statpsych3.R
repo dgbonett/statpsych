@@ -261,7 +261,7 @@ ci.prop2 <- function(alpha, f1, f2, n1, n2) {
 #' Computes an approximate confidence interval for a population proportion 
 #' difference when inverse sampling has been used. An approximate standard  
 #' error is recovered from the confidence interval. With inverse sampling, the  
-#' number of participants who have the attribute within group 1(f1) and group 2
+#' number of participants who have the attribute within group 1 (f1) and group 2
 #' (f2) are predetermined, and sampling continues within each group until f1 
 #' and f2 attain their prespecified values. With inverse sampling, the sample 
 #' sizes (n1 and n2) will not be known in advance.
