@@ -1327,7 +1327,7 @@ ci.agree2 <- function(alpha, n1, f1, n2, f2, r) {
 #' all pairs of raters in a 3-rater design with a dichotomous rating, and 
 #' computes adjusted Wald confidence intervals for differences of all pairs of 
 #' G agreement. An adjusted Wald confidence interval for unanimous G agreement 
-#' among the three raters also is computed. In the three-rater design, 
+#' among the three raters is also computed. In the three-rater design, 
 #' unanimous G agreement is equal to the average of all pairs of G agreement. 
 #'
 #'  
