@@ -716,9 +716,9 @@ ci.ratio.prop.ps <- function(alpha, f00, f01, f10, f11) {
 #' @description
 #' Computes confidence intervals and test statistics for population 
 #' conditional slopes (simple slopes) in a logistic model that
-#' includes a predictor variable that is the product of a moderator 
-#' variable and a predictor variable. Conditional slopes are computed 
-#' at low and high values of the moderator variable. 
+#' includes a predictor variable (x1), a moderator variable (x2),
+#' and a product predictor variable (x1*x2). Conditional slopes are 
+#' computed at low and high values of the moderator variable. 
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
