@@ -1917,7 +1917,7 @@ ci.lc.median.bs <- function(alpha, m, se, v) {
 #' * Median1-Median2 - estimated difference of medians
 #' * SE1 - standard error of median 1 
 #' * SE2 - standard error of median 2 
-#' * COV - covariance of the two `estimated medians
+#' * COV - covariance of the two estimated medians
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #'
