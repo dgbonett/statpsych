@@ -2141,7 +2141,7 @@ ci.sign1 <- function(alpha, y, h) {
 #'
 #' @return 
 #' Returns a 1-row matrix. The columns are:
-#' * Estimate - estimate of probability
+#' * Estimate - estimated proportion
 #' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
