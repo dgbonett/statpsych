@@ -2458,10 +2458,10 @@ ci.etasqr <- function(alpha, etasqr, df1, df2) {
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
-#' @param   y11     vector of scores at level 1 in group 1
-#' @param   y12     vector of scores at level 2 in group 1
-#' @param   y21     vector of scores at level 1 in group 2
-#' @param   y22     vector of scores at level 2 in group 2
+#' @param   y11     vector of scores at level 1 of A and level 1 of B
+#' @param   y12     vector of scores at level 1 of A and level 2 of B
+#' @param   y21     vector of scores at level 2 of A and level 1 of B
+#' @param   y22     vector of scores at level 2 of A and level 2 of B
 #'
 #'
 #' @return
