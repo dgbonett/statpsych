@@ -2294,7 +2294,7 @@ ci.random.anova1 <- function(alpha, m, sd, n) {
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
-#' @param  rel    sample value of Cronbach's reliability  
+#' @param  rel    estimated Cronbach's reliability  
 #' @param  r      number of measurements (items, raters, etc.)
 #' @param  n	  sample size
 #'
