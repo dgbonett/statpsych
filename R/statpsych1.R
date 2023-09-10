@@ -1457,8 +1457,8 @@ ci.cod1 <-function(alpha, y) {
 #'           
 #' @description
 #' Computes a confidence interval for a ratio of population dispersion
-#' coefficients (MAD/median) in a 2-group design. Ratio-scale scores are
-#' assumed.
+#' coefficients (mean absolute deviation from median divided by median)
+#' in a 2-group design. Ratio-scale scores are assumed.
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
 #' @param  y1      vector of scores in gorup 1
