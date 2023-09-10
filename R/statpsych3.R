@@ -402,7 +402,7 @@ ci.ratio.prop2 <- function(alpha, f1, f2, n1, n2) {
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
-#' @param   f       vector of frequency counts of participants with attribute
+#' @param   f       vector of frequency counts of participants who have the attribute
 #' @param   n       vector of sample sizes
 #' @param   v       vector of between-subjects contrast coefficients
 #'
@@ -1561,7 +1561,7 @@ ci.cramer <- function(alpha, chisqr, r, c, n) {
  p <- pchisq(chisqr, df, nc)
  k1 <- which(min(abs(p - alpha2)) == abs(p - alpha2))[[1]]
  dL <- nc[k1]
- # version 1.5 corrects error in Smithson CI equation 4.13 
+ # version 1.5 corrects an error in the Smithson CI equation 4.13 
  ll <- sqrt(dL/(n*k))
  k2 <- which(min(abs(p - alpha1)) == abs(p - alpha1))[[1]]
  dU <- nc[k2]
@@ -1590,7 +1590,7 @@ ci.cramer <- function(alpha, chisqr, r, c, n) {
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
-#' @param   f       vector of frequency counts of participants with attribute
+#' @param   f       vector of frequency counts of participants who have the attribute
 #' @param   n       vector of sample sizes
 #'
 #'
