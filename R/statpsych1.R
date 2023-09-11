@@ -4773,7 +4773,7 @@ power.mean2 <- function(alpha, n1, n2, var1, var2, es) {
 #'
 #' @description
 #' Computes the approximate power of a test for a linear contrast of population
-#' mean for planned sample sizes in a between-subject design. The groups can be
+#' means for planned sample sizes in a between-subject design. The groups can be
 #' the factor levels of a single factor design or the combinations of factors 
 #' in a factorial design. For a conservatively low power approximation, set the
 #' variance planning values to the largest values within their plausible ranges,
