@@ -845,7 +845,7 @@ ci.oddsratio <- function(alpha, f00, f01, f10, f11) {
 #' used as a crude approximation to the tetrachoric correlation. Yule Y is 
 #' equal to the phi coefficient only when all marginal frequencies are equal.
 #' Bonett-Price Y* is a better approximation to the phi coeffiient when the
-#; marginal frequencies are not equal.
+#' marginal frequencies are not equal.
 #'
 #'
 #' @param   alpha  alpha level for 1-alpha confidence
