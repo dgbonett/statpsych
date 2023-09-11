@@ -1260,7 +1260,7 @@ ci.ratio.sd2 <- function(alpha, y1, y2) {
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
 #' @param  y1      vector of measurement 1 scores
-#' @param  y2      vector of measurement 2 scores
+#' @param  y2      vector of measurement 2 scores (paired with y1)
 #'
 #'
 #' @return 
@@ -1461,8 +1461,8 @@ ci.cod1 <-function(alpha, y) {
 #' in a 2-group design. Ratio-scale scores are assumed.
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
-#' @param  y1      vector of scores in gorup 1
-#' @param  y2      vector of scores in gorup 2
+#' @param  y1      vector of scores in group 1
+#' @param  y2      vector of scores in group 2
 #'
 #'
 #' @return 
@@ -1907,7 +1907,7 @@ ci.lc.median.bs <- function(alpha, m, se, v) {
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
 #' @param  y1      vector of scores for measurement 1
-#' @param  y2      vector of scores for measurement 2
+#' @param  y2      vector of scores for measurement 2 (paired with y1)
 #'
 #'
 #' @return 
@@ -1991,7 +1991,7 @@ ci.median.ps <- function(alpha, y1, y2) {
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
 #' @param  y1      vector of scores for measurement 1
-#' @param  y2      vector of scores for measurement 2
+#' @param  y2      vector of scores for measurement 2 (paired with y1)
 #'
 #'
 #' @return 
