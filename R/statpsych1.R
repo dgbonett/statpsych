@@ -5041,7 +5041,7 @@ pi.score.ps <- function(alpha, m1, m2, sd1, sd2, cor, n) {
 #'
 #'
 #' @description
-#' Generates a random sample of participant IDs.
+#' Generates a random sample of participant IDs without replacement.
 #'
 #'
 #' @param  popsize     study population size
@@ -5104,7 +5104,7 @@ randomize <- function(n) {
 #'
 #' @description
 #' Generates a random sample of scores from a normal distribution with a
-#' specified population mean and standard deviation. This functions is useful 
+#' specified population mean and standard deviation. This function is useful 
 #' for generating hypothetical data for classroom demonstrations.
 #'
 #'
