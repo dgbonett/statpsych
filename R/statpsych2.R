@@ -313,7 +313,7 @@ ci.cor2.gen <- function(cor1, ll1, ul1, cor2, ll2, ul2) {
 #' Computes confidence intervals for two types of population point-biserial 
 #' correlations. One type uses a weighted average of the group variances 
 #' and is appropriate for nonexperimental designs with simple random sampling
-#' (rather than stratified random sampling). The other type uses an unweighted 
+#' (but not stratified random sampling). The other type uses an unweighted 
 #' average of the group variances and is appropriate for experimental designs.
 #' Equality of variances is not assumed for either type. 
 #'
