@@ -157,7 +157,7 @@ ci.pairs.prop1 <-function(alpha, f) {
 #' @return
 #' Returns a 1-row matrix. The columns are:
 #' * Estimate - estimate of proportion
-#' * SE - standard error
+#' * SE - recovered standard error
 #' * LL - lower limit of confidence interval
 #' * UL - upper limit of confidence interval
 #'
@@ -277,7 +277,7 @@ ci.prop2 <- function(alpha, f1, f2, n1, n2) {
 #' @return
 #' Returns a 1-row matrix. The columns are:
 #' * Estimate - estimate of proportion difference
-#' * SE - standard error 
+#' * SE - recovered standard error 
 #' * LL - lower limit of confidence interval
 #' * UL - upper limit of confidence interval
 #'
