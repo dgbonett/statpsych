@@ -2301,7 +2301,7 @@ size.ci.prop1 <- function(alpha, p, w) {
 #'
 #'
 #' @return
-#' Returns the required sample size per group
+#' Returns the required sample size for each group
 #'
 #'
 #' @examples
@@ -2340,7 +2340,7 @@ size.ci.prop2 <- function(alpha, p1, p2, w) {
 #'
 #'
 #' @return
-#' Returns the required sample size per group
+#' Returns the required sample size for each group
 #'
 #'
 #' @examples
@@ -2381,7 +2381,7 @@ size.ci.ratio.prop2 <- function(alpha, p1, p2, r) {
 #'
 #'
 #' @return
-#' Returns the required sample size per group
+#' Returns the required sample size for each group
 #'
 #'
 #' @examples
@@ -2456,8 +2456,8 @@ size.ci.prop.ps <- function(alpha, p1, p2, phi, w) {
 #' @description
 #' Computes the sample size required to estimate a ratio of proportions 
 #' with desired confidence interval precision in a paired-samples design.
-#' Set the phi planning value to the smallest value within a plausible range
-#' for a conservatively large sample size. 
+#' Set the phi correlation planning value to the smallest value within a 
+#' plausible range for a conservatively large sample size. 
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
@@ -2596,7 +2596,7 @@ size.test.prop1 <- function(alpha, pow, p, es) {
 #'
 #'
 #' @return
-#' Returns the required sample size per group
+#' Returns the required sample size for eachr group
 #'
 #'
 #' @examples
@@ -2641,7 +2641,7 @@ size.test.prop2 <- function(alpha, pow, p1, p2, es) {
 #'
 #'
 #' @return
-#' Returns the required sample size per group
+#' Returns the required sample size for each group
 #'
 #'
 #' @examples
@@ -2661,7 +2661,7 @@ size.test.lc.prop.bs <- function(alpha, pow, p, es, v) {
  zb <- qnorm(pow)
  n <- ceiling((t(v)%*%diag(p*(1 - p))%*%v)*(za + zb)^2/es^2)
  out <- matrix(n, nrow = 1, ncol = 1)
- colnames(out) <- "Sample size pe group"
+ colnames(out) <- "Sample size per group"
  return(out)
 }
 
@@ -2689,7 +2689,7 @@ size.test.lc.prop.bs <- function(alpha, pow, p, es, v) {
 #'
 #'
 #' @return
-#' Returns the required sample size per group
+#' Returns the required sample size for each group
 #'
 #'
 #' @examples
@@ -2709,7 +2709,7 @@ size.equiv.prop2 <- function(alpha, pow, p1, p2, h) {
  es <- p1 - p2
  n <- ceiling((p1*(1 - p1) + p2*(1 - p2))*(za + zb)^2/(h - abs(es))^2)
  out <- matrix(n, nrow = 1, ncol = 1)
- colnames(out) <- "Sample size"
+ colnames(out) <- "Sample size per group"
  return(out)
 }
 
@@ -2737,7 +2737,7 @@ size.equiv.prop2 <- function(alpha, pow, p1, p2, h) {
 #'
 #'
 #' @return
-#' Returns the required sample size per group
+#' Returns the required sample size for each group
 #'
 #'
 #' @examples
@@ -2756,7 +2756,7 @@ size.supinf.prop2 <- function(alpha, pow, p1, p2, h) {
  es <- p1 - p2
  n <- ceiling((p1*(1 - p1) + p2*(1 - p2))*(za + zb)^2/(es - h)^2)
  out <- matrix(n, nrow = 1, ncol = 1)
- colnames(out) <- "Sample size"
+ colnames(out) <- "Sample size per group"
  return(out)
 }
 
