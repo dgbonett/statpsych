@@ -2774,7 +2774,7 @@ size.supinf.prop2 <- function(alpha, pow, p1, p2, h) {
 #' size. The planning value for the effect size (proportion difference)
 #' could be set equal to the difference of the two proportion planning values 
 #' or it could be set equal to a minimally interesting effect size. Set the
-#' phi coefficient planning value to the smallest value within a plausible range
+#' phi correlation planning value to the smallest value within a plausible range
 #' for a conservatively large sample size.
 #'
 #'
@@ -2782,7 +2782,7 @@ size.supinf.prop2 <- function(alpha, pow, p1, p2, h) {
 #' @param  pow    desired power
 #' @param  p1     planning value of proportion for measurement 1
 #' @param  p2     planning value of proportion for measurement 2
-#' @param  phi    planning value of phi coefficient
+#' @param  phi    planning value of phi coerrelation
 #' @param  es     planning value of proportion difference
 #'
 #'
@@ -2833,7 +2833,7 @@ size.test.prop.ps <- function(alpha, pow, p1, p2, phi, es) {
 #' @param  pow    desired power
 #' @param  p1     planning value of proportion for measurement 1
 #' @param  p2     planning value of proportion for measurement 2
-#' @param  phi    planning value of phi coefficient
+#' @param  phi    planning value of phi correlation
 #' @param  h      upper limit for range of practical equivalence
 #'
 #'
