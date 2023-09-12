@@ -1276,8 +1276,8 @@ ci.rel2 <- function(rel1, ll1, ul1, rel2, ll2, ul2) {
 #' size.ci.slope(.05, 31.1, x, 1)
 #'
 #' # Should return:
-#' #      Sample size
-#' # [1,]          83
+#' #      Total sample size
+#' # [1,]                83
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -1288,7 +1288,7 @@ size.ci.slope <- function(alpha, evar, x, w) {
  z <- qnorm(1 - alpha/2)
  n <- ceiling(4*(evar/xvar)*(z/w)^2 + 1 + z^2/2)
  out <- matrix(n, nrow = 1, ncol = 1)
- colnames(out) <- "Sample size"
+ colnames(out) <- "Total sample size"
  return(out)
 }
 
@@ -1467,7 +1467,7 @@ size.ci.condmean <- function(alpha, evar, xvar, diff, w) {
 #'
 #' 
 #' @return 
-#' Returns the required sample size per group
+#' Returns the required sample size for each group
 #' 
 #' 
 #' @examples
@@ -1549,7 +1549,7 @@ size.ci.indirect <- function(alpha, cor1, cor2, w) {
 #'
 #'
 #' @return 
-#' Returns the required sample size per group
+#' Returns the required sample size for each group
 #'
 #'
 #' @references
@@ -1618,8 +1618,8 @@ size.ci.cronbach2 <- function(alpha, rel1, rel2, r, w) {
 #' size.test.slope(.05, .9, 31.1, x, .75, 0)
 #'
 #' # Should return:
-#' #      Sample size
-#' # [1,]         100
+#' #      Total sample size
+#' # [1,]               100
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -1632,7 +1632,7 @@ size.test.slope <- function(alpha, pow, evar, x, slope, h) {
  es <- slope - h
  n <- ceiling((evar/xvar)*(za + zb)^2/es^2 + 1 + za^2/2)
  out <- matrix(n, nrow = 1, ncol = 1)
- colnames(out) <- "Sample size"
+ colnames(out) <- "Total sample size"
  return(out)
 }
 
@@ -1747,7 +1747,7 @@ size.interval.cor <- function(alpha, pow, cor, s, h) {
 #'
 #' 
 #' @return 
-#' Returns the required sample size per group
+#' Returns the required sample size for each group
 #' 
 #' 
 #' @examples
@@ -1801,7 +1801,7 @@ size.test.cor2 <- function(alpha, pow, cor1, cor2, s) {
 #'
 #' 
 #' @return 
-#' Returns the required sample size per group
+#' Returns the required sample size for each group
 #' 
 #' 
 #' @examples
@@ -1844,7 +1844,7 @@ size.test.lc.ancova <- function(alpha, pow, evar, es, s, d, v) {
 #'
 #'
 #' @return 
-#' Returns the required sample size per group
+#' Returns the required sample size for each group
 #'
 #'
 #' @references
