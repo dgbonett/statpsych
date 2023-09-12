@@ -3503,7 +3503,7 @@ size.ci.mean2 <- function(alpha, var, w, R) {
 #'
 #'
 #' @return 
-#' Returns the required sample size per each group for each standardizer
+#' Returns the required sample size per group for each standardizer
 #'
 #'
 #' @examples
@@ -3987,13 +3987,13 @@ size.ci.cronbach <- function(alpha, rel, r, w) {
 #'
 #'  
 #' @param  alpha    alpha level for 1-alpha confidence
-#' @param  etasqr   planning value of squared multiple correlation
+#' @param  etasqr   planning value of eta-squared
 #' @param  groups   number of groups
 #' @param  w        desired confidence interval width
 #'
 #' 
 #' @return 
-#' Returns the required sample size for each group
+#' Returns the required sample size for each group group
 #' 
 #' 
 #' @examples
@@ -4139,7 +4139,7 @@ size.test.mean1 <- function(alpha, pow, var, es) {
 #'
 #'
 #' @return 
-#' Returns the required sample size per group
+#' Returns the required sample size for each group
 #'
 #'	
 #' @examples
@@ -4183,7 +4183,7 @@ size.test.mean2 <- function(alpha, pow, var, es, R) {
 #'
 #'
 #' @return 
-#' Returns the required sample size per group
+#' Returns the required sample size for each group
 #'
 #'
 #' @examples
@@ -4233,7 +4233,7 @@ size.test.lc.mean.bs <- function(alpha, pow, var, es, v) {
 #'
 #'
 #' @return 
-#' Returns the required sample size per group
+#' Returns the required sample size for each group
 #'
 #'
 #' @examples
@@ -4281,7 +4281,7 @@ size.equiv.mean2 <- function(alpha, pow, var, es, h) {
 #'
 #'
 #' @return 
-#' Returns the required sample size per group
+#' Returns the required sample size for each group
 #'
 #'
 #' @examples
@@ -4521,7 +4521,7 @@ size.supinf.mean.ps <- function(alpha, pow, var, es, cor, h) {
 #'
 #'
 #' @return 
-#' Returns the required sample size per group 
+#' Returns the required sample size for each group 
 #'
 #'
 #' @examples
