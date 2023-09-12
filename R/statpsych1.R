@@ -4073,7 +4073,7 @@ size.ci.etasqr <- function(alpha, etasqr, groups, w) {
 size.ci.second <- function(n0, w0, w) {
  n <- ceiling(((w0/w)^2 - 1)*n0)
  out <- matrix(n, nrow = 1, ncol = 1)
- colnames(out) <- "Sample size"
+ colnames(out) <- "Second-stage sample size"
  return(out)
 }
 
@@ -4299,7 +4299,7 @@ size.supinf.mean2 <- function(alpha, pow, var, es, h) {
  zb <- qnorm(pow)
  n <- ceiling(var*2*(za + zb)^2/(es - h)^2 + za^2/4)
  out <- matrix(n, nrow = 1, ncol = 1)
- colnames(out) <- "Sample size"
+ colnames(out) <- "Sample size per group"
  return(out)
 }
 
