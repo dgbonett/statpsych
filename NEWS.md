@@ -4,6 +4,7 @@ statpsych version 1.5.0 (Release date: 2023/11/xx)
 Changes:
 
 * New functions:
+  
         * ci.cv1 -- Confidence interval for a single coefficient of variation
   
         * ci.ratio.cv2 -- Confidence interval for a ratio of coefficients of variation
@@ -32,7 +33,8 @@ Changes:
   
          * corrected SE error in ci.lc.stdmean.ws
   
-* Modifications:  
+* Modifications:
+   
          * both biased and bias adjusted estimates are now reported in ci.stdmean1, ci.stdmean2, 
            ci.stdmean.ps, ci.stdmean.strat, and ci.2x2.stdmean.bs 
 
