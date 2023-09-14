@@ -4,10 +4,26 @@ statpsych version 1.5.0 (Release date: 2023/11/xx)
 Changes:
 
 * New functions:
-    
-
-*  Modifications:
-
+        * ci.cv1 -- Confidence interval for a single coefficient of variation
+        * ci.ratio.cv2 -- Confidence interval for a ratio of coefficients of variation 
+        * ci.pv -- Confidence interval for positive and negative predictive values with
+          retrospective sampling
+        * ci.2x2.stdmean.ws -- Computes confidence intervals of standardized effects in a 2x2 
+          within-subjects design
+        * ci.2x2.stdmean.mixed -- Computes confidence intervals of standardized effects in a 2x2 
+          mixed design
+        * ci.2x2.median.ws -- Computes confidence intervals of effects in a 2x2 within-subjects 
+          design for medians
+        * ci.2x2.median.mixed -- Computes confidence intervals of effects in a 2x2 mixed design  
+          for medians
+        * spearmanbrown -- Computes the reliability of a scale with r2 measurements given the 
+          reliability of a scale with r1 measurements
+* Error Corrections:
+         * corrected CI error in ci.cramer
+         * corrected SE error in ci.lc.stdmean.ws
+* Modifications:  
+         * both biased and bias adjusted estimates are now reported in ci.stdmean1, ci.stdmean2, 
+           ci.stdmean.ps, ci.stdmean.strat, and ci.2x2.stdmean.bs 
 
 
 statpsych version 1.4.0 (Release date: 2023/06/26)
