@@ -27,6 +27,7 @@ Changes:
           reliability of a scale with r1 measurements
   
 * Error Corrections:
+  
          * corrected CI error in ci.cramer
   
          * corrected SE error in ci.lc.stdmean.ws
