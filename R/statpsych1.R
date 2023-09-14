@@ -1374,6 +1374,79 @@ ci.cv1 <- function(alpha, m, sd, n) {
 }
 
 
+#  ci.ratio.cv2  ====================================================================
+#' Confidence interval for a ratio of coefficients of variation in a 2-group
+#' design
+#'
+#'
+#' @description
+#' Computes a confidence interval for a ratio of population coefficients of 
+#' variation (CV) in a 2-group degin. This confidence interval uses the
+#' confidence interval for each CV and then uses the MOVER-DL method 
+#' (see Newcombe, page 138) to obtain a confidence interval for CV1/CV2. 
+#' The CV assumes ratio-scale scores.
+#'
+#'  
+#' @param  alpha  alpha level for 1-alpha confidence
+#' @param  m1	  estimated mean for group 1
+#' @param  m2	  estimated mean for group 2 
+#' @param  sd1	  estimated standard deviation for group 1
+#' @param  sd2	  estimated standard deviation for group 2
+#' @param  n1	  sample size for group 1
+#' @param  n2	  sample size for group 2
+#'
+#'
+#' @return 
+#' Returns a 1-row matrix. The columns are:
+#' * Estimate - estimated ratio of coefficients of variation 
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
+#' 
+#' 
+#' @references
+#' \insertRef{Newcombe2013}{statpsych}
+#'
+#'
+#' @examples
+#' ci.cv2(.05, 34.5, 26.1, 4.15, 2.26, 50, 50)
+#'
+#' # Should return:
+#' #      Estimate       LL       UL
+#' # [1,] 1.389188 1.041478 1.854101
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export
+ci.ratio.cv2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
+ z <- qnorm(1 - alpha/2)
+ df1 <- n1 - 1
+ est.d1 <- m1/sd1
+ se.d1 <- sqrt(est.d1^2/(2*df1) + 1/df1)
+ if (est.d1 - z*se.d1 > .000001)  
+  {UL1 <- log(1/(est.d1 - z*se.d1))}
+ else 
+  {UL1 <- log(999999)}
+ LL1 <- log(1/(est.d1 + z*se.d1))
+ est1 <- log(1/est.d1)
+ df2 <- n2 - 1
+ est.d2 <- m2/sd2
+ se.d2 <- sqrt(est.d2^2/(2*df2) + 1/df2)
+ if (est.d2 - z*se.d2 > .000001) 
+  {UL2 <- log(1/(est.d2 - z*se.d2))}
+ else 
+  {UL2 <- log(999999)}
+ LL2 <- log(1/(est.d2 + z*se.d2))
+ est2 <- log(1/est.d2)
+ diff <- est1 - est2
+ ll <- exp(diff - sqrt((est1 - LL1)^2 + (UL2 - est2)^2))
+ ul <- exp(diff + sqrt((UL1 - est1)^2 + (est2 - LL2)^2))
+ est <- exp(diff)
+ out <- t(c(est, ll, ul))
+ colnames(out) <- c("Estimate", "LL", "UL")
+ return(out)
+}
+	
+
 #  ci.cod1 =================================================================== 
 #' Confidence interval for a single coefficient of dispersion
 #'
