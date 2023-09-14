@@ -9,7 +9,7 @@ Changes:
   
         * ci.ratio.cv2 -- Confidence interval for a ratio of coefficients of variation
   
-        * ci.pv -- Confidence interval for positive and negative predictive values with
+        * ci.pv -- Confidence intervals for positive and negative predictive values with
           retrospective sampling
   
         * ci.2x2.stdmean.ws -- Computes confidence intervals of standardized effects in a 2x2 
