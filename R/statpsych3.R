@@ -1887,7 +1887,7 @@ ci.bayes.prop1 <- function(alpha, prior.mean, prior.sd, f, n) {
 
 
 #  ci.pv =====================================================================
-#' Confidence interval for positive and negative predictive values with 
+#' Confidence intervals for positive and negative predictive values with 
 #' retrospective sampling
 #'
 #'                                 
