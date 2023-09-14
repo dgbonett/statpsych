@@ -55,7 +55,9 @@ ci.mean1 <- function(alpha, m, sd, n) {
 #'
 #' @description
 #' Computes a confidence interval for a population standardized mean 
-#' difference from a hypothesized value. 
+#' difference from a hypothesized value. If the hypothesized value is set
+#' to 0, the reciprocals of the confidence interval endpoints gives a 
+#' confidence interval for the coefficient of variation.
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -67,7 +69,8 @@ ci.mean1 <- function(alpha, m, sd, n) {
 #'
 #' @return 
 #' Returns a 1-row matrix. The columns are:
-#' * Estimate - bias adjusted standardized mean difference
+#' * Estimate - estimated standardized mean difference
+#' * adj Estimate - bias adjusted standardized mean difference estimate
 #' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -81,8 +84,8 @@ ci.mean1 <- function(alpha, m, sd, n) {
 #' ci.stdmean1(.05, 24.5, 3.65, 40, 20)
 #'
 #' # Should return:
-#' #      Estimate        SE        LL       UL
-#' # [1,] 1.209015 0.2124335 0.8165146 1.649239
+#' #      Estimate adj Estimate        SE        LL       UL
+#' # [1,] 1.232877     1.209015 0.2124335 0.8165146 1.649239
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -96,8 +99,8 @@ ci.stdmean1 <- function(alpha, m, sd, n, h) {
  se <- sqrt(est^2/(2*df) + 1/df)
  ll <- est - z*se
  ul <- est + z*se
- out <- t(c(estu, se, ll, ul))
- colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ out <- t(c(est, estu, se, ll, ul))
+ colnames(out) <- c("Estimate", "adj Estimate", "SE", "LL", "UL")
  return(out)
 }
 	
@@ -508,7 +511,8 @@ ci.ratio.mean2 <- function(alpha, y1, y2){
 #'
 #' @return 
 #' Returns a 4-row matrix. The columns are: 
-#' * Estimate - bias adjusted standardized mean difference
+#' * Estimate - estimated standardized mean difference
+#' * adj Estimate - bias adjusted standardized mean difference estimate
 #' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -522,11 +526,11 @@ ci.ratio.mean2 <- function(alpha, y1, y2){
 #' ci.stdmean2(.05, 35.1, 26.7, 7.32, 6.98, 30, 30)
 #' 
 #' # Should return:
-#' #                           Estimate        SE        LL       UL
-#' # Unweighted standardizer:  1.159240 0.2844012 0.6170771 1.731909
-#' # Weighted standardizer:    1.159240 0.2802826 0.6251494 1.723837
-#' # Group 1 standardizer:     1.117605 0.2975582 0.5643375 1.730744
-#' # Group 2 standardizer:     1.172044 0.3120525 0.5918268 1.815050
+#' #                          Estimate adj Estimate        SE        LL       UL
+#' # Unweighted standardizer: 1.174493     1.159240 0.2844012 0.6170771 1.731909
+#' # Weighted standardizer:   1.174493     1.159240 0.2802826 0.6251494 1.723837
+#' # Group 1 standardizer:    1.147541     1.117605 0.2975582 0.5643375 1.730744
+#' # Group 2 standardizer:    1.203438     1.172044 0.3120525 0.5918268 1.815050
 #'
 #'
 #' @importFrom stats qnorm
@@ -563,12 +567,12 @@ ci.stdmean2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
  se4 <- sqrt(est4^2/(2*df2) + 1/df2 + v1/(df1*v2))
  ll4 <- est4 - z*se4
  ul4 <- est4 + z*se4
- out1 <- t(c(est1u, se1, ll1, ul1))
- out2 <- t(c(est2u, se2, ll2, ul2))
- out3 <- t(c(est3u, se3, ll3, ul3))
- out4 <- t(c(est4u, se4, ll4, ul4))
+ out1 <- t(c(est1, est1u, se1, ll1, ul1))
+ out2 <- t(c(est2, est2u, se2, ll2, ul2))
+ out3 <- t(c(est3, est3u, se3, ll3, ul3))
+ out4 <- t(c(est4, est4u, se4, ll4, ul4))
  out <- rbind(out1, out2, out3, out4)
- colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ colnames(out) <- c("Estimate", "adj Estimate", "SE", "LL", "UL")
  rownames1 <- c("Unweighted standardizer:", "Weighted standardizer:")
  rownames2 <- c("Group 1 standardizer:", "Group 2 standardizer:")
  rownames(out) <- c(rownames1, rownames2)
@@ -601,7 +605,8 @@ ci.stdmean2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #'
 #' @return 
 #' Returns a 3-row matrix. The columns are: 
-#' * Estimate - bias adjusted standardized mean difference
+#' * Estimate - estimated standardized mean difference
+#' * adj Estimate - bias adjusted standardized mean difference estimate
 #' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -612,13 +617,13 @@ ci.stdmean2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #'
 #'
 #' @examples
-#' ci.stdmean.strat(.05, 30.2, 30.8, 10.5, 11.2, 200, 200, .533)
+#' ci.stdmean.strat(.05, 33.2, 30.8, 10.5, 11.2, 200, 200, .533)
 #'
 #' # Should return:
-#' #                           Estimate         SE         LL        UL
-#' # Weighted standardizer: -0.05528428 0.10023259 -0.2518410 0.1410636
-#' # Group 1 standardizer:  -0.05692722 0.10368609 -0.2603639 0.1460782
-#' # Group 2 standardizer:  -0.05692722 0.09720571 -0.2440911 0.1369483
+#' #                         Estimate adj Estimate         SE         LL        UL
+#' # Weighted standardizer: 0.2215549    0.2211371 0.10052057 0.02453817 0.4185716
+#' # Group 1 standardizer:  0.2285714    0.2277089 0.10427785 0.02419059 0.4329523
+#' # Group 2 standardizer:  0.2142857    0.2277089 0.09776049 0.02267868 0.4058927
 #'
 #'
 #' @importFrom stats qnorm
@@ -649,11 +654,11 @@ ci.stdmean.strat <- function(alpha, m1, m2, sd1, sd2, n1, n2, p1) {
  se4 <- sqrt(est4^2/(2*df2) + 1/df2 + v1/(df1*v2))
  ll4 <- est4 - z*se4
  ul4 <- est4 + z*se4
- out1 <- t(c(est1u, se1, ll1, ul1))
- out3 <- t(c(est3u, se3, ll3, ul3))
- out4 <- t(c(est4u, se4, ll4, ul4))
+ out1 <- t(c(est1, est1u, se1, ll1, ul1))
+ out3 <- t(c(est3, est3u, se3, ll3, ul3))
+ out4 <- t(c(est4, est4u, se4, ll4, ul4))
  out <- rbind(out1, out3, out4)
- colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ colnames(out) <- c("Estimate", "adj Estimate", "SE", "LL", "UL")
  rownames1 <- c("Weighted standardizer:")
  rownames2 <- c("Group 1 standardizer:", "Group 2 standardizer:")
  rownames(out) <- c(rownames1, rownames2)
@@ -684,7 +689,8 @@ ci.stdmean.strat <- function(alpha, m1, m2, sd1, sd2, n1, n2, p1) {
 #'
 #' @return 
 #' Returns a 3-row matrix. The columns are:
-#' * Estimate - bias adjusted standardized linear contrast
+#' * Estimate - estimated standardized linear contrast
+#' * adj Estimate - bias adjusted standardized linear contrast estimate
 #' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -702,10 +708,10 @@ ci.stdmean.strat <- function(alpha, m1, m2, sd1, sd2, n1, n2, p1) {
 #' ci.lc.stdmean.bs(.05, m, sd, n, v)
 #'
 #' # Should return:
-#' #                           Estimate        SE        LL         UL
-#' # Unweighted standardizer: -1.273964 0.3692800 -2.025039 -0.5774878
-#' # Weighted standardizer:   -1.273964 0.3514511 -1.990095 -0.6124317
-#' # Group 1 standardizer:    -1.273810 0.4849842 -2.343781 -0.4426775
+#' #                           Estimate adj Estimate        SE        LL         UL
+#' # Unweighted standardizer: -1.301263    -1.273964 0.3692800 -2.025039 -0.5774878
+#' # Weighted standardizer:   -1.301263    -1.273964 0.3514511 -1.990095 -0.6124317
+#' # Group 1 standardizer:    -1.393229    -1.273810 0.4849842 -2.343781 -0.4426775
 #'
 #'
 #' @importFrom stats qnorm
@@ -744,11 +750,11 @@ ci.lc.stdmean.bs <- function(alpha, m, sd, n, v) {
  se3 <- sqrt(a1 + a2)
  ll3 <- est3 - z*se3
  ul3 <- est3 + z*se3
- out1 <- t(c(est1u, se1, ll1, ul1))
- out2 <- t(c(est2u, se2, ll2, ul2))
- out3 <- t(c(est3u, se3, ll3, ul3))
+ out1 <- t(c(est1, est1u, se1, ll1, ul1))
+ out2 <- t(c(est2, est2u, se2, ll2, ul2))
+ out3 <- t(c(est3, est3u, se3, ll3, ul3))
  out <- rbind(out1, out2, out3)
- colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ colnames(out) <- c("Estimate", "adj Estimate", "SE", "LL", "UL")
  rownames(out) <- c("Unweighted standardizer:", "Weighted standardizer:", "Group 1 standardizer:")
  return(out)
 }
@@ -896,7 +902,8 @@ ci.ratio.mean.ps <- function(alpha, y1, y2){
 #'
 #' @return 
 #' Returns a 3-row matrix. The columns are:
-#' * Estimate - bias adjusted standardized mean difference
+#' * Estimate - estimated standardized mean difference
+#' * adj Estimate - bias adjusted standardized mean difference estimate
 #' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -910,16 +917,15 @@ ci.ratio.mean.ps <- function(alpha, y1, y2){
 #' ci.stdmean.ps(.05, 110.4, 102.1, 15.3, 14.6, .75, 25)
 #'
 #' # Should return:
-#' #                              Estimate        SE        LL        UL
-#' # Unweighted standardizer:     0.5433457 0.1609934 0.2394905 0.8705732
-#' # Measurement 1 standardizer:  0.5253526 0.1615500 0.2258515 0.8591158
-#' # Measurement 2 standardizer:  0.5505407 0.1692955 0.2366800 0.9003063
+#' #                              Estimate adj Estimate        SE        LL        UL
+#' # Unweighted standardizer:    0.5550319    0.5433457 0.1609934 0.2394905 0.8705732
+#' # Measurement 1 standardizer: 0.5424837    0.5253526 0.1615500 0.2258515 0.8591158
+#' # Measurement 2 standardizer: 0.5684932    0.5505407 0.1692955 0.2366800 0.9003063
 #'
 #'
 #' @importFrom stats qnorm
 #' @export
 ci.stdmean.ps <- function(alpha, m1, m2, sd1, sd2, cor, n) {
- if (cor > .999 || cor < -.999) {stop("correlation must be between -.999 and .999")}
  z <- qnorm(1 - alpha/2)
  s <- sqrt((sd1^2 + sd2^2)/2)
  df <- n - 1
@@ -943,11 +949,11 @@ ci.stdmean.ps <- function(alpha, m1, m2, sd1, sd2, cor, n) {
  se4 <- sqrt(est4^2/(2*df) + vd/(df*v2))
  ll4 <- est4 - z*se4
  ul4 <- est4 + z*se4
- out1 <- t(c(est1u, se1, ll1, ul1))
- out3 <- t(c(est3u, se3, ll3, ul3))
- out4 <- t(c(est4u, se4, ll4, ul4))
+ out1 <- t(c(est1, est1u, se1, ll1, ul1))
+ out3 <- t(c(est3, est3u, se3, ll3, ul3))
+ out4 <- t(c(est4, est4u, se4, ll4, ul4))
  out <- rbind(out1, out3, out4)
- colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ colnames(out) <- c("Estimate", "adj Estimate", "SE", "LL", "UL")
  rownames1 <- c("Unweighted standardizer:")
  rownames2 <- c("Measurement 1 standardizer:", "Measurement 2 standardizer:")
  rownames(out) <- c(rownames1, rownames2)
@@ -978,7 +984,8 @@ ci.stdmean.ps <- function(alpha, m1, m2, sd1, sd2, cor, n) {
 #'
 #' @return 
 #' Returns a 2-row matrix. The columns are:
-#' * Estimate - bias adjusted standardized linear contrast
+#' * Estimate - estimated standardized linear contrast
+#' * adj Estimate - bias adjusted standardized linear contrast estimate
 #' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -995,15 +1002,14 @@ ci.stdmean.ps <- function(alpha, m1, m2, sd1, sd2, cor, n) {
 #' ci.lc.stdmean.ws(.05, m, sd, .672, 20, q)
 #'
 #' # Should return:
-#' #                           Estimate        SE        LL         UL
-#' # Unweighted standardizer: -1.266557 0.3147937 -1.918248 -0.6842788
-#' # Level 1 standardizer:    -1.337500 0.3661824 -2.110934 -0.6755248
+#' #                           Estimate adj Estimate        SE        LL         UL
+#' # Unweighted standardizer: -1.301263    -1.266557 0.3147937 -1.918248 -0.6842788
+#' # Level 1 standardizer:    -1.393229    -1.337500 0.3661824 -2.110934 -0.6755248
 #'
 #'
 #' @importFrom stats qnorm
 #' @export
 ci.lc.stdmean.ws <- function(alpha, m, sd, cor, n, q) {
- if (cor > .999 || cor < -.999) {stop("correlation must be between -.999 and .999")}
  z <- qnorm(1 - alpha/2)
  a <- length(m)
  df <- n - 1
@@ -1030,10 +1036,10 @@ ci.lc.stdmean.ws <- function(alpha, m, sd, cor, n, q) {
  se2 <- sqrt(v1 + (v4 + 2*v5)/(df*s1^2))
  ll2 <- est2 - z*se2
  ul2 <- est2 + z*se2
- out1 <- t(c(est1u, se1, ll1, ul1))
- out2 <- t(c(est2u, se2, ll2, ul2))
+ out1 <- t(c(est1, est1u, se1, ll1, ul1))
+ out2 <- t(c(est2, est2u, se2, ll2, ul2))
  out <- rbind(out1, out2)
- colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ colnames(out) <- c("Estimate", "adj Estimate", "SE", "LL", "UL")
  rownames(out) <- c("Unweighted standardizer:", "Level 1 standardizer:")
  return(out)
 }
@@ -2943,28 +2949,29 @@ ci.2x2.mean.bs <- function(alpha, y11, y12, y21, y22) {
 #'
 #' @return
 #' Returns a 7-row matrix (one row per effect). The columns are:
-#' * Estimate - bias adjusted estimate of standardized effect
+#' * Estimate - estimate of standardized effect
+#' * adj Estimate - bias adjusted estimate of standardized effect
 #' * SE - standard error 
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #'
 #'
 #' @examples
-#' y11 <- c(14, 15, 11, 7, 16, 12, 15, 16, 10, 9)
-#' y12 <- c(18, 24, 14, 18, 22, 21, 16, 17, 14, 13)
-#' y21 <- c(16, 11, 10, 17, 13, 18, 12, 16, 6, 15)
-#' y22 <- c(18, 17, 11, 9, 9, 13, 18, 15, 14, 11)
+#' y11 = c(14, 15, 11, 7, 16, 12, 15, 16, 10, 9)
+#' y12 = c(18, 24, 14, 18, 22, 21, 16, 17, 14, 13)
+#' y21 = c(16, 11, 10, 17, 13, 18, 12, 16, 6, 15)
+#' y22 = c(18, 17, 11, 9, 9, 13, 18, 15, 14, 11)
 #' ci.2x2.stdmean.bs(.05, y11, y12, y21, y22)
 #'
 #' # Should return:
-#' #            Estimate        SE         LL         UL
-#' # AB:      -1.4193502 0.6885238 -2.7992468 -0.1002829
-#' # A:        0.4592015 0.3379520 -0.1933321  1.1314153
-#' # B:       -0.7375055 0.3451209 -1.4297338 -0.0768846
-#' # A at b1: -0.2504736 0.4640186 -1.1653006  0.6536189
-#' # A at b2:  1.1688767 0.5001423  0.2136630  2.1741850
-#' # B at a1: -1.4471806 0.4928386 -2.4441376 -0.5122457
-#' # B at a2: -0.0278304 0.4820369 -0.9732017  0.9163482
+#' #             Estimate adj Estimate        SE         LL         UL
+#' # AB:      -1.44976487   -1.4193502 0.6885238 -2.7992468 -0.1002829
+#' # A:        0.46904158    0.4592015 0.3379520 -0.1933321  1.1314153
+#' # B:       -0.75330920   -0.7375055 0.3451209 -1.4297338 -0.0768846
+#' # A at b1: -0.25584086   -0.2504736 0.4640186 -1.1653006  0.6536189
+#' # A at b2:  1.19392401    1.1688767 0.5001423  0.2136630  2.1741850
+#' # B at a1: -1.47819163   -1.4471806 0.4928386 -2.4441376 -0.5122457
+#' # B at a2: -0.02842676   -0.0278304 0.4820369 -0.9732017  0.9163482
 #'
 #'
 #' @importFrom stats qnorm
@@ -3007,8 +3014,8 @@ ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
  se1 <- sqrt(a2 + a3)
  LL1 <- est1 - z*se1
  UL1 <- est1 + z*se1
- row1 <- c(est1u, se1, LL1, UL1)
- # A 
+ row1 <- c(est1, est1u, se1, LL1, UL1)
+# A 
  est2 <- (t(v2)%*%m)/s
  est2u <- adj*est2
  a1 <- est2^2/(2*a^2*s^4)
@@ -3017,8 +3024,8 @@ ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
  se2 <- sqrt(a2 + a3)
  LL2 <- est2 - z*se2
  UL2 <- est2 + z*se2
- row2 <- c(est2u, se2, LL2, UL2)
- # B 
+ row2 <- c(est2, est2u, se2, LL2, UL2)
+# B 
  est3 <- (t(v3)%*%m)/s
  est3u <- adj*est3
  a1 <- est3^2/(2*a^2*s^4)
@@ -3027,8 +3034,8 @@ ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
  se3 <- sqrt(a2 + a3)
  LL3 <- est3 - z*se3
  UL3 <- est3 + z*se3
- row3 <- c(est3u, se3, LL3, UL3)
- # A at b1 
+ row3 <- c(est3, est3u, se3, LL3, UL3)
+# A at b1 
  est4 <- (t(v4)%*%m)/s
  est4u <- adj*est4
  a1 <- est4^2/(2*a^2*s^4)
@@ -3037,8 +3044,8 @@ ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
  se4 <- sqrt(a2 + a3)
  LL4 <- est4 - z*se4
  UL4 <- est4 + z*se4
- row4 <- c(est4u, se4, LL4, UL4)
- # A at b2 
+ row4 <- c(est4, est4u, se4, LL4, UL4)
+# A at b2 
  est5 <- (t(v5)%*%m)/s
  est5u <- adj*est5
  a1 <- est5^2/(2*a^2*s^4)
@@ -3047,8 +3054,8 @@ ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
  se5 <- sqrt(a2 + a3)
  LL5 <- est5 - z*se5
  UL5 <- est5 + z*se5
- row5 <- c(est5u, se5, LL5, UL5)
- # B at a1 
+ row5 <- c(est5, est5u, se5, LL5, UL5)
+# B at a1 
  est6 <- (t(v6)%*%m)/s
  est6u <- adj*est6
  a1 <- est6^2/(2*a^2*s^4)
@@ -3057,8 +3064,8 @@ ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
  se6 <- sqrt(a2 + a3)
  LL6 <- est6 - z*se6
  UL6 <- est6 + z*se6
- row6 <- c(est6u, se6, LL6, UL6)
- # B at a2 
+ row6 <- c(est6, est6u, se6, LL6, UL6)
+# B at a2 
  est7 <- (t(v7)%*%m)/s
  est7u <- adj*est7
  a1 <- est7^2/(2*a^2*s^4)
@@ -3067,10 +3074,10 @@ ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
  se7 <- sqrt(a2 + a3)
  LL7 <- est7 - z*se7
  UL7 <- est7 + z*se7
- row7 <- c(est7u, se7, LL7, UL7)
+ row7 <- c(est7, est7u, se7, LL7, UL7)
  out <- rbind(row1, row2, row3, row4, row5, row6, row7)
  rownames(out) <- c("AB:", "A:", "B:", "A at b1:", "A at b2:", "B at a1:", "B at a2:")
- colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ colnames(out) = c("Estimate", "adj Estimate", "SE", "LL", "UL")
  return(out)
 }
 
