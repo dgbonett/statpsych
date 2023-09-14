@@ -3232,6 +3232,688 @@ ci.2x2.median.bs <- function(alpha, y11, y12, y21, y22) {
 }
 
 
+# ci.2x2.stdmean.ws ===========================================================
+#' Computes confidence intervals of standardized effects in a 2x2 
+#' within-subjects design 
+#'
+#'
+#' @description
+#' Computes confidence intervals for standardized linear constrasts of means
+#' (AB interaction, main effect of A, main efect of B, simple main effects
+#' of A, and simple main effects of B) in a 2x2 within-subjects design.
+#' Equality of population variances is not assumed. An unweigthed variance 
+#' standardizer is used.
+#'
+#'
+#' @param   alpha   alpha level for 1-alpha confidence
+#' @param   y11     vector of scores at level 1 of A and level 1 of B
+#' @param   y12     vector of scores at level 1 of A and level 2 of B
+#' @param   y21     vector of scores at level 2 of A and level 1 of B
+#' @param   y22     vector of scores at level 2 of A and level 2 of B
+#'
+#'
+#' @return
+#' Returns a 7-row matrix (one row per effect). The columns are:
+#' * Estimate - estimated standardized effect
+#' * adj Estimate - bias adjusted standardized effect estimate
+#' * SE - standard error 
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
+#'
+#'
+#' @examples
+#' y11 = c(21, 39, 32, 29, 27, 17, 27, 21, 28, 17, 12, 27)
+#' y12 = c(20, 36, 33, 27, 28, 14, 30, 20, 27, 15, 11, 22)
+#' y21 = c(21, 36, 30, 27, 28, 15, 27, 18, 29, 16, 11, 22)
+#' y22 = c(18, 34, 29, 28, 28, 17, 27, 21, 26, 16, 14, 23)
+#' ci.2x2.stdmean.ws(.05, y11, y12, y21, y22)
+#'
+#' # Should return:
+#' #             Estimate adj Estimate         SE           LL        UL
+#' # AB:       0.17248839   0.16446123 0.13654635 -0.095137544 0.4401143
+#' # A:        0.10924265   0.10415878 0.05752822 -0.003510596 0.2219959
+#' # B:        0.07474497   0.07126653 0.05920554 -0.041295751 0.1907857
+#' # A at b1:  0.19548684   0.18638939 0.08460680  0.029660560 0.3613131
+#' # A at b2:  0.02299845   0.02192816 0.09371838 -0.160686202 0.2066831
+#' # B at a1:  0.16098916   0.15349715 0.09457347 -0.024371434 0.3463498
+#' # B at a2: -0.01149923  -0.01096408 0.08595873 -0.179975237 0.1569768
+#'
+#'
+#' @importFrom stats qnorm
+#' @export
+ci.2x2.stdmean.ws <- function(alpha, y11, y12, y21, y22) {
+ if (length(y11) != length(y12)) {stop("data vectors must have same length")}
+ if (length(y11) != length(y21)) {stop("data vectors must have same length")}
+ if (length(y11) != length(y22)) {stop("data vectors must have same length")}
+ z <- qnorm(1 - alpha/2)
+ n <- length(y11)
+ q1 <- c(1, -1, -1, 1)
+ q2 <- c(.5, .5, -.5, -.5)
+ q3 <- c(.5, -.5, .5, -.5)
+ q4 <- c(1, 0, -1, 0)
+ q5 <- c(0, 1, 0, -1)
+ q6 <- c(1, -1, 0, 0)
+ q7 <- c(0, 0, 1, -1)
+ sd1 <- sd(y11)
+ sd2 <- sd(y12)
+ sd3 <- sd(y21)
+ sd4 <- sd(y22)
+ r12 <- cor(y11, y12)
+ r13 <- cor(y11, y21)
+ r14 <- cor(y11, y22)
+ r23 <- cor(y12, y21)
+ r24 <- cor(y12, y22)
+ r34 <- cor(y21, y22)
+ s <- sqrt((sd1^2 + sd2^2 + sd3^2 + sd4^2)/4)
+ m <- c(mean(y11), mean(y12), mean(y21), mean(y22))
+ sd <- c(sd1, sd2, sd3, sd4) 
+ df <- n - 1
+ adj <- sqrt((n - 2)/df)
+ v2 <- sum(sd^4)
+ c1 <- r12^2*sd1^2*sd2^2 + r13^2*sd1^2*sd3^2 + r14^2*sd1^2*sd4^2
+ c2 <- r23^2*sd2^2*sd3^2 + r24^2*sd2^2*sd4^2 + r34^2*sd3^2*sd4^2
+ v3 <- c1 + c2
+ # AB 
+ est1 <- (t(q1)%*%m)/s
+ est1u <- adj*est1
+ v1 <- est1^2/(32*s^4*df)                 
+ v4 <- sum(q1^2*sd^2)
+ c3 <- q1[1]*q1[2]*r12*sd1*sd2 + q1[1]*q1[3]*r13*sd1*sd3 + q1[1]*q1[4]*r14*sd1*sd4
+ c4 <- q1[2]*q1[3]*r23*sd2*sd3 + q1[2]*q1[4]*r24*sd2*sd4 + q1[3]*q1[4]*r34*sd3*sd4
+ v5 <- c3 + c4
+ se1 <- sqrt(v1*(v2 + 2*v3) + (v4 + 2*v5)/(df*s^2))
+ LL1 <- est1 - z*se1
+ UL1 <- est1 + z*se1
+ row1 <- c(est1, est1u, se1, LL1, UL1)
+ # A 
+ est2 <- (t(q2)%*%m)/s
+ est2u <- adj*est2
+ v1 <- est2^2/(32*s^4*df)                 
+ v4 <- sum(q2^2*sd^2)
+ c3 <- q2[1]*q2[2]*r12*sd1*sd2 + q2[1]*q2[3]*r13*sd1*sd3 + q2[1]*q2[4]*r14*sd1*sd4
+ c4 <- q2[2]*q2[3]*r23*sd2*sd3 + q2[2]*q2[4]*r24*sd2*sd4 + q2[3]*q2[4]*r34*sd3*sd4
+ v5 <- c3 + c4
+ se2 <- sqrt(v1*(v2 + 2*v3) + (v4 + 2*v5)/(df*s^2))
+ LL2 <- est2 - z*se2
+ UL2 <- est2 + z*se2
+ row2 <- c(est2, est2u, se2, LL2, UL2)
+ # B 
+ est3 <- (t(q3)%*%m)/s
+ est3u <- adj*est3
+ v1 <- est3^2/(32*s^4*df)                 
+ v4 <- sum(q3^2*sd^2)
+ c3 <- q3[1]*q3[2]*r12*sd1*sd2 + q3[1]*q3[3]*r13*sd1*sd3 + q3[1]*q3[4]*r14*sd1*sd4
+ c4 <- q3[2]*q3[3]*r23*sd2*sd3 + q3[2]*q3[4]*r24*sd2*sd4 + q3[3]*q3[4]*r34*sd3*sd4
+ v5 <- c3 + c4
+ se3 <- sqrt(v1*(v2 + 2*v3) + (v4 + 2*v5)/(df*s^2))
+ LL3 <- est3 - z*se3
+ UL3 <- est3 + z*se3
+ row3 <- c(est3, est3u, se3, LL3, UL3)
+ # A at b1 
+ est4 <- (t(q4)%*%m)/s
+ est4u <- adj*est4
+ v1 <- est4^2/(32*s^4*df)                 
+ v4 <- sum(q4^2*sd^2)
+ c3 <- q4[1]*q4[2]*r12*sd1*sd2 + q4[1]*q4[3]*r13*sd1*sd3 + q4[1]*q4[4]*r14*sd1*sd4
+ c4 <- q4[2]*q4[3]*r23*sd2*sd3 + q4[2]*q4[4]*r24*sd2*sd4 + q4[3]*q4[4]*r34*sd3*sd4
+ v5 <- c3 + c4
+ se4 <- sqrt(v1*(v2 + 2*v3) + (v4 + 2*v5)/(df*s^2))
+ LL4 <- est4 - z*se4
+ UL4 <- est4 + z*se4
+ row4 <- c(est4, est4u, se4, LL4, UL4)
+ # A at b2 
+ est5 <- (t(q5)%*%m)/s
+ est5u <- adj*est5
+ v1 <- est5^2/(32*s^4*df)                 
+ v4 <- sum(q5^2*sd^2)
+ c3 <- q5[1]*q5[2]*r12*sd1*sd2 + q5[1]*q5[3]*r13*sd1*sd3 + q5[1]*q5[4]*r14*sd1*sd4
+ c4 <- q5[2]*q5[3]*r23*sd2*sd3 + q5[2]*q5[4]*r24*sd2*sd4 + q5[3]*q5[4]*r34*sd3*sd4
+ v5 <- c3 + c4
+ se5 <- sqrt(v1*(v2 + 2*v3) + (v4 + 2*v5)/(df*s^2))
+ LL5 <- est5 - z*se5
+ UL5 <- est5 + z*se5
+ row5 <- c(est5, est5u, se5, LL5, UL5)
+ # B at a1 
+ est6 <- (t(q6)%*%m)/s
+ est6u <- adj*est6
+ v1 <- est6^2/(32*s^4*df)                 
+ v4 <- sum(q6^2*sd^2)
+ c3 <- q6[1]*q6[2]*r12*sd1*sd2 + q6[1]*q6[3]*r13*sd1*sd3 + q6[1]*q6[4]*r14*sd1*sd4
+ c4 <- q6[2]*q6[3]*r23*sd2*sd3 + q6[2]*q6[4]*r24*sd2*sd4 + q6[3]*q6[4]*r34*sd3*sd4
+ v5 <- c3 + c4
+ se6 <- sqrt(v1*(v2 + 2*v3) + (v4 + 2*v5)/(df*s^2))
+ LL6 <- est6 - z*se6
+ UL6 <- est6 + z*se6
+ row6 <- c(est6, est6u, se6, LL6, UL6)
+ # B at a2 
+ est7 <- (t(q7)%*%m)/s
+ est7u <- adj*est7
+ v1 <- est7^2/(32*s^4*df)                 
+ v4 <- sum(q7^2*sd^2)
+ c3 <- q7[1]*q7[2]*r12*sd1*sd2 + q7[1]*q7[3]*r13*sd1*sd3 + q7[1]*q7[4]*r14*sd1*sd4
+ c4 <- q7[2]*q7[3]*r23*sd2*sd3 + q7[2]*q7[4]*r24*sd2*sd4 + q7[3]*q7[4]*r34*sd3*sd4
+ v5 <- c3 + c4
+ se7 <- sqrt(v1*(v2 + 2*v3) + (v4 + 2*v5)/(df*s^2))
+ LL7 <- est7 - z*se7
+ UL7 <- est7 + z*se7
+ row7 <- c(est7, est7u, se7, LL7, UL7)
+ out <- rbind(row1, row2, row3, row4, row5, row6, row7)
+ rownames(out) <- c("AB:", "A:", "B:", "A at b1:", "A at b2:", "B at a1:", "B at a2:")
+ colnames(out) = c("Estimate", "adj Estimate", "SE", "LL", "UL")
+ return(out)
+}
+
+
+# ci.2x2.stdmean.mixed ========================================================
+#' Computes confidence intervals of standardized effects in a 2x2 
+#' mixed design
+#'
+#'                          
+#' @description
+#' Computes confidence intervals for the standardized AB interaction effect, 
+#' main effect of A, main efect of B, simple main effects of A, and simple main
+#' effects of B in a 2x2 mixed factorial design where Factor A is a 
+#' within-subjects factor, and Factor B is a between-subjects factor. Equality 
+#' of population variances is not assumed.
+#'
+#'
+#' @param   alpha   alpha level for 1-alpha confidence
+#' @param   y11     vector of scores at level 1 of A in group 1 
+#' @param   y12     vector of scores at level 2 of A in group 1
+#' @param   y21     vector of scores at level 1 of A in group 2
+#' @param   y22     vector of scores at level 2 of A in group 2
+#'
+#'
+#' @return
+#' Returns a 7-row matrix (one row per effect). The columns are:
+#' * Estimate - estimated standardized effect
+#' * adj Estimate - bias adjusted standardized effect estimate
+#' * SE - standard error 
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
+#'
+#'
+#' @examples
+#' y11 = c(18, 19, 20, 17, 20, 16)
+#' y12 = c(19, 18, 19, 20, 17, 16)
+#' y21 = c(19, 16, 16, 14, 16, 18)
+#' y22 = c(16, 10, 12,  9, 13, 15)
+#' ci.2x2.stdmean.mixed(.05, y11, y12, y21, y22)
+#'
+#' # Should return:
+#' #             Estimate adj Estimate        SE         LL         UL
+#' # AB:      -1.95153666  -1.80141845 0.5424100 -3.0146407 -0.8884326
+#' # A:        1.06061775   1.01125934 0.2780119  0.5157244  1.6055111
+#' # B:        1.90911195   1.76225718 0.5743510  0.7834047  3.0348192
+#' # A at b1:  0.08484942   0.07589163 0.4649598 -0.8264549  0.9961538
+#' # A at b2:  2.03638608   1.82139908 0.2964013  1.4554502  2.6173219
+#' # B at a1:  0.93334362   0.86154796 0.5487927 -0.1422703  2.0089575
+#' # B at a2:  2.88488027   2.66296641 0.7127726  1.4878717  4.2818889
+#'
+#'
+#' @importFrom stats qnorm
+#' @export
+ci.2x2.stdmean.mixed <- function(alpha, y11, y12, y21, y22) {
+ if (length(y11) != length(y12)) {stop("length of y11 must equal length of y12")}
+ if (length(y21) != length(y22)) {stop("length of y21 must equal length of y22")}
+ z <- qnorm(1 - alpha/2)
+ n1 <- length(y11)
+ n2 <- length(y21)
+ df1 <- n1 - 1
+ df2 <- n2 - 1
+ adj1 <- 1 - 3/(4*(df1 + df2) - 1)
+ adj2 <- sqrt((n1 - 2)/df1)
+ adj3 <- sqrt((n2 - 2)/df2)
+ adj4 <- sqrt((n1 + n2 - 2)/(n1 + n2 - 1))
+ diff1 <- y11 - y12
+ diff2 <- y21 - y22
+ ave1 <- (y11 + y12)/2
+ ave2 <- (y21 + y22)/2
+ vd1 <- var(diff1)
+ vd2 <- var(diff2)
+ va1 <- var(ave1)
+ va2 <- var(ave2)
+ sd1 <- sd(y11)
+ sd2 <- sd(y12)
+ sd3 <- sd(y21)
+ sd4 <- sd(y22)
+ cor1 <- cor(y11, y21)
+ cor2 <- cor(y12, y22)
+ s <- sqrt((sd1^2 + sd2^2 + sd3^2 + sd4^2)/4)
+ # check v0
+ v01 <- (sd1^4 + sd3^4 + 2*(cor1^2*sd1^2*sd3^2))/(32*s^4*df1)
+ v02 <- (sd2^4 + sd4^4 + 2*(cor2^2*sd2^2*sd4^2))/(32*s^4*df2)
+ v0 <- v01 + v02
+ # AB
+ est1 <- (mean(diff1) - mean(diff2))/s
+ est1u <- adj1*est1
+ v1 <- (vd1/df1 + vd2/df2)/(s^2)
+ se1 <- sqrt(est1*v0/s^4 + v1)
+ LL1 <- est1 - z*se1
+ UL1 <- est1 + z*se1
+ row1 <- c(est1, est1u, se1, LL1, UL1)
+ # A 
+ est2 <- (mean(diff1) + mean(diff2))/(2*s)
+ est2u <- adj4*est2
+ v2 <- (vd1/df1 + vd2/df2)/(4*s^2)
+ se2 <- sqrt(est2*v0/s^4 + v2)
+ LL2 <- est2 - z*se2
+ UL2 <- est2 + z*se2
+ row2 <- c(est2, est2u, se2, LL2, UL2)
+ # B
+ est3 <- (mean(ave1) - mean(ave2))/s
+ est3u <- adj1*est3
+ v3 <- (va1/df1 + va2/df2)/(s^2)
+ se3 <- sqrt(est3*v0/s^4 + v3)
+ LL3 <- est3 - z*se3
+ UL3 <- est3 + z*se3
+ row3 <- c(est3, est3u, se3, LL3, UL3)
+ # A at b1
+ est4 <- mean(diff1)/s
+ est4u <- adj2*est4
+ v4 <- vd1/df1
+ se4 <- sqrt(est4*v0/s^4 + v4/s^2)
+ LL4 <- est4 - z*se4
+ UL4 <- est4 + z*se4
+ row4 <- c(est4, est4u, se4, LL4, UL4)
+ # A at b2
+ est5 <- mean(diff2)/s
+ est5u <- adj3*est5
+ v5 <- vd2/df2
+ se5 <- sqrt(est5*v0/s^4 + v5/s^2)
+ LL5 <- est5 - z*se5
+ UL5 <- est5 + z*se5
+ row5 <- c(est5, est5u, se5, LL5, UL5)
+ # B at a1
+ est6 <- (mean(y11) - mean(y21))/s
+ est6u <- adj1*est6
+ v6 <- var(y11)/df1 + var(y21)/df2
+ se6 <- sqrt(est6*v0/s^4 + v6/s^2)
+ LL6 <- est6 - z*se6
+ UL6 <- est6 + z*se6
+ row6 <- c(est6, est6u, se6, LL6, UL6)
+ # B at a2
+ est7 <- (mean(y12) - mean(y22))/s
+ est7u <- adj1*est7
+ v7 <- var(y12)/df1 + var(y22)/df2
+ se7 <- sqrt(est7*v0/s^4 + v7/s^2)
+ LL7 <- est7 - z*se7
+ UL7 <- est7 + z*se7
+ row7 <- c(est7, est7u, se7, LL7, UL7)
+ out <- rbind(row1, row2, row3, row4, row5, row6, row7)
+ rownames(out) <- c("AB:", "A:", "B:", "A at b1:", "A at b2:", "B at a1:", "B at a2:")
+ colnames(out) = c("Estimate", "adj Estimate", "SE", "LL", "UL")
+ return(out)
+}
+
+
+# ci.2x2.median.mixed =========================================================
+#' Computes confidence intervals in a 2x2 mixed design for medians
+#'
+#'
+#' @description
+#' Computes distribution-free confidence intervals based on medians for the AB 
+#' interaction effect, main effect of A, main efect of B, simple main effects 
+#' of A, and simple main effects of B in a 2x2 mixed design where Factor A is 
+#' the within-subjects factor and Factor B is the between subbjects factor. 
+#' Tied scores are assumed to be rare.
+#'
+#'
+#' @param   alpha   alpha level for 1-alpha confidence
+#' @param   y11     vector of scores at level 1 of A in group 1
+#' @param   y12     vector of scores at level 2 of A in group 1
+#' @param   y21     vector of scores at level 1 of A in group 2
+#' @param   y22     vector of scores at level 2 of A in group 2
+#'
+#'
+#' @return
+#' Returns a 7-row matrix (one row per effect). The columns are:
+#' * Estimate - estimate of effect
+#' * SE - standard error 
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
+#'
+#'
+#' @references
+#' \insertRef{Bonett2020}{statpsych}
+#'
+#'
+#' @examples
+#' y11 = c(18, 19, 20, 17, 20, 16)
+#' y12 = c(19, 18, 19, 20, 17, 16)
+#' y21 = c(19, 16, 16, 14, 16, 18)
+#' y22 = c(16, 10, 12,  9, 13, 15)
+#' ci.2x2.median.mixed(.05, y11, y12, y21, y22)
+#'
+#' # Should return:
+#' #          Estimate       SE         LL       UL
+#' # AB:         -3.50 2.698647 -8.7892514 1.789251
+#' # A:           1.75 1.349324 -0.8946257 4.394626
+#' # B:           4.25 1.017564  2.2556114 6.244389
+#' # A at b1:     0.00 1.489007 -2.9184005 2.918400
+#' # A at b2:     3.50 2.250679 -0.9112492 7.911249
+#' # B at a1:     2.50 1.486420 -0.4133294 5.413329
+#' # B at a2:     6.00 1.871571  2.3317887 9.668211
+#'
+#'
+#' @importFrom stats qnorm
+#' @importFrom stats pbinom
+#' @importFrom stats median
+#' @export
+ci.2x2.median.mixed <- function(alpha, y11, y12, y21, y22) {
+ if (length(y11) != length(y12)) {stop("length of y11 must equal length of y12")}
+ if (length(y21) != length(y22)) {stop("length of y21 must equal length of y22")}
+ z <- qnorm(1 - alpha/2)
+ n1 <- length(y11)
+ n2 <- length(y21)
+ median11 <- median(y11)
+ median12 <- median(y12)
+ median21 <- median(y21)
+ median22 <- median(y22)
+ # Group 1
+ a1 <- (y11 < median11)
+ a2 <- (y12 < median12)
+ a3 <- a1 + a2
+ a4 <- sum(a3 == 2)
+ a <- round(n1/2 - sqrt(n1))
+ if (a < 1) {a = 1}
+ p <- pbinom(a - 1, size = n1, prob = .5)
+ z0 <- qnorm(1 - p)
+ y11 <- sort(y11)
+ y12 <- sort(y12)
+ L1 <- y11[a]
+ U1 <- y11[n1 - a + 1]
+ se11 <- (U1 - L1)/(2*z0)
+ L2 <- y12[a]
+ U2 <- y12[n1 - a + 1]
+ se12 <- (U2 - L2)/(2*z0)
+ if (n1/2 == trunc(n1/2)) {
+   p00 <- (sum(a4) + .25)/(n1 + 1)
+ } else {
+   p00 <- (sum(a4) + .25)/n1 
+ }
+ cov1 <- (4*p00 - 1)*se11*se12
+ # Group 2
+ a1 <- (y21 < median21)
+ a2 <- (y22 < median22)
+ a3 <- a1 + a2
+ a4 <- sum(a3 == 2)
+ a <- round(n2/2 - sqrt(n2))
+ if (a < 1) {a = 1}
+ p <- pbinom(a - 1, size = n2, prob = .5)
+ z0 <- qnorm(1 - p)
+ y21 <- sort(y21)
+ y22 <- sort(y22)
+ L1 <- y21[a]
+ U1 <- y21[n2 - a + 1]
+ se21 <- (U1 - L1)/(2*z0)
+ L2 <- y22[a]
+ U2 <- y22[n2 - a + 1]
+ se22 <- (U2 - L2)/(2*z0)
+ if (n2/2 == trunc(n2/2)) {
+   p00 <- (sum(a4) + .25)/(n2 + 1)
+ } else {
+   p00 <- (sum(a4) + .25)/n2 
+ }
+ cov2 <- (4*p00 - 1)*se21*se22
+ # AB
+ est1 <- (median11 - median12) - (median21 - median22)
+ se1 <- sqrt(se11^2 + se12^2 - 2*cov1 + se21^2 + se22^2 - 2*cov2)
+ LL1 <- est1 - z*se1
+ UL1 <- est1 + z*se1
+ row1 <- c(est1, se1, LL1, UL1)
+ # A
+ est2 <- (median11 + median21)/2 - (median12 + median22)/2
+ se2 <- se1/2
+ LL2 <- est2 - z*se2
+ UL2 <- est2 + z*se2
+ row2 <- c(est2, se2, LL2, UL2)
+ # B
+ est3 <- (median11 + median12)/2 - (median21 + median22)/2
+ se3 <- sqrt(se11^2 + se12^2 + 2*cov1 + se21^2 + se22^2 + 2*cov2)/2
+ LL3 <- est3 - z*se3
+ UL3 <- est3 + z*se3
+ row3 <- c(est3, se3, LL3, UL3)
+ # A at b1
+ est4 <- median11 - median12
+ se4 <- sqrt(se11^2 + se12^2 - 2*cov1)
+ LL4 <- est4 - z*se4
+ UL4 <- est4 + z*se4
+ row4 <- c(est4, se4, LL4, UL4)
+ # A at b2
+ est5 <- median21 - median22
+ se5 <- sqrt(se21^2 + se22^2 - 2*cov2)
+ LL5 <- est5 - z*se5
+ UL5 <- est5 + z*se5
+ row5 <- c(est5, se5, LL5, UL5)
+ #B at a1
+ est6 <- median11 - median21
+ se6 <- sqrt(se11^2 + se21^2)
+ LL6 <- est6 - z*se6
+ UL6 <- est6 + z*se6
+ row6 <- c(est6, se6, LL6, UL6)
+ #B at a2
+ est7 <- median12 - median22
+ se7 <- sqrt(se12^2 + se22^2)
+ LL7 <- est7 - z*se7
+ UL7 <- est7 + z*se7
+ row7 <- c(est7, se7, LL7, UL7)
+ out <- rbind(row1, row2, row3, row4, row5, row6, row7)
+ rownames(out) <- c("AB:", "A:", "B:", "A at b1:", "A at b2:", "B at a1:", "B at a2:")
+ colnames(out) = c("Estimate", "SE", "LL", "UL")
+ return(out)
+}
+
+
+# ci.2x2.median.ws ============================================================
+#' Computes confidence intervals in a 2x2 within-subjects design for medians
+#'
+#'
+#' @description
+#' Computes distribution-free confidence intervals based on medians for the AB 
+#' interaction effect, main effect of A, main efect of B, simple main effects 
+#' of A, and simple main effects of B in a 2x2 within-subjects design. Tied 
+#' scores are assumed to be rare.
+#'
+#'
+#' @param   alpha   alpha level for 1-alpha confidence
+#' @param   y11     vector of scores at level 1 of A and level 1 of B
+#' @param   y12     vector of scores at level 1 of A and level 2 of B
+#' @param   y21     vector of scores at level 2 of A and level 1 of B
+#' @param   y22     vector of scores at level 2 of A and level 2 of B
+#'
+#'
+#' @return
+#' Returns a 7-row matrix (one row per effect). The columns are:
+#' * Estimate - estimate of effect
+#' * SE - standard error 
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
+#'
+#'
+#' @references
+#' \insertRef{Bonett2020}{statpsych}
+#'
+#'
+#' @examples
+#' y11 = c(221, 402, 333, 301, 284, 182, 281, 230, 290, 182, 133, 278)
+#' y12 = c(221, 371, 340, 288, 293, 150, 317, 211, 286, 161, 126, 234)
+#' y21 = c(219, 371, 314, 279, 284, 155, 278, 185, 296, 169, 118, 229)
+#' y22 = c(170, 332, 280, 273, 272, 160, 260, 204, 252, 153, 137, 221)
+#' ci.2x2.median.ws(.05, y11, y12, y21, y22)
+#'
+#' # Should return:
+#' #          Estimate       SE         LL        UL
+#' # AB:          2.50 21.050122 -38.757482 43.75748
+#' # A:          24.75  9.603490   5.927505 43.57250
+#' # B:          18.25  9.101881   0.410641 36.08936
+#' # A at b1:    26.00 11.813742   2.845491 49.15451
+#' # A at b2:    23.50 16.323093  -8.492675 55.49267
+#' # B at a1:    19.50 15.710347 -11.291715 50.29171
+#' # B at a2:    17.00 11.850202  -6.225970 40.22597
+#'
+#'
+#' @importFrom stats qnorm
+#' @importFrom stats pbinom
+#' @importFrom stats median
+#' @export
+ci.2x2.median.ws <- function(alpha, y11, y12, y21, y22) {
+ if (length(y11) != length(y12)) {stop("data vectors must have same length")}
+ if (length(y11) != length(y21)) {stop("data vectors must have same length")}
+ if (length(y11) != length(y22)) {stop("data vectors must have same length")}
+ z <- qnorm(1 - alpha/2)
+ n <- length(y11)
+ q1 <- c(1, -1, -1, 1)
+ q2 <- c(.5, .5, -.5, -.5)
+ q3 <- c(.5, -.5, .5, -.5)
+ q4 <- c(1, 0, -1, 0)
+ q5 <- c(0, 1, 0, -1)
+ q6 <- c(1, -1, 0, 0)
+ q7 <- c(0, 0, 1, -1)
+ median11 <- median(y11)
+ median12 <- median(y12)
+ median21 <- median(y21)
+ median22 <- median(y22)
+ a <- round(n/2 - sqrt(n))
+ if (a < 1) {a = 1}
+ p <- pbinom(a - 1, size = n, prob = .5)
+ z0 <- qnorm(1 - p)
+ y11.s <- sort(y11)
+ y12.s <- sort(y12)
+ y21.s <- sort(y21)
+ y22.s <- sort(y22)
+ L11 <- y11.s[a]
+ U11 <- y11.s[n - a + 1]
+ L12 <- y12.s[a]
+ U12 <- y12.s[n - a + 1]
+ L21 <- y21.s[a]
+ U21 <- y21.s[n - a + 1]
+ L22 <- y22.s[a]
+ U22 <- y22.s[n - a + 1]
+ se11 <- (U11 - L11)/(2*z0)
+ se12 <- (U12 - L12)/(2*z0)
+ se21 <- (U21 - L21)/(2*z0)
+ se22 <- (U22 - L22)/(2*z0)
+ # cov(y11,y12)
+ a1 <- (y11 < median11)
+ a2 <- (y12 < median12)
+ a3 <- a1 + a2
+ a4 <- sum(a3 == 2)
+ if (n/2 == trunc(n/2)) {
+   p11.12 <- (sum(a4) + .25)/(n + 1)
+ } else {
+   p11.12 <- (sum(a4) + .25)/n 
+ }
+ c11.12 <- (4*p11.12 - 1)*se11*se12
+ # cov(y11,y21)
+ a1 <- (y11 < median11)
+ a2 <- (y21 < median21)
+ a3 <- a1 + a2
+ a4 <- sum(a3 == 2)
+ if (n/2 == trunc(n/2)) {
+   p11.21 <- (sum(a4) + .25)/(n + 1)
+ } else {
+   p11.21 <- (sum(a4) + .25)/n 
+ }
+ c11.21 <- (4*p11.21 - 1)*se11*se21
+ # cov(y11,y22)
+ a1 <- (y11 < median11)
+ a2 <- (y22 < median22)
+ a3 <- a1 + a2
+ a4 <- sum(a3 == 2)
+ if (n/2 == trunc(n/2)) {
+   p11.22 <- (sum(a4) + .25)/(n + 1)
+ } else {
+   p11.22 <- (sum(a4) + .25)/n 
+ }
+ c11.22 <- (4*p11.22 - 1)*se11*se22
+ # cov(y12,y21)
+ a1 <- (y12 < median12)
+ a2 <- (y21 < median21)
+ a3 <- a1 + a2
+ a4 <- sum(a3 == 2)
+ if (n/2 == trunc(n/2)) {
+   p12.21 <- (sum(a4) + .25)/(n + 1)
+ } else {
+   p12.21 <- (sum(a4) + .25)/n 
+ }
+ c12.21 <- (4*p12.21 - 1)*se12*se21
+ # cov(y12,y22)
+ a1 <- (y12 < median12)
+ a2 <- (y22 < median22)
+ a3 <- a1 + a2
+ a4 <- sum(a3 == 2)
+ if (n/2 == trunc(n/2)) {
+   p12.22 <- (sum(a4) + .25)/(n + 1)
+ } else {
+   p12.22 <- (sum(a4) + .25)/n 
+ }
+ c12.22 <- (4*p12.22 - 1)*se12*se22
+ # cov(y21,y22)
+ a1 <- (y21 < median21)
+ a2 <- (y22 < median22)
+ a3 <- a1 + a2
+ a4 <- sum(a3 == 2)
+ if (n/2 == trunc(n/2)) {
+   p21.22 <- (sum(a4) + .25)/(n + 1)
+ } else {
+   p21.22 <- (sum(a4) + .25)/n 
+ }
+ c21.22 <- (4*p21.22 - 1)*se21*se22
+ cov1 <- c(se11^2, c11.12, c11.21, c11.22)
+ cov2 <- c(c11.12, se12^2, c12.21, c12.22)
+ cov3 <- c(c11.21, c12.21, se21^2, c21.22)
+ cov4 <- c(c11.22, c12.22, c21.22, se22^2)
+ cov <- rbind(cov1, cov2, cov3, cov4)
+ # AB
+ est1 <- (median11 - median12) - (median21 - median22)
+ se1 <- sqrt(t(q1)%*%cov%*%q1)
+ LL1 <- est1 - z*se1
+ UL1 <- est1 + z*se1
+ row1 <- c(est1, se1, LL1, UL1)
+ # A
+ est2 <- (median11 + median12)/2 - (median21 + median22)/2
+ se2 <- sqrt(t(q2)%*%cov%*%q2)
+ LL2 <- est2 - z*se2
+ UL2 <- est2 + z*se2
+ row2 <- c(est2, se2, LL2, UL2)
+ # B
+ est3 <- (median11 + median21)/2 - (median12 + median22)/2
+ se3 <- sqrt(t(q3)%*%cov%*%q3)
+ LL3 <- est3 - z*se3
+ UL3 <- est3 + z*se3
+ row3 <- c(est3, se3, LL3, UL3)
+ # A at b1
+ est4 <- median11 - median21
+ se4 <- sqrt(t(q4)%*%cov%*%q4)
+ LL4 <- est4 - z*se4
+ UL4 <- est4 + z*se4
+ row4 <- c(est4, se4, LL4, UL4)
+ # A at b2
+ est5 <- median12 - median22
+ se5 <- sqrt(t(q5)%*%cov%*%q5)
+ LL5 <- est5 - z*se5
+ UL5 <- est5 + z*se5
+ row5 <- c(est5, se5, LL5, UL5)
+ #B at a1
+ est6 <- median11 - median12
+ se6 <- sqrt(t(q6)%*%cov%*%q6)
+ LL6 <- est6 - z*se6
+ UL6 <- est6 + z*se6
+ row6 <- c(est6, se6, LL6, UL6)
+ #B at a2
+ est7 <- median21 - median22
+ se7 <- sqrt(t(q7)%*%cov%*%q7)
+ LL7 <- est7 - z*se7
+ UL7 <- est7 + z*se7
+ row7 <- c(est7, se7, LL7, UL7)
+ out <- rbind(row1, row2, row3, row4, row5, row6, row7)
+ rownames(out) <- c("AB:", "A:", "B:", "A at b1:", "A at b2:", "B at a1:", "B at a2:")
+ colnames(out) = c("Estimate", "SE", "LL", "UL")
+ return(out)
+}
+
+
 # ci.bayes.normal ============================================================
 #' Bayesian credible interval for a normal prior distribution
 #'
