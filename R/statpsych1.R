@@ -4022,8 +4022,8 @@ ci.bayes.normal <- function(alpha, prior.mean, prior.sd, est, se) {
 #' test.skew(y)
 #'
 #' # Should return:
-#' #      Skewness      p
-#' # [1,]   1.5201 0.0067
+#' # Skewness      p
+#' #   1.5201 0.0067
 #'
 #'
 #' @importFrom stats rnorm
@@ -4051,6 +4051,7 @@ test.skew <- function(y) {
  p <- e1 + e2
  out <- round(t(c(skew, p)), 4)
  colnames(out) <- c("Skewness", "p")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -4083,8 +4084,8 @@ test.skew <- function(y) {
 #' test.kurtosis(y)
 #'
 #' # Should return:
-#' #      Kurtosis  Excess      p
-#' # [1,]   4.8149  1.8149 0.0385 
+#' # Kurtosis  Excess      p
+#' #   4.8149  1.8149 0.0385 
 #'
 #'
 #' @importFrom stats rnorm
@@ -4111,6 +4112,7 @@ test.kurtosis <- function(y) {
  if (p > .9999) {p = .9999}
  out <- round(t(c(kur, kur - 3, p)), 4)
  colnames(out) <- c("Kurtosis", "Excess", "p")
+ rownames(out) <- ""
  return(out)
 }
 
