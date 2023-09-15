@@ -4212,8 +4212,8 @@ test.mono.mean.bs <-function(alpha, m, sd, n) {
 #' size.ci.mean1(.05, 264.4, 10)
 #'
 #' # Should return:
-#' #      Sample size
-#' # [1,]          43
+#' # Sample size
+#' #          43
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -4223,6 +4223,7 @@ size.ci.mean1 <- function(alpha, var, w) {
  n <- ceiling(4*var*(z/w)^2 + z^2/2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -4253,8 +4254,8 @@ size.ci.mean1 <- function(alpha, var, w) {
 #' size.ci.mean2(.05, 37.1, 5, 1)
 #'
 #' # Should return:
-#' #      n1  n2
-#' # [1,] 47  47
+#' # n1  n2
+#' # 47  47
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -4265,6 +4266,7 @@ size.ci.mean2 <- function(alpha, var, w, R) {
  n2 <- ceiling(R*n1)
  out <- t(c(n1, n2))
  colnames(out) <- c("n1", "n2")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -4351,8 +4353,8 @@ size.ci.stdmean2 <- function(alpha, d, w, R) {
 #' size.ci.ratio.mean2(.05, .4, 3.5, 3.1, 1.2, 2)
 #'
 #' # Should return:
-#' #      n1   n2
-#' # [1,] 53  106
+#' # n1   n2
+#' # 53  106
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -4363,6 +4365,7 @@ size.ci.ratio.mean2 <- function(alpha, var, m1, m2, r, R) {
  n2 <- ceiling(R*n1)
  out <- t(c(n1, n2))
  colnames(out) <- c("n1", "n2")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -4394,8 +4397,8 @@ size.ci.ratio.mean2 <- function(alpha, var, m1, m2, r, R) {
 #' size.ci.lc.mean.bs(.05, 5.62, 2.0, v)
 #'
 #' # Should return:
-#' #      Sample size per group
-#' # [1,]                    34
+#' # Sample size per group
+#' #                    34
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -4406,6 +4409,7 @@ size.ci.lc.mean.bs <- function(alpha, var, w, v) {
  n <- ceiling(4*var*(t(v)%*%v)*(z/w)^2 + z^2/(2*m))
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size per group"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -4493,8 +4497,8 @@ size.ci.lc.stdmean.bs <- function(alpha, d, w, v) {
 #' size.ci.mean.ps(.05, 265, .8, 10)
 #'
 #' # Should return:
-#' #      Sample size
-#' # [1,]          19
+#' # Sample size
+#' #          19
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -4504,6 +4508,7 @@ size.ci.mean.ps <- function(alpha, var, cor, w) {
  n <- ceiling(8*(1 - cor)*var*(z/w)^2 + z^2/2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
+ rownames(out) <- ""
  return(out)	
 }
 
@@ -4593,8 +4598,8 @@ size.ci.stdmean.ps <- function(alpha, d, cor, w) {
 #' size.ci.ratio.mean.ps(.05, 400, 150, 100, .7, 1.2)
 #'
 #' # Should return:
-#' #      Sample size
-#' # [1,]          21
+#' # Sample size
+#' #          21
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -4605,6 +4610,7 @@ size.ci.ratio.mean.ps <- function(alpha, var, m1, m2, cor, r) {
  n <- ceiling(8*var*(1/m1^2 + 1/m2^2 - 2*cor/(m1*m2))*(z/log(r))^2 + z^2/2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -4639,8 +4645,8 @@ size.ci.ratio.mean.ps <- function(alpha, var, m1, m2, cor, r) {
 #' size.ci.lc.mean.ws(.05, 265, .8, 10, q)
 #'
 #' # Should return:
-#' #      Sample size
-#' # [1,]          11
+#' # Sample size
+#' #          11
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -4652,6 +4658,7 @@ size.ci.lc.mean.ws <- function(alpha, var, cor, w, q) {
  n <- ceiling(4*(1 - cor)*var*(t(q)%*%q)*(z/w)^2 + z^2/2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -4739,8 +4746,8 @@ size.ci.lc.stdmean.ws <- function(alpha, d, cor, w, q) {
 #' size.ci.cronbach(.05, .85, 5, .1)
 #'
 #' # Should return:
-#' #      Sample size
-#' # [1,]          89
+#' # Sample size
+#' #          89
 #'  
 #' 
 #' @importFrom stats qf
@@ -4761,6 +4768,7 @@ size.ci.cronbach <- function(alpha, rel, r, w) {
  n <- ceiling((n0 - 2)*(w0/w)^2 + 2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -4790,8 +4798,8 @@ size.ci.cronbach <- function(alpha, rel, r, w) {
 #' size.ci.etasqr(.05, .333, 3, .2)
 #'
 #' # Should return:
-#' #      Sample size per group 
-#' # [1,]                    63
+#' # Sample size per group 
+#' #                    63
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -4821,6 +4829,7 @@ size.ci.etasqr <- function(alpha, etasqr, groups, w) {
  if (n0 < 2) {n0 = 2}
  out <- matrix(n0, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size per group"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -4854,8 +4863,8 @@ size.ci.etasqr <- function(alpha, etasqr, groups, w) {
 #' size.ci.second(20, 5.3, 2.5)
 #'
 #' # Should return:
-#' #      Second-stage sample size
-#' # [1,]                       70
+#' # Second-stage sample size
+#' #                       70
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -4864,6 +4873,7 @@ size.ci.second <- function(n0, w0, w) {
  n <- ceiling(((w0/w)^2 - 1)*n0)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Second-stage sample size"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -4894,8 +4904,8 @@ size.ci.second <- function(n0, w0, w) {
 #' size.test.mean1(.05, .9, 80.5, 7)
 #'
 #' # Should return:
-#' #      Sample size
-#' # [1,]          20
+#' # Sample size
+#' #          20
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -4906,6 +4916,7 @@ size.test.mean1 <- function(alpha, pow, var, es) {
  n <- ceiling(var*(za + zb)^2/es^2 + za^2/2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -4936,8 +4947,8 @@ size.test.mean1 <- function(alpha, pow, var, es) {
 #' size.test.mean2(.05, .95, 100, 10, 1) 
 #'
 #' # Should return:
-#' #      n1  n2
-#' # [1,] 27  27
+#' # n1  n2
+#' # 27  27
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -4949,6 +4960,7 @@ size.test.mean2 <- function(alpha, pow, var, es, R) {
  n2 <- ceiling(R*n1)
  out <- t(c(n1, n2))
  colnames(out) <- c("n1", "n2")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -4981,8 +4993,8 @@ size.test.mean2 <- function(alpha, pow, var, es, R) {
 #' size.test.lc.mean.bs(.05, .90, 27.5, 5, v)
 #'
 #' # Should return:
-#' #      Sample size per group
-#' # [1,]                    47
+#' # Sample size per group
+#' #                    47
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -4994,6 +5006,7 @@ size.test.lc.mean.bs <- function(alpha, pow, var, es, v) {
  n <- ceiling(var*(t(v)%*%v)*(za + zb)^2/es^2 + za^2/(2*m))
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size per group"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -5030,8 +5043,8 @@ size.test.lc.mean.bs <- function(alpha, pow, var, es, v) {
 #' size.equiv.mean2(.10, .80, 15, 2, 4)
 #'
 #' # Should return:
-#' #      Sample size per group 
-#' # [1,]                    50
+#' # Sample size per group 
+#' #                    50
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -5043,6 +5056,7 @@ size.equiv.mean2 <- function(alpha, pow, var, es, h) {
  n <- ceiling(var*2*(za + zb)^2/(abs(h) - abs(es))^2 + za^2/4)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size per group"
+ rownames(out) <- ""
  return(out)
 }
  
@@ -5078,8 +5092,8 @@ size.equiv.mean2 <- function(alpha, pow, var, es, h) {
 #' size.supinf.mean2(.05, .80, 225, 9, 4)
 #'
 #' # Should return:
-#' #      Sample size per group 
-#' # [1,]                   143
+#' # Sample size per group 
+#' #                   143
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -5090,6 +5104,7 @@ size.supinf.mean2 <- function(alpha, pow, var, es, h) {
  n <- ceiling(var*2*(za + zb)^2/(es - h)^2 + za^2/4)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size per group"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -5121,8 +5136,8 @@ size.supinf.mean2 <- function(alpha, pow, var, es, h) {
 #' size.test.mean.ps(.05, .80, 1.25, .5, .75) 
 #'
 #' # Should return:
-#' #      Sample size
-#' # [1,]          22
+#' # Sample size
+#' #          22
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -5134,6 +5149,7 @@ size.test.mean.ps <- function(alpha, pow, var, es, cor) {
  n <- ceiling(2*var*(1 - cor)*(za + zb)^2/es^2 + za^2/2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -5168,8 +5184,8 @@ size.test.mean.ps <- function(alpha, pow, var, es, cor) {
 #' size.test.lc.mean.ws(.05, .90, 50.7, 2, .8, q)
 #'
 #' # Should return:
-#' #      Sample size
-#' # [1,]          29
+#' # Sample size
+#' #          29
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -5181,6 +5197,7 @@ size.test.lc.mean.ws <- function(alpha, pow, var, es, cor, q) {
  n <- ceiling(var*(1 - cor)*(t(q)%*%q)*(za + zb)^2/es^2 + za^2/2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
+ rownames(out) <- ""
  return(out)
 }
 	
@@ -5218,8 +5235,8 @@ size.test.lc.mean.ws <- function(alpha, pow, var, es, cor, q) {
 #' size.equiv.mean.ps(.10, .85, 15, .5, .7, 1.5)
 #'
 #' # Should return:
-#' #      Sample size
-#' # [1,]          68
+#' # Sample size
+#' #          68
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -5232,6 +5249,7 @@ size.equiv.mean.ps <- function(alpha, pow, var, es, cor, h) {
  n <- ceiling(2*var*(1 - cor)*(za + zb)^2/(h - abs(es))^2 + za^2/2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -5268,8 +5286,8 @@ size.equiv.mean.ps <- function(alpha, pow, var, es, cor, h) {
 #' size.supinf.mean.ps(.05, .80, 225, 9, .75, 4)
 #'
 #' # Should return:
-#' #      Sample size
-#' # [1,]          38
+#' # Sample size
+#' #          38
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -5281,6 +5299,7 @@ size.supinf.mean.ps <- function(alpha, pow, var, es, cor, h) {
  n <- ceiling(2*var*(1 - cor)*(za + zb)^2/(es - h)^2 + za^2/2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -5318,8 +5337,8 @@ size.supinf.mean.ps <- function(alpha, pow, var, es, cor, h) {
 #' size.test.mann(.05, .90, .3)
 #'
 #' # Should return:
-#' #      Sample size per group
-#' # [1,]                    44
+#' # Sample size per group
+#' #                    44
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -5331,6 +5350,7 @@ size.test.mann <- function(alpha, pow, p) {
  n <- ceiling((za + zb)^2/(6*es^2))
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size per group"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -5359,8 +5379,8 @@ size.test.mann <- function(alpha, pow, p) {
 #' size.test.sign1(.05, .90, .3)
 #'
 #' # Should return:
-#' #      Sample size
-#' # [1,]          56
+#' # Sample size
+#' #          56
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -5372,6 +5392,7 @@ size.test.sign1 <- function(alpha, pow, p) {
  n <- ceiling(p*(1 - p)*(za + zb)^2/es^2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -5404,8 +5425,8 @@ size.test.sign1 <- function(alpha, pow, p) {
 #' size.test.sign.ps(.05, .90, .75)
 #'
 #' # Should return:
-#' #      Sample size
-#' # [1,]          32
+#' # Sample size
+#' #          32
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -5417,6 +5438,7 @@ size.test.sign.ps <- function(alpha, pow, p) {
  n <- ceiling(p*(1 - p)*(za + zb)^2/es^2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -5448,8 +5470,8 @@ size.test.sign.ps <- function(alpha, pow, p) {
 #' size.test.cronbach(.05, .85, .80, 5, .7)
 #'
 #' # Should return:
-#' #      Sample size
-#' # [1,]         139
+#' # Sample size
+#' #         139
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -5461,6 +5483,7 @@ size.test.cronbach <- function(alpha, pow, rel, r, h) {
  n <- ceiling((2*r/(r - 1))*(za + zb)^2/log(e)^2 + 2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -5491,8 +5514,8 @@ size.test.cronbach <- function(alpha, pow, rel, r, h) {
 #' power.mean1(.05, 15, 80.5, 7)
 #'
 #' # Should return:
-#' #          Power
-#' # [1,] 0.8021661
+#' #     Power
+#' # 0.8021661
 #'
 #'
 #' @importFrom stats qt
@@ -5505,6 +5528,7 @@ power.mean1 <- function(alpha, n, var, es) {
  pow <- 1 - pt(t, df, z)
  out <- matrix(pow, nrow = 1, ncol = 1)
  colnames(out) <- "Power"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -5538,8 +5562,8 @@ power.mean1 <- function(alpha, n, var, es) {
 #' power.mean2(.05, 25, 25, 5.0, 6.0, 2)
 #'
 #' # Should return:
-#' #          Power
-#' # [1,] 0.8398413
+#' #     Power
+#' # 0.8398413
 #'
 #'
 #' @importFrom stats qt
@@ -5552,6 +5576,7 @@ power.mean2 <- function(alpha, n1, n2, var1, var2, es) {
  pow <- 1 - pt(t, df, z)
  out <- matrix(pow, nrow = 1, ncol = 1)
  colnames(out) <- "Power"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -5590,8 +5615,8 @@ power.mean2 <- function(alpha, n1, n2, var1, var2, es) {
 #' power.lc.mean.bs(.05, n, var, 5, v)
 #'
 #' # Should return:
-#' #          Power
-#' # [1,] 0.7221139
+#' #     Power
+#' # 0.7221139
 #'
 #'
 #' @importFrom stats qt
@@ -5606,6 +5631,7 @@ power.lc.mean.bs <- function(alpha, n, var, es, v) {
  pow <- 1 - pt(t, df, z)
  out <- matrix(pow, nrow = 1, ncol = 1)
  colnames(out) <- "Power"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -5639,8 +5665,8 @@ power.lc.mean.bs <- function(alpha, n, var, es, v) {
 #' power.mean.ps(.05, 20, 10.0, 12.0, 2, .7)
 #'
 #' # Should return:
-#' #          Power
-#' # [1,] 0.9074353
+#' #     Power
+#' # 0.9074353
 #'
 #'
 #' @importFrom stats qt
@@ -5654,6 +5680,7 @@ power.mean.ps <- function(alpha, n, var1, var2, es, cor) {
  pow <- 1 - pt(t, df, z)
  out <- matrix(pow, nrow = 1, ncol = 1)
  colnames(out) <- "Power"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -5686,8 +5713,8 @@ power.mean.ps <- function(alpha, n, var1, var2, es, cor) {
 #' pi.score1(.05, 24.5, 3.65, 40)
 #'
 #' # Should return:
-#' #      Predicted  df       LL       UL
-#' # [1,]      24.5  39 17.02546 31.97454
+#' # Predicted  df       LL       UL
+#' #      24.5  39 17.02546 31.97454
 #'  
 #' 
 #' @importFrom stats qt
@@ -5700,6 +5727,7 @@ pi.score1 <- function(alpha, m, sd, n) {
  ul <- m + tcrit*se
  out <- t(c(m, df, ll, ul))
  colnames(out) <- c("Predicted", "df", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -5805,8 +5833,8 @@ pi.score2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' pi.score.ps(.05, 265.1, 208.6, 23.51, 19.94, .814, 30)
 #'
 #' # Should return:
-#' #      Predicted df       LL       UL
-#' # [1,]      56.5 29 28.05936 84.94064
+#' # Predicted df       LL       UL
+#' #      56.5 29 28.05936 84.94064
 #'  
 #' 
 #' @importFrom stats qt
@@ -5822,6 +5850,7 @@ pi.score.ps <- function(alpha, m1, m2, sd1, sd2, cor, n) {
  ul <- est + tcrit*se
  out <- t(c(est, df, ll, ul))
  colnames(out) <- c("Predicted", "df", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -5953,8 +5982,8 @@ random.y <- function(n, m, sd, min, max, dec) {
 #' ci.var.upper(.25, 15, 60)
 #'
 #' # Should return:
-#' #            UL
-#' # [1,] 17.23264
+#' #       UL
+#' # 17.23264
 #'  
 #' 
 #' @importFrom stats qchisq
@@ -5964,6 +5993,7 @@ ci.var.upper <- function(alpha, var, n) {
  ul <- (n - 1)*var/chi
  out <- matrix(ul, nrow = 1, ncol = 1)
  colnames(out) <- "UL"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -5998,8 +6028,8 @@ ci.var.upper <- function(alpha, var, n) {
 #' pi.var.upper(.2, 15, 40, 100)
 #'
 #' # Should return:
-#' #           UL
-#' # [1] 18.78522
+#' #       UL
+#' # 18.78522
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -6008,7 +6038,8 @@ pi.var.upper <- function(alpha, var, n1, n2) {
  z <- qnorm(1 - alpha)
  ul <- exp(log(var) + z*sqrt(2/(n1 - 1) + 2/(n2 - 1)))
  out <- matrix(ul, nrow = 1, ncol = 1)
- colnames(out) <- c("UL")
+ colnames(out) <- "UL"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -6036,8 +6067,8 @@ pi.var.upper <- function(alpha, var, n1, n2) {
 #' etasqr.adj(.315, 2, 42)
 #'
 #' # Should return:
-#' #      Adjusted eta-squared
-#' # [1,]             0.282381
+#' # adj eta-squared
+#' #        0.282381
 #'  
 #' 
 #' @export
@@ -6045,7 +6076,8 @@ etasqr.adj <- function(etasqr, dfeffect, dferror) {
  adj <- 1 - (dferror + dfeffect)*(1 - etasqr)/dferror
  if (adj < 0) {adj = 0}
  out <- matrix(adj, nrow = 1, ncol = 1)
- colnames(out) <- "Adjusted eta-squared"
+ colnames(out) <- "adj eta-squared"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -6084,8 +6116,8 @@ etasqr.adj <- function(etasqr, dfeffect, dferror) {
 #' test.anova1.bs(m, sd, n)
 #'
 #' #  Should return:
-#' #             F dfA  dfE           p eta-squared adj eta-squared
-#' # [1,] 5.919585   2   57 0.004614428   0.1719831       0.1429298
+#' #        F dfA  dfE           p eta-squared adj eta-squared
+#' # 5.919585   2   57 0.004614428   0.1719831       0.1429298
 #'  
 #' 
 #' @importFrom stats pf
@@ -6107,6 +6139,7 @@ test.anova1.bs <- function(m, sd, n) {
   adjetasqr <- 1 - (dfa + dfe)*(1 - etasqr)/dfe
   out <- t(c(F, dfa, dfe, p, etasqr, adjetasqr))
   colnames(out) <- c("F", "dfA",  "dfE", "p", "eta-squared", "adj eta-squared")
+  rownames(out) <- ""
   return(out)
 }
 
@@ -6204,8 +6237,8 @@ etasqr.gen.2way <- function(SSa, SSb, SSab, SSe) {
 #' sim.ci.mean1(.05, 40, 4, 1000)
 #'
 #' # Should return (within sampling error):
-#' #      Coverage Lower Error Upper Error Ave CI Width
-#' # [1,]  0.94722     0.01738      0.0354    0.6333067
+#' # Coverage Lower Error Upper Error Ave CI Width
+#' #  0.94722     0.01738      0.0354    0.6333067
 #'
 #'
 #' @importFrom stats qt
@@ -6246,6 +6279,7 @@ sim.ci.mean1 <- function(alpha, n, dist, rep) {
  cov <- 1 - (e1 + e2)
  out <- t(c(cov, e1, e2, width))
  colnames(out) <- c("Coverage", "Lower Error", "Upper Error", "Ave CI Width")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -6413,8 +6447,8 @@ sim.ci.mean2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2, rep) {
 #' sim.ci.mean.ps(.05, 30, 1.5, .7, 4, 5, 1000)
 #'
 #' # Should return (within sampling error):
-#' #      Coverage Lower Error Upper Error Ave CI Width
-#' # [1,]  0.93815     0.05125      0.0106    0.7778518
+#' # Coverage Lower Error Upper Error Ave CI Width
+#' #  0.93815     0.05125      0.0106    0.7778518
 #'
 #'
 #' @importFrom stats qt
@@ -6468,6 +6502,7 @@ sim.ci.mean.ps <- function(alpha, n, sd.ratio, cor, dist1, dist2, rep) {
  cov <- 1 - (e1 + e2)/rep
  out <- t(c(cov, e1/rep, e2/rep, width))
  colnames(out) <- c("Coverage", "Lower Error", "Upper Error", "Ave CI Width")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -6506,8 +6541,8 @@ sim.ci.mean.ps <- function(alpha, n, sd.ratio, cor, dist1, dist2, rep) {
 #' sim.ci.median1(.05, 20, 5, 1000)
 #'
 #' # Should return (within sampling error):
-#' #      Coverage Lower Error Upper Error Ave CI Width
-#' # [1,]   0.9589      0.0216      0.0195    0.9735528
+#' # Coverage Lower Error Upper Error Ave CI Width
+#' #   0.9589      0.0216      0.0195    0.9735528
 #'
 #'
 #' @importFrom stats qnorm
@@ -6590,6 +6625,7 @@ sim.ci.median1 <- function(alpha, n, dist, rep) {
   cov <- 1 - (e1 + e2)/rep
   out <- t(c(cov, e1/rep, e2/rep, width))
   colnames(out) <- c("Coverage", "Lower Error", "Upper Error", "Ave CI Width")
+  rownames(out) <- ""
   return(out)
 }
 
@@ -6631,8 +6667,8 @@ sim.ci.median1 <- function(alpha, n, dist, rep) {
 #' sim.ci.median2(.05, 20, 20, 2, 5, 4, 5000)
 #'
 #' # Should return (within sampling error):
-#' #      Coverage Lower Error Upper Error Ave CI Width
-#' # [1,]    0.952       0.027       0.021     2.368914
+#' # Coverage Lower Error Upper Error Ave CI Width
+#' #    0.952       0.027       0.021     2.368914
 #'
 #'
 #' @importFrom stats qnorm
@@ -6713,6 +6749,7 @@ sim.ci.median2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2, rep) {
   cov <- 1 - (e1 + e2)/rep
   out <- t(c(cov, e1/rep, e2/rep, width))
   colnames(out) <- c("Coverage", "Lower Error", "Upper Error", "Ave CI Width")
+  rownames(out) <- ""
   return(out)
 }
 
@@ -6758,8 +6795,8 @@ sim.ci.median2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2, rep) {
 #' sim.ci.median.ps(.05, 30, 1.5, .7, 4, 3, 1000)
 #'
 #' # Should return (within sampling error):
-#' #      Coverage Lower Error Upper Error Ave CI Width
-#' # [1,]    0.961       0.026       0.013    0.9435462
+#' # Coverage Lower Error Upper Error Ave CI Width
+#' #    0.961       0.026       0.013    0.9435462
 #'
 #'
 #' @importFrom stats qnorm
@@ -6848,6 +6885,7 @@ sim.ci.median.ps <- function(alpha, n, sd.ratio, cor, dist1, dist2, rep) {
  cov <- 1 - (e1 + e2)/rep
  out <- t(c(cov, e1/rep, e2/rep, width))
  colnames(out) <- c("Coverage", "Lower Error", "Upper Error", "Ave CI Width")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -7140,8 +7178,8 @@ sim.ci.stdmean.ps <- function(alpha, n, sd.ratio, cor, dist1, dist2, d, rep) {
 #' spearmanbrown(.6, 10, 20)
 #'
 #' # Should return:
-          Reliability of r2 measurements
-#' # [1,]                            .75
+#' # Reliability of r2 measurements
+#' #                            .75
 #'
 #'
 #' @export
@@ -7149,6 +7187,7 @@ spearmanbrown <- function(rel, r1, r2) {
  rel.r2 <- (r2/r1)*rel/(1 + (r2/r1 - 1)*rel)
  out <- matrix(rel.r2, nrow = 1, ncol = 1)
  colnames(out) <- "Reliability of r2 measurements"
+ rownames(out) <- ""
  return(out)
 }
 
