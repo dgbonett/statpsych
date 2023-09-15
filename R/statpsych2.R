@@ -33,8 +33,8 @@
 #' ci.cor(.05, .536, 0, 50)
 #'
 #' # Should return:
-#' #      Estimate        SE        LL        UL
-#' # [1,]    0.536 0.1018149 0.2978573 0.7058914
+#' # Estimate        SE        LL        UL
+#' #    0.536 0.1018149 0.2978573 0.7058914
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -51,6 +51,7 @@ ci.cor <- function(alpha, cor, s, n) {
  ul <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
  out <- t(c(cor, se, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -91,8 +92,8 @@ ci.cor <- function(alpha, cor, s, n) {
 #' ci.spcor(.05, .582, .699, 20)
 #'
 #' # Should return:
-#' #      Estimate        SE        LL        UL
-#' # [1,]    0.582 0.1374298 0.2525662 0.7905182
+#' # Estimate        SE        LL        UL
+#' #    0.582 0.1374298 0.2525662 0.7905182
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -111,6 +112,7 @@ ci.spcor <- function(alpha, cor, r2, n) {
  ul <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
  out <- t(c(cor, se, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -148,8 +150,8 @@ ci.spcor <- function(alpha, cor, r2, n) {
 #' ci.cor2(.05, .886, .802, 200, 200)
 #'
 #' # Should return:
-#' #      Estimate         SE         LL        UL
-#' # [1,]    0.084 0.02967934 0.02803246 0.1463609
+#' # Estimate         SE         LL        UL
+#' #    0.084 0.02967934 0.02803246 0.1463609
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -176,6 +178,7 @@ ci.cor2 <- function(alpha, cor1, cor2, n1, n2) {
  se <- sqrt((1 - cor1^2)^2/(n1 - 3) + (1 - cor2^2)^2/((n2 - 3)))
  out <- t(c(diff, se, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -215,8 +218,8 @@ ci.cor2 <- function(alpha, cor1, cor2, n1, n2) {
 #' ci.cor.dep(.05, .396, .179, .088, 166)
 #'
 #' # Should return:
-#' #      Estimate       SE         LL       UL
-#' # [1,]   0.217 0.1026986 0.01323072 0.415802
+#' # Estimate        SE         LL       UL
+#' #    0.217 0.1026986 0.01323072 0.415802
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -248,6 +251,7 @@ ci.cor.dep <- function(alpha, cor1, cor2, cor12, n) {
  se <- (ul - ll)/(2*z)
  out <- t(c(diff, se, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -287,8 +291,8 @@ ci.cor.dep <- function(alpha, cor1, cor2, cor12, n) {
 #' ci.cor2.gen(.4, .35, .47, .2, .1, .32)
 #'
 #' # Should return:
-#' #      Estimate   LL        UL
-#' # [1,]      0.2 0.07 0.3220656
+#' # Estimate   LL        UL
+#' #      0.2 0.07 0.3220656
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -301,6 +305,7 @@ ci.cor2.gen <- function(cor1, ll1, ul1, cor2, ll2, ul2) {
  ul <- diff + sqrt((ul1 - cor1)^2 + (cor2 - ll2)^2)
  out <- t(c(diff, ll, ul))
  colnames(out) <- c("Estimate", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -415,8 +420,8 @@ ci.pbcor <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' ci.spear(.05, y, x)
 #'
 #' # Should return:
-#' #       Estimate         SE        LL        UL
-#' # [1,] 0.8699639 0.08241326 0.5840951 0.9638297
+#' #  Estimate         SE        LL        UL
+#' # 0.8699639 0.08241326 0.5840951 0.9638297
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -435,6 +440,7 @@ ci.spear <- function(alpha, y, x) {
  ul <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
  out <- cbind(cor, se, ll, ul)
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
  return (out)
 }
 	
@@ -474,8 +480,8 @@ ci.spear <- function(alpha, y, x) {
 #' ci.spear2(.05, .54, .48, 180, 200)
 #'
 #' # Should return:
-#' #      Estimate         SE         LL        UL
-#' # [1,]     0.06 0.08124926 -0.1003977 0.2185085     
+#' # Estimate         SE         LL        UL
+#' #     0.06 0.08124926 -0.1003977 0.2185085     
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -502,6 +508,7 @@ ci.spear2 <- function(alpha, cor1, cor2, n1, n2) {
  se <- sqrt(se1^2 + se2^2)
  out <- cbind(cor.dif, se, ll.dif, ul.dif)
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
  return (out)
 }
 	
@@ -538,8 +545,8 @@ ci.spear2 <- function(alpha, cor1, cor2, n1, n2) {
 #' ci.mape(.05, res, 1)
 #'
 #' # Should return:
-#' #       Estimate        SE       LL       UL
-#' # [1,]    2.3744 0.3314752 1.751678 3.218499
+#' # Estimate        SE       LL       UL
+#' #   2.3744 0.3314752 1.751678 3.218499
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -558,6 +565,7 @@ ci.mape <- function(alpha, res, s) {
  se.mape <- c*mape*se
  out <- t(c(c*mape, se.mape, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -601,8 +609,8 @@ ci.mape <- function(alpha, res, s) {
 #' ci.mape2(.05, res1, res2, 1, 1)
 #'
 #' # Should return:
-#' #        MAPE1     MAPE2 MAPE1/MAPE2       LL       UL
-#' # [1,] 2.58087 0.8327273    3.099298 1.917003 5.010761
+#' #   MAPE1     MAPE2 MAPE1/MAPE2       LL       UL
+#' # 2.58087 0.8327273    3.099298 1.917003 5.010761
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -627,6 +635,7 @@ ci.mape2 <- function(alpha, res1, res2, s1, s2) {
  ul <- exp(log(c1*mape1) - log(c2*mape2) + z*se)
  out <- t(c(c1*mape1, c2*mape2,(c1*mape1)/(c2*mape2), ll, ul))
  colnames(out) <- c("MAPE1", "MAPE2", "MAPE1/MAPE2", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -740,8 +749,8 @@ ci.condslope <- function(alpha, b1, b2, se1, se2, cov, lo, hi, dfe) {
 #' ci.lc.reg(.05, est, se, n, 4, v)
 #'
 #' # Should return:
-#' #      Estimate        SE        t      df          p        LL       UL
-#' # [1,]    1.303 0.5085838 2.562016 78.8197 0.01231256 0.2906532 2.315347
+#' # Estimate        SE        t      df          p        LL       UL
+#' #    1.303 0.5085838 2.562016 78.8197 0.01231256 0.2906532 2.315347
 #'  
 #' 
 #' @importFrom stats qt
@@ -757,6 +766,7 @@ ci.lc.reg <- function(alpha, est, se, n, s, v) {
  ul <- con + tcrit*se.con
  out <- t(c(con, se.con, t, df, p, ll, ul))
  colnames(out) <- c("Estimate", "SE", "t", "df", "p", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -783,8 +793,8 @@ ci.lc.reg <- function(alpha, est, se, n, s, v) {
 #' ci.fisher(.05, .641, .052)
 #'
 #' # Should return:
-#' #             LL        UL
-#' # [1,] 0.5276396 0.7319293
+#' # Estimate        LL        UL
+#' #    0.641 0.5276396 0.7319293
 #'
 #'
 #' @importFrom stats qnorm
@@ -797,8 +807,8 @@ ci.fisher <- function(alpha, cor, se) {
  ul0 <- zr + z*se/(1 - cor^2)
  ll <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
  ul <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
- out <- t(c(ll, ul))
- colnames(out) <- c("LL", "UL")
+ out <- t(c(cor, ll, ul))
+ colnames(out) <- c("Estimate", "LL", "UL")
  return(out)
 }
 
@@ -838,8 +848,8 @@ ci.fisher <- function(alpha, cor, se) {
 #' ci.indirect (.05, 2.48, 1.92, .586, .379)
 #'
 #' # Should return (within sampling error):
-#' #      Estimate       SE       LL       UL
-#' # [1,]   4.7616 1.625282 2.178812 7.972262
+#' # Estimate       SE       LL       UL
+#' #   4.7616 1.625282 2.178812 7.972262
 #'  
 #' 
 #' @importFrom stats rnorm
@@ -855,6 +865,7 @@ ci.indirect <- function(alpha, b1, b2, se1, se2) {
  ul <- y[k - c + 1]
  out <- t(c(b1*b2, se, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -903,8 +914,8 @@ ci.indirect <- function(alpha, b1, b2, se1, se2) {
 #' # (Intercept)          x1          x2 
 #' #   26.891111    3.648889    2.213333 
 #' # > ci.lc.glm(.05, n, b, V, q)
-#' #      Estimate        SE       t df           p       LL       UL
-#' # [1,] 2.931111 0.4462518 6.56829  7 0.000313428 1.875893 3.986329
+#' # Estimate        SE       t df           p       LL       UL
+#' # 2.931111 0.4462518 6.56829  7 0.000313428 1.875893 3.986329
 #'
 #'
 #' @importFrom stats qt
@@ -921,6 +932,7 @@ ci.lc.glm <-function(alpha, n, b, V, q) {
  ul <- est + tcrit*se
  out <- t(c(est, se, t, df, p, ll, ul))
  colnames(out) <- c("Estimate", "SE", "t", "df", "p", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -960,8 +972,8 @@ ci.lc.glm <-function(alpha, n, b, V, q) {
 #' ci.lc.gen.bs(.05, est, se, v)
 #'
 #' # Should return:
-#' #      Estimate        SE       LL       UL
-#' # [1,]     1.63 0.2573806 1.125543 2.134457
+#' # Estimate        SE       LL       UL
+#' #     1.63 0.2573806 1.125543 2.134457
 #'
 #'
 #' @importFrom stats qnorm
@@ -974,6 +986,7 @@ ci.lc.gen.bs <- function(alpha, est, se, v) {
  ul <- est.lc + zcrit*se.lc
  out <- t(c(est.lc, se.lc, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1009,8 +1022,8 @@ ci.lc.gen.bs <- function(alpha, est, se, v) {
 #' ci.rsqr(.05, .241, 3, 116)
 #'
 #' # Should return:
-#' #      R-squared adj R-squared         SE         LL        UL  
-#' # [1,]     0.241     0.2206696 0.06752263 0.09819599 0.3628798
+#' # R-squared adj R-squared         SE         LL        UL  
+#' #     0.241     0.2206696 0.06752263 0.09819599 0.3628798
 #'  
 #' 
 #' @importFrom stats qf
@@ -1054,6 +1067,7 @@ ci.rsqr <- function(alpha, r2, s, n) {
  se <- (ul - ll)/(2*z0)
  out <- t(c(r2, adj, se, ll, ul))
  colnames(out) <- c("R-squared", "adj R-squared", "SE", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1091,8 +1105,8 @@ ci.rsqr <- function(alpha, r2, s, n) {
 #' ci.theil(.05, y, x)
 #'
 #' # Should return:
-#' #      Estimate        SE        LL   UL
-#' # [1,]      0.5 0.1085927 0.3243243 0.75
+#' # Estimate        SE        LL   UL
+#' #      0.5 0.1085927 0.3243243 0.75
 #'
 #'
 #' @importFrom stats qnorm
@@ -1121,6 +1135,7 @@ ci.theil <- function(alpha, y, x) {
   se <- (ul - ll)/(2*z)
   out <- t(c(est, se, ll, ul))
   colnames(out) = c("Estimate", "SE", "LL", "UL")
+  rownames(out) <- ""
   return(out)
 }
 
@@ -1160,8 +1175,8 @@ ci.theil <- function(alpha, y, x) {
 #' ci.cronbach2(.05, .88, .76, 8, 8, 200, 250)
 #'
 #' # Should return:
-#' #      Estimate         LL       UL
-#' # [1,]     0.12 0.06973411 0.173236
+#' # Estimate         LL       UL
+#' #     0.12 0.06973411 0.173236
 #'  
 #' 
 #' @importFrom stats qf
@@ -1188,6 +1203,7 @@ ci.cronbach2 <- function(alpha, rel1, rel2, r1, r2, n1, n2) {
  ul <- d + sqrt((UL1 - rel1)^2 + (rel2 - LL2)^2)
  out <- t(c(d, ll, ul))
  colnames(out) <- c("Estimate", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1228,8 +1244,8 @@ ci.cronbach2 <- function(alpha, rel1, rel2, r1, r2, n1, n2) {
 #' ci.rel2(.4, .35, .47, .2, .1, .32)
 #'
 #' # Should return:
-#' #      Estimate   LL        UL
-#' # [1,]      0.2 0.07 0.3220656
+#' # Estimate   LL        UL
+#' #      0.2 0.07 0.3220656
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -1242,6 +1258,7 @@ ci.rel2 <- function(rel1, ll1, ul1, rel2, ll2, ul2) {
  ul <- diff + sqrt((ul1 - rel1)^2 + (rel2 - ll2)^2)
  out <- t(c(diff, ll, ul))
  colnames(out) <- c("Estimate", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
