@@ -31,8 +31,8 @@
 #' ci.mean1(.05, 24.5, 3.65, 40)
 #'
 #' # Should return:
-#' #        Estimate        SE       LL       UL
-#' # [1,]       24.5 0.5771157 23.33267 25.66733
+#' # Estimate        SE       LL       UL
+#' #     24.5 0.5771157 23.33267 25.66733
 #'  
 #' 
 #' @importFrom stats qt
@@ -45,6 +45,7 @@ ci.mean1 <- function(alpha, m, sd, n) {
  ul <- m + tcrit*se
  out <- t(c(m, se, ll, ul))
  colnames(out) <- c("Estimate", "SE",  "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -84,8 +85,8 @@ ci.mean1 <- function(alpha, m, sd, n) {
 #' ci.stdmean1(.05, 24.5, 3.65, 40, 20)
 #'
 #' # Should return:
-#' #      Estimate adj Estimate        SE        LL       UL
-#' # [1,] 1.232877     1.209015 0.2124335 0.8165146 1.649239
+#' # Estimate  adj Estimate        SE        LL       UL
+#' # 1.232877      1.209015 0.2124335 0.8165146 1.649239
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -100,7 +101,8 @@ ci.stdmean1 <- function(alpha, m, sd, n, h) {
  ll <- est - z*se
  ul <- est + z*se
  out <- t(c(est, estu, se, ll, ul))
- colnames(out) <- c("Estimate", "adj Estimate", "SE", "LL", "UL")
+ colnames(out) <- c("Estimate", " adj Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 	
@@ -458,8 +460,8 @@ ci.slope.mean.bs <- function(alpha, m, sd, n, x) {
 #'
 #' # Should return:
 #' #
-#' #      Mean1    Mean2 Mean1/Mean2        LL       UL
-#' # [1,]  41.5 36.38462    1.140592 0.9897482 1.314425
+#' # Mean1    Mean2 Mean1/Mean2        LL       UL
+#' #  41.5 36.38462    1.140592 0.9897482 1.314425
 #'
 #'
 #' @importFrom stats qt
@@ -481,6 +483,7 @@ ci.ratio.mean2 <- function(alpha, y1, y2){
  ul <- exp(est + tcrit*se)
  out <- t(c(m1, m2, exp(est), ll, ul))
  colnames(out) <- c("Mean1", "Mean2", "Mean1/Mean2", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -526,11 +529,11 @@ ci.ratio.mean2 <- function(alpha, y1, y2){
 #' ci.stdmean2(.05, 35.1, 26.7, 7.32, 6.98, 30, 30)
 #' 
 #' # Should return:
-#' #                          Estimate adj Estimate        SE        LL       UL
-#' # Unweighted standardizer: 1.174493     1.159240 0.2844012 0.6170771 1.731909
-#' # Weighted standardizer:   1.174493     1.159240 0.2802826 0.6251494 1.723837
-#' # Group 1 standardizer:    1.147541     1.117605 0.2975582 0.5643375 1.730744
-#' # Group 2 standardizer:    1.203438     1.172044 0.3120525 0.5918268 1.815050
+#' #                          Estimate  adj Estimate        SE        LL       UL
+#' # Unweighted standardizer: 1.174493      1.159240 0.2844012 0.6170771 1.731909
+#' # Weighted standardizer:   1.174493      1.159240 0.2802826 0.6251494 1.723837
+#' # Group 1 standardizer:    1.147541      1.117605 0.2975582 0.5643375 1.730744
+#' # Group 2 standardizer:    1.203438      1.172044 0.3120525 0.5918268 1.815050
 #'
 #'
 #' @importFrom stats qnorm
@@ -572,7 +575,7 @@ ci.stdmean2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
  out3 <- t(c(est3, est3u, se3, ll3, ul3))
  out4 <- t(c(est4, est4u, se4, ll4, ul4))
  out <- rbind(out1, out2, out3, out4)
- colnames(out) <- c("Estimate", "adj Estimate", "SE", "LL", "UL")
+ colnames(out) <- c("Estimate", " adj Estimate", "SE", "LL", "UL")
  rownames1 <- c("Unweighted standardizer:", "Weighted standardizer:")
  rownames2 <- c("Group 1 standardizer:", "Group 2 standardizer:")
  rownames(out) <- c(rownames1, rownames2)
@@ -620,10 +623,10 @@ ci.stdmean2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' ci.stdmean.strat(.05, 33.2, 30.8, 10.5, 11.2, 200, 200, .533)
 #'
 #' # Should return:
-#' #                         Estimate adj Estimate         SE         LL        UL
-#' # Weighted standardizer: 0.2215549    0.2211371 0.10052057 0.02453817 0.4185716
-#' # Group 1 standardizer:  0.2285714    0.2277089 0.10427785 0.02419059 0.4329523
-#' # Group 2 standardizer:  0.2142857    0.2277089 0.09776049 0.02267868 0.4058927
+#' #                         Estimate  adj Estimate         SE         LL        UL
+#' # Weighted standardizer: 0.2215549     0.2211371 0.10052057 0.02453817 0.4185716
+#' # Group 1 standardizer:  0.2285714     0.2277089 0.10427785 0.02419059 0.4329523
+#' # Group 2 standardizer:  0.2142857     0.2277089 0.09776049 0.02267868 0.4058927
 #'
 #'
 #' @importFrom stats qnorm
@@ -658,7 +661,7 @@ ci.stdmean.strat <- function(alpha, m1, m2, sd1, sd2, n1, n2, p1) {
  out3 <- t(c(est3, est3u, se3, ll3, ul3))
  out4 <- t(c(est4, est4u, se4, ll4, ul4))
  out <- rbind(out1, out3, out4)
- colnames(out) <- c("Estimate", "adj Estimate", "SE", "LL", "UL")
+ colnames(out) <- c("Estimate", " adj Estimate", "SE", "LL", "UL")
  rownames1 <- c("Weighted standardizer:")
  rownames2 <- c("Group 1 standardizer:", "Group 2 standardizer:")
  rownames(out) <- c(rownames1, rownames2)
@@ -708,10 +711,10 @@ ci.stdmean.strat <- function(alpha, m1, m2, sd1, sd2, n1, n2, p1) {
 #' ci.lc.stdmean.bs(.05, m, sd, n, v)
 #'
 #' # Should return:
-#' #                           Estimate adj Estimate        SE        LL         UL
-#' # Unweighted standardizer: -1.301263    -1.273964 0.3692800 -2.025039 -0.5774878
-#' # Weighted standardizer:   -1.301263    -1.273964 0.3514511 -1.990095 -0.6124317
-#' # Group 1 standardizer:    -1.393229    -1.273810 0.4849842 -2.343781 -0.4426775
+#' #                           Estimate  adj Estimate        SE        LL         UL
+#' # Unweighted standardizer: -1.301263     -1.273964 0.3692800 -2.025039 -0.5774878
+#' # Weighted standardizer:   -1.301263     -1.273964 0.3514511 -1.990095 -0.6124317
+#' # Group 1 standardizer:    -1.393229     -1.273810 0.4849842 -2.343781 -0.4426775
 #'
 #'
 #' @importFrom stats qnorm
@@ -754,7 +757,7 @@ ci.lc.stdmean.bs <- function(alpha, m, sd, n, v) {
  out2 <- t(c(est2, est2u, se2, ll2, ul2))
  out3 <- t(c(est3, est3u, se3, ll3, ul3))
  out <- rbind(out1, out2, out3)
- colnames(out) <- c("Estimate", "adj Estimate", "SE", "LL", "UL")
+ colnames(out) <- c("Estimate", " adj Estimate", "SE", "LL", "UL")
  rownames(out) <- c("Unweighted standardizer:", "Weighted standardizer:", "Group 1 standardizer:")
  return(out)
 }
@@ -794,8 +797,8 @@ ci.lc.stdmean.bs <- function(alpha, m, sd, n, v) {
 #' ci.mean.ps(.05, 58.2, 51.4, 7.43, 8.92, .537, 30)
 #'
 #' # Should return:
-#' #      Estimate       SE        t df            p       LL       UL
-#' # [1,]      6.8 1.455922 4.670578 29  6.33208e-05 3.822304 9.777696
+#' # Estimate       SE        t df            p       LL       UL
+#' #      6.8 1.455922 4.670578 29  6.33208e-05 3.822304 9.777696
 #'
 #'
 #' @importFrom stats qt
@@ -814,6 +817,7 @@ ci.mean.ps <- function(alpha, m1, m2, sd1, sd2, cor, n) {
  ul <- est + tcrit*se
  out <- t(c(est, se, t, df, p, ll, ul))
  colnames(out) <- c("Estimate", "SE", "t", "df", "p","LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -852,8 +856,8 @@ ci.mean.ps <- function(alpha, m1, m2, sd1, sd2, cor, n) {
 #' ci.ratio.mean.ps(.05, y1, y2)
 #'
 #' # Should return:
-#' #       Mean1 Mean2 Mean1/Mean2      LL       UL
-#' # [1,] 3.4875 3.075    1.134146 1.09417 1.175583
+#' #  Mean1 Mean2 Mean1/Mean2      LL       UL
+#' # 3.4875 3.075    1.134146 1.09417 1.175583
 #'
 #'
 #' @importFrom stats qt
@@ -876,6 +880,7 @@ ci.ratio.mean.ps <- function(alpha, y1, y2){
  ul <- exp(est + tcrit*se)
  out <- t(c(m1, m2, exp(est), ll, ul))
  colnames(out) <- c("Mean1", "Mean2", "Mean1/Mean2", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -917,10 +922,10 @@ ci.ratio.mean.ps <- function(alpha, y1, y2){
 #' ci.stdmean.ps(.05, 110.4, 102.1, 15.3, 14.6, .75, 25)
 #'
 #' # Should return:
-#' #                              Estimate adj Estimate        SE        LL        UL
-#' # Unweighted standardizer:    0.5550319    0.5433457 0.1609934 0.2394905 0.8705732
-#' # Measurement 1 standardizer: 0.5424837    0.5253526 0.1615500 0.2258515 0.8591158
-#' # Measurement 2 standardizer: 0.5684932    0.5505407 0.1692955 0.2366800 0.9003063
+#' #                              Estimate  adj Estimate        SE        LL        UL
+#' # Unweighted standardizer:    0.5550319     0.5433457 0.1609934 0.2394905 0.8705732
+#' # Measurement 1 standardizer: 0.5424837     0.5253526 0.1615500 0.2258515 0.8591158
+#' # Measurement 2 standardizer: 0.5684932     0.5505407 0.1692955 0.2366800 0.9003063
 #'
 #'
 #' @importFrom stats qnorm
@@ -953,7 +958,7 @@ ci.stdmean.ps <- function(alpha, m1, m2, sd1, sd2, cor, n) {
  out3 <- t(c(est3, est3u, se3, ll3, ul3))
  out4 <- t(c(est4, est4u, se4, ll4, ul4))
  out <- rbind(out1, out3, out4)
- colnames(out) <- c("Estimate", "adj Estimate", "SE", "LL", "UL")
+ colnames(out) <- c("Estimate", " adj Estimate", "SE", "LL", "UL")
  rownames1 <- c("Unweighted standardizer:")
  rownames2 <- c("Measurement 1 standardizer:", "Measurement 2 standardizer:")
  rownames(out) <- c(rownames1, rownames2)
@@ -1002,9 +1007,9 @@ ci.stdmean.ps <- function(alpha, m1, m2, sd1, sd2, cor, n) {
 #' ci.lc.stdmean.ws(.05, m, sd, .672, 20, q)
 #'
 #' # Should return:
-#' #                           Estimate adj Estimate        SE        LL         UL
-#' # Unweighted standardizer: -1.301263    -1.266557 0.3147937 -1.918248 -0.6842788
-#' # Level 1 standardizer:    -1.393229    -1.337500 0.3661824 -2.110934 -0.6755248
+#' #                           Estimate  adj Estimate        SE        LL         UL
+#' # Unweighted standardizer: -1.301263     -1.266557 0.3147937 -1.918248 -0.6842788
+#' # Level 1 standardizer:    -1.393229     -1.337500 0.3661824 -2.110934 -0.6755248
 #'
 #'
 #' @importFrom stats qnorm
@@ -1039,7 +1044,7 @@ ci.lc.stdmean.ws <- function(alpha, m, sd, cor, n, q) {
  out1 <- t(c(est1, est1u, se1, ll1, ul1))
  out2 <- t(c(est2, est2u, se2, ll2, ul2))
  out <- rbind(out1, out2)
- colnames(out) <- c("Estimate", "adj Estimate", "SE", "LL", "UL")
+ colnames(out) <- c("Estimate", " adj Estimate", "SE", "LL", "UL")
  rownames(out) <- c("Unweighted standardizer:", "Level 1 standardizer:")
  return(out)
 }
@@ -1077,8 +1082,8 @@ ci.lc.stdmean.ws <- function(alpha, m, sd, cor, n, q) {
 #' ci.mad1(.05, y)
 #'
 #' # Should return:
-#' #       Estimate       SE       LL       UL
-#' # [1,]      12.5 2.876103 7.962667 19.62282
+#' # Estimate       SE       LL       UL
+#' #     12.5 2.876103 7.962667 19.62282
 #'
 #'
 #' @importFrom stats qnorm
@@ -1098,6 +1103,7 @@ ci.mad1 <- function(alpha, y) {
  se.mad <- c*mad*se
  out <- t(c(c*mad, se.mad, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1135,8 +1141,8 @@ ci.mad1 <- function(alpha, y) {
 #' ci.ratio.mad2(.05, y1, y2)
 #'
 #' # Should return:
-#' #          MAD1     MAD2  MAD1/MAD2        LL       UL
-#' # [1,] 5.111111 5.888889  0.8679245 0.4520879 1.666253
+#' #     MAD1     MAD2  MAD1/MAD2        LL       UL
+#' # 5.111111 5.888889  0.8679245 0.4520879 1.666253
 #'
 #'
 #' @importFrom stats qnorm
@@ -1166,6 +1172,7 @@ ci.ratio.mad2 <- function(alpha, y1, y2) {
  ul <- exp(log(c*est) + z*se)
  out <- t(c(c1*mad1, c2*mad2, c*est, ll, ul))
  colnames(out) <- c("MAD1", "MAD2", "MAD1/MAD2", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1211,8 +1218,8 @@ ci.ratio.mad2 <- function(alpha, y1, y2) {
 #' ci.ratio.sd2(.05, y1, y2)
 #'
 #' # Should return:
-#' #           SD1      SD2    SD1/SD2       LL       UL
-#' # [1,] 5.711587 6.450667  0.8854257 0.486279 1.728396
+#' #      SD1      SD2    SD1/SD2       LL       UL
+#' # 5.711587 6.450667  0.8854257 0.486279 1.728396
 #'
 #'
 #' @importFrom stats qnorm
@@ -1252,6 +1259,7 @@ ci.ratio.sd2 <- function(alpha, y1, y2) {
  }
  out <- t(c(sd1, sd2, sd1/sd2, ll, ul))
  colnames(out) <- c("SD1", "SD2", "SD1/SD2", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
   
@@ -1288,8 +1296,8 @@ ci.ratio.sd2 <- function(alpha, y1, y2) {
 #' ci.ratio.mad.ps(.05, y1, y2)
 #'
 #' # Should return:
-#' #          MAD1  MAD2  MAD1/MAD2       LL       UL
-#' # [1,] 12.71429   7.5   1.695238 1.109176 2.590961
+#' #     MAD1  MAD2  MAD1/MAD2       LL       UL
+#' # 12.71429   7.5   1.695238 1.109176 2.590961
 #'
 #'
 #' @importFrom stats qnorm
@@ -1320,6 +1328,7 @@ ci.ratio.mad.ps <- function(alpha, y1, y2) {
  ul <- exp(log(est) + z*se)
  out <- t(c(c*mad1, c*mad2, est, ll, ul))
  colnames(out) <- c("MAD1", "MAD2", "MAD1/MAD2", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1355,8 +1364,8 @@ ci.ratio.mad.ps <- function(alpha, y1, y2) {
 #' ci.cv1(.05, 24.5, 3.65, 40)
 #'
 #' # Should return:
-#' #       Estimate        SE        LL       UL
-#' # [1,] 0.1489796 0.01817373 0.1214381 0.1926778
+#' #  Estimate        SE        LL       UL
+#' # 0.1489796 0.01817373 0.1214381 0.1926778
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -1376,6 +1385,7 @@ ci.cv1 <- function(alpha, m, sd, n) {
  se <- (ul - ll)/(2*z)
  out <- t(c(est, se, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1417,8 +1427,8 @@ ci.cv1 <- function(alpha, m, sd, n) {
 #' ci.cv2(.05, 34.5, 26.1, 4.15, 2.26, 50, 50)
 #'
 #' # Should return:
-#' #      Estimate       LL       UL
-#' # [1,] 1.389188 1.041478 1.854101
+#' # Estimate       LL       UL
+#' # 1.389188 1.041478 1.854101
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -1449,6 +1459,7 @@ ci.ratio.cv2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
  est <- exp(diff)
  out <- t(c(est, ll, ul))
  colnames(out) <- c("Estimate", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 	
@@ -1486,8 +1497,8 @@ ci.ratio.cv2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' ci.cod1(.05, y)
 #'
 #' # Should return:
-#' #        Estimate        SE        LL       UL
-#' # [1,]  0.5921053 0.1814708 0.3813259 1.092679
+#' #  Estimate        SE        LL       UL
+#' # 0.5921053 0.1814708 0.3813259 1.092679
 #'
 #'
 #' @importFrom stats qnorm
@@ -1525,6 +1536,7 @@ ci.cod1 <-function(alpha, y) {
  se <- (ul - ll)/(2*z)
  out <- t(c(cod, se, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1559,8 +1571,8 @@ ci.cod1 <-function(alpha, y) {
 #' ci.cod2(.05, y1, y2)
 #'
 #' # Should return:
-#' #           COD1      COD2 COD1/COD2       LL       UL
-#' # [1,] 0.1333333 0.1232558  1.081761 0.494964 2.282254
+#' #      COD1      COD2 COD1/COD2       LL       UL
+#' # 0.1333333 0.1232558  1.081761 0.494964 2.282254
 #'
 #'
 #' @importFrom stats qnorm
@@ -1625,6 +1637,7 @@ ci.cod2 <-function(alpha, y1, y2) {
  UL <- exp(log(cod1/cod2) + sqrt((log(cod1) - UL1)^2 + (log(cod2) - LL2)^2))
  out <- t(c(cod1, cod2, cod1/cod2, LL, UL))
  colnames(out) <- c("COD1", "COD2", "COD1/COD2", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1663,8 +1676,8 @@ ci.cod2 <-function(alpha, y1, y2) {
 #' ci.cqv1(.05, y)
 #'
 #' # Should return:
-#' #        Estimate        SE        LL       UL
-#' # [1,]        0.5 0.1552485 0.2617885 0.8841821
+#' # Estimate        SE        LL       UL
+#' #      0.5 0.1552485 0.2617885 0.8841821
 #'
 #'
 #' @importFrom stats qnorm
@@ -1708,6 +1721,7 @@ ci.cqv1 <- function(alpha, y) {
  ul <- exp(c*log(est) + z*se)
  out <- t(c(est, est*se, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1742,8 +1756,8 @@ ci.cqv1 <- function(alpha, y) {
 #' ci.median1(.05, y)
 #'
 #' # Should return:
-#' #      Estimate       SE LL UL
-#' # [1,]       20 4.270922 10 30
+#' # Estimate       SE LL UL
+#' #       20 4.270922 10 30
 #'
 #'
 #' @importFrom stats qnorm
@@ -1768,6 +1782,7 @@ ci.median1 <- function(alpha, y) {
  se <- (ul1 - ll1)/(2*z0)
  out <- t(c(median, se, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1806,8 +1821,8 @@ ci.median1 <- function(alpha, y) {
 #' ci.median2(.05, y1, y2)
 #'
 #' # Should return:
-#' #       Median1 Median2 Median1-Median2       SE        LL          UL
-#' # [1,]     34.5      43            -8.5 4.316291 -16.95977 -0.04022524
+#' # Median1 Median2 Median1-Median2       SE        LL          UL
+#' #    34.5      43            -8.5 4.316291 -16.95977 -0.04022524
 #'
 #'
 #' @importFrom stats qnorm
@@ -1842,6 +1857,7 @@ ci.median2 <- function(alpha, y1, y2) {
  ul <- diff + z*se
  out <- t(c(median1, median2, diff, se, ll, ul))
  colnames(out) <- c("Median1", "Median2", "Median1-Median2", "SE", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1879,8 +1895,8 @@ ci.median2 <- function(alpha, y1, y2) {
 #' ci.ratio.median2(.05, y1, y2)
 #'
 #' # Should return:
-#' #      Median1 Median2 Median1/Median2       LL       UL
-#' # [1,]      43      37        1.162162 0.927667 1.455933
+#' # Median1 Median2 Median1/Median2       LL       UL
+#' #      43      37        1.162162 0.927667 1.455933
 #'
 #'
 #' @importFrom stats qnorm
@@ -1915,6 +1931,7 @@ ci.ratio.median2 <- function(alpha, y1, y2) {
  ul <- exp(diff + z*se)
  out <- t(c(median1, median2, exp(diff), ll, ul))
  colnames(out) <- c("Median1", "Median2", "Median1/Median2", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1956,8 +1973,8 @@ ci.ratio.median2 <- function(alpha, y1, y2) {
 #' ci.lc.median.bs(.05, m, se, v)
 #'
 #' # Should return:
-#' #      Estimate       SE       LL       UL
-#' # [1,]    35.77 11.67507 12.88727 58.65273
+#' # Estimate       SE       LL       UL
+#' #    35.77 11.67507 12.88727 58.65273
 #'
 #'
 #' @importFrom stats qnorm
@@ -1970,6 +1987,7 @@ ci.lc.median.bs <- function(alpha, m, se, v) {
  ul <- est + zcrit*se
  out <- t(c(est, se, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -2011,10 +2029,10 @@ ci.lc.median.bs <- function(alpha, m, se, v) {
 #' ci.median.ps(.05, y1, y2)
 #'
 #' # Should return:
-#' #    Median1 Median2 Median1-Median2       SE        LL        UL  
-#' # [1,]    13      30             -17 3.362289 -23.58996 -10.41004 
-#' #        SE1      SE2      COV
-#' #   3.085608 4.509735 9.276849
+#' # Median1 Median2 Median1-Median2       SE        LL        UL  
+#' #      13      30             -17 3.362289 -23.58996 -10.41004 
+#' #      SE1      SE2      COV
+#' # 3.085608 4.509735 9.276849
 #'
 #'
 #' @importFrom stats qnorm
@@ -2055,6 +2073,7 @@ ci.median.ps <- function(alpha, y1, y2) {
  ul <- diff + z*se
  out <- t(c(median1, median2, diff, se, ll, ul, se1, se2, cov))
  colnames(out) <- c("Median1", "Median2", "Median1-Median2", "SE", "LL", "UL", "SE1", "SE2", "COV")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -2092,8 +2111,8 @@ ci.median.ps <- function(alpha, y1, y2) {
 #' ci.ratio.median.ps(.05, y1, y2)
 #'
 #' # Should return:
-#' #         Median1  Median2   Median1/Median2        LL        UL
-#' # [1,]         13       30         0.4333333 0.3094838 0.6067451
+#' # Median1  Median2   Median1/Median2        LL        UL
+#' #      13       30         0.4333333 0.3094838 0.6067451
 #'
 #'
 #' @importFrom stats qnorm
@@ -2135,6 +2154,7 @@ ci.ratio.median.ps <- function(alpha, y1, y2) {
  ul <- exp(logratio + z*se)
  out <- t(c(med1, med2, exp(logratio), ll, ul))
  colnames(out) <- c("Median1", "Median2", "Median1/Median2", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -2174,8 +2194,8 @@ ci.ratio.median.ps <- function(alpha, y1, y2) {
 #' ci.sign1(.05, y, 9)
 #'
 #' # Should return:
-#' #      Estimate        SE        LL        UL
-#' # [1,] 0.826087 0.0790342 0.6711828 0.9809911
+#' # Estimate        SE        LL        UL
+#' # 0.826087 0.0790342 0.6711828 0.9809911
 #'
 #'
 #' @importFrom stats qnorm
@@ -2194,6 +2214,7 @@ ci.sign1 <- function(alpha, y, h) {
  if (UL.adj > 1) {UL.adj = 1}
  out <- t(c(p.adj, se.adj, LL.adj, UL.adj))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -2236,8 +2257,8 @@ ci.sign1 <- function(alpha, y, h) {
 #' ci.mann(.05, y1, y2)
 #'
 #' # Should return:
-#' #      Estimate        SE        LL UL
-#' # [1,]    0.795 0.1401834 0.5202456  1
+#' # Estimate        SE        LL UL
+#' #    0.795 0.1401834 0.5202456  1
 #'
 #'
 #' @importFrom stats qnorm
@@ -2268,6 +2289,7 @@ ci.mann <- function(alpha, y1, y2){
  if (ll < 0) {ll = 0}
  out <- t(c(est, se, ll, ul))
  colnames(out) <- c("Estimate", "SE",  "LL", "UL")	
+ rownames(out) <- ""
  return(out)
 }
 
@@ -2392,8 +2414,8 @@ ci.random.anova1 <- function(alpha, m, sd, n) {
 #' ci.cronbach(.05, .85, 7, 89)
 #'
 #' # Should return:
-#' #               SE        LL        UL
-#' # [1,]  0.02456518 0.7971254 0.8931436   
+#' # Estimate          SE        LL        UL
+#' #     0.85  0.02456518 0.7971254 0.8931436   
 #'  
 #' 
 #' @importFrom stats qf
@@ -2408,8 +2430,9 @@ ci.cronbach <- function(alpha, rel, r, n) {
  f0 <- 1/(1 - rel)
  ll <- 1 - f1/f0
  ul <- 1 - 1/(f0*f2)
- out <- t(c(se, ll, ul))
- colnames(out) = c("SE", "LL", "UL")
+ out <- t(c(rel, se, ll, ul))
+ colnames(out) = c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -2441,8 +2464,8 @@ ci.cronbach <- function(alpha, rel, r, n) {
 #' ci.reliability(.05, .88, .0147, 100)
 #'
 #' # Should return:
-#' #             LL        UL
-#' # [1,] 0.8489612 0.9065575
+#' # Estimate         LL        UL
+#' #     0.88  0.8489612 0.9065575
 #'  
 #' 
 #' @importFrom stats qf
@@ -2454,7 +2477,8 @@ ci.reliability <- function(alpha, rel, se, n) {
  ll <- 1 - exp(log(1 - rel) - b + z*sqrt(se^2/(1 - rel)^2))
  ul <- 1 - exp(log(1 - rel) - b - z*sqrt(se^2/(1 - rel)^2))
  out <- t(c(ll, ul))
- colnames(out) = c("LL", "UL")
+ colnames(out) = c("Estimate", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -2489,8 +2513,8 @@ ci.reliability <- function(alpha, rel, se, n) {
 #' ci.etasqr(.05, .241, 3, 116)
 #'
 #' # Should return:
-#' #      Eta-squared adj Eta-squared         SE        LL        UL
-#' # [1,]       0.241       0.2213707 0.06258283 0.1040229 0.3493431
+#' # Eta-squared  adj Eta-squared         SE        LL        UL
+#' #       0.241        0.2213707 0.06258283 0.1040229 0.3493431
 #'  
 #' 
 #' @importFrom stats pf
@@ -2518,7 +2542,8 @@ ci.etasqr <- function(alpha, etasqr, df1, df2) {
  if (ul == 0) {ul = ul0}
  se <- (ul - ll)/(2*z0)
  out <- t(c(etasqr, adj, se, ll, ul))
- colnames(out) <- c("Eta-squared", "adj Eta-squared", "SE", "LL", "UL")
+ colnames(out) <- c("Eta-squared", " adj Eta-squared", "SE", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -2964,14 +2989,14 @@ ci.2x2.mean.bs <- function(alpha, y11, y12, y21, y22) {
 #' ci.2x2.stdmean.bs(.05, y11, y12, y21, y22)
 #'
 #' # Should return:
-#' #             Estimate adj Estimate        SE         LL         UL
-#' # AB:      -1.44976487   -1.4193502 0.6885238 -2.7992468 -0.1002829
-#' # A:        0.46904158    0.4592015 0.3379520 -0.1933321  1.1314153
-#' # B:       -0.75330920   -0.7375055 0.3451209 -1.4297338 -0.0768846
-#' # A at b1: -0.25584086   -0.2504736 0.4640186 -1.1653006  0.6536189
-#' # A at b2:  1.19392401    1.1688767 0.5001423  0.2136630  2.1741850
-#' # B at a1: -1.47819163   -1.4471806 0.4928386 -2.4441376 -0.5122457
-#' # B at a2: -0.02842676   -0.0278304 0.4820369 -0.9732017  0.9163482
+#' #             Estimate  adj Estimate        SE         LL         UL
+#' # AB:      -1.44976487    -1.4193502 0.6885238 -2.7992468 -0.1002829
+#' # A:        0.46904158     0.4592015 0.3379520 -0.1933321  1.1314153
+#' # B:       -0.75330920    -0.7375055 0.3451209 -1.4297338 -0.0768846
+#' # A at b1: -0.25584086    -0.2504736 0.4640186 -1.1653006  0.6536189
+#' # A at b2:  1.19392401     1.1688767 0.5001423  0.2136630  2.1741850
+#' # B at a1: -1.47819163    -1.4471806 0.4928386 -2.4441376 -0.5122457
+#' # B at a2: -0.02842676    -0.0278304 0.4820369 -0.9732017  0.9163482
 #'
 #'
 #' @importFrom stats qnorm
@@ -3077,7 +3102,7 @@ ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
  row7 <- c(est7, est7u, se7, LL7, UL7)
  out <- rbind(row1, row2, row3, row4, row5, row6, row7)
  rownames(out) <- c("AB:", "A:", "B:", "A at b1:", "A at b2:", "B at a1:", "B at a2:")
- colnames(out) = c("Estimate", "adj Estimate", "SE", "LL", "UL")
+ colnames(out) = c("Estimate", " adj Estimate", "SE", "LL", "UL")
  return(out)
 }
 
@@ -3269,14 +3294,14 @@ ci.2x2.median.bs <- function(alpha, y11, y12, y21, y22) {
 #' ci.2x2.stdmean.ws(.05, y11, y12, y21, y22)
 #'
 #' # Should return:
-#' #             Estimate adj Estimate         SE           LL        UL
-#' # AB:       0.17248839   0.16446123 0.13654635 -0.095137544 0.4401143
-#' # A:        0.10924265   0.10415878 0.05752822 -0.003510596 0.2219959
-#' # B:        0.07474497   0.07126653 0.05920554 -0.041295751 0.1907857
-#' # A at b1:  0.19548684   0.18638939 0.08460680  0.029660560 0.3613131
-#' # A at b2:  0.02299845   0.02192816 0.09371838 -0.160686202 0.2066831
-#' # B at a1:  0.16098916   0.15349715 0.09457347 -0.024371434 0.3463498
-#' # B at a2: -0.01149923  -0.01096408 0.08595873 -0.179975237 0.1569768
+#' #             Estimate  adj Estimate         SE           LL        UL
+#' # AB:       0.17248839    0.16446123 0.13654635 -0.095137544 0.4401143
+#' # A:        0.10924265    0.10415878 0.05752822 -0.003510596 0.2219959
+#' # B:        0.07474497    0.07126653 0.05920554 -0.041295751 0.1907857
+#' # A at b1:  0.19548684    0.18638939 0.08460680  0.029660560 0.3613131
+#' # A at b2:  0.02299845    0.02192816 0.09371838 -0.160686202 0.2066831
+#' # B at a1:  0.16098916    0.15349715 0.09457347 -0.024371434 0.3463498
+#' # B at a2: -0.01149923   -0.01096408 0.08595873 -0.179975237 0.1569768
 #'
 #'
 #' @importFrom stats qnorm
@@ -3399,7 +3424,7 @@ ci.2x2.stdmean.ws <- function(alpha, y11, y12, y21, y22) {
  row7 <- c(est7, est7u, se7, LL7, UL7)
  out <- rbind(row1, row2, row3, row4, row5, row6, row7)
  rownames(out) <- c("AB:", "A:", "B:", "A at b1:", "A at b2:", "B at a1:", "B at a2:")
- colnames(out) = c("Estimate", "adj Estimate", "SE", "LL", "UL")
+ colnames(out) = c("Estimate", " adj Estimate", "SE", "LL", "UL")
  return(out)
 }
 
@@ -3441,14 +3466,14 @@ ci.2x2.stdmean.ws <- function(alpha, y11, y12, y21, y22) {
 #' ci.2x2.stdmean.mixed(.05, y11, y12, y21, y22)
 #'
 #' # Should return:
-#' #             Estimate adj Estimate        SE         LL         UL
-#' # AB:      -1.95153666  -1.80141845 0.5424100 -3.0146407 -0.8884326
-#' # A:        1.06061775   1.01125934 0.2780119  0.5157244  1.6055111
-#' # B:        1.90911195   1.76225718 0.5743510  0.7834047  3.0348192
-#' # A at b1:  0.08484942   0.07589163 0.4649598 -0.8264549  0.9961538
-#' # A at b2:  2.03638608   1.82139908 0.2964013  1.4554502  2.6173219
-#' # B at a1:  0.93334362   0.86154796 0.5487927 -0.1422703  2.0089575
-#' # B at a2:  2.88488027   2.66296641 0.7127726  1.4878717  4.2818889
+#' #             Estimate  adj Estimate        SE         LL         UL
+#' # AB:      -1.95153666   -1.80141845 0.5424100 -3.0146407 -0.8884326
+#' # A:        1.06061775    1.01125934 0.2780119  0.5157244  1.6055111
+#' # B:        1.90911195    1.76225718 0.5743510  0.7834047  3.0348192
+#' # A at b1:  0.08484942    0.07589163 0.4649598 -0.8264549  0.9961538
+#' # A at b2:  2.03638608    1.82139908 0.2964013  1.4554502  2.6173219
+#' # B at a1:  0.93334362    0.86154796 0.5487927 -0.1422703  2.0089575
+#' # B at a2:  2.88488027    2.66296641 0.7127726  1.4878717  4.2818889
 #'
 #'
 #' @importFrom stats qnorm
@@ -3542,7 +3567,7 @@ ci.2x2.stdmean.mixed <- function(alpha, y11, y12, y21, y22) {
  row7 <- c(est7, est7u, se7, LL7, UL7)
  out <- rbind(row1, row2, row3, row4, row5, row6, row7)
  rownames(out) <- c("AB:", "A:", "B:", "A at b1:", "A at b2:", "B at a1:", "B at a2:")
- colnames(out) = c("Estimate", "adj Estimate", "SE", "LL", "UL")
+ colnames(out) = c("Estimate", " adj Estimate", "SE", "LL", "UL")
  return(out)
 }
 
@@ -3949,8 +3974,8 @@ ci.2x2.median.ws <- function(alpha, y11, y12, y21, y22) {
 #' ci.bayes.normal(.05, 30, 2, 24.5, 0.577)
 #'
 #' # Should return:
-#' #      Posterior mean Posterior SD       LL       UL
-#' # [1,]        24.9226    0.5543895 23.83602 26.00919
+#' # Posterior mean Posterior SD       LL       UL
+#' #        24.9226    0.5543895 23.83602 26.00919
 #'
 #'
 #' @importFrom stats qnorm
@@ -3963,6 +3988,7 @@ ci.bayes.normal <- function(alpha, prior.mean, prior.sd, est, se) {
  ul <- post.mean + zcrit*post.sd
  out <- t(c(post.mean, post.sd, ll, ul))
  colnames(out) <- c("Posterior mean", "Posterior SD", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
