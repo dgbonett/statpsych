@@ -2288,8 +2288,8 @@ test.mono.prop.bs <-function(alpha, f, n) {
 #' size.ci.prop1(.05, .4, .2)
 #'
 #' # Should return:
-#' #      Sample size
-#' # [1,]          93
+#' # Sample size
+#' #          93
 #'
 #'
 #' @importFrom stats qnorm
@@ -2299,6 +2299,7 @@ size.ci.prop1 <- function(alpha, p, w) {
  n <- ceiling(4*p*(1 - p)*(z/w)^2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -2328,8 +2329,8 @@ size.ci.prop1 <- function(alpha, p, w) {
 #' size.ci.prop2(.05, .4, .2, .15)
 #'
 #' # Should return:
-#' #      Sample size per group
-#' # [1,]                   274
+#' # Sample size per group
+#' #                   274
 #'
 #'
 #' @importFrom stats qnorm
@@ -2339,6 +2340,7 @@ size.ci.prop2 <- function(alpha, p1, p2, w) {
  n <- ceiling(4*(p1*(1 - p1) + p2*(1 - p2))*(z/w)^2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size per group"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -2367,8 +2369,8 @@ size.ci.prop2 <- function(alpha, p1, p2, w) {
 #' size.ci.ratio.prop2(.05, .2, .1, 2)
 #'
 #' # Should return:
-#' #      Sample size per group
-#' # [1,]                   416
+#' # Sample size per group
+#' #                   416
 #'
 #'
 #' @importFrom stats qnorm
@@ -2378,6 +2380,7 @@ size.ci.ratio.prop2 <- function(alpha, p1, p2, r) {
  n <- ceiling(4*((1 - p1)/p1 + (1 - p2)/p2)*(z/log(r))^2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size per group"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -2410,8 +2413,8 @@ size.ci.ratio.prop2 <- function(alpha, p1, p2, r) {
 #' size.ci.lc.prop.bs(.05, p, .2, v)
 #'
 #' # Should return:
-#' #      Sample size per group
-#' # [1,]                    87
+#' # Sample size per group
+#' #                    87
 #'
 #'
 #' @importFrom stats qnorm
@@ -2421,6 +2424,7 @@ size.ci.lc.prop.bs <- function(alpha, p, w, v) {
  n <- ceiling((4*t(v)%*%diag(p*(1 - p))%*%v)*(z/w)^2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size per group"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -2452,8 +2456,8 @@ size.ci.lc.prop.bs <- function(alpha, p, w, v) {
 #' size.ci.prop.ps(.05, .2, .3, .8, .1)
 #'
 #' # Should return:
-#' #      Sample size
-#' # [1,]         118
+#' # Sample size
+#' #         118
 #'
 #'
 #' @importFrom stats qnorm
@@ -2465,6 +2469,7 @@ size.ci.prop.ps <- function(alpha, p1, p2, phi, w) {
  n <- ceiling((4*(p1*(1 - p1) + p2*(1 - p2) - 2*cov))*(z/w)^2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -2495,8 +2500,8 @@ size.ci.prop.ps <- function(alpha, p1, p2, phi, w) {
 #' size.ci.ratio.prop.ps(.05, .4, .2, .7, 2)
 #'
 #' # Should return:
-#' #      Sample size
-#' # [1,]          67
+#' # Sample size
+#' #          67
 #'
 #'
 #' @importFrom stats qnorm
@@ -2508,6 +2513,7 @@ size.ci.ratio.prop.ps <- function(alpha, p1, p2, phi, r) {
  n <- ceiling(4*((1 - p1)/p1 + (1 - p2)/p2 - 2*cov)*(z/log(r))^2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -2536,8 +2542,8 @@ size.ci.ratio.prop.ps <- function(alpha, p1, p2, phi, r) {
 #' size.ci.agree(.05, .8, .2)
 #'
 #' # Should return:
-#' #      Sample size
-#' # [1,]         139
+#' # Sample size
+#' #         139
 #'
 #'
 #' @importFrom stats qnorm
@@ -2548,6 +2554,7 @@ size.ci.agree <- function(alpha, G, w) {
  n <- ceiling(4*(1 - G^2)*(z/w)^2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -2578,8 +2585,8 @@ size.ci.agree <- function(alpha, G, w) {
 #' size.test.prop1(.05, .9, .5, .2)
 #'
 #' # Should return:
-#' #      Sample size
-#' # [1,]          66
+#' # Sample size
+#' #          66
 #'
 #'
 #' @importFrom stats qnorm
@@ -2590,6 +2597,7 @@ size.test.prop1 <- function(alpha, pow, p, es) {
  n <- ceiling(p*(1 - p)*(za + zb)^2/es^2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -2623,8 +2631,8 @@ size.test.prop1 <- function(alpha, pow, p, es) {
 #' size.test.prop2(.05, .8, .2, .4, .2)
 #'
 #' # Should return:
-#' #      Sample size per group
-#' # [1,]                    79
+#' # Sample size per group
+#' #                    79
 #'
 #'
 #' @importFrom stats qnorm
@@ -2635,6 +2643,7 @@ size.test.prop2 <- function(alpha, pow, p1, p2, es) {
  n <- ceiling((p1*(1 - p1) + p2*(1 - p2))*(za + zb)^2/es^2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size per group"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -2670,8 +2679,8 @@ size.test.prop2 <- function(alpha, pow, p1, p2, es) {
 #' size.test.lc.prop.bs(.05, .9, p, .15, v)
 #'
 #' # Should return:
-#' #      Sample size per group
-#' # [1,]                   105
+#' # Sample size per group
+#' #                   105
 #'
 #'
 #' @importFrom stats qnorm
@@ -2682,6 +2691,7 @@ size.test.lc.prop.bs <- function(alpha, pow, p, es, v) {
  n <- ceiling((t(v)%*%diag(p*(1 - p))%*%v)*(za + zb)^2/es^2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size per group"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -2716,8 +2726,8 @@ size.test.lc.prop.bs <- function(alpha, pow, p, es, v) {
 #' size.equiv.prop2(.1, .8, .30, .35, .15)
 #'
 #' # Should return:
-#' #      Sample size per group
-#' # [1,]                   288
+#' # Sample size per group
+#' #                   288
 #'
 #'
 #' @importFrom stats qnorm
@@ -2730,6 +2740,7 @@ size.equiv.prop2 <- function(alpha, pow, p1, p2, h) {
  n <- ceiling((p1*(1 - p1) + p2*(1 - p2))*(za + zb)^2/(h - abs(es))^2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size per group"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -2764,8 +2775,8 @@ size.equiv.prop2 <- function(alpha, pow, p1, p2, h) {
 #' size.supinf.prop2(.05, .9, .35, .20, .05)
 #'
 #' # Should return:
-#' #      Sample size per group
-#' # [1,]                   408
+#' # Sample size per group
+#' #                   408
 #'
 #'
 #' @importFrom stats qnorm
@@ -2777,6 +2788,7 @@ size.supinf.prop2 <- function(alpha, pow, p1, p2, h) {
  n <- ceiling((p1*(1 - p1) + p2*(1 - p2))*(za + zb)^2/(es - h)^2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size per group"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -2814,8 +2826,8 @@ size.supinf.prop2 <- function(alpha, pow, p1, p2, h) {
 #' size.test.prop.ps(.05, .80, .4, .3, .5, .1)
 #'
 #' # Should return:
-#' #      Sample size
-#' # [1,]         177
+#' # Sample size
+#' #         177
 #'
 #'
 #' @importFrom stats qnorm
@@ -2828,6 +2840,7 @@ size.test.prop.ps <- function(alpha, pow, p1, p2, phi, es) {
  n <- ceiling(((p1*(1 - p1) + p2*(1 - p2) - 2*cov))*((za + zb)/es)^2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -2865,8 +2878,8 @@ size.test.prop.ps <- function(alpha, pow, p1, p2, phi, es) {
 #' size.equiv.prop.ps(.1, .8, .30, .35, .40, .15)
 #'
 #' # Should return:
-#' #      Sample size
-#' # [1,]         173
+#' # Sample size
+#' #         173
 #'
 #'
 #' @importFrom stats qnorm
@@ -2881,6 +2894,7 @@ size.equiv.prop.ps <- function(alpha, pow, p1, p2, phi, h) {
  n <- ceiling(((p1*(1 - p1) + p2*(1 - p2) - 2*cov))*(za + zb)^2/(h - abs(es))^2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -2919,8 +2933,8 @@ size.equiv.prop.ps <- function(alpha, pow, p1, p2, phi, h) {
 #' size.supinf.prop.ps(.05, .9, .35, .20, .45, .05)
 #'
 #' # Should return:
-#' #      Sample size
-#' # [1,]         227
+#' # Sample size
+#' #         227
 #'
 #'
 #' @importFrom stats qnorm
@@ -2934,6 +2948,7 @@ size.supinf.prop.ps <- function(alpha, pow, p1, p2, phi, h) {
  n <- ceiling(((p1*(1 - p1) + p2*(1 - p2) - 2*cov))*(za + zb)^2/(es - h)^2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -2965,8 +2980,8 @@ size.supinf.prop.ps <- function(alpha, pow, p1, p2, phi, h) {
 #' power.prop1(.05, 40, .5, .2)
 #'
 #' # Should return:
-#' #         Power
-#' # [1,] 0.715613
+#' #    Power
+#' # 0.715613
 #'
 #'
 #' @importFrom stats qnorm
@@ -2978,6 +2993,7 @@ power.prop1 <- function(alpha, n, p, es) {
  pow <- pnorm(z)
  out <- matrix(pow, nrow = 1, ncol = 1)
  colnames(out) <- "Power"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -3012,8 +3028,8 @@ power.prop1 <- function(alpha, n, p, es) {
 #' power.prop2(.05, 60, 40, .5, .5, .2)
 #'
 #' # Should return:
-#' #          Power
-#' # [1,] 0.4998515
+#' #     Power
+#' # 0.4998515
 #'
 #'
 #' @importFrom stats qnorm
@@ -3025,6 +3041,7 @@ power.prop2 <- function(alpha, n1, n2, p1, p2, es) {
  pow <- pnorm(z)
  out <- matrix(pow, nrow = 1, ncol = 1)
  colnames(out) <- "Power"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -3063,8 +3080,8 @@ power.prop2 <- function(alpha, n1, n2, p1, p2, es) {
 #' power.prop.ps(.05, 45, .5, .5, .4, .2)
 #'
 #' # Should return:
-#' #          Power
-#' # [1,] 0.6877652
+#' #     Power
+#' # 0.6877652
 #'
 #'
 #' @importFrom stats qnorm
@@ -3078,6 +3095,7 @@ power.prop.ps <- function(alpha, n, p1, p2, phi, es) {
  pow <- pnorm(z)
  out <- matrix(pow, nrow = 1, ncol = 1)
  colnames(out) <- "Power"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -3103,8 +3121,8 @@ power.prop.ps <- function(alpha, n, p1, p2, phi, es) {
 #' iqv(f)
 #'
 #' # Should return:
-#' #        Simpson    Berger   Shannon
-#' # [1,] 0.7367908 0.5045045       0.7
+#' #   Simpson    Berger   Shannon
+#' # 0.7367908 0.5045045       0.7
 #'  
 #' 
 #' @export  
@@ -3118,6 +3136,7 @@ iqv <- function(f) {
  iqv3 <- (-1)*sum(p*log(p))/log(k)
  out <- t(c(iqv1, iqv2, iqv3))
  colnames(out) <- c("Simpson", "Berger", "Shannon")
+ rownames(out) <- ""
  return(out)
 }
 
