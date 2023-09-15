@@ -170,8 +170,8 @@ ci.pairs.prop1 <-function(alpha, f) {
 #' ci.prop1.inv(.05, 5, 67)
 #'
 #' # Should return:
-#' #        Estimate         SE         LL        UL
-#' # [1,] 0.07462687 0.03145284 0.02467471 0.1479676
+#' #   Estimate         SE         LL        UL
+#' # 0.07462687 0.03145284 0.02467471 0.1479676
 #'
 #'
 #' @importFrom stats qnorm
@@ -196,6 +196,7 @@ ci.prop1.inv <- function(alpha, f, n) {
  se <- (ul - ll)/(2*z)
  out <- t(c(est, se, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -231,8 +232,8 @@ ci.prop1.inv <- function(alpha, f, n) {
 #' ci.prop2(.05, 35, 21, 150, 150)
 #'
 #' # Should return:
-#' #        Estimate         SE          LL        UL
-#' # [1,] 0.09210526 0.04476077 0.004375769 0.1798348
+#' #   Estimate         SE          LL        UL
+#' # 0.09210526 0.04476077 0.004375769 0.1798348
 #'
 #'
 #' @importFrom stats qnorm
@@ -248,6 +249,7 @@ ci.prop2 <- function(alpha, f1, f2, n1, n2) {
  ul <- p1 - p2 + z*se
  out <- t(c(p1-p2, se, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -290,8 +292,8 @@ ci.prop2 <- function(alpha, f1, f2, n1, n2) {
 #' ci.prop2.inv(.05, 10, 10, 48, 213)
 #'
 #' # Should return:
-#' #       Estimate         SE         LL        UL
-#' # [1,]  0.161385 0.05997618 0.05288277 0.2879851
+#' #  Estimate         SE         LL        UL
+#' #  0.161385 0.05997618 0.05288277 0.2879851
 #'
 #'
 #' @importFrom stats qnorm
@@ -333,6 +335,7 @@ ci.prop2.inv <- function(alpha, f1, f2, n1, n2) {
  se <- (ul - ll)/(2*z)
  out <- t(c(diff, se, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -368,8 +371,8 @@ ci.prop2.inv <- function(alpha, f1, f2, n1, n2) {
 #' ci.ratio.prop2(.05, 35, 21, 150, 150)
 #'
 #' # Should return:
-#' #      Estimate       LL       UL
-#' # [1,] 1.666667 1.017253 2.705025
+#' # Estimate       LL       UL
+#' # 1.666667 1.017253 2.705025
 #'
 #'
 #' @importFrom stats qnorm
@@ -387,6 +390,7 @@ ci.ratio.prop2 <- function(alpha, f1, f2, n1, n2) {
  ul <- exp(log(p1/p2) + z*se)
  out <- t(c(p1/p2, ll, ul))
  colnames(out) <- c("Estimate", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -428,8 +432,8 @@ ci.ratio.prop2 <- function(alpha, f1, f2, n1, n2) {
 #' ci.lc.prop.bs(.05, f, n, v)
 #'
 #' # Should return:
-#' #       Estimate         SE        z           p         LL        UL
-#' # [1,] 0.2119565 0.07602892 2.787841 0.005306059 0.06294259 0.3609705
+#' #  Estimate         SE        z           p         LL        UL
+#' # 0.2119565 0.07602892 2.787841 0.005306059 0.06294259 0.3609705
 #'
 #'
 #' @importFrom stats qnorm
@@ -449,6 +453,7 @@ ci.lc.prop.bs <- function(alpha, f, n, v) {
  ul <- est + z*se
  out <- t(c(est, se, zval, pval, ll, ul))
  colnames(out) <- c("Estimate", "SE", "z", "p", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -560,8 +565,8 @@ ci.pairs.prop.bs <-function(alpha, f, n) {
 #' ci.slope.prop.bs(.05, f, n, x)
 #'
 #' # Should return:
-#' #         Estimate          SE        z           p          LL         UL
-#' # [1,] 0.007542293 0.002016793 3.739746 0.000184206 0.003589452 0.01149513
+#' #    Estimate          SE        z           p          LL         UL
+#' # 0.007542293 0.002016793 3.739746 0.000184206 0.003589452 0.01149513
 #'
 #'
 #' @importFrom stats qnorm
@@ -584,6 +589,7 @@ ci.slope.prop.bs <- function(alpha, f, n, x) {
  ul <- slope + z*se
  out <- t(c(slope, se, t, pval, ll, ul))
  colnames(out) <- c("Estimate", "SE", "z", "p", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -622,8 +628,8 @@ ci.slope.prop.bs <- function(alpha, f, n, x) {
 #' ci.prop.ps(.05, 12, 4, 26, 6)
 #'
 #' # Should return:
-#' #       Estimate         SE        LL        UL
-#' # [1,]      0.44 0.09448809 0.2548067 0.6251933
+#' # Estimate         SE        LL        UL
+#' #     0.44 0.09448809 0.2548067 0.6251933
 #'
 #'
 #' @importFrom stats qnorm
@@ -639,6 +645,7 @@ ci.prop.ps <- function(alpha, f00, f01, f10, f11) {
  ul <- p10 - p01 + z*se
  out <- t(c(diff, se, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -675,8 +682,8 @@ ci.prop.ps <- function(alpha, f00, f01, f10, f11) {
 #' ci.ratio.prop.ps(.05, 12, 4, 26, 6)
 #'
 #' # Should return:
-#' #      Estimate       LL       UL
-#' # [1,]      3.2 1.766544 5.796628
+#' # Estimate       LL       UL
+#' #      3.2 1.766544 5.796628
 #'
 #'
 #' @importFrom stats qnorm
@@ -705,6 +712,7 @@ ci.ratio.prop.ps <- function(alpha, f00, f01, f10, f11) {
  ul <- exp(log(UL1) - log(LL2))
  out <- t(c(ratio, ll, ul))
  colnames(out) <- c("Estimate", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -832,6 +840,7 @@ ci.oddsratio <- function(alpha, f00, f01, f10, f11) {
  return(out)
 }
 
+
 #  ci.yule ==================================================================== 
 #' Confidence intervals for generalized Yule coefficients
 #'
@@ -954,8 +963,8 @@ ci.yule <- function(alpha, f00, f01, f10, f11) {
 #' ci.phi(.05, 229, 28, 96, 24)
 #'
 #' # Should return:
-#' #       Estimate         SE         LL        UL
-#' # [1,] 0.1229976 0.05746271 0.01037273 0.2356224
+#' #  Estimate         SE         LL        UL
+#' # 0.1229976 0.05746271 0.01037273 0.2356224
 #'
 #'
 #' @importFrom stats qnorm
@@ -976,6 +985,7 @@ ci.phi <- function(alpha, f00, f01, f10, f11) {
  ul <- phi + z*se
  out <- t(c(phi, se, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1015,8 +1025,8 @@ ci.phi <- function(alpha, f00, f01, f10, f11) {
 #' ci.biphi(.05, 46, 15, 100, 100)
 #'
 #' # Should return:
-#' #       Estimate         SE        LL       UL
-#' # [1,] 0.4145733 0.07551281 0.2508866 0.546141
+#' #  Estimate         SE        LL       UL
+#' # 0.4145733 0.07551281 0.2508866 0.546141
 #'
 #'
 #' @importFrom stats qnorm
@@ -1043,6 +1053,7 @@ ci.biphi <- function(alpha, f1, f2, n1, n2) {
  ul <- UL1/sqrt(UL1^2 + 2.89/(p1*p2))
  out <- t(c(biphi, se.biphi, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1083,8 +1094,8 @@ ci.biphi <- function(alpha, f1, f2, n1, n2) {
 #' ci.tetra(.05, 46, 15, 54, 85)
 #'
 #' # Should return:
-#' #       Estimate         SE        LL        UL
-#' # [1,] 0.5135167 0.09301703 0.3102345 0.6748546
+#' #  Estimate         SE        LL        UL
+#' # 0.5135167 0.09301703 0.3102345 0.6748546
 #'
 #'
 #' @importFrom stats qnorm
@@ -1109,6 +1120,7 @@ ci.tetra <- function(alpha, f00, f01, f10, f11) {
  se <- (ul - ll)/(2*z)
  out <- t(c(tetra, se, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1214,8 +1226,8 @@ ci.kappa <- function(alpha, f00, f01, f10, f11) {
 #' ci.agree(.05, 100, 80, 4)
 #'
 #' # Should return:
-#' #       Estimate         SE        LL        UL
-#' # [1,] 0.7333333 0.05333333 0.6132949 0.8226025
+#' #  Estimate         SE        LL        UL
+#' # 0.7333333 0.05333333 0.6132949 0.8226025
 #'
 #'
 #' @importFrom stats qnorm
@@ -1232,6 +1244,7 @@ ci.agree <- function(alpha, n, f, k) {
  UL.g <- a*(p.adj + z*sqrt(p.adj*(1 - p.adj)/(n + 4))) - 1/(k - 1) 
  out <- t(c(g.mle, se.g, LL.g, UL.g))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1486,8 +1499,8 @@ ci.agree.3rater <- function(alpha, f) {
 #' ci.popsize(.05, 794, 710, 741)
 #'
 #' # Should return:
-#' #      Estimate       SE   LL   UL
-#' # [1,]     2908 49.49071 2818 3012
+#' # Estimate       SE   LL   UL
+#' #     2908 49.49071 2818 3012
 #'
 #'
 #' @importFrom stats qnorm
@@ -1503,6 +1516,7 @@ ci.popsize <- function(alpha, f00, f01, f10) {
  se <- (ul - ll)/(2*z)
  out <- t(c(N, se, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1542,8 +1556,8 @@ ci.popsize <- function(alpha, f00, f01, f10) {
 #' ci.cramer(.05, 19.21, 2, 3, 200)
 #'
 #' # Should return:
-#' #        Estimate     SE     LL     UL
-#' # [1,]     0.3099 0.0718 0.1601 0.4417
+#' # Estimate     SE     LL     UL
+#' #   0.3099 0.0718 0.1601 0.4417
 #'  
 #' 
 #' @importFrom stats pchisq
@@ -1569,6 +1583,7 @@ ci.cramer <- function(alpha, chisqr, r, c, n) {
  se <- (ul - ll)/(2*z)
  out <- round(t(c(v, se, ll, ul)), 4)
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1861,8 +1876,8 @@ ci.2x2.prop.mixed <- function(alpha, group1, group2) {
 #' ci.bayes.prop1(.05, .4, .1, 12, 100)
 #'
 #' # Should return:
-#' #      Posterior mean Posterior SD       LL        UL
-#' # [1,]           0.15   0.03273268  0.09218 0.2188484
+#' # Posterior mean Posterior SD       LL        UL
+#' #           0.15   0.03273268  0.09218 0.2188484
 #'
 #'
 #' @importFrom stats qnorm
@@ -1882,6 +1897,7 @@ ci.bayes.prop1 <- function(alpha, prior.mean, prior.sd, f, n) {
  ul <- qbeta(1 - alpha/2, post.a, post.b)
  out <- t(c(post.mean, post.sd, ll, ul))
  colnames(out) <- c("Posterior mean", "Posterior SD", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -2000,8 +2016,8 @@ ci.pv <- function(alpha, f1, f2, n1, n2, prev) {
 #' test.prop1(9, 20, .2)
 #'
 #' # Should return:
-#' #      Estimate        z          p
-#' # [1,]     0.45 2.515576 0.01188379
+#' # Estimate        z          p
+#' #     0.45 2.515576 0.01188379
 #'
 #'
 #' @importFrom stats pnorm
@@ -2014,6 +2030,7 @@ test.prop1 <- function(f, n, h) {
  pval <- 2*(1 - pnorm(abs(z)))
  out <- t(c(p, z, pval))
  colnames(out) <- c("Estimate", "z", "p")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -2048,8 +2065,8 @@ test.prop1 <- function(f, n, h) {
 #' test.prop2(11, 26, 50, 50)
 #'
 #' # Should return:
-#' #  Estimate        z           p
-#' #      -0.3 2.899726 0.003734895
+#' # Estimate        z           p
+#' #     -0.3 2.899726 0.003734895
 #'
 #'
 #' @importFrom stats pnorm
@@ -2066,6 +2083,7 @@ test.prop2 <- function(f1, f2, n1, n2) {
  pval <- 2*(1 - pnorm(abs(z)))
  out <- t(c(diff, z, pval))
  colnames(out) <- c("Estimate", "z", "p")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -2100,8 +2118,8 @@ test.prop2 <- function(f1, f2, n1, n2) {
 #' test.prop.bs (f, n)
 #'
 #' # Should return:
-#' #      Chi-square df            p
-#' # [1,]   17.41071  2 0.0001656958
+#' # Chi-square df            p
+#' #   17.41071  2 0.0001656958
 #'
 #'
 #' @importFrom stats pchisq
@@ -2118,6 +2136,7 @@ test.prop.bs <- function(f, n) {
  pval <- 1 - pchisq(chi, df)
  out <- t(c(chi, df, pval))
  colnames(out) <- c("Chi-square", "df", "p")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -2153,8 +2172,8 @@ test.prop.bs <- function(f, n) {
 #' test.prop.ps(156, 96, 68, 80)
 #'
 #' # Should return:
-#' #      Estimate        z          p
-#' # [1,]     0.07 2.108346 0.03500109
+#' # Estimate        z          p
+#' #     0.07 2.108346 0.03500109
 #'
 #'
 #' @importFrom stats pnorm
@@ -2171,6 +2190,7 @@ test.prop.ps <- function(f00, f01, f10, f11) {
  pval <- 2*(1 - pnorm(abs(z)))
  out <- t(c(diff, z, pval))
  colnames(out) <- c("Estimate", "z", "p")
+ rownames(out) <- ""
  return(out)
 }
 
