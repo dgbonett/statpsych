@@ -1293,8 +1293,8 @@ ci.rel2 <- function(rel1, ll1, ul1, rel2, ll2, ul2) {
 #' size.ci.slope(.05, 31.1, x, 1)
 #'
 #' # Should return:
-#' #      Total sample size
-#' # [1,]                83
+#' # Total sample size
+#' #                83
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -1306,6 +1306,7 @@ size.ci.slope <- function(alpha, evar, x, w) {
  n <- ceiling(4*(evar/xvar)*(z/w)^2 + 1 + z^2/2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Total sample size"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1340,8 +1341,8 @@ size.ci.slope <- function(alpha, evar, x, w) {
 #' size.ci.cor(.05, .362, 0, .25)
 #'
 #' # Should return:
-#' #      Sample size
-#' # [1,]         188
+#' # Sample size
+#' #         188
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -1359,6 +1360,7 @@ size.ci.cor <- function(alpha, cor, s, w) {
  n <- ceiling((n1 - s - 3)*((ul - ll)/w)^2 + 3 + s)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1388,8 +1390,8 @@ size.ci.cor <- function(alpha, cor, s, w) {
 #' size.ci.rsqr(.05, .25, 5, .2)
 #' 
 #' # Should return:
-#' #      Sample size
-#' # [1,]         214
+#' # Sample size
+#' #         214
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -1410,6 +1412,7 @@ size.ci.rsqr <- function(alpha, r2, s, w) {
  if (n < s + 2) {n = s + 2}
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1443,8 +1446,8 @@ size.ci.rsqr <- function(alpha, r2, s, w) {
 #' size.ci.condmean(.05, 120, 125, 15, 5)
 #'
 #' # Should return:
-#' #      Total sample size
-#' # [1,]               210
+#' # Total sample size
+#' #               210
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -1454,6 +1457,7 @@ size.ci.condmean <- function(alpha, evar, xvar, diff, w) {
  n <- ceiling(4*(evar*(1 + diff^2/xvar))*(z/w)^2 + 1 + z^2/2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Total sample size"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1492,8 +1496,8 @@ size.ci.condmean <- function(alpha, evar, xvar, diff, w) {
 #' size.ci.lc.ancova(.05, 1.37, 1, 0, 1.5, v)
 #'
 #' # Should return:
-#' #      Sample size per group
-#' # [1,]                    21
+#' # Sample size per group
+#' #                    21
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -1504,6 +1508,7 @@ size.ci.lc.ancova <- function(alpha, evar, s, d, w, v) {
  n <- ceiling(4*evar*(1 + d^2/4)*(t(v)%*%v)*(z/w)^2 + s + z^2/(2*k))
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size per group"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1533,8 +1538,8 @@ size.ci.lc.ancova <- function(alpha, evar, s, d, w, v) {
 #' size.ci.indirect(.05, .4, .5, .2)
 #'
 #' # Should return:
-#' #      Sample size
-#' # [1,]         106
+#' # Sample size
+#' #         106
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -1544,6 +1549,7 @@ size.ci.indirect <- function(alpha, cor1, cor2, w) {
  n <- ceiling(4*(cor2^2*(1 - cor1^2)^2 + cor1^2*(1 - cor2^2)^2)*(z/w)^2 + 3)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1577,8 +1583,8 @@ size.ci.indirect <- function(alpha, cor1, cor2, w) {
 #' size.ci.cronbach2(.05, .85, .70, 8, .15)
 #'
 #' # Should return:
-#' #      Sample size per group
-#' # [1,]                   180
+#' # Sample size per group
+#' #                   180
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -1599,6 +1605,7 @@ size.ci.cronbach2 <- function(alpha, rel1, rel2, r, w) {
  n <- ceiling((n0 - 2)*(w0/w)^2 + 2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size per group"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1635,8 +1642,8 @@ size.ci.cronbach2 <- function(alpha, rel1, rel2, r, w) {
 #' size.test.slope(.05, .9, 31.1, x, .75, 0)
 #'
 #' # Should return:
-#' #      Total sample size
-#' # [1,]               100
+#' # Total sample size
+#' #               100
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -1650,6 +1657,7 @@ size.test.slope <- function(alpha, pow, evar, x, slope, h) {
  n <- ceiling((evar/xvar)*(za + zb)^2/es^2 + 1 + za^2/2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Total sample size"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1678,8 +1686,8 @@ size.test.slope <- function(alpha, pow, evar, x, slope, h) {
 #' size.test.cor(.05, .9, .45, 0, 0)
 #'
 #' # Should return:
-#' #      Sample size
-#' # [1,]          48
+#' # Sample size
+#' #          48
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -1694,6 +1702,7 @@ size.test.cor <- function(alpha, pow, cor, s, h) {
  n <- ceiling((za + zb)^2/es^2 + s + 3)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1724,8 +1733,8 @@ size.test.cor <- function(alpha, pow, cor, s, h) {
 #' size.interval.cor(.05, .8, .1, 0, .25)
 #'
 #' # Should return:
-#' #      Sample size
-#' # [1,]         360
+#' # Sample size
+#' #         360
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -1741,6 +1750,7 @@ size.interval.cor <- function(alpha, pow, cor, s, h) {
  n <- ceiling((za + zb)^2/es^2 + s + 3)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1771,8 +1781,8 @@ size.interval.cor <- function(alpha, pow, cor, s, h) {
 #' size.test.cor2(.05, .8, .4, .2, 0)
 #'
 #' # Should return:
-#' #      Sample size per group
-#' # [1,]                   325
+#' # Sample size per group
+#' #                   325
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -1788,6 +1798,7 @@ size.test.cor2 <- function(alpha, pow, cor1, cor2, s) {
  n <- ceiling(2*(za + zb)^2/es^2 + s + 3)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size per group"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1826,8 +1837,8 @@ size.test.cor2 <- function(alpha, pow, cor1, cor2, s) {
 #' size.test.lc.ancova(.05, .9, 1.37, .7, 1, 0, v)
 #'
 #' # Should return:
-#' #      Sample size per group
-#' # [1,]                    47
+#' # Sample size per group
+#' #                    47
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -1839,6 +1850,7 @@ size.test.lc.ancova <- function(alpha, pow, evar, es, s, d, v) {
  n <- ceiling((evar*(1 + d^2/4)*t(v)%*%v)*(za + zb)^2/es^2 + s + za^2/k)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size per group"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1872,8 +1884,8 @@ size.test.lc.ancova <- function(alpha, pow, evar, es, s, d, v) {
 #' size.test.cronbach2(.05, .80, .85, .70, 8)
 #'
 #' # Should return:
-#' #      Sample size per group
-#' # [1,]                    77
+#' # Sample size per group
+#' #                    77
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -1887,6 +1899,7 @@ size.test.cronbach2 <- function(alpha, pow, rel1, rel2, r) {
  n <- ceiling((4*r/(r - 1))*(za + zb)^2/log(e)^2 + 2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size per group"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1916,8 +1929,8 @@ size.test.cronbach2 <- function(alpha, pow, rel1, rel2, r) {
 #' power.cor1(.05, 80, .3, 0, 0)
 #'
 #' # Should return:
-#' #          Power
-#' # [1,] 0.7751932
+#' #     Power
+#' # 0.7751932
 #'
 #'
 #' @importFrom stats qnorm
@@ -1932,6 +1945,7 @@ power.cor1 <- function(alpha, n, cor, h, s) {
  pow <- pnorm(z)
  out <- matrix(pow, nrow = 1, ncol = 1)
  colnames(out) <- "Power"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1963,8 +1977,8 @@ power.cor1 <- function(alpha, n, cor, h, s) {
 #' power.cor2(.05, 200, 200, .4, .2, 0)
 #'
 #' # Should return:
-#' #          Power
-#' # [1,] 0.5919517
+#' #     Power
+#' # 0.5919517
 #'
 #'
 #' @importFrom stats qnorm
@@ -1980,6 +1994,7 @@ power.cor2 <- function(alpha, n1, n2, cor1, cor2, s) {
  pow <- pnorm(z)
  out <- matrix(pow, nrow = 1, ncol = 1)
  colnames(out) <- "Power"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -2020,7 +2035,7 @@ slope.contrast <- function(x) {
  ss <- sum((x - m)^2)
  coef <- (x - m)/ss
  out <- matrix(coef, nrow = a, ncol = 1)
- colnames(out) = "Coefficient"
+ colnames(out) <- "Coefficient"
  return(out)
 }
 
