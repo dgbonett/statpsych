@@ -2502,7 +2502,7 @@ ci.reliability <- function(alpha, rel, se, n) {
 #'
 #' @return 
 #' Returns a 1-row matrix. The columns are:
-#' * Eta-squared - estimate of eta-squared 
+#' * Eta-squared - eta-squared (from input)
 #' * adj Eta-squared - bias adjusted eta-squared estimate
 #' * SE - recovered standard error
 #' * LL - lower limit of the confidence interval
@@ -6067,7 +6067,7 @@ pi.var.upper <- function(alpha, var, n1, n2) {
 #' etasqr.adj(.315, 2, 42)
 #'
 #' # Should return:
-#' # adj eta-squared
+#' # adj Eta-squared
 #' #        0.282381
 #'  
 #' 
@@ -6076,7 +6076,7 @@ etasqr.adj <- function(etasqr, dfeffect, dferror) {
  adj <- 1 - (dferror + dfeffect)*(1 - etasqr)/dferror
  if (adj < 0) {adj = 0}
  out <- matrix(adj, nrow = 1, ncol = 1)
- colnames(out) <- "adj eta-squared"
+ colnames(out) <- "adj Eta-squared"
  rownames(out) <- ""
  return(out)
 }
@@ -6105,8 +6105,8 @@ etasqr.adj <- function(etasqr, dfeffect, dferror) {
 #' * dfE - error degrees of freedom
 #' * dfA - degrees of freedom for between-subjects factor
 #' * p - p-value for F-test
-#' * eta-squared - estimate of eta-squared
-#' * adj eta-squared - a bias adjusted estimate of eta-squared
+#' * Eta-squared - estimate of eta-squared
+#' * adj Eta-squared - a bias adjusted estimate of eta-squared
 #'
 #'
 #' @examples
@@ -6116,8 +6116,8 @@ etasqr.adj <- function(etasqr, dfeffect, dferror) {
 #' test.anova1.bs(m, sd, n)
 #'
 #' #  Should return:
-#' #        F dfA  dfE           p eta-squared adj eta-squared
-#' # 5.919585   2   57 0.004614428   0.1719831       0.1429298
+#' #        F dfA  dfE           p Eta-squared  adj Eta-squared
+#' # 5.919585   2   57 0.004614428   0.1719831        0.1429298
 #'  
 #' 
 #' @importFrom stats pf
@@ -6138,7 +6138,7 @@ test.anova1.bs <- function(m, sd, n) {
   etasqr <- SSa/(SSa + SSe)
   adjetasqr <- 1 - (dfa + dfe)*(1 - etasqr)/dfe
   out <- t(c(F, dfa, dfe, p, etasqr, adjetasqr))
-  colnames(out) <- c("F", "dfA",  "dfE", "p", "eta-squared", "adj eta-squared")
+  colnames(out) <- c("F", "dfA",  "dfE", "p", "Eta-squared", " adj Eta-squared")
   rownames(out) <- ""
   return(out)
 }
