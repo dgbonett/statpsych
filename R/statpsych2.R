@@ -776,12 +776,14 @@ ci.lc.reg <- function(alpha, est, se, n, s, v) {
 #'
 #' 
 #' @description
-#' Computes a Fisher confidence interval for any type of correlation (e.g.,
-#' Pearson, Spearman, Kendall-tau, tetrachoric, phi, partial, semipartial,  
-#' a latent variable correlation, etc.) or any type of ordinal association 
-#' such as gamma, Somers' d, or tau-b. The standard error can be a traditional 
-#' standard error, a robust standard error from a SEM program, or a
-#' bootstrap standard error. 
+#' Computes a Fisher confidence interval for any type of correlation (e.g., 
+#' Pearson, Spearman, Kendall-tau, tetrachoric, phi, partial, semipartial, 
+#' etc.) or ordinal association such as gamma, Somers' d, or tau-b. The 
+#' correlation could also be between two latent factors obtained
+#' from a SEM analysis (the Fisher CI will be more accurate than the 
+#' large-sample CI from a SEM analysis). The standard error can be a 
+#' traditional standard error, a bootstrap standard error, or a robust 
+#' standard error from a SEM analysis.
 #'
 #'
 #' @param   alpha  alpha value for 1-alpha confidence
