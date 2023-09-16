@@ -36,7 +36,9 @@ Changes:
 * Modifications:
    
          * both biased and bias adjusted estimates are now reported in ci.stdmean1, ci.stdmean2, 
-           ci.stdmean.ps, ci.stdmean.strat, and ci.2x2.stdmean.bs 
+           ci.stdmean.ps, ci.stdmean.strat, and ci.2x2.stdmean.bs
+  
+         * ci.mape has been renamed ci.mape1
 
 
 statpsych version 1.4.0 (Release date: 2023/06/26)
