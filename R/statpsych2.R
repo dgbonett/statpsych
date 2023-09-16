@@ -776,17 +776,24 @@ ci.lc.reg <- function(alpha, est, se, n, s, v) {
 #'
 #' 
 #' @description
-#' Computes a Fisher confidence interval for any type of correlation or any
-#' measure of association that has a -1 to 1 range.
+#' Computes a Fisher confidence interval for any type of correlation (e.g.,
+#' Pearson, Spearman, Kendall-tau, tetrachoric, phi, partial, semipartial,  
+#' a latent variable correlation, etc.) or any type of ordinal association 
+#' such as gamma, Somers' d, or tau-b. The standard error can be a traditional 
+#' standard error, a robust standard error from a SEM program, or a
+#' bootstrap standard error. 
 #'
 #'
 #' @param   alpha  alpha value for 1-alpha confidence
 #' @param   cor    estimated correlation or association coefficient 
-#' @param   se     standard error of estimate
+#' @param   se     standard error of correlation or association coefficient
 #'
 #'
 #' @return
-#' Returns a 1-row matrix containing the lower and upper confidence limits.
+#' Returns a 1-row matrix. The columns are:
+#' * Estimate - correlation (from input) 
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
 #'
 #'
 #' @examples
