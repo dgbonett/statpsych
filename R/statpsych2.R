@@ -513,7 +513,7 @@ ci.spear2 <- function(alpha, cor1, cor2, n1, n2) {
 }
 	
 
-#  ci.mape  ===================================================================
+#  ci.mape1  ===================================================================
 #' Confidence interval for a mean absolute prediction error
 #'
 #'
@@ -542,7 +542,7 @@ ci.spear2 <- function(alpha, cor1, cor2, n1, n2) {
 #' @examples
 #' res <- c(-2.70, -2.69, -1.32, 1.02, 1.23, -1.46, 2.21, -2.10, 2.56,
 #'       -3.02, -1.55, 1.46, 4.02, 2.34)
-#' ci.mape(.05, res, 1)
+#' ci.mape1(.05, res, 1)
 #'
 #' # Should return:
 #' # Estimate        SE       LL       UL
@@ -552,7 +552,7 @@ ci.spear2 <- function(alpha, cor1, cor2, n1, n2) {
 #' @importFrom stats qnorm
 #' @importFrom stats sd
 #' @export
-ci.mape <- function(alpha, res, s) {
+ci.mape1 <- function(alpha, res, s) {
  n <- length(res)
  df <- n - s - 1
  z <- qnorm(1 - alpha/2)
