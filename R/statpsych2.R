@@ -1402,8 +1402,8 @@ size.ci.cor <- function(alpha, cor, s, w) {
 #' size.ci.spear(.05, .362, .25)
 #'
 #' # Should return:
-#' #      Sample size
-#' # [1,]         200
+#' # Sample size
+#' #         200
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -1420,6 +1420,7 @@ size.ci.spear <- function(alpha, cor, w) {
  n <- ceiling((n1 - 3)*((ul - ll)/w)^2 + 3)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
+ rownames(out) <- ""
  return(out)
 }
 
