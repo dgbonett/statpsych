@@ -1425,6 +1425,55 @@ size.ci.spear <- function(alpha, cor, w) {
 }
 
 
+#  size.ci.pbcor ==============================================================
+#' Sample size for a point-biserial correlation confidence interval 
+#'
+#'
+#' @description
+#' Computes the sample size required to estimate a point-biserial correlation
+#' with desired confidence interval precision in a two-group nonexperimental
+#' design with simple random sampling. A two-group nonexperimental design 
+#' implies two subpopulations (e.g., all boys and all girls in a school 
+#' district). This function requires a planning value for the proportion of 
+#' population members who belong to one of the two subpopulations. Set the
+#' correlation planning value to the smallest value within a plausible range
+#' for a conservatively large sample size.
+#'
+#'  
+#' @param  alpha  alpha level for 1-alpha confidence
+#' @param  cor    planning value of point-biserial correlation
+#' @param  w      desired confidence interval width
+#' @param  p      proportion of members in one of the two subpopulations
+#'
+#' 
+#' @references
+#' \insertRef{Bonett2020a}{statpsych}
+#'
+#'
+#' @return 
+#' Returns the required sample size
+#' 
+#' 
+#' @examples
+#' size.ci.pbcor(.05, .40, .25, .73)
+#'
+#' # Should return:
+#' # Sample size
+#' #         168
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export  
+size.ci.pbcor <- function(alpha, cor, w, p) {
+ z <- qnorm(1 - alpha/2)
+ n <- ceiling(4*((1 - cor^2)^2)*(1 - 1.5*cor^2 + cor^2/(4*p*(1 - p)))*(z/w)^2)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- c("Sample size")
+ rownames(out) <- ""
+ return(out)
+}
+
+
 #  size.ci.rsqr ==============================================================
 #' Sample size for a squared multiple correlation confidence interval
 #'                       
