@@ -27,7 +27,9 @@ Changes:
         * spearmanbrown -- Computes the reliability of a scale with r2 measurements given the 
           reliability of a scale with r1 measurements
 
-        * size.ci.spear -- Computes sample size for a Spearman correlation confidence interval
+        * size.ci.spear -- Computes the sample size requirement for a Spearman correlation confidence interval
+
+        * size.ci.pbcor -- Computes the sample size requirement for a point-biserial correlation confidence interval
   
 * Error Corrections:
   
