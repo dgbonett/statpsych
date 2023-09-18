@@ -5,11 +5,11 @@ Changes:
 
 * New functions:
   
-        * ci.cv1 -- Confidence interval for a single coefficient of variation
+        * ci.cv1 -- Computes confidence interval for a single coefficient of variation
   
-        * ci.ratio.cv2 -- Confidence interval for a ratio of coefficients of variation
+        * ci.ratio.cv2 -- Computes confidence interval for a ratio of coefficients of variation
   
-        * ci.pv -- Confidence intervals for positive and negative predictive values with
+        * ci.pv -- Computes confidence intervals for positive and negative predictive values with
           retrospective sampling
   
         * ci.2x2.stdmean.ws -- Computes confidence intervals of standardized effects in a 2x2 
