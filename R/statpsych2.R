@@ -1374,6 +1374,56 @@ size.ci.cor <- function(alpha, cor, s, w) {
 }
 
 
+#  size.ci.spear ==============================================================
+#' Sample size for a Spearman correlation confidence interval 
+#'
+#'
+#' @description
+#' Computes the sample size required to estimate a Spearman correlation with 
+#' desired confidence interval precision. Set the correlation planning value
+#' to the smallest value within a plausible range for a conservatively 
+#' large sample size.
+#'
+#'  
+#' @param  alpha  alpha level for 1-alpha confidence
+#' @param  cor    planning value of Spearman correlation
+#' @param  w      desired confidence interval width
+#'
+#' 
+#' @references
+#' \insertRef{Bonett2000}{statpsych}
+#'
+#'
+#' @return 
+#' Returns the required sample size
+#' 
+#' 
+#' @examples
+#' size.ci.spear(.05, .362, .25)
+#'
+#' # Should return:
+#' #      Sample size
+#' # [1,]         200
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export  
+size.ci.spear <- function(alpha, cor, w) {
+ z <- qnorm(1 - alpha/2)
+ n1 <- ceiling(4*(1 + cor^2/2)*(1 - cor^2)^2*(z/w)^2 + 3)
+ zr <- log((1 + cor)/(1 - cor))/2 
+ se <- sqrt((1 + cor^2/2)/(n1 - 3))
+ ll0 <- zr - z*se
+ ul0 <- zr + z*se
+ ll <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
+ ul <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
+ n <- ceiling((n1 - 3)*((ul - ll)/w)^2 + 3)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size"
+ return(out)
+}
+
+
 #  size.ci.rsqr ==============================================================
 #' Sample size for a squared multiple correlation confidence interval
 #'                       
