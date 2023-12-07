@@ -2295,6 +2295,7 @@ test.mono.prop.bs <-function(alpha, f, n) {
 #' @importFrom stats qnorm
 #' @export                 
 size.ci.prop1 <- function(alpha, p, w) {
+ if (p > .9999 || p < .0001) {stop("proportion must be between .0001 and .9999")}
  z <- qnorm(1 - alpha/2)
  n <- ceiling(4*p*(1 - p)*(z/w)^2)
  out <- matrix(n, nrow = 1, ncol = 1)
@@ -2592,6 +2593,7 @@ size.ci.agree <- function(alpha, G, w) {
 #' @importFrom stats qnorm
 #' @export
 size.test.prop1 <- function(alpha, pow, p, es) {
+ if (p > .9999 || p < .0001) {stop("proportion must be between .0001 and .9999")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
  n <- ceiling(p*(1 - p)*(za + zb)^2/es^2)
@@ -2988,6 +2990,7 @@ size.supinf.prop.ps <- function(alpha, pow, p1, p2, phi, h) {
 #' @importFrom stats pnorm
 #' @export
 power.prop1 <- function(alpha, n, p, es) {
+ if (p > .9999 || p < .0001) {stop("proportion must be between .0001 and .9999")}
  za <- qnorm(1 - alpha/2)
  z <- abs(es)/sqrt(p*(1 - p)/n) - za
  pow <- pnorm(z)
