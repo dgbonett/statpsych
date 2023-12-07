@@ -5346,6 +5346,7 @@ size.supinf.mean.ps <- function(alpha, pow, var, es, cor, h) {
 #' @importFrom stats qnorm
 #' @export
 size.test.mann <- function(alpha, pow, p) {
+ if (p > .999 || p < .001) {stop("Mann-Whitney parameter must be between .001 and .999")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
  es <- p - .5;
@@ -5388,6 +5389,7 @@ size.test.mann <- function(alpha, pow, p) {
 #' @importFrom stats qnorm
 #' @export
 size.test.sign1 <- function(alpha, pow, p) {
+ if (p > .9999 || p < .0001) {stop("proportion must be between .0001 and .9999")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
  es <- p - .5
@@ -5434,6 +5436,7 @@ size.test.sign1 <- function(alpha, pow, p) {
 #' @importFrom stats qnorm
 #' @export
 size.test.sign.ps <- function(alpha, pow, p) {
+ if (p > .9999 || p < .0001) {stop("proportion must be between .0001 and .9999")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
  es <- p - .5
@@ -5479,6 +5482,7 @@ size.test.sign.ps <- function(alpha, pow, p) {
 #' @importFrom stats qnorm
 #' @export
 size.test.cronbach <- function(alpha, pow, rel, r, h) {
+ if (rel > .999 || rel < .001) {stop("reliability must be between .001 and .999")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
  e <- (1 - rel)/(1 - h)
@@ -6075,6 +6079,7 @@ pi.var.upper <- function(alpha, var, n1, n2) {
 #' 
 #' @export
 etasqr.adj <- function(etasqr, dfeffect, dferror) {
+ if (etasqr > .999 || etasqr < .001) {stop("etasqr must be between .001 and .999")}
  adj <- 1 - (dferror + dfeffect)*(1 - etasqr)/dferror
  if (adj < 0) {adj = 0}
  out <- matrix(adj, nrow = 1, ncol = 1)
