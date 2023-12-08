@@ -225,9 +225,9 @@ ci.cor2 <- function(alpha, cor1, cor2, n1, n2) {
 #' @importFrom stats qnorm
 #' @export 
 ci.cor.dep <- function(alpha, cor1, cor2, cor12, n) {
- if (cor1 > .999 || cor1 < -.999) {stop("correlation must be between -.999 and .999")}
- if (cor2 > .999 || cor2 < -.999) {stop("correlation must be between -.999 and .999")}
- if (cor12 > .999 || cor12 < -.999) {stop("correlation must be between -.999 and .999")}
+ if (cor1 > .999 || cor1 < -.999) {stop("cor1 must be between -.999 and .999")}
+ if (cor2 > .999 || cor2 < -.999) {stop("cor2 must be between -.999 and .999")}
+ if (cor12 > .999 || cor12 < -.999) {stop("cor12 must be between -.999 and .999")}
  z <- qnorm(1 - alpha/2)
  diff <- cor1 - cor2
  se1 <- sqrt(1/((n - 3)))
@@ -298,8 +298,8 @@ ci.cor.dep <- function(alpha, cor1, cor2, cor12, n) {
 #' @importFrom stats qnorm
 #' @export 
 ci.cor2.gen <- function(cor1, ll1, ul1, cor2, ll2, ul2) {
- if (cor1 > .999 || cor1 < -.999) {stop("correlation must be between -.999 and .999")}
- if (cor2 > .999 || cor2 < -.999) {stop("correlation must be between -.999 and .999")}
+ if (cor1 > .999 || cor1 < -.999) {stop("cor1 must be between -.999 and .999")}
+ if (cor2 > .999 || cor2 < -.999) {stop("cor2 must be between -.999 and .999")}
  diff <- cor1 - cor2
  ll <- diff - sqrt((cor1 - ll1)^2 + (ul2 - cor2)^2)
  ul <- diff + sqrt((ul1 - cor1)^2 + (cor2 - ll2)^2)
@@ -487,8 +487,8 @@ ci.spear <- function(alpha, y, x) {
 #' @importFrom stats qnorm
 #' @export
 ci.spear2 <- function(alpha, cor1, cor2, n1, n2) {
- if (cor1 > .999 || cor1 < -.999) {stop("correlation must be between -.999 and .999")}
- if (cor2 > .999 || cor2 < -.999) {stop("correlation must be between -.999 and .999")}
+ if (cor1 > .999 || cor1 < -.999) {stop("cor1 must be between -.999 and .999")}
+ if (cor2 > .999 || cor2 < -.999) {stop("cor2 must be between -.999 and .999")}
  z <- qnorm(1 - alpha/2)
  se1 <- sqrt((1 + cor1^2/2)*(1 - cor1^2)^2/(n1 - 3))
  se2 <- sqrt((1 + cor2^2/2)*(1 - cor2^2)^2/(n2 - 3))
@@ -1191,8 +1191,8 @@ ci.theil <- function(alpha, y, x) {
 #' @importFrom stats qf
 #' @export
 ci.cronbach2 <- function(alpha, rel1, rel2, r1, r2, n1, n2) {
- if (rel1 > .999 || rel1 < .001) {stop("reliability must be between .001 and .999")}
- if (rel2 > .999 || rel2 < .001) {stop("reliability must be between .001 and .999")}
+ if (rel1 > .999 || rel1 < .001) {stop("rel1 must be between .001 and .999")}
+ if (rel2 > .999 || rel2 < .001) {stop("rel2 must be between .001 and .999")}
  df11 <- n1 - 1
  df21 <- n1*(r1 - 1)
  f11 <- qf(1 - alpha/2, df11, df21)
@@ -1409,6 +1409,7 @@ size.ci.cor <- function(alpha, cor, s, w) {
 #' @importFrom stats qnorm
 #' @export  
 size.ci.spear <- function(alpha, cor, w) {
+ if (cor > .999 || cor < -.999) {stop("correlation must be between -.999 and .999")}
  z <- qnorm(1 - alpha/2)
  n1 <- ceiling(4*(1 + cor^2/2)*(1 - cor^2)^2*(z/w)^2 + 3)
  zr <- log((1 + cor)/(1 - cor))/2 
@@ -1465,6 +1466,7 @@ size.ci.spear <- function(alpha, cor, w) {
 #' @importFrom stats qnorm
 #' @export  
 size.ci.pbcor <- function(alpha, cor, w, p) {
+ if (cor > .999 || cor < -.999) {stop("correlation must be between -.999 and .999")}
  z <- qnorm(1 - alpha/2)
  n <- ceiling(4*((1 - cor^2)^2)*(1 - 1.5*cor^2 + cor^2/(4*p*(1 - p)))*(z/w)^2)
  out <- matrix(n, nrow = 1, ncol = 1)
@@ -1654,6 +1656,8 @@ size.ci.lc.ancova <- function(alpha, evar, s, d, w, v) {
 #' @importFrom stats qnorm
 #' @export  
 size.ci.indirect <- function(alpha, cor1, cor2, w) {
+ if (cor1 > .999 || cor1 < -.999) {stop("cor1 must be between -.999 and .999")}
+ if (cor2 > .999 || cor2 < -.999) {stop("cor2 must be between -.999 and .999")}
  z <- qnorm(1 - alpha/2)
  n <- ceiling(4*(cor2^2*(1 - cor1^2)^2 + cor1^2*(1 - cor2^2)^2)*(z/w)^2 + 3)
  out <- matrix(n, nrow = 1, ncol = 1)
@@ -1699,8 +1703,8 @@ size.ci.indirect <- function(alpha, cor1, cor2, w) {
 #' @importFrom stats qnorm
 #' @export
 size.ci.cronbach2 <- function(alpha, rel1, rel2, r, w) {
- if (rel1 > .999 || rel1 < .001) {stop("reliability must be between .001 and .999")}
- if (rel2 > .999 || rel2 < .001) {stop("reliability must be between .001 and .999")}
+ if (rel1 > .999 || rel1 < .001) {stop("rel1 must be between .001 and .999")}
+ if (rel2 > .999 || rel2 < .001) {stop("rel2 must be between .001 and .999")}
  z <- qnorm(1 - alpha/2)
  n0 <- ceiling((8*r/(r - 1))*((1 - rel1)^2 + (1 - rel2)^2)*(z/w)^2 + 2)
  b <- log(n0/(n0 - 1))
@@ -1897,8 +1901,8 @@ size.interval.cor <- function(alpha, pow, cor, s, h) {
 #' @importFrom stats qnorm
 #' @export  
 size.test.cor2 <- function(alpha, pow, cor1, cor2, s) {
- if (cor1 > .999 || cor1 < -.999) {stop("correlation must be between -.999 and .999")}
- if (cor2 > .999 || cor2 < -.999) {stop("correlation must be between -.999 and .999")}
+ if (cor1 > .999 || cor1 < -.999) {stop("cor1 must be between -.999 and .999")}
+ if (cor2 > .999 || cor2 < -.999) {stop("cor2 must be between -.999 and .999")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
  zr1 <- log((1 + cor1)/(1 - cor1))/2
@@ -2000,8 +2004,8 @@ size.test.lc.ancova <- function(alpha, pow, evar, es, s, d, v) {
 #' @importFrom stats qnorm
 #' @export
 size.test.cronbach2 <- function(alpha, pow, rel1, rel2, r) {
- if (rel1 > .999 || rel1 < .001) {stop("reliability must be between .001 and .999")}
- if (rel2 > .999 || rel2 < .001) {stop("reliability must be between .001 and .999")}
+ if (rel1 > .999 || rel1 < .001) {stop("rel1 must be between .001 and .999")}
+ if (rel2 > .999 || rel2 < .001) {stop("rel2 must be between .001 and .999")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
  e <- (1 - rel1)/(1 - rel2)
@@ -2094,8 +2098,8 @@ power.cor1 <- function(alpha, n, cor, h, s) {
 #' @importFrom stats pnorm
 #' @export
 power.cor2 <- function(alpha, n1, n2, cor1, cor2, s) {
- if (cor1 > .999 || cor1 < -.999) {stop("correlation must be between -.999 and .999")}
- if (cor2 > .999 || cor2 < -.999) {stop("correlation must be between -.999 and .999")}
+ if (cor1 > .999 || cor1 < -.999) {stop("cor1 must be between -.999 and .999")}
+ if (cor2 > .999 || cor2 < -.999) {stop("cor2 must be between -.999 and .999")}
  za <- qnorm(1 - alpha/2)
  f1 <- log((1 + cor1)/(1 - cor1))/2
  f2 <- log((1 + cor2)/(1 - cor2))/2
@@ -2192,6 +2196,7 @@ slope.contrast <- function(x) {
 #' 
 #' @export  
 random.yx <- function(n, my, mx, sdy, sdx, cor, dec) {
+ if (cor > .999 || cor < -.999) {stop("correlation must be between -.999 and .999")}
  x0 <- rnorm(n, 0, 1)
  y0 <- cor*x0 + sqrt(1 - cor^2)*rnorm(n, 0, 1)
  x <- sdx*x0 + mx
