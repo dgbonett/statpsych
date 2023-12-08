@@ -2337,6 +2337,8 @@ size.ci.prop1 <- function(alpha, p, w) {
 #' @importFrom stats qnorm
 #' @export                 
 size.ci.prop2 <- function(alpha, p1, p2, w) {
+ if (p1 > .9999 || p1 < .0001) {stop("p1 must be between .0001 and .9999")}
+ if (p2 > .9999 || p2 < .0001) {stop("p2 must be between .0001 and .9999")}
  z <- qnorm(1 - alpha/2)
  n <- ceiling(4*(p1*(1 - p1) + p2*(1 - p2))*(z/w)^2)
  out <- matrix(n, nrow = 1, ncol = 1)
@@ -2377,6 +2379,8 @@ size.ci.prop2 <- function(alpha, p1, p2, w) {
 #' @importFrom stats qnorm
 #' @export   
 size.ci.ratio.prop2 <- function(alpha, p1, p2, r) {
+ if (p1 > .9999 || p1 < .0001) {stop("p1 must be between .0001 and .9999")}
+ if (p2 > .9999 || p2 < .0001) {stop("p2 must be between .0001 and .9999")}
  z <- qnorm(1 - alpha/2)
  n <- ceiling(4*((1 - p1)/p1 + (1 - p2)/p2)*(z/log(r))^2)
  out <- matrix(n, nrow = 1, ncol = 1)
@@ -2465,6 +2469,8 @@ size.ci.lc.prop.bs <- function(alpha, p, w, v) {
 #' @export  
 size.ci.prop.ps <- function(alpha, p1, p2, phi, w) {
  if (phi > .999 || phi < -.999) {stop("phi must be between -.999 and .999")}
+ if (p1 > .9999 || p1 < .0001) {stop("p1 must be between .0001 and .9999")}
+ if (p2 > .9999 || p2 < .0001) {stop("p2 must be between .0001 and .9999")}
  z <- qnorm(1 - alpha/2)
  cov <- phi*sqrt(p1*p2*(1 - p1)*(1 - p2))
  n <- ceiling((4*(p1*(1 - p1) + p2*(1 - p2) - 2*cov))*(z/w)^2)
@@ -2509,6 +2515,8 @@ size.ci.prop.ps <- function(alpha, p1, p2, phi, w) {
 #' @export  
 size.ci.ratio.prop.ps <- function(alpha, p1, p2, phi, r) {
  if (phi > .999 || phi < -.999) {stop("phi must be between -.999 and .999")}
+ if (p1 > .9999 || p1 < .0001) {stop("p1 must be between .0001 and .9999")}
+ if (p2 > .9999 || p2 < .0001) {stop("p2 must be between .0001 and .9999")}
  z <- qnorm(1 - alpha/2)
  cov <- phi*sqrt((1 - p1)*(1 - p2)/(p1*p2))
  n <- ceiling(4*((1 - p1)/p1 + (1 - p2)/p2 - 2*cov)*(z/log(r))^2)
@@ -2640,6 +2648,8 @@ size.test.prop1 <- function(alpha, pow, p, es) {
 #' @importFrom stats qnorm
 #' @export
 size.test.prop2 <- function(alpha, pow, p1, p2, es) {
+ if (p1 > .9999 || p1 < .0001) {stop("p1 must be between .0001 and .9999")}
+ if (p2 > .9999 || p2 < .0001) {stop("p2 must be between .0001 and .9999")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
  n <- ceiling((p1*(1 - p1) + p2*(1 - p2))*(za + zb)^2/es^2)
@@ -2736,6 +2746,8 @@ size.test.lc.prop.bs <- function(alpha, pow, p, es, v) {
 #' @export
 size.equiv.prop2 <- function(alpha, pow, p1, p2, h) {
  if (h <= abs(p1 - p2)) {stop("|p1 - p2| must be less than h")}
+ if (p1 > .9999 || p1 < .0001) {stop("p1 must be between .0001 and .9999")}
+ if (p2 > .9999 || p2 < .0001) {stop("p2 must be between .0001 and .9999")}
  za <- qnorm(1 - alpha)
  zb <- qnorm(1 - (1 - pow)/2)
  es <- p1 - p2
@@ -2784,6 +2796,8 @@ size.equiv.prop2 <- function(alpha, pow, p1, p2, h) {
 #' @importFrom stats qnorm
 #' @export
 size.supinf.prop2 <- function(alpha, pow, p1, p2, h) {
+ if (p1 > .9999 || p1 < .0001) {stop("p1 must be between .0001 and .9999")}
+ if (p2 > .9999 || p2 < .0001) {stop("p2 must be between .0001 and .9999")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
  es <- p1 - p2
@@ -2889,6 +2903,8 @@ size.test.prop.ps <- function(alpha, pow, p1, p2, phi, es) {
 size.equiv.prop.ps <- function(alpha, pow, p1, p2, phi, h) {
  if (phi > .999 || phi < -.999) {stop("phi must be between -.999 and .999")}
  if (h <= abs(p1 - p2)) {stop("|p1 - p2| must be less than h")}
+ if (p1 > .9999 || p1 < .0001) {stop("p1 must be between .0001 and .9999")}
+ if (p2 > .9999 || p2 < .0001) {stop("p2 must be between .0001 and .9999")}
  za <- qnorm(1 - alpha)
  zb <- qnorm(1 - (1 - pow)/2)
  cov <- phi*sqrt(p1*p2*(1 - p1)*(1 - p2))
@@ -2943,6 +2959,8 @@ size.equiv.prop.ps <- function(alpha, pow, p1, p2, phi, h) {
 #' @export
 size.supinf.prop.ps <- function(alpha, pow, p1, p2, phi, h) {
  if (phi > .999 || phi < -.999) {stop("phi must be between -.999 and .999")}
+ if (p1 > .9999 || p1 < .0001) {stop("p1 must be between .0001 and .9999")}
+ if (p2 > .9999 || p2 < .0001) {stop("p2 must be between .0001 and .9999")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
  cov <- phi*sqrt(p1*p2*(1 - p1)*(1 - p2))
@@ -3039,6 +3057,8 @@ power.prop1 <- function(alpha, n, p, es) {
 #' @importFrom stats pnorm
 #' @export
 power.prop2 <- function(alpha, n1, n2, p1, p2, es) {
+ if (p1 > .9999 || p1 < .0001) {stop("p1 must be between .0001 and .9999")}
+ if (p2 > .9999 || p2 < .0001) {stop("p2 must be between .0001 and .9999")}
  za <- qnorm(1 - alpha/2)
  z <- abs(es)/sqrt(p1*(1 - p1)/n1 + p2*(1 - p2)/n2) - za
  pow <- pnorm(z)
@@ -3092,6 +3112,8 @@ power.prop2 <- function(alpha, n1, n2, p1, p2, es) {
 #' @export
 power.prop.ps <- function(alpha, n, p1, p2, phi, es) {
  if (phi > .999 || phi < -.999) {stop("phi must be between -.999 and .999")}
+ if (p1 > .9999 || p1 < .0001) {stop("p1 must be between .0001 and .9999")}
+ if (p2 > .9999 || p2 < .0001) {stop("p2 must be between .0001 and .9999")}
  za <- qnorm(1 - alpha/2)
  v <- 2*phi*sqrt(p1*(1 - p1)*p2*(1 - p2))
  z <- abs(es)/sqrt((p1*(1 - p1) + p2*(1 - p2) - v)/n) - za
