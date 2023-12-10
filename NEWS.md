@@ -30,6 +30,8 @@ Changes:
         * size.ci.spear -- Computes the sample size requirement for a Spearman correlation confidence interval
 
         * size.ci.pbcor -- Computes the sample size requirement for a point-biserial correlation confidence interval
+
+        * size.ci.mape1 -- Computes the sample size requirement for a mean absolute prediction error confidence interval
   
 * Error Corrections:
   
