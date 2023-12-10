@@ -1723,6 +1723,58 @@ size.ci.cronbach2 <- function(alpha, rel1, rel2, r, w) {
 }
 
 
+#  size.ci.mape1 ==============================================================
+#' Sample size for a mean absolute prediction error confidence interval
+#'
+#'
+#' Computes the sample size required to estimate a mean absolute prediction
+#' error for a general linear model with desired confidence interval precision.
+#' Setting s = 0 gives the sample size requirement for a mean absolute 
+#' deviation in a one-group design. This function assumes that the prediction
+#' errors have a normal distribution.
+#'
+#'
+#' @param  alpha  alpha value for 1-alpha confidence 
+#' @param  mape   mean absolute prediction error planning value
+#' @param  s      number of predictor variables
+#' @param  w      desired confidence interval width
+#'
+#'
+#' @return 
+#' Returns the required sample size
+#'
+#'
+#' @examples
+#' size.ci.mape1(.05, 4.5, 5, 2)
+#'
+#' # Should return:
+#' #      Sample size
+#' # [1,]          57
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export
+size.ci.mape1 <- function(alpha, mape, s, w) {
+ z <- qnorm(1 - alpha/2)
+ n0 <- ceiling(2.28*mape^2*(z/w)^2) + s
+ df <- n0 - s - 1
+ c <- n0/(n0 - (s + 2)/2)
+ ll <- exp(log(c*mape) - z*sqrt(.57/df))
+ ul <- exp(log(c*mape) + z*sqrt(.57/df))
+ w0 <- ul - ll
+ n1 <- ceiling((n0 - s)*(w0/w)^2 + s)
+ df <- n1 - s - 1
+ c <- n1/(n1 - (s + 2)/2)
+ ll <- exp(log(c*mape) - z*sqrt(.57/df))
+ ul <- exp(log(c*mape) + z*sqrt(.57/df))
+ w0 <- ul - ll
+ n <- ceiling((n1 - s)*(w0/w)^2 + s)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size"
+ return(out)
+}
+
+
 # ======================= Sample Size for Desired Power =======================
 #  size.test.slope ============================================================
 #' Sample size for a test of a slope
