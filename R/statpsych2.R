@@ -1748,8 +1748,8 @@ size.ci.cronbach2 <- function(alpha, rel1, rel2, r, w) {
 #' size.ci.mape1(.05, 4.5, 5, 2)
 #'
 #' # Should return:
-#' #      Sample size
-#' # [1,]          57
+#' # Sample size
+#' #          57
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -1771,6 +1771,7 @@ size.ci.mape1 <- function(alpha, mape, s, w) {
  n <- ceiling((n1 - s)*(w0/w)^2 + s)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
+ rownames(out) <- ""
  return(out)
 }
 
