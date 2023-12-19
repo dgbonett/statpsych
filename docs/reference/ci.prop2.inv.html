@@ -4,7 +4,7 @@ sampling — ci.prop2.inv • statpsych</title><!-- jquery --><script src="https
 sampling — ci.prop2.inv"><meta property="og:description" content="Computes an approximate confidence interval for a population proportion
 difference when inverse sampling has been used. An approximate standard
 error is recovered from the confidence interval. With inverse sampling, the
-number of participants who have the attribute within group 1(f1) and group 2
+number of participants who have the attribute within group 1 (f1) and group 2
 (f2) are predetermined, and sampling continues within each group until f1
 and f2 attain their prespecified values. With inverse sampling, the sample
 sizes (n1 and n2) will not be known in advance."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -25,7 +25,7 @@ sizes (n1 and n2) will not be known in advance."><!-- mathjax --><script src="ht
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statpsych</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.0</span>
       </span>
     </div>
 
@@ -61,14 +61,14 @@ sampling</h1>
     <p>Computes an approximate confidence interval for a population proportion
 difference when inverse sampling has been used. An approximate standard
 error is recovered from the confidence interval. With inverse sampling, the
-number of participants who have the attribute within group 1(f1) and group 2
+number of participants who have the attribute within group 1 (f1) and group 2
 (f2) are predetermined, and sampling continues within each group until f1
 and f2 attain their prespecified values. With inverse sampling, the sample
 sizes (n1 and n2) will not be known in advance.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ci.prop2.inv</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">f1</span>, <span class="va">f2</span>, <span class="va">n1</span>, <span class="va">n2</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ci.prop2.inv</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">f1</span>, <span class="va">f2</span>, <span class="va">n1</span>, <span class="va">n2</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -98,7 +98,7 @@ sizes (n1 and n2) will not be known in advance.</p>
     
 
 <p>Returns a 1-row matrix. The columns are:</p><ul><li><p>Estimate - estimate of proportion difference</p></li>
-<li><p>SE - standard error</p></li>
+<li><p>SE - recovered standard error</p></li>
 <li><p>LL - lower limit of confidence interval</p></li>
 <li><p>UL - upper limit of confidence interval</p></li>
 </ul></div>
@@ -107,21 +107,21 @@ sizes (n1 and n2) will not be known in advance.</p>
     <p>Zou GY (2010).
 “Confidence interval estimation under inverse sampling.”
 <em>Computational Statistics and Data Analysis</em>, <b>54</b>(1), 55--64.
-ISSN 0167-9473, doi: <a href="https://doi.org/doi.org/10.1016/j.csda.2005.05.007" class="external-link">doi.org/10.1016/j.csda.2005.05.007</a>
+ISSN 0167-9473, <a href="https://doi.org/10.1016/j.csda.2005.05.007" class="external-link">doi:10.1016/j.csda.2005.05.007</a>
 .</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">ci.prop2.inv</span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">10</span>, <span class="fl">10</span>, <span class="fl">48</span>, <span class="fl">213</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      Estimate         SE         LL        UL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 0.161385 0.05997618 0.05288277 0.2879851</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Should return:</span></span>
-<span class="r-in"><span class="co">#       Estimate         SE         LL        UL</span></span>
-<span class="r-in"><span class="co"># [1,]  0.161385 0.05997618 0.05288277 0.2879851</span></span>
-<span class="r-in"></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">ci.prop2.inv</span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">10</span>, <span class="fl">10</span>, <span class="fl">48</span>, <span class="fl">213</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Estimate         SE         LL        UL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.161385 0.05997618 0.05288277 0.2879851</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Should return:</span></span></span>
+<span class="r-in"><span><span class="co">#  Estimate         SE         LL        UL</span></span></span>
+<span class="r-in"><span><span class="co">#  0.161385 0.05997618 0.05288277 0.2879851</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>

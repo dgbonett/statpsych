@@ -32,8 +32,8 @@ s = 0 for a Pearson correlation.
 power.cor2(.05, 200, 200, .4, .2, 0)
 
 # Should return:
-#          Power
-# [1,] 0.5919517
+#     Power
+# 0.5919517
 
 
 }

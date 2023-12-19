@@ -14,7 +14,7 @@ size.test.mann(alpha, pow, p)
 \item{p}{planning value of Mann-Whitney parameter}
 }
 \value{
-Returns the required sample size per group
+Returns the required sample size for each group
 }
 \description{
 Computes the sample size in each group (assuming equal sample sizes)
@@ -31,8 +31,8 @@ subpopulation 2.
 size.test.mann(.05, .90, .3)
 
 # Should return:
-#      Sample size per group
-# [1,]                    44
+# Sample size per group
+#                    44
  
 
 }

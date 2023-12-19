@@ -9,7 +9,7 @@ ci.cramer(alpha, chisqr, r, c, n)
 \arguments{
 \item{alpha}{alpha value for 1-alpha confidence}
 
-\item{chisqr}{Pearson chi-square test statistic for independence}
+\item{chisqr}{Pearson chi-square test statistic of independence}
 
 \item{r}{number of rows in contingency table}
 
@@ -37,8 +37,8 @@ confidence interval.
 ci.cramer(.05, 19.21, 2, 3, 200)
 
 # Should return:
-#        Estimate     SE     LL     UL
-# [1,]     0.3099 0.0674 0.1888 0.4529
+# Estimate     SE     LL     UL
+#   0.3099 0.0718 0.1601 0.4417
  
 
 }

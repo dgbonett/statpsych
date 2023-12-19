@@ -41,8 +41,8 @@ treatment conditions.
 pi.score.ps(.05, 265.1, 208.6, 23.51, 19.94, .814, 30)
 
 # Should return:
-#      Predicted df       LL       UL
-# [1,]      56.5 29 28.05936 84.94064
+# Predicted df       LL       UL
+#      56.5 29 28.05936 84.94064
  
 
 }

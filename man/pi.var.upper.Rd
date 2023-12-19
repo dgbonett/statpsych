@@ -33,8 +33,8 @@ sample size in the future study.
 pi.var.upper(.2, 15, 40, 100)
 
 # Should return:
-#           UL
-# [1] 18.78522
+#       UL
+# 18.78522
  
 
 }

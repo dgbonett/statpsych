@@ -19,7 +19,7 @@ for each median and the covariance between the two estimated medians."><!-- math
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statpsych</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.0</span>
       </span>
     </div>
 
@@ -57,7 +57,7 @@ for each median and the covariance between the two estimated medians.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ci.median.ps</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">y1</span>, <span class="va">y2</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ci.median.ps</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">y1</span>, <span class="va">y2</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -71,7 +71,7 @@ for each median and the covariance between the two estimated medians.</p>
 
 
 <dt>y2</dt>
-<dd><p>vector of scores for measurement 2</p></dd>
+<dd><p>vector of scores for measurement 2 (paired with y1)</p></dd>
 
 </dl></div>
     <div id="value">
@@ -83,7 +83,7 @@ for each median and the covariance between the two estimated medians.</p>
 <li><p>Median1-Median2 - estimated difference of medians</p></li>
 <li><p>SE1 - standard error of median 1</p></li>
 <li><p>SE2 - standard error of median 2</p></li>
-<li><p>COV - covariance of the two `estimated medians</p></li>
+<li><p>COV - covariance of the two estimated medians</p></li>
 <li><p>LL - lower limit of the confidence interval</p></li>
 <li><p>UL - upper limit of the confidence interval</p></li>
 </ul></div>
@@ -92,27 +92,27 @@ for each median and the covariance between the two estimated medians.</p>
     <p>Bonett DG, Price RM (2020).
 “Interval estimation for linear functions of medians in within-subjects and mixed designs.”
 <em>British Journal of Mathematical and Statistical Psychology</em>, <b>73</b>(2), 333--346.
-ISSN 0007-1102, doi: <a href="https://doi.org/10.1111/bmsp.12171" class="external-link">10.1111/bmsp.12171</a>
+ISSN 0007-1102, <a href="https://doi.org/10.1111/bmsp.12171" class="external-link">doi:10.1111/bmsp.12171</a>
 .</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">y1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">21</span>, <span class="fl">4</span>, <span class="fl">9</span>, <span class="fl">12</span>, <span class="fl">35</span>, <span class="fl">18</span>, <span class="fl">10</span>, <span class="fl">22</span>, <span class="fl">24</span>, <span class="fl">1</span>, <span class="fl">6</span>, <span class="fl">8</span>, <span class="fl">13</span>, <span class="fl">16</span>, <span class="fl">19</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">y2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">67</span>, <span class="fl">28</span>, <span class="fl">30</span>, <span class="fl">28</span>, <span class="fl">52</span>, <span class="fl">40</span>, <span class="fl">25</span>, <span class="fl">37</span>, <span class="fl">44</span>, <span class="fl">10</span>, <span class="fl">14</span>, <span class="fl">20</span>, <span class="fl">28</span>, <span class="fl">40</span>, <span class="fl">51</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">ci.median.ps</span><span class="op">(</span><span class="fl">.05</span>, <span class="va">y1</span>, <span class="va">y2</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      Median1 Median2 Median1-Median2       SE        LL        UL      SE1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]      13      30             -17 3.362289 -23.58996 -10.41004 3.085608</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           SE2      COV</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 4.509735 9.276849</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Should return:</span></span>
-<span class="r-in"><span class="co">#    Median1 Median2 Median1-Median2       SE        LL        UL  </span></span>
-<span class="r-in"><span class="co"># [1,]    13      30             -17 3.362289 -23.58996 -10.41004 </span></span>
-<span class="r-in"><span class="co">#        SE1      SE2      COV</span></span>
-<span class="r-in"><span class="co">#   3.085608 4.509735 9.276849</span></span>
-<span class="r-in"></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">y1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">21</span>, <span class="fl">4</span>, <span class="fl">9</span>, <span class="fl">12</span>, <span class="fl">35</span>, <span class="fl">18</span>, <span class="fl">10</span>, <span class="fl">22</span>, <span class="fl">24</span>, <span class="fl">1</span>, <span class="fl">6</span>, <span class="fl">8</span>, <span class="fl">13</span>, <span class="fl">16</span>, <span class="fl">19</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">y2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">67</span>, <span class="fl">28</span>, <span class="fl">30</span>, <span class="fl">28</span>, <span class="fl">52</span>, <span class="fl">40</span>, <span class="fl">25</span>, <span class="fl">37</span>, <span class="fl">44</span>, <span class="fl">10</span>, <span class="fl">14</span>, <span class="fl">20</span>, <span class="fl">28</span>, <span class="fl">40</span>, <span class="fl">51</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">ci.median.ps</span><span class="op">(</span><span class="fl">.05</span>, <span class="va">y1</span>, <span class="va">y2</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Median1 Median2 Median1-Median2       SE        LL        UL      SE1      SE2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       13      30             -17 3.362289 -23.58996 -10.41004 3.085608 4.509735</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       COV</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9.276849</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Should return:</span></span></span>
+<span class="r-in"><span><span class="co"># Median1 Median2 Median1-Median2       SE        LL        UL  </span></span></span>
+<span class="r-in"><span><span class="co">#      13      30             -17 3.362289 -23.58996 -10.41004 </span></span></span>
+<span class="r-in"><span><span class="co">#      SE1      SE2      COV</span></span></span>
+<span class="r-in"><span><span class="co"># 3.085608 4.509735 9.276849</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>

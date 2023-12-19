@@ -31,8 +31,8 @@ plausible range for a conservatively large sample size.
 size.ci.prop.ps(.05, .2, .3, .8, .1)
 
 # Should return:
-#      Sample size
-# [1,]         118
+# Sample size
+#         118
 
 
 }

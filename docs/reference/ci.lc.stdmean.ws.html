@@ -23,7 +23,7 @@ equal."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/math
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statpsych</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.0</span>
       </span>
     </div>
 
@@ -64,7 +64,7 @@ equal.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ci.lc.stdmean.ws</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">m</span>, <span class="va">sd</span>, <span class="va">cor</span>, <span class="va">n</span>, <span class="va">q</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ci.lc.stdmean.ws</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">m</span>, <span class="va">sd</span>, <span class="va">cor</span>, <span class="va">n</span>, <span class="va">q</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -97,7 +97,8 @@ equal.</p>
     <h2>Value</h2>
     
 
-<p>Returns a 2-row matrix. The columns are:</p><ul><li><p>Estimate - bias adjusted standardized linear contrast</p></li>
+<p>Returns a 2-row matrix. The columns are:</p><ul><li><p>Estimate - estimated standardized linear contrast</p></li>
+<li><p>adj Estimate - bias adjusted standardized linear contrast estimate</p></li>
 <li><p>SE - standard error</p></li>
 <li><p>LL - lower limit of the confidence interval</p></li>
 <li><p>UL - upper limit of the confidence interval</p></li>
@@ -107,26 +108,26 @@ equal.</p>
     <p>Bonett DG (2008).
 “Confidence intervals for standardized linear contrasts of means.”
 <em>Psychological Methods</em>, <b>13</b>(2), 99--109.
-ISSN 1939-1463, doi: <a href="https://doi.org/10.1037/1082-989X.13.2.99" class="external-link">10.1037/1082-989X.13.2.99</a>
+ISSN 1939-1463, <a href="https://doi.org/10.1037/1082-989X.13.2.99" class="external-link">doi:10.1037/1082-989X.13.2.99</a>
 .</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">33.5</span>, <span class="fl">37.9</span>, <span class="fl">38.0</span>, <span class="fl">44.1</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">sd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3.84</span>, <span class="fl">3.84</span>, <span class="fl">3.65</span>, <span class="fl">4.98</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">q</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.5</span>, <span class="fl">.5</span>, <span class="op">-</span><span class="fl">.5</span>, <span class="op">-</span><span class="fl">.5</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">ci.lc.stdmean.ws</span><span class="op">(</span><span class="fl">.05</span>, <span class="va">m</span>, <span class="va">sd</span>, <span class="fl">.672</span>, <span class="fl">20</span>, <span class="va">q</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                           Estimate        SE        LL         UL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Unweighted standardizer: -1.266557 0.2096351 -1.712140 -0.8903860</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Level 1 standardizer:    -1.337500 0.2662156 -1.915002 -0.8714561</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Should return:</span></span>
-<span class="r-in"><span class="co">#                           Estimate        SE        LL         UL</span></span>
-<span class="r-in"><span class="co"># Unweighted standardizer: -1.266557 0.2096351 -1.712140 -0.8903860</span></span>
-<span class="r-in"><span class="co"># Level 1 standardizer:    -1.337500 0.2662156 -1.915002 -0.8714561</span></span>
-<span class="r-in"></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">33.5</span>, <span class="fl">37.9</span>, <span class="fl">38.0</span>, <span class="fl">44.1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">sd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3.84</span>, <span class="fl">3.84</span>, <span class="fl">3.65</span>, <span class="fl">4.98</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">q</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.5</span>, <span class="fl">.5</span>, <span class="op">-</span><span class="fl">.5</span>, <span class="op">-</span><span class="fl">.5</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">ci.lc.stdmean.ws</span><span class="op">(</span><span class="fl">.05</span>, <span class="va">m</span>, <span class="va">sd</span>, <span class="fl">.672</span>, <span class="fl">20</span>, <span class="va">q</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                           Estimate adj Estimate        SE        LL         UL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Unweighted standardizer: -1.301263    -1.266557 0.3147937 -1.918248 -0.6842788</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Level 1 standardizer:    -1.393229    -1.337500 0.3661824 -2.110934 -0.6755248</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Should return:</span></span></span>
+<span class="r-in"><span><span class="co">#                           Estimate  adj Estimate        SE        LL         UL</span></span></span>
+<span class="r-in"><span><span class="co"># Unweighted standardizer: -1.301263     -1.266557 0.3147937 -1.918248 -0.6842788</span></span></span>
+<span class="r-in"><span><span class="co"># Level 1 standardizer:    -1.393229     -1.337500 0.3661824 -2.110934 -0.6755248</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>

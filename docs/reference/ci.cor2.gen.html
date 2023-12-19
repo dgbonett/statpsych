@@ -21,7 +21,7 @@ interval for each correlation as input."><!-- mathjax --><script src="https://cd
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statpsych</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.0</span>
       </span>
     </div>
 
@@ -61,7 +61,7 @@ interval for each correlation as input.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ci.cor2.gen</span><span class="op">(</span><span class="va">cor1</span>, <span class="va">ll1</span>, <span class="va">ul1</span>, <span class="va">cor2</span>, <span class="va">ll2</span>, <span class="va">ul2</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ci.cor2.gen</span><span class="op">(</span><span class="va">cor1</span>, <span class="va">ll1</span>, <span class="va">ul1</span>, <span class="va">cor2</span>, <span class="va">ll2</span>, <span class="va">ul2</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -103,21 +103,21 @@ interval for each correlation as input.</p>
     <p>Zou GY (2007).
 “Toward using confidence intervals to compare correlations.”
 <em>Psychological Methods</em>, <b>12</b>(4), 399--413.
-ISSN 1939-1463, doi: <a href="https://doi.org/10.1037/1082-989X.12.4.399" class="external-link">10.1037/1082-989X.12.4.399</a>
+ISSN 1939-1463, <a href="https://doi.org/10.1037/1082-989X.12.4.399" class="external-link">doi:10.1037/1082-989X.12.4.399</a>
 .</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">ci.cor2.gen</span><span class="op">(</span><span class="fl">.4</span>, <span class="fl">.35</span>, <span class="fl">.47</span>, <span class="fl">.2</span>, <span class="fl">.1</span>, <span class="fl">.32</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      Estimate   LL        UL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]      0.2 0.07 0.3220656</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Should return:</span></span>
-<span class="r-in"><span class="co">#      Estimate   LL        UL</span></span>
-<span class="r-in"><span class="co"># [1,]      0.2 0.07 0.3220656</span></span>
-<span class="r-in"> </span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">ci.cor2.gen</span><span class="op">(</span><span class="fl">.4</span>, <span class="fl">.35</span>, <span class="fl">.47</span>, <span class="fl">.2</span>, <span class="fl">.1</span>, <span class="fl">.32</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Estimate   LL        UL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       0.2 0.07 0.3220656</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Should return:</span></span></span>
+<span class="r-in"><span><span class="co"># Estimate   LL        UL</span></span></span>
+<span class="r-in"><span><span class="co">#      0.2 0.07 0.3220656</span></span></span>
+<span class="r-in"><span> </span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>

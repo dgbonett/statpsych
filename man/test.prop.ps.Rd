@@ -32,8 +32,8 @@ from a 2 x 2 contingency table for two paired dichotomous measurements.
 test.prop.ps(156, 96, 68, 80)
 
 # Should return:
-#      Estimate        z          p
-# [1,]     0.07 2.108346 0.03500109
+# Estimate        z          p
+#     0.07 2.108346 0.03500109
 
 
 }

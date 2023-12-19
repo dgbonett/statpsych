@@ -33,13 +33,14 @@
 #' ci.cor(.05, .536, 0, 50)
 #'
 #' # Should return:
-#' #      Estimate        SE        LL        UL
-#' # [1,]    0.536 0.1018149 0.2978573 0.7058914
+#' # Estimate        SE        LL        UL
+#' #    0.536 0.1018149 0.2978573 0.7058914
 #'  
 #' 
 #' @importFrom stats qnorm
 #' @export
 ci.cor <- function(alpha, cor, s, n) {
+ if (cor > .999 || cor < -.999) {stop("correlation must be between -.999 and .999")}
  z <- qnorm(1 - alpha/2)
  se <- sqrt((1 - cor^2)^2/(n - 1))
  se.z <- sqrt(1/((n - s - 3)))
@@ -50,6 +51,7 @@ ci.cor <- function(alpha, cor, s, n) {
  ul <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
  out <- t(c(cor, se, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -90,13 +92,14 @@ ci.cor <- function(alpha, cor, s, n) {
 #' ci.spcor(.05, .582, .699, 20)
 #'
 #' # Should return:
-#' #      Estimate        SE        LL        UL
-#' # [1,]    0.582 0.1374298 0.2525662 0.7905182
+#' # Estimate        SE        LL        UL
+#' #    0.582 0.1374298 0.2525662 0.7905182
 #'  
 #' 
 #' @importFrom stats qnorm
 #' @export
 ci.spcor <- function(alpha, cor, r2, n) {
+ if (cor > .999 || cor < -.999) {stop("correlation must be between -.999 and .999")}
  z <- qnorm(1 - alpha/2)
  r0 <- r2 - cor^2
  zr <- log((1 + cor)/(1 - cor))/2
@@ -109,6 +112,7 @@ ci.spcor <- function(alpha, cor, r2, n) {
  ul <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
  out <- t(c(cor, se, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -146,13 +150,15 @@ ci.spcor <- function(alpha, cor, r2, n) {
 #' ci.cor2(.05, .886, .802, 200, 200)
 #'
 #' # Should return:
-#' #      Estimate         SE         LL        UL
-#' # [1,]    0.084 0.02967934 0.02803246 0.1463609
+#' # Estimate         SE         LL        UL
+#' #    0.084 0.02967934 0.02803246 0.1463609
 #'  
 #' 
 #' @importFrom stats qnorm
 #' @export
 ci.cor2 <- function(alpha, cor1, cor2, n1, n2) {
+ if (cor1 > .999 || cor1 < -.999) {stop("correlation must be between -.999 and .999")}
+ if (cor2 > .999 || cor2 < -.999) {stop("correlation must be between -.999 and .999")}
  z <- qnorm(1 - alpha/2)
  diff <- cor1 - cor2
  se1 <- sqrt(1/(n1 - 3))
@@ -172,6 +178,7 @@ ci.cor2 <- function(alpha, cor1, cor2, n1, n2) {
  se <- sqrt((1 - cor1^2)^2/(n1 - 3) + (1 - cor2^2)^2/((n2 - 3)))
  out <- t(c(diff, se, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -211,13 +218,16 @@ ci.cor2 <- function(alpha, cor1, cor2, n1, n2) {
 #' ci.cor.dep(.05, .396, .179, .088, 166)
 #'
 #' # Should return:
-#' #      Estimate       SE         LL       UL
-#' # [1,]   0.217 0.1026986 0.01323072 0.415802
+#' # Estimate        SE         LL       UL
+#' #    0.217 0.1026986 0.01323072 0.415802
 #'  
 #' 
 #' @importFrom stats qnorm
 #' @export 
 ci.cor.dep <- function(alpha, cor1, cor2, cor12, n) {
+ if (cor1 > .999 || cor1 < -.999) {stop("cor1 must be between -.999 and .999")}
+ if (cor2 > .999 || cor2 < -.999) {stop("cor2 must be between -.999 and .999")}
+ if (cor12 > .999 || cor12 < -.999) {stop("cor12 must be between -.999 and .999")}
  z <- qnorm(1 - alpha/2)
  diff <- cor1 - cor2
  se1 <- sqrt(1/((n - 3)))
@@ -241,6 +251,7 @@ ci.cor.dep <- function(alpha, cor1, cor2, cor12, n) {
  se <- (ul - ll)/(2*z)
  out <- t(c(diff, se, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -280,18 +291,21 @@ ci.cor.dep <- function(alpha, cor1, cor2, cor12, n) {
 #' ci.cor2.gen(.4, .35, .47, .2, .1, .32)
 #'
 #' # Should return:
-#' #      Estimate   LL        UL
-#' # [1,]      0.2 0.07 0.3220656
+#' # Estimate   LL        UL
+#' #      0.2 0.07 0.3220656
 #'  
 #' 
 #' @importFrom stats qnorm
 #' @export 
 ci.cor2.gen <- function(cor1, ll1, ul1, cor2, ll2, ul2) {
+ if (cor1 > .999 || cor1 < -.999) {stop("cor1 must be between -.999 and .999")}
+ if (cor2 > .999 || cor2 < -.999) {stop("cor2 must be between -.999 and .999")}
  diff <- cor1 - cor2
  ll <- diff - sqrt((cor1 - ll1)^2 + (ul2 - cor2)^2)
  ul <- diff + sqrt((ul1 - cor1)^2 + (cor2 - ll2)^2)
  out <- t(c(diff, ll, ul))
  colnames(out) <- c("Estimate", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -304,7 +318,7 @@ ci.cor2.gen <- function(cor1, ll1, ul1, cor2, ll2, ul2) {
 #' Computes confidence intervals for two types of population point-biserial 
 #' correlations. One type uses a weighted average of the group variances 
 #' and is appropriate for nonexperimental designs with simple random sampling
-#' (rather than stratified random sampling). The other type uses an unweighted 
+#' (but not stratified random sampling). The other type uses an unweighted 
 #' average of the group variances and is appropriate for experimental designs.
 #' Equality of variances is not assumed for either type. 
 #'
@@ -406,8 +420,8 @@ ci.pbcor <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' ci.spear(.05, y, x)
 #'
 #' # Should return:
-#' #       Estimate         SE        LL        UL
-#' # [1,] 0.8699639 0.08241326 0.5840951 0.9638297
+#' #  Estimate         SE        LL        UL
+#' # 0.8699639 0.08241326 0.5840951 0.9638297
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -426,6 +440,7 @@ ci.spear <- function(alpha, y, x) {
  ul <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
  out <- cbind(cor, se, ll, ul)
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
  return (out)
 }
 	
@@ -465,13 +480,15 @@ ci.spear <- function(alpha, y, x) {
 #' ci.spear2(.05, .54, .48, 180, 200)
 #'
 #' # Should return:
-#' #      Estimate         SE         LL        UL
-#' # [1,]     0.06 0.08124926 -0.1003977 0.2185085     
+#' # Estimate         SE         LL        UL
+#' #     0.06 0.08124926 -0.1003977 0.2185085     
 #'  
 #' 
 #' @importFrom stats qnorm
 #' @export
 ci.spear2 <- function(alpha, cor1, cor2, n1, n2) {
+ if (cor1 > .999 || cor1 < -.999) {stop("cor1 must be between -.999 and .999")}
+ if (cor2 > .999 || cor2 < -.999) {stop("cor2 must be between -.999 and .999")}
  z <- qnorm(1 - alpha/2)
  se1 <- sqrt((1 + cor1^2/2)*(1 - cor1^2)^2/(n1 - 3))
  se2 <- sqrt((1 + cor2^2/2)*(1 - cor2^2)^2/(n2 - 3))
@@ -491,11 +508,12 @@ ci.spear2 <- function(alpha, cor1, cor2, n1, n2) {
  se <- sqrt(se1^2 + se2^2)
  out <- cbind(cor.dif, se, ll.dif, ul.dif)
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
  return (out)
 }
 	
 
-#  ci.mape  ===================================================================
+#  ci.mape1  ===================================================================
 #' Confidence interval for a mean absolute prediction error
 #'
 #'
@@ -524,17 +542,17 @@ ci.spear2 <- function(alpha, cor1, cor2, n1, n2) {
 #' @examples
 #' res <- c(-2.70, -2.69, -1.32, 1.02, 1.23, -1.46, 2.21, -2.10, 2.56,
 #'       -3.02, -1.55, 1.46, 4.02, 2.34)
-#' ci.mape(.05, res, 1)
+#' ci.mape1(.05, res, 1)
 #'
 #' # Should return:
-#' #       Estimate        SE       LL       UL
-#' # [1,]    2.3744 0.3314752 1.751678 3.218499
+#' # Estimate        SE       LL       UL
+#' #   2.3744 0.3314752 1.751678 3.218499
 #'  
 #' 
 #' @importFrom stats qnorm
 #' @importFrom stats sd
 #' @export
-ci.mape <- function(alpha, res, s) {
+ci.mape1 <- function(alpha, res, s) {
  n <- length(res)
  df <- n - s - 1
  z <- qnorm(1 - alpha/2)
@@ -547,6 +565,7 @@ ci.mape <- function(alpha, res, s) {
  se.mape <- c*mape*se
  out <- t(c(c*mape, se.mape, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -558,11 +577,12 @@ ci.mape <- function(alpha, res, s) {
 #'                      
 #' @description
 #' Computes a confidence interval for a ratio of population mean absolute 
-#' prediction errors (MAPEs) from in a general linear model in two independent 
+#' prediction errors (MAPEs) from a general linear model in two independent 
 #' groups. The number of predictor variables can differ across groups and the 
 #' two models can be non-nested. This function requires a vector of estimated 
 #' residuals from each group. This function does not assume zero excess 
-#' kurtosis but does assume symmetry in the population prediction errors.
+#' kurtosis but does assume symmetry in the population prediction errors for
+#' the two models.
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -589,8 +609,8 @@ ci.mape <- function(alpha, res, s) {
 #' ci.mape2(.05, res1, res2, 1, 1)
 #'
 #' # Should return:
-#' #        MAPE1     MAPE2 MAPE1/MAPE2       LL       UL
-#' # [1,] 2.58087 0.8327273    3.099298 1.917003 5.010761
+#' #   MAPE1     MAPE2 MAPE1/MAPE2       LL       UL
+#' # 2.58087 0.8327273    3.099298 1.917003 5.010761
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -615,6 +635,7 @@ ci.mape2 <- function(alpha, res1, res2, s1, s2) {
  ul <- exp(log(c1*mape1) - log(c2*mape2) + z*se)
  out <- t(c(c1*mape1, c2*mape2,(c1*mape1)/(c2*mape2), ll, ul))
  colnames(out) <- c("MAPE1", "MAPE2", "MAPE1/MAPE2", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -626,8 +647,8 @@ ci.mape2 <- function(alpha, res1, res2, s1, s2) {
 #' @description
 #' Computes confidence intervals and test statistics for population 
 #' conditional slopes (simple slopes) in a general linear model that
-#' includes a predictor variable that is the product of a moderator 
-#' variable and a predictor variable. Conditional slopes are computed  
+#' includes a predictor variable (x1), a moderator variable (x2), and
+#' a product predictor variable (x1*x2). Conditional slopes are computed  
 #' at specified low and high values of the moderator variable. 
 #'
 #'  
@@ -728,8 +749,8 @@ ci.condslope <- function(alpha, b1, b2, se1, se2, cov, lo, hi, dfe) {
 #' ci.lc.reg(.05, est, se, n, 4, v)
 #'
 #' # Should return:
-#' #      Estimate        SE        t      df          p        LL       UL
-#' # [1,]    1.303 0.5085838 2.562016 78.8197 0.01231256 0.2906532 2.315347
+#' # Estimate        SE        t      df          p        LL       UL
+#' #    1.303 0.5085838 2.562016 78.8197 0.01231256 0.2906532 2.315347
 #'  
 #' 
 #' @importFrom stats qt
@@ -745,6 +766,7 @@ ci.lc.reg <- function(alpha, est, se, n, s, v) {
  ul <- con + tcrit*se.con
  out <- t(c(con, se.con, t, df, p, ll, ul))
  colnames(out) <- c("Estimate", "SE", "t", "df", "p", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -754,38 +776,48 @@ ci.lc.reg <- function(alpha, est, se, n, s, v) {
 #'
 #' 
 #' @description
-#' Computes a Fisher confidence interval for any type of correlation or any
-#' measure of association that has a -1 to 1 range.
+#' Computes a Fisher confidence interval for any type of correlation (e.g., 
+#' Pearson, Spearman, Kendall-tau, tetrachoric, phi, partial, semipartial, 
+#' etc.) or ordinal association such as gamma, Somers' d, or tau-b. The 
+#' correlation could also be between two latent factors obtained
+#' from a SEM analysis (the Fisher CI will be more accurate than the 
+#' large-sample CI from a SEM analysis). The standard error can be a 
+#' traditional standard error, a bootstrap standard error, or a robust 
+#' standard error from a SEM analysis.
 #'
 #'
 #' @param   alpha  alpha value for 1-alpha confidence
 #' @param   cor    estimated correlation or association coefficient 
-#' @param   se     standard error of estimate
+#' @param   se     standard error of correlation or association coefficient
 #'
 #'
 #' @return
-#' Returns a 1-row matrix containing the lower and upper confidence limits.
+#' Returns a 1-row matrix. The columns are:
+#' * Estimate - correlation (from input) 
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
 #'
 #'
 #' @examples
 #' ci.fisher(.05, .641, .052)
 #'
 #' # Should return:
-#' #             LL        UL
-#' # [1,] 0.5276396 0.7319293
+#' # Estimate        LL        UL
+#' #    0.641 0.5276396 0.7319293
 #'
 #'
 #' @importFrom stats qnorm
 #' @export
 ci.fisher <- function(alpha, cor, se) {
+ if (cor > .999 || cor < -.999) {stop("correlation must be between -.999 and .999")}
  z <- qnorm(1 - alpha/2)
  zr <- log((1 + cor)/(1 - cor))/2
  ll0 <- zr - z*se/(1 - cor^2)
  ul0 <- zr + z*se/(1 - cor^2)
  ll <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
  ul <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
- out <- t(c(ll, ul))
- colnames(out) <- c("LL", "UL")
+ out <- t(c(cor, ll, ul))
+ colnames(out) <- c("Estimate", "LL", "UL")
  return(out)
 }
 
@@ -825,8 +857,8 @@ ci.fisher <- function(alpha, cor, se) {
 #' ci.indirect (.05, 2.48, 1.92, .586, .379)
 #'
 #' # Should return (within sampling error):
-#' #      Estimate       SE       LL       UL
-#' # [1,]   4.7616 1.625282 2.178812 7.972262
+#' # Estimate       SE       LL       UL
+#' #   4.7616 1.625282 2.178812 7.972262
 #'  
 #' 
 #' @importFrom stats rnorm
@@ -842,6 +874,7 @@ ci.indirect <- function(alpha, b1, b2, se1, se2) {
  ul <- y[k - c + 1]
  out <- t(c(b1*b2, se, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -890,8 +923,8 @@ ci.indirect <- function(alpha, b1, b2, se1, se2) {
 #' # (Intercept)          x1          x2 
 #' #   26.891111    3.648889    2.213333 
 #' # > ci.lc.glm(.05, n, b, V, q)
-#' #      Estimate        SE       t df           p       LL       UL
-#' # [1,] 2.931111 0.4462518 6.56829  7 0.000313428 1.875893 3.986329
+#' # Estimate        SE       t df           p       LL       UL
+#' # 2.931111 0.4462518 6.56829  7 0.000313428 1.875893 3.986329
 #'
 #'
 #' @importFrom stats qt
@@ -908,6 +941,7 @@ ci.lc.glm <-function(alpha, n, b, V, q) {
  ul <- est + tcrit*se
  out <- t(c(est, se, t, df, p, ll, ul))
  colnames(out) <- c("Estimate", "SE", "t", "df", "p", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -947,8 +981,8 @@ ci.lc.glm <-function(alpha, n, b, V, q) {
 #' ci.lc.gen.bs(.05, est, se, v)
 #'
 #' # Should return:
-#' #      Estimate        SE       LL       UL
-#' # [1,]     1.63 0.2573806 1.125543 2.134457
+#' # Estimate        SE       LL       UL
+#' #     1.63 0.2573806 1.125543 2.134457
 #'
 #'
 #' @importFrom stats qnorm
@@ -961,6 +995,7 @@ ci.lc.gen.bs <- function(alpha, est, se, v) {
  ul <- est.lc + zcrit*se.lc
  out <- t(c(est.lc, se.lc, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -996,13 +1031,14 @@ ci.lc.gen.bs <- function(alpha, est, se, v) {
 #' ci.rsqr(.05, .241, 3, 116)
 #'
 #' # Should return:
-#' #      R-squared adj R-squared         SE         LL        UL  
-#' # [1,]     0.241     0.2206696 0.06752263 0.09819599 0.3628798
+#' # R-squared adj R-squared         SE         LL        UL  
+#' #     0.241     0.2206696 0.06752263 0.09819599 0.3628798
 #'  
 #' 
 #' @importFrom stats qf
 #' @export
 ci.rsqr <- function(alpha, r2, s, n) {
+ if (r2 > .999 || r2 < .001) {stop("squared multiple correlation must be between .001 and .999")}
  alpha1 <- alpha/2
  alpha2 <- 1 - alpha1
  z0 <- qnorm(1 - alpha1)
@@ -1013,6 +1049,8 @@ ci.rsqr <- function(alpha, r2, s, n) {
  b2 <- adj/(1 - adj)
  v1 <- ((n - 1)*b1 + s)^2/((n - 1)*b1*(b1 + 2) + s)
  v2 <- ((n - 1)*b2 + s)^2/((n - 1)*b2*(b2 + 2) + s)
+ if (v1 < 1) {v1 = 1}
+ if (v2 < 1) {v2 = 1}
  F1 <- qf(alpha1, v1, dfe)
  F2 <- qf(alpha2, v2, dfe)
  ll <- (dfe*r2 - (1 - r2)*s*F2)/(dfe*(r2 + (1 - r2)*F2))
@@ -1026,6 +1064,8 @@ ci.rsqr <- function(alpha, r2, s, n) {
    b2 <- ll/(1 - ll)
    v1 <- ((n - 1)*b1 + s)^2/((n - 1)*b1*(b1 + 2) + s)
    v2 <- ((n - 1)*b2 + s)^2/((n - 1)*b2*(b2 + 2) + s)
+   if (v1 < 1) {v1 = 1}
+   if (v2 < 1) {v2 = 1}
    F1 <- qf(alpha1, v1, dfe)
    F2 <- qf(alpha2, v2, dfe)
    ll <- (dfe*r2 - (1 - r2)*s*F2)/(dfe*(r2 + (1 - r2)*F2))
@@ -1036,6 +1076,7 @@ ci.rsqr <- function(alpha, r2, s, n) {
  se <- (ul - ll)/(2*z0)
  out <- t(c(r2, adj, se, ll, ul))
  colnames(out) <- c("R-squared", "adj R-squared", "SE", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1073,8 +1114,8 @@ ci.rsqr <- function(alpha, r2, s, n) {
 #' ci.theil(.05, y, x)
 #'
 #' # Should return:
-#' #      Estimate        SE        LL   UL
-#' # [1,]      0.5 0.1085927 0.3243243 0.75
+#' # Estimate        SE        LL   UL
+#' #      0.5 0.1085927 0.3243243 0.75
 #'
 #'
 #' @importFrom stats qnorm
@@ -1103,6 +1144,7 @@ ci.theil <- function(alpha, y, x) {
   se <- (ul - ll)/(2*z)
   out <- t(c(est, se, ll, ul))
   colnames(out) = c("Estimate", "SE", "LL", "UL")
+  rownames(out) <- ""
   return(out)
 }
 
@@ -1142,13 +1184,15 @@ ci.theil <- function(alpha, y, x) {
 #' ci.cronbach2(.05, .88, .76, 8, 8, 200, 250)
 #'
 #' # Should return:
-#' #      Estimate         LL       UL
-#' # [1,]     0.12 0.06973411 0.173236
+#' # Estimate         LL       UL
+#' #     0.12 0.06973411 0.173236
 #'  
 #' 
 #' @importFrom stats qf
 #' @export
 ci.cronbach2 <- function(alpha, rel1, rel2, r1, r2, n1, n2) {
+ if (rel1 > .999 || rel1 < .001) {stop("rel1 must be between .001 and .999")}
+ if (rel2 > .999 || rel2 < .001) {stop("rel2 must be between .001 and .999")}
  df11 <- n1 - 1
  df21 <- n1*(r1 - 1)
  f11 <- qf(1 - alpha/2, df11, df21)
@@ -1168,6 +1212,7 @@ ci.cronbach2 <- function(alpha, rel1, rel2, r1, r2, n1, n2) {
  ul <- d + sqrt((UL1 - rel1)^2 + (rel2 - LL2)^2)
  out <- t(c(d, ll, ul))
  colnames(out) <- c("Estimate", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1208,18 +1253,21 @@ ci.cronbach2 <- function(alpha, rel1, rel2, r1, r2, n1, n2) {
 #' ci.rel2(.4, .35, .47, .2, .1, .32)
 #'
 #' # Should return:
-#' #      Estimate   LL        UL
-#' # [1,]      0.2 0.07 0.3220656
+#' # Estimate   LL        UL
+#' #      0.2 0.07 0.3220656
 #'  
 #' 
 #' @importFrom stats qnorm
 #' @export 
 ci.rel2 <- function(rel1, ll1, ul1, rel2, ll2, ul2) {
+ if (rel1 > .999 || rel1 < .001) {stop("reliability must be between .001 and .999")}
+ if (rel2 > .999 || rel2 < .001) {stop("reliability must be between .001 and .999")}
  diff <- rel1 - rel2
  ll <- diff - sqrt((rel1 - ll1)^2 + (ul2 - rel2)^2)
  ul <- diff + sqrt((ul1 - rel1)^2 + (rel2 - ll2)^2)
  out <- t(c(diff, ll, ul))
  colnames(out) <- c("Estimate", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1254,8 +1302,8 @@ ci.rel2 <- function(rel1, ll1, ul1, rel2, ll2, ul2) {
 #' size.ci.slope(.05, 31.1, x, 1)
 #'
 #' # Should return:
-#' #      Sample size
-#' # [1,]          83
+#' # Total sample size
+#' #                83
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -1266,7 +1314,8 @@ size.ci.slope <- function(alpha, evar, x, w) {
  z <- qnorm(1 - alpha/2)
  n <- ceiling(4*(evar/xvar)*(z/w)^2 + 1 + z^2/2)
  out <- matrix(n, nrow = 1, ncol = 1)
- colnames(out) <- "Sample size"
+ colnames(out) <- "Total sample size"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1301,13 +1350,14 @@ size.ci.slope <- function(alpha, evar, x, w) {
 #' size.ci.cor(.05, .362, 0, .25)
 #'
 #' # Should return:
-#' #      Sample size
-#' # [1,]         188
+#' # Sample size
+#' #         188
 #'  
 #' 
 #' @importFrom stats qnorm
 #' @export  
 size.ci.cor <- function(alpha, cor, s, w) {
+ if (cor > .999 || cor < -.999) {stop("correlation must be between -.999 and .999")}
  z <- qnorm(1 - alpha/2)
  n1 <- ceiling(4*(1 - cor^2)^2*(z/w)^2 + s + 3)
  zr <- log((1 + cor)/(1 - cor))/2
@@ -1319,6 +1369,109 @@ size.ci.cor <- function(alpha, cor, s, w) {
  n <- ceiling((n1 - s - 3)*((ul - ll)/w)^2 + 3 + s)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
+ rownames(out) <- ""
+ return(out)
+}
+
+
+#  size.ci.spear ==============================================================
+#' Sample size for a Spearman correlation confidence interval 
+#'
+#'
+#' @description
+#' Computes the sample size required to estimate a Spearman correlation with 
+#' desired confidence interval precision. Set the correlation planning value
+#' to the smallest value within a plausible range for a conservatively 
+#' large sample size.
+#'
+#'  
+#' @param  alpha  alpha level for 1-alpha confidence
+#' @param  cor    planning value of Spearman correlation
+#' @param  w      desired confidence interval width
+#'
+#' 
+#' @references
+#' \insertRef{Bonett2000}{statpsych}
+#'
+#'
+#' @return 
+#' Returns the required sample size
+#' 
+#' 
+#' @examples
+#' size.ci.spear(.05, .362, .25)
+#'
+#' # Should return:
+#' # Sample size
+#' #         200
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export  
+size.ci.spear <- function(alpha, cor, w) {
+ if (cor > .999 || cor < -.999) {stop("correlation must be between -.999 and .999")}
+ z <- qnorm(1 - alpha/2)
+ n1 <- ceiling(4*(1 + cor^2/2)*(1 - cor^2)^2*(z/w)^2 + 3)
+ zr <- log((1 + cor)/(1 - cor))/2 
+ se <- sqrt((1 + cor^2/2)/(n1 - 3))
+ ll0 <- zr - z*se
+ ul0 <- zr + z*se
+ ll <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
+ ul <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
+ n <- ceiling((n1 - 3)*((ul - ll)/w)^2 + 3)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size"
+ rownames(out) <- ""
+ return(out)
+}
+
+
+#  size.ci.pbcor ==============================================================
+#' Sample size for a point-biserial correlation confidence interval 
+#'
+#'
+#' @description
+#' Computes the sample size required to estimate a point-biserial correlation
+#' with desired confidence interval precision in a two-group nonexperimental
+#' design with simple random sampling. A two-group nonexperimental design 
+#' implies two subpopulations (e.g., all boys and all girls in a school 
+#' district). This function requires a planning value for the proportion of 
+#' population members who belong to one of the two subpopulations. Set the
+#' correlation planning value to the smallest value within a plausible range
+#' for a conservatively large sample size.
+#'
+#'  
+#' @param  alpha  alpha level for 1-alpha confidence
+#' @param  cor    planning value of point-biserial correlation
+#' @param  w      desired confidence interval width
+#' @param  p      proportion of members in one of the two subpopulations
+#'
+#' 
+#' @references
+#' \insertRef{Bonett2020a}{statpsych}
+#'
+#'
+#' @return 
+#' Returns the required sample size
+#' 
+#' 
+#' @examples
+#' size.ci.pbcor(.05, .40, .25, .73)
+#'
+#' # Should return:
+#' # Sample size
+#' #         168
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export  
+size.ci.pbcor <- function(alpha, cor, w, p) {
+ if (cor > .999 || cor < -.999) {stop("correlation must be between -.999 and .999")}
+ z <- qnorm(1 - alpha/2)
+ n <- ceiling(4*((1 - cor^2)^2)*(1 - 1.5*cor^2 + cor^2/(4*p*(1 - p)))*(z/w)^2)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- c("Sample size")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1345,28 +1498,32 @@ size.ci.cor <- function(alpha, cor, s, w) {
 #' 
 #' 
 #' @examples
+#' size.ci.rsqr(.05, .25, 5, .2)
 #' 
-#'
 #' # Should return:
-#' #      Sample size
-#' # [1,]         226
+#' # Sample size
+#' #         214
 #'  
 #' 
 #' @importFrom stats qnorm
 #' @export  
 size.ci.rsqr <- function(alpha, r2, s, w) {
+ if (r2 > .999 || r2 < .001) {stop("squared multiple correlation must be between .001 and .999")}
  z <- qnorm(1 - alpha/2)
  n1 <- ceiling(16*(r2*(1 - r2)^2)*(z/w)^2 + s + 2)
  ci <- ci.rsqr(alpha, r2, s, n1)
  ll <- ci[1,4]                           
  ul <- ci[1,5]
  n2 <- ceiling(n1*((ul - ll)/w)^2)
+ if (n2 < s + 2) {n2 = s + 2}
  ci <- ci.rsqr(alpha, r2, s, n2)
  ll <- ci[1,4]                          
  ul <- ci[1,5]
  n <- ceiling(n2*((ul - ll)/w)^2)
+ if (n < s + 2) {n = s + 2}
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1400,8 +1557,8 @@ size.ci.rsqr <- function(alpha, r2, s, w) {
 #' size.ci.condmean(.05, 120, 125, 15, 5)
 #'
 #' # Should return:
-#' #      Total sample size
-#' # [1,]               210
+#' # Total sample size
+#' #               210
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -1411,6 +1568,7 @@ size.ci.condmean <- function(alpha, evar, xvar, diff, w) {
  n <- ceiling(4*(evar*(1 + diff^2/xvar))*(z/w)^2 + 1 + z^2/2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Total sample size"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1441,7 +1599,7 @@ size.ci.condmean <- function(alpha, evar, xvar, diff, w) {
 #'
 #' 
 #' @return 
-#' Returns the required sample size per group
+#' Returns the required sample size for each group
 #' 
 #' 
 #' @examples
@@ -1449,8 +1607,8 @@ size.ci.condmean <- function(alpha, evar, xvar, diff, w) {
 #' size.ci.lc.ancova(.05, 1.37, 1, 0, 1.5, v)
 #'
 #' # Should return:
-#' #      Sample size per group
-#' # [1,]                    21
+#' # Sample size per group
+#' #                    21
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -1461,6 +1619,7 @@ size.ci.lc.ancova <- function(alpha, evar, s, d, w, v) {
  n <- ceiling(4*evar*(1 + d^2/4)*(t(v)%*%v)*(z/w)^2 + s + z^2/(2*k))
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size per group"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1470,15 +1629,15 @@ size.ci.lc.ancova <- function(alpha, evar, s, d, w, v) {
 #'
 #'
 #' @description
-#' Computes the approximate sample size required to estimate the indirect effect  
-#' in a simple mediation model. The direct effect of the independent variable on 
-#' the dependent variable, controlling for the mediator variable, is assumed to 
-#' be negligible. 
+#' Computes the approximate sample size required to estimate a standardized 
+#' indirect effect in a simple mediation model. The direct effect of the 
+#' independent (exogenous) variable on the response variable, controlling for
+#' the mediator variable, is assumed to be negligible. 
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  cor1   planning value of correlation between the independent and mediator variables
-#' @param  cor2   planning value of correlation between the mediator and dependent variables 
+#' @param  cor2   planning value of correlation between the mediator and response variables 
 #' @param  w      desired confidence interval width
 #'
 #' 
@@ -1490,17 +1649,20 @@ size.ci.lc.ancova <- function(alpha, evar, s, d, w, v) {
 #' size.ci.indirect(.05, .4, .5, .2)
 #'
 #' # Should return:
-#' #      Sample size
-#' # [1,]         106
+#' # Sample size
+#' #         106
 #'  
 #' 
 #' @importFrom stats qnorm
 #' @export  
 size.ci.indirect <- function(alpha, cor1, cor2, w) {
+ if (cor1 > .999 || cor1 < -.999) {stop("cor1 must be between -.999 and .999")}
+ if (cor2 > .999 || cor2 < -.999) {stop("cor2 must be between -.999 and .999")}
  z <- qnorm(1 - alpha/2)
  n <- ceiling(4*(cor2^2*(1 - cor1^2)^2 + cor1^2*(1 - cor2^2)^2)*(z/w)^2 + 3)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1523,7 +1685,7 @@ size.ci.indirect <- function(alpha, cor1, cor2, w) {
 #'
 #'
 #' @return 
-#' Returns the required sample size per group
+#' Returns the required sample size for each group
 #'
 #'
 #' @references
@@ -1534,13 +1696,15 @@ size.ci.indirect <- function(alpha, cor1, cor2, w) {
 #' size.ci.cronbach2(.05, .85, .70, 8, .15)
 #'
 #' # Should return:
-#' #      Sample size per group
-#' # [1,]                   180
+#' # Sample size per group
+#' #                   180
 #'  
 #' 
 #' @importFrom stats qnorm
 #' @export
 size.ci.cronbach2 <- function(alpha, rel1, rel2, r, w) {
+ if (rel1 > .999 || rel1 < .001) {stop("rel1 must be between .001 and .999")}
+ if (rel2 > .999 || rel2 < .001) {stop("rel2 must be between .001 and .999")}
  z <- qnorm(1 - alpha/2)
  n0 <- ceiling((8*r/(r - 1))*((1 - rel1)^2 + (1 - rel2)^2)*(z/w)^2 + 2)
  b <- log(n0/(n0 - 1))
@@ -1554,6 +1718,60 @@ size.ci.cronbach2 <- function(alpha, rel1, rel2, r, w) {
  n <- ceiling((n0 - 2)*(w0/w)^2 + 2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size per group"
+ rownames(out) <- ""
+ return(out)
+}
+
+
+#  size.ci.mape1 ==============================================================
+#' Sample size for a mean absolute prediction error confidence interval
+#'
+#'
+#' Computes the sample size required to estimate a mean absolute prediction
+#' error for a general linear model with desired confidence interval precision.
+#' Setting s = 0 gives the sample size requirement for a mean absolute 
+#' deviation in a one-group design. This function assumes that the prediction
+#' errors have a normal distribution.
+#'
+#'
+#' @param  alpha  alpha value for 1-alpha confidence 
+#' @param  mape   mean absolute prediction error planning value
+#' @param  s      number of predictor variables
+#' @param  w      desired confidence interval width
+#'
+#'
+#' @return 
+#' Returns the required sample size
+#'
+#'
+#' @examples
+#' size.ci.mape1(.05, 4.5, 5, 2)
+#'
+#' # Should return:
+#' # Sample size
+#' #          57
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export
+size.ci.mape1 <- function(alpha, mape, s, w) {
+ z <- qnorm(1 - alpha/2)
+ n0 <- ceiling(2.28*mape^2*(z/w)^2) + s
+ df <- n0 - s - 1
+ c <- n0/(n0 - (s + 2)/2)
+ ll <- exp(log(c*mape) - z*sqrt(.57/df))
+ ul <- exp(log(c*mape) + z*sqrt(.57/df))
+ w0 <- ul - ll
+ n1 <- ceiling((n0 - s)*(w0/w)^2 + s)
+ df <- n1 - s - 1
+ c <- n1/(n1 - (s + 2)/2)
+ ll <- exp(log(c*mape) - z*sqrt(.57/df))
+ ul <- exp(log(c*mape) + z*sqrt(.57/df))
+ w0 <- ul - ll
+ n <- ceiling((n1 - s)*(w0/w)^2 + s)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1590,8 +1808,8 @@ size.ci.cronbach2 <- function(alpha, rel1, rel2, r, w) {
 #' size.test.slope(.05, .9, 31.1, x, .75, 0)
 #'
 #' # Should return:
-#' #      Sample size
-#' # [1,]         100
+#' # Total sample size
+#' #               100
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -1604,7 +1822,8 @@ size.test.slope <- function(alpha, pow, evar, x, slope, h) {
  es <- slope - h
  n <- ceiling((evar/xvar)*(za + zb)^2/es^2 + 1 + za^2/2)
  out <- matrix(n, nrow = 1, ncol = 1)
- colnames(out) <- "Sample size"
+ colnames(out) <- "Total sample size"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1633,13 +1852,14 @@ size.test.slope <- function(alpha, pow, evar, x, slope, h) {
 #' size.test.cor(.05, .9, .45, 0, 0)
 #'
 #' # Should return:
-#' #      Sample size
-#' # [1,]          48
+#' # Sample size
+#' #          48
 #'  
 #' 
 #' @importFrom stats qnorm
 #' @export  
 size.test.cor <- function(alpha, pow, cor, s, h) {
+ if (cor > .999 || cor < -.999) {stop("correlation must be between -.999 and .999")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
  zr <- log((1 + cor)/(1 - cor))/2
@@ -1648,6 +1868,7 @@ size.test.cor <- function(alpha, pow, cor, s, h) {
  n <- ceiling((za + zb)^2/es^2 + s + 3)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1678,14 +1899,15 @@ size.test.cor <- function(alpha, pow, cor, s, h) {
 #' size.interval.cor(.05, .8, .1, 0, .25)
 #'
 #' # Should return:
-#' #      Sample size
-#' # [1,]         360
+#' # Sample size
+#' #         360
 #'  
 #' 
 #' @importFrom stats qnorm
 #' @export  
 size.interval.cor <- function(alpha, pow, cor, s, h) {
- if (h <= abs(cor)) {stop("cor must be between -h and h")}
+ if (cor > .999 || cor < -.999) {stop("correlation must be between -.999 and .999")}
+ if (h <= abs(cor)) {stop("correlation must be between -h and h")}
  za <- qnorm(1 - alpha)
  zb <- qnorm(1 - (1 - pow)/2)
  zr <- log((1 + cor)/(1 - cor))/2
@@ -1694,6 +1916,7 @@ size.interval.cor <- function(alpha, pow, cor, s, h) {
  n <- ceiling((za + zb)^2/es^2 + s + 3)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1717,20 +1940,22 @@ size.interval.cor <- function(alpha, pow, cor, s, h) {
 #'
 #' 
 #' @return 
-#' Returns the required sample size per group
+#' Returns the required sample size for each group
 #' 
 #' 
 #' @examples
 #' size.test.cor2(.05, .8, .4, .2, 0)
 #'
 #' # Should return:
-#' #      Sample size per group
-#' # [1,]                   325
+#' # Sample size per group
+#' #                   325
 #'  
 #' 
 #' @importFrom stats qnorm
 #' @export  
 size.test.cor2 <- function(alpha, pow, cor1, cor2, s) {
+ if (cor1 > .999 || cor1 < -.999) {stop("cor1 must be between -.999 and .999")}
+ if (cor2 > .999 || cor2 < -.999) {stop("cor2 must be between -.999 and .999")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
  zr1 <- log((1 + cor1)/(1 - cor1))/2
@@ -1739,6 +1964,7 @@ size.test.cor2 <- function(alpha, pow, cor1, cor2, s) {
  n <- ceiling(2*(za + zb)^2/es^2 + s + 3)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size per group"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1769,7 +1995,7 @@ size.test.cor2 <- function(alpha, pow, cor1, cor2, s) {
 #'
 #' 
 #' @return 
-#' Returns the required sample size per group
+#' Returns the required sample size for each group
 #' 
 #' 
 #' @examples
@@ -1777,8 +2003,8 @@ size.test.cor2 <- function(alpha, pow, cor1, cor2, s) {
 #' size.test.lc.ancova(.05, .9, 1.37, .7, 1, 0, v)
 #'
 #' # Should return:
-#' #      Sample size per group
-#' # [1,]                    47
+#' # Sample size per group
+#' #                    47
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -1790,6 +2016,7 @@ size.test.lc.ancova <- function(alpha, pow, evar, es, s, d, v) {
  n <- ceiling((evar*(1 + d^2/4)*t(v)%*%v)*(za + zb)^2/es^2 + s + za^2/k)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size per group"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1812,7 +2039,7 @@ size.test.lc.ancova <- function(alpha, pow, evar, es, s, d, v) {
 #'
 #'
 #' @return 
-#' Returns the required sample size per group
+#' Returns the required sample size for each group
 #'
 #'
 #' @references
@@ -1823,19 +2050,22 @@ size.test.lc.ancova <- function(alpha, pow, evar, es, s, d, v) {
 #' size.test.cronbach2(.05, .80, .85, .70, 8)
 #'
 #' # Should return:
-#' #      Sample size per group
-#' # [1,]                    77
+#' # Sample size per group
+#' #                    77
 #'  
 #' 
 #' @importFrom stats qnorm
 #' @export
 size.test.cronbach2 <- function(alpha, pow, rel1, rel2, r) {
+ if (rel1 > .999 || rel1 < .001) {stop("rel1 must be between .001 and .999")}
+ if (rel2 > .999 || rel2 < .001) {stop("rel2 must be between .001 and .999")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
  e <- (1 - rel1)/(1 - rel2)
  n <- ceiling((4*r/(r - 1))*(za + zb)^2/log(e)^2 + 2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size per group"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1865,21 +2095,23 @@ size.test.cronbach2 <- function(alpha, pow, rel1, rel2, r) {
 #' power.cor1(.05, 80, .3, 0, 0)
 #'
 #' # Should return:
-#' #          Power
-#' # [1,] 0.7751932
+#' #     Power
+#' # 0.7751932
 #'
 #'
 #' @importFrom stats qnorm
 #' @importFrom stats pnorm
 #' @export
 power.cor1 <- function(alpha, n, cor, h, s) {
+ if (cor > .999 || cor < -.999) {stop("correlation must be between -.999 and .999")}
  za <- qnorm(1 - alpha/2)
- f1 = log((1 + cor)/(1 - cor))/2
- f2 = log((1 + h)/(1 - h))/2
+ f1 <- log((1 + cor)/(1 - cor))/2
+ f2 <- log((1 + h)/(1 - h))/2
  z <- abs(f1 - f2)*sqrt(n - 3 - s) - za
  pow <- pnorm(z)
  out <- matrix(pow, nrow = 1, ncol = 1)
  colnames(out) <- "Power"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1911,21 +2143,24 @@ power.cor1 <- function(alpha, n, cor, h, s) {
 #' power.cor2(.05, 200, 200, .4, .2, 0)
 #'
 #' # Should return:
-#' #          Power
-#' # [1,] 0.5919517
+#' #     Power
+#' # 0.5919517
 #'
 #'
 #' @importFrom stats qnorm
 #' @importFrom stats pnorm
 #' @export
 power.cor2 <- function(alpha, n1, n2, cor1, cor2, s) {
+ if (cor1 > .999 || cor1 < -.999) {stop("cor1 must be between -.999 and .999")}
+ if (cor2 > .999 || cor2 < -.999) {stop("cor2 must be between -.999 and .999")}
  za <- qnorm(1 - alpha/2)
- f1 = log((1 + cor1)/(1 - cor1))/2
- f2 = log((1 + cor2)/(1 - cor2))/2
+ f1 <- log((1 + cor1)/(1 - cor1))/2
+ f2 <- log((1 + cor2)/(1 - cor2))/2
  z <- abs(f1 - f2)/sqrt(1/(n1 - 3 - s) + 1/(n2 - 3 - s)) - za
  pow <- pnorm(z)
  out <- matrix(pow, nrow = 1, ncol = 1)
  colnames(out) <- "Power"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1966,7 +2201,7 @@ slope.contrast <- function(x) {
  ss <- sum((x - m)^2)
  coef <- (x - m)/ss
  out <- matrix(coef, nrow = a, ncol = 1)
- colnames(out) = "Coefficient"
+ colnames(out) <- "Coefficient"
  return(out)
 }
 
@@ -2014,6 +2249,7 @@ slope.contrast <- function(x) {
 #' 
 #' @export  
 random.yx <- function(n, my, mx, sdy, sdx, cor, dec) {
+ if (cor > .999 || cor < -.999) {stop("correlation must be between -.999 and .999")}
  x0 <- rnorm(n, 0, 1)
  y0 <- cor*x0 + sqrt(1 - cor^2)*rnorm(n, 0, 1)
  x <- sdx*x0 + mx
@@ -2072,6 +2308,7 @@ random.yx <- function(n, my, mx, sdy, sdx, cor, dec) {
 #' @importFrom mnonr unonr
 #' @export
 sim.ci.cor <- function(alpha, n, cor, dist1, dist2, rep) {
+ if (cor > .999 || cor < -.999) {stop("correlation must be between -.999 and .999")}
  zcrit <- qnorm(1 - alpha/2)
  if (dist1 == 1) {
    skw1 <- 0; kur1 <- 0
@@ -2170,6 +2407,7 @@ sim.ci.cor <- function(alpha, n, cor, dist1, dist2, rep) {
 #' @importFrom mnonr unonr
 #' @export
 sim.ci.spear <- function(alpha, n, cor, dist1, dist2, rep) {
+ if (cor > .999 || cor < -.999) {stop("correlation must be between -.999 and .999")}
  zcrit <- qnorm(1 - alpha/2)
  if (dist1 == 1) {
    skw1 <- 0; kur1 <- 0

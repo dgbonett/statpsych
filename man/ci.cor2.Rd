@@ -35,8 +35,8 @@ reduce the bias of each Fisher transformed correlation.
 ci.cor2(.05, .886, .802, 200, 200)
 
 # Should return:
-#      Estimate         SE         LL        UL
-# [1,]    0.084 0.02967934 0.02803246 0.1463609
+# Estimate         SE         LL        UL
+#    0.084 0.02967934 0.02803246 0.1463609
  
 
 }

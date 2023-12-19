@@ -23,7 +23,7 @@ deviation of 1.0 in group 1."><!-- mathjax --><script src="https://cdnjs.cloudfl
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statpsych</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.0</span>
       </span>
     </div>
 
@@ -64,7 +64,7 @@ deviation of 1.0 in group 1.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">sim.ci.mean2</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">n1</span>, <span class="va">n2</span>, <span class="va">sd.ratio</span>, <span class="va">dist1</span>, <span class="va">dist2</span>, <span class="va">rep</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">sim.ci.mean2</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">n1</span>, <span class="va">n2</span>, <span class="va">sd.ratio</span>, <span class="va">dist1</span>, <span class="va">dist2</span>, <span class="va">rep</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -114,17 +114,17 @@ deviation of 1.0 in group 1.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">sim.ci.mean2</span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">30</span>, <span class="fl">25</span>, <span class="fl">1.5</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">1000</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">sim.ci.mean2</span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">30</span>, <span class="fl">25</span>, <span class="fl">1.5</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">1000</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                              Coverage Lower Error Upper Error Ave CI Width</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Equal Variances Assumed:        0.954       0.034       0.012     1.320548</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Equal Variances Not Assumed:    0.962       0.033       0.005     1.374079</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Should return (within sampling error):</span></span>
-<span class="r-in"><span class="co">#                             Coverage Lower Error Upper Error Ave CI Width</span></span>
-<span class="r-in"><span class="co"># Equal Variances Assumed:      0.93986     0.04022     0.01992     1.344437</span></span>
-<span class="r-in"><span class="co"># Equal Variances Not Assumed:  0.94762     0.03862     0.01376     1.401305</span></span>
-<span class="r-in"></span>
-<span class="r-in"></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Equal Variances Assumed:        0.941       0.036       0.023     1.349059</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Equal Variances Not Assumed:    0.944       0.037       0.019     1.406432</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Should return (within sampling error):</span></span></span>
+<span class="r-in"><span><span class="co">#                             Coverage Lower Error Upper Error Ave CI Width</span></span></span>
+<span class="r-in"><span><span class="co"># Equal Variances Assumed:      0.93986     0.04022     0.01992     1.344437</span></span></span>
+<span class="r-in"><span><span class="co"># Equal Variances Not Assumed:  0.94762     0.03862     0.01376     1.401305</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>

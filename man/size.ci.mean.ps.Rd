@@ -31,8 +31,8 @@ within a plausible range for a conservatively large sample size.
 size.ci.mean.ps(.05, 265, .8, 10)
 
 # Should return:
-#      Sample size
-# [1,]          19
+# Sample size
+#          19
  
 
 }

@@ -11,7 +11,7 @@ ci.median.ps(alpha, y1, y2)
 
 \item{y1}{vector of scores for measurement 1}
 
-\item{y2}{vector of scores for measurement 2}
+\item{y2}{vector of scores for measurement 2 (paired with y1)}
 }
 \value{
 Returns a 1-row matrix. The columns are:
@@ -21,7 +21,7 @@ Returns a 1-row matrix. The columns are:
 \item Median1-Median2 - estimated difference of medians
 \item SE1 - standard error of median 1
 \item SE2 - standard error of median 2
-\item COV - covariance of the two `estimated medians
+\item COV - covariance of the two estimated medians
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval
 }
@@ -37,10 +37,10 @@ y2 <- c(67, 28, 30, 28, 52, 40, 25, 37, 44, 10, 14, 20, 28, 40, 51)
 ci.median.ps(.05, y1, y2)
 
 # Should return:
-#    Median1 Median2 Median1-Median2       SE        LL        UL  
-# [1,]    13      30             -17 3.362289 -23.58996 -10.41004 
-#        SE1      SE2      COV
-#   3.085608 4.509735 9.276849
+# Median1 Median2 Median1-Median2       SE        LL        UL  
+#      13      30             -17 3.362289 -23.58996 -10.41004 
+#      SE1      SE2      COV
+# 3.085608 4.509735 9.276849
 
 
 }

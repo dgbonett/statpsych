@@ -36,8 +36,8 @@ sample size.
 size.ci.ratio.mean.ps(.05, 400, 150, 100, .7, 1.2)
 
 # Should return:
-#      Sample size
-# [1,]          21
+# Sample size
+#          21
  
 
 }

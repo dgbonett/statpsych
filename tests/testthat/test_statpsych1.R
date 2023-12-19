@@ -12,7 +12,7 @@ test_that("ci.mean1 returns valid matrix", {
 
 
 test_that("ci.stdmean1 returns valid matrix", {
-  colnames_expected <- c("Estimate", "SE", "LL", "UL")
+  colnames_expected <- c("Estimate", "adj Estimate", "SE", "LL", "UL")
   
   res <- ci.stdmean1(.05, 24.5, 3.65, 40, 20)
   
@@ -76,7 +76,7 @@ test_that("ci.ratio.mean2  returns valid matrix", {
 
 
 test_that("ci.stdmean2  returns valid matrix", {
-  colnames_expected <- c("Estimate", "SE", "LL", "UL")
+  colnames_expected <- c("Estimate", "adj Estimate", "SE", "LL", "UL")
   
   res <- ci.stdmean2(.05, 35.1, 26.7, 7.32, 6.98, 30, 30)
   
@@ -87,7 +87,7 @@ test_that("ci.stdmean2  returns valid matrix", {
 
 
 test_that("ci.stdmean.strat returns valid matrix", {
-  colnames_expected <- c("Estimate", "SE", "LL", "UL")
+  colnames_expected <- c("Estimate", "adj Estimate", "SE", "LL", "UL")
   
   res <- ci.stdmean.strat(.05, 30.2, 30.8, 10.5, 11.2, 200, 200, .533)
   
@@ -98,7 +98,7 @@ test_that("ci.stdmean.strat returns valid matrix", {
 
 
 test_that("ci.lc.stdmean.bs returns valid matrix", {
-  colnames_expected <- c("Estimate", "SE", "LL", "UL")
+  colnames_expected <- c("Estimate", "adj Estimate", "SE", "LL", "UL")
   
   m <- c(33.5, 37.9, 38.0, 44.1)
   sd <- c(3.84, 3.84, 3.65, 4.98)
@@ -137,7 +137,7 @@ test_that("ci.ratio.mean.ps returns valid matrix", {
 
 
 test_that("ci.stdmean.ps returns valid matrix", {
-  colnames_expected <- c("Estimate", "SE", "LL", "UL")
+  colnames_expected <- c("Estimate", "adj Estimate", "SE", "LL", "UL")
   
   res <- ci.stdmean.ps(.05, 110.4, 102.1, 15.3, 14.6, .75, 25)
   
@@ -148,7 +148,7 @@ test_that("ci.stdmean.ps returns valid matrix", {
 
 
 test_that("ci.lc.stdmean.ws returns valid matrix", {
-  colnames_expected <- c("Estimate", "SE", "LL", "UL")
+  colnames_expected <- c("Estimate", "adj Estimate", "SE", "LL", "UL")
   
   m <- c(33.5, 37.9, 38.0, 44.1)
   sd <- c(3.84, 3.84, 3.65, 4.98)
@@ -194,6 +194,28 @@ test_that("ci.ratio.mad.ps returns valid matrix", {
   y2 <- c(21, 4, 9, 12, 35, 18, 10, 22, 24, 1, 6, 8, 13, 16, 19)
   y1 <- c(67, 28, 30, 28, 52, 40, 25, 37, 44, 10, 14, 20, 28, 40, 51)
   res <- ci.ratio.mad.ps(.05, y1, y2)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+test_that("ci.cv1 returns valid matrix", {
+  colnames_expected <- c("Estimate", "SE", "LL", "UL")
+  
+  res <- ci.cv1(.05, 24.5, 3.65, 40)
+
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+test_that("ci.ratio.cv2 returns valid matrix", {
+  colnames_expected <- c("Estimate", "LL", "UL")
+  
+  res <- ci.ratio.cv2(.05, 34.5, 26.1, 4.15, 2.26, 50, 50)
   
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
@@ -329,7 +351,7 @@ test_that("ci.random.anova1 returns valid matrix", {
 
 test_that("ci.cronbach returns valid matrix", {
   colnames_expected <- c(
-   "SE", "LL", "UL"
+   "Estimate", "SE", "LL", "UL"
   )
   
   res <- ci.cronbach(.05, .85, 7, 89)
@@ -648,9 +670,9 @@ test_that("etasqr.adj returns valid number", {
 })
 
 
-test_that("pi.score2 returns valid matrix", {
+test_that("test.anova1.bs returns valid matrix", {
   colnames_expected <- c(
-    "F", "dfA", "dfE", "p", "eta-squared", "adj eta-squared"
+    "F", "dfA", "dfE", "p", "Eta-squared", "adj Eta-squared"
   )
   
   m <- c(12.4, 8.6, 10.5)
@@ -706,15 +728,13 @@ test_that("ci.etasqr returns valid matrix", {
 
 
 test_that("ci.reliability returns valid vector", {
-  colnames_expected <- c(
-    "LL",        "UL"
-  )
+  colnames_expected <- c("Estimate", "LL", "UL")
   
   
-  res <- ci.reliability(.05, .88, .147, 100)
+  res <- ci.reliability(.05, .88, .0147, 100)
   
   testthat::expect_equal(class(res), c("matrix", "array"))
-  testthat::expect_equal(dim(res), c(1, 2))
+  testthat::expect_equal(dim(res), c(1, 3))
   testthat::expect_equal(colnames(res), colnames_expected)
 
 })
@@ -921,7 +941,7 @@ test_that("ci.ratio.sd2 returns valid matrix", {
 
 test_that("size.ci.etasqr returns valid matrix", {
   colnames_expected <- c(
-    "Total sample size"
+    "Sample size per group"
   )
   
   res <- size.ci.etasqr(.05, .333, 3, .2)
@@ -934,7 +954,7 @@ test_that("size.ci.etasqr returns valid matrix", {
 
 test_that("ci.2x2.stdmean.bs returns valid matrix", {
   colnames_expected <- c(
-    "Estimate", "SE", "LL",        "UL"
+    "Estimate", "adj Estimate", "SE", "LL",        "UL"
   )
   
   y11 = c(14, 15, 11, 7, 16, 12, 15, 16, 10, 9)
@@ -954,11 +974,80 @@ test_that("ci.2x2.median.bs returns valid matrix", {
     "Estimate", "SE", "LL",        "UL"
   )
   
-  y11 = c(14, 15, 11, 7, 16, 12, 15, 16, 10, 9)
-  y12 = c(18, 24, 14, 18, 22, 21, 16, 17, 14, 13)
-  y21 = c(16, 11, 10, 17, 13, 18, 12, 16, 6, 15)
-  y22 = c(18, 17, 11, 9, 9, 13, 18, 15, 14, 11)
+  y11 <- c(14, 15, 11, 7, 16, 12, 15, 16, 10, 9)
+  y12 <- c(18, 24, 14, 18, 22, 21, 16, 17, 14, 13)
+  y21 <- c(16, 11, 10, 17, 13, 18, 12, 16, 6, 15)
+  y22 <- c(18, 17, 11, 9, 9, 13, 18, 15, 14, 11)
   res <- ci.2x2.median.bs(.05, y11, y12, y21, y22)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(7, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+test_that("ci.2x2.stdmean.ws returns valid matrix", {
+  colnames_expected <- c(
+    "Estimate", "adj Estimate",  "SE", "LL",        "UL"
+  )
+  
+  y11 <- c(21, 39, 32, 29, 27, 17, 27, 21, 28, 17, 12, 27)
+  y12 <- c(20, 36, 33, 27, 28, 14, 30, 20, 27, 15, 11, 22)
+  y21 <- c(21, 36, 30, 27, 28, 15, 27, 18, 29, 16, 11, 22)
+  y22 <- c(18, 34, 29, 28, 28, 17, 27, 21, 26, 16, 14, 23)
+  res <- ci.2x2.stdmean.ws(.05, y11, y12, y21, y22)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(7, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+
+test_that("ci.2x2.stdmean.mixed returns valid matrix", {
+  colnames_expected <- c(
+    "Estimate", "adj Estimate",  "SE", "LL",        "UL"
+  )
+  
+  y11 <- c(18, 19, 20, 17, 20, 16)
+  y12 <- c(19, 18, 19, 20, 17, 16)
+  y21 <- c(19, 16, 16, 14, 16, 18)
+  y22 <- c(16, 10, 12,  9, 13, 15)
+  res <- ci.2x2.stdmean.mixed(.05, y11, y12, y21, y22)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(7, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+test_that("ci.2x2.median.mixed returns valid matrix", {
+  colnames_expected <- c(
+    "Estimate", "SE", "LL",        "UL"
+  )
+  
+  y11 <- c(18, 19, 20, 17, 20, 16)
+  y12 <- c(19, 18, 19, 20, 17, 16)
+  y21 <- c(19, 16, 16, 14, 16, 18)
+  y22 <- c(16, 10, 12,  9, 13, 15)
+  res <- ci.2x2.median.mixed(.05, y11, y12, y21, y22)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(7, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+test_that("ci.2x2.median.w returns valid matrix", {
+  colnames_expected <- c(
+    "Estimate", "SE", "LL",        "UL"
+  )
+  
+  y11 <- c(221, 402, 333, 301, 284, 182, 281, 230, 290, 182, 133, 278)
+  y12 <- c(221, 371, 340, 288, 293, 150, 317, 211, 286, 161, 126, 234)
+  y21 <- c(219, 371, 314, 279, 284, 155, 278, 185, 296, 169, 118, 229)
+  y22 <- c(170, 332, 280, 273, 272, 160, 260, 204, 252, 153, 137, 221)
+  res <- ci.2x2.median.ws(.05, y11, y12, y21, y22)
   
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(dim(res), c(7, length(colnames_expected)))
@@ -990,3 +1079,17 @@ test_that("ci.bayes.normal returns valid matrix", {
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)
 })
+
+
+test_that("spearmanbrown returns valid matrix", {
+  colnames_expected <- c(
+    "Reliability of r2 measurements"
+  )
+  
+  res <- spearmanbrown(.6, 10, 20)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+

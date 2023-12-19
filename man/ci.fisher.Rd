@@ -11,21 +11,32 @@ ci.fisher(alpha, cor, se)
 
 \item{cor}{estimated correlation or association coefficient}
 
-\item{se}{standard error of estimate}
+\item{se}{standard error of correlation or association coefficient}
 }
 \value{
-Returns a 1-row matrix containing the lower and upper confidence limits.
+Returns a 1-row matrix. The columns are:
+\itemize{
+\item Estimate - correlation (from input)
+\item LL - lower limit of the confidence interval
+\item UL - upper limit of the confidence interval
+}
 }
 \description{
-Computes a Fisher confidence interval for any type of correlation or any
-measure of association that has a -1 to 1 range.
+Computes a Fisher confidence interval for any type of correlation (e.g.,
+Pearson, Spearman, Kendall-tau, tetrachoric, phi, partial, semipartial,
+etc.) or ordinal association such as gamma, Somers' d, or tau-b. The
+correlation could also be between two latent factors obtained
+from a SEM analysis (the Fisher CI will be more accurate than the
+large-sample CI from a SEM analysis). The standard error can be a
+traditional standard error, a bootstrap standard error, or a robust
+standard error from a SEM analysis.
 }
 \examples{
 ci.fisher(.05, .641, .052)
 
 # Should return:
-#             LL        UL
-# [1,] 0.5276396 0.7319293
+# Estimate        LL        UL
+#    0.641 0.5276396 0.7319293
 
 
 }

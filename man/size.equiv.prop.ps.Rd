@@ -15,7 +15,7 @@ size.equiv.prop.ps(alpha, pow, p1, p2, phi, h)
 
 \item{p2}{planning value of proportion for measurement 2}
 
-\item{phi}{planning value of phi coefficient}
+\item{phi}{planning value of phi correlation}
 
 \item{h}{upper limit for range of practical equivalence}
 }
@@ -38,8 +38,8 @@ plausible range for a conservatively large sample size.
 size.equiv.prop.ps(.1, .8, .30, .35, .40, .15)
 
 # Should return:
-#      Sample size
-# [1,]         173
+# Sample size
+#         173
 
 
 }

@@ -36,8 +36,8 @@ x <- c(2, 5, 8)
 size.test.slope(.05, .9, 31.1, x, .75, 0)
 
 # Should return:
-#      Sample size
-# [1,]         100
+# Total sample size
+#               100
  
 
 }

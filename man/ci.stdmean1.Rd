@@ -20,7 +20,8 @@ ci.stdmean1(alpha, m, sd, n, h)
 \value{
 Returns a 1-row matrix. The columns are:
 \itemize{
-\item Estimate - bias adjusted standardized mean difference
+\item Estimate - estimated standardized mean difference
+\item adj Estimate - bias adjusted standardized mean difference estimate
 \item SE - standard error
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval
@@ -36,8 +37,8 @@ confidence interval for the coefficient of variation.
 ci.stdmean1(.05, 24.5, 3.65, 40, 20)
 
 # Should return:
-#      Estimate        SE        LL       UL
-# [1,] 1.209015 0.2124335 0.8165146 1.649239
+# Estimate  adj Estimate        SE        LL       UL
+# 1.232877      1.209015 0.2124335 0.8165146 1.649239
  
 
 }

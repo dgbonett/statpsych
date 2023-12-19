@@ -18,7 +18,7 @@ size.supinf.prop2(alpha, pow, p1, p2, h)
 \item{h}{lower or upper limit for range of practical equivalence}
 }
 \value{
-Returns the required sample size per group
+Returns the required sample size for each group
 }
 \description{
 Computes the sample size in each group (assuming equal sample sizes) required
@@ -34,8 +34,8 @@ to p1 - p2.
 size.supinf.prop2(.05, .9, .35, .20, .05)
 
 # Should return:
-#      Sample size per group
-# [1,]                   408
+# Sample size per group
+#                   408
 
 
 }

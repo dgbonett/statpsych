@@ -29,16 +29,18 @@ Returns a 1-row matrix. The columns are:
 \description{
 Computes an approximate Bayesian credible interval for a normal prior
 distribution. This function can be used with any parameter estimator
-(e.g., mean, mean difference, linear contrast of means, slope coefficient)
-that has a normal sampling distribution. The mean and standard deviation
-of the posterior normal distribution are also reported.
+(e.g., mean, mean difference, linear contrast of means, slope coefficient
+standardized mean difference, standardized linear contrast of means, median,
+median difference, linear contrast of medians, etc.) that has an approximate
+normal sampling distribution. The mean and standard deviation of the posterior
+normal distribution are also reported.
 }
 \examples{
 ci.bayes.normal(.05, 30, 2, 24.5, 0.577)
 
 # Should return:
-#      Posterior mean Posterior SD       LL       UL
-# [1,]        24.9226    0.5543895 23.83602 26.00919
+# Posterior mean Posterior SD       LL       UL
+#        24.9226    0.5543895 23.83602 26.00919
 
 
 }

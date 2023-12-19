@@ -34,8 +34,8 @@ the two measurements can be unequal.
 power.mean.ps(.05, 20, 10.0, 12.0, 2, .7)
 
 # Should return:
-#          Power
-# [1,] 0.9074353
+#     Power
+# 0.9074353
 
 
 }

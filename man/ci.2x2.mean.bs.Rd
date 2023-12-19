@@ -38,10 +38,10 @@ variable. A Satterthwaite adjustment to the degrees of freedom is used and
 equality of population variances is not assumed.
 }
 \examples{
-y11 = c(14, 15, 11, 7, 16, 12, 15, 16, 10, 9)
-y12 = c(18, 24, 14, 18, 22, 21, 16, 17, 14, 13)
-y21 = c(16, 11, 10, 17, 13, 18, 12, 16, 6, 15)
-y22 = c(18, 17, 11, 9, 9, 13, 18, 15, 14, 11)
+y11 <- c(14, 15, 11, 7, 16, 12, 15, 16, 10, 9)
+y12 <- c(18, 24, 14, 18, 22, 21, 16, 17, 14, 13)
+y21 <- c(16, 11, 10, 17, 13, 18, 12, 16, 6, 15)
+y22 <- c(18, 17, 11, 9, 9, 13, 18, 15, 14, 11)
 ci.2x2.mean.bs(.05, y11, y12, y21, y22)
 
 # Should return:

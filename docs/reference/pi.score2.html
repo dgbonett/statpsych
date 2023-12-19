@@ -21,7 +21,7 @@ are computed."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/li
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statpsych</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.0</span>
       </span>
     </div>
 
@@ -61,7 +61,7 @@ are computed.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">pi.score2</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">m1</span>, <span class="va">m2</span>, <span class="va">sd1</span>, <span class="va">sd2</span>, <span class="va">n1</span>, <span class="va">n2</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">pi.score2</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">m1</span>, <span class="va">m2</span>, <span class="va">sd1</span>, <span class="va">sd2</span>, <span class="va">n1</span>, <span class="va">n2</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -108,23 +108,23 @@ are computed.</p>
     <p>Hahn GJ (1977).
 “A prediction interval on the difference between two future sample means and its application to a claim of product superiority.”
 <em>Technometrics</em>, <b>19</b>(2), 131--134.
-ISSN 0040-1706, doi: <a href="https://doi.org/10.1080/00401706.1977.10489520" class="external-link">10.1080/00401706.1977.10489520</a>
+ISSN 0040-1706, <a href="https://doi.org/10.1080/00401706.1977.10489520" class="external-link">doi:10.1080/00401706.1977.10489520</a>
 .</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">pi.score2</span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">29.57</span>, <span class="fl">18.35</span>, <span class="fl">2.68</span>, <span class="fl">1.92</span>, <span class="fl">40</span>, <span class="fl">45</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">pi.score2</span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">29.57</span>, <span class="fl">18.35</span>, <span class="fl">2.68</span>, <span class="fl">1.92</span>, <span class="fl">40</span>, <span class="fl">45</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                              Predicted       df       LL       UL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Equal Variances Assumed:         11.22 83.00000 4.650454 17.78955</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Equal Variances Not Assumed:     11.22 72.34319 4.603642 17.83636</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Should return:</span></span>
-<span class="r-in"><span class="co">#                              Predicted       df       LL       UL</span></span>
-<span class="r-in"><span class="co"># Equal Variances Assumed:         11.22 83.00000 4.650454 17.78955</span></span>
-<span class="r-in"><span class="co"># Equal Variances Not Assumed:     11.22 72.34319 4.603642 17.83636</span></span>
-<span class="r-in"> </span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Should return:</span></span></span>
+<span class="r-in"><span><span class="co">#                              Predicted       df       LL       UL</span></span></span>
+<span class="r-in"><span><span class="co"># Equal Variances Assumed:         11.22 83.00000 4.650454 17.78955</span></span></span>
+<span class="r-in"><span><span class="co"># Equal Variances Not Assumed:     11.22 72.34319 4.603642 17.83636</span></span></span>
+<span class="r-in"><span> </span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>

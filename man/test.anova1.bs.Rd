@@ -21,8 +21,8 @@ Returns a 1-row matrix. The columns are:
 \item dfE - error degrees of freedom
 \item dfA - degrees of freedom for between-subjects factor
 \item p - p-value for F-test
-\item eta-squared - estimate of eta-squared
-\item adj eta-squared - a bias adjusted estimate of eta-squared
+\item Eta-squared - estimate of eta-squared
+\item adj Eta-squared - a bias adjusted estimate of eta-squared
 }
 }
 \description{
@@ -38,8 +38,8 @@ n <- c(20, 20, 20)
 test.anova1.bs(m, sd, n)
 
 #  Should return:
-#             F dfA  dfE           p eta-squared adj eta-squared
-# [1,] 5.919585   2   57 0.004614428   0.1719831       0.1429298
+#        F dfA  dfE           p Eta-squared  adj Eta-squared
+# 5.919585   2   57 0.004614428   0.1719831        0.1429298
  
 
 }

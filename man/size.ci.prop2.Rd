@@ -16,7 +16,7 @@ size.ci.prop2(alpha, p1, p2, w)
 \item{w}{desired confidence interval width}
 }
 \value{
-Returns the required sample size per group
+Returns the required sample size for each group
 }
 \description{
 Computes the sample size in each group (assuming equal sample sizes) required
@@ -28,8 +28,8 @@ a conservatively large sample size.
 size.ci.prop2(.05, .4, .2, .15)
 
 # Should return:
-#      Sample size per group
-# [1,]                   274
+# Sample size per group
+#                   274
 
 
 }

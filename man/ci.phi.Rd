@@ -36,8 +36,8 @@ dichotomous variables are naturally dichotomous.
 ci.phi(.05, 229, 28, 96, 24)
 
 # Should return:
-#       Estimate         SE         LL        UL
-# [1,] 0.1229976 0.05746271 0.01037273 0.2356224
+#  Estimate         SE         LL        UL
+# 0.1229976 0.05746271 0.01037273 0.2356224
 
 
 }

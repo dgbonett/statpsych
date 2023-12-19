@@ -3,7 +3,7 @@
 all pairs of raters in a 3-rater design with a dichotomous rating, and
 computes adjusted Wald confidence intervals for differences of all pairs of
 G agreement. An adjusted Wald confidence interval for unanimous G agreement
-among the three raters also is computed. In the three-rater design,
+among the three raters is also computed. In the three-rater design,
 unanimous G agreement is equal to the average of all pairs of G agreement."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -22,7 +22,7 @@ unanimous G agreement is equal to the average of all pairs of G agreement."><!--
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statpsych</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.0</span>
       </span>
     </div>
 
@@ -58,12 +58,12 @@ unanimous G agreement is equal to the average of all pairs of G agreement."><!--
 all pairs of raters in a 3-rater design with a dichotomous rating, and
 computes adjusted Wald confidence intervals for differences of all pairs of
 G agreement. An adjusted Wald confidence interval for unanimous G agreement
-among the three raters also is computed. In the three-rater design,
+among the three raters is also computed. In the three-rater design,
 unanimous G agreement is equal to the average of all pairs of G agreement.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ci.agree.3rater</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">f</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ci.agree.3rater</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">f</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -74,9 +74,9 @@ unanimous G agreement is equal to the average of all pairs of G agreement.</p>
 
 <dt>f</dt>
 <dd><p>vector of frequency counts from 2x2x2 table where
-f = <code>[</code>f111, f112, f121, f122, f211, f212, f221, f222<code>]</code>
+f = <code>[</code>f111, f112, f121, f122, f211, f212, f221, f222<code>]</code>,
 first subscript represents rating of rater 1,
-second subscript represents rating of rater 2,
+second subscript represents rating of rater 2, and
 third subscript represents rating of rater 3</p></dd>
 
 </dl></div>
@@ -100,34 +100,34 @@ third subscript represents rating of rater 3</p></dd>
     <p>Bonett DG (2022).
 “Statistical inference for G-indices of agreement.”
 <em>Journal of Educational and Behavioral Statistics</em>, <b>47</b>(4), 438--458.
-ISSN 1076-9986, doi: <a href="https://doi.org/10.3102/10769986221088561" class="external-link">10.3102/10769986221088561</a>
+ISSN 1076-9986, <a href="https://doi.org/10.3102/10769986221088561" class="external-link">doi:10.3102/10769986221088561</a>
 .</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">6</span>, <span class="fl">4</span>, <span class="fl">40</span>, <span class="fl">20</span>, <span class="fl">1</span>, <span class="fl">9</span>, <span class="fl">120</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">ci.agree.3rater</span><span class="op">(</span><span class="fl">.05</span>, <span class="va">f</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">6</span>, <span class="fl">4</span>, <span class="fl">40</span>, <span class="fl">20</span>, <span class="fl">1</span>, <span class="fl">9</span>, <span class="fl">120</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">ci.agree.3rater</span><span class="op">(</span><span class="fl">.05</span>, <span class="va">f</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                  Estimate          LL         UL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> G{1,2}         0.56666667  0.46601839  0.6524027</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> G{1,3}         0.50000000  0.39564646  0.5911956</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> G{2,3}         0.86666667  0.79701213  0.9135142</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> G{1,2}-G{1,3}  0.06666667  0.00580397  0.1266464</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> G{1,2}-G{2,3} -0.30000000 -0.40683919 -0.1891873</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> G{2,3}-G{1,3} -0.36666667 -0.46222023 -0.2662566</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> G(1,2)         0.56666667  0.46601839  0.6524027</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> G(1,3)         0.50000000  0.39564646  0.5911956</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> G(2,3)         0.86666667  0.79701213  0.9135142</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> G(1,2)-G(1,3)  0.06666667  0.00580397  0.1266464</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> G(1,2)-G(2,3) -0.30000000 -0.40683919 -0.1891873</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> G(2,3)-G(1,3) -0.36666667 -0.46222023 -0.2662566</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> G(3)           0.64444444  0.57382971  0.7068720</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Should return:</span></span>
-<span class="r-in"><span class="co">#                  Estimate          LL         UL</span></span>
-<span class="r-in"><span class="co"># G(1,2)         0.56666667  0.46601839  0.6524027</span></span>
-<span class="r-in"><span class="co"># G(1,3)         0.50000000  0.39564646  0.5911956</span></span>
-<span class="r-in"><span class="co"># G(2,3)         0.86666667  0.79701213  0.9135142</span></span>
-<span class="r-in"><span class="co"># G(1,2)-G(1,3)  0.06666667  0.00580397  0.1266464</span></span>
-<span class="r-in"><span class="co"># G(1,2)-G(2,3) -0.30000000 -0.40683919 -0.1891873</span></span>
-<span class="r-in"><span class="co"># G(2,3)-G(1,3) -0.36666667 -0.46222023 -0.2662566</span></span>
-<span class="r-in"><span class="co"># G(3)           0.64444444  0.57382971  0.7068720</span></span>
-<span class="r-in"> </span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Should return:</span></span></span>
+<span class="r-in"><span><span class="co">#                  Estimate          LL         UL</span></span></span>
+<span class="r-in"><span><span class="co"># G(1,2)         0.56666667  0.46601839  0.6524027</span></span></span>
+<span class="r-in"><span><span class="co"># G(1,3)         0.50000000  0.39564646  0.5911956</span></span></span>
+<span class="r-in"><span><span class="co"># G(2,3)         0.86666667  0.79701213  0.9135142</span></span></span>
+<span class="r-in"><span><span class="co"># G(1,2)-G(1,3)  0.06666667  0.00580397  0.1266464</span></span></span>
+<span class="r-in"><span><span class="co"># G(1,2)-G(2,3) -0.30000000 -0.40683919 -0.1891873</span></span></span>
+<span class="r-in"><span><span class="co"># G(2,3)-G(1,3) -0.36666667 -0.46222023 -0.2662566</span></span></span>
+<span class="r-in"><span><span class="co"># G(3)           0.64444444  0.57382971  0.7068720</span></span></span>
+<span class="r-in"><span> </span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>

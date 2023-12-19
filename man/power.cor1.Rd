@@ -28,8 +28,8 @@ a planned sample size. Set s = 0 for a Pearson correlation.
 power.cor1(.05, 80, .3, 0, 0)
 
 # Should return:
-#          Power
-# [1,] 0.7751932
+#     Power
+# 0.7751932
 
 
 }

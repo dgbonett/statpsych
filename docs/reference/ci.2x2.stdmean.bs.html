@@ -24,7 +24,7 @@ recommended standarizer when both factors are treatment factors."><!-- mathjax -
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statpsych</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.0</span>
       </span>
     </div>
 
@@ -66,7 +66,7 @@ recommended standarizer when both factors are treatment factors.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ci.2x2.stdmean.bs</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">y11</span>, <span class="va">y12</span>, <span class="va">y21</span>, <span class="va">y22</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ci.2x2.stdmean.bs</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">y11</span>, <span class="va">y12</span>, <span class="va">y21</span>, <span class="va">y22</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -95,7 +95,8 @@ recommended standarizer when both factors are treatment factors.</p>
     <h2>Value</h2>
     
 
-<p>Returns a 7-row matrix (one row per effect). The columns are:</p><ul><li><p>Estimate - bias adjusted estimate of standardized effect</p></li>
+<p>Returns a 7-row matrix (one row per effect). The columns are:</p><ul><li><p>Estimate - estimate of standardized effect</p></li>
+<li><p>adj Estimate - bias adjusted estimate of standardized effect</p></li>
 <li><p>SE - standard error</p></li>
 <li><p>LL - lower limit of the confidence interval</p></li>
 <li><p>UL - upper limit of the confidence interval</p></li>
@@ -103,31 +104,31 @@ recommended standarizer when both factors are treatment factors.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">y11</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">14</span>, <span class="fl">15</span>, <span class="fl">11</span>, <span class="fl">7</span>, <span class="fl">16</span>, <span class="fl">12</span>, <span class="fl">15</span>, <span class="fl">16</span>, <span class="fl">10</span>, <span class="fl">9</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">y12</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">18</span>, <span class="fl">24</span>, <span class="fl">14</span>, <span class="fl">18</span>, <span class="fl">22</span>, <span class="fl">21</span>, <span class="fl">16</span>, <span class="fl">17</span>, <span class="fl">14</span>, <span class="fl">13</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">y21</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">16</span>, <span class="fl">11</span>, <span class="fl">10</span>, <span class="fl">17</span>, <span class="fl">13</span>, <span class="fl">18</span>, <span class="fl">12</span>, <span class="fl">16</span>, <span class="fl">6</span>, <span class="fl">15</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">y22</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">18</span>, <span class="fl">17</span>, <span class="fl">11</span>, <span class="fl">9</span>, <span class="fl">9</span>, <span class="fl">13</span>, <span class="fl">18</span>, <span class="fl">15</span>, <span class="fl">14</span>, <span class="fl">11</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">ci.2x2.stdmean.bs</span><span class="op">(</span><span class="fl">.05</span>, <span class="va">y11</span>, <span class="va">y12</span>, <span class="va">y21</span>, <span class="va">y22</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            Estimate        SE         LL         UL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> AB:      -1.4193502 0.6885238 -2.7992468 -0.1002829</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> A:        0.4592015 0.3379520 -0.1933321  1.1314153</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> B:       -0.7375055 0.3451209 -1.4297338 -0.0768846</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> A at b1: -0.2504736 0.4640186 -1.1653006  0.6536189</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> A at b2:  1.1688767 0.5001423  0.2136630  2.1741850</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> B at a1: -1.4471806 0.4928386 -2.4441376 -0.5122457</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> B at a2: -0.0278304 0.4820369 -0.9732017  0.9163482</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Should return:</span></span>
-<span class="r-in"><span class="co">#            Estimate        SE         LL         UL</span></span>
-<span class="r-in"><span class="co"># AB:      -1.4193502 0.6885238 -2.7992468 -0.1002829</span></span>
-<span class="r-in"><span class="co"># A:        0.4592015 0.3379520 -0.1933321  1.1314153</span></span>
-<span class="r-in"><span class="co"># B:       -0.7375055 0.3451209 -1.4297338 -0.0768846</span></span>
-<span class="r-in"><span class="co"># A at b1: -0.2504736 0.4640186 -1.1653006  0.6536189</span></span>
-<span class="r-in"><span class="co"># A at b2:  1.1688767 0.5001423  0.2136630  2.1741850</span></span>
-<span class="r-in"><span class="co"># B at a1: -1.4471806 0.4928386 -2.4441376 -0.5122457</span></span>
-<span class="r-in"><span class="co"># B at a2: -0.0278304 0.4820369 -0.9732017  0.9163482</span></span>
-<span class="r-in"></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">y11</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">14</span>, <span class="fl">15</span>, <span class="fl">11</span>, <span class="fl">7</span>, <span class="fl">16</span>, <span class="fl">12</span>, <span class="fl">15</span>, <span class="fl">16</span>, <span class="fl">10</span>, <span class="fl">9</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">y12</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">18</span>, <span class="fl">24</span>, <span class="fl">14</span>, <span class="fl">18</span>, <span class="fl">22</span>, <span class="fl">21</span>, <span class="fl">16</span>, <span class="fl">17</span>, <span class="fl">14</span>, <span class="fl">13</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">y21</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">16</span>, <span class="fl">11</span>, <span class="fl">10</span>, <span class="fl">17</span>, <span class="fl">13</span>, <span class="fl">18</span>, <span class="fl">12</span>, <span class="fl">16</span>, <span class="fl">6</span>, <span class="fl">15</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">y22</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">18</span>, <span class="fl">17</span>, <span class="fl">11</span>, <span class="fl">9</span>, <span class="fl">9</span>, <span class="fl">13</span>, <span class="fl">18</span>, <span class="fl">15</span>, <span class="fl">14</span>, <span class="fl">11</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">ci.2x2.stdmean.bs</span><span class="op">(</span><span class="fl">.05</span>, <span class="va">y11</span>, <span class="va">y12</span>, <span class="va">y21</span>, <span class="va">y22</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             Estimate adj Estimate        SE         LL         UL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> AB:      -1.44976487   -1.4193502 0.6885238 -2.7992468 -0.1002829</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> A:        0.46904158    0.4592015 0.3379520 -0.1933321  1.1314153</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> B:       -0.75330920   -0.7375055 0.3451209 -1.4297338 -0.0768846</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> A at b1: -0.25584086   -0.2504736 0.4640186 -1.1653006  0.6536189</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> A at b2:  1.19392401    1.1688767 0.5001423  0.2136630  2.1741850</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> B at a1: -1.47819163   -1.4471806 0.4928386 -2.4441376 -0.5122457</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> B at a2: -0.02842676   -0.0278304 0.4820369 -0.9732017  0.9163482</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Should return:</span></span></span>
+<span class="r-in"><span><span class="co">#             Estimate  adj Estimate        SE         LL         UL</span></span></span>
+<span class="r-in"><span><span class="co"># AB:      -1.44976487    -1.4193502 0.6885238 -2.7992468 -0.1002829</span></span></span>
+<span class="r-in"><span><span class="co"># A:        0.46904158     0.4592015 0.3379520 -0.1933321  1.1314153</span></span></span>
+<span class="r-in"><span><span class="co"># B:       -0.75330920    -0.7375055 0.3451209 -1.4297338 -0.0768846</span></span></span>
+<span class="r-in"><span><span class="co"># A at b1: -0.25584086    -0.2504736 0.4640186 -1.1653006  0.6536189</span></span></span>
+<span class="r-in"><span><span class="co"># A at b2:  1.19392401     1.1688767 0.5001423  0.2136630  2.1741850</span></span></span>
+<span class="r-in"><span><span class="co"># B at a1: -1.47819163    -1.4471806 0.4928386 -2.4441376 -0.5122457</span></span></span>
+<span class="r-in"><span><span class="co"># B at a2: -0.02842676    -0.0278304 0.4820369 -0.9732017  0.9163482</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>

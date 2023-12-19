@@ -35,8 +35,8 @@ ci.ratio.mean2(.05, y1, y2)
 
 # Should return:
 #
-#      Mean1    Mean2 Mean1/Mean2        LL       UL
-# [1,]  41.5 36.38462    1.140592 0.9897482 1.314425
+# Mean1    Mean2 Mean1/Mean2        LL       UL
+#  41.5 36.38462    1.140592 0.9897482 1.314425
 
 
 }

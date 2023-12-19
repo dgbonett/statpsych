@@ -26,8 +26,8 @@ with desired confidence interval precision.
 size.ci.cronbach(.05, .85, 5, .1)
 
 # Should return:
-#      Sample size
-# [1,]          89
+# Sample size
+#          89
  
 
 }

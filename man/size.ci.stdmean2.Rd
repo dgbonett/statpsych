@@ -16,7 +16,7 @@ size.ci.stdmean2(alpha, d, w, R)
 \item{R}{n2/n1 ratio}
 }
 \value{
-Returns the required sample size per each group for each standardizer
+Returns the required sample size per group for each standardizer
 }
 \description{
 Computes the sample size per group required to estimate two types of

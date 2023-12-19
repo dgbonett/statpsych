@@ -28,8 +28,8 @@ with desired power. Set s = 0 for a Pearson correlation.
 size.test.cor(.05, .9, .45, 0, 0)
 
 # Should return:
-#      Sample size
-# [1,]          48
+# Sample size
+#          48
  
 
 }

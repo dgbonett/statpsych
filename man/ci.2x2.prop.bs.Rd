@@ -10,7 +10,7 @@ ci.2x2.prop.bs(alpha, f, n)
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
 
-\item{f}{vector of frequency counts of participants with attribute}
+\item{f}{vector of frequency counts of participants who have the attribute}
 
 \item{n}{vector of sample sizes}
 }
@@ -30,14 +30,14 @@ Computes adjusted Wald confidence intervals and tests for the AB
 interaction effect, main effect of A, main efect of B, simple main effects
 of A, and simple main effects of B in a 2x2 between-subjects factorial
 design with a dichotomous response variable. The input vector of
-frequency counts is f11, f12, f21, f22, and the input vector of
-sample sizes is n11, n12, n21, n22 where the first subscript represents
-the levels of Factor A and the second subscript represents the levels of
-Factor B.
+frequency counts is f = {\code{[}}f11, f12, f21, f22{\code{[}}, and the input vector of
+sample sizes is n = {\code{[}}n11, n12, n21, n22{\code{[}} where the first subscript
+represents the levels of Factor A and the second subscript represents the
+levels of Factor B.
 }
 \examples{
-f = c(15, 24, 28, 23)
-n = c(50, 50, 50, 50)
+f <- c(15, 24, 28, 23)
+n <- c(50, 50, 50, 50)
 ci.2x2.prop.bs(.05, f, n)
 
 # Should return:
@@ -51,4 +51,7 @@ ci.2x2.prop.bs(.05, f, n)
 # B at a2:  0.09615385 0.09758550  0.9853293 0.324462356 -0.09511021  0.28741790
 
 
+}
+\references{
+\insertRef{Price2004}{statpsych}
 }

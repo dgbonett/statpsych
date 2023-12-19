@@ -28,8 +28,8 @@ effect size to a minimally interesting value.
 power.mean1(.05, 15, 80.5, 7)
 
 # Should return:
-#          Power
-# [1,] 0.8021661
+#     Power
+# 0.8021661
 
 
 }

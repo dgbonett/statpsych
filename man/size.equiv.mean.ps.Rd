@@ -38,8 +38,8 @@ conservatively large sample size.
 size.equiv.mean.ps(.10, .85, 15, .5, .7, 1.5)
 
 # Should return:
-#      Sample size
-# [1,]          68
+# Sample size
+#          68
  
 
 }

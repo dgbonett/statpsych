@@ -10,9 +10,9 @@ ci.agree.3rater(alpha, f)
 \item{alpha}{alpha level for 1-alpha confidence}
 
 \item{f}{vector of frequency counts from 2x2x2 table where
-f = {\code{[}}f111, f112, f121, f122, f211, f212, f221, f222{\verb{]}}
+f = {\code{[}}f111, f112, f121, f122, f211, f212, f221, f222{\verb{]}},
 first subscript represents rating of rater 1,
-second subscript represents rating of rater 2,
+second subscript represents rating of rater 2, and
 third subscript represents rating of rater 3}
 }
 \value{
@@ -39,7 +39,7 @@ Computes adjusted Wald confidence intervals for a G-index of agreement for
 all pairs of raters in a 3-rater design with a dichotomous rating, and
 computes adjusted Wald confidence intervals for differences of all pairs of
 G agreement. An adjusted Wald confidence interval for unanimous G agreement
-among the three raters also is computed. In the three-rater design,
+among the three raters is also computed. In the three-rater design,
 unanimous G agreement is equal to the average of all pairs of G agreement.
 }
 \examples{

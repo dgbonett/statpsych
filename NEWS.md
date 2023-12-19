@@ -1,4 +1,53 @@
-statpsych version 1.4.0 (Release date: 2023/06/15)
+statpsych version 1.5.0 (Release date: 2023/12/11)
+===========
+
+Changes:
+
+* New functions:
+  
+        * ci.cv1 -- Computes confidence interval for a single coefficient of variation
+  
+        * ci.ratio.cv2 -- Computes confidence interval for a ratio of coefficients of variation
+  
+        * ci.pv -- Computes confidence intervals for positive and negative predictive values with
+          retrospective sampling
+  
+        * ci.2x2.stdmean.ws -- Computes confidence intervals of standardized effects in a 2x2 
+          within-subjects design
+  
+        * ci.2x2.stdmean.mixed -- Computes confidence intervals of standardized effects in a 2x2 
+          mixed design
+  
+        * ci.2x2.median.ws -- Computes confidence intervals of effects in a 2x2 within-subjects 
+          design for medians
+  
+        * ci.2x2.median.mixed -- Computes confidence intervals of effects in a 2x2 mixed design  
+          for medians
+  
+        * spearmanbrown -- Computes the reliability of a scale with r2 measurements given the 
+          reliability of a scale with r1 measurements
+
+        * size.ci.spear -- Computes the sample size requirement for a Spearman correlation confidence interval
+
+        * size.ci.pbcor -- Computes the sample size requirement for a point-biserial correlation confidence interval
+
+        * size.ci.mape1 -- Computes the sample size requirement for a mean absolute prediction error confidence interval
+  
+* Error Corrections:
+  
+         * corrected CI error in ci.cramer
+  
+         * corrected SE error in ci.lc.stdmean.ws
+  
+* Modifications:
+   
+         * both biased and bias adjusted estimates are now reported in ci.stdmean1, ci.stdmean2, 
+           ci.stdmean.ps, ci.stdmean.strat, and ci.2x2.stdmean.bs
+  
+         * ci.mape has been renamed ci.mape1
+
+
+statpsych version 1.4.0 (Release date: 2023/06/26)
 ===========
 
 Changes:

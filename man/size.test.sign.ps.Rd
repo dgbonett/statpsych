@@ -30,8 +30,8 @@ measurement 2 scores.
 size.test.sign.ps(.05, .90, .75)
 
 # Should return:
-#      Sample size
-# [1,]          32
+# Sample size
+#          32
  
 
 }

@@ -35,6 +35,7 @@ each cell frequency. This function requires the frequency counts from a
 used as a crude approximation to the tetrachoric correlation. Yule Y is
 equal to the phi coefficient only when all marginal frequencies are equal.
 Bonett-Price Y* is a better approximation to the phi coeffiient when the
+marginal frequencies are not equal.
 }
 \examples{
 ci.yule(.05, 229, 28, 96, 24)

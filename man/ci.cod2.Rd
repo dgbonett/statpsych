@@ -10,9 +10,9 @@ ci.cod2(alpha, y1, y2)
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
 
-\item{y1}{vector of scores in gorup 1}
+\item{y1}{vector of scores in group 1}
 
-\item{y2}{vector of scores in gorup 2}
+\item{y2}{vector of scores in group 2}
 }
 \value{
 Returns a 1-row matrix. The columns are:
@@ -26,8 +26,8 @@ Returns a 1-row matrix. The columns are:
 }
 \description{
 Computes a confidence interval for a ratio of population dispersion
-coefficients (MAD/median) in a 2-group design. Ratio-scale scores are
-assumed.
+coefficients (mean absolute deviation from median divided by median)
+in a 2-group design. Ratio-scale scores are assumed.
 }
 \examples{
 y1 <- c(32, 39, 26, 35, 43, 27, 40, 37, 34, 29)
@@ -35,8 +35,8 @@ y2 <- c(36, 44, 47, 42, 49, 39, 46, 31, 33, 48)
 ci.cod2(.05, y1, y2)
 
 # Should return:
-#           COD1      COD2 COD1/COD2       LL       UL
-# [1,] 0.1333333 0.1232558  1.081761 0.494964 2.282254
+#      COD1      COD2 COD1/COD2       LL       UL
+# 0.1333333 0.1232558  1.081761 0.494964 2.282254
 
 
 }

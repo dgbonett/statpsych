@@ -38,8 +38,8 @@ from the confidence interval.
 ci.popsize(.05, 794, 710, 741)
 
 # Should return:
-#      Estimate       SE   LL   UL
-# [1,]     2908 49.49071 2818 3012
+# Estimate       SE   LL   UL
+#     2908 49.49071 2818 3012
 
 
 }

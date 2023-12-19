@@ -17,7 +17,7 @@ ci.prop1.inv(alpha, f, n)
 Returns a 1-row matrix. The columns are:
 \itemize{
 \item Estimate - estimate of proportion
-\item SE - standard error
+\item SE - recovered standard error
 \item LL - lower limit of confidence interval
 \item UL - upper limit of confidence interval
 }
@@ -34,8 +34,8 @@ the sample size (n) will not be known in advance.
 ci.prop1.inv(.05, 5, 67)
 
 # Should return:
-#        Estimate         SE         LL        UL
-# [1,] 0.07462687 0.03145284 0.02467471 0.1479676
+#   Estimate         SE         LL        UL
+# 0.07462687 0.03145284 0.02467471 0.1479676
 
 
 }

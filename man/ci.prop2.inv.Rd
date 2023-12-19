@@ -22,7 +22,7 @@ ci.prop2.inv(alpha, f1, f2, n1, n2)
 Returns a 1-row matrix. The columns are:
 \itemize{
 \item Estimate - estimate of proportion difference
-\item SE - standard error
+\item SE - recovered standard error
 \item LL - lower limit of confidence interval
 \item UL - upper limit of confidence interval
 }
@@ -31,7 +31,7 @@ Returns a 1-row matrix. The columns are:
 Computes an approximate confidence interval for a population proportion
 difference when inverse sampling has been used. An approximate standard
 error is recovered from the confidence interval. With inverse sampling, the
-number of participants who have the attribute within group 1(f1) and group 2
+number of participants who have the attribute within group 1 (f1) and group 2
 (f2) are predetermined, and sampling continues within each group until f1
 and f2 attain their prespecified values. With inverse sampling, the sample
 sizes (n1 and n2) will not be known in advance.
@@ -40,8 +40,8 @@ sizes (n1 and n2) will not be known in advance.
 ci.prop2.inv(.05, 10, 10, 48, 213)
 
 # Should return:
-#       Estimate         SE         LL        UL
-# [1,]  0.161385 0.05997618 0.05288277 0.2879851
+#  Estimate         SE         LL        UL
+#  0.161385 0.05997618 0.05288277 0.2879851
 
 
 }

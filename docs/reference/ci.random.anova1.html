@@ -21,7 +21,7 @@ This function assumes equal sample sizes."><!-- mathjax --><script src="https://
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statpsych</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.0</span>
       </span>
     </div>
 
@@ -61,7 +61,7 @@ This function assumes equal sample sizes.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ci.random.anova1</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">m</span>, <span class="va">sd</span>, <span class="va">n</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ci.random.anova1</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">m</span>, <span class="va">sd</span>, <span class="va">n</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -97,23 +97,23 @@ This function assumes equal sample sizes.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">56.1</span>, <span class="fl">51.2</span>, <span class="fl">60.3</span>, <span class="fl">68.2</span>, <span class="fl">48.9</span>, <span class="fl">70.5</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">sd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">9.45</span>, <span class="fl">8.79</span>, <span class="fl">9.71</span>, <span class="fl">8.90</span>, <span class="fl">8.31</span>, <span class="fl">9.75</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">ci.random.anova1</span><span class="op">(</span><span class="fl">.05</span>, <span class="va">m</span>, <span class="va">sd</span>, <span class="fl">20</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">56.1</span>, <span class="fl">51.2</span>, <span class="fl">60.3</span>, <span class="fl">68.2</span>, <span class="fl">48.9</span>, <span class="fl">70.5</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">sd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">9.45</span>, <span class="fl">8.79</span>, <span class="fl">9.71</span>, <span class="fl">8.90</span>, <span class="fl">8.31</span>, <span class="fl">9.75</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">ci.random.anova1</span><span class="op">(</span><span class="fl">.05</span>, <span class="va">m</span>, <span class="va">sd</span>, <span class="fl">20</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                 Estimate         LL         UL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Grand mean     59.200000 49.9363896 68.4636104</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Within SD:      9.166782  8.0509046 10.4373219</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Between SD:     8.585948  8.3239359  8.8562078</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Omega-squared:  0.467317  0.2284142  0.8480383</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Should return:</span></span>
-<span class="r-in"><span class="co">#                 Estimate         LL         UL</span></span>
-<span class="r-in"><span class="co"># Grand mean     59.200000 49.9363896 68.4636104</span></span>
-<span class="r-in"><span class="co"># Within SD:      9.166782  8.0509046 10.4373219</span></span>
-<span class="r-in"><span class="co"># Between SD:     8.585948  8.3239359  8.8562078</span></span>
-<span class="r-in"><span class="co"># Omega-squared:  0.467317  0.2284142  0.8480383</span></span>
-<span class="r-in"></span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Should return:</span></span></span>
+<span class="r-in"><span><span class="co">#                 Estimate         LL         UL</span></span></span>
+<span class="r-in"><span><span class="co"># Grand mean     59.200000 49.9363896 68.4636104</span></span></span>
+<span class="r-in"><span><span class="co"># Within SD:      9.166782  8.0509046 10.4373219</span></span></span>
+<span class="r-in"><span><span class="co"># Between SD:     8.585948  8.3239359  8.8562078</span></span></span>
+<span class="r-in"><span><span class="co"># Omega-squared:  0.467317  0.2284142  0.8480383</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>

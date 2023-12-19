@@ -37,8 +37,8 @@ transformation of the semipartial correlation.
 ci.spcor(.05, .582, .699, 20)
 
 # Should return:
-#      Estimate        SE        LL        UL
-# [1,]    0.582 0.1374298 0.2525662 0.7905182
+# Estimate        SE        LL        UL
+#    0.582 0.1374298 0.2525662 0.7905182
  
 
 }

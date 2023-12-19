@@ -16,7 +16,7 @@ ci.mann(alpha, y1, y2)
 \value{
 Returns a 1-row matrix. The columns are:
 \itemize{
-\item Estimate - estimate of probability
+\item Estimate - estimated proportion
 \item SE - standard error
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval
@@ -38,8 +38,8 @@ y1 <- c(32, 39, 26, 35, 43, 27, 40, 37, 34, 29)
 ci.mann(.05, y1, y2)
 
 # Should return:
-#      Estimate        SE        LL UL
-# [1,]    0.795 0.1401834 0.5202456  1
+# Estimate        SE        LL UL
+#    0.795 0.1401834 0.5202456  1
 
 
 }

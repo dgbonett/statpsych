@@ -87,7 +87,8 @@ ci.prop1 <- function(alpha, f, n) {
 #'
 #'
 #' @return
-#' Returns a 1-row matrix. The columns are:
+#' Returns a matrix with the number of rows equal to the number
+#' of pairwise comparisons. The columns are:
 #' * Estimate - adjusted estimate of proportion difference
 #' * SE - adjusted standard error
 #' * LL - lower limit of the adjusted Wald confidence interval
@@ -156,7 +157,7 @@ ci.pairs.prop1 <-function(alpha, f) {
 #' @return
 #' Returns a 1-row matrix. The columns are:
 #' * Estimate - estimate of proportion
-#' * SE - standard error
+#' * SE - recovered standard error
 #' * LL - lower limit of confidence interval
 #' * UL - upper limit of confidence interval
 #'
@@ -169,8 +170,8 @@ ci.pairs.prop1 <-function(alpha, f) {
 #' ci.prop1.inv(.05, 5, 67)
 #'
 #' # Should return:
-#' #        Estimate         SE         LL        UL
-#' # [1,] 0.07462687 0.03145284 0.02467471 0.1479676
+#' #   Estimate         SE         LL        UL
+#' # 0.07462687 0.03145284 0.02467471 0.1479676
 #'
 #'
 #' @importFrom stats qnorm
@@ -195,6 +196,7 @@ ci.prop1.inv <- function(alpha, f, n) {
  se <- (ul - ll)/(2*z)
  out <- t(c(est, se, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -230,8 +232,8 @@ ci.prop1.inv <- function(alpha, f, n) {
 #' ci.prop2(.05, 35, 21, 150, 150)
 #'
 #' # Should return:
-#' #        Estimate         SE          LL        UL
-#' # [1,] 0.09210526 0.04476077 0.004375769 0.1798348
+#' #   Estimate         SE          LL        UL
+#' # 0.09210526 0.04476077 0.004375769 0.1798348
 #'
 #'
 #' @importFrom stats qnorm
@@ -247,6 +249,7 @@ ci.prop2 <- function(alpha, f1, f2, n1, n2) {
  ul <- p1 - p2 + z*se
  out <- t(c(p1-p2, se, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -260,7 +263,7 @@ ci.prop2 <- function(alpha, f1, f2, n1, n2) {
 #' Computes an approximate confidence interval for a population proportion 
 #' difference when inverse sampling has been used. An approximate standard  
 #' error is recovered from the confidence interval. With inverse sampling, the  
-#' number of participants who have the attribute within group 1(f1) and group 2
+#' number of participants who have the attribute within group 1 (f1) and group 2
 #' (f2) are predetermined, and sampling continues within each group until f1 
 #' and f2 attain their prespecified values. With inverse sampling, the sample 
 #' sizes (n1 and n2) will not be known in advance.
@@ -276,7 +279,7 @@ ci.prop2 <- function(alpha, f1, f2, n1, n2) {
 #' @return
 #' Returns a 1-row matrix. The columns are:
 #' * Estimate - estimate of proportion difference
-#' * SE - standard error 
+#' * SE - recovered standard error 
 #' * LL - lower limit of confidence interval
 #' * UL - upper limit of confidence interval
 #'
@@ -289,8 +292,8 @@ ci.prop2 <- function(alpha, f1, f2, n1, n2) {
 #' ci.prop2.inv(.05, 10, 10, 48, 213)
 #'
 #' # Should return:
-#' #       Estimate         SE         LL        UL
-#' # [1,]  0.161385 0.05997618 0.05288277 0.2879851
+#' #  Estimate         SE         LL        UL
+#' #  0.161385 0.05997618 0.05288277 0.2879851
 #'
 #'
 #' @importFrom stats qnorm
@@ -332,6 +335,7 @@ ci.prop2.inv <- function(alpha, f1, f2, n1, n2) {
  se <- (ul - ll)/(2*z)
  out <- t(c(diff, se, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -367,8 +371,8 @@ ci.prop2.inv <- function(alpha, f1, f2, n1, n2) {
 #' ci.ratio.prop2(.05, 35, 21, 150, 150)
 #'
 #' # Should return:
-#' #      Estimate       LL       UL
-#' # [1,] 1.666667 1.017253 2.705025
+#' # Estimate       LL       UL
+#' # 1.666667 1.017253 2.705025
 #'
 #'
 #' @importFrom stats qnorm
@@ -386,6 +390,7 @@ ci.ratio.prop2 <- function(alpha, f1, f2, n1, n2) {
  ul <- exp(log(p1/p2) + z*se)
  out <- t(c(p1/p2, ll, ul))
  colnames(out) <- c("Estimate", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -401,7 +406,7 @@ ci.ratio.prop2 <- function(alpha, f1, f2, n1, n2) {
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
-#' @param   f       vector of frequency counts of participants with attribute
+#' @param   f       vector of frequency counts of participants who have the attribute
 #' @param   n       vector of sample sizes
 #' @param   v       vector of between-subjects contrast coefficients
 #'
@@ -427,8 +432,8 @@ ci.ratio.prop2 <- function(alpha, f1, f2, n1, n2) {
 #' ci.lc.prop.bs(.05, f, n, v)
 #'
 #' # Should return:
-#' #       Estimate         SE        z           p         LL        UL
-#' # [1,] 0.2119565 0.07602892 2.787841 0.005306059 0.06294259 0.3609705
+#' #  Estimate         SE        z           p         LL        UL
+#' # 0.2119565 0.07602892 2.787841 0.005306059 0.06294259 0.3609705
 #'
 #'
 #' @importFrom stats qnorm
@@ -448,6 +453,7 @@ ci.lc.prop.bs <- function(alpha, f, n, v) {
  ul <- est + z*se
  out <- t(c(est, se, zval, pval, ll, ul))
  colnames(out) <- c("Estimate", "SE", "z", "p", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -469,7 +475,8 @@ ci.lc.prop.bs <- function(alpha, f, n, v) {
 #'
 #'
 #' @return
-#' Returns a 1-row matrix. The columns are:
+#' Returns a matrix with the number of rows equal to the number
+#' of pairwise comparisons. The columns are:
 #' * Estimate - adjusted estimate of proportion difference
 #' * SE - adjusted standard error
 #' * z - z test statistic
@@ -558,8 +565,8 @@ ci.pairs.prop.bs <-function(alpha, f, n) {
 #' ci.slope.prop.bs(.05, f, n, x)
 #'
 #' # Should return:
-#' #         Estimate          SE        z           p          LL         UL
-#' # [1,] 0.007542293 0.002016793 3.739746 0.000184206 0.003589452 0.01149513
+#' #    Estimate          SE        z           p          LL         UL
+#' # 0.007542293 0.002016793 3.739746 0.000184206 0.003589452 0.01149513
 #'
 #'
 #' @importFrom stats qnorm
@@ -582,6 +589,7 @@ ci.slope.prop.bs <- function(alpha, f, n, x) {
  ul <- slope + z*se
  out <- t(c(slope, se, t, pval, ll, ul))
  colnames(out) <- c("Estimate", "SE", "z", "p", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -620,8 +628,8 @@ ci.slope.prop.bs <- function(alpha, f, n, x) {
 #' ci.prop.ps(.05, 12, 4, 26, 6)
 #'
 #' # Should return:
-#' #       Estimate         SE        LL        UL
-#' # [1,]      0.44 0.09448809 0.2548067 0.6251933
+#' # Estimate         SE        LL        UL
+#' #     0.44 0.09448809 0.2548067 0.6251933
 #'
 #'
 #' @importFrom stats qnorm
@@ -637,6 +645,7 @@ ci.prop.ps <- function(alpha, f00, f01, f10, f11) {
  ul <- p10 - p01 + z*se
  out <- t(c(diff, se, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -673,8 +682,8 @@ ci.prop.ps <- function(alpha, f00, f01, f10, f11) {
 #' ci.ratio.prop.ps(.05, 12, 4, 26, 6)
 #'
 #' # Should return:
-#' #      Estimate       LL       UL
-#' # [1,]      3.2 1.766544 5.796628
+#' # Estimate       LL       UL
+#' #      3.2 1.766544 5.796628
 #'
 #'
 #' @importFrom stats qnorm
@@ -703,6 +712,7 @@ ci.ratio.prop.ps <- function(alpha, f00, f01, f10, f11) {
  ul <- exp(log(UL1) - log(LL2))
  out <- t(c(ratio, ll, ul))
  colnames(out) <- c("Estimate", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -714,9 +724,9 @@ ci.ratio.prop.ps <- function(alpha, f00, f01, f10, f11) {
 #' @description
 #' Computes confidence intervals and test statistics for population 
 #' conditional slopes (simple slopes) in a logistic model that
-#' includes a predictor variable that is the product of a moderator 
-#' variable and a predictor variable. Conditional slopes are computed 
-#' at low and high values of the moderator variable. 
+#' includes a predictor variable (x1), a moderator variable (x2),
+#' and a product predictor variable (x1*x2). Conditional slopes are 
+#' computed at low and high values of the moderator variable. 
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -830,6 +840,7 @@ ci.oddsratio <- function(alpha, f00, f01, f10, f11) {
  return(out)
 }
 
+
 #  ci.yule ==================================================================== 
 #' Confidence intervals for generalized Yule coefficients
 #'
@@ -843,7 +854,7 @@ ci.oddsratio <- function(alpha, f00, f01, f10, f11) {
 #' used as a crude approximation to the tetrachoric correlation. Yule Y is 
 #' equal to the phi coefficient only when all marginal frequencies are equal.
 #' Bonett-Price Y* is a better approximation to the phi coeffiient when the
-#; marginal frequencies are not equal.
+#' marginal frequencies are not equal.
 #'
 #'
 #' @param   alpha  alpha level for 1-alpha confidence
@@ -952,8 +963,8 @@ ci.yule <- function(alpha, f00, f01, f10, f11) {
 #' ci.phi(.05, 229, 28, 96, 24)
 #'
 #' # Should return:
-#' #       Estimate         SE         LL        UL
-#' # [1,] 0.1229976 0.05746271 0.01037273 0.2356224
+#' #  Estimate         SE         LL        UL
+#' # 0.1229976 0.05746271 0.01037273 0.2356224
 #'
 #'
 #' @importFrom stats qnorm
@@ -974,6 +985,7 @@ ci.phi <- function(alpha, f00, f01, f10, f11) {
  ul <- phi + z*se
  out <- t(c(phi, se, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1013,8 +1025,8 @@ ci.phi <- function(alpha, f00, f01, f10, f11) {
 #' ci.biphi(.05, 46, 15, 100, 100)
 #'
 #' # Should return:
-#' #       Estimate         SE        LL       UL
-#' # [1,] 0.4145733 0.07551281 0.2508866 0.546141
+#' #  Estimate         SE        LL       UL
+#' # 0.4145733 0.07551281 0.2508866 0.546141
 #'
 #'
 #' @importFrom stats qnorm
@@ -1041,6 +1053,7 @@ ci.biphi <- function(alpha, f1, f2, n1, n2) {
  ul <- UL1/sqrt(UL1^2 + 2.89/(p1*p2))
  out <- t(c(biphi, se.biphi, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1081,8 +1094,8 @@ ci.biphi <- function(alpha, f1, f2, n1, n2) {
 #' ci.tetra(.05, 46, 15, 54, 85)
 #'
 #' # Should return:
-#' #       Estimate         SE        LL        UL
-#' # [1,] 0.5135167 0.09301703 0.3102345 0.6748546
+#' #  Estimate         SE        LL        UL
+#' # 0.5135167 0.09301703 0.3102345 0.6748546
 #'
 #'
 #' @importFrom stats qnorm
@@ -1107,6 +1120,7 @@ ci.tetra <- function(alpha, f00, f01, f10, f11) {
  se <- (ul - ll)/(2*z)
  out <- t(c(tetra, se, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1212,8 +1226,8 @@ ci.kappa <- function(alpha, f00, f01, f10, f11) {
 #' ci.agree(.05, 100, 80, 4)
 #'
 #' # Should return:
-#' #       Estimate         SE        LL        UL
-#' # [1,] 0.7333333 0.05333333 0.6132949 0.8226025
+#' #  Estimate         SE        LL        UL
+#' # 0.7333333 0.05333333 0.6132949 0.8226025
 #'
 #'
 #' @importFrom stats qnorm
@@ -1230,6 +1244,7 @@ ci.agree <- function(alpha, n, f, k) {
  UL.g <- a*(p.adj + z*sqrt(p.adj*(1 - p.adj)/(n + 4))) - 1/(k - 1) 
  out <- t(c(g.mle, se.g, LL.g, UL.g))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1325,15 +1340,15 @@ ci.agree2 <- function(alpha, n1, f1, n2, f2, r) {
 #' all pairs of raters in a 3-rater design with a dichotomous rating, and 
 #' computes adjusted Wald confidence intervals for differences of all pairs of 
 #' G agreement. An adjusted Wald confidence interval for unanimous G agreement 
-#' among the three raters also is computed. In the three-rater design, 
+#' among the three raters is also computed. In the three-rater design, 
 #' unanimous G agreement is equal to the average of all pairs of G agreement. 
 #'
 #'  
 #' @param  alpha    alpha level for 1-alpha confidence
 #' @param  f        vector of frequency counts from 2x2x2 table where
-#'                  f = {`[`}f111, f112, f121, f122, f211, f212, f221, f222{`]`}
+#'                  f = {`[`}f111, f112, f121, f122, f211, f212, f221, f222{`]`},
 #'                  first subscript represents rating of rater 1,
-#'                  second subscript represents rating of rater 2,
+#'                  second subscript represents rating of rater 2, and
 #'                  third subscript represents rating of rater 3
 #'
 #' 
@@ -1484,8 +1499,8 @@ ci.agree.3rater <- function(alpha, f) {
 #' ci.popsize(.05, 794, 710, 741)
 #'
 #' # Should return:
-#' #      Estimate       SE   LL   UL
-#' # [1,]     2908 49.49071 2818 3012
+#' # Estimate       SE   LL   UL
+#' #     2908 49.49071 2818 3012
 #'
 #'
 #' @importFrom stats qnorm
@@ -1501,6 +1516,7 @@ ci.popsize <- function(alpha, f00, f01, f10) {
  se <- (ul - ll)/(2*z)
  out <- t(c(N, se, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1518,7 +1534,7 @@ ci.popsize <- function(alpha, f00, f01, f10) {
 #'
 #'
 #' @param  alpha    alpha value for 1-alpha confidence
-#' @param  chisqr   Pearson chi-square test statistic for independence
+#' @param  chisqr   Pearson chi-square test statistic of independence
 #' @param  r        number of rows in contingency table
 #' @param  c        number of columns in contengency table
 #' @param  n        sample size
@@ -1540,8 +1556,8 @@ ci.popsize <- function(alpha, f00, f01, f10) {
 #' ci.cramer(.05, 19.21, 2, 3, 200)
 #'
 #' # Should return:
-#' #        Estimate     SE     LL     UL
-#' # [1,]     0.3099 0.0674 0.1888 0.4529
+#' # Estimate     SE     LL     UL
+#' #   0.3099 0.0718 0.1601 0.4417
 #'  
 #' 
 #' @importFrom stats pchisq
@@ -1554,18 +1570,20 @@ ci.cramer <- function(alpha, chisqr, r, c, n) {
  k <- min(r - 1, c - 1)
  df <- (r - 1)*(c - 1)
  v <- sqrt(chisqr/(n*k))
- du <- n*k - df
+ du <- n*k 
  nc <- seq(0, du, by = .001)
  p <- pchisq(chisqr, df, nc)
  k1 <- which(min(abs(p - alpha2)) == abs(p - alpha2))[[1]]
  dL <- nc[k1]
- ll <- sqrt((dL + df)/(n*k))
+ # version 1.5 corrects an error in the Smithson CI equation 4.13 
+ ll <- sqrt(dL/(n*k))
  k2 <- which(min(abs(p - alpha1)) == abs(p - alpha1))[[1]]
  dU <- nc[k2]
- ul <- sqrt((dU + df)/(n*k))
+ ul <- sqrt(dU/(n*k))
  se <- (ul - ll)/(2*z)
  out <- round(t(c(v, se, ll, ul)), 4)
- colnames(out) <- c("Cramer's V", "SE", "LL", "UL")
+ colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1580,14 +1598,14 @@ ci.cramer <- function(alpha, chisqr, r, c, n) {
 #' interaction effect, main effect of A, main efect of B, simple main effects
 #' of A, and simple main effects of B in a 2x2 between-subjects factorial 
 #' design with a dichotomous response variable. The input vector of 
-#' frequency counts is f11, f12, f21, f22, and the input vector of 
-#' sample sizes is n11, n12, n21, n22 where the first subscript represents
-#' the levels of Factor A and the second subscript represents the levels of
-#' Factor B.
+#' frequency counts is f = {`[`}f11, f12, f21, f22{`[`}, and the input vector of 
+#' sample sizes is n = {`[`}n11, n12, n21, n22{`[`} where the first subscript 
+#' represents the levels of Factor A and the second subscript represents the 
+#' levels of Factor B.
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
-#' @param   f       vector of frequency counts of participants with attribute
+#' @param   f       vector of frequency counts of participants who have the attribute
 #' @param   n       vector of sample sizes
 #'
 #'
@@ -1601,9 +1619,13 @@ ci.cramer <- function(alpha, chisqr, r, c, n) {
 #' * UL - upper limit of the adjusted Wald confidence interval
 #'
 #'
+#' @references
+#' \insertRef{Price2004}{statpsych}
+#'
+#'
 #' @examples
-#' f = c(15, 24, 28, 23)
-#' n = c(50, 50, 50, 50)
+#' f <- c(15, 24, 28, 23)
+#' n <- c(50, 50, 50, 50)
 #' ci.2x2.prop.bs(.05, f, n)
 #'
 #' # Should return:
@@ -1721,8 +1743,8 @@ ci.2x2.prop.bs <- function(alpha, f, n) {
 #'
 #'
 #' @examples
-#' group1 = c(125, 14, 10, 254)
-#' group2 = c(100, 16, 9, 275)
+#' group1 <- c(125, 14, 10, 254)
+#' group2 <- c(100, 16, 9, 275)
 #' ci.2x2.prop.mixed (.05, group1, group2)
 #'
 #' # Should return:
@@ -1854,8 +1876,8 @@ ci.2x2.prop.mixed <- function(alpha, group1, group2) {
 #' ci.bayes.prop1(.05, .4, .1, 12, 100)
 #'
 #' # Should return:
-#' #      Posterior mean Posterior SD       LL        UL
-#' # [1,]           0.15   0.03273268  0.09218 0.2188484
+#' # Posterior mean Posterior SD       LL        UL
+#' #           0.15   0.03273268  0.09218 0.2188484
 #'
 #'
 #' @importFrom stats qnorm
@@ -1875,6 +1897,91 @@ ci.bayes.prop1 <- function(alpha, prior.mean, prior.sd, f, n) {
  ul <- qbeta(1 - alpha/2, post.a, post.b)
  out <- t(c(post.mean, post.sd, ll, ul))
  colnames(out) <- c("Posterior mean", "Posterior SD", "LL", "UL")
+ rownames(out) <- ""
+ return(out)
+}
+
+
+#  ci.pv =====================================================================
+#' Confidence intervals for positive and negative predictive values with 
+#' retrospective sampling
+#'
+#'                                 
+#' @description
+#' Computes adjusted Wald confidence intervals for positive and negative
+#' predictive values (PPV and NPV)) of a diagnostic test with retrospective 
+#' sampling where the population prevalence rate is assumed to be known. With 
+#' retrospective sampling, one random sample is obtained from a subpopulation
+#' that is known to have a "positive" outcome, a second random sample is
+#' obtained from a subpopulation that is known to have a "negative" outcome,
+#' and then the diagnostic test (scored "pass" or "fail") is given in each 
+#' sample. PPV and NPV can be expressed as a function of proportion ratios 
+#' and the known population prevalence rate (the population proportion who 
+#' would "pass"). The confidence intervals for PPV and NPV are based on the 
+#' Price-Bonett adjusted Wald confidence interval for a proportion ratio.
+#'
+#'
+#' @param   alpha   alpha level for 1-alpha confidence
+#' @param   f1      number of participants with a positive outcome who pass the test
+#' @param   f2      number of participants with a negative outcome who fail the test
+#' @param   n1      sample size for the positive outcome group
+#' @param   n2      sample size for the negative outcome group
+#' @param   prev    known population proportion with a positive outcome
+#'
+#'
+#' @return
+#' Returns a 2-row matrix. The columns are:
+#' * Estimate - adjusted estimate of the predictive value
+#' * LL - lower limit of the adjusted Wald confidence interval
+#' * UL - upper limit of the adjusted Wald confidence interval
+#'
+#'
+#' @references
+#' \insertRef{Price2008}{statpsych}
+#'
+#'
+#' @examples
+#' ci.pv(.05, 89, 5, 100, 100, .16)
+#'
+#' # Should return:
+#' #        Estimate        LL        UL
+#' # PPV:  0.7640449 0.5838940 0.8819671
+#' # NPV:  0.9779978 0.9623406 0.9872318
+#'
+#'
+#' @importFrom stats qnorm
+#' @export
+ci.pv <- function(alpha, f1, f2, n1, n2, prev) {
+ z <- qnorm(1 - alpha/2)
+ k1 <- (1 - prev)/prev
+ p1 <- (f1 + 1/4)/(n1 + 7/4)
+ p2 <- (f2 + 1/4)/(n2 + 7/4)
+ v1 <- 1/(f1 + 1/4 + (f1 + 1/4)^2/(n1 - f1 + 3/2))
+ v2 <- 1/(f2 + 1/4 + (f2 + 1/4)^2/(n2 - f2 + 3/2))
+ se <- sqrt(v1 + v2)
+ LL0 <- exp(log(p2/p1) - z*se)
+ UL0 <- exp(log(p2/p1) + z*se)
+ ppv <- 1/(1 + (p2/p1)*k1)
+ LL1 <- 1/(1 + UL0*k1)
+ UL1 <- 1/(1 + LL0*k1)
+ out1 <- t(c(ppv, LL1, UL1))
+ k2 <- prev/(1 - prev)
+ f3 <- n1 - f1
+ f4 <- n2 - f2
+ p3 <- (f3 + 1/4)/(n1 + 7/4)
+ p4 <- (f4 + 1/4)/(n2 + 7/4)
+ v1 <- 1/(f3 + 1/4 + (f3 + 1/4)^2/(n1 - f3 + 3/2))
+ v2 <- 1/(f2 + 1/4 + (f4 + 1/4)^2/(n2 - f4 + 3/2))
+ se <- sqrt(v1 + v2)
+ LL0 <- exp(log(p3/p4) - z*se)
+ UL0 <- exp(log(p3/p4) + z*se)
+ npv <- 1/(1 + (p3/p4)*k2)
+ LL2 <- 1/(1 + UL0*k2)
+ UL2 <- 1/(1 + LL0*k2)
+ out2 <- t(c(npv, LL2, UL2))
+ out <- rbind(out1, out2)
+ colnames(out) <- c("Estimate", "LL", "UL")
+ rownames(out) <- c("PPV: ", "NPV: ")
  return(out)
 }
 
@@ -1909,8 +2016,8 @@ ci.bayes.prop1 <- function(alpha, prior.mean, prior.sd, f, n) {
 #' test.prop1(9, 20, .2)
 #'
 #' # Should return:
-#' #      Estimate        z          p
-#' # [1,]     0.45 2.515576 0.01188379
+#' # Estimate        z          p
+#' #     0.45 2.515576 0.01188379
 #'
 #'
 #' @importFrom stats pnorm
@@ -1923,6 +2030,7 @@ test.prop1 <- function(f, n, h) {
  pval <- 2*(1 - pnorm(abs(z)))
  out <- t(c(p, z, pval))
  colnames(out) <- c("Estimate", "z", "p")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1957,8 +2065,8 @@ test.prop1 <- function(f, n, h) {
 #' test.prop2(11, 26, 50, 50)
 #'
 #' # Should return:
-#' #  Estimate        z           p
-#' #      -0.3 2.899726 0.003734895
+#' # Estimate        z           p
+#' #     -0.3 2.899726 0.003734895
 #'
 #'
 #' @importFrom stats pnorm
@@ -1975,6 +2083,7 @@ test.prop2 <- function(f1, f2, n1, n2) {
  pval <- 2*(1 - pnorm(abs(z)))
  out <- t(c(diff, z, pval))
  colnames(out) <- c("Estimate", "z", "p")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -2009,8 +2118,8 @@ test.prop2 <- function(f1, f2, n1, n2) {
 #' test.prop.bs (f, n)
 #'
 #' # Should return:
-#' #      Chi-square df            p
-#' # [1,]   17.41071  2 0.0001656958
+#' # Chi-square df            p
+#' #   17.41071  2 0.0001656958
 #'
 #'
 #' @importFrom stats pchisq
@@ -2027,6 +2136,7 @@ test.prop.bs <- function(f, n) {
  pval <- 1 - pchisq(chi, df)
  out <- t(c(chi, df, pval))
  colnames(out) <- c("Chi-square", "df", "p")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -2062,8 +2172,8 @@ test.prop.bs <- function(f, n) {
 #' test.prop.ps(156, 96, 68, 80)
 #'
 #' # Should return:
-#' #      Estimate        z          p
-#' # [1,]     0.07 2.108346 0.03500109
+#' # Estimate        z          p
+#' #     0.07 2.108346 0.03500109
 #'
 #'
 #' @importFrom stats pnorm
@@ -2080,6 +2190,7 @@ test.prop.ps <- function(f00, f01, f10, f11) {
  pval <- 2*(1 - pnorm(abs(z)))
  out <- t(c(diff, z, pval))
  colnames(out) <- c("Estimate", "z", "p")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -2177,17 +2288,19 @@ test.mono.prop.bs <-function(alpha, f, n) {
 #' size.ci.prop1(.05, .4, .2)
 #'
 #' # Should return:
-#' #      Sample size
-#' # [1,]          93
+#' # Sample size
+#' #          93
 #'
 #'
 #' @importFrom stats qnorm
 #' @export                 
 size.ci.prop1 <- function(alpha, p, w) {
+ if (p > .9999 || p < .0001) {stop("proportion must be between .0001 and .9999")}
  z <- qnorm(1 - alpha/2)
  n <- ceiling(4*p*(1 - p)*(z/w)^2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -2210,24 +2323,27 @@ size.ci.prop1 <- function(alpha, p, w) {
 #'
 #'
 #' @return
-#' Returns the required sample size per group
+#' Returns the required sample size for each group
 #'
 #'
 #' @examples
 #' size.ci.prop2(.05, .4, .2, .15)
 #'
 #' # Should return:
-#' #      Sample size per group
-#' # [1,]                   274
+#' # Sample size per group
+#' #                   274
 #'
 #'
 #' @importFrom stats qnorm
 #' @export                 
 size.ci.prop2 <- function(alpha, p1, p2, w) {
+ if (p1 > .9999 || p1 < .0001) {stop("p1 must be between .0001 and .9999")}
+ if (p2 > .9999 || p2 < .0001) {stop("p2 must be between .0001 and .9999")}
  z <- qnorm(1 - alpha/2)
  n <- ceiling(4*(p1*(1 - p1) + p2*(1 - p2))*(z/w)^2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size per group"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -2249,24 +2365,27 @@ size.ci.prop2 <- function(alpha, p1, p2, w) {
 #'
 #'
 #' @return
-#' Returns the required sample size per group
+#' Returns the required sample size for each group
 #'
 #'
 #' @examples
 #' size.ci.ratio.prop2(.05, .2, .1, 2)
 #'
 #' # Should return:
-#' #      Sample size per group
-#' # [1,]                   416
+#' # Sample size per group
+#' #                   416
 #'
 #'
 #' @importFrom stats qnorm
 #' @export   
 size.ci.ratio.prop2 <- function(alpha, p1, p2, r) {
+ if (p1 > .9999 || p1 < .0001) {stop("p1 must be between .0001 and .9999")}
+ if (p2 > .9999 || p2 < .0001) {stop("p2 must be between .0001 and .9999")}
  z <- qnorm(1 - alpha/2)
  n <- ceiling(4*((1 - p1)/p1 + (1 - p2)/p2)*(z/log(r))^2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size per group"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -2290,7 +2409,7 @@ size.ci.ratio.prop2 <- function(alpha, p1, p2, r) {
 #'
 #'
 #' @return
-#' Returns the required sample size per group
+#' Returns the required sample size for each group
 #'
 #'
 #' @examples
@@ -2299,8 +2418,8 @@ size.ci.ratio.prop2 <- function(alpha, p1, p2, r) {
 #' size.ci.lc.prop.bs(.05, p, .2, v)
 #'
 #' # Should return:
-#' #      Sample size per group
-#' # [1,]                    87
+#' # Sample size per group
+#' #                    87
 #'
 #'
 #' @importFrom stats qnorm
@@ -2310,6 +2429,7 @@ size.ci.lc.prop.bs <- function(alpha, p, w, v) {
  n <- ceiling((4*t(v)%*%diag(p*(1 - p))%*%v)*(z/w)^2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size per group"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -2341,18 +2461,22 @@ size.ci.lc.prop.bs <- function(alpha, p, w, v) {
 #' size.ci.prop.ps(.05, .2, .3, .8, .1)
 #'
 #' # Should return:
-#' #      Sample size
-#' # [1,]         118
+#' # Sample size
+#' #         118
 #'
 #'
 #' @importFrom stats qnorm
 #' @export  
 size.ci.prop.ps <- function(alpha, p1, p2, phi, w) {
+ if (phi > .999 || phi < -.999) {stop("phi must be between -.999 and .999")}
+ if (p1 > .9999 || p1 < .0001) {stop("p1 must be between .0001 and .9999")}
+ if (p2 > .9999 || p2 < .0001) {stop("p2 must be between .0001 and .9999")}
  z <- qnorm(1 - alpha/2)
  cov <- phi*sqrt(p1*p2*(1 - p1)*(1 - p2))
  n <- ceiling((4*(p1*(1 - p1) + p2*(1 - p2) - 2*cov))*(z/w)^2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -2364,8 +2488,8 @@ size.ci.prop.ps <- function(alpha, p1, p2, phi, w) {
 #' @description
 #' Computes the sample size required to estimate a ratio of proportions 
 #' with desired confidence interval precision in a paired-samples design.
-#' Set the phi planning value to the smallest value within a plausible range
-#' for a conservatively large sample size. 
+#' Set the phi correlation planning value to the smallest value within a 
+#' plausible range for a conservatively large sample size. 
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
@@ -2383,18 +2507,22 @@ size.ci.prop.ps <- function(alpha, p1, p2, phi, w) {
 #' size.ci.ratio.prop.ps(.05, .4, .2, .7, 2)
 #'
 #' # Should return:
-#' #      Sample size
-#' # [1,]          67
+#' # Sample size
+#' #          67
 #'
 #'
 #' @importFrom stats qnorm
 #' @export  
 size.ci.ratio.prop.ps <- function(alpha, p1, p2, phi, r) {
+ if (phi > .999 || phi < -.999) {stop("phi must be between -.999 and .999")}
+ if (p1 > .9999 || p1 < .0001) {stop("p1 must be between .0001 and .9999")}
+ if (p2 > .9999 || p2 < .0001) {stop("p2 must be between .0001 and .9999")}
  z <- qnorm(1 - alpha/2)
  cov <- phi*sqrt((1 - p1)*(1 - p2)/(p1*p2))
  n <- ceiling(4*((1 - p1)/p1 + (1 - p2)/p2 - 2*cov)*(z/log(r))^2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -2423,17 +2551,19 @@ size.ci.ratio.prop.ps <- function(alpha, p1, p2, phi, r) {
 #' size.ci.agree(.05, .8, .2)
 #'
 #' # Should return:
-#' #      Sample size
-#' # [1,]         139
+#' # Sample size
+#' #         139
 #'
 #'
 #' @importFrom stats qnorm
 #' @export
 size.ci.agree <- function(alpha, G, w) {
+ if (G > .999 || G < .001) {stop("G must be between .001 and .999")}
  z <- qnorm(1 - alpha/2)
  n <- ceiling(4*(1 - G^2)*(z/w)^2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -2464,18 +2594,20 @@ size.ci.agree <- function(alpha, G, w) {
 #' size.test.prop1(.05, .9, .5, .2)
 #'
 #' # Should return:
-#' #      Sample size
-#' # [1,]          66
+#' # Sample size
+#' #          66
 #'
 #'
 #' @importFrom stats qnorm
 #' @export
 size.test.prop1 <- function(alpha, pow, p, es) {
+ if (p > .9999 || p < .0001) {stop("proportion must be between .0001 and .9999")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
  n <- ceiling(p*(1 - p)*(za + zb)^2/es^2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -2502,25 +2634,28 @@ size.test.prop1 <- function(alpha, pow, p, es) {
 #'
 #'
 #' @return
-#' Returns the required sample size per group
+#' Returns the required sample size for eachr group
 #'
 #'
 #' @examples
 #' size.test.prop2(.05, .8, .2, .4, .2)
 #'
 #' # Should return:
-#' #      Sample size per group
-#' # [1,]                    79
+#' # Sample size per group
+#' #                    79
 #'
 #'
 #' @importFrom stats qnorm
 #' @export
 size.test.prop2 <- function(alpha, pow, p1, p2, es) {
+ if (p1 > .9999 || p1 < .0001) {stop("p1 must be between .0001 and .9999")}
+ if (p2 > .9999 || p2 < .0001) {stop("p2 must be between .0001 and .9999")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
  n <- ceiling((p1*(1 - p1) + p2*(1 - p2))*(za + zb)^2/es^2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size per group"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -2547,7 +2682,7 @@ size.test.prop2 <- function(alpha, pow, p1, p2, es) {
 #'
 #'
 #' @return
-#' Returns the required sample size per group
+#' Returns the required sample size for each group
 #'
 #'
 #' @examples
@@ -2556,8 +2691,8 @@ size.test.prop2 <- function(alpha, pow, p1, p2, es) {
 #' size.test.lc.prop.bs(.05, .9, p, .15, v)
 #'
 #' # Should return:
-#' #      Sample size per group
-#' # [1,]                   105
+#' # Sample size per group
+#' #                   105
 #'
 #'
 #' @importFrom stats qnorm
@@ -2567,7 +2702,8 @@ size.test.lc.prop.bs <- function(alpha, pow, p, es, v) {
  zb <- qnorm(pow)
  n <- ceiling((t(v)%*%diag(p*(1 - p))%*%v)*(za + zb)^2/es^2)
  out <- matrix(n, nrow = 1, ncol = 1)
- colnames(out) <- "Sample size pe group"
+ colnames(out) <- "Sample size per group"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -2595,27 +2731,30 @@ size.test.lc.prop.bs <- function(alpha, pow, p, es, v) {
 #'
 #'
 #' @return
-#' Returns the required sample size per group
+#' Returns the required sample size for each group
 #'
 #'
 #' @examples
 #' size.equiv.prop2(.1, .8, .30, .35, .15)
 #'
 #' # Should return:
-#' #      Sample size per group
-#' # [1,]                   288
+#' # Sample size per group
+#' #                   288
 #'
 #'
 #' @importFrom stats qnorm
 #' @export
 size.equiv.prop2 <- function(alpha, pow, p1, p2, h) {
  if (h <= abs(p1 - p2)) {stop("|p1 - p2| must be less than h")}
+ if (p1 > .9999 || p1 < .0001) {stop("p1 must be between .0001 and .9999")}
+ if (p2 > .9999 || p2 < .0001) {stop("p2 must be between .0001 and .9999")}
  za <- qnorm(1 - alpha)
  zb <- qnorm(1 - (1 - pow)/2)
  es <- p1 - p2
  n <- ceiling((p1*(1 - p1) + p2*(1 - p2))*(za + zb)^2/(h - abs(es))^2)
  out <- matrix(n, nrow = 1, ncol = 1)
- colnames(out) <- "Sample size"
+ colnames(out) <- "Sample size per group"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -2643,26 +2782,29 @@ size.equiv.prop2 <- function(alpha, pow, p1, p2, h) {
 #'
 #'
 #' @return
-#' Returns the required sample size per group
+#' Returns the required sample size for each group
 #'
 #'
 #' @examples
 #' size.supinf.prop2(.05, .9, .35, .20, .05)
 #'
 #' # Should return:
-#' #      Sample size per group
-#' # [1,]                   408
+#' # Sample size per group
+#' #                   408
 #'
 #'
 #' @importFrom stats qnorm
 #' @export
 size.supinf.prop2 <- function(alpha, pow, p1, p2, h) {
+ if (p1 > .9999 || p1 < .0001) {stop("p1 must be between .0001 and .9999")}
+ if (p2 > .9999 || p2 < .0001) {stop("p2 must be between .0001 and .9999")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
  es <- p1 - p2
  n <- ceiling((p1*(1 - p1) + p2*(1 - p2))*(za + zb)^2/(es - h)^2)
  out <- matrix(n, nrow = 1, ncol = 1)
- colnames(out) <- "Sample size"
+ colnames(out) <- "Sample size per group"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -2688,7 +2830,7 @@ size.supinf.prop2 <- function(alpha, pow, p1, p2, h) {
 #' @param  pow    desired power
 #' @param  p1     planning value of proportion for measurement 1
 #' @param  p2     planning value of proportion for measurement 2
-#' @param  phi    planning value of phi correlation
+#' @param  phi    planning value of phi coerrelation
 #' @param  es     planning value of proportion difference
 #'
 #'
@@ -2700,19 +2842,21 @@ size.supinf.prop2 <- function(alpha, pow, p1, p2, h) {
 #' size.test.prop.ps(.05, .80, .4, .3, .5, .1)
 #'
 #' # Should return:
-#' #      Sample size
-#' # [1,]         177
+#' # Sample size
+#' #         177
 #'
 #'
 #' @importFrom stats qnorm
 #' @export
 size.test.prop.ps <- function(alpha, pow, p1, p2, phi, es) {
+ if (phi > .999 || phi < -.999) {stop("phi must be between -.999 and .999")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
  cov <- phi*sqrt(p1*p2*(1 - p1)*(1 - p2))
  n <- ceiling(((p1*(1 - p1) + p2*(1 - p2) - 2*cov))*((za + zb)/es)^2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -2738,7 +2882,7 @@ size.test.prop.ps <- function(alpha, pow, p1, p2, phi, es) {
 #' @param  pow    desired power
 #' @param  p1     planning value of proportion for measurement 1
 #' @param  p2     planning value of proportion for measurement 2
-#' @param  phi    planning value of phi coefficient
+#' @param  phi    planning value of phi correlation
 #' @param  h      upper limit for range of practical equivalence
 #'
 #'
@@ -2750,14 +2894,17 @@ size.test.prop.ps <- function(alpha, pow, p1, p2, phi, es) {
 #' size.equiv.prop.ps(.1, .8, .30, .35, .40, .15)
 #'
 #' # Should return:
-#' #      Sample size
-#' # [1,]         173
+#' # Sample size
+#' #         173
 #'
 #'
 #' @importFrom stats qnorm
 #' @export
 size.equiv.prop.ps <- function(alpha, pow, p1, p2, phi, h) {
+ if (phi > .999 || phi < -.999) {stop("phi must be between -.999 and .999")}
  if (h <= abs(p1 - p2)) {stop("|p1 - p2| must be less than h")}
+ if (p1 > .9999 || p1 < .0001) {stop("p1 must be between .0001 and .9999")}
+ if (p2 > .9999 || p2 < .0001) {stop("p2 must be between .0001 and .9999")}
  za <- qnorm(1 - alpha)
  zb <- qnorm(1 - (1 - pow)/2)
  cov <- phi*sqrt(p1*p2*(1 - p1)*(1 - p2))
@@ -2765,6 +2912,7 @@ size.equiv.prop.ps <- function(alpha, pow, p1, p2, phi, h) {
  n <- ceiling(((p1*(1 - p1) + p2*(1 - p2) - 2*cov))*(za + zb)^2/(h - abs(es))^2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -2803,13 +2951,16 @@ size.equiv.prop.ps <- function(alpha, pow, p1, p2, phi, h) {
 #' size.supinf.prop.ps(.05, .9, .35, .20, .45, .05)
 #'
 #' # Should return:
-#' #      Sample size
-#' # [1,]         227
+#' # Sample size
+#' #         227
 #'
 #'
 #' @importFrom stats qnorm
 #' @export
 size.supinf.prop.ps <- function(alpha, pow, p1, p2, phi, h) {
+ if (phi > .999 || phi < -.999) {stop("phi must be between -.999 and .999")}
+ if (p1 > .9999 || p1 < .0001) {stop("p1 must be between .0001 and .9999")}
+ if (p2 > .9999 || p2 < .0001) {stop("p2 must be between .0001 and .9999")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
  cov <- phi*sqrt(p1*p2*(1 - p1)*(1 - p2))
@@ -2817,6 +2968,7 @@ size.supinf.prop.ps <- function(alpha, pow, p1, p2, phi, h) {
  n <- ceiling(((p1*(1 - p1) + p2*(1 - p2) - 2*cov))*(za + zb)^2/(es - h)^2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -2848,19 +3000,21 @@ size.supinf.prop.ps <- function(alpha, pow, p1, p2, phi, h) {
 #' power.prop1(.05, 40, .5, .2)
 #'
 #' # Should return:
-#' #         Power
-#' # [1,] 0.715613
+#' #    Power
+#' # 0.715613
 #'
 #'
 #' @importFrom stats qnorm
 #' @importFrom stats pnorm
 #' @export
 power.prop1 <- function(alpha, n, p, es) {
+ if (p > .9999 || p < .0001) {stop("proportion must be between .0001 and .9999")}
  za <- qnorm(1 - alpha/2)
  z <- abs(es)/sqrt(p*(1 - p)/n) - za
  pow <- pnorm(z)
  out <- matrix(pow, nrow = 1, ncol = 1)
  colnames(out) <- "Power"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -2895,19 +3049,22 @@ power.prop1 <- function(alpha, n, p, es) {
 #' power.prop2(.05, 60, 40, .5, .5, .2)
 #'
 #' # Should return:
-#' #          Power
-#' # [1,] 0.4998515
+#' #     Power
+#' # 0.4998515
 #'
 #'
 #' @importFrom stats qnorm
 #' @importFrom stats pnorm
 #' @export
 power.prop2 <- function(alpha, n1, n2, p1, p2, es) {
+ if (p1 > .9999 || p1 < .0001) {stop("p1 must be between .0001 and .9999")}
+ if (p2 > .9999 || p2 < .0001) {stop("p2 must be between .0001 and .9999")}
  za <- qnorm(1 - alpha/2)
  z <- abs(es)/sqrt(p1*(1 - p1)/n1 + p2*(1 - p2)/n2) - za
  pow <- pnorm(z)
  out <- matrix(pow, nrow = 1, ncol = 1)
  colnames(out) <- "Power"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -2946,20 +3103,24 @@ power.prop2 <- function(alpha, n1, n2, p1, p2, es) {
 #' power.prop.ps(.05, 45, .5, .5, .4, .2)
 #'
 #' # Should return:
-#' #          Power
-#' # [1,] 0.6877652
+#' #     Power
+#' # 0.6877652
 #'
 #'
 #' @importFrom stats qnorm
 #' @importFrom stats pnorm
 #' @export
 power.prop.ps <- function(alpha, n, p1, p2, phi, es) {
+ if (phi > .999 || phi < -.999) {stop("phi must be between -.999 and .999")}
+ if (p1 > .9999 || p1 < .0001) {stop("p1 must be between .0001 and .9999")}
+ if (p2 > .9999 || p2 < .0001) {stop("p2 must be between .0001 and .9999")}
  za <- qnorm(1 - alpha/2)
  v <- 2*phi*sqrt(p1*(1 - p1)*p2*(1 - p2))
  z <- abs(es)/sqrt((p1*(1 - p1) + p2*(1 - p2) - v)/n) - za
  pow <- pnorm(z)
  out <- matrix(pow, nrow = 1, ncol = 1)
  colnames(out) <- "Power"
+ rownames(out) <- ""
  return(out)
 }
 
@@ -2985,8 +3146,8 @@ power.prop.ps <- function(alpha, n, p1, p2, phi, es) {
 #' iqv(f)
 #'
 #' # Should return:
-#' #        Simpson    Berger   Shannon
-#' # [1,] 0.7367908 0.5045045       0.7
+#' #   Simpson    Berger   Shannon
+#' # 0.7367908 0.5045045       0.7
 #'  
 #' 
 #' @export  
@@ -3000,6 +3161,7 @@ iqv <- function(f) {
  iqv3 <- (-1)*sum(p*log(p))/log(k)
  out <- t(c(iqv1, iqv2, iqv3))
  colnames(out) <- c("Simpson", "Berger", "Shannon")
+ rownames(out) <- ""
  return(out)
 }
 

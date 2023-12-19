@@ -19,7 +19,7 @@ size.test.cronbach2(alpha, pow, rel1, rel2, r)
 \item{r}{number of measurements (items, raters)}
 }
 \value{
-Returns the required sample size per group
+Returns the required sample size for each group
 }
 \description{
 Computes the sample size required to test a difference in population
@@ -29,8 +29,8 @@ Cronbach reliability coefficients with desired power in a 2-group design.
 size.test.cronbach2(.05, .80, .85, .70, 8)
 
 # Should return:
-#      Sample size per group
-# [1,]                    77
+# Sample size per group
+#                    77
  
 
 }

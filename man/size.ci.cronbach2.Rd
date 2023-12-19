@@ -19,7 +19,7 @@ size.ci.cronbach2(alpha, rel1, rel2, r, w)
 \item{w}{desired confidence interval width}
 }
 \value{
-Returns the required sample size per group
+Returns the required sample size for each group
 }
 \description{
 Computes the sample size required to estimate a difference in population
@@ -30,8 +30,8 @@ design.
 size.ci.cronbach2(.05, .85, .70, 8, .15)
 
 # Should return:
-#      Sample size per group
-# [1,]                   180
+# Sample size per group
+#                   180
  
 
 }

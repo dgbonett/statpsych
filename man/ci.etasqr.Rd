@@ -18,7 +18,7 @@ ci.etasqr(alpha, etasqr, df1, df2)
 \value{
 Returns a 1-row matrix. The columns are:
 \itemize{
-\item Eta-squared - estimate of eta-squared
+\item Eta-squared - eta-squared (from input)
 \item adj Eta-squared - bias adjusted eta-squared estimate
 \item SE - recovered standard error
 \item LL - lower limit of the confidence interval
@@ -35,8 +35,8 @@ approximate standard error is recovered from the confidence interval.
 ci.etasqr(.05, .241, 3, 116)
 
 # Should return:
-#      Eta-squared adj Eta-squared         SE        LL        UL
-# [1,]       0.241       0.2213707 0.06258283 0.1040229 0.3493431
+# Eta-squared  adj Eta-squared         SE        LL        UL
+#       0.241        0.2213707 0.06258283 0.1040229 0.3493431
  
 
 }

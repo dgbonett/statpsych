@@ -39,8 +39,8 @@ reliability coefficicents in a 2-group design. The number of measurements
 ci.cronbach2(.05, .88, .76, 8, 8, 200, 250)
 
 # Should return:
-#      Estimate         LL       UL
-# [1,]     0.12 0.06973411 0.173236
+# Estimate         LL       UL
+#     0.12 0.06973411 0.173236
  
 
 }

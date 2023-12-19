@@ -28,8 +28,8 @@ desired power.
 size.test.cronbach(.05, .85, .80, 5, .7)
 
 # Should return:
-#      Sample size
-# [1,]         139
+# Sample size
+#         139
  
 
 }

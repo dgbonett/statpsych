@@ -18,7 +18,7 @@ size.equiv.mean2(alpha, pow, var, es, h)
 \item{h}{upper limit for range of practical equivalence}
 }
 \value{
-Returns the required sample size per group
+Returns the required sample size for each group
 }
 \description{
 Computes the sample size in each group (assuming equal sample sizes)
@@ -36,8 +36,8 @@ size.
 size.equiv.mean2(.10, .80, 15, 2, 4)
 
 # Should return:
-#      Sample size per group 
-# [1,]                    50
+# Sample size per group 
+#                    50
  
 
 }

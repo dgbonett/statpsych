@@ -25,8 +25,8 @@ eta-squared estimates.
 etasqr.adj(.315, 2, 42)
 
 # Should return:
-#      Adjusted eta-squared
-# [1,]             0.282381
+# adj Eta-squared
+#        0.282381
  
 
 }

@@ -18,7 +18,7 @@ size.test.lc.mean.bs(alpha, pow, var, es, v)
 \item{v}{vector of between-subjects contrast coefficients}
 }
 \value{
-Returns the required sample size per group
+Returns the required sample size for each group
 }
 \description{
 Computes the sample size in each group (assuming equal sample sizes)
@@ -32,8 +32,8 @@ v <- c(1, -1, -1, 1)
 size.test.lc.mean.bs(.05, .90, 27.5, 5, v)
 
 # Should return:
-#      Sample size per group
-# [1,]                    47
+# Sample size per group
+#                    47
  
 
 }

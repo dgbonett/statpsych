@@ -15,7 +15,7 @@ size.test.prop.ps(alpha, pow, p1, p2, phi, es)
 
 \item{p2}{planning value of proportion for measurement 2}
 
-\item{phi}{planning value of phi correlation}
+\item{phi}{planning value of phi coerrelation}
 
 \item{es}{planning value of proportion difference}
 }
@@ -38,8 +38,8 @@ for a conservatively large sample size.
 size.test.prop.ps(.05, .80, .4, .3, .5, .1)
 
 # Should return:
-#      Sample size
-# [1,]         177
+# Sample size
+#         177
 
 
 }

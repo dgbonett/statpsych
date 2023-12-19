@@ -37,8 +37,8 @@ value within a plausible range for a conservatively large sample size.
 size.supinf.mean.ps(.05, .80, 225, 9, .75, 4)
 
 # Should return:
-#      Sample size
-# [1,]          38
+# Sample size
+#          38
  
 
 }

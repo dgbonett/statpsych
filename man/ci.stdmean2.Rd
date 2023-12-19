@@ -24,7 +24,8 @@ ci.stdmean2(alpha, m1, m2, sd1, sd2, n1, n2)
 \value{
 Returns a 4-row matrix. The columns are:
 \itemize{
-\item Estimate - bias adjusted standardized mean difference
+\item Estimate - estimated standardized mean difference
+\item adj Estimate - bias adjusted standardized mean difference estimate
 \item SE - standard error
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval
@@ -44,11 +45,11 @@ assumed.
 ci.stdmean2(.05, 35.1, 26.7, 7.32, 6.98, 30, 30)
 
 # Should return:
-#                           Estimate        SE        LL       UL
-# Unweighted standardizer:  1.159240 0.2844012 0.6170771 1.731909
-# Weighted standardizer:    1.159240 0.2802826 0.6251494 1.723837
-# Group 1 standardizer:     1.117605 0.2975582 0.5643375 1.730744
-# Group 2 standardizer:     1.172044 0.3120525 0.5918268 1.815050
+#                          Estimate  adj Estimate        SE        LL       UL
+# Unweighted standardizer: 1.174493      1.159240 0.2844012 0.6170771 1.731909
+# Weighted standardizer:   1.174493      1.159240 0.2802826 0.6251494 1.723837
+# Group 1 standardizer:    1.147541      1.117605 0.2975582 0.5643375 1.730744
+# Group 2 standardizer:    1.203438      1.172044 0.3120525 0.5918268 1.815050
 
 
 }

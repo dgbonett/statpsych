@@ -23,7 +23,7 @@ standardizer.  Equality of variances is not assumed."><!-- mathjax --><script sr
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statpsych</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.0</span>
       </span>
     </div>
 
@@ -64,7 +64,7 @@ standardizer.  Equality of variances is not assumed.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ci.stdmean.strat</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">m1</span>, <span class="va">m2</span>, <span class="va">sd1</span>, <span class="va">sd2</span>, <span class="va">n1</span>, <span class="va">n2</span>, <span class="va">p1</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ci.stdmean.strat</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">m1</span>, <span class="va">m2</span>, <span class="va">sd1</span>, <span class="va">sd2</span>, <span class="va">n1</span>, <span class="va">n2</span>, <span class="va">p1</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -105,7 +105,8 @@ standardizer.  Equality of variances is not assumed.</p>
     <h2>Value</h2>
     
 
-<p>Returns a 3-row matrix. The columns are:</p><ul><li><p>Estimate - bias adjusted standardized mean difference</p></li>
+<p>Returns a 3-row matrix. The columns are:</p><ul><li><p>Estimate - estimated standardized mean difference</p></li>
+<li><p>adj Estimate - bias adjusted standardized mean difference estimate</p></li>
 <li><p>SE - standard error</p></li>
 <li><p>LL - lower limit of the confidence interval</p></li>
 <li><p>UL - upper limit of the confidence interval</p></li>
@@ -115,25 +116,25 @@ standardizer.  Equality of variances is not assumed.</p>
     <p>Bonett DG (2020).
 “Point-biserial correlation: Interval estimation, hypothesis testing, meta-analysis, and sample size determination.”
 <em>British Journal of Mathematical and Statistical Psychology</em>, <b>73</b>(S1), 113--144.
-ISSN 0007-1102, doi: <a href="https://doi.org/10.1111/bmsp.12189" class="external-link">10.1111/bmsp.12189</a>
+ISSN 0007-1102, <a href="https://doi.org/10.1111/bmsp.12189" class="external-link">doi:10.1111/bmsp.12189</a>
 .</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">ci.stdmean.strat</span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">30.2</span>, <span class="fl">30.8</span>, <span class="fl">10.5</span>, <span class="fl">11.2</span>, <span class="fl">200</span>, <span class="fl">200</span>, <span class="fl">.533</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                           Estimate         SE         LL        UL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Weighted standardizer: -0.05528428 0.10023259 -0.2518410 0.1410636</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Group 1 standardizer:  -0.05692722 0.10368609 -0.2603639 0.1460782</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Group 2 standardizer:  -0.05692722 0.09720571 -0.2440911 0.1369483</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Should return:</span></span>
-<span class="r-in"><span class="co">#                           Estimate         SE         LL        UL</span></span>
-<span class="r-in"><span class="co"># Weighted standardizer: -0.05528428 0.10023259 -0.2518410 0.1410636</span></span>
-<span class="r-in"><span class="co"># Group 1 standardizer:  -0.05692722 0.10368609 -0.2603639 0.1460782</span></span>
-<span class="r-in"><span class="co"># Group 2 standardizer:  -0.05692722 0.09720571 -0.2440911 0.1369483</span></span>
-<span class="r-in"></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">ci.stdmean.strat</span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">33.2</span>, <span class="fl">30.8</span>, <span class="fl">10.5</span>, <span class="fl">11.2</span>, <span class="fl">200</span>, <span class="fl">200</span>, <span class="fl">.533</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                         Estimate adj Estimate         SE         LL        UL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Weighted standardizer: 0.2215549    0.2211371 0.10052057 0.02453817 0.4185716</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Group 1 standardizer:  0.2285714    0.2277089 0.10427785 0.02419059 0.4329523</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Group 2 standardizer:  0.2142857    0.2277089 0.09776049 0.02267868 0.4058927</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Should return:</span></span></span>
+<span class="r-in"><span><span class="co">#                         Estimate  adj Estimate         SE         LL        UL</span></span></span>
+<span class="r-in"><span><span class="co"># Weighted standardizer: 0.2215549     0.2211371 0.10052057 0.02453817 0.4185716</span></span></span>
+<span class="r-in"><span><span class="co"># Group 1 standardizer:  0.2285714     0.2277089 0.10427785 0.02419059 0.4329523</span></span></span>
+<span class="r-in"><span><span class="co"># Group 2 standardizer:  0.2142857     0.2277089 0.09776049 0.02267868 0.4058927</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>

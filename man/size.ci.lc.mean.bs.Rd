@@ -30,8 +30,8 @@ v <- c(.5, .5, -1)
 size.ci.lc.mean.bs(.05, 5.62, 2.0, v)
 
 # Should return:
-#      Sample size per group
-# [1,]                    34
+# Sample size per group
+#                    34
  
 
 }

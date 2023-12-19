@@ -37,8 +37,8 @@ is recovered from the confidence interval.
 ci.cor.dep(.05, .396, .179, .088, 166)
 
 # Should return:
-#      Estimate       SE         LL       UL
-# [1,]   0.217 0.1026986 0.01323072 0.415802
+# Estimate        SE         LL       UL
+#    0.217 0.1026986 0.01323072 0.415802
  
 
 }
