@@ -833,7 +833,7 @@ ci.mean.ps <- function(alpha, m1, m2, sd1, sd2, cor, n) {
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  y1     vector of measurement 1 scores
-#' @param  y2     vector of measurement 2 scores
+#' @param  y2     vector of measurement 2 scores (paired with y1)
 #'
 #'
 #' @return 
