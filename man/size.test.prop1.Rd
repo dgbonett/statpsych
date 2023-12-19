@@ -29,8 +29,8 @@ be based on the proportion planning value.
 size.test.prop1(.05, .9, .5, .2)
 
 # Should return:
-#      Sample size
-# [1,]          66
+# Sample size
+#          66
 
 
 }

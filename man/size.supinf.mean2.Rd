@@ -18,7 +18,7 @@ size.supinf.mean2(alpha, pow, var, es, h)
 \item{h}{upper or lower limit for range of practical equivalence}
 }
 \value{
-Returns the required sample size per group
+Returns the required sample size for each group
 }
 \description{
 Computes the sample size in each group (assuming equal sample sizes)
@@ -35,8 +35,8 @@ range for a conservatively large sample size.
 size.supinf.mean2(.05, .80, 225, 9, 4)
 
 # Should return:
-#      Sample size per group 
-# [1,]                   143
+# Sample size per group 
+#                   143
  
 
 }

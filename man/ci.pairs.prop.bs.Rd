@@ -15,7 +15,8 @@ ci.pairs.prop.bs(alpha, f, n)
 \item{n}{vector of sample sizes}
 }
 \value{
-Returns a 1-row matrix. The columns are:
+Returns a matrix with the number of rows equal to the number
+of pairwise comparisons. The columns are:
 \itemize{
 \item Estimate - adjusted estimate of proportion difference
 \item SE - adjusted standard error

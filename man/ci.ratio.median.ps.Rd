@@ -11,7 +11,7 @@ ci.ratio.median.ps(alpha, y1, y2)
 
 \item{y1}{vector of scores for measurement 1}
 
-\item{y2}{vector of scores for measurement 2}
+\item{y2}{vector of scores for measurement 2 (paired with y1)}
 }
 \value{
 Returns a 1-row matrix. The columns are:
@@ -33,8 +33,8 @@ y2 <- c(67, 28, 30, 28, 52, 40, 25, 37, 44, 10, 14, 20, 28, 40, 51)
 ci.ratio.median.ps(.05, y1, y2)
 
 # Should return:
-#         Median1  Median2   Median1/Median2        LL        UL
-# [1,]         13       30         0.4333333 0.3094838 0.6067451
+# Median1  Median2   Median1/Median2        LL        UL
+#      13       30         0.4333333 0.3094838 0.6067451
 
 
 }

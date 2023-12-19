@@ -33,8 +33,8 @@ y1 <- c(36, 44, 47, 42, 49, 39, 46, 31, 33, 48)
 ci.ratio.median2(.05, y1, y2)
 
 # Should return:
-#      Median1 Median2 Median1/Median2       LL       UL
-# [1,]      43      37        1.162162 0.927667 1.455933
+# Median1 Median2 Median1/Median2       LL       UL
+#      43      37        1.162162 0.927667 1.455933
 
 
 }

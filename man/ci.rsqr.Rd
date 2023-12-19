@@ -35,8 +35,8 @@ approximate standard error is recovered from the confidence interval.
 ci.rsqr(.05, .241, 3, 116)
 
 # Should return:
-#      R-squared adj R-squared         SE         LL        UL  
-# [1,]     0.241     0.2206696 0.06752263 0.09819599 0.3628798
+# R-squared adj R-squared         SE         LL        UL  
+#     0.241     0.2206696 0.06752263 0.09819599 0.3628798
  
 
 }

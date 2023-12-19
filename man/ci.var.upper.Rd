@@ -26,8 +26,8 @@ planning value.
 ci.var.upper(.25, 15, 60)
 
 # Should return:
-#            UL
-# [1,] 17.23264
+#       UL
+# 17.23264
  
 
 }

@@ -34,8 +34,8 @@ adjustment is used to improve the accuracy of the power approximation.
 power.mean2(.05, 25, 25, 5.0, 6.0, 2)
 
 # Should return:
-#          Power
-# [1,] 0.8398413
+#     Power
+# 0.8398413
 
 
 }

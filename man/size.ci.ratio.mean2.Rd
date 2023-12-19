@@ -34,8 +34,8 @@ conservatively large sample size.
 size.ci.ratio.mean2(.05, .4, 3.5, 3.1, 1.2, 2)
 
 # Should return:
-#      n1   n2
-# [1,] 53  106
+# n1   n2
+# 53  106
  
 
 }

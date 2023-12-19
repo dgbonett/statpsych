@@ -16,7 +16,7 @@ size.ci.ratio.prop2(alpha, p1, p2, r)
 \item{r}{desired upper to lower confidence interval endpoint ratio}
 }
 \value{
-Returns the required sample size per group
+Returns the required sample size for each group
 }
 \description{
 Computes the sample size in each group (assuming equal sample sizes) required
@@ -27,8 +27,8 @@ in a 2-group design.
 size.ci.ratio.prop2(.05, .2, .1, 2)
 
 # Should return:
-#      Sample size per group
-# [1,]                   416
+# Sample size per group
+#                   416
 
 
 }

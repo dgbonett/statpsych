@@ -26,8 +26,8 @@ sample size.
 size.ci.mean1(.05, 264.4, 10)
 
 # Should return:
-#      Sample size
-# [1,]          43
+# Sample size
+#          43
  
 
 }

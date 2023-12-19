@@ -21,7 +21,8 @@ ci.2x2.stdmean.bs(alpha, y11, y12, y21, y22)
 \value{
 Returns a 7-row matrix (one row per effect). The columns are:
 \itemize{
-\item Estimate - bias adjusted estimate of standardized effect
+\item Estimate - estimate of standardized effect
+\item adj Estimate - bias adjusted estimate of standardized effect
 \item SE - standard error
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval
@@ -36,21 +37,21 @@ assumed. An unweigthed variance standardizer is used, which is the
 recommended standarizer when both factors are treatment factors.
 }
 \examples{
-y11 = c(14, 15, 11, 7, 16, 12, 15, 16, 10, 9)
-y12 = c(18, 24, 14, 18, 22, 21, 16, 17, 14, 13)
-y21 = c(16, 11, 10, 17, 13, 18, 12, 16, 6, 15)
-y22 = c(18, 17, 11, 9, 9, 13, 18, 15, 14, 11)
+y11 <- c(14, 15, 11, 7, 16, 12, 15, 16, 10, 9)
+y12 <- c(18, 24, 14, 18, 22, 21, 16, 17, 14, 13)
+y21 <- c(16, 11, 10, 17, 13, 18, 12, 16, 6, 15)
+y22 <- c(18, 17, 11, 9, 9, 13, 18, 15, 14, 11)
 ci.2x2.stdmean.bs(.05, y11, y12, y21, y22)
 
 # Should return:
-#            Estimate        SE         LL         UL
-# AB:      -1.4193502 0.6885238 -2.7992468 -0.1002829
-# A:        0.4592015 0.3379520 -0.1933321  1.1314153
-# B:       -0.7375055 0.3451209 -1.4297338 -0.0768846
-# A at b1: -0.2504736 0.4640186 -1.1653006  0.6536189
-# A at b2:  1.1688767 0.5001423  0.2136630  2.1741850
-# B at a1: -1.4471806 0.4928386 -2.4441376 -0.5122457
-# B at a2: -0.0278304 0.4820369 -0.9732017  0.9163482
+#             Estimate  adj Estimate        SE         LL         UL
+# AB:      -1.44976487    -1.4193502 0.6885238 -2.7992468 -0.1002829
+# A:        0.46904158     0.4592015 0.3379520 -0.1933321  1.1314153
+# B:       -0.75330920    -0.7375055 0.3451209 -1.4297338 -0.0768846
+# A at b1: -0.25584086    -0.2504736 0.4640186 -1.1653006  0.6536189
+# A at b2:  1.19392401     1.1688767 0.5001423  0.2136630  2.1741850
+# B at a1: -1.47819163    -1.4471806 0.4928386 -2.4441376 -0.5122457
+# B at a2: -0.02842676    -0.0278304 0.4820369 -0.9732017  0.9163482
 
 
 }

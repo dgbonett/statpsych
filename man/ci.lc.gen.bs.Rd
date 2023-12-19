@@ -40,8 +40,8 @@ v <- c(.5, .5, -.5, -.5)
 ci.lc.gen.bs(.05, est, se, v)
 
 # Should return:
-#      Estimate        SE       LL       UL
-# [1,]     1.63 0.2573806 1.125543 2.134457
+# Estimate        SE       LL       UL
+#     1.63 0.2573806 1.125543 2.134457
 
 
 }

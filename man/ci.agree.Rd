@@ -33,8 +33,8 @@ were given the same rating by both raters.
 ci.agree(.05, 100, 80, 4)
 
 # Should return:
-#       Estimate         SE        LL        UL
-# [1,] 0.7333333 0.05333333 0.6132949 0.8226025
+#  Estimate         SE        LL        UL
+# 0.7333333 0.05333333 0.6132949 0.8226025
 
 
 }

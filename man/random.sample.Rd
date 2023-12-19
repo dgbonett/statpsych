@@ -15,7 +15,7 @@ random.sample(popsize, samsize)
 Returns a vector of randomly generated participant IDs
 }
 \description{
-Generates a random sample of participant IDs.
+Generates a random sample of participant IDs without replacement.
 }
 \examples{
 random.sample(3000, 25)

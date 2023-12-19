@@ -27,6 +27,7 @@ reference:
   - random.yx
   - randomize
   - slope.contrast
+  - spearmanbrown
 
 - title: Power
   desc:  Compute power for a given sample size for various designs

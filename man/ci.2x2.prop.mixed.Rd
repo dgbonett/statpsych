@@ -36,8 +36,8 @@ the number of participants with a response of i = 0 or 1 at level 1 of
 Factor A and a response of j = 0 or 1 at level 2 of Factor A.
 }
 \examples{
-group1 = c(125, 14, 10, 254)
-group2 = c(100, 16, 9, 275)
+group1 <- c(125, 14, 10, 254)
+group2 <- c(100, 16, 9, 275)
 ci.2x2.prop.mixed (.05, group1, group2)
 
 # Should return:

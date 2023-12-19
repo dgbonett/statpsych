@@ -19,7 +19,7 @@ a 2 x 2 contingency table for two repeated dichotomous measurements."><!-- mathj
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statpsych</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.0</span>
       </span>
     </div>
 
@@ -57,7 +57,7 @@ a 2 x 2 contingency table for two repeated dichotomous measurements.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ci.ratio.prop.ps</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">f00</span>, <span class="va">f01</span>, <span class="va">f10</span>, <span class="va">f11</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ci.ratio.prop.ps</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">f00</span>, <span class="va">f01</span>, <span class="va">f10</span>, <span class="va">f11</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -95,21 +95,21 @@ a 2 x 2 contingency table for two repeated dichotomous measurements.</p>
     <p>Bonett DG, Price RM (2006).
 “Confidence intervals for a ratio of binomial proportions based on paired data.”
 <em>Statistics in Medicine</em>, <b>25</b>(17), 3039--3047.
-ISSN 0277-6715, doi: <a href="https://doi.org/10.1002/sim.2440" class="external-link">10.1002/sim.2440</a>
+ISSN 0277-6715, <a href="https://doi.org/10.1002/sim.2440" class="external-link">doi:10.1002/sim.2440</a>
 .</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">ci.ratio.prop.ps</span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">12</span>, <span class="fl">4</span>, <span class="fl">26</span>, <span class="fl">6</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      Estimate       LL       UL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]      3.2 1.766544 5.796628</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Should return:</span></span>
-<span class="r-in"><span class="co">#      Estimate       LL       UL</span></span>
-<span class="r-in"><span class="co"># [1,]      3.2 1.766544 5.796628</span></span>
-<span class="r-in"></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">ci.ratio.prop.ps</span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">12</span>, <span class="fl">4</span>, <span class="fl">26</span>, <span class="fl">6</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Estimate       LL       UL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       3.2 1.766544 5.796628</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Should return:</span></span></span>
+<span class="r-in"><span><span class="co"># Estimate       LL       UL</span></span></span>
+<span class="r-in"><span><span class="co">#      3.2 1.766544 5.796628</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>

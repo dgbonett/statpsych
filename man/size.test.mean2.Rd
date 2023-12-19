@@ -18,7 +18,7 @@ size.test.mean2(alpha, pow, var, es, R)
 \item{R}{n2/n1 ratio}
 }
 \value{
-Returns the required sample size per group
+Returns the required sample size for each group
 }
 \description{
 Computes the sample size in each group required  to test a difference in
@@ -30,8 +30,8 @@ plausible range for a conservatively large sample size.
 size.test.mean2(.05, .95, 100, 10, 1) 
 
 # Should return:
-#      n1  n2
-# [1,] 27  27
+# n1  n2
+# 27  27
  
 
 }

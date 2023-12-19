@@ -13,7 +13,8 @@ ci.pairs.prop1(alpha, f)
 \item{f}{vector of multinomial frequency counts}
 }
 \value{
-Returns a 1-row matrix. The columns are:
+Returns a matrix with the number of rows equal to the number
+of pairwise comparisons. The columns are:
 \itemize{
 \item Estimate - adjusted estimate of proportion difference
 \item SE - adjusted standard error

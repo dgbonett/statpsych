@@ -36,8 +36,8 @@ dichtomous measurements.
 ci.prop.ps(.05, 12, 4, 26, 6)
 
 # Should return:
-#       Estimate         SE        LL        UL
-# [1,]      0.44 0.09448809 0.2548067 0.6251933
+# Estimate         SE        LL        UL
+#     0.44 0.09448809 0.2548067 0.6251933
 
 
 }

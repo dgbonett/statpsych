@@ -39,8 +39,8 @@ estimate.
 power.prop.ps(.05, 45, .5, .5, .4, .2)
 
 # Should return:
-#          Power
-# [1,] 0.6877652
+#     Power
+# 0.6877652
 
 
 }

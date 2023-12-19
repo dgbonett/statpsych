@@ -34,8 +34,8 @@ y2 <- c(36, 44, 47, 42, 49, 39, 46, 31, 33, 48)
 ci.median2(.05, y1, y2)
 
 # Should return:
-#       Median1 Median2 Median1-Median2       SE        LL          UL
-# [1,]     34.5      43            -8.5 4.316291 -16.95977 -0.04022524
+# Median1 Median2 Median1-Median2       SE        LL          UL
+#    34.5      43            -8.5 4.316291 -16.95977 -0.04022524
 
 
 }

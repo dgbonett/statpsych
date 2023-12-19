@@ -38,8 +38,8 @@ Returns a 2-row matrix. The columns are:
 \description{
 Computes confidence intervals and test statistics for population
 conditional slopes (simple slopes) in a general linear model that
-includes a predictor variable that is the product of a moderator
-variable and a predictor variable. Conditional slopes are computed
+includes a predictor variable (x1), a moderator variable (x2), and
+a product predictor variable (x1*x2). Conditional slopes are computed
 at specified low and high values of the moderator variable.
 }
 \examples{

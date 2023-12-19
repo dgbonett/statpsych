@@ -10,7 +10,7 @@ ci.lc.prop.bs(alpha, f, n, v)
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
 
-\item{f}{vector of frequency counts of participants with attribute}
+\item{f}{vector of frequency counts of participants who have the attribute}
 
 \item{n}{vector of sample sizes}
 
@@ -38,8 +38,8 @@ v <- c(-.5, -.5, 1)
 ci.lc.prop.bs(.05, f, n, v)
 
 # Should return:
-#       Estimate         SE        z           p         LL        UL
-# [1,] 0.2119565 0.07602892 2.787841 0.005306059 0.06294259 0.3609705
+#  Estimate         SE        z           p         LL        UL
+# 0.2119565 0.07602892 2.787841 0.005306059 0.06294259 0.3609705
 
 
 }

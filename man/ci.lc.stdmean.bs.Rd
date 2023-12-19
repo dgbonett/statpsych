@@ -21,7 +21,8 @@ ci.lc.stdmean.bs(alpha, m, sd, n, v)
 \value{
 Returns a 3-row matrix. The columns are:
 \itemize{
-\item Estimate - bias adjusted standardized linear contrast
+\item Estimate - estimated standardized linear contrast
+\item adj Estimate - bias adjusted standardized linear contrast estimate
 \item SE - standard error
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval
@@ -43,10 +44,10 @@ v <- c(.5, .5, -.5, -.5)
 ci.lc.stdmean.bs(.05, m, sd, n, v)
 
 # Should return:
-#                           Estimate        SE        LL         UL
-# Unweighted standardizer: -1.273964 0.3692800 -2.025039 -0.5774878
-# Weighted standardizer:   -1.273964 0.3514511 -1.990095 -0.6124317
-# Group 1 standardizer:    -1.273810 0.4849842 -2.343781 -0.4426775
+#                           Estimate  adj Estimate        SE        LL         UL
+# Unweighted standardizer: -1.301263     -1.273964 0.3692800 -2.025039 -0.5774878
+# Weighted standardizer:   -1.301263     -1.273964 0.3514511 -1.990095 -0.6124317
+# Group 1 standardizer:    -1.393229     -1.273810 0.4849842 -2.343781 -0.4426775
 
 
 }

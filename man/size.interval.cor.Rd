@@ -30,8 +30,8 @@ the hypothesized finite interval.
 size.interval.cor(.05, .8, .1, 0, .25)
 
 # Should return:
-#      Sample size
-# [1,]         360
+# Sample size
+#         360
  
 
 }

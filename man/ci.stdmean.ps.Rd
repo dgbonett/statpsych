@@ -24,7 +24,8 @@ ci.stdmean.ps(alpha, m1, m2, sd1, sd2, cor, n)
 \value{
 Returns a 3-row matrix. The columns are:
 \itemize{
-\item Estimate - bias adjusted standardized mean difference
+\item Estimate - estimated standardized mean difference
+\item adj Estimate - bias adjusted standardized mean difference estimate
 \item SE - standard error
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval
@@ -40,10 +41,10 @@ of variances is not assumed.
 ci.stdmean.ps(.05, 110.4, 102.1, 15.3, 14.6, .75, 25)
 
 # Should return:
-#                              Estimate        SE        LL        UL
-# Unweighted standardizer:     0.5433457 0.1609934 0.2394905 0.8705732
-# Measurement 1 standardizer:  0.5253526 0.1615500 0.2258515 0.8591158
-# Measurement 2 standardizer:  0.5505407 0.1692955 0.2366800 0.9003063
+#                              Estimate  adj Estimate        SE        LL        UL
+# Unweighted standardizer:    0.5550319     0.5433457 0.1609934 0.2394905 0.8705732
+# Measurement 1 standardizer: 0.5424837     0.5253526 0.1615500 0.2258515 0.8591158
+# Measurement 2 standardizer: 0.5684932     0.5505407 0.1692955 0.2366800 0.9003063
 
 
 }

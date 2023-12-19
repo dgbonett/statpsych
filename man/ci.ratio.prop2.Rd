@@ -33,8 +33,8 @@ Computes an adjusted Wald confidence interval for a proportion ratio in a
 ci.ratio.prop2(.05, 35, 21, 150, 150)
 
 # Should return:
-#      Estimate       LL       UL
-# [1,] 1.666667 1.017253 2.705025
+# Estimate       LL       UL
+# 1.666667 1.017253 2.705025
 
 
 }

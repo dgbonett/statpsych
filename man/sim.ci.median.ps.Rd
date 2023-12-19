@@ -52,8 +52,8 @@ unonr function in the mnonr package.
 sim.ci.median.ps(.05, 30, 1.5, .7, 4, 3, 1000)
 
 # Should return (within sampling error):
-#      Coverage Lower Error Upper Error Ave CI Width
-# [1,]    0.961       0.026       0.013    0.9435462
+# Coverage Lower Error Upper Error Ave CI Width
+#    0.961       0.026       0.013    0.9435462
 
 
 }

@@ -108,14 +108,14 @@ test_that("ci.spear2 returns valid matrix", {
 })
 
 
-test_that("ci.mape returns valid matrix", {
+test_that("ci.mape1 returns valid matrix", {
   colnames_expected <- c(
     "Estimate", "SE", "LL", "UL"
   )
   
-  r <- c(-2.70, -2.69, -1.32, 1.02, 1.23, -1.46, 2.21, -2.10, 2.56,
+  res <- c(-2.70, -2.69, -1.32, 1.02, 1.23, -1.46, 2.21, -2.10, 2.56,
          -3.02, -1.55, 1.46, 4.02, 2.34)
-  res <- ci.mape(.05, r, 1)
+  res <- ci.mape1(.05, res, 1)
   
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
@@ -155,7 +155,7 @@ test_that("ci.lc.reg returns valid matrix", {
 
 test_that("ci.fisher returns valid matrix", {
   colnames_expected <- c(
-    "LL", "UL"
+   "Estimate", "LL", "UL"
   )
   
   res <- ci.fisher(.05, .641, .052)
@@ -195,6 +195,35 @@ test_that("size.ci.cor returns valid numeric", {
   
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(res[[1,1]], 188)
+})
+
+
+test_that("size.ci.spear returns valid numeric", {
+  
+  colnames_expected <- c(
+    "Sample size"
+  )
+  
+  res <- size.ci.spear(.05, .362, .25)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(res[[1,1]], 200)
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+test_that("size.ci.pbcor returns valid numeric", {
+  colnames_expected <- c(
+    "Sample size"
+  )
+  
+  res <- size.ci.pbcor(.05, .40, .25, .73)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(res[[1,1]], 168)
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
 })
 
 
@@ -415,6 +444,20 @@ test_that("size.ci.cronbach2 returns valid matrix", {
   res <- size.ci.cronbach2(.05, .85, .70, 8, .15)
   
   testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+test_that("size.ci.mape1 returns valid numeric", {
+  colnames_expected <- c(
+    "Sample size"
+  )
+  
+  res <- size.ci.mape1(.05, 4.5, 5, 2)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(res[[1,1]], 57)
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)
 })

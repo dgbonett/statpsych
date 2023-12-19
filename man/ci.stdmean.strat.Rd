@@ -27,7 +27,8 @@ ci.stdmean.strat(alpha, m1, m2, sd1, sd2, n1, n2, p1)
 \value{
 Returns a 3-row matrix. The columns are:
 \itemize{
-\item Estimate - bias adjusted standardized mean difference
+\item Estimate - estimated standardized mean difference
+\item adj Estimate - bias adjusted standardized mean difference estimate
 \item SE - standard error
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval
@@ -41,13 +42,13 @@ weighted variance standardizer or single group standard deviation
 standardizer.  Equality of variances is not assumed.
 }
 \examples{
-ci.stdmean.strat(.05, 30.2, 30.8, 10.5, 11.2, 200, 200, .533)
+ci.stdmean.strat(.05, 33.2, 30.8, 10.5, 11.2, 200, 200, .533)
 
 # Should return:
-#                           Estimate         SE         LL        UL
-# Weighted standardizer: -0.05528428 0.10023259 -0.2518410 0.1410636
-# Group 1 standardizer:  -0.05692722 0.10368609 -0.2603639 0.1460782
-# Group 2 standardizer:  -0.05692722 0.09720571 -0.2440911 0.1369483
+#                         Estimate  adj Estimate         SE         LL        UL
+# Weighted standardizer: 0.2215549     0.2211371 0.10052057 0.02453817 0.4185716
+# Group 1 standardizer:  0.2285714     0.2277089 0.10427785 0.02419059 0.4329523
+# Group 2 standardizer:  0.2142857     0.2277089 0.09776049 0.02267868 0.4058927
 
 
 }

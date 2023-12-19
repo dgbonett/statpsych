@@ -38,8 +38,8 @@ confidence interval.
 ci.tetra(.05, 46, 15, 54, 85)
 
 # Should return:
-#       Estimate         SE        LL        UL
-# [1,] 0.5135167 0.09301703 0.3102345 0.6748546
+#  Estimate         SE        LL        UL
+# 0.5135167 0.09301703 0.3102345 0.6748546
 
 
 }

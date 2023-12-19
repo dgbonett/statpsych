@@ -19,7 +19,7 @@ size.test.cor2(alpha, pow, cor1, cor2, s)
 \item{s}{number of control variables}
 }
 \value{
-Returns the required sample size per group
+Returns the required sample size for each group
 }
 \description{
 Computes the sample size required to test equality of two Pearson or partial
@@ -30,8 +30,8 @@ correlation.
 size.test.cor2(.05, .8, .4, .2, 0)
 
 # Should return:
-#      Sample size per group
-# [1,]                   325
+# Sample size per group
+#                   325
  
 
 }

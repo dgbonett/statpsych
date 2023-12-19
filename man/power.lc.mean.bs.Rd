@@ -23,7 +23,7 @@ Returns the approximate power of the test
 }
 \description{
 Computes the approximate power of a test for a linear contrast of population
-mean for planned sample sizes in a between-subject design. The groups can be
+means for planned sample sizes in a between-subject design. The groups can be
 the factor levels of a single factor design or the combinations of factors
 in a factorial design. For a conservatively low power approximation, set the
 variance planning values to the largest values within their plausible ranges,
@@ -38,8 +38,8 @@ v <- c(.5, .5, -.5, -.5)
 power.lc.mean.bs(.05, n, var, 5, v)
 
 # Should return:
-#          Power
-# [1,] 0.7221139
+#     Power
+# 0.7221139
 
 
 }

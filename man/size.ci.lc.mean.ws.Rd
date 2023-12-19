@@ -34,8 +34,8 @@ q <- c(.5, .5, -.5, -.5)
 size.ci.lc.mean.ws(.05, 265, .8, 10, q)
 
 # Should return:
-#      Sample size
-# [1,]          11
+# Sample size
+#          11
  
 
 }

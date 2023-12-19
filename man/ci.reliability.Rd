@@ -32,8 +32,8 @@ standard error or bootstrap standard error obtained from an SEM program.
 ci.reliability(.05, .88, .0147, 100)
 
 # Should return:
-#             LL        UL
-# [1,] 0.8489612 0.9065575
+# Estimate         LL        UL
+#     0.88  0.8489612 0.9065575
  
 
 }

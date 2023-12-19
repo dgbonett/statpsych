@@ -37,10 +37,10 @@ effects of B in a 2x2 within-subjects design with a quantitative response
 variable.
 }
 \examples{
-y11 = c(1,2,3,4,5,7,7)
-y12 = c(1,0,2,4,3,8,7)
-y21 = c(4,5,6,7,8,9,8)
-y22 = c(5,6,8,7,8,9,9)
+y11 <- c(1,2,3,4,5,7,7)
+y12 <- c(1,0,2,4,3,8,7)
+y21 <- c(4,5,6,7,8,9,8)
+y22 <- c(5,6,8,7,8,9,9)
 ci.2x2.mean.ws(.05, y11, y12, y21, y22)
 
 # Should return:

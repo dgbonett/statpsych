@@ -21,7 +21,7 @@ correlation."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/lib
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statpsych</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.0</span>
       </span>
     </div>
 
@@ -60,7 +60,7 @@ correlation.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">size.test.cor2</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">pow</span>, <span class="va">cor1</span>, <span class="va">cor2</span>, <span class="va">s</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">size.test.cor2</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">pow</span>, <span class="va">cor1</span>, <span class="va">cor2</span>, <span class="va">s</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -89,20 +89,20 @@ correlation.</p>
     <h2>Value</h2>
     
 
-<p>Returns the required sample size per group</p>
+<p>Returns the required sample size for each group</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">size.test.cor2</span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">.8</span>, <span class="fl">.4</span>, <span class="fl">.2</span>, <span class="fl">0</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      Sample size per group</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]                   325</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Should return:</span></span>
-<span class="r-in"><span class="co">#      Sample size per group</span></span>
-<span class="r-in"><span class="co"># [1,]                   325</span></span>
-<span class="r-in"> </span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">size.test.cor2</span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">.8</span>, <span class="fl">.4</span>, <span class="fl">.2</span>, <span class="fl">0</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Sample size per group</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                    325</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Should return:</span></span></span>
+<span class="r-in"><span><span class="co"># Sample size per group</span></span></span>
+<span class="r-in"><span><span class="co">#                   325</span></span></span>
+<span class="r-in"><span> </span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>

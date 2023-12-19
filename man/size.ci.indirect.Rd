@@ -11,7 +11,7 @@ size.ci.indirect(alpha, cor1, cor2, w)
 
 \item{cor1}{planning value of correlation between the independent and mediator variables}
 
-\item{cor2}{planning value of correlation between the mediator and dependent variables}
+\item{cor2}{planning value of correlation between the mediator and response variables}
 
 \item{w}{desired confidence interval width}
 }
@@ -19,17 +19,17 @@ size.ci.indirect(alpha, cor1, cor2, w)
 Returns the required sample size
 }
 \description{
-Computes the approximate sample size required to estimate the indirect effect
-in a simple mediation model. The direct effect of the independent variable on
-the dependent variable, controlling for the mediator variable, is assumed to
-be negligible.
+Computes the approximate sample size required to estimate a standardized
+indirect effect in a simple mediation model. The direct effect of the
+independent (exogenous) variable on the response variable, controlling for
+the mediator variable, is assumed to be negligible.
 }
 \examples{
 size.ci.indirect(.05, .4, .5, .2)
 
 # Should return:
-#      Sample size
-# [1,]         106
+# Sample size
+#         106
  
 
 }

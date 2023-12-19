@@ -32,8 +32,8 @@ x <- c(2, 5, 8)
 size.ci.slope(.05, 31.1, x, 1)
 
 # Should return:
-#      Sample size
-# [1,]          83
+# Total sample size
+#                83
  
 
 }

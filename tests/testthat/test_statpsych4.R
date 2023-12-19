@@ -3,7 +3,7 @@ library(statpsych)
 
 test_that("ci.cramer returns valid matrix", {
   colnames_expected <- c(
-    "Cramer's V",     "SE",     "LL",     "UL"
+    "Estimate",     "SE",     "LL",     "UL"
   )
 
   res <- ci.cramer(.05, 19.21, 2, 3, 200)

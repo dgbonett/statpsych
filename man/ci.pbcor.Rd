@@ -34,7 +34,7 @@ Returns a 2-row matrix. The columns are:
 Computes confidence intervals for two types of population point-biserial
 correlations. One type uses a weighted average of the group variances
 and is appropriate for nonexperimental designs with simple random sampling
-(rather than stratified random sampling). The other type uses an unweighted
+(but not stratified random sampling). The other type uses an unweighted
 average of the group variances and is appropriate for experimental designs.
 Equality of variances is not assumed for either type.
 }

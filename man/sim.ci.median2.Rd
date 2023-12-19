@@ -48,8 +48,8 @@ are scaled to have standard deviations of 1.0 in group 1.
 sim.ci.median2(.05, 20, 20, 2, 5, 4, 5000)
 
 # Should return (within sampling error):
-#      Coverage Lower Error Upper Error Ave CI Width
-# [1,]    0.952       0.027       0.021     2.368914
+# Coverage Lower Error Upper Error Ave CI Width
+#    0.952       0.027       0.021     2.368914
 
 
 }

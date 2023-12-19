@@ -31,8 +31,8 @@ the desired confidence interval width.
 size.ci.second(20, 5.3, 2.5)
 
 # Should return:
-#      Second-stage sample size
-# [1,]                       70
+# Second-stage sample size
+#                       70
  
 
 }

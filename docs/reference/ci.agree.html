@@ -19,7 +19,7 @@ were given the same rating by both raters."><!-- mathjax --><script src="https:/
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statpsych</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.0</span>
       </span>
     </div>
 
@@ -57,7 +57,7 @@ were given the same rating by both raters.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ci.agree</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">n</span>, <span class="va">f</span>, <span class="va">k</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ci.agree</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">n</span>, <span class="va">f</span>, <span class="va">k</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -92,21 +92,21 @@ were given the same rating by both raters.</p>
     <p>Bonett DG (2022).
 “Statistical inference for G-indices of agreement.”
 <em>Journal of Educational and Behavioral Statistics</em>, <b>47</b>(4), 438--458.
-ISSN 1076-9986, doi: <a href="https://doi.org/10.3102/10769986221088561" class="external-link">10.3102/10769986221088561</a>
+ISSN 1076-9986, <a href="https://doi.org/10.3102/10769986221088561" class="external-link">doi:10.3102/10769986221088561</a>
 .</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">ci.agree</span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">100</span>, <span class="fl">80</span>, <span class="fl">4</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       Estimate         SE        LL        UL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 0.7333333 0.05333333 0.6132949 0.8226025</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Should return:</span></span>
-<span class="r-in"><span class="co">#       Estimate         SE        LL        UL</span></span>
-<span class="r-in"><span class="co"># [1,] 0.7333333 0.05333333 0.6132949 0.8226025</span></span>
-<span class="r-in"></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">ci.agree</span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">100</span>, <span class="fl">80</span>, <span class="fl">4</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Estimate         SE        LL        UL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.7333333 0.05333333 0.6132949 0.8226025</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Should return:</span></span></span>
+<span class="r-in"><span><span class="co">#  Estimate         SE        LL        UL</span></span></span>
+<span class="r-in"><span><span class="co"># 0.7333333 0.05333333 0.6132949 0.8226025</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>

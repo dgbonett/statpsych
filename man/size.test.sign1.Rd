@@ -26,8 +26,8 @@ with scores greater than the hypothesized value.
 size.test.sign1(.05, .90, .3)
 
 # Should return:
-#      Sample size
-# [1,]          56
+# Sample size
+#          56
  
 
 }

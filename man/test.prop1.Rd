@@ -29,8 +29,8 @@ Computes a continuity-corrected z test for a single proportion in a
 test.prop1(9, 20, .2)
 
 # Should return:
-#      Estimate        z          p
-# [1,]     0.45 2.515576 0.01188379
+# Estimate        z          p
+#     0.45 2.515576 0.01188379
 
 
 }

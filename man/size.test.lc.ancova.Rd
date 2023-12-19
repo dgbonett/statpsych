@@ -22,7 +22,7 @@ size.test.lc.ancova(alpha, pow, evar, es, s, d, v)
 \item{v}{vector of between-subjects contrast coefficients}
 }
 \value{
-Returns the required sample size per group
+Returns the required sample size for each group
 }
 \description{
 Computes the sample size for each group (assuming equal sample sizes) required
@@ -40,8 +40,8 @@ v <- c(.5, .5, -1)
 size.test.lc.ancova(.05, .9, 1.37, .7, 1, 0, v)
 
 # Should return:
-#      Sample size per group
-# [1,]                    47
+# Sample size per group
+#                    47
  
 
 }

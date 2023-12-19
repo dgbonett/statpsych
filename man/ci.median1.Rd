@@ -29,8 +29,8 @@ y <- c(30, 20, 15, 10, 10, 60, 20, 25, 20, 30, 10, 5, 50, 40,
 ci.median1(.05, y)
 
 # Should return:
-#      Estimate       SE LL UL
-# [1,]       20 4.270922 10 30
+# Estimate       SE LL UL
+#       20 4.270922 10 30
 
 
 }

@@ -37,8 +37,8 @@ dichotomous.
 ci.biphi(.05, 46, 15, 100, 100)
 
 # Should return:
-#       Estimate         SE        LL       UL
-# [1,] 0.4145733 0.07551281 0.2508866 0.546141
+#  Estimate         SE        LL       UL
+# 0.4145733 0.07551281 0.2508866 0.546141
 
 
 }

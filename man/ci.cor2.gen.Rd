@@ -38,8 +38,8 @@ interval for each correlation as input.
 ci.cor2.gen(.4, .35, .47, .2, .1, .32)
 
 # Should return:
-#      Estimate   LL        UL
-# [1,]      0.2 0.07 0.3220656
+# Estimate   LL        UL
+#      0.2 0.07 0.3220656
  
 
 }

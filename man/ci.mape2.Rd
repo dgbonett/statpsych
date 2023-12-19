@@ -30,11 +30,12 @@ Returns a 1-row matrix. The columns are:
 }
 \description{
 Computes a confidence interval for a ratio of population mean absolute
-prediction errors (MAPEs) from in a general linear model in two independent
+prediction errors (MAPEs) from a general linear model in two independent
 groups. The number of predictor variables can differ across groups and the
 two models can be non-nested. This function requires a vector of estimated
 residuals from each group. This function does not assume zero excess
-kurtosis but does assume symmetry in the population prediction errors.
+kurtosis but does assume symmetry in the population prediction errors for
+the two models.
 }
 \examples{
 res1 <- c(-2.70, -2.69, -1.32, 1.02, 1.23, -1.46, 2.21, -2.10, 2.56, -3.02
@@ -44,8 +45,8 @@ res2 <- c(-0.71, -0.89, 0.72, -0.35, 0.33 -0.92, 2.37, 0.51, 0.68, -0.85,
 ci.mape2(.05, res1, res2, 1, 1)
 
 # Should return:
-#        MAPE1     MAPE2 MAPE1/MAPE2       LL       UL
-# [1,] 2.58087 0.8327273    3.099298 1.917003 5.010761
+#   MAPE1     MAPE2 MAPE1/MAPE2       LL       UL
+# 2.58087 0.8327273    3.099298 1.917003 5.010761
  
 
 }

@@ -41,8 +41,8 @@ deviations of 1.0.
 sim.ci.median1(.05, 20, 5, 1000)
 
 # Should return (within sampling error):
-#      Coverage Lower Error Upper Error Ave CI Width
-# [1,]   0.9589      0.0216      0.0195    0.9735528
+# Coverage Lower Error Upper Error Ave CI Width
+#   0.9589      0.0216      0.0195    0.9735528
 
 
 }

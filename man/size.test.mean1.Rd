@@ -28,8 +28,8 @@ size.
 size.test.mean1(.05, .9, 80.5, 7)
 
 # Should return:
-#      Sample size
-# [1,]          20
+# Sample size
+#          20
  
 
 }

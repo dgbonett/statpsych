@@ -29,8 +29,8 @@ n <- c(50, 50, 50)
 test.prop.bs (f, n)
 
 # Should return:
-#      Chi-square df            p
-# [1,]   17.41071  2 0.0001656958
+# Chi-square df            p
+#   17.41071  2 0.0001656958
 
 
 }

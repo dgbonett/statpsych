@@ -43,8 +43,8 @@ raw data input.
 ci.mean.ps(.05, 58.2, 51.4, 7.43, 8.92, .537, 30)
 
 # Should return:
-#      Estimate       SE        t df            p       LL       UL
-# [1,]      6.8 1.455922 4.670578 29  6.33208e-05 3.822304 9.777696
+# Estimate       SE        t df            p       LL       UL
+#      6.8 1.455922 4.670578 29  6.33208e-05 3.822304 9.777696
 
 
 }

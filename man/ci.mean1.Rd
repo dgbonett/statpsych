@@ -33,8 +33,8 @@ for raw data input.
 ci.mean1(.05, 24.5, 3.65, 40)
 
 # Should return:
-#        Estimate        SE       LL       UL
-# [1,]       24.5 0.5771157 23.33267 25.66733
+# Estimate        SE       LL       UL
+#     24.5 0.5771157 23.33267 25.66733
  
 
 }

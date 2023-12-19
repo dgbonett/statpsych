@@ -31,8 +31,8 @@ conservatively large sample size.
 size.test.mean.ps(.05, .80, 1.25, .5, .75) 
 
 # Should return:
-#      Sample size
-# [1,]          22
+# Sample size
+#          22
  
 
 }

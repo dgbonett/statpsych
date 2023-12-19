@@ -39,8 +39,8 @@ large sample size.
 size.supinf.prop.ps(.05, .9, .35, .20, .45, .05)
 
 # Should return:
-#      Sample size
-# [1,]         227
+# Sample size
+#         227
 
 
 }

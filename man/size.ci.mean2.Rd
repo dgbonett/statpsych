@@ -29,8 +29,8 @@ sample size.
 size.ci.mean2(.05, 37.1, 5, 1)
 
 # Should return:
-#      n1  n2
-# [1,] 47  47
+# n1  n2
+# 47  47
  
 
 }

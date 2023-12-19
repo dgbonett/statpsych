@@ -9,7 +9,7 @@ ci.cronbach(alpha, rel, r, n)
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
 
-\item{rel}{sample value of Cronbach's reliability}
+\item{rel}{estimated Cronbach's reliability}
 
 \item{r}{number of measurements (items, raters, etc.)}
 
@@ -32,8 +32,8 @@ measurements.
 ci.cronbach(.05, .85, 7, 89)
 
 # Should return:
-#               SE        LL        UL
-# [1,]  0.02456518 0.7971254 0.8931436   
+# Estimate          SE        LL        UL
+#     0.85  0.02456518 0.7971254 0.8931436   
  
 
 }

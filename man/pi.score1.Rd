@@ -32,8 +32,8 @@ randomly selected member from the study population.
 pi.score1(.05, 24.5, 3.65, 40)
 
 # Should return:
-#      Predicted  df       LL       UL
-# [1,]      24.5  39 17.02546 31.97454
+# Predicted  df       LL       UL
+#      24.5  39 17.02546 31.97454
  
 
 }

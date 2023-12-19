@@ -23,15 +23,15 @@ Returns the required sample size
 \description{
 Computes the sample size required to estimate a ratio of proportions
 with desired confidence interval precision in a paired-samples design.
-Set the phi planning value to the smallest value within a plausible range
-for a conservatively large sample size.
+Set the phi correlation planning value to the smallest value within a
+plausible range for a conservatively large sample size.
 }
 \examples{
 size.ci.ratio.prop.ps(.05, .4, .2, .7, 2)
 
 # Should return:
-#      Sample size
-# [1,]          67
+# Sample size
+#          67
 
 
 }

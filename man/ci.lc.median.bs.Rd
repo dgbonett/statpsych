@@ -38,8 +38,8 @@ v <- c(1, -1, -1, 1)
 ci.lc.median.bs(.05, m, se, v)
 
 # Should return:
-#      Estimate       SE       LL       UL
-# [1,]    35.77 11.67507 12.88727 58.65273
+# Estimate       SE       LL       UL
+#    35.77 11.67507 12.88727 58.65273
 
 
 }

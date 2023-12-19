@@ -25,8 +25,8 @@ to .5 for a conservatively large sample size.
 size.ci.prop1(.05, .4, .2)
 
 # Should return:
-#      Sample size
-# [1,]          93
+# Sample size
+#          93
 
 
 }

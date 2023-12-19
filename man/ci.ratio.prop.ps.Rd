@@ -34,8 +34,8 @@ a 2 x 2 contingency table for two repeated dichotomous measurements.
 ci.ratio.prop.ps(.05, 12, 4, 26, 6)
 
 # Should return:
-#      Estimate       LL       UL
-# [1,]      3.2 1.766544 5.796628
+# Estimate       LL       UL
+#      3.2 1.766544 5.796628
 
 
 }

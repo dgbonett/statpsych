@@ -18,7 +18,7 @@ size.equiv.prop2(alpha, pow, p1, p2, h)
 \item{h}{upper limit for range of practical equivalence}
 }
 \value{
-Returns the required sample size per group
+Returns the required sample size for each group
 }
 \description{
 Computes the sample size in each group (assuming equal sample sizes) required
@@ -34,8 +34,8 @@ alpha = .05).
 size.equiv.prop2(.1, .8, .30, .35, .15)
 
 # Should return:
-#      Sample size per group
-# [1,]                   288
+# Sample size per group
+#                   288
 
 
 }

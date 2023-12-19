@@ -101,7 +101,7 @@ ci.stdmean1 <- function(alpha, m, sd, n, h) {
  ll <- est - z*se
  ul <- est + z*se
  out <- t(c(est, estu, se, ll, ul))
- colnames(out) <- c("Estimate", " adj Estimate", "SE", "LL", "UL")
+ colnames(out) <- c("Estimate", "adj Estimate", "SE", "LL", "UL")
  rownames(out) <- ""
  return(out)
 }
@@ -502,7 +502,6 @@ ci.ratio.mean2 <- function(alpha, y1, y2){
 #' experimental or nonexperimental designs. Equality of variances is not 
 #' assumed.
 #'
-#'
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  m1     estimated mean for group 1
 #' @param  m2     estimated mean for group 2
@@ -575,7 +574,7 @@ ci.stdmean2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
  out3 <- t(c(est3, est3u, se3, ll3, ul3))
  out4 <- t(c(est4, est4u, se4, ll4, ul4))
  out <- rbind(out1, out2, out3, out4)
- colnames(out) <- c("Estimate", " adj Estimate", "SE", "LL", "UL")
+ colnames(out) <- c("Estimate", "adj Estimate", "SE", "LL", "UL")
  rownames1 <- c("Unweighted standardizer:", "Weighted standardizer:")
  rownames2 <- c("Group 1 standardizer:", "Group 2 standardizer:")
  rownames(out) <- c(rownames1, rownames2)
@@ -661,7 +660,7 @@ ci.stdmean.strat <- function(alpha, m1, m2, sd1, sd2, n1, n2, p1) {
  out3 <- t(c(est3, est3u, se3, ll3, ul3))
  out4 <- t(c(est4, est4u, se4, ll4, ul4))
  out <- rbind(out1, out3, out4)
- colnames(out) <- c("Estimate", " adj Estimate", "SE", "LL", "UL")
+ colnames(out) <- c("Estimate", "adj Estimate", "SE", "LL", "UL")
  rownames1 <- c("Weighted standardizer:")
  rownames2 <- c("Group 1 standardizer:", "Group 2 standardizer:")
  rownames(out) <- c(rownames1, rownames2)
@@ -757,7 +756,7 @@ ci.lc.stdmean.bs <- function(alpha, m, sd, n, v) {
  out2 <- t(c(est2, est2u, se2, ll2, ul2))
  out3 <- t(c(est3, est3u, se3, ll3, ul3))
  out <- rbind(out1, out2, out3)
- colnames(out) <- c("Estimate", " adj Estimate", "SE", "LL", "UL")
+ colnames(out) <- c("Estimate", "adj Estimate", "SE", "LL", "UL")
  rownames(out) <- c("Unweighted standardizer:", "Weighted standardizer:", "Group 1 standardizer:")
  return(out)
 }
@@ -958,7 +957,7 @@ ci.stdmean.ps <- function(alpha, m1, m2, sd1, sd2, cor, n) {
  out3 <- t(c(est3, est3u, se3, ll3, ul3))
  out4 <- t(c(est4, est4u, se4, ll4, ul4))
  out <- rbind(out1, out3, out4)
- colnames(out) <- c("Estimate", " adj Estimate", "SE", "LL", "UL")
+ colnames(out) <- c("Estimate", "adj Estimate", "SE", "LL", "UL")
  rownames1 <- c("Unweighted standardizer:")
  rownames2 <- c("Measurement 1 standardizer:", "Measurement 2 standardizer:")
  rownames(out) <- c(rownames1, rownames2)
@@ -1044,7 +1043,7 @@ ci.lc.stdmean.ws <- function(alpha, m, sd, cor, n, q) {
  out1 <- t(c(est1, est1u, se1, ll1, ul1))
  out2 <- t(c(est2, est2u, se2, ll2, ul2))
  out <- rbind(out1, out2)
- colnames(out) <- c("Estimate", " adj Estimate", "SE", "LL", "UL")
+ colnames(out) <- c("Estimate", "adj Estimate", "SE", "LL", "UL")
  rownames(out) <- c("Unweighted standardizer:", "Level 1 standardizer:")
  return(out)
 }
@@ -1424,7 +1423,7 @@ ci.cv1 <- function(alpha, m, sd, n) {
 #'
 #'
 #' @examples
-#' ci.cv2(.05, 34.5, 26.1, 4.15, 2.26, 50, 50)
+#' ci.ratio.cv2(.05, 34.5, 26.1, 4.15, 2.26, 50, 50)
 #'
 #' # Should return:
 #' # Estimate       LL       UL
@@ -2476,7 +2475,7 @@ ci.reliability <- function(alpha, rel, se, n) {
  b <- log(n/(n - 1))
  ll <- 1 - exp(log(1 - rel) - b + z*sqrt(se^2/(1 - rel)^2))
  ul <- 1 - exp(log(1 - rel) - b - z*sqrt(se^2/(1 - rel)^2))
- out <- t(c(ll, ul))
+ out <- t(c(rel, ll, ul))
  colnames(out) = c("Estimate", "LL", "UL")
  rownames(out) <- ""
  return(out)
@@ -2542,7 +2541,7 @@ ci.etasqr <- function(alpha, etasqr, df1, df2) {
  if (ul == 0) {ul = ul0}
  se <- (ul - ll)/(2*z0)
  out <- t(c(etasqr, adj, se, ll, ul))
- colnames(out) <- c("Eta-squared", " adj Eta-squared", "SE", "LL", "UL")
+ colnames(out) <- c("Eta-squared", "adj Eta-squared", "SE", "LL", "UL")
  rownames(out) <- ""
  return(out)
 }
@@ -2982,10 +2981,10 @@ ci.2x2.mean.bs <- function(alpha, y11, y12, y21, y22) {
 #'
 #'
 #' @examples
-#' y11 = c(14, 15, 11, 7, 16, 12, 15, 16, 10, 9)
-#' y12 = c(18, 24, 14, 18, 22, 21, 16, 17, 14, 13)
-#' y21 = c(16, 11, 10, 17, 13, 18, 12, 16, 6, 15)
-#' y22 = c(18, 17, 11, 9, 9, 13, 18, 15, 14, 11)
+#' y11 <- c(14, 15, 11, 7, 16, 12, 15, 16, 10, 9)
+#' y12 <- c(18, 24, 14, 18, 22, 21, 16, 17, 14, 13)
+#' y21 <- c(16, 11, 10, 17, 13, 18, 12, 16, 6, 15)
+#' y22 <- c(18, 17, 11, 9, 9, 13, 18, 15, 14, 11)
 #' ci.2x2.stdmean.bs(.05, y11, y12, y21, y22)
 #'
 #' # Should return:
@@ -3102,7 +3101,7 @@ ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
  row7 <- c(est7, est7u, se7, LL7, UL7)
  out <- rbind(row1, row2, row3, row4, row5, row6, row7)
  rownames(out) <- c("AB:", "A:", "B:", "A at b1:", "A at b2:", "B at a1:", "B at a2:")
- colnames(out) = c("Estimate", " adj Estimate", "SE", "LL", "UL")
+ colnames(out) = c("Estimate", "adj Estimate", "SE", "LL", "UL")
  return(out)
 }
 
@@ -3287,10 +3286,10 @@ ci.2x2.median.bs <- function(alpha, y11, y12, y21, y22) {
 #'
 #'
 #' @examples
-#' y11 = c(21, 39, 32, 29, 27, 17, 27, 21, 28, 17, 12, 27)
-#' y12 = c(20, 36, 33, 27, 28, 14, 30, 20, 27, 15, 11, 22)
-#' y21 = c(21, 36, 30, 27, 28, 15, 27, 18, 29, 16, 11, 22)
-#' y22 = c(18, 34, 29, 28, 28, 17, 27, 21, 26, 16, 14, 23)
+#' y11 <- c(21, 39, 32, 29, 27, 17, 27, 21, 28, 17, 12, 27)
+#' y12 <- c(20, 36, 33, 27, 28, 14, 30, 20, 27, 15, 11, 22)
+#' y21 <- c(21, 36, 30, 27, 28, 15, 27, 18, 29, 16, 11, 22)
+#' y22 <- c(18, 34, 29, 28, 28, 17, 27, 21, 26, 16, 14, 23)
 #' ci.2x2.stdmean.ws(.05, y11, y12, y21, y22)
 #'
 #' # Should return:
@@ -3424,7 +3423,7 @@ ci.2x2.stdmean.ws <- function(alpha, y11, y12, y21, y22) {
  row7 <- c(est7, est7u, se7, LL7, UL7)
  out <- rbind(row1, row2, row3, row4, row5, row6, row7)
  rownames(out) <- c("AB:", "A:", "B:", "A at b1:", "A at b2:", "B at a1:", "B at a2:")
- colnames(out) = c("Estimate", " adj Estimate", "SE", "LL", "UL")
+ colnames(out) = c("Estimate", "adj Estimate", "SE", "LL", "UL")
  return(out)
 }
 
@@ -3459,10 +3458,10 @@ ci.2x2.stdmean.ws <- function(alpha, y11, y12, y21, y22) {
 #'
 #'
 #' @examples
-#' y11 = c(18, 19, 20, 17, 20, 16)
-#' y12 = c(19, 18, 19, 20, 17, 16)
-#' y21 = c(19, 16, 16, 14, 16, 18)
-#' y22 = c(16, 10, 12,  9, 13, 15)
+#' y11 <- c(18, 19, 20, 17, 20, 16)
+#' y12 <- c(19, 18, 19, 20, 17, 16)
+#' y21 <- c(19, 16, 16, 14, 16, 18)
+#' y22 <- c(16, 10, 12,  9, 13, 15)
 #' ci.2x2.stdmean.mixed(.05, y11, y12, y21, y22)
 #'
 #' # Should return:
@@ -3567,7 +3566,7 @@ ci.2x2.stdmean.mixed <- function(alpha, y11, y12, y21, y22) {
  row7 <- c(est7, est7u, se7, LL7, UL7)
  out <- rbind(row1, row2, row3, row4, row5, row6, row7)
  rownames(out) <- c("AB:", "A:", "B:", "A at b1:", "A at b2:", "B at a1:", "B at a2:")
- colnames(out) = c("Estimate", " adj Estimate", "SE", "LL", "UL")
+ colnames(out) = c("Estimate", "adj Estimate", "SE", "LL", "UL")
  return(out)
 }
 
@@ -3604,10 +3603,10 @@ ci.2x2.stdmean.mixed <- function(alpha, y11, y12, y21, y22) {
 #'
 #'
 #' @examples
-#' y11 = c(18, 19, 20, 17, 20, 16)
-#' y12 = c(19, 18, 19, 20, 17, 16)
-#' y21 = c(19, 16, 16, 14, 16, 18)
-#' y22 = c(16, 10, 12,  9, 13, 15)
+#' y11 <- c(18, 19, 20, 17, 20, 16)
+#' y12 <- c(19, 18, 19, 20, 17, 16)
+#' y21 <- c(19, 16, 16, 14, 16, 18)
+#' y22 <- c(16, 10, 12,  9, 13, 15)
 #' ci.2x2.median.mixed(.05, y11, y12, y21, y22)
 #'
 #' # Should return:
@@ -3761,10 +3760,10 @@ ci.2x2.median.mixed <- function(alpha, y11, y12, y21, y22) {
 #'
 #'
 #' @examples
-#' y11 = c(221, 402, 333, 301, 284, 182, 281, 230, 290, 182, 133, 278)
-#' y12 = c(221, 371, 340, 288, 293, 150, 317, 211, 286, 161, 126, 234)
-#' y21 = c(219, 371, 314, 279, 284, 155, 278, 185, 296, 169, 118, 229)
-#' y22 = c(170, 332, 280, 273, 272, 160, 260, 204, 252, 153, 137, 221)
+#' y11 <- c(221, 402, 333, 301, 284, 182, 281, 230, 290, 182, 133, 278)
+#' y12 <- c(221, 371, 340, 288, 293, 150, 317, 211, 286, 161, 126, 234)
+#' y21 <- c(219, 371, 314, 279, 284, 155, 278, 185, 296, 169, 118, 229)
+#' y22 <- c(170, 332, 280, 273, 272, 160, 260, 204, 252, 153, 137, 221)
 #' ci.2x2.median.ws(.05, y11, y12, y21, y22)
 #'
 #' # Should return:
@@ -6145,7 +6144,7 @@ test.anova1.bs <- function(m, sd, n) {
   etasqr <- SSa/(SSa + SSe)
   adjetasqr <- 1 - (dfa + dfe)*(1 - etasqr)/dfe
   out <- t(c(F, dfa, dfe, p, etasqr, adjetasqr))
-  colnames(out) <- c("F", "dfA",  "dfE", "p", "Eta-squared", " adj Eta-squared")
+  colnames(out) <- c("F", "dfA",  "dfE", "p", "Eta-squared", "adj Eta-squared")
   rownames(out) <- ""
   return(out)
 }

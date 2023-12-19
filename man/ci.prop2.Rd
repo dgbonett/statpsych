@@ -34,8 +34,8 @@ in a 2-group design.
 ci.prop2(.05, 35, 21, 150, 150)
 
 # Should return:
-#        Estimate         SE          LL        UL
-# [1,] 0.09210526 0.04476077 0.004375769 0.1798348
+#   Estimate         SE          LL        UL
+# 0.09210526 0.04476077 0.004375769 0.1798348
 
 
 }

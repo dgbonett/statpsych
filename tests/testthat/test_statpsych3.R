@@ -577,3 +577,15 @@ test_that("ci.bayes.prop1 returns valid matrix", {
 })
 
 
+test_that("ci.pv returns valid matrix", {
+  colnames_expected <- c(
+    "Estimate", "LL", "UL"
+  )
+  
+  res <- ci.pv(.05, 89, 5, 100, 100, .16)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(2, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+

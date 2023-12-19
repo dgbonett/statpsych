@@ -26,8 +26,8 @@ range for a conservatively large sample size.
 size.ci.agree(.05, .8, .2)
 
 # Should return:
-#      Sample size
-# [1,]         139
+# Sample size
+#         139
 
 
 }

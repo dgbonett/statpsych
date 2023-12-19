@@ -39,8 +39,8 @@ less than m(1 - m) where m is the prior mean.
 ci.bayes.prop1(.05, .4, .1, 12, 100)
 
 # Should return:
-#      Posterior mean Posterior SD       LL        UL
-# [1,]           0.15   0.03273268  0.09218 0.2188484
+# Posterior mean Posterior SD       LL        UL
+#           0.15   0.03273268  0.09218 0.2188484
 
 
 }

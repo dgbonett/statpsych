@@ -19,7 +19,7 @@ is not assumed."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statpsych</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.0</span>
       </span>
     </div>
 
@@ -57,7 +57,7 @@ is not assumed.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ci.ratio.mean2</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">y1</span>, <span class="va">y2</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ci.ratio.mean2</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">y1</span>, <span class="va">y2</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -89,24 +89,24 @@ is not assumed.</p>
     <p>Bonett DG, Price RM (2020).
 “Confidence intervals for ratios of means and medians.”
 <em>Journal of Educational and Behavioral Statistics</em>, <b>45</b>(6), 750--770.
-ISSN 1076-9986, doi: <a href="https://doi.org/10.3102/1076998620934125" class="external-link">10.3102/1076998620934125</a>
+ISSN 1076-9986, <a href="https://doi.org/10.3102/1076998620934125" class="external-link">doi:10.3102/1076998620934125</a>
 .</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">y2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">32</span>, <span class="fl">39</span>, <span class="fl">26</span>, <span class="fl">35</span>, <span class="fl">43</span>, <span class="fl">27</span>, <span class="fl">40</span>, <span class="fl">37</span>, <span class="fl">34</span>, <span class="fl">29</span>, <span class="fl">49</span>, <span class="fl">42</span>, <span class="fl">40</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">y1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">36</span>, <span class="fl">44</span>, <span class="fl">47</span>, <span class="fl">42</span>, <span class="fl">49</span>, <span class="fl">39</span>, <span class="fl">46</span>, <span class="fl">31</span>, <span class="fl">33</span>, <span class="fl">48</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">ci.ratio.mean2</span><span class="op">(</span><span class="fl">.05</span>, <span class="va">y1</span>, <span class="va">y2</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      Mean1    Mean2 Mean1/Mean2        LL      UL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  41.5 36.38462    1.140592 0.9837277 1.32247</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Should return:</span></span>
-<span class="r-in"><span class="co">#</span></span>
-<span class="r-in"><span class="co">#      Mean1    Mean2 Mean1/Mean2        LL       UL</span></span>
-<span class="r-in"><span class="co"># [1,]  41.5 36.38462    1.140592 0.9897482 1.314425</span></span>
-<span class="r-in"></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">y2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">32</span>, <span class="fl">39</span>, <span class="fl">26</span>, <span class="fl">35</span>, <span class="fl">43</span>, <span class="fl">27</span>, <span class="fl">40</span>, <span class="fl">37</span>, <span class="fl">34</span>, <span class="fl">29</span>, <span class="fl">49</span>, <span class="fl">42</span>, <span class="fl">40</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">y1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">36</span>, <span class="fl">44</span>, <span class="fl">47</span>, <span class="fl">42</span>, <span class="fl">49</span>, <span class="fl">39</span>, <span class="fl">46</span>, <span class="fl">31</span>, <span class="fl">33</span>, <span class="fl">48</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">ci.ratio.mean2</span><span class="op">(</span><span class="fl">.05</span>, <span class="va">y1</span>, <span class="va">y2</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean1    Mean2 Mean1/Mean2        LL      UL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   41.5 36.38462    1.140592 0.9837277 1.32247</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Should return:</span></span></span>
+<span class="r-in"><span><span class="co">#</span></span></span>
+<span class="r-in"><span><span class="co"># Mean1    Mean2 Mean1/Mean2        LL       UL</span></span></span>
+<span class="r-in"><span><span class="co">#  41.5 36.38462    1.140592 0.9897482 1.314425</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>

@@ -29,8 +29,8 @@ large sample size.
 size.ci.cor(.05, .362, 0, .25)
 
 # Should return:
-#      Sample size
-# [1,]         188
+# Sample size
+#         188
  
 
 }

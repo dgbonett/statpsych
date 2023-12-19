@@ -20,7 +20,7 @@ proportions in a betwen-subjects design."><!-- mathjax --><script src="https://c
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statpsych</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.0</span>
       </span>
     </div>
 
@@ -58,7 +58,7 @@ proportions in a betwen-subjects design.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ci.lc.prop.bs</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">f</span>, <span class="va">n</span>, <span class="va">v</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ci.lc.prop.bs</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">f</span>, <span class="va">n</span>, <span class="va">v</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -68,7 +68,7 @@ proportions in a betwen-subjects design.</p>
 
 
 <dt>f</dt>
-<dd><p>vector of frequency counts of participants with attribute</p></dd>
+<dd><p>vector of frequency counts of participants who have the attribute</p></dd>
 
 
 <dt>n</dt>
@@ -95,24 +95,24 @@ proportions in a betwen-subjects design.</p>
     <p>Price RM, Bonett DG (2004).
 “An improved confidence interval for a linear function of binomial proportions.”
 <em>Computational Statistics &amp; Data Analysis</em>, <b>45</b>(3), 449--456.
-ISSN 01679473, doi: <a href="https://doi.org/10.1016/S0167-9473(03)00007-0" class="external-link">10.1016/S0167-9473(03)00007-0</a>
-, <a href="https://doi.org/10.1016/S0167-9473(03)00007-0" class="external-link">https://doi.org/10.1016/S0167-9473(03)00007-0</a>.</p>
+ISSN 01679473, <a href="https://doi.org/10.1016/S0167-9473%2803%2900007-0" class="external-link">doi:10.1016/S0167-9473(03)00007-0</a>
+.</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">26</span>, <span class="fl">24</span>, <span class="fl">38</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">60</span>, <span class="fl">60</span>, <span class="fl">60</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">v</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">.5</span>, <span class="op">-</span><span class="fl">.5</span>, <span class="fl">1</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">ci.lc.prop.bs</span><span class="op">(</span><span class="fl">.05</span>, <span class="va">f</span>, <span class="va">n</span>, <span class="va">v</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       Estimate         SE        z           p         LL        UL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 0.2119565 0.07602892 2.787841 0.005306059 0.06294259 0.3609705</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Should return:</span></span>
-<span class="r-in"><span class="co">#       Estimate         SE        z           p         LL        UL</span></span>
-<span class="r-in"><span class="co"># [1,] 0.2119565 0.07602892 2.787841 0.005306059 0.06294259 0.3609705</span></span>
-<span class="r-in"></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">26</span>, <span class="fl">24</span>, <span class="fl">38</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">60</span>, <span class="fl">60</span>, <span class="fl">60</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">v</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">.5</span>, <span class="op">-</span><span class="fl">.5</span>, <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">ci.lc.prop.bs</span><span class="op">(</span><span class="fl">.05</span>, <span class="va">f</span>, <span class="va">n</span>, <span class="va">v</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Estimate         SE        z           p         LL        UL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.2119565 0.07602892 2.787841 0.005306059 0.06294259 0.3609705</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Should return:</span></span></span>
+<span class="r-in"><span><span class="co">#  Estimate         SE        z           p         LL        UL</span></span></span>
+<span class="r-in"><span><span class="co"># 0.2119565 0.07602892 2.787841 0.005306059 0.06294259 0.3609705</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>

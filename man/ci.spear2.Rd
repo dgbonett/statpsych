@@ -34,8 +34,8 @@ correlations in a 2-group design.
 ci.spear2(.05, .54, .48, 180, 200)
 
 # Should return:
-#      Estimate         SE         LL        UL
-# [1,]     0.06 0.08124926 -0.1003977 0.2185085     
+# Estimate         SE         LL        UL
+#     0.06 0.08124926 -0.1003977 0.2185085     
  
 
 }

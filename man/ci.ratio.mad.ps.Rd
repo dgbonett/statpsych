@@ -11,7 +11,7 @@ ci.ratio.mad.ps(alpha, y1, y2)
 
 \item{y1}{vector of measurement 1 scores}
 
-\item{y2}{vector of measurement 2 scores}
+\item{y2}{vector of measurement 2 scores (paired with y1)}
 }
 \value{
 Returns a 1-row matrix. The columns are:
@@ -33,8 +33,8 @@ y1 <- c(67, 28, 30, 28, 52, 40, 25, 37, 44, 10, 14, 20, 28, 40, 51)
 ci.ratio.mad.ps(.05, y1, y2)
 
 # Should return:
-#          MAD1  MAD2  MAD1/MAD2       LL       UL
-# [1,] 12.71429   7.5   1.695238 1.109176 2.590961
+#     MAD1  MAD2  MAD1/MAD2       LL       UL
+# 12.71429   7.5   1.695238 1.109176 2.590961
 
 
 }

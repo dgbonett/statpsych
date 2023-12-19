@@ -31,8 +31,8 @@ a 2-group design.
 test.prop2(11, 26, 50, 50)
 
 # Should return:
-#  Estimate        z           p
-#      -0.3 2.899726 0.003734895
+# Estimate        z           p
+#     -0.3 2.899726 0.003734895
 
 
 }

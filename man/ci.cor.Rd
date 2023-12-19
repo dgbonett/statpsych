@@ -35,8 +35,8 @@ input. Use the cor.test function for raw data input.
 ci.cor(.05, .536, 0, 50)
 
 # Should return:
-#      Estimate        SE        LL        UL
-# [1,]    0.536 0.1018149 0.2978573 0.7058914
+# Estimate        SE        LL        UL
+#    0.536 0.1018149 0.2978573 0.7058914
  
 
 }

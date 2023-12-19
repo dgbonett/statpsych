@@ -18,7 +18,7 @@ size.test.lc.prop.bs(alpha, pow, p, es, v)
 \item{v}{vector of between-subjects contrast coefficients}
 }
 \value{
-Returns the required sample size per group
+Returns the required sample size for each group
 }
 \description{
 Computes the sample size in each group (assuming equal sample sizes) required
@@ -35,8 +35,8 @@ v <- c(.5, .5, -.5, -.5)
 size.test.lc.prop.bs(.05, .9, p, .15, v)
 
 # Should return:
-#      Sample size per group
-# [1,]                   105
+# Sample size per group
+#                   105
 
 
 }

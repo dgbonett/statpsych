@@ -18,7 +18,7 @@ size.test.prop2(alpha, pow, p1, p2, es)
 \item{es}{planning value of proportion difference}
 }
 \value{
-Returns the required sample size per group
+Returns the required sample size for eachr group
 }
 \description{
 Computes the sample size in each group required to test a difference in
@@ -33,8 +33,8 @@ equal to a minimally interesting effect size.
 size.test.prop2(.05, .8, .2, .4, .2)
 
 # Should return:
-#      Sample size per group
-# [1,]                    79
+# Sample size per group
+#                    79
 
 
 }

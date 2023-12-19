@@ -33,8 +33,8 @@ within a plausible range for a conservatively large sample size.
 size.ci.condmean(.05, 120, 125, 15, 5)
 
 # Should return:
-#      Total sample size
-# [1,]               210
+# Total sample size
+#               210
  
 
 }
