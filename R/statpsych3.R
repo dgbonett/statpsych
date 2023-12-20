@@ -1361,9 +1361,9 @@ ci.agree2 <- function(alpha, n1, f1, n2, f2, r) {
 #' * G(1,2): G-index for raters 1 and 2
 #' * G(1,3): G-index for raters 1 and 3
 #' * G(2,3): G-index for raters 2 and 3
-#' * G(1,2)-G(1,3): difference in G{1,2} and G{1,3}
-#' * G(1,2)-G(2,3): difference in G{1,2} and G{2,3}
-#' * G(2,3)-G(1,3): difference in G{2,3} and G{1,3}
+#' * G(1,2)-G(1,3): difference in G(1,2) and G(1,3)
+#' * G(1,2)-G(2,3): difference in G(1,2) and G(2,3)
+#' * G(2,3)-G(1,3): difference in G(2,3) and G(1,3)
 #' * G(3): G-index of unanimous agreement for all three raters
 #'
 #'
