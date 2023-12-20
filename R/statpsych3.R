@@ -1598,7 +1598,7 @@ ci.cramer <- function(alpha, chisqr, r, c, n) {
 #' interaction effect, main effect of A, main efect of B, simple main effects
 #' of A, and simple main effects of B in a 2x2 between-subjects factorial 
 #' design with a dichotomous response variable. The input vector of 
-#' frequency counts is f = {`[`}f11, f12, f21, f22{`[`}, and the input vector of 
+#' frequency counts is f = {`[`}f11, f12, f21, f22{`]`}, and the input vector of 
 #' sample sizes is n = {`[`}n11, n12, n21, n22{`[`} where the first subscript 
 #' represents the levels of Factor A and the second subscript represents the 
 #' levels of Factor B.
