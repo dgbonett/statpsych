@@ -30,7 +30,7 @@ Computes adjusted Wald confidence intervals and tests for the AB
 interaction effect, main effect of A, main efect of B, simple main effects
 of A, and simple main effects of B in a 2x2 between-subjects factorial
 design with a dichotomous response variable. The input vector of
-frequency counts is f = {\code{[}}f11, f12, f21, f22{\code{[}}, and the input vector of
+frequency counts is f = {\code{[}}f11, f12, f21, f22{\verb{]}}, and the input vector of
 sample sizes is n = {\code{[}}n11, n12, n21, n22{\code{[}} where the first subscript
 represents the levels of Factor A and the second subscript represents the
 levels of Factor B.
