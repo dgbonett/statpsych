@@ -1346,7 +1346,7 @@ ci.agree2 <- function(alpha, n1, f1, n2, f2, r) {
 #'  
 #' @param  alpha    alpha level for 1-alpha confidence
 #' @param  f        vector of frequency counts from 2x2x2 table where
-#'                  f = {`[`}f111, f112, f121, f122, f211, f212, f221, f222{`]`},
+#'                  f = \[ f111, f112, f121, f122, f211, f212, f221, f222 \],
 #'                  first subscript represents rating of rater 1,
 #'                  second subscript represents rating of rater 2, and
 #'                  third subscript represents rating of rater 3
@@ -1361,9 +1361,9 @@ ci.agree2 <- function(alpha, n1, f1, n2, f2, r) {
 #' * G(1,2): G-index for raters 1 and 2
 #' * G(1,3): G-index for raters 1 and 3
 #' * G(2,3): G-index for raters 2 and 3
-#' * G(1,2)-G(1,3): difference in G{1,2} and G{1,3}
-#' * G(1,2)-G(2,3): difference in G{1,2} and G{2,3}
-#' * G(2,3)-G(1,3): difference in G{2,3} and G{1,3}
+#' * G(1,2)-G(1,3): difference in G(1,2) and G(1,3)
+#' * G(1,2)-G(2,3): difference in G(1,2) and G(2,3)
+#' * G(2,3)-G(1,3): difference in G(2,3) and G(1,3)
 #' * G(3): G-index of unanimous agreement for all three raters
 #'
 #'
@@ -1598,8 +1598,8 @@ ci.cramer <- function(alpha, chisqr, r, c, n) {
 #' interaction effect, main effect of A, main efect of B, simple main effects
 #' of A, and simple main effects of B in a 2x2 between-subjects factorial 
 #' design with a dichotomous response variable. The input vector of 
-#' frequency counts is f = {`[`}f11, f12, f21, f22{`]`}, and the input vector of 
-#' sample sizes is n = {`[`}n11, n12, n21, n22{`[`} where the first subscript 
+#' frequency counts is f = \[ f11, f12, f21, f22 \], and the input vector of 
+#' sample sizes is n = \[ n11, n12, n21, n22 \] where the first subscript 
 #' represents the levels of Factor A and the second subscript represents the 
 #' levels of Factor B.
 #'
