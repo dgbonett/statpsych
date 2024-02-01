@@ -1903,6 +1903,10 @@ ci.median2 <- function(alpha, y1, y2) {
 #' @importFrom stats median
 #' @export
 ci.ratio.median2 <- function(alpha, y1, y2) {
+ min1 <- min(y1)
+ min2 <- min(y2)
+ if (min1 < 0) {stop("scores cannot be negative")}
+ if (min2 < 0) {stop("scores cannot be negative")}
  z <- qnorm(1 - alpha/2)
  n1 <- length(y1)
  y1 <- sort(y1)
@@ -2120,6 +2124,10 @@ ci.median.ps <- function(alpha, y1, y2) {
 #' @export
 ci.ratio.median.ps <- function(alpha, y1, y2) {
  if (length(y1) != length(y2)) {stop("length of y1 must equal length of y2")}
+ min1 <- min(y1)
+ min2 <- min(y2)
+ if (min1 < 0) {stop("scores cannot be negative")}
+ if (min2 < 0) {stop("scores cannot be negative")}
  z <- qnorm(1 - alpha/2)
  n <- length(y1)
  med1 <- median(y1)
