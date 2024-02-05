@@ -468,6 +468,10 @@ ci.slope.mean.bs <- function(alpha, m, sd, n, x) {
 #' @importFrom stats var
 #' @export
 ci.ratio.mean2 <- function(alpha, y1, y2){
+ min1 <- min(y1)
+ min2 <- min(y2)
+ if (min1 < 0) {print("WARNING: ratio-scale scores cannot be negative")}
+ if (min2 < 0) {print("WARNING: ratio-scale scores cannot be negative")}
  n1 <- length(y1)
  n2 <- length(y2)
  m1 <- mean(y1)
@@ -864,6 +868,10 @@ ci.mean.ps <- function(alpha, m1, m2, sd1, sd2, cor, n) {
 #' @export
 ci.ratio.mean.ps <- function(alpha, y1, y2){
  if (length(y1) != length(y2)) {stop("length of y1 must equal length of y2")}
+ min1 <- min(y1)
+ min2 <- min(y2)
+ if (min1 < 0) {print("WARNING: ratio-scale scores cannot be negative")}
+ if (min2 < 0) {print("WARNING: ratio-scale scores cannot be negative")}
  n <- length(y1)
  m1 <- mean(y1)
  m2 <- mean(y2)
