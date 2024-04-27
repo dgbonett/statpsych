@@ -3000,8 +3000,8 @@ size.supinf.prop.ps <- function(alpha, pow, p1, p2, phi, h) {
 #' power.prop1(.05, 40, .5, .2)
 #'
 #' # Should return:
-#' #    Power
-#' # 0.715613
+#' #     Power
+#' # 0.7156044
 #'
 #'
 #' @importFrom stats qnorm
@@ -3010,8 +3010,11 @@ size.supinf.prop.ps <- function(alpha, pow, p1, p2, phi, h) {
 power.prop1 <- function(alpha, n, p, es) {
  if (p > .9999 || p < .0001) {stop("proportion must be between .0001 and .9999")}
  za <- qnorm(1 - alpha/2)
- z <- abs(es)/sqrt(p*(1 - p)/n) - za
- pow <- pnorm(z)
+ z1 <- abs(es)/sqrt(p*(1 - p)/n) - za
+ z2 <- abs(es)/sqrt(p*(1 - p)/n) + za
+ pow1 <- pnorm(z1)
+ pow2 <- 1 - pnorm(z2)
+ pow <- pow1 + pow2
  out <- matrix(pow, nrow = 1, ncol = 1)
  colnames(out) <- "Power"
  rownames(out) <- ""
@@ -3050,7 +3053,7 @@ power.prop1 <- function(alpha, n, p, es) {
 #'
 #' # Should return:
 #' #     Power
-#' # 0.4998515
+#' # 0.4998959
 #'
 #'
 #' @importFrom stats qnorm
@@ -3060,8 +3063,11 @@ power.prop2 <- function(alpha, n1, n2, p1, p2, es) {
  if (p1 > .9999 || p1 < .0001) {stop("p1 must be between .0001 and .9999")}
  if (p2 > .9999 || p2 < .0001) {stop("p2 must be between .0001 and .9999")}
  za <- qnorm(1 - alpha/2)
- z <- abs(es)/sqrt(p1*(1 - p1)/n1 + p2*(1 - p2)/n2) - za
- pow <- pnorm(z)
+ z1 <- abs(es)/sqrt(p1*(1 - p1)/n1 + p2*(1 - p2)/n2) - za
+ z2 <- abs(es)/sqrt(p1*(1 - p1)/n1 + p2*(1 - p2)/n2) + za
+ pow1 <- pnorm(z1)
+ pow2 <- 1 - pnorm(z2)
+ pow <- pow1 + pow2
  out <- matrix(pow, nrow = 1, ncol = 1)
  colnames(out) <- "Power"
  rownames(out) <- ""
@@ -3104,7 +3110,7 @@ power.prop2 <- function(alpha, n1, n2, p1, p2, es) {
 #'
 #' # Should return:
 #' #     Power
-#' # 0.6877652
+#' # 0.6877704
 #'
 #'
 #' @importFrom stats qnorm
@@ -3116,8 +3122,11 @@ power.prop.ps <- function(alpha, n, p1, p2, phi, es) {
  if (p2 > .9999 || p2 < .0001) {stop("p2 must be between .0001 and .9999")}
  za <- qnorm(1 - alpha/2)
  v <- 2*phi*sqrt(p1*(1 - p1)*p2*(1 - p2))
- z <- abs(es)/sqrt((p1*(1 - p1) + p2*(1 - p2) - v)/n) - za
- pow <- pnorm(z)
+ z1 <- abs(es)/sqrt((p1*(1 - p1) + p2*(1 - p2) - v)/n) - za
+ z2 <- abs(es)/sqrt((p1*(1 - p1) + p2*(1 - p2) - v)/n) + za
+ pow1 <- pnorm(z1)
+ pow2 <- 1 - pnorm(z2)
+ pow <- pow1 + pow2
  out <- matrix(pow, nrow = 1, ncol = 1)
  colnames(out) <- "Power"
  rownames(out) <- ""
