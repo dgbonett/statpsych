@@ -50,6 +50,56 @@ ci.mean1 <- function(alpha, m, sd, n) {
 }
 
 
+#  ci.mean1.fpc  ==============================================================
+#' Confidence interval for a single mean with a finite population correction
+#'
+#'
+#' @description
+#' Computes a confidence interval for a population mean with a finite 
+#' population correction (fpc) using the estimated mean, estimated standard 
+#' deviation, sample size, and population size. This function is useful when 
+#' the sample size is not a small fraction of the population size.
+#'
+#'  
+#' @param  alpha  alpha level for 1-alpha confidence
+#' @param  m	  estimated mean 
+#' @param  sd	  estimated standard deviation
+#' @param  n	  sample size
+#' @param  N	  population size
+#'
+#'
+#' @return 
+#' Returns a 1-row matrix. The columns are:
+#' * Estimate - estimated mean
+#' * SE - standard error with fpc
+#' * LL - lower limit of the confidence interval with fpc
+#' * UL - upper limit of the confidence interval with fpc
+#' 
+#' 
+#' @examples
+#' ci.mean1.fpc(.05, 24.5, 3.65, 40, 300)
+#'
+#' # Should return:
+#' # Estimate        SE       LL       UL
+#' #     24.5 0.5381631 23.41146 25.58854
+#'  
+#' 
+#' @importFrom stats qt
+#' @export
+ci.mean1.fpc <- function(alpha, m, sd, n, N) {
+ if (n > N) {stop("n cannot be greater than N")}
+ df <- n - 1
+ tcrit <- qt(1 - alpha/2, df)
+ se <- (sd/sqrt(n))*sqrt((N - n)/(N - 1))
+ ll <- m - tcrit*se
+ ul <- m + tcrit*se
+ out <- t(c(m, se, ll, ul))
+ colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
+ return(out)
+}
+
+
 #  ci.stdmean1  ==============================================================
 #' Confidence interval for a single standardized mean
 #'
