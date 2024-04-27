@@ -5540,7 +5540,7 @@ size.test.cronbach <- function(alpha, pow, rel, r, h) {
 #'
 #' # Should return:
 #' #     Power
-#' # 0.8021661
+#' # 0.8021669
 #'
 #'
 #' @importFrom stats qt
@@ -5550,7 +5550,9 @@ power.mean1 <- function(alpha, n, var, es) {
  df <- n - 1
  t <- qt(1 - alpha/2, df)
  z <- abs(es)/sqrt(var/n)
- pow <- 1 - pt(t, df, z)
+ pow1 <- 1 - pt(t, df, z)
+ pow2 <- 1 - pt(t, df, -z)
+ pow <- pow1 + pow2
  out <- matrix(pow, nrow = 1, ncol = 1)
  colnames(out) <- "Power"
  rownames(out) <- ""
@@ -5588,7 +5590,7 @@ power.mean1 <- function(alpha, n, var, es) {
 #'
 #' # Should return:
 #' #     Power
-#' # 0.8398413
+#' # 0.8398417
 #'
 #'
 #' @importFrom stats qt
@@ -5598,7 +5600,9 @@ power.mean2 <- function(alpha, n1, n2, var1, var2, es) {
  df <- (var1/n1 + var2/n2)^2/(var1^2/(n1^2*(n1 - 1)) + var2^2/(n2^2*(n2 - 1)))
  t <- qt(1 - alpha/2, df)
  z <- abs(es)/sqrt(var1/n1 + var2/n2)
- pow <- 1 - pt(t, df, z)
+ pow1 <- 1 - pt(t, df, z)
+ pow2 <- 1 - pt(t, df, -z)
+ pow <- pow1 + pow2
  out <- matrix(pow, nrow = 1, ncol = 1)
  colnames(out) <- "Power"
  rownames(out) <- ""
@@ -5641,7 +5645,7 @@ power.mean2 <- function(alpha, n1, n2, var1, var2, es) {
 #'
 #' # Should return:
 #' #     Power
-#' # 0.7221139
+#' # 0.7221171
 #'
 #'
 #' @importFrom stats qt
@@ -5653,7 +5657,9 @@ power.lc.mean.bs <- function(alpha, n, var, es, v) {
  df <- (se^4)/sum(((v^4)*(var^2)/(n^2*(n - 1))))
  t <- qt(1 - alpha/2, df)
  z <- abs(es)/se
- pow <- 1 - pt(t, df, z)
+ pow1 <- 1 - pt(t, df, z)
+ pow2 <- 1 - pt(t, df, -z)
+ pow <- pow1 + pow2
  out <- matrix(pow, nrow = 1, ncol = 1)
  colnames(out) <- "Power"
  rownames(out) <- ""
@@ -5691,7 +5697,7 @@ power.lc.mean.bs <- function(alpha, n, var, es, v) {
 #'
 #' # Should return:
 #' #     Power
-#' # 0.9074353
+#' # 0.9074354
 #'
 #'
 #' @importFrom stats qt
@@ -5702,7 +5708,9 @@ power.mean.ps <- function(alpha, n, var1, var2, es, cor) {
  df <- n - 1
  t <- qt(1 - alpha/2, df)
  z <- abs(es)/sqrt((var1 + var2 - 2*cor*sqrt(var1*var2))/n)
- pow <- 1 - pt(t, df, z)
+ pow1 <- 1 - pt(t, df, z)
+ pow2 <- 1 - pt(t, df, -z)
+ pow <- pow1 + pow2
  out <- matrix(pow, nrow = 1, ncol = 1)
  colnames(out) <- "Power"
  rownames(out) <- ""
