@@ -1271,6 +1271,269 @@ ci.rel2 <- function(rel1, ll1, ul1, rel2, ll2, ul2) {
  return(out)
 }
 
+#  ======================== Hypothesis Tests ==================================
+# test.cor1 ===================================================================
+#' Hypothesis test for a single Pearson or partial correlation 
+#'
+#'                        
+#' @description
+#' Computes a t test for a test of the null hypothesis that a Pearson or 
+#' partial correlations is equal to 0, or a z test using a Fisher 
+#' transformation for a test of the null hypothesis that a Pearson or
+#' partial correlation is equal to some specified nonzero value. Set s = 0 
+#' for a Pearson correlation. The hypothesis testing results should be 
+#' accompanied with a confidence interval for the population Pearson or
+#' partial correlation value.
+#'
+#'
+#' @param  cor     estimated correlation 
+#' @param  h       null hypothesis correlation value 
+#' @param  n       sample size 
+#' @param  s       number of control variables
+#'
+#'
+#' @return
+#' Returns a 1-row matrix. The columns are:
+#' * Estimate - estimate of correlation 
+#' * t or z - t test statistic (for h = 0) or z test statistic
+#' * p - p-value
+#'
+#'
+#' @seealso \link[statpsych]{ci.cor1}
+#' 
+#' 
+#' @examples
+#' test.cor1(.484, .2, 100, 0)
+#'
+#' # Should return:
+#' # Estimate        z           p
+#' #    0.484 3.205432 0.001348601
+#'
+#'
+#' test.cor1(.372, 0, 100, 0)
+#'
+#' # Should return:
+#' #  Estimate        t df           p
+#' #     0.372 3.967337 98 0.000138436
+#'
+#'
+#' @importFrom stats pnorm
+#' @export
+test.cor1 <- function(cor, h, n, s) {
+ if (cor > .9999) {stop("correlation cannot be greater than .9999")}
+ if (cor < -.9999) {stop("correlation cannot be less than -.9999")}
+ if (h == 0) {
+  df <- n - 2 - s
+  se <- sqrt((1 - cor^2)/df)
+  t <- cor/se
+  pval <- 2*(1 - pt(abs(t), df))
+  out <- t(c(cor, t, df, pval))
+  colnames(out) <- c("Estimate", "t", "df", "p")
+ }
+ else {
+   r.z <- log((1 + cor)/(1 - cor))/2
+   h.z <- log((1 + h)/(1 - h))/2
+   se.z <- sqrt(1/(n - 3 - s))
+   z <- (r.z - h.z)/se.z
+   pval <- 2*(1 - pnorm(abs(z)))
+   out <- t(c(cor, z, pval))
+   colnames(out) <- c("Estimate", "z", "p")
+ }
+ rownames(out) <- ""
+ return(out)
+}
+
+
+# test.spear1 ===================================================================
+#' Hypothesis test for a single Spearman correlation 
+#'
+#'                      
+#' @description
+#' Computes a t test for a test of the null hypothesis that a Spearman 
+#' correlation is equal to 0, or a z test using a Fisher transformation for a 
+#' test of the null hypothesis that a Spearman correlation is equal to some 
+#' specified nonzero value. The hypothesis testing results should be 
+#' accompanied with a confidence interval for the population Spearman
+#' correlation value.
+#'
+#'
+#' @param  cor     estimated correlation 
+#' @param  h       null hypothesis corelation value
+#' @param  n       sample size 
+#'
+#'
+#' @return
+#' Returns a 1-row matrix. The columns are:
+#' * Estimate - estimate of correlation 
+#' * t or z - t test statistic (for h = 0) or z test statistic
+#' * p - p-value
+#'
+#'
+#' @seealso \link[statpsych]{ci.spear1}
+#' 
+#' 
+#' @examples
+#' test.spear1(.471, .2, 100)
+#'
+#' # Should return:
+#' # Estimate        z           p
+#' #     0.471 3.009628 0.00261568
+#'
+#'
+#' test.spear1(.342, 0, 100)
+#'
+#' # Should return:
+#' #  Estimate        t df            p
+#' #     0.342 3.602881 98 0.0004965008
+#'
+#'
+#' @importFrom stats pnorm
+#' @export
+test.spear1 <- function(cor, h, n) {
+ if (cor > .9999) {stop("correlation cannot be greater than .9999")}
+ if (cor < -.9999) {stop("correlation cannot be less than -.9999")}
+ if (h == 0) {
+  df <- n - 2
+  se <- sqrt((1 - cor^2)/df)
+  t <- cor/se
+  pval <- 2*(1 - pt(abs(t), df))
+  out <- t(c(cor, t, df, pval))
+  colnames(out) <- c("Estimate", "t", "df", "p")
+ }
+ else {
+   r.z <- log((1 + cor)/(1 - cor))/2
+   h.z <- log((1 + h)/(1 - h))/2
+   se.z <- sqrt((1 + h^2/2)/(n - 3))
+   z <- (r.z - h.z)/se.z
+   pval <- 2*(1 - pnorm(abs(z)))
+   out <- t(c(cor, z, pval))
+   colnames(out) <- c("Estimate", "z", "p")
+ }
+ rownames(out) <- ""
+ return(out)
+}
+
+
+# test.cor2 =================================================================
+#' Hypothesis test for a 2-group Pearson or partial correlation difference
+#'
+#'
+#' @description
+#' Computes a z test for a difference of Pearson or partial correlations in  
+#' a 2-group design. Set s = 0 for a Pearson correlation. The hypothesis 
+#' testing results should be accompanied with a confidence interval for the 
+#' difference in population correlation values.
+#'
+#'
+#' @param  cor1    estimated correlation for group 1
+#' @param  cor2    estimated correlation for group 2
+#' @param  n1      sample size for group 1
+#' @param  n2      sample size for group 2
+#' @param  s       number of control variables
+#'
+#'
+#' @return
+#' Returns a 1-row matrix. The columns are:
+#' * Estimate - estimate of correlation difference
+#' * z - z test statistic
+#' * p - p-value
+#'
+#'
+#' @seealso \link[statpsych]{ci.cor2}
+#' 
+#' 
+#' @examples
+#' test.cor2(.684, .437, 100, 125, 0)
+#'
+#' # Should return:
+#' # Estimate        z           p
+#' #    0.247 2.705709 0.006815877
+#'
+#'
+#' @importFrom stats pnorm
+#' @export
+test.cor2 <- function(cor1, cor2, n1, n2, s) {
+ if (cor1 > .9999) {stop("correlation cannot be greater than .9999")}
+ if (cor1 < -.9999) {stop("correlation cannot be less than -.9999")}
+ if (cor2 > .9999) {stop("correlation cannot be greater than .9999")}
+ if (cor2 < -.9999) {stop("correlation cannot be less than -.9999")}
+ z1 <- log((1 + cor1)/(1 - cor1))/2
+ z2 <- log((1 + cor2)/(1 - cor2))/2
+ v1 <- 1/(n1 - 3 - s)
+ v2 <- 1/(n2 - 3 - s)
+ se <- sqrt(v1 + v2)
+ diff <- cor1 - cor2
+ z <- (z1 - z2)/se
+ pval <- 2*(1 - pnorm(abs(z)))
+ out <- t(c(diff, z, pval))
+ colnames(out) <- c("Estimate", "z", "p")
+ rownames(out) <- ""
+ return(out)
+}
+
+
+# test.spear2 =================================================================
+#' Hypothesis test for a 2-group Spearman correlation difference
+#'
+#'
+#' @description
+#' Computes a z test for a difference of Spearman correlations in a 2-group
+#' design. The test statistic uses a Bonett-Wright standard error for each
+#' Spearman correlation. The hypothesis testing results should be 
+#' accompanied with a confidence interval for a difference in population 
+#' Spearman correlation values.
+#'
+#'
+#' @param  cor1    estimated Spearman correlation for group 1
+#' @param  cor2    estimated Spearman correlation for group 2
+#' @param  n1      sample size for group 1
+#' @param  n2      sample size for group 2
+#'
+#'
+#' @return
+#' Returns a 1-row matrix. The columns are:
+#' * Estimate - estimate of correlation difference
+#' * z - z test statistic
+#' * p - p-value
+#'
+#'
+#' @seealso \link[statpsych]{ci.spear2}
+#' 
+#' 
+#' @references
+#' \insertRef{Bonett2000}{statpsych}
+#'
+#'
+#' @examples
+#' test.spear2(.684, .437, 100, 125)
+#'
+#' # Should return:
+#' # Estimate        z          p
+#' #    0.247 2.498645 0.01246691
+#'
+#'
+#' @importFrom stats pnorm
+#' @export
+test.spear2 <- function(cor1, cor2, n1, n2) {
+ if (cor1 > .9999) {stop("correlation cannot be greater than .9999")}
+ if (cor1 < -.9999) {stop("correlation cannot be less than -.9999")}
+ if (cor2 > .9999) {stop("correlation cannot be greater than .9999")}
+ if (cor2 < -.9999) {stop("correlation cannot be less than -.9999")}
+ z1 <- log((1 + cor1)/(1 - cor1))/2
+ z2 <- log((1 + cor2)/(1 - cor2))/2
+ v1 <- (1 + cor1^2/2)/(n1 - 3)
+ v2 <- (1 + cor2^2/2)/(n2 - 3)
+ se <- sqrt(v1 + v2)
+ diff <- cor1 - cor2
+ z <- (z1 - z2)/se
+ pval <- 2*(1 - pnorm(abs(z)))
+ out <- t(c(diff, z, pval))
+ colnames(out) <- c("Estimate", "z", "p")
+ rownames(out) <- ""
+ return(out)
+}
+
+
 
 #  =================== Sample Size for Desire Precision =======================
 #  size.ci.slope ==============================================================
