@@ -70,6 +70,59 @@ ci.prop1 <- function(alpha, f, n) {
 }
 
 
+#  ci.prop1.fpc =============================================================== 
+#' Confidence interval for a single proportion with a finite population 
+#' correction
+#'
+#'
+#' @description
+#' Computes an adjusted Wald interval for a single population proportion with a 
+#' finite population correction (fpc). This confidence interval is useful 
+#' when the sample size is not a small fraction of the population size.
+#'
+#'
+#' @param   alpha   alpha level for 1-alpha confidence
+#' @param   f       number of participants who have the attribute
+#' @param   n       sample size
+#' @param   N       population size
+#'
+#'
+#' @return
+#' Returns a 1-row matrix. The columns are:
+#' * Estimate - adjusted estimate of proportion
+#' * SE - adjusted standard error with fpc
+#' * LL - lower limit of the confidence interval with fpc
+#' * UL - upper limit of the confidence interval with fpc
+#'
+#'
+#' @examples
+#' ci.prop1.fpc(.05, 12, 100, 400)
+#'
+#' # Should return:
+#' #   Estimate         SE         LL        UL
+#' #  0.1346154  0.0290208 0.07773565 0.1914951
+#'
+#'
+#' @importFrom stats qnorm
+#' @export
+ci.prop1.fpc <- function(alpha, f, n, N) {
+ if (f > n) {stop("f cannot be greater than n")}
+ if (f > N) {stop("f cannot be greater than N")}
+ if (n > N) {stop("n cannot be greater than N")}
+ z <- qnorm(1 - alpha/2)
+ p.adj <- (f + 2)/(n + 4)
+ se.adj <- sqrt(p.adj*(1 - p.adj)/(n + 4))*sqrt((N - n)/(N - 1))
+ LL.adj <- p.adj - z*se.adj
+ UL.adj <- p.adj + z*se.adj
+ if (LL.adj < 0) {LL.adj = 0}
+ if (UL.adj > 1) {UL.adj = 1}
+ out <- t(c(p.adj, se.adj, LL.adj, UL.adj))
+ colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
+ return(out)
+}
+
+
 #  ci.pairs.prop1 ============================================================
 #' Confidence intervals for pairwise proportion differences of a
 #' polychotomous variable
