@@ -65,7 +65,7 @@ ci.mean1 <- function(alpha, m, sd, n) {
 #' @param  m	  estimated mean 
 #' @param  sd	  estimated standard deviation
 #' @param  n	  sample size
-#' @param  h      hypothesized value
+#' @param  h      hypothesized value of mean
 #'
 #'
 #' @return 
