@@ -2622,21 +2622,18 @@ size.ci.agree <- function(alpha, G, w) {
 
 
 # ===================== Sample Size for Desired Power ========================
-#  size.test.prop1 =========================================================== 
+#  size.test.prop1 ============[added to GitHub 4/26]=============================================== 
 #' Sample size for a test of a single proportion 
 #'
 #' @description
 #' Computes the sample size required to test a single population proportion 
-#' with desired power in a 1-group design. Set the proportion planning value 
-#' to .5 for a conservatively large sample size. The value of the effect
-#' size (expected population proportion minus hypothesized value) need not
-#' be based on the proportion planning value.
+#' with desired power using a correction for continuity in a 1-group design. 
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test 
 #' @param  pow    desired power
 #' @param  p      planning value of proportion 
-#' @param  es     planning value of proportion minus null hypothesis value
+#' @param  h      null hypothesis proportion value
 #'
 #'
 #' @return
@@ -2644,25 +2641,28 @@ size.ci.agree <- function(alpha, G, w) {
 #'
 #'
 #' @examples
-#' size.test.prop1(.05, .9, .5, .2)
+#' size.test.prop1(.05, .9, .5, .3)
 #'
 #' # Should return:
 #' # Sample size
-#' #          66
+#' #          67
 #'
 #'
 #' @importFrom stats qnorm
 #' @export
-size.test.prop1 <- function(alpha, pow, p, es) {
+size.test.prop1 <- function(alpha, pow, p, h) {
  if (p > .9999 || p < .0001) {stop("proportion must be between .0001 and .9999")}
+ if (h > .9999 || h < .0001) {stop("null hypothesis value must be between .0001 and .9999")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
- n <- ceiling(p*(1 - p)*(za + zb)^2/es^2)
+ n0 <- ceiling((za*sqrt(h*(1 - h)) + zb*sqrt(p*(1 - p)))^2/((p - h)^2))
+ n <- n0 + 1/abs(p - h)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
  rownames(out) <- ""
  return(out)
 }
+
 
 
 #  size.test.prop2 ===========================================================
@@ -2671,11 +2671,15 @@ size.test.prop1 <- function(alpha, pow, p, es) {
 #'
 #' @description
 #' Computes the sample size in each group required to test a difference in 
-#' population proportions with desired power in a 2-group design. This 
-#' function requires planning values for both proportions. Set the proportion 
-#' planning values to .5 for a conservatively large sample size. The
-#' planning value for the effect size (proportion difference) could be set equal
-#' to the difference of the two proportion planning values or it could be set
+#' population proportions with desired power and a continuity correction in a
+#' 2-group design. This function requires planning values for both proportions. 
+#' Set each proportion planning value to .5, or a value closest to .5 within
+#' a plausible range, for a conservatively large sample size requirement. This
+#' function does not use the typical sample size approach where the effect 
+#' size is assumed to equal the difference in proportion planning values. This
+#' function does not require the planning value for the proportion difference 
+#' (effect size) to equal the difference of the two proportion planning values;
+#' for example, the planning value of the proportion difference could be set 
 #' equal to a minimally interesting effect size.
 #'
 #'
@@ -2683,7 +2687,7 @@ size.test.prop1 <- function(alpha, pow, p, es) {
 #' @param  pow    desired power
 #' @param  p1     planning value of proportion for group 1
 #' @param  p2     planning value of proportion for group 2
-#' @param  es     planning value of proportion difference
+#' @param  es     planning value of proportion difference (effect size)
 #'
 #'
 #' @return
@@ -2691,11 +2695,16 @@ size.test.prop1 <- function(alpha, pow, p, es) {
 #'
 #'
 #' @examples
-#' size.test.prop2(.05, .8, .2, .4, .2)
+#' size.test.prop2(.05, .8, .5, .5, .2)
 #'
 #' # Should return:
 #' # Sample size per group
-#' #                    79
+#' #                   109
+#'
+#' size.test.prop2(.05, .8, .3, .1, .2)
+#' # Should return:
+#' # Sample size per group
+#' #                    71
 #'
 #'
 #' @importFrom stats qnorm
@@ -2703,9 +2712,14 @@ size.test.prop1 <- function(alpha, pow, p, es) {
 size.test.prop2 <- function(alpha, pow, p1, p2, es) {
  if (p1 > .9999 || p1 < .0001) {stop("p1 must be between .0001 and .9999")}
  if (p2 > .9999 || p2 < .0001) {stop("p2 must be between .0001 and .9999")}
+ if (es < .001) {stop("effect size must be greater than .001")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
- n <- ceiling((p1*(1 - p1) + p2*(1 - p2))*(za + zb)^2/es^2)
+ p0 <- (p1 + p2)/2
+ se1 <- sqrt(2*(p0*(1 - p0)))
+ se2 <- sqrt(p1*(1 - p1) + p2*(1 - p2))
+ n0 <- ceiling((za*se2 + zb*se1)^2/es^2)
+ n <- n0 + 2/abs(es)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size per group"
  rownames(out) <- ""
