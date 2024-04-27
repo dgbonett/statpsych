@@ -2622,7 +2622,7 @@ size.ci.agree <- function(alpha, G, w) {
 
 
 # ===================== Sample Size for Desired Power ========================
-#  size.test.prop1 ============[added to GitHub 4/26]=============================================== 
+#  size.test.prop1 =========================================================== 
 #' Sample size for a test of a single proportion 
 #'
 #' @description
@@ -2662,7 +2662,6 @@ size.test.prop1 <- function(alpha, pow, p, h) {
  rownames(out) <- ""
  return(out)
 }
-
 
 
 #  size.test.prop2 ===========================================================
