@@ -2891,3 +2891,119 @@ sim.ci.spear <- function(alpha, n, cor, dist1, dist2, rep) {
  return(out)
 }
 
+
+#  adj.se =====================================================================
+#' Computes adjusted standard error for slope coefficients in an exploratory
+#' analysis
+#'                              
+#'
+#' @description
+#' Computes an adjusted standard error in a general linear model after one or 
+#' more predictor variables with nonsignificant slopes have been dropped from 
+#' the model. The adjusted standard error is then used to compute adjusted 
+#' p-values and adjusted confidence intervals. The the mean square error and
+#' error degrees of freedom from the full model are used to compute the 
+#' adjusted standard errors. These adjusted results are less susceptable to
+#' the negative effects of an exploratory model selection. 
+#'
+#'  
+#' @param  alpha  alpha level for 1-alpha confidence
+#' @param  mse1   mean squared error in full model
+#' @param  mse2   mean squared error in selected model
+#' @param  dfe1   error df in full model
+#' @param  se     vector of slope standard errors in selected model
+#' @param  b      vector of estimated slopes in selected model
+#'
+#' 
+#' @return 
+#' Returns adjusted standard error, t-statistic, p-value, and confidence interval
+#' for each slope coefficient
+#' 
+#' 
+#' @examples
+#' se <- c(1.57, 3.15, 0.982)
+#' b <- c(3.78, 8.21, 2.99)
+#' adj.se(.05, 10.26, 8.37, 114, se, b)
+#'
+#' # Should return:
+#' #      Estimate   adj SE        t  df           p        LL        UL
+#' # [1,]     3.78 1.738243 2.174609 114 0.031725582 0.3365531  7.223447
+#' # [2,]     8.21 3.487559 2.354082 114 0.020279958 1.3011734 15.118827
+#' # [3,]     2.99 1.087233 2.750102 114 0.006930554 0.8362007  5.143799
+#'  
+#' 
+#' @importFrom stats qt
+#' @importFrom stats pt
+#' @export  
+adj.se <- function(alpha, mse1, mse2, df1, se, b) {
+ s <- length(b)
+ df <- rep(df1, s)
+ tcrit <- qt(1 - alpha/2, df1)
+ adjse <- se*sqrt(mse1/mse2)
+ t <- b/adjse
+ p <- 2*(1 - pt(abs(t),df1))
+ ll <- b - tcrit*adjse
+ ul <- b + tcrit*adjse
+ out <- matrix(c(t(b), t(adjse), t(t), t(df), t(p), t(ll), t(ul)), s, 7)
+ colnames(out) <- c("Estimate", "adj SE", "t", "df", "p", "LL", "UL")
+ return(out)
+}
+
+
+#  fitindices =================================================================
+#' Computes SEM fit indices
+#'
+#'
+#' @description
+#' Computes the normed fit index (NFI), adjusted normed fit index (adj NFI),
+#' compararive fit index (CFI), Tucker-Lewis fit index (TLI), and root mean
+#' square error of approximation index (RMSEA). Of the first four indices, the
+#' adj NFI index is recommended because it has smaller sampling variability
+#' than CFI and TLI and less negative bias than NFI.
+#'
+#'  
+#' @param  chi1   chi-square test statistic for full model
+#' @param  df1    degrees of freedom for full model
+#' @param  chi2   chi-square test statistic for reduced model
+#' @param  df2    degrees of freedom for reduced model
+#' @param  n      sample size
+#'
+#' 
+#' @return 
+#' Returns NFI, adj NFI, CFI, TLI, and RMSEA
+#' 
+#' 
+#' @examples
+#' fitindices(14.21, 10, 258.43, 20, 300)
+#'
+#' # Should return:
+#' #        NFI   adj NFI       CFI       TLI      RMSEA
+#' #  0.9450141 0.9837093 0.9823428 0.9646857 0.03746109
+#'  
+#' 
+#' @export  
+fitindices <- function(chi1, df1, chi2, df2, n) {
+ if (chi2 = 0) {stop("chi2 must be a positive value")}
+ nfi <- 1 - chi1/chi2
+ d1 <- chi1 - df1
+ if (d1 < 0) {d1 = 0}
+ adjnfi <- 1 - d1/chi2
+ rmsea <- sqrt(d1/(n*df1))
+ if (chi2 - df2 > 0) 
+  {cfi <- 1 - d1/(chi2 - df2)}
+ else
+  {cfi <- 0}
+ d2 <- chi2/df2 - chi1/df1
+ d3 <- chi2/df2 - 1
+ if (d2 < 0) {d2 = 0}
+ if (d3 < 0) {d3 = 0}
+ if (d3 > 0)
+  {tli <- d2/d3}
+ else
+  {tli <- 0}
+ out <- t(c(nfi, adjnfi, cfi, tli, rmsea))
+ colnames(out) <- c("NFI", "adj NFI", "CFI", "TLI", "RMSEA")
+ rownames(out) <- ""
+ return(out)
+}
+
