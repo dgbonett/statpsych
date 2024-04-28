@@ -1534,7 +1534,6 @@ test.spear2 <- function(cor1, cor2, n1, n2) {
 }
 
 
-
 #  =================== Sample Size for Desire Precision =======================
 #  size.ci.slope ==============================================================
 #' Sample size for a slope confidence interval
@@ -2034,6 +2033,167 @@ size.ci.mape1 <- function(alpha, mape, s, w) {
  n <- ceiling((n1 - s)*(w0/w)^2 + s)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
+ rownames(out) <- ""
+ return(out)
+}
+
+
+#  size.ci.pbcor ==============================================================
+#' Sample size for a point-biserial correlation confidence interval 
+#'
+#'
+#' @description
+#' Computes the sample size required to estimate a point-biserial correlation
+#' in a two-group design with desired confidence interval precision. Set the
+#' correlation planning value to the smallest value within a plausible range
+#' for a conservatively large sample size. Set R = 1 for equal sample sizes.
+#'
+#'  
+#' @param  alpha  alpha level for 1-alpha confidence
+#' @param  cor    planning value of point-biserial correlation
+#' @param  w      desired confidence interval width
+#' @param  R      n2/n1 ratio
+#'
+#' 
+#' @references
+#' \insertRef{Bonett2020a}{statpsych}
+#'
+#'
+#' @return 
+#' Returns the required sample size for each group
+#' 
+#' 
+#' @examples
+#' size.ci.pbcor(.05, .30, .25, 2)
+#'
+#' # Should return:
+#' # n1   n2
+#' # 74  148
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export  
+size.ci.pbcor <- function(alpha, cor, w, R) {
+ z <- qnorm(1 - alpha/2)
+ k1 <- (1 + R)/R
+ k2 <- cor^2/(2*(1 - cor^2)^2) + 1
+ k3 <- (cor^2/(1 - cor^2) + 1)^(-3)
+ n2 <- ceiling(k1*k2*k3*(z/w)^2)
+ n1 <- ceiling(n2*R)
+ out <- t(c(n1, n2))
+ colnames(out) <- c("n1", "n2")
+ rownames(out) <- ""
+ return(out)
+}
+
+
+#  size.ci.cor2 ==============================================================
+#' Sample size for a 2-group Pearson correlation difference confidence 
+#' interval 
+#'
+#'                     
+#' @description
+#' Computes the sample size required to estimate a difference in Pearson or
+#' partial correlations with desired confidence interval precision in a 
+#' 2-group design. Set the correlation planning values to the smallest values
+#' within their plausible ranges for a conservatively large sample size.
+#'
+#'  
+#' @param  alpha  alpha level for 1-alpha confidence
+#' @param  cor1   group 1 correlation planning value
+#' @param  cor2   group 2 correlation planning value
+#' @param  w      desired confidence interval width
+#'
+#' 
+#' @references
+#' \insertRef{Bonett2000}{statpsych}
+#'
+#'
+#' @return 
+#' Returns the required sample size
+#' 
+#' 
+#' @examples
+#' size.ci.cor2(.05, .8, .5, .2)
+#'
+#' # Should return:
+#' # Sample size per group
+#' #                   271
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export  
+size.ci.cor2 <- function(alpha, cor1, cor2, w) {
+ if (cor1 > .999 || cor1 < -.999) {stop("correlation must be between -.999 and .999")}
+ if (cor2 > .999 || cor2 < -.999) {stop("correlation must be between -.999 and .999")}
+ z <- qnorm(1 - alpha/2)
+ n1 <- ceiling(4*((1 - cor1^2)^2 + (1 - cor2^2)^2)*(z/w)^2 + 3)
+ ci <- ci.cor2(alpha, cor1, cor2, n1, n1)
+ ll <- ci[1,3]                                  
+ ul <- ci[1,4]
+ n2 <- ceiling(n1*((ul - ll)/w)^2)
+ ci <- ci.cor2(alpha, cor1, cor2, n2, n2)
+ ll <- ci[1,3]                                  
+ ul <- ci[1,4]
+ n <- ceiling(n2*((ul - ll)/w)^2)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size per group"
+ rownames(out) <- ""
+ return(out)
+}
+
+
+# size.ci.spear2 =============================================================
+#' Sample size for a 2-group Spearman correlation difference confidence 
+#' interval 
+#'
+#'                     
+#' @description
+#' Computes the sample size required to estimate a difference in Spearman
+#' correlations with desired confidence interval precision in a 2-group 
+#' design. Set the correlation planning values to the smallest values within 
+#' their plausible ranges for a conservatively large sample size.
+#'
+#'  
+#' @param  alpha  alpha level for 1-alpha confidence
+#' @param  cor1   group 1 Spearman correlation planning value
+#' @param  cor2   group 2 Spearman correlation planning value
+#' @param  w      desired confidence interval width
+#'
+#' 
+#' @references
+#' \insertRef{Bonett2000}{statpsych}
+#'
+#'
+#' @return 
+#' Returns the required sample size
+#' 
+#' 
+#' @examples
+#' size.ci.spear2(.05, .8, .5, .2)
+#'
+#' # Should return:
+#' # Sample size per group
+#' #                   314
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export  
+size.ci.spear2 <- function(alpha, cor1, cor2, w) {
+ if (cor1 > .999 || cor1 < -.999) {stop("correlation must be between -.999 and .999")}
+ if (cor2 > .999 || cor2 < -.999) {stop("correlation must be between -.999 and .999")}
+ z <- qnorm(1 - alpha/2)
+ n1 <- ceiling(4*((1 + cor1^2/2)*(1 - cor1^2)^2 + (1 + cor2^2/2)*(1 - cor2^2)^2)*(z/w)^2 + 3)
+ ci <- ci.spear2(alpha, cor1, cor2, n1, n1)
+ ll <- ci[1,3]                                  
+ ul <- ci[1,4]
+ n2 <- ceiling(n1*((ul - ll)/w)^2)
+ ci <- ci.spear2(alpha, cor1, cor2, n2, n2)
+ ll <- ci[1,3]                                  
+ ul <- ci[1,4]
+ n <- ceiling(n2*((ul - ll)/w)^2)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size per group"
  rownames(out) <- ""
  return(out)
 }
