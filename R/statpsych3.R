@@ -2039,6 +2039,129 @@ ci.pv <- function(alpha, f1, f2, n1, n2, prev) {
 }
 
 
+#  ci.poisson1 =============================================================== 
+#' Confidence interval for a Poisson rate
+#'
+#'                        
+#' @description
+#' Computes a confidence interval for a population Poisson rate. This function
+#' requires the number of occurances (f) of a specific event that were 
+#' observed over a specific period of time (t).
+#'
+#'
+#' @param  alpha  alpha value for 1-alpha confidence 
+#' @param  f      number of event occurances
+#' @param  t      time period 
+#'
+#'
+#' @details
+#' The time period (t) does not need to be an integer and can be expressed in 
+#' any unit of time such as seconds, hours, or months. The occurances are
+#' assumed to be independent of one another and the unknown occurance rate is
+#' assumed to be constant over time. 
+#'
+#'
+#' @return 
+#' Returns a 1-row matrix. The columns are:
+#' * Estimate - estimated Poisson rate
+#' * SE - recovered standard error
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
+#'
+#'
+#' @references
+#' \insertRef{Hahn1991}{statpsych}
+#'
+#'
+#' @examples
+#' ci.poisson1(.05, 23, 5.25)
+#'
+#' # Should return:
+#' # Estimate        SE       LL      UL
+#' # 4.380952 0.9684952 2.777148 6.57358
+
+#'  
+#' 
+#' @importFrom stats qchisq
+#' @importFrom stats qnorm
+#' @export
+ci.poisson1 <- function(alpha, f, t) {
+ z <- qnorm(1 - alpha/2)
+ est <- f/t
+ ll <- qchisq(alpha/2, 2*f)/(2*t)
+ ul <- qchisq(1 - alpha/2, 2*f + 2)/(2*t)
+ se <- (ul - ll)/(2*z)
+ out <- t(c(est, se, ll, ul))
+ colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
+ return(out)
+}
+
+
+#  ci.ratio.poisson2 ========================================================== 
+#' Confidence interval for a ratio of Poisson rates in a 2-group design
+#'
+#'                        
+#' @description
+#' Computes a confidence interval for a ratio of population Poisson rates in a
+#' 2-group design. The confidence interval is based on the binomial method 
+#' with an Agresti-Coull confidence interval. This function requires the number 
+#' of occurances of a specific event (f) that were observed over a specific
+#' period of time (t) within each group.
+#'
+#'
+#' @param  alpha  alpha value for 1-alpha confidence 
+#' @param  f1     number of event occurances for group 1
+#' @param  f2     number of event occurances for group 2
+#' @param  t1     time period for group 1
+#' @param  t2     time period for group 2
+#'
+#'
+#' @details
+#' The time periods do not need to be integers and can be expressed in any unit
+#' of time such as seconds, hours, or months. The occurances are assumed to be
+#' independent of one another and the unknown occurance rate is assumed to be
+#' constant over time within each group condition.
+#'
+#'
+#' @return 
+#' Returns a 1-row matrix. The columns are:
+#' * Estimate - estimated ratio of Poisson rates
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
+#'
+#'
+#' @references
+#' \insertRef{Price2000}{statpsych}
+#'
+#'
+#' @examples
+#' ci.ratio.poisson2(.05, 19, 5, 30, 40.5)
+#'
+#' # Should return:
+#' # Estimate       LL       UL
+#' #     5.13 1.939576 13.71481
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export
+ci.ratio.poisson2 <- function(alpha, f1, f2, t1, t2) {
+ z <- qnorm(1 - alpha/2)
+ est <- (f1/t1)/(f2/t2)
+ n <- f1 + f2
+ p <- (f1 + 2)/(n + 4)
+ se <- sqrt(p*(1 - p)/(n + 4))
+ ll0 <- (p - z*se)
+ ul0 <- (p + z*se)
+ ll <- (t2/t1)*ll0/(1 - ll0)
+ ul <- (t2/t1)*ul0/(1 - ul0)
+ out <- t(c(est, ll, ul))
+ colnames(out) <- c("Estimate", "LL", "UL")
+ rownames(out) <- ""
+ return(out)
+}
+
+
 # ======================== Hypothesis Tests ==================================
 # test.prop1 =================================================================
 #' Hypothesis test for a single proportion 
