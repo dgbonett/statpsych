@@ -2162,6 +2162,49 @@ ci.ratio.poisson2 <- function(alpha, f1, f2, t1, t2) {
 }
 
 
+#  pi.prop =================================================================== 
+#' Prediction interval for an estimated proportion 
+#'
+#'                        
+#' @description
+#' Computes approximate prediction interval for the estimated proportion 
+#' in a future study with a planned sample size of n2. The prediction interval
+#' uses a proportion estimate from a prior study that used a sample size of n1.
+#'
+#'
+#' @param  alpha  alpha value for 1-alpha confidence 
+#' @param  prop   estimated proportion from prior study
+#' @param  n1     sample size used to estimate proportion in prior study 
+#' @param  n2     planned sample size of future study
+#'
+#'
+#' @return 
+#' Returns a prediction interval for an estimated proportion in a future 
+#' study
+#'
+#'
+#' @examples
+#' pi.prop(.1, .225, 80, 120)
+#'
+#' # Should return:
+#' #         LL       UL
+#' #  0.1390955 0.337095
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export
+pi.prop <- function(alpha, prop, n1, n2) {
+ z <- qnorm(1 - alpha/2)
+ p <- (n1*prop + 2)/(n1 + 4)
+ ll <- p - z*sqrt(p*(1 - p)/(n1 + 4) + p*(1 - p)/(n2 + 4))
+ ul <- p + z*sqrt(p*(1 - p)/(n1 + 4) + p*(1 - p)/(n2 + 4))
+ out <- t(c(ll, ul))
+ colnames(out) <- c("LL", "UL")
+ rownames(out) <- ""
+ return(out)
+}
+
+
 # ======================== Hypothesis Tests ==================================
 # test.prop1 =================================================================
 #' Hypothesis test for a single proportion 
