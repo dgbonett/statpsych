@@ -6108,18 +6108,19 @@ ci.var.upper <- function(alpha, var, n) {
 #'
 #'
 #' @examples
-#' pi.var.upper(.2, 15, 40, 100)
+#' pi.var.upper(.05, 15, 40, 100)
 #'
 #' # Should return:
 #' #       UL
-#' # 18.78522
+#' # 23.9724
 #'  
 #' 
 #' @importFrom stats qnorm
+#' @importFrom stats qf
 #' @export
 pi.var.upper <- function(alpha, var, n1, n2) {
  z <- qnorm(1 - alpha)
- ul <- exp(log(var) + z*sqrt(2/(n1 - 1) + 2/(n2 - 1)))
+ ul <- var*qf(1 - alpha, n2 - 1, n1 - 1)
  out <- matrix(ul, nrow = 1, ncol = 1)
  colnames(out) <- "UL"
  rownames(out) <- ""
