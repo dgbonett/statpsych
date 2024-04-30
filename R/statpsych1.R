@@ -6107,11 +6107,15 @@ ci.var.upper <- function(alpha, var, n) {
 #' Returns an upper prediction estimate (UL) of an estimated variance in a future study
 #'
 #'
+#' @references
+#' \insertRef{Hahn1972}{statpsych}
+#'
+#'
 #' @examples
 #' pi.var.upper(.05, 15, 40, 100)
 #'
 #' # Should return:
-#' #       UL
+#' #      UL
 #' # 23.9724
 #'  
 #' 
@@ -6208,24 +6212,24 @@ etasqr.adj <- function(etasqr, dfeffect, dferror) {
 #' @importFrom stats pf
 #' @export
 test.anova1.bs <- function(m, sd, n) {
-  a <- length(m)
-  nt <- sum(n)
-  dfe <- nt - a
-  dfa <- a - 1
-  v <- sd^2
-  grandmean <- sum(n*m)/nt
-  SSe <- sum((n - 1)*v)
-  MSe <- SSe/dfe
-  SSa <- sum(n*(m - grandmean)^2)
-  MSa <- SSa/dfa
-  F <- MSa/MSe
-  p <- 1 - pf(F, dfa, dfe)
-  etasqr <- SSa/(SSa + SSe)
-  adjetasqr <- 1 - (dfa + dfe)*(1 - etasqr)/dfe
-  out <- t(c(F, dfa, dfe, p, etasqr, adjetasqr))
-  colnames(out) <- c("F", "dfA",  "dfE", "p", "Eta-squared", "adj Eta-squared")
-  rownames(out) <- ""
-  return(out)
+ a <- length(m)
+ nt <- sum(n)
+ dfe <- nt - a
+ dfa <- a - 1
+ v <- sd^2
+ grandmean <- sum(n*m)/nt
+ SSe <- sum((n - 1)*v)
+ MSe <- SSe/dfe
+ SSa <- sum(n*(m - grandmean)^2)
+ MSa <- SSa/dfa
+ F <- MSa/MSe
+ p <- 1 - pf(F, dfa, dfe)
+ etasqr <- SSa/(SSa + SSe)
+ adjetasqr <- 1 - (dfa + dfe)*(1 - etasqr)/dfe
+ out <- t(c(F, dfa, dfe, p, etasqr, adjetasqr))
+ colnames(out) <- c("F", "dfA",  "dfE", "p", "Eta-squared", "adj Eta-squared")
+ rownames(out) <- ""
+ return(out)
 }
 
 
