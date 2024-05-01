@@ -4035,7 +4035,7 @@ ci.2x2.median.ws <- function(alpha, y11, y12, y21, y22) {
 #' @description
 #' Computes an approximate Bayesian credible interval for a normal prior 
 #' distribution. This function can be used with any parameter estimator 
-#' (e.g., mean, mean difference, linear contrast of means, slope coefficient
+#' (e.g., mean, mean difference, linear contrast of means, slope coefficient,
 #' standardized mean difference, standardized linear contrast of means, median,
 #' median difference, linear contrast of medians, etc.) that has an approximate
 #' normal sampling distribution. The mean and standard deviation of the posterior
