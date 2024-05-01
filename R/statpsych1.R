@@ -50,7 +50,7 @@ ci.mean1 <- function(alpha, m, sd, n) {
 }
 
 
-#  ci.mean1.fpc  ==============================================================
+#  ci.mean.fpc  ==============================================================
 #' Confidence interval for a single mean with a finite population correction
 #'
 #'
@@ -77,7 +77,7 @@ ci.mean1 <- function(alpha, m, sd, n) {
 #' 
 #' 
 #' @examples
-#' ci.mean1.fpc(.05, 24.5, 3.65, 40, 300)
+#' ci.mean.fpc(.05, 24.5, 3.65, 40, 300)
 #'
 #' # Should return:
 #' # Estimate        SE       LL       UL
@@ -86,7 +86,7 @@ ci.mean1 <- function(alpha, m, sd, n) {
 #' 
 #' @importFrom stats qt
 #' @export
-ci.mean1.fpc <- function(alpha, m, sd, n, N) {
+ci.mean.fpc <- function(alpha, m, sd, n, N) {
  if (n > N) {stop("n cannot be greater than N")}
  df <- n - 1
  tcrit <- qt(1 - alpha/2, df)
@@ -100,7 +100,7 @@ ci.mean1.fpc <- function(alpha, m, sd, n, N) {
 }
 
 
-#  ci.stdmean1  ==============================================================
+#  ci.stdmean  ==============================================================
 #' Confidence interval for a single standardized mean
 #'
 #'
@@ -132,7 +132,7 @@ ci.mean1.fpc <- function(alpha, m, sd, n, N) {
 #'
 #'
 #' @examples
-#' ci.stdmean1(.05, 24.5, 3.65, 40, 20)
+#' ci.stdmean(.05, 24.5, 3.65, 40, 20)
 #'
 #' # Should return:
 #' # Estimate  adj Estimate        SE        LL       UL
@@ -141,7 +141,7 @@ ci.mean1.fpc <- function(alpha, m, sd, n, N) {
 #' 
 #' @importFrom stats qnorm
 #' @export
-ci.stdmean1 <- function(alpha, m, sd, n, h) {
+ci.stdmean <- function(alpha, m, sd, n, h) {
  z <- qnorm(1 - alpha/2)
  df <- n - 1
  adj <- 1 - 3/(4*df - 1)
@@ -1390,7 +1390,7 @@ ci.ratio.mad.ps <- function(alpha, y1, y2) {
 }
 
 
-#  ci.cv1  ====================================================================
+#  ci.cv  ====================================================================
 #' Confidence interval for a single coefficient of variation
 #'
 #'
@@ -1398,7 +1398,7 @@ ci.ratio.mad.ps <- function(alpha, y1, y2) {
 #' Computes a confidence interval for a population coefficient of variation
 #' (standard deviation divided by mean). This confidence interval is the
 #' reciprocal of a confidence interval for a standardized mean (see description
-#' of ci.stdmean1 function). An approximate standard error is recovered from
+#' of ci.stdmean function). An approximate standard error is recovered from
 #' the confidence interval. The coefficient of variation assumes ratio-scale
 #' scores.
 #'
@@ -1418,7 +1418,7 @@ ci.ratio.mad.ps <- function(alpha, y1, y2) {
 #' 
 #' 
 #' @examples
-#' ci.cv1(.05, 24.5, 3.65, 40)
+#' ci.cv(.05, 24.5, 3.65, 40)
 #'
 #' # Should return:
 #' #  Estimate        SE        LL       UL
@@ -1427,7 +1427,7 @@ ci.ratio.mad.ps <- function(alpha, y1, y2) {
 #' 
 #' @importFrom stats qnorm
 #' @export
-ci.cv1 <- function(alpha, m, sd, n) {
+ci.cv <- function(alpha, m, sd, n) {
  z <- qnorm(1 - alpha/2)
  df <- n - 1
  est.d <- m/sd
@@ -1521,7 +1521,7 @@ ci.ratio.cv2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 }
 	
 
-#  ci.cod1 =================================================================== 
+#  ci.cod =================================================================== 
 #' Confidence interval for a single coefficient of dispersion
 #'
 #'
@@ -1551,7 +1551,7 @@ ci.ratio.cv2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' @examples
 #' y <- c(30, 20, 15, 10, 10, 60, 20, 25, 20, 30, 10, 5, 50, 40,
 #'        20, 10, 0, 20, 50)
-#' ci.cod1(.05, y)
+#' ci.cod(.05, y)
 #'
 #' # Should return:
 #' #  Estimate        SE        LL       UL
@@ -1562,7 +1562,7 @@ ci.ratio.cv2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' @importFrom stats var
 #' @importFrom stats median
 #' @export
-ci.cod1 <-function(alpha, y) {
+ci.cod <-function(alpha, y) {
  z <- qnorm(1 - alpha/2)
  n <- length(y)
  c <- n/(n - 1)
@@ -1598,7 +1598,7 @@ ci.cod1 <-function(alpha, y) {
 }
 
 
-# ci.cod2 ====================================================================
+# ci.ratio.cod2 ====================================================================
 #' Confidence interval for a ratio of dispersion coefficients in a 2-group
 #' design
 #'
@@ -1625,7 +1625,7 @@ ci.cod1 <-function(alpha, y) {
 #' @examples
 #' y1 <- c(32, 39, 26, 35, 43, 27, 40, 37, 34, 29)
 #' y2 <- c(36, 44, 47, 42, 49, 39, 46, 31, 33, 48)
-#' ci.cod2(.05, y1, y2)
+#' ci.ratio.cod2(.05, y1, y2)
 #'
 #' # Should return:
 #' #      COD1      COD2 COD1/COD2       LL       UL
@@ -1636,7 +1636,7 @@ ci.cod1 <-function(alpha, y) {
 #' @importFrom stats var
 #' @importFrom stats median
 #' @export
-ci.cod2 <-function(alpha, y1, y2) {
+ci.ratio.cod2 <-function(alpha, y1, y2) {
  min1 <- min(y1)
  min2 <- min(y2)
  if (min1 < 0) {stop("ERROR: ratio-scale scores cannot be negative")}
@@ -1703,7 +1703,7 @@ ci.cod2 <-function(alpha, y1, y2) {
 }
 
 
-#  ci.cqv1 =====================================================================
+#  ci.cqv =====================================================================
 #' Confidence interval for a single coefficient of quartile variation 
 #'
 #'
@@ -1734,7 +1734,7 @@ ci.cod2 <-function(alpha, y1, y2) {
 #' @examples
 #' y <- c(30, 20, 15, 10, 10, 60, 20, 25, 20, 30, 10, 5, 50, 40,
 #'        20, 10, 0, 20, 50)
-#' ci.cqv1(.05, y)
+#' ci.cqv(.05, y)
 #'
 #' # Should return:
 #' # Estimate        SE        LL       UL
@@ -1745,7 +1745,7 @@ ci.cod2 <-function(alpha, y1, y2) {
 #' @importFrom stats quantile
 #' @importFrom stats pbinom
 #' @export
-ci.cqv1 <- function(alpha, y) {
+ci.cqv <- function(alpha, y) {
  n <- length(y)
  c <- n/(n - 1)
  y <- sort(y)
@@ -2228,7 +2228,7 @@ ci.ratio.median.ps <- function(alpha, y1, y2) {
 }
 
 
-#  ci.sign1 ================================================================== 
+#  ci.sign ================================================================== 
 #' Confidence interval for the parameter of the one-sample sign test
 #'
 #'
@@ -2260,7 +2260,7 @@ ci.ratio.median.ps <- function(alpha, y1, y2) {
 #' @examples
 #' y <- c(30, 20, 15, 10, 10, 60, 20, 25, 20, 30, 10, 5, 50, 40, 20, 10,
 #'         0, 20, 50)
-#' ci.sign1(.05, y, 9)
+#' ci.sign(.05, y, 9)
 #'
 #' # Should return:
 #' # Estimate        SE        LL        UL
@@ -2269,7 +2269,7 @@ ci.ratio.median.ps <- function(alpha, y1, y2) {
 #'
 #' @importFrom stats qnorm
 #' @export
-ci.sign1 <- function(alpha, y, h) {
+ci.sign <- function(alpha, y, h) {
  z <- qnorm(1 - alpha/2)
  f <- sum(as.integer(y > h))
  n <- length(y)
@@ -5427,7 +5427,7 @@ size.test.mann <- function(alpha, pow, p) {
 }
 
 
-#  size.test.sign1 =========================================================== 
+#  size.test.sign =========================================================== 
 #' Sample size for a 1-sample Sign test
 #'
 #'
@@ -5448,7 +5448,7 @@ size.test.mann <- function(alpha, pow, p) {
 #'
 #'
 #' @examples
-#' size.test.sign1(.05, .90, .3)
+#' size.test.sign(.05, .90, .3)
 #'
 #' # Should return:
 #' # Sample size
@@ -5457,7 +5457,7 @@ size.test.mann <- function(alpha, pow, p) {
 #' 
 #' @importFrom stats qnorm
 #' @export
-size.test.sign1 <- function(alpha, pow, p) {
+size.test.sign <- function(alpha, pow, p) {
  if (p > .9999 || p < .0001) {stop("proportion must be between .0001 and .9999")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
@@ -5769,7 +5769,7 @@ power.mean.ps <- function(alpha, n, var1, var2, es, cor) {
 
 
 # ============================== Miscellaneous ===============================
-#  pi.score1 ================================================================= 
+#  pi.score ================================================================= 
 #' Prediction interval for one score
 #'
 #'
@@ -5793,7 +5793,7 @@ power.mean.ps <- function(alpha, n, var1, var2, es, cor) {
 #'
 #'
 #' @examples
-#' pi.score1(.05, 24.5, 3.65, 40)
+#' pi.score(.05, 24.5, 3.65, 40)
 #'
 #' # Should return:
 #' # Predicted  df       LL       UL
@@ -5802,7 +5802,7 @@ power.mean.ps <- function(alpha, n, var1, var2, es, cor) {
 #' 
 #' @importFrom stats qt
 #' @export
-pi.score1 <- function(alpha, m, sd, n) {
+pi.score <- function(alpha, m, sd, n) {
  df <- n - 1
  tcrit <- qt(1 - alpha/2, df)
  se <- sqrt(sd^2 + sd^2/n)
