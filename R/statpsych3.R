@@ -771,7 +771,7 @@ ci.ratio.prop.ps <- function(alpha, f00, f01, f10, f11) {
 
 
 # ci.condslope.log ===========================================================
-#' Confidence interval for conditional (simple) slopes in a logistic model
+#' Confidence intervals for conditional (simple) slopes in a logistic model
 #'
 #'
 #' @description
@@ -798,8 +798,8 @@ ci.ratio.prop.ps <- function(alpha, f00, f01, f10, f11) {
 #' * exp(Estimate) - estimated exponentiated conditional slope
 #' * z - z test statistic
 #' * p - p-value
-#' * LL - lower limit of the confidence interval
-#' * UL - upper limit of the confidence interval
+#' * LL - lower limit of the exponentiated confidence interval
+#' * UL - upper limit of the exponentiated confidence interval
 #' 
 #' 
 #' @examples
