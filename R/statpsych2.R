@@ -513,7 +513,7 @@ ci.spear2 <- function(alpha, cor1, cor2, n1, n2) {
 }
 	
 
-#  ci.mape1  ===================================================================
+#  ci.mape  ===================================================================
 #' Confidence interval for a mean absolute prediction error
 #'
 #'
@@ -542,7 +542,7 @@ ci.spear2 <- function(alpha, cor1, cor2, n1, n2) {
 #' @examples
 #' res <- c(-2.70, -2.69, -1.32, 1.02, 1.23, -1.46, 2.21, -2.10, 2.56,
 #'       -3.02, -1.55, 1.46, 4.02, 2.34)
-#' ci.mape1(.05, res, 1)
+#' ci.mape(.05, res, 1)
 #'
 #' # Should return:
 #' # Estimate        SE       LL       UL
@@ -552,7 +552,7 @@ ci.spear2 <- function(alpha, cor1, cor2, n1, n2) {
 #' @importFrom stats qnorm
 #' @importFrom stats sd
 #' @export
-ci.mape1 <- function(alpha, res, s) {
+ci.mape <- function(alpha, res, s) {
  n <- length(res)
  df <- n - s - 1
  z <- qnorm(1 - alpha/2)
@@ -570,7 +570,7 @@ ci.mape1 <- function(alpha, res, s) {
 }
 
 
-#  ci.mape2  ===================================================================
+#  ci.ratio.mape2  ===================================================================
 #' Confidence interval for a ratio of mean absolute prediction errors in a
 #' 2-group design
 #'
@@ -606,7 +606,7 @@ ci.mape1 <- function(alpha, res, s) {
 #'         -1.55, 1.46, 4.02, 2.34)
 #' res2 <- c(-0.71, -0.89, 0.72, -0.35, 0.33 -0.92, 2.37, 0.51, 0.68, -0.85,
 #'         -0.15, 0.77, -1.52, 0.89, -0.29, -0.23, -0.94, 0.93, -0.31 -0.04)
-#' ci.mape2(.05, res1, res2, 1, 1)
+#' ci.ratio.mape2(.05, res1, res2, 1, 1)
 #'
 #' # Should return:
 #' #   MAPE1     MAPE2 MAPE1/MAPE2       LL       UL
@@ -616,7 +616,7 @@ ci.mape1 <- function(alpha, res, s) {
 #' @importFrom stats qnorm
 #' @importFrom stats sd
 #' @export
-ci.mape2 <- function(alpha, res1, res2, s1, s2) {
+ci.ratio.mape2 <- function(alpha, res1, res2, s1, s2) {
  z <- qnorm(1 - alpha/2)
  n1 <- length(res1)
  df1 <- n1 - s1 - 1
@@ -1319,7 +1319,7 @@ pi.cor <- function(alpha, cor, n1, n2) {
 
 
 #  ======================== Hypothesis Tests ==================================
-# test.cor1 ===================================================================
+# test.cor ===================================================================
 #' Hypothesis test for a single Pearson or partial correlation 
 #'
 #'                        
@@ -1350,14 +1350,14 @@ pi.cor <- function(alpha, cor, n1, n2) {
 #' 
 #' 
 #' @examples
-#' test.cor1(.484, .2, 100, 0)
+#' test.cor(.484, .2, 100, 0)
 #'
 #' # Should return:
 #' # Estimate        z           p
 #' #    0.484 3.205432 0.001348601
 #'
 #'
-#' test.cor1(.372, 0, 100, 0)
+#' test.cor(.372, 0, 100, 0)
 #'
 #' # Should return:
 #' #  Estimate        t df           p
@@ -1366,7 +1366,7 @@ pi.cor <- function(alpha, cor, n1, n2) {
 #'
 #' @importFrom stats pnorm
 #' @export
-test.cor1 <- function(cor, h, n, s) {
+test.cor <- function(cor, h, n, s) {
  if (cor > .9999) {stop("correlation cannot be greater than .9999")}
  if (cor < -.9999) {stop("correlation cannot be less than -.9999")}
  if (h == 0) {
@@ -1391,7 +1391,7 @@ test.cor1 <- function(cor, h, n, s) {
 }
 
 
-# test.spear1 ===================================================================
+# test.spear ===================================================================
 #' Hypothesis test for a single Spearman correlation 
 #'
 #'                      
@@ -1420,7 +1420,7 @@ test.cor1 <- function(cor, h, n, s) {
 #' 
 #' 
 #' @examples
-#' test.spear1(.471, .2, 100)
+#' test.spear(.471, .2, 100)
 #'
 #' # Should return:
 #' # Estimate        z           p
@@ -1436,7 +1436,7 @@ test.cor1 <- function(cor, h, n, s) {
 #'
 #' @importFrom stats pnorm
 #' @export
-test.spear1 <- function(cor, h, n) {
+test.spear <- function(cor, h, n) {
  if (cor > .9999) {stop("correlation cannot be greater than .9999")}
  if (cor < -.9999) {stop("correlation cannot be less than -.9999")}
  if (h == 0) {
@@ -2032,7 +2032,7 @@ size.ci.cronbach2 <- function(alpha, rel1, rel2, r, w) {
 }
 
 
-#  size.ci.mape1 ==============================================================
+#  size.ci.mape ==============================================================
 #' Sample size for a mean absolute prediction error confidence interval
 #'
 #'
@@ -2054,7 +2054,7 @@ size.ci.cronbach2 <- function(alpha, rel1, rel2, r, w) {
 #'
 #'
 #' @examples
-#' size.ci.mape1(.05, 4.5, 5, 2)
+#' size.ci.mape(.05, 4.5, 5, 2)
 #'
 #' # Should return:
 #' # Sample size
@@ -2063,7 +2063,7 @@ size.ci.cronbach2 <- function(alpha, rel1, rel2, r, w) {
 #' 
 #' @importFrom stats qnorm
 #' @export
-size.ci.mape1 <- function(alpha, mape, s, w) {
+size.ci.mape <- function(alpha, mape, s, w) {
  z <- qnorm(1 - alpha/2)
  n0 <- ceiling(2.28*mape^2*(z/w)^2) + s
  df <- n0 - s - 1
@@ -2541,7 +2541,7 @@ size.test.cronbach2 <- function(alpha, pow, rel1, rel2, r) {
 
 
 #  ======================= Power for Planned Sample Size ======================
-#  power.cor1 =================================================================
+#  power.cor =================================================================
 #' Approximates the power of a correlation test for a planned sample size
 #'
 #'
@@ -2562,7 +2562,7 @@ size.test.cronbach2 <- function(alpha, pow, rel1, rel2, r) {
 #'
 #'
 #' @examples
-#' power.cor1(.05, 80, .3, 0, 0)
+#' power.cor(.05, 80, .3, 0, 0)
 #'
 #' # Should return:
 #' #     Power
@@ -2572,7 +2572,7 @@ size.test.cronbach2 <- function(alpha, pow, rel1, rel2, r) {
 #' @importFrom stats qnorm
 #' @importFrom stats pnorm
 #' @export
-power.cor1 <- function(alpha, n, cor, h, s) {
+power.cor <- function(alpha, n, cor, h, s) {
  if (cor > .999 || cor < -.999) {stop("correlation must be between -.999 and .999")}
  za <- qnorm(1 - alpha/2)
  f1 <- log((1 + cor)/(1 - cor))/2 
