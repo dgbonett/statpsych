@@ -641,7 +641,7 @@ ci.ratio.mape2 <- function(alpha, res1, res2, s1, s2) {
 
 
 #  ci.condslope  ==============================================================
-#' Confidence interval for conditional (simple) slopes in a linear model
+#' Confidence intervals for conditional (simple) slopes in a linear model
 #'
 #'
 #' @description
