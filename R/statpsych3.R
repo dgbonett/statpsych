@@ -1252,9 +1252,10 @@ ci.kappa <- function(alpha, f00, f01, f10, f11) {
 #'
 #'
 #' @description
-#' Computes a confidence interval for a G-index of agreement between two
-#' polychotomous ratings. This function requires the number of objects that
-#' were given the same rating by both raters.
+#' Computes an adjusted Wald  confidence interval for a G-index of agreement
+#' between two polychotomous ratings. This function requires the number of 
+#' objects that were given the same rating by both raters. The G-index
+#' corrects for chance agreement.
 #'
 #'
 #' @param   alpha  alpha level for 1-alpha confidence
@@ -1267,8 +1268,8 @@ ci.kappa <- function(alpha, f00, f01, f10, f11) {
 #' Returns a 1-row matrix. The columns are:
 #' * Estimate - maximum likelihood estimate of G-index 
 #' * SE - standard error
-#' * LL - lower limit of the confidence interval
-#' * UL - upper limit of the confidence interval
+#' * LL - lower limit of the adjusted Wald confidence interval
+#' * UL - upper limit of the adjusted Wald confidence interval
 #'
 #'
 #' @references
@@ -1329,8 +1330,8 @@ ci.agree <- function(alpha, n, f, k) {
 #' The columns are:
 #' * Estimate - maximum likelihood estimate of G-index and difference  
 #' * SE - standard error
-#' * LL - lower limit of confidence interval
-#' * UL - upper limit of confidence interval
+#' * LL - lower limit of adjusted Wald confidence interval
+#' * UL - upper limit of adjusted Wald confidence interval
 #'
 #'
 #' @references
@@ -1395,14 +1396,15 @@ ci.agree2 <- function(alpha, n1, f1, n2, f2, r) {
 #' G agreement. An adjusted Wald confidence interval for unanimous G agreement 
 #' among the three raters is also computed. In the three-rater design, 
 #' unanimous G agreement is equal to the average of all pairs of G agreement. 
+#' The G-index corrects for chance agreement.
 #'
 #'  
 #' @param  alpha    alpha level for 1-alpha confidence
 #' @param  f        vector of frequency counts from 2x2x2 table where
 #'                  f = \[ f111, f112, f121, f122, f211, f212, f221, f222 \],
-#'                  first subscript represents rating of rater 1,
-#'                  second subscript represents rating of rater 2, and
-#'                  third subscript represents rating of rater 3
+#'                  first subscript represents the rating of rater 1,
+#'                  second subscript represents the rating of rater 2, and
+#'                  third subscript represents the rating of rater 3
 #'
 #' 
 #' @references
@@ -1422,8 +1424,8 @@ ci.agree2 <- function(alpha, n1, f1, n2, f2, r) {
 #'
 #' The columns are:
 #' * Estimate - estimate of G-index (two-rater, difference, or unanimous)  
-#' * LL - lower limit of confidence interval
-#' * UL - upper limit of confidence interval
+#' * LL - lower limit of adjusted Wald confidence interval
+#' * UL - upper limit of adjusted Wald confidence interval
 #'
 #' 
 #' 
