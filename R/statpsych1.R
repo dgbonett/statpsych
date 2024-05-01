@@ -3022,7 +3022,7 @@ ci.2x2.mean.bs <- function(alpha, y11, y12, y21, y22) {
 
 # ci.2x2.stdmean.bs ============================================================
 #' Computes confidence intervals of standardized effects in a 2x2 
-#' between-subjects design for means 
+#' between-subjects design 
 #'
 #'
 #' @description
@@ -3048,6 +3048,10 @@ ci.2x2.mean.bs <- function(alpha, y11, y12, y21, y22) {
 #' * SE - standard error 
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
+#'
+#'
+#' @references
+#' \insertRef{Bonett2008}{statpsych}
 #'
 #'
 #' @examples
@@ -3204,6 +3208,10 @@ ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
 #' * UL - upper limit of the confidence interval
 #'
 #'
+#' @references
+#' \insertRef{Bonett2002}{statpsych}
+#'
+#'
 #' @examples
 #' y11 <- c(19.2, 21.1, 14.4, 13.3, 19.8, 15.9, 18.0, 19.1, 16.2, 14.6)
 #' y12 <- c(21.3, 27.0, 19.1, 21.5, 25.2, 24.1, 19.8, 19.7, 17.5, 16.0)
@@ -3354,6 +3362,10 @@ ci.2x2.median.bs <- function(alpha, y11, y12, y21, y22) {
 #' * SE - standard error 
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
+#'
+#'
+#' @references
+#' \insertRef{Bonett2008}{statpsych}
 #'
 #'
 #' @examples
@@ -3526,6 +3538,10 @@ ci.2x2.stdmean.ws <- function(alpha, y11, y12, y21, y22) {
 #' * SE - standard error 
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
+#'
+#'
+#' @references
+#' \insertRef{Bonett2008}{statpsych}
 #'
 #'
 #' @examples
