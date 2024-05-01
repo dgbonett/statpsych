@@ -70,7 +70,7 @@ ci.prop1 <- function(alpha, f, n) {
 }
 
 
-#  ci.prop1.fpc =============================================================== 
+#  ci.prop.fpc =============================================================== 
 #' Confidence interval for a single proportion with a finite population 
 #' correction
 #'
@@ -96,7 +96,7 @@ ci.prop1 <- function(alpha, f, n) {
 #'
 #'
 #' @examples
-#' ci.prop1.fpc(.05, 12, 100, 400)
+#' ci.prop.fpc(.05, 12, 100, 400)
 #'
 #' # Should return:
 #' #   Estimate         SE         LL        UL
@@ -105,7 +105,7 @@ ci.prop1 <- function(alpha, f, n) {
 #'
 #' @importFrom stats qnorm
 #' @export
-ci.prop1.fpc <- function(alpha, f, n, N) {
+ci.prop.fpc <- function(alpha, f, n, N) {
  if (f > n) {stop("f cannot be greater than n")}
  if (f > N) {stop("f cannot be greater than N")}
  if (n > N) {stop("n cannot be greater than N")}
@@ -125,14 +125,14 @@ ci.prop1.fpc <- function(alpha, f, n, N) {
 
 #  ci.pairs.prop1 ============================================================
 #' Confidence intervals for pairwise proportion differences of a
-#' polychotomous variable
+#' polychotomous variable in a single sample
 #'
 #'
 #' @description
 #' Computes adjusted Wald confidence intervals for pairwise proportion
-#' differences of a polychotomous variable. These adjusted Wald confidence
-#' intervals use the same method that is used to compare the two proportions
-#' in a paired-samples design.
+#' differences of a polychotomous variable in a single sample. These adjusted
+#' Wald confidence intervals use the same method that is used to compare the
+#' two proportions in a paired-samples design.
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
@@ -189,7 +189,7 @@ ci.pairs.prop1 <-function(alpha, f) {
 }
 
 
-#  ci.prop1.inv =============================================================== 
+#  ci.prop.inv =============================================================== 
 #' Confidence interval for a single proportion using inverse sampling
 #'
 #'
@@ -220,7 +220,7 @@ ci.pairs.prop1 <-function(alpha, f) {
 #'
 #'
 #' @examples
-#' ci.prop1.inv(.05, 5, 67)
+#' ci.prop.inv(.05, 5, 67)
 #'
 #' # Should return:
 #' #   Estimate         SE         LL        UL
@@ -230,7 +230,7 @@ ci.pairs.prop1 <-function(alpha, f) {
 #' @importFrom stats qnorm
 #' @importFrom stats qf
 #' @export
-ci.prop1.inv <- function(alpha, f, n) {
+ci.prop.inv <- function(alpha, f, n) {
  if (f > n) {stop("f cannot be greater than n")}
  z <- qnorm(1 - alpha/2)
  y <- n - f
@@ -1892,7 +1892,7 @@ ci.2x2.prop.mixed <- function(alpha, group1, group2) {
 }
 
 
-# ci.bayes.prop1 ==============================================================
+# ci.bayes.prop ==============================================================
 #' Bayesian credible interval for a single proportion
 #'
 #'
@@ -1926,7 +1926,7 @@ ci.2x2.prop.mixed <- function(alpha, group1, group2) {
 #'
 #'
 #' @examples
-#' ci.bayes.prop1(.05, .4, .1, 12, 100)
+#' ci.bayes.prop(.05, .4, .1, 12, 100)
 #'
 #' # Should return:
 #' # Posterior mean Posterior SD       LL        UL
@@ -1936,7 +1936,7 @@ ci.2x2.prop.mixed <- function(alpha, group1, group2) {
 #' @importFrom stats qnorm
 #' @importFrom stats qbeta
 #' @export
-ci.bayes.prop1 <- function(alpha, prior.mean, prior.sd, f, n) {
+ci.bayes.prop <- function(alpha, prior.mean, prior.sd, f, n) {
  if (prior.sd^2 >= prior.mean*(1 - prior.mean)) {stop("prior SD is too large")}
  if (f > n) {stop("f cannot be greater than n")}
  zcrit <- qnorm(1 - alpha/2)
@@ -2039,7 +2039,7 @@ ci.pv <- function(alpha, f1, f2, n1, n2, prev) {
 }
 
 
-#  ci.poisson1 =============================================================== 
+#  ci.poisson =============================================================== 
 #' Confidence interval for a Poisson rate
 #'
 #'                        
@@ -2074,7 +2074,7 @@ ci.pv <- function(alpha, f1, f2, n1, n2, prev) {
 #'
 #'
 #' @examples
-#' ci.poisson1(.05, 23, 5.25)
+#' ci.poisson(.05, 23, 5.25)
 #'
 #' # Should return:
 #' # Estimate        SE       LL      UL
@@ -2085,7 +2085,7 @@ ci.pv <- function(alpha, f1, f2, n1, n2, prev) {
 #' @importFrom stats qchisq
 #' @importFrom stats qnorm
 #' @export
-ci.poisson1 <- function(alpha, f, t) {
+ci.poisson <- function(alpha, f, t) {
  z <- qnorm(1 - alpha/2)
  est <- f/t
  ll <- qchisq(alpha/2, 2*f)/(2*t)
@@ -3206,8 +3206,8 @@ size.supinf.prop.ps <- function(alpha, pow, p1, p2, phi, h) {
 
           
 # ===================== Power for Planned Sample Size  ========================
-#  power.prop1 ================================================================
-#' Approximates the power of a one-sample proportion test for a planned sample
+#  power.prop ================================================================
+#' Approximates the power of a 1-group proportion test for a planned sample
 #' size
 #'
 #'
@@ -3229,7 +3229,7 @@ size.supinf.prop.ps <- function(alpha, pow, p1, p2, phi, h) {
 #'
 #'
 #' @examples
-#' power.prop1(.05, 40, .5, .2)
+#' power.prop(.05, 40, .5, .2)
 #'
 #' # Should return:
 #' #     Power
@@ -3239,7 +3239,7 @@ size.supinf.prop.ps <- function(alpha, pow, p1, p2, phi, h) {
 #' @importFrom stats qnorm
 #' @importFrom stats pnorm
 #' @export
-power.prop1 <- function(alpha, n, p, es) {
+power.prop <- function(alpha, n, p, es) {
  if (p > .9999 || p < .0001) {stop("proportion must be between .0001 and .9999")}
  za <- qnorm(1 - alpha/2)
  z1 <- abs(es)/sqrt(p*(1 - p)/n) - za
@@ -3255,7 +3255,7 @@ power.prop1 <- function(alpha, n, p, es) {
 
           
 #  power.prop2 ================================================================
-#' Approximates the power of a two-sample proportion test for planned sample 
+#' Approximates the power of a 2-group proportion test for planned sample 
 #' sizes
 #'
 #'
