@@ -1412,7 +1412,7 @@ ci.agree2 <- function(alpha, n1, f1, n2, f2, r) {
 #'
 #'
 #' @return 
-#' Returns a 3-row matrix. The rows are:
+#' Returns a 7-row matrix. The rows are:
 #' * G(1,2): G-index for raters 1 and 2
 #' * G(1,3): G-index for raters 1 and 3
 #' * G(2,3): G-index for raters 2 and 3
@@ -1591,7 +1591,7 @@ ci.popsize <- function(alpha, f00, f01, f10) {
 #' @param  alpha    alpha value for 1-alpha confidence
 #' @param  chisqr   Pearson chi-square test statistic of independence
 #' @param  r        number of rows in contingency table
-#' @param  c        number of columns in contengency table
+#' @param  c        number of columns in contingency table
 #' @param  n        sample size
 #'
 #'
