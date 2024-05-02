@@ -128,8 +128,8 @@ ci.spcor <- function(alpha, cor, r2, n) {
 #'
 #'  
 #' @param  alpha	alpha level for 1-alpha confidence
-#' @param  cor1	  	estimated Pearson correlation in group 1
-#' @param  cor2	  	estimated Pearson correlation in group 2
+#' @param  cor1	  	estimated Pearson correlation for group 1
+#' @param  cor2	  	estimated Pearson correlation for group 2
 #' @param  n1	  	sample size for group 1
 #' @param  n2	  	sample size for group 2
 #'
