@@ -2553,7 +2553,7 @@ size.test.cronbach2 <- function(alpha, pow, rel1, rel2, r) {
 #' @param  alpha  alpha level for hypothesis test 
 #' @param  n      planned sample size
 #' @param  cor    planning value of correlation 
-#' @param  h      hypothesized value of correlation 
+#' @param  h      null hypothesis value of correlation 
 #' @param  s      number of control variables
 #'
 #'
