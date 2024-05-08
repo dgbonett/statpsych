@@ -323,10 +323,10 @@ ci.prop2 <- function(alpha, f1, f2, n1, n2) {
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
-#' @param   f1      number of participants in group 1 who have the attribute
-#' @param   f2      number of participants in group 2 who have the attribute
-#' @param   n1      sample size for group 1
-#' @param   n2      sample size for group 2
+#' @param   f1      number of participants in group 1 who have the attribute (fixed)
+#' @param   f2      number of participants in group 2 who have the attribute (fixed)
+#' @param   n1      sample size for group 1 (random)
+#' @param   n2      sample size for group 2 (random)
 #'
 #'
 #' @return
