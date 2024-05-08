@@ -2363,7 +2363,7 @@ ci.mann <- function(alpha, y1, y2){
 }
 
 
-#  ci.random.anova1 ===========================================================
+#  ci.random.anova ===========================================================
 #' Confidence intervals for parameters of one-way random effects ANOVA
 #'
 #'
@@ -2398,7 +2398,7 @@ ci.mann <- function(alpha, y1, y2){
 #' @examples
 #' m <- c(56.1, 51.2, 60.3, 68.2, 48.9, 70.5)
 #' sd <- c(9.45, 8.79, 9.71, 8.90, 8.31, 9.75)
-#' ci.random.anova1(.05, m, sd, 20)
+#' ci.random.anova(.05, m, sd, 20)
 #'
 #' # Should return:
 #' #                 Estimate         LL         UL
@@ -2412,7 +2412,7 @@ ci.mann <- function(alpha, y1, y2){
 #' @importFrom stats qnorm
 #' @importFrom stats qt
 #' @export
-ci.random.anova1 <- function(alpha, m, sd, n) {
+ci.random.anova <- function(alpha, m, sd, n) {
  z <- qnorm(1 - alpha/2)
  a <- length(m)
  t <- qt(1 - alpha/2, a - 1)
