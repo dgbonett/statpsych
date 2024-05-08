@@ -1258,8 +1258,8 @@ ci.ratio.mad2 <- function(alpha, y1, y2) {
 #'
 #' @return 
 #' Returns a 1-row matrix. The columns are:
-#' * SD1 - estimated SD from group 1
-#' * SD2 - estimated SD from group 2
+#' * SD1 - estimated SD for group 1
+#' * SD2 - estimated SD for group 2
 #' * SD1/SD2 - estimate of SD ratio
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
