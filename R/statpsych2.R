@@ -311,7 +311,7 @@ ci.cor2.gen <- function(cor1, ll1, ul1, cor2, ll2, ul2) {
 
 
 #  ci.pbcor ==================================================================
-#' Confidence interval for a point-biserial correlation
+#' Confidence intervals for point-biserial correlations
 #'
 #'
 #' @description 
@@ -577,9 +577,9 @@ ci.mape <- function(alpha, res, s) {
 #'                      
 #' @description
 #' Computes a confidence interval for a ratio of population mean absolute 
-#' prediction errors (MAPEs) from a general linear model in two independent 
-#' groups. The number of predictor variables can differ across groups and the 
-#' two models can be non-nested. This function requires a vector of estimated 
+#' prediction errors from a general linear model in two independent groups.
+#' The number of predictor variables can differ across groups and the two
+#' models can be non-nested. This function requires a vector of estimated 
 #' residuals from each group. This function does not assume zero excess 
 #' kurtosis but does assume symmetry in the population prediction errors for
 #' the two models.
