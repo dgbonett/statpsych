@@ -6110,13 +6110,14 @@ ci.var.upper <- function(alpha, var, n) {
 #' @description
 #' Computes an approximate upper prediction limit for the estimated variance 
 #' in a future study for a planned sample size. The prediction limit uses a 
-#' variance estimate from a prior study. The upper variance prediction limit
-#' is useful as a variance planning value for the sample size required to obtain
-#' a confidence interval with desired width. This strategy for specifying a 
-#' variance planning value is useful in applications where the population variance
-#' in the prior study is assumed to be similar to the population variance in the
-#' planned study. This variance planning value can be used to revise the planned 
-#' sample size in the future study.
+#' variance estimate from a prior study. Several confidence interval 
+#' sample size functions in this package require a planning value of the
+#' estimated variance that is expected in the planned study. The upper variance
+#' prediction limit is useful as a variance planning value for the sample size
+#' required to obtain a confidence interval with desired width. This strategy
+#' for specifying a variance planning value is useful in applications where the
+#' population variance in the prior study is assumed to be similar to the 
+#' population variance in the planned study. 
 #'
 #'
 #' @param  alpha  alpha value for upper 1-alpha confidence 
