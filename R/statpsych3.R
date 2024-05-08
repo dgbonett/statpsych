@@ -1963,7 +1963,7 @@ ci.bayes.prop <- function(alpha, prior.mean, prior.sd, f, n) {
 #'                                 
 #' @description
 #' Computes adjusted Wald confidence intervals for positive and negative
-#' predictive values (PPV and NPV)) of a diagnostic test with retrospective 
+#' predictive values (PPV and NPV) of a diagnostic test with retrospective 
 #' sampling where the population prevalence rate is assumed to be known. With 
 #' retrospective sampling, one random sample is obtained from a subpopulation
 #' that is known to have a "positive" outcome, a second random sample is
