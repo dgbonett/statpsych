@@ -123,14 +123,14 @@ ci.prop.fpc <- function(alpha, f, n, N) {
 }
 
 
-#  ci.pairs.prop1 ============================================================
+#  ci.pairs.mult ============================================================
 #' Confidence intervals for pairwise proportion differences of a
-#' polychotomous variable in a single sample
+#' multinomial variable in a single sample
 #'
 #'
 #' @description
 #' Computes adjusted Wald confidence intervals for pairwise proportion
-#' differences of a polychotomous variable in a single sample. These adjusted
+#' differences of a multinomial variable in a single sample. These adjusted
 #' Wald confidence intervals use the same method that is used to compare the
 #' two proportions in a paired-samples design.
 #'
