@@ -2458,19 +2458,20 @@ ci.random.anova <- function(alpha, m, sd, n) {
 #'
 #' @description
 #' Computes a confidence interval for a population Cronbach reliability. 
-#' The point estimate of Cronbach's reliability assumes essentially 
+#' The point estimate of Cronbach reliability assumes essentially 
 #' tau-equivalent measurements and this confidence interval assumes parallel
 #' measurements. 
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
-#' @param  rel    estimated Cronbach's reliability  
+#' @param  rel    estimated Cronbach reliability  
 #' @param  r      number of measurements (items, raters, etc.)
 #' @param  n	  sample size
 #'
 #'
 #' @return 
 #' Returns a 1-row matrix. The columns are:
+#' * Estimate - estimated Cronbach reliability (from input)
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #' 
@@ -2525,6 +2526,7 @@ ci.cronbach <- function(alpha, rel, r, n) {
 #'
 #' @return 
 #' Returns a 1-row matrix. The columns are:
+#' * Estimate - estimated reliability (from input)
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #' 
