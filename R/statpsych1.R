@@ -1037,8 +1037,8 @@ ci.stdmean.ps <- function(alpha, m1, m2, sd1, sd2, cor, n) {
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
-#' @param  m      vector of within-subjects estimated means
-#' @param  sd     vector of within-subjects estimated standard deviations
+#' @param  m      vector of estimated means for levels of within-subjects factor
+#' @param  sd     vector of estimated standard deviations for levels of within-subjects factor
 #' @param  cor    average estimated correlation of all measurement pairs
 #' @param  n      sample size
 #' @param  q      vector of within-subjects contrast coefficients
