@@ -715,11 +715,12 @@ ci.condslope <- function(alpha, b1, b2, se1, se2, cov, lo, hi, dfe) {
 #'
 #'  
 #' @description
-#' Compute a confidence interval and test statistic for a linear contrast
-#' of a population regression coefficients (y-intercept or slope) across
-#' groups in a multiple group regression model. Equality of error variances
-#' across groups is not assumed. A Satterthwaite adjustment to the degrees 
-#' of freedom is used to improve the accuracy of the confidence interval. 
+#' Computes a confidence interval and test statistic for a linear contrast
+#' of population regression coefficients (e.g., a y-intercept or a slope
+#' coefficient) across groups in a multiple group regression model. Equality
+#' of error variances across groups is not assumed. A Satterthwaite adjustment
+#' to the degrees of freedom is used to improve the accuracy of the confidence
+#' interval. 
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -922,7 +923,7 @@ ci.indirect <- function(alpha, b1, b2, se1, se2) {
 #' #  Should return:
 #' # (Intercept)          x1          x2 
 #' #   26.891111    3.648889    2.213333 
-#' # > ci.lc.glm(.05, n, b, V, q)
+#' #
 #' # Estimate        SE       t df           p       LL       UL
 #' # 2.931111 0.4462518 6.56829  7 0.000313428 1.875893 3.986329
 #'
@@ -953,14 +954,14 @@ ci.lc.glm <-function(alpha, n, b, V, q) {
 #'                                              
 #' @description
 #' Computes the estimate, standard error, and approximate confidence interval 
-#' for a linear contrast of any type of parameter (e.g., quartile, ordinal 
-#' regression slope, path coefficient, G-index) where each parameter value has
+#' for a linear contrast of any type of parameter (e.g., quartile, logistic
+#' regression slope, path coefficient) where each parameter value has
 #' been estimated from a different sample. The parameter vaues are assumed to 
 #' be of the same type (e.g., all unstandardized path coefficients) and their 
 #' sampling distributions are assumed to be approximately normal.
 #'
 #'
-#' @param  alpha   alpha level for simultaneous 1-alpha confidence
+#' @param  alpha   alpha level for 1-alpha confidence
 #' @param  est     vector of parameter estimates
 #' @param  se      vector of standard errors
 #' @param  v       vector of contrast coefficients
