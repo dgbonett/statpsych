@@ -1864,10 +1864,10 @@ ci.median1 <- function(alpha, y) {
 #'
 #' @return 
 #' Returns a 1-row matrix. The columns are:
-#' * Median1 - estimated median from group 1
-#' * Median2 - estimated median from group 2
-#' * Median1-Median2 - estimated difference in medians
-#' * SE - standard error of the difference
+#' * Median1 - estimated median for group 1
+#' * Median2 - estimated median for group 2
+#' * Median1-Median2 - estimated difference of medians
+#' * SE - standard error 
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #'
