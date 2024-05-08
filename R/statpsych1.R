@@ -492,8 +492,8 @@ ci.slope.mean.bs <- function(alpha, m, sd, n, x) {
 #'
 #' @return 
 #' Returns a 1-row matrix. The columns are:
-#' * Mean1 - estimated mean from group 1
-#' * Mean2 - estimated mean from group 2
+#' * Mean1 - estimated mean for group 1
+#' * Mean2 - estimated mean for group 2
 #' * Mean1/Mean2- estimated mean ratio
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -1181,8 +1181,8 @@ ci.mad1 <- function(alpha, y) {
 #'
 #' @return 
 #' Returns a 1-row matrix. The columns are:
-#' * MAD1 - estimated MAD from group 1
-#' * MAD2 - estimated MAD from group 2
+#' * MAD1 - estimated MAD for group 1
+#' * MAD2 - estimated MAD for group 2
 #' * MAD1/MAD2 - estimate of MAD ratio
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -2159,8 +2159,8 @@ ci.median.ps <- function(alpha, y1, y2) {
 #'
 #' @return 
 #' Returns a 1-row matrix. The columns are:
-#' * Median1 - estimated median from measurement 1
-#' * Median2 - estimated median from measurement 2
+#' * Median1 - estimated median for measurement 1
+#' * Median2 - estimated median for measurement 2
 #' * Median1/Median2 - estimated ratio of medians
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
