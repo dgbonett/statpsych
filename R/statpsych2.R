@@ -78,7 +78,7 @@ ci.cor <- function(alpha, cor, s, n) {
 #'
 #' @return 
 #' Returns a 1-row matrix. The columns are:
-#' * Estimate - estimated semipartial correlation
+#' * Estimate - estimated semipartial correlation (from input)
 #' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -404,7 +404,7 @@ ci.pbcor <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #'
 #' @return 
 #' Returns a 1-row matrix. The columns are:
-#' * Estimate - estimated correlation
+#' * Estimate - estimated Spearman correlation
 #' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -450,7 +450,7 @@ ci.spear <- function(alpha, y, x) {
 #'
 #'
 #' @description
-#' Computes a confidence interval for a difference in population Spearman 
+#' Computes a confidence interval for a difference of population Spearman 
 #' correlations in a 2-group design. 
 #'
 #'  
@@ -1021,7 +1021,7 @@ ci.lc.gen.bs <- function(alpha, est, se, v) {
 #'
 #' @return 
 #' Returns a 1-row matrix. The columns are:
-#' * R-squared - estimate of unadjusted R-squared 
+#' * R-squared - estimate of unadjusted R-squared (from input)
 #' * adj R-squared - bias adjusted R-squared estimate
 #' * SE - recovered standard error
 #' * LL - lower limit of the confidence interval
@@ -1226,8 +1226,8 @@ ci.cronbach2 <- function(alpha, rel1, rel2, r1, r2, n1, n2) {
 #' Computes a 100(1 - alpha)% confidence interval for a difference in 
 #' population reliabilities in a 2-group design. This function can be
 #' used with any type of reliablity coefficient (e.g., Cronbach alpha,
-#' McDonald omega, intraclass reliablities). The function requires 
-#' point estimates and 100(1 - alpha)% confidence intervals for each
+#' McDonald omega, intraclass reliablitie). The function requires a
+#' point estimate and a 100(1 - alpha)% confidence interval for each
 #' reliability as input. 
 #'
 #'  
