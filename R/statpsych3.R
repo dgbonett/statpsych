@@ -3380,7 +3380,7 @@ power.prop.ps <- function(alpha, n, p1, p2, phi, es) {
 #'
 #' 
 #' @return 
-#' Returns estimates of the Shannon, Berger, and Simpson qualitative indices
+#' Returns estimates of the Shannon, Berger, and Simpson indices
 #' 
 #' 
 #' @examples
