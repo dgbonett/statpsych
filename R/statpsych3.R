@@ -1179,13 +1179,12 @@ ci.tetra <- function(alpha, f00, f01, f10, f11) {
 
 
 #  ci.kappa ================================================================== 
-#' Confidence interval for a kappa reliability 
+#' Confidence interval for two kappa reliability coefficients
 #'
 #'
 #' @description
-#' Computes a confidence interval for the intraclass kappa coefficient and
-#' Cohen's kappa coefficient for two dichotomous ratings. Both measures
-#' are intraclass reliability coefficients.
+#' Computes confidence intervals for the intraclass kappa coefficient and
+#' Cohen's kappa coefficient with two dichotomous ratings. 
 #'
 #'
 #' @param   alpha  alpha level for 1-alpha confidence
