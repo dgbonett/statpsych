@@ -581,14 +581,14 @@ ci.pairs.prop.bs <-function(alpha, f, n) {
 
 
 #  ci.slope.prop.bs ========================================================== 
-#' Confidence interval for a slope of a proportion in a single-factor design
-#' with a quantitative between-subjects factor
+#' Confidence interval for a slope of a proportion in a single-factor 
+#' experimental design with a quantitative between-subjects factor
 #'
 #'
 #' @description
 #' Computes a test statistic and an adjusted Wald confidence interval for the 
-#' slope of proportions in a single-factor design with a quantitative 
-#' between-subjects factor. 
+#' slope of proportions in a single-factor experimental design with a 
+#' quantitative between-subjects factor. 
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
