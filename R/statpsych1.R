@@ -6071,8 +6071,8 @@ random.y <- function(n, m, sd, min, max, dec) {
 #' @description
 #' Computes an upper limit for a population variance using an estimated variance 
 #' from a sample of size n in a prior study. The upper limit can be used as 
-#' a variance planning value in sample size functions that require a variance 
-#' planning value.
+#' a variance planning value in sample size functions for desired power that 
+#' require a planning value for the population variance.
 #'
 #'
 #' @param  alpha  alpha value for 1-alpha confidence (one-sided)
@@ -6155,7 +6155,7 @@ pi.var.upper <- function(alpha, var, n1, n2) {
 
 
 #  etasqr.adj =================================================================
-#' Bias adjusts an eta-squared estimate
+#' Bias adjustments for an eta-squared estimate
 #'
 #'
 #' @description
