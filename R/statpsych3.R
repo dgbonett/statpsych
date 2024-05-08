@@ -154,7 +154,7 @@ ci.prop.fpc <- function(alpha, f, n, N) {
 #'
 #' @examples
 #' f <- c(125, 82, 92)
-#' ci.pairs.prop1(.05, f)
+#' ci.pairs.mult(.05, f)
 #'
 #' # Should return:
 #' #        Estimate         SE          LL         UL
@@ -165,7 +165,7 @@ ci.prop.fpc <- function(alpha, f, n, N) {
 #'
 #' @importFrom stats qnorm
 #' @export
-ci.pairs.prop1 <-function(alpha, f) {
+ci.pairs.mult <-function(alpha, f) {
  zcrit <- qnorm(1 - alpha/2)
  a <- length(f)
  n <- sum(f)
