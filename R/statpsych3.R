@@ -1,6 +1,6 @@
 # ======================== Confidence Intervals ==============================
 #  ci.prop1 ================================================================== 
-#' Confidence interval for a single proportion
+#' Confidence intervals for a single proportion
 #'
 #'
 #' @description
@@ -203,8 +203,8 @@ ci.pairs.mult <-function(alpha, f) {
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
-#' @param   f       number of participants who have the attribute
-#' @param   n       sample size
+#' @param   f       number of participants who have the attribute (fixed)
+#' @param   n       sample size (random)
 #'
 #'
 #' @return
