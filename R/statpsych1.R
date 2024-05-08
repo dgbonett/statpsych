@@ -396,16 +396,16 @@ ci.tukey <-function(alpha, m, sd, n) {
 
 
 #  ci.slope.mean.bs ===========================================================
-#' Confidence interval for the slope of means in a single-factor design with a
-#' quantitative between-subjects factor
+#' Confidence interval for the slope of means in a single-factor experimental 
+#' design with a quantitative between-subjects factor
 #' 
 #' 
 #' @description
 #' Computes a test statistic and confidence interval for the slope of means in 
-#' a single-factor design with a quantitative between-subjects factor. This 
-#' function computes both the unequal variance and equal variance confidence
-#' intervals and test statistics. A Satterthwaite adjustment to the degrees of
-#' freedom is used with the unequal variance method. 
+#' a single-factor experimental design with a quantitative between-subjects 
+#' factor. This function computes both the unequal variance and equal variance
+#' confidence intervals and test statistics. A Satterthwaite adjustment to the
+#' degrees of freedom is used with the unequal variance method. 
 #'
 #'
 #' @param     alpha  	alpha level for 1-alpha confidence
@@ -543,7 +543,7 @@ ci.ratio.mean2 <- function(alpha, y1, y2){
 
 
 #  ci.stdmean2 ================================================================
-#' Confidence interval for a 2-group standardized mean difference
+#' Confidence intervals for a 2-group standardized mean difference
 #' 
 #'
 #' @description
@@ -637,7 +637,7 @@ ci.stdmean2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 	
 
 #  ci.stdmean.strat ===========================================================
-#' Confidence interval for a 2-group standardized mean difference with 
+#' Confidence intervals for a 2-group standardized mean difference with 
 #' stratified sampling
 #'
 #'
@@ -943,7 +943,7 @@ ci.ratio.mean.ps <- function(alpha, y1, y2){
 
 
 #  ci.stdmean.ps =============================================================
-#' Confidence interval for a paired-samples standardized mean difference
+#' Confidence intervals for a paired-samples standardized mean difference
 #'
 #'
 #' @description
@@ -954,10 +954,10 @@ ci.ratio.mean.ps <- function(alpha, y1, y2){
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
-#' @param  m1     estimated mean of measurement 1
-#' @param  m2     estimated mean of measurement 2
-#' @param  sd1    estimated standard deviation of measurement 1
-#' @param  sd2    estimated standard deviation of measurement 2
+#' @param  m1     estimated mean for measurement 1
+#' @param  m2     estimated mean for measurement 2
+#' @param  sd1    estimated standard deviation for measurement 1
+#' @param  sd2    estimated standard deviation for measurement 2
 #' @param  cor    estimated correlation between measurements
 #' @param  n      sample size
 #'
