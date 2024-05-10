@@ -2485,7 +2485,7 @@ test.mono.prop.bs <-function(alpha, f, n) {
 
 
 # ================= Sample Size for Desired Precision =======================
-#  size.ci.prop1 ============================================================
+#  size.ci.prop ============================================================
 #' Sample size for a single proportion confidence interval  
 #'
 #'
@@ -2505,7 +2505,7 @@ test.mono.prop.bs <-function(alpha, f, n) {
 #'
 #'
 #' @examples
-#' size.ci.prop1(.05, .4, .2)
+#' size.ci.prop(.05, .4, .2)
 #'
 #' # Should return:
 #' # Sample size
@@ -2514,7 +2514,7 @@ test.mono.prop.bs <-function(alpha, f, n) {
 #'
 #' @importFrom stats qnorm
 #' @export                 
-size.ci.prop1 <- function(alpha, p, w) {
+size.ci.prop <- function(alpha, p, w) {
  if (p > .9999 || p < .0001) {stop("proportion must be between .0001 and .9999")}
  z <- qnorm(1 - alpha/2)
  n <- ceiling(4*p*(1 - p)*(z/w)^2)
@@ -3222,7 +3222,7 @@ size.supinf.prop.ps <- function(alpha, pow, p1, p2, phi, h) {
 #' @param  alpha  alpha level for hypothesis test 
 #' @param  n      planned sample size
 #' @param  p      planning value of proportion 
-#' @param  es     planning value of proportion minus hypothesized value
+#' @param  es     planning value of proportion minus null hypothesis value
 #'
 #'
 #' @return
