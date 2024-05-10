@@ -2043,7 +2043,7 @@ size.ci.cronbach2 <- function(alpha, rel1, rel2, r, w) {
 #' error for a general linear model with desired confidence interval precision.
 #' Setting s = 0 gives the sample size requirement for a mean absolute 
 #' deviation in a one-group design. This function assumes that the prediction
-#' errors have a normal distribution.
+#' errors have an approximate normal distribution.
 #'
 #'
 #' @param  alpha  alpha value for 1-alpha confidence 
