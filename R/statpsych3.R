@@ -2207,7 +2207,7 @@ pi.prop <- function(alpha, prop, n1, n2) {
 
 
 # ======================== Hypothesis Tests ==================================
-# test.prop1 =================================================================
+# test.prop =================================================================
 #' Hypothesis test for a single proportion 
 #'
 #'
@@ -2233,7 +2233,7 @@ pi.prop <- function(alpha, prop, n1, n2) {
 #'
 #'
 #' @examples
-#' test.prop1(9, 20, .2)
+#' test.prop(9, 20, .2)
 #'
 #' # Should return:
 #' # Estimate        z          p
@@ -2242,7 +2242,7 @@ pi.prop <- function(alpha, prop, n1, n2) {
 #'
 #' @importFrom stats pnorm
 #' @export
-test.prop1 <- function(f, n, h) {
+test.prop <- function(f, n, h) {
  if (f > n) {stop("f cannot be greater than n")}
  p <- f/n
  se <- sqrt(h*(1 - h)/n)
@@ -2801,6 +2801,10 @@ size.ci.agree <- function(alpha, G, w) {
 #' @param  pow    desired power
 #' @param  p      planning value of proportion 
 #' @param  h      null hypothesis proportion value
+#'
+#'
+#' @references
+#' \insertRef{Fleiss2003}{statpsych}
 #'
 #'
 #' @return
