@@ -2789,7 +2789,7 @@ size.ci.agree <- function(alpha, G, w) {
 
 
 # ===================== Sample Size for Desired Power ========================
-#  size.test.prop1 =========================================================== 
+#  size.test.prop =========================================================== 
 #' Sample size for a test of a single proportion 
 #'
 #' @description
@@ -2808,7 +2808,7 @@ size.ci.agree <- function(alpha, G, w) {
 #'
 #'
 #' @examples
-#' size.test.prop1(.05, .9, .5, .3)
+#' size.test.prop(.05, .9, .5, .3)
 #'
 #' # Should return:
 #' # Sample size
@@ -2817,7 +2817,7 @@ size.ci.agree <- function(alpha, G, w) {
 #'
 #' @importFrom stats qnorm
 #' @export
-size.test.prop1 <- function(alpha, pow, p, h) {
+size.test.prop <- function(alpha, pow, p, h) {
  if (p > .9999 || p < .0001) {stop("proportion must be between .0001 and .9999")}
  if (h > .9999 || h < .0001) {stop("null hypothesis value must be between .0001 and .9999")}
  za <- qnorm(1 - alpha/2)
