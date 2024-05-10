@@ -4883,7 +4883,7 @@ size.ci.cronbach <- function(alpha, rel, r, w) {
 #'
 #' 
 #' @return 
-#' Returns the required sample size for each group group
+#' Returns the required sample size for each group
 #' 
 #' 
 #' @examples
