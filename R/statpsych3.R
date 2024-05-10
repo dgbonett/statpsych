@@ -2667,8 +2667,8 @@ size.ci.lc.prop.bs <- function(alpha, p, w, v) {
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
-#' @param  p1     planning value of proportion for group 1
-#' @param  p2     planning value of proportion for group 2
+#' @param  p1     planning value of proportion for measurement 1
+#' @param  p2     planning value of proportion for measurement 2
 #' @param  phi    planning value of phi correlation
 #' @param  w      desired confidence interval width
 #'
