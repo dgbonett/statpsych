@@ -5586,7 +5586,7 @@ size.test.cronbach <- function(alpha, pow, rel, r, h) {
 
 
 # ======================= Power for Planned Sample Size =======================
-#  power.mean1 ================================================================
+#  power.mean ================================================================
 #' Approximates the power of a one-sample t-test for a planned sample size
 #'
 #'
@@ -5600,7 +5600,7 @@ size.test.cronbach <- function(alpha, pow, rel, r, h) {
 #' @param  alpha  alpha level for hypothesis test 
 #' @param  n      planned sample size
 #' @param  var    planning value of response variable variance 
-#' @param  es     planning value of mean minus hypothesized value
+#' @param  es     planning value of mean minus null hypothesis value
 #'
 #'
 #' @return
@@ -5608,7 +5608,7 @@ size.test.cronbach <- function(alpha, pow, rel, r, h) {
 #'
 #'
 #' @examples
-#' power.mean1(.05, 15, 80.5, 7)
+#' power.mean(.05, 15, 80.5, 7)
 #'
 #' # Should return:
 #' #     Power
@@ -5618,7 +5618,7 @@ size.test.cronbach <- function(alpha, pow, rel, r, h) {
 #' @importFrom stats qt
 #' @importFrom stats pt
 #' @export
-power.mean1 <- function(alpha, n, var, es) { 
+power.mean <- function(alpha, n, var, es) { 
  df <- n - 1
  t <- qt(1 - alpha/2, df)
  z <- abs(es)/sqrt(var/n)
@@ -5999,11 +5999,11 @@ random.sample <- function(popsize, samsize) {
 #' Randomly assigns a sample of participants into k groups.
 #'
 #'
-#' @param  n   vector of sample sizes per group
+#' @param  n   k x 1 vector of sample sizes
 #'
 #'
 #' @return 
-#' Returns a vector of randomly generated group assignments.
+#' Returns a vector of randomly generated group assignments
 #'
 #'  
 #' @examples
