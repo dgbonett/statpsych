@@ -2347,14 +2347,14 @@ size.test.cor <- function(alpha, pow, cor, s, h) {
 
 
 #  size.interval.cor =========================================================
-#' Sample size for a finite interval test of a Pearson or partial correlation 
+#' Sample size for an interval test of a Pearson or partial correlation 
 #'
 #'
 #' @description
-#' Computes the sample size required to perform a finite interval test for a 
-#' Pearson or a partial correlation with desired power. Set s = 0 for a 
-#' Pearson correlation. The correlation planning value must be a value within 
-#' the hypothesized finite interval. 
+#' Computes the sample size required to perform an interval test for a Pearson
+#' or a partial correlation with desired power where the interval midpoint is 
+#' equal to zero. Set s = 0 for a Pearson correlation. The correlation planning 
+#' value must be a value within the hypothesized interval. 
 #'
 #'  
 #' @param  alpha   alpha level for hypothesis test
