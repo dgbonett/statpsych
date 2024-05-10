@@ -1856,7 +1856,7 @@ size.ci.rsqr <- function(alpha, r2, s, w) {
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  evar   planning value of within group (error) variance
-#' @param  xvar   variance of fixed predictor variables 
+#' @param  xvar   variance of fixed predictor variable 
 #' @param  diff   difference between x* and mean of x
 #' @param  w      desired confidence interval width
 #'
