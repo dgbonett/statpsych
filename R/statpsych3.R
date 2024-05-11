@@ -2213,7 +2213,8 @@ pi.prop <- function(alpha, prop, n1, n2) {
 #'
 #' @description
 #' Computes a continuity-corrected z test for a single proportion in a 
-#' 1-group design.
+#' 1-group design. A confidence interval for a population proportion 
+#' is a recommended supplement to the z test.
 #'
 #'
 #' @param   f    number of participants who have the attribute
@@ -2261,7 +2262,8 @@ test.prop <- function(f, n, h) {
 #'
 #' @description
 #' Computes a continuity-corrected z test for a difference of proportions in  
-#' a 2-group design.
+#' a 2-group design. A confidence interval for a difference in population
+#' proportions (see ci.prop2) is a recommended supplement to the z test.
 #'
 #'
 #' @param  f1      number of group 1 participants who have the attribute
@@ -2369,6 +2371,8 @@ test.prop.bs <- function(f, n) {
 #' Computes a continuity-corrected McNemar test for equality of proportions 
 #' in a paired-samples design. This function requires the frequency counts
 #' from a 2 x 2 contingency table for two paired dichotomous measurements.
+#' A confidence interval for a difference in population proportions (see
+#' ci.prop.ps) is a recommended supplement to the McNemar test.
 #'
 #'
 #' @param   f00    number participants with y = 0 and x = 0
