@@ -2353,8 +2353,10 @@ size.test.cor <- function(alpha, pow, cor, s, h) {
 #' @description
 #' Computes the sample size required to perform an interval test for a Pearson
 #' or a partial correlation with desired power where the interval midpoint is 
-#' equal to zero. Set s = 0 for a Pearson correlation. The correlation planning 
-#' value must be a value within the hypothesized interval. 
+#' equal to zero. This function can be used to plan a study where the goal is
+#' to show that the population correlation is small. Set s = 0 for a Pearson 
+#' correlation. The correlation planning value must be a value within the 
+#' hypothesized interval. 
 #'
 #'  
 #' @param  alpha   alpha level for hypothesis test
