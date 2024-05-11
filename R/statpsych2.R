@@ -2269,7 +2269,7 @@ size.ci.spear2 <- function(alpha, cor1, cor2, w) {
 #' @param  evar    planning value of within-group (error) variance
 #' @param  x       vector of x values of the quantitative factor
 #' @param  slope   planning value of slope
-#' @param  h       hypothesized value of slope  
+#' @param  h       null hypothesis slope value  
 #'
 #' 
 #' @return 
@@ -2652,8 +2652,8 @@ power.cor2 <- function(alpha, n1, n2, cor1, cor2, s) {
 #'
 #'
 #' @description
-#' Computes the contrast coefficients to estimate the slope of a line in a
-#' single factor design with a quantitative factor.
+#' Computes the contrast coefficients that are needed to estimate the slope of a
+#' line in a single factor design with a quantitative factor.
 #'
 #'
 #' @param   x      vector of numeric factor levels
