@@ -6220,7 +6220,6 @@ etasqr.adj <- function(etasqr, dfeffect, dferror) {
 #' * F - F statistic for test of null hypothesis
 #' * dfA - degrees of freedom for between-subjects factor
 #' * dfE - error degrees of freedom
-#' * dfA - degrees of freedom for between-subjects factor
 #' * p - p-value for F-test
 #' * Eta-squared - estimate of eta-squared
 #' * adj Eta-squared - a bias adjusted estimate of eta-squared
