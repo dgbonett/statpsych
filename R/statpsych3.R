@@ -2219,7 +2219,7 @@ pi.prop <- function(alpha, prop, n1, n2) {
 #'
 #' @param   f    number of participants who have the attribute
 #' @param   n    sample size
-#' @param   h    population proportion under null hypothesis
+#' @param   h    null hypothesis proportion value
 #'
 #'
 #' @return
