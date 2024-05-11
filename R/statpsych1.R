@@ -6229,7 +6229,7 @@ etasqr.adj <- function(etasqr, dfeffect, dferror) {
 #' m <- c(12.4, 8.6, 10.5)
 #' sd <- c(3.84, 3.12, 3.48)
 #' n <- c(20, 20, 20)
-#' test.anova1.bs(m, sd, n)
+#' test.anova.bs(m, sd, n)
 #'
 #' #  Should return:
 #' #        F dfA  dfE           p Eta-squared  adj Eta-squared
