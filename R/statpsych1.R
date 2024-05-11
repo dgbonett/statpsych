@@ -5453,10 +5453,14 @@ size.test.mann <- function(alpha, pow, p) {
 #'
 #'
 #' @description
-#' Computes the sample size required for a Sign test with desired power in a 
-#' 1-sample design. A planning value of the 1-sample Sign test parameter value
-#' is required. This parameter is the proportion of members in the population 
-#' with scores greater than the hypothesized value. 
+#' Computes the sample size required for a 1-sample Sign test with desired 
+#' power (see size.test.sign.ps for a paired-samples sign test). The Sign 
+#' test is a test of the null hypothesis that the population median is equal 
+#' to some specified value. This null hypothesis can also be expressed in
+#' terms of the proportion of scores in the population that are greater than 
+#' the hypothesized population median value. Under the null hypothesis, this
+#' proportion is equal to .5. This function requires a planning value of this 
+#' population proportion.
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test 
@@ -5473,7 +5477,7 @@ size.test.mann <- function(alpha, pow, p) {
 #'
 #' # Should return:
 #' # Sample size
-#' #          56
+#' #          67
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -5482,8 +5486,8 @@ size.test.sign <- function(alpha, pow, p) {
  if (p > .9999 || p < .0001) {stop("proportion must be between .0001 and .9999")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
- es <- p - .5
- n <- ceiling(p*(1 - p)*(za + zb)^2/es^2)
+ n0 <- ceiling((za*sqrt(.25) + zb*sqrt(p*(1 - p)))^2/((p - .5)^2))
+ n <- n0 + 1/abs(p - .5)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
  rownames(out) <- ""
@@ -5496,14 +5500,16 @@ size.test.sign <- function(alpha, pow, p) {
 #'
 #'
 #' @description
-#' Computes sample size required for a Sign test with desired power in a 
-#' paired-samples design. A planning value of the paired-samples Sign test 
-#' parameter is required. In a paired-samples experiment, this parameter 
-#' is the proportion of members in the population with scores that would be 
+#' Computes sample size required for a paired-samples Sign test with desired 
+#' power. The null hypothesis can be expressed in terms of a population 
+#' proportion. In a paired-samples experiment, the proportion is defined as 
+#' the proportion of members in the population with scores that would be 
 #' larger under treatment 1 than treatment 2. In a paired-samples 
-#' nonexperiment, this parameter is the proportion of members in the  
+#' nonexperiment, the proportion is the proportion of members in the  
 #' population with measurement 1 scores that are larger than their
-#' measurement 2 scores.
+#' measurement 2 scores. Under the null hypothesis, the proportion is equal
+#' to .5. This function requires a planning value of this population 
+#' proportion.
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test 
@@ -5520,7 +5526,7 @@ size.test.sign <- function(alpha, pow, p) {
 #'
 #' # Should return:
 #' # Sample size
-#' #          32
+#' #          42
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -5529,8 +5535,8 @@ size.test.sign.ps <- function(alpha, pow, p) {
  if (p > .9999 || p < .0001) {stop("proportion must be between .0001 and .9999")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
- es <- p - .5
- n <- ceiling(p*(1 - p)*(za + zb)^2/es^2)
+ n0 <- ceiling((za*sqrt(.25) + zb*sqrt(p*(1 - p)))^2/((p - .5)^2))
+ n <- n0 + 1/abs(p - .5)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
  rownames(out) <- ""
