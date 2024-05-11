@@ -4614,10 +4614,10 @@ size.ci.mean.ps <- function(alpha, var, cor, w) {
 #' Computes the sample size required to estimate two types of population 
 #' standardized mean differences (unweighted standardizer and single group
 #' standardizer) with desired confidence interval precision in a paired-samples
-#' design. For a conservatively large sample size, set the standardized mean 
-#' difference planning value to the largest value within a plausible range and 
-#' set the Pearson correlation planning value to the smallest value within a 
-#' plausible range.
+#' design. Set the standardized mean difference planning value to the largest 
+#' value within a plausible range, and set the Pearson correlation planning 
+#' value to the smallest value within a plausible range for a conservatively
+#' large sample size.
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -4627,7 +4627,7 @@ size.ci.mean.ps <- function(alpha, var, cor, w) {
 #'
 #'
 #' @references
-#' \insertRef{Bonett2009}{statpsych}0
+#' \insertRef{Bonett2009}{statpsych}
 #'
 #'
 #' @return 
