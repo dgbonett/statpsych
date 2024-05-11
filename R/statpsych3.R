@@ -3055,8 +3055,8 @@ size.supinf.prop2 <- function(alpha, pow, p1, p2, h) {
 #' proportions with desired power in a paired-samples design. This function 
 #' requires planning values for both proportions and a phi coefficient that 
 #' describes the correlation between the two dichotomous measurements. The 
-#' proportion planning values can set to .5 for a conservatively large sample 
-#' size. The planning value for the effect size (proportion difference)
+#' proportion planning values can be set to .5 for a conservatively large 
+#' sample size. The planning value for the effect size (proportion difference)
 #' could be set equal to the difference of the two proportion planning values 
 #' or it could be set equal to a minimally interesting effect size. Set the
 #' phi correlation planning value to the smallest value within a plausible range
@@ -3067,7 +3067,7 @@ size.supinf.prop2 <- function(alpha, pow, p1, p2, h) {
 #' @param  pow    desired power
 #' @param  p1     planning value of proportion for measurement 1
 #' @param  p2     planning value of proportion for measurement 2
-#' @param  phi    planning value of phi coerrelation
+#' @param  phi    planning value of phi correlation
 #' @param  es     planning value of proportion difference
 #'
 #'
