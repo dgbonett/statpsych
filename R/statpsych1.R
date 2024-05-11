@@ -5449,11 +5449,11 @@ size.test.mann <- function(alpha, pow, p) {
 
 
 #  size.test.sign =========================================================== 
-#' Sample size for a 1-sample Sign test
+#' Sample size for a 1-group Sign test
 #'
 #'
 #' @description
-#' Computes the sample size required for a 1-sample Sign test with desired 
+#' Computes the sample size required for a 1-group Sign test with desired 
 #' power (see size.test.sign.ps for a paired-samples Sign test). The Sign 
 #' test is a test of the null hypothesis that the population median is equal 
 #' to some specified value. This null hypothesis can also be expressed in
