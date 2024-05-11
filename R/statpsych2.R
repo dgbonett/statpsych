@@ -2314,7 +2314,7 @@ size.test.slope <- function(alpha, pow, evar, x, slope, h) {
 #' @param  pow     desired power
 #' @param  cor     planning value of correlation
 #' @param  s       number of control variables
-#' @param  h       hypothesized value of correlation  
+#' @param  h       null hypothesis value of correlation  
 #'
 #' 
 #' @return 
@@ -2409,8 +2409,8 @@ size.interval.cor <- function(alpha, pow, cor, s, h) {
 #'  
 #' @param  alpha   alpha level for hypothesis test
 #' @param  pow     desired power
-#' @param  cor1    planning value of correlation
-#' @param  cor2    planning value of correlation
+#' @param  cor1    planning value of correlation for group 1
+#' @param  cor2    planning value of correlation for group 2
 #' @param  s       number of control variables
 #'
 #' 
@@ -2508,8 +2508,8 @@ size.test.lc.ancova <- function(alpha, pow, evar, es, s, d, v) {
 #'
 #' @param  alpha  alpha level for hypothesis test 
 #' @param  pow    desired power
-#' @param  rel1   group 1 reliability planning value
-#' @param  rel2   group 2 reliability planning value
+#' @param  rel1   reliability planning value for group 1
+#' @param  rel2   reliability planning value for group 2
 #' @param  r      number of measurements (items, raters)
 #'
 #'
