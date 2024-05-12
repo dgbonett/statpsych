@@ -469,7 +469,7 @@ ci.ratio.prop2 <- function(alpha, f1, f2, n1, n2) {
 #' * Estimate - adjusted estimate of proportion linear contrast
 #' * SE - adjusted standard error
 #' * z - z test statistic
-#' * p - p-value
+#' * p - two-sided p-value
 #' * LL - lower limit of the adjusted Wald confidence interval
 #' * UL - upper limit of the adjusted Wald confidence interval
 #'
@@ -533,7 +533,7 @@ ci.lc.prop.bs <- function(alpha, f, n, v) {
 #' * Estimate - adjusted estimate of proportion difference
 #' * SE - adjusted standard error
 #' * z - z test statistic
-#' * p - p-value
+#' * p - two-sided p-value
 #' * LL - lower limit of the adjusted Wald confidence interval
 #' * UL - upper limit of the adjusted Wald confidence interval
 #'
@@ -602,7 +602,7 @@ ci.pairs.prop.bs <-function(alpha, f, n) {
 #' * Estimate - adjusted slope estimate
 #' * SE - adjusted standard error
 #' * z - z test statistic
-#' * p - p-value
+#' * p - two-sided p-value
 #' * LL - lower limit of the adjusted Wald confidence interval
 #' * UL - upper limit of the adjusted Wald confidence interval
 #'
@@ -797,7 +797,7 @@ ci.ratio.prop.ps <- function(alpha, f00, f01, f10, f11) {
 #' * Estimate - estimated conditional slope
 #' * exp(Estimate) - estimated exponentiated conditional slope
 #' * z - z test statistic
-#' * p - p-value
+#' * p - two-sided p-value
 #' * LL - lower limit of the exponentiated confidence interval
 #' * UL - upper limit of the exponentiated confidence interval
 #' 
@@ -1668,7 +1668,7 @@ ci.cramer <- function(alpha, chisqr, r, c, n) {
 #' * Estimate - adjusted estimate of effect
 #' * SE - standard error 
 #' * z - z test statistic for test of null hypothesis
-#' * p - p-value 
+#' * p - two-sided p-value 
 #' * LL - lower limit of the adjusted Wald confidence interval
 #' * UL - upper limit of the adjusted Wald confidence interval
 #'
@@ -1791,7 +1791,7 @@ ci.2x2.prop.bs <- function(alpha, f, n) {
 #' * Estimate - adjusted estimate of effect
 #' * SE - standard error of estimate
 #' * z - z test statistic 
-#' * p - p-value
+#' * p - two-sided p-value
 #' * LL - lower limit of the adjusted Wald confidence interval
 #' * UL - upper limit of the adjusted Wald confidence interval
 #'
