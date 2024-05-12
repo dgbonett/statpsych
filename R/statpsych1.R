@@ -164,8 +164,9 @@ ci.stdmean <- function(alpha, m, sd, n, h) {
 #' @description
 #' Computes equal variance and unequal variance confidence intervals for a 
 #' population 2-group mean difference using the estimated means, estimated 
-#' standard deviations, and sample sizes. Use the t.test function for raw data
-#' input.
+#' standard deviations, and sample sizes. Also computes equal variance and
+#' unequal variance independent-samples t-tests. Use the t.test function for
+#' raw data input.
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -183,7 +184,7 @@ ci.stdmean <- function(alpha, m, sd, n, h) {
 #' * SE - standard error
 #' * t - t test statistic
 #' * df - degrees of freedom
-#' * p - p-value
+#' * p - two-sided p-value
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #' 
@@ -261,7 +262,7 @@ ci.mean2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' * SE - standard error
 #' * t - t test statistic
 #' * df - degrees of freedom
-#' * p - p-value
+#' * p - two-sided p-value
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #' 
@@ -343,7 +344,7 @@ ci.lc.mean.bs <- function(alpha, m, sd, n, v) {
 #' * SE - standard error
 #' * t - t test statistic
 #' * df - degrees of freedom
-#' * p - p-value
+#' * p - two-sided p-value
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #'
@@ -421,7 +422,7 @@ ci.tukey <-function(alpha, m, sd, n) {
 #' * SE - standard error
 #' * t - t test statistic
 #' * df - degrees of freedom
-#' * p - p-value
+#' * p - two-sided p-value
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #' 
@@ -822,8 +823,8 @@ ci.lc.stdmean.bs <- function(alpha, m, sd, n, v) {
 #' @description
 #' Computes a confidence interval for a population paired-samples mean 
 #' difference using the estimated means, estimated standard deviations, 
-#' estimated correlation, and sample size. Use the t.test function for 
-#' raw data input.
+#' estimated correlation, and sample size. Also computes a paired-samples
+#' t-test. Use the t.test function for raw data input.
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -841,7 +842,7 @@ ci.lc.stdmean.bs <- function(alpha, m, sd, n, v) {
 #' * SE - standard error
 #' * t - t test statistic
 #' * df - degrees of freedom
-#' * p - p-value
+#' * p - two-sided p-value
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #' 
@@ -2644,7 +2645,7 @@ ci.etasqr <- function(alpha, etasqr, df1, df2) {
 #' * SE - standard error 
 #' * t - t test statistic 
 #' * df - degrees of freedom
-#' * p - p-value 
+#' * p - two-sided p-value 
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #'
@@ -2778,7 +2779,7 @@ ci.2x2.mean.mixed <- function(alpha, y11, y12, y21, y22) {
 #' * SE - standard error 
 #' * t - t test statistic 
 #' * df - degrees of freedom
-#' * p - p-value 
+#' * p - two-sided p-value 
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #'
@@ -2901,7 +2902,7 @@ ci.2x2.mean.ws <- function(alpha, y11, y12, y21, y22) {
 #' * SE - standard error 
 #' * t - t test statistic 
 #' * df - degrees of freedom
-#' * p - p-value 
+#' * p - two-sided p-value 
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #'
@@ -4106,7 +4107,7 @@ ci.bayes.normal <- function(alpha, prior.mean, prior.sd, est, se) {
 #' @return
 #' Returns a 1-row matrix. The columns are:
 #' * Skewness - estimate of skewness coefficient
-#' * p - Monte Carlo two-sided p-value for test of zero skewness
+#' * p - Monte Carlo two-sided p-value
 #'
 #'
 #' @examples
@@ -4168,7 +4169,7 @@ test.skew <- function(y) {
 #' Returns a 1-row matrix. The columns are:
 #' * Kurtosis - estimate of kurtosis coefficient
 #' * Excess - estimate of excess kurtosis (kurtosis - 3)
-#' * p - Monte Carlo two-sided p-value for test of zero excess kurtosis
+#' * p - Monte Carlo two-sided p-value
 #'
 #'
 #' @examples
