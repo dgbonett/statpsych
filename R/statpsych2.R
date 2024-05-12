@@ -1337,30 +1337,30 @@ pi.cor <- function(alpha, cor, n1, n2) {
 #'
 #'
 #' @param  cor     estimated correlation 
-#' @param  h       null hypothesis correlation value 
 #' @param  n       sample size 
 #' @param  s       number of control variables
+#' @param  h       null hypothesis value of correlation
 #'
 #'
 #' @return
 #' Returns a 1-row matrix. The columns are:
 #' * Estimate - estimate of correlation 
 #' * t or z - t test statistic (for h = 0) or z test statistic
-#' * p - p-value
+#' * p - two-sided p-value
 #'
 #'
-#' @seealso \link[statpsych]{ci.cor1}
+#' @seealso \link[statpsych]{ci.cor}
 #' 
 #' 
 #' @examples
-#' test.cor(.484, .2, 100, 0)
+#' test.cor(.484, 100, 0, .2)
 #'
 #' # Should return:
 #' # Estimate        z           p
 #' #    0.484 3.205432 0.001348601
 #'
 #'
-#' test.cor(.372, 0, 100, 0)
+#' test.cor(.372, 100, 0, 0)
 #'
 #' # Should return:
 #' #  Estimate        t df           p
@@ -1369,7 +1369,7 @@ pi.cor <- function(alpha, cor, n1, n2) {
 #'
 #' @importFrom stats pnorm
 #' @export
-test.cor <- function(cor, h, n, s) {
+test.cor <- function(cor, n, s, h) {
  if (cor > .9999) {stop("correlation cannot be greater than .9999")}
  if (cor < -.9999) {stop("correlation cannot be less than -.9999")}
  if (h == 0) {
@@ -1408,18 +1408,18 @@ test.cor <- function(cor, h, n, s) {
 #'
 #'
 #' @param  cor     estimated correlation 
-#' @param  h       null hypothesis corelation value
 #' @param  n       sample size 
+#' @param  h       null hypothesis value of correlation
 #'
 #'
 #' @return
 #' Returns a 1-row matrix. The columns are:
 #' * Estimate - estimate of correlation 
 #' * t or z - t test statistic (for h = 0) or z test statistic
-#' * p - p-value
+#' * p - two-sided p-value
 #'
 #'
-#' @seealso \link[statpsych]{ci.spear1}
+#' @seealso \link[statpsych]{ci.spear}
 #' 
 #' 
 #' @examples
@@ -1439,7 +1439,7 @@ test.cor <- function(cor, h, n, s) {
 #'
 #' @importFrom stats pnorm
 #' @export
-test.spear <- function(cor, h, n) {
+test.spear <- function(cor, n, h) {
  if (cor > .9999) {stop("correlation cannot be greater than .9999")}
  if (cor < -.9999) {stop("correlation cannot be less than -.9999")}
  if (h == 0) {
@@ -1486,7 +1486,7 @@ test.spear <- function(cor, h, n) {
 #' Returns a 1-row matrix. The columns are:
 #' * Estimate - estimate of correlation difference
 #' * z - z test statistic
-#' * p - p-value
+#' * p - two-sided p-value
 #'
 #'
 #' @seealso \link[statpsych]{ci.cor2}
@@ -1544,7 +1544,7 @@ test.cor2 <- function(cor1, cor2, n1, n2, s) {
 #' Returns a 1-row matrix. The columns are:
 #' * Estimate - estimate of correlation difference
 #' * z - z test statistic
-#' * p - p-value
+#' * p - two-sided p-value
 #'
 #'
 #' @seealso \link[statpsych]{ci.spear2}
@@ -1584,7 +1584,7 @@ test.spear2 <- function(cor1, cor2, n1, n2) {
 }
 
 
-#  =================== Sample Size for Desire Precision =======================
+#  =================== Sample Size for Desired Precision ======================
 #  size.ci.slope ==============================================================
 #' Sample size for a slope confidence interval
 #'
@@ -2269,7 +2269,7 @@ size.ci.spear2 <- function(alpha, cor1, cor2, w) {
 #' @param  evar    planning value of within-group (error) variance
 #' @param  x       vector of x values of the quantitative factor
 #' @param  slope   planning value of slope
-#' @param  h       null hypothesis slope value  
+#' @param  h       null hypothesis value of slope  
 #'
 #' 
 #' @return 
