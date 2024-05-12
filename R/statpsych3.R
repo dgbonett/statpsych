@@ -2212,21 +2212,21 @@ pi.prop <- function(alpha, prop, n1, n2) {
 #'
 #'
 #' @description
-#' Computes a continuity-corrected z test for a single proportion in a 
+#' Computes a continuity-corrected z-test for a single proportion in a 
 #' 1-group design. A confidence interval for a population proportion 
-#' is a recommended supplement to the z test.
+#' is a recommended supplement to the z-test.
 #'
 #'
 #' @param   f    number of participants who have the attribute
 #' @param   n    sample size
-#' @param   h    null hypothesis proportion value
+#' @param   h    null hypothesis value of proportion
 #'
 #'
 #' @return
 #' Returns a 1-row matrix. The columns are:
 #' * Estimate - ML estimate of proportion 
 #' * z - z test statistic
-#' * p - p-value
+#' * p - two-sided p-value
 #'
 #'
 #' @references
@@ -2261,9 +2261,9 @@ test.prop <- function(f, n, h) {
 #'
 #'
 #' @description
-#' Computes a continuity-corrected z test for a difference of proportions in  
+#' Computes a continuity-corrected z-test for a difference of proportions in  
 #' a 2-group design. A confidence interval for a difference in population
-#' proportions (see ci.prop2) is a recommended supplement to the z test.
+#' proportions (see ci.prop2) is a recommended supplement to the z-test.
 #'
 #'
 #' @param  f1      number of group 1 participants who have the attribute
@@ -2276,7 +2276,7 @@ test.prop <- function(f, n, h) {
 #' Returns a 1-row matrix. The columns are:
 #' * Estimate - ML estimate of proportion difference
 #' * z - z test statistic
-#' * p - p-value
+#' * p - two-sided p-value
 #'
 #'
 #' @references
@@ -2389,7 +2389,7 @@ test.prop.bs <- function(f, n) {
 #' Returns a 1-row matrix. The columns are:
 #' * Estimate - ML estimate of proportion difference
 #' * z - z test statistic
-#' * p - p-value
+#' * p - two-sided p-value
 #'
 #'
 #' @examples
