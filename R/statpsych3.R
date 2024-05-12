@@ -2804,7 +2804,7 @@ size.ci.agree <- function(alpha, G, w) {
 #' @param  alpha  alpha level for hypothesis test 
 #' @param  pow    desired power
 #' @param  p      planning value of proportion 
-#' @param  h      null hypothesis proportion value
+#' @param  h      null hypothesis value of proportion
 #'
 #'
 #' @references
