@@ -1,5 +1,5 @@
 # =========================== Confidence Intervals ===========================
-#  ci.mean1  =================================================================
+#  ci.mean  =================================================================
 #' Confidence interval for a single mean
 #'
 #'
@@ -28,7 +28,7 @@
 #'
 #'
 #' @examples
-#' ci.mean1(.05, 24.5, 3.65, 40)
+#' ci.mean(.05, 24.5, 3.65, 40)
 #'
 #' # Should return:
 #' # Estimate        SE       LL       UL
@@ -37,7 +37,7 @@
 #' 
 #' @importFrom stats qt
 #' @export
-ci.mean1 <- function(alpha, m, sd, n) {
+ci.mean <- function(alpha, m, sd, n) {
  df <- n - 1
  tcrit <- qt(1 - alpha/2, df)
  se <- sd/sqrt(n)
@@ -1787,7 +1787,7 @@ ci.cqv <- function(alpha, y) {
 }
 
 
-#  ci.median1 =================================================================
+#  ci.median =================================================================
 #' Confidence interval for a single median 
 #'
 #'
@@ -1814,7 +1814,7 @@ ci.cqv <- function(alpha, y) {
 #' @examples
 #' y <- c(30, 20, 15, 10, 10, 60, 20, 25, 20, 30, 10, 5, 50, 40,
 #'        20, 10, 0, 20, 50)
-#' ci.median1(.05, y)
+#' ci.median(.05, y)
 #'
 #' # Should return:
 #' # Estimate       SE LL UL
@@ -1825,7 +1825,7 @@ ci.cqv <- function(alpha, y) {
 #' @importFrom stats pbinom
 #' @importFrom stats median
 #' @export
-ci.median1 <- function(alpha, y) {
+ci.median <- function(alpha, y) {
  n <- length(y)
  y <- sort(y)
  z <- qnorm(1 - alpha/2)
