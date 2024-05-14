@@ -1,5 +1,5 @@
 # ======================== Confidence Intervals ==============================
-#  ci.prop1 ================================================================== 
+#  ci.prop ================================================================== 
 #' Confidence intervals for a single proportion
 #'
 #'
@@ -34,7 +34,7 @@
 #'
 #'
 #' @examples
-#' ci.prop1(.05, 12, 100)
+#' ci.prop(.05, 12, 100)
 #'
 #' # Should return:
 #' #                  Estimate         SE         LL        UL
@@ -44,7 +44,7 @@
 #'
 #' @importFrom stats qnorm
 #' @export
-ci.prop1 <- function(alpha, f, n) {
+ci.prop <- function(alpha, f, n) {
  if (f > n) {stop("f cannot be greater than n")}
  z <- qnorm(1 - alpha/2)
  p.mle <- f/n
