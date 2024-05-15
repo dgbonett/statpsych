@@ -4087,6 +4087,56 @@ ci.bayes.normal <- function(alpha, prior.mean, prior.sd, est, se) {
 
 
 #  =========================== Hypothesis tests ==============================
+#  test.mean  =================================================================
+#' Hypothesis test for a single mean
+#'
+#'
+#' @description
+#' Computes a one-sample t-test for a population mean using the estimated 
+#' mean, estimated standard deviation, sample size, and null hypothesis value. 
+#' Use the t.test function for raw data input. A confidence interval for a 
+#' population mean is a recommended supplement to the t-test (see \link[statpsych]{ci.mean}).
+#'
+#'  
+#' @param  m	  estimated mean 
+#' @param  sd	  estimated standard deviation
+#' @param  n	  sample size
+#' @param  h	  null hypothesis value of mean
+#'
+#'
+#' @return 
+#' Returns a 1-row matrix. The columns are:
+#' * t - t test statistic
+#' * df - degrees of freedom
+#' * p - two-sided p-value
+#' 
+#' 
+#' @references
+#' \insertRef{Snedecor1980}{statpsych}
+#'
+#'
+#' @examples
+#' test.mean(24.5, 3.65, 40, 23)
+#'
+#' # Should return:
+#' #         t df          p
+#' #  2.599132 39 0.01312665
+#'  
+#' 
+#' @importFrom stats pt
+#' @export
+test.mean <- function(m, sd, n, h) {
+ df <- n - 1
+ se <- sd/sqrt(n)
+ t <- (m - h)/se
+ p <- 2*(1 - pt(abs(t), df))
+ out <- t(c(t, df, p))
+ colnames(out) <- c("t", "df", "p")
+ rownames(out) <- ""
+ return(out)
+}
+
+
 #  test.skew =================================================================
 #' Computes p-value for test of skewness
 #'
