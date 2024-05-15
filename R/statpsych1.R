@@ -1398,9 +1398,10 @@ ci.ratio.mad.ps <- function(alpha, y1, y2) {
 #' @description
 #' Computes a confidence interval for a population coefficient of variation
 #' (standard deviation divided by mean). This confidence interval is the
-#' reciprocal of a confidence interval for a standardized mean (see ci.stdmean). 
-#' An approximate standard error is recovered from the confidence interval. 
-#' The coefficient of variation assumes ratio-scale scores.
+#' reciprocal of a confidence interval for a standardized mean (see 
+#' \link[statpsych]{ci.stdmean}). An approximate standard error is recovered
+#' from the confidence interval. The coefficient of variation assumes 
+#' ratio-scale scores.
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -2010,7 +2011,7 @@ ci.ratio.median2 <- function(alpha, y1, y2) {
 #' Computes a distribution-free confidence interval for a linear contrast of 
 #' medians in a between-subjects design using estimated medians and their 
 #' standard errors. The sample median and standard error for each group can be
-#' computed using the ci.median1 function.
+#' computed using the \link[statpsych]{ci.median}) function.
 #'
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
@@ -6319,8 +6320,8 @@ test.anova.bs <- function(m, sd, n) {
 #' Computes generalized eta-square estimates in a two-factor design where one
 #' or both factors are classification factors. If both factors are treatment
 #' factors, then partial eta-square estimates are typically recommended.
-#' Use the estimates from this function in the etasqr.adj function to obtain
-#' bias adjusted estimates.
+#' The eta-squared estimates from this function can be used in the 
+#' \link[statpsych]{etasqr.adj}) function to obtain bias adjusted estimates.
 #'
 #'
 #' @param  SSa    sum of squares for factor A
