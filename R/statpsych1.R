@@ -1,6 +1,6 @@
 # =========================== Confidence Intervals ===========================
 #  ci.mean  =================================================================
-#' Confidence interval for a single mean
+#' Confidence interval for a mean
 #'
 #'
 #' @description
@@ -51,7 +51,7 @@ ci.mean <- function(alpha, m, sd, n) {
 
 
 #  ci.mean.fpc  ==============================================================
-#' Confidence interval for a single mean with a finite population correction
+#' Confidence interval for a mean with a finite population correction
 #'
 #'
 #' @description
@@ -101,7 +101,7 @@ ci.mean.fpc <- function(alpha, m, sd, n, N) {
 
 
 #  ci.stdmean  ==============================================================
-#' Confidence interval for a single standardized mean
+#' Confidence interval for a standardized mean
 #'
 #'
 #' @description
@@ -397,13 +397,13 @@ ci.tukey <-function(alpha, m, sd, n) {
 
 
 #  ci.slope.mean.bs ===========================================================
-#' Confidence interval for the slope of means in a single-factor experimental 
+#' Confidence interval for the slope of means in a onr-factor experimental 
 #' design with a quantitative between-subjects factor
 #' 
 #' 
 #' @description
 #' Computes a test statistic and confidence interval for the slope of means in 
-#' a single-factor experimental design with a quantitative between-subjects 
+#' a one-factor experimental design with a quantitative between-subjects 
 #' factor. This function computes both the unequal variance and equal variance
 #' confidence intervals and test statistics. A Satterthwaite adjustment to the
 #' degrees of freedom is used with the unequal variance method. 
@@ -1109,7 +1109,7 @@ ci.lc.stdmean.ws <- function(alpha, m, sd, cor, n, q) {
 
 
 #  ci.mad ====================================================================
-#' Confidence interval for a single mean absolute deviation 
+#' Confidence interval for a mean absolute deviation 
 #'
 #'
 #' @description
@@ -1392,7 +1392,7 @@ ci.ratio.mad.ps <- function(alpha, y1, y2) {
 
 
 #  ci.cv  ====================================================================
-#' Confidence interval for a single coefficient of variation
+#' Confidence interval for a coefficient of variation
 #'
 #'
 #' @description
@@ -1522,7 +1522,7 @@ ci.ratio.cv2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 	
 
 #  ci.cod =================================================================== 
-#' Confidence interval for a single coefficient of dispersion
+#' Confidence interval for a coefficient of dispersion
 #'
 #'
 #' @description
@@ -1704,7 +1704,7 @@ ci.ratio.cod2 <-function(alpha, y1, y2) {
 
 
 #  ci.cqv =====================================================================
-#' Confidence interval for a single coefficient of quartile variation 
+#' Confidence interval for a coefficient of quartile variation 
 #'
 #'
 #' @description
@@ -1788,11 +1788,11 @@ ci.cqv <- function(alpha, y) {
 
 
 #  ci.median =================================================================
-#' Confidence interval for a single median 
+#' Confidence interval for a median 
 #'
 #'
 #' @description
-#' Computes a confidence interval for a single population median.
+#' Computes a distribution-free confidence interval for a population median.
 #'
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
@@ -1853,8 +1853,8 @@ ci.median <- function(alpha, y) {
 #'
 #'
 #' @description
-#' Computes a confidence interval for a difference of population medians in
-#' a 2-group design.
+#' Computes a distribution-free confidence interval for a difference of population
+#' medians in a 2-group design.
 #'
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
@@ -1928,8 +1928,8 @@ ci.median2 <- function(alpha, y1, y2) {
 #'
 #'
 #' @description
-#' Computes a confidence interval for a ratio of population medians of 
-#' ratio-scale measurements in a 2-group design.
+#' Computes a distribution-free confidence interval for a ratio of population 
+#' medians of ratio-scale measurements in a 2-group design.
 #' 
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
@@ -2007,10 +2007,10 @@ ci.ratio.median2 <- function(alpha, y1, y2) {
 #'
 #'
 #' @description
-#' Computes a confidence interval for a linear contrast of medians in a  
-#' between-subjects design using estimated medians and their standard errors.
-#' The sample median and standard error for each group can be computed using
-#' the ci.median1 function.
+#' Computes a distribution-free confidence interval for a linear contrast of 
+#' medians in a between-subjects design using estimated medians and their 
+#' standard errors. The sample median and standard error for each group can be
+#' computed using the ci.median1 function.
 #'
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
@@ -2062,9 +2062,10 @@ ci.lc.median.bs <- function(alpha, m, se, v) {
 #'
 #'
 #' @description
-#' Computes a confidence interval for a difference of population medians in 
-#' a paired-samples design. This function also computes the standard errors
-#' for each median and the covariance between the two estimated medians.
+#' Computes a distribution-free confidence interval for a difference of 
+#' population medians in a paired-samples design. This function also computes
+#' the standard error of each median and the covariance between the two 
+#' estimated medians.
 #'
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
@@ -2148,8 +2149,8 @@ ci.median.ps <- function(alpha, y1, y2) {
 #'
 #'
 #' @description
-#' Computes a confidence interval for a ratio of population medians in a 
-#' paired-samples design. Ratio-scale measurements are assumed.
+#' Computes a distriibution-free confidence interval for a ratio of population
+#' medians in a  paired-samples design. Ratio-scale measurements are assumed.
 #'
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
@@ -2459,7 +2460,7 @@ ci.random.anova <- function(alpha, m, sd, n) {
 #' @description
 #' Computes a confidence interval for a population Cronbach reliability. 
 #' The point estimate of Cronbach reliability assumes essentially 
-#' tau-equivalent measurements and this confidence interval assumes parallel
+#' tau-equivalent measurements and the confidence interval assumes parallel
 #' measurements. 
 #'
 #'  
@@ -4088,7 +4089,7 @@ ci.bayes.normal <- function(alpha, prior.mean, prior.sd, est, se) {
 
 #  =========================== Hypothesis tests ==============================
 #  test.mean  =================================================================
-#' Hypothesis test for a single mean
+#' Hypothesis test for a mean
 #'
 #'
 #' @description
@@ -4333,11 +4334,11 @@ test.mono.mean.bs <-function(alpha, m, sd, n) {
 
 # ====================== Sample Size for Desired Precision ====================
 # size.ci.mean ===============================================================
-#' Sample size for a single mean confidence interval
+#' Sample size for a mean confidence interval
 #'
 #'
 #' @description
-#' Computes the sample size required to estimate a single population mean with
+#' Computes the sample size required to estimate a population mean with
 #' desired confidence interval precision. Set the variance planning value to   
 #' the largest value within a plausible range for a conservatively large  
 #' sample size. 
@@ -5023,7 +5024,7 @@ size.ci.second <- function(n0, w0, w) {
 
 # ======================== Sample Size for Desired Power ======================
 #  size.test.mean ============================================================
-#' Sample size for a test of a single mean
+#' Sample size for a test of a mean
 #'
 #'
 #' @description
@@ -6121,14 +6122,14 @@ random.y <- function(n, m, sd, min, max, dec) {
 
 
 #  ci.var.upper =============================================================== 
-#' Upper confidence limit of variance
+#' Upper confidence limit of a variance
 #'
 #'
 #' @description
-#' Computes an upper limit for a population variance using an estimated variance 
-#' from a sample of size n in a prior study. The upper limit can be used as 
-#' a variance planning value in sample size functions for desired power that 
-#' require a planning value of the population variance.
+#' Computes an upper confidence limit for a population variance using an 
+#' estimated variance from a sample of size n in a prior study. The upper limit
+#' can be used as a variance planning value in sample size functions for 
+#' desired power that require a planning value of the population variance.
 #'
 #'
 #' @param  alpha  alpha value for 1-alpha confidence (one-sided)
@@ -6164,8 +6165,8 @@ ci.var.upper <- function(alpha, var, n) {
 #'
 #'                        
 #' @description
-#' Computes an approximate upper prediction limit for the estimated variance 
-#' in a future study for a planned sample size. The prediction limit uses a 
+#' Computes an upper prediction limit for the estimated variance in a
+#' future study for a planned sample size. The prediction limit uses a 
 #' variance estimate from a prior study. Several confidence interval 
 #' sample size functions in this package require a planning value of the
 #' estimated variance that is expected in the planned study. The upper variance
@@ -6256,9 +6257,8 @@ etasqr.adj <- function(etasqr, dfeffect, dferror) {
 #'
 #' @description
 #' Computes the F statistic, p-value, eta-squared, and adjusted eta-squared 
-#' for the main effect of Factor A in a one-way between-subjects ANOVA using
-#' the estimated group means, estimated group standard deviations, and group
-#' sample sizes.  
+#' for the main effect in a one-way between-subjects ANOVA using the estimated
+#' group means, estimated group standard deviations, and group sample sizes.  
 #'
 #'
 #' @param   m       vector of estimated group means
@@ -6371,12 +6371,12 @@ etasqr.gen.2way <- function(SSa, SSb, SSab, SSe) {
 
 
 #  sim.ci.mean ===============================================================
-#' Simulates confidence interval coverage probability for single mean
+#' Simulates confidence interval coverage probability for a mean
 #'
 #'                               
 #' @description
 #' Performs a computer simulation of the confidence interval performance for a 
-#' single mean. Sample data can be generated from five different population 
+#' population mean. Sample data can be generated from five different population 
 #' distributions. All distributions are scaled to have standard deviations
 #' of 1.0.
 #'
@@ -6458,10 +6458,10 @@ sim.ci.mean <- function(alpha, n, dist, rep) {
 #'                               
 #' @description
 #' Performs a computer simulation of separate variance and pooled variance 
-#' confidence interval performance for a mean difference in a 2-group design.
-#' Sample data within each group can be generated from five different 
-#' population distributions. All distributions are scaled to have a standard 
-#' deviation of 1.0 in group 1. 
+#' confidence interval performance for a population mean difference in a 
+#' 2-group design. Sample data within each group can be generated from five 
+#' different population distributions. All distributions are scaled to have
+#' a standard deviation of 1.0 in group 1. 
 #'
 #'
 #' @param   alpha     alpha level for 1-alpha confidence
@@ -6579,9 +6579,9 @@ sim.ci.mean2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2, rep) {
 #'
 #'                               
 #' @description
-#' Performs a computer simulation of confidence interval performance for a mean 
-#' difference in a paired-samples design. Sample data for the two levels of the 
-#' within-subjects factor can be generated from bivariate population
+#' Performs a computer simulation of confidence interval performance for a
+#' population mean difference in a paired-samples design. Sample data for the two
+#' levels of the within-subjects factor can be generated from bivariate population
 #' distributions with five different marginal distributions. All distributions
 #' are scaled to have standard deviations of 1.0 at level 1. Bivariate random
 #' data with specified marginal skewness and kurtosis are generated using the
@@ -6675,12 +6675,12 @@ sim.ci.mean.ps <- function(alpha, n, sd.ratio, cor, dist1, dist2, rep) {
 
 
 #  sim.ci.median =============================================================
-#' Simulates confidence interval coverage probability for single median
+#' Simulates confidence interval coverage probability for a median
 #'
 #'                                      
 #' @description
 #' Performs a computer simulation of the confidence interval performance for 
-#' a single median. Sample data can be generated from five different 
+#' a population median. Sample data can be generated from five different 
 #' population distributions. All distributions are scaled to have standard 
 #' deviations of 1.0.
 #'
@@ -6804,9 +6804,9 @@ sim.ci.median <- function(alpha, n, dist, rep) {
 #'                                          
 #' @description
 #' Performs a computer simulation of the confidence interval performance for a 
-#' difference of medians in a 2-group design. Sample data for each group can
-#' be generated from five different population distributions. All distributions
-#' are scaled to have standard deviations of 1.0 in group 1.
+#' difference of population medians in a 2-group design. Sample data for each
+#' group can be generated from five different population distributions. All 
+#' distributions are scaled to have standard deviations of 1.0 in group 1.
 #'
 #' @param   alpha     alpha level for 1-alpha confidence
 #' @param   n1        sample size for group 1
@@ -6928,12 +6928,12 @@ sim.ci.median2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2, rep) {
 #'                               
 #' @description
 #' Performs a computer simulation of confidence interval performance for a 
-#' median difference in a paired-samples design. Sample data for the two levels
-#' of the within-subjects factor can be generated from bivariate population
-#' distributions with five different marginal distributions. All distributions
-#' are scaled to have standard deviations of 1.0 at level 1. Bivariate random 
-#' data with specified marginal skewness and kurtosis are generated using the
-#' unonr function in the mnonr package. 
+#' population median difference in a paired-samples design. Sample data for the
+#' two levels of the within-subjects factor can be generated from bivariate 
+#' population distributions with five different marginal distributions. All 
+#' distributions are scaled to have standard deviations of 1.0 at level 1. 
+#' Bivariate random data with specified marginal skewness and kurtosis are 
+#' generated using the unonr function in the mnonr package. 
 #'
 #' @param   alpha     alpha level for 1-alpha confidence
 #' @param   n         sample size 
