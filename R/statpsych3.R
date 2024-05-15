@@ -1,12 +1,11 @@
 # ======================== Confidence Intervals ==============================
 #  ci.prop ================================================================== 
-#' Confidence intervals for a single proportion
+#' Confidence intervals for a proportion
 #'
 #'
 #' @description
-#' Computes adjusted Wald and Wilson confidence intervals for a single
-#' population proportion. The Wilson confidence interval uses a continuity
-#' correction.
+#' Computes adjusted Wald and Wilson confidence intervals for a population
+#' proportion. The Wilson confidence interval uses a continuity correction.
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
@@ -71,12 +70,12 @@ ci.prop <- function(alpha, f, n) {
 
 
 #  ci.prop.fpc =============================================================== 
-#' Confidence interval for a single proportion with a finite population 
+#' Confidence interval for a proportion with a finite population 
 #' correction
 #'
 #'
 #' @description
-#' Computes an adjusted Wald interval for a single population proportion with a 
+#' Computes an adjusted Wald interval for a population proportion with a 
 #' finite population correction (fpc). This confidence interval is useful 
 #' when the sample size is not a small fraction of the population size.
 #'
@@ -125,7 +124,7 @@ ci.prop.fpc <- function(alpha, f, n, N) {
 
 #  ci.pairs.mult ============================================================
 #' Confidence intervals for pairwise proportion differences of a
-#' multinomial variable in a single sample
+#' multinomial variable
 #'
 #'
 #' @description
@@ -190,11 +189,11 @@ ci.pairs.mult <-function(alpha, f) {
 
 
 #  ci.prop.inv =============================================================== 
-#' Confidence interval for a single proportion using inverse sampling
+#' Confidence interval for a proportion using inverse sampling
 #'
 #'
 #' @description
-#' Computes an exact confidence interval for a single population proportion 
+#' Computes an exact confidence interval for a population proportion 
 #' when inverse sampling has been used. An approximate standard error is 
 #' recovered from the confidence interval. With inverse sampling, the number 
 #' of participants who have the attribute (f) is predetermined and sampling 
@@ -258,8 +257,8 @@ ci.prop.inv <- function(alpha, f, n) {
 #' Confidence interval for a 2-group proportion difference
 #'
 #' @description
-#' Computes an adjusted Wald confidence interval for a proportion difference
-#' in a 2-group design.
+#' Computes an adjusted Wald confidence interval for a population proportion
+#' difference in a 2-group design.
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
@@ -398,8 +397,8 @@ ci.prop2.inv <- function(alpha, f1, f2, n1, n2) {
 #'
 #'
 #' @description
-#' Computes an adjusted Wald confidence interval for a proportion ratio in a
-#' 2-group design.
+#' Computes an adjusted Wald confidence interval for a population proportion 
+#' ratio in a 2-group design.
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
@@ -455,7 +454,7 @@ ci.ratio.prop2 <- function(alpha, f1, f2, n1, n2) {
 #'
 #' @description
 #' Computes an adjusted Wald confidence interval for a linear contrast of 
-#' proportions in a betwen-subjects design.
+#' population proportions in a between-subjects design.
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
@@ -517,9 +516,9 @@ ci.lc.prop.bs <- function(alpha, f, n, v) {
 #'
 #'
 #' @description
-#' Computes adjusted Wald confidence intervals for all pairwise differences of 
-#' proportions in a between-subjects design with a Bonferroni adjusted alpha
-#' level.
+#' Computes adjusted Wald confidence intervals for all pairwise differences 
+#' of population proportions in a between-subjects design using a Bonferroni
+#' adjusted alpha level.
 #'
 #'
 #' @param   alpha   alpha level for simultaneous 1-alpha confidence
@@ -587,7 +586,7 @@ ci.pairs.prop.bs <-function(alpha, f, n) {
 #'
 #' @description
 #' Computes a test statistic and an adjusted Wald confidence interval for the 
-#' slope of proportions in a single-factor experimental design with a 
+#' populatin slope of proportions in a one-factor experimental design with a 
 #' quantitative between-subjects factor. 
 #'
 #'
@@ -653,8 +652,8 @@ ci.slope.prop.bs <- function(alpha, f, n, x) {
 #'
 #' @description
 #' Computes an adjusted Wald confidence interval for a difference of 
-#' proportions in a paired-samples design. This function requires the 
-#' frequency counts from a 2 x 2 contingency table for two repeated 
+#' population proportions in a paired-samples design. This function requires 
+#' the frequency counts from a 2 x 2 contingency table for two repeated 
 #' dichtomous measurements.
 #'
 #'
@@ -708,7 +707,7 @@ ci.prop.ps <- function(alpha, f00, f01, f10, f11) {
 #'
 #'
 #' @description
-#' Computes a confidence interval for a ratio of proportions in a 
+#' Computes a confidence interval for a ratio of population proportions in a 
 #' paired-samples design. This function requires the frequency counts from
 #' a 2 x 2 contingency table for two repeated dichotomous measurements.
 #'
@@ -987,10 +986,10 @@ ci.yule <- function(alpha, f00, f01, f10, f11) {
 #'
 #'
 #' @description
-#' Computes a confidence interval for a phi correlation. This function requires 
-#' the frequency counts from a 2 x 2 contingency table for two dichotomous 
-#' variables. This measure of association is usually most appropriate when both
-#' dichotomous variables are naturally dichotomous.
+#' Computes a confidence interval for a population phi correlation. This 
+#' function requires the frequency counts from a 2 x 2 contingency table for 
+#' two dichotomous variables. This measure of association is usually most 
+#' appropriate when both dichotomous variables are naturally dichotomous.
 #'
 #'
 #' @param   alpha  alpha level for 1-alpha confidence
@@ -1048,10 +1047,10 @@ ci.phi <- function(alpha, f00, f01, f10, f11) {
 #'
 #'
 #' @description
-#' Computes a confidence interval for a biserial-phi correlation using a
-#' transformation of a confidence interval for an odds ratio with .5 added to
-#' each cell frequency. This measure of association assumes the group variable
-#' is naturally dichotomous and the response variable is artificially
+#' Computes a confidence interval for a population biserial-phi correlation
+#' using a transformation of a confidence interval for an odds ratio with .5 
+#' added to each cell frequency. This measure of association assumes the group
+#' variable is naturally dichotomous and the response variable is artificially
 #' dichotomous. 
 #'
 #'
@@ -1251,7 +1250,7 @@ ci.kappa <- function(alpha, f00, f01, f10, f11) {
 #'
 #'
 #' @description
-#' Computes an adjusted Wald  confidence interval for a G-index of agreement
+#' Computes an adjusted Wald confidence interval for a G-index of agreement
 #' between two polychotomous ratings. This function requires the number of 
 #' objects that were given the same rating by both raters. The G-index
 #' corrects for chance agreement.
@@ -1782,8 +1781,8 @@ ci.2x2.prop.bs <- function(alpha, f, n) {
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
-#' @param   group1  vector of frequency counts from 2x2 contingency table for Factor A in group 1
-#' @param   group2  vector of frequency counts from 2x2 contingency table for Factor A in group 2
+#' @param   group1  vector of frequency counts from 2x2 contingency table in group 1
+#' @param   group2  vector of frequency counts from 2x2 contingency table in group 2
 #'
 #'
 #' @return
@@ -1894,11 +1893,11 @@ ci.2x2.prop.mixed <- function(alpha, group1, group2) {
 
 
 # ci.bayes.prop ==============================================================
-#' Bayesian credible interval for a single proportion
+#' Bayesian credible interval for a proportion
 #'
 #'
 #' @description
-#' Computes a Bayesian credible interval for a single proportion using the 
+#' Computes a Bayesian credible interval for a population proportion using the 
 #' mean and standard deviation of a prior Beta distribution along with sample
 #' information. The mean and standard deviation of the posterior Beta 
 #' distribution are also reported. For a noninformative prior, set the prior 
@@ -2208,11 +2207,11 @@ pi.prop <- function(alpha, prop, n1, n2) {
 
 # ======================== Hypothesis Tests ==================================
 # test.prop =================================================================
-#' Hypothesis test for a single proportion 
+#' Hypothesis test for a proportion 
 #'
 #'
 #' @description
-#' Computes a continuity-corrected z-test for a single proportion in a 
+#' Computes a continuity-corrected z-test for a population proportion in a 
 #' 1-group design. A confidence interval for a population proportion 
 #' is a recommended supplement to the z-test (see \link[statpsych]{ci.prop}).
 #'
@@ -2261,9 +2260,9 @@ test.prop <- function(f, n, h) {
 #'
 #'
 #' @description
-#' Computes a continuity-corrected z-test for a difference of proportions in  
-#' a 2-group design. A confidence interval for a difference in population
-#' proportions (see ci.prop2) is a recommended supplement to the z-test (see
+#' Computes a continuity-corrected z-test for a difference of population 
+#' proportions in a 2-group design. A confidence interval for a difference in 
+#' population proportions is a recommended supplement to the z-test (see
 #' \link[statpsych]{ci.prop2}).
 #'
 #'
@@ -2369,9 +2368,9 @@ test.prop.bs <- function(f, n) {
 #'
 #'
 #' @description
-#' Computes a continuity-corrected McNemar test for equality of proportions 
-#' in a paired-samples design. This function requires the frequency counts
-#' from a 2 x 2 contingency table for two paired dichotomous measurements.
+#' Computes a continuity-corrected McNemar test for equality of population 
+#' proportions in a paired-samples design. This function requires the frequency
+#' counts from a 2 x 2 contingency table for two paired dichotomous measurements.
 #' A confidence interval for a difference in population proportions (see
 #' \link[statpsych]{ci.prop.ps}) is a recommended supplement to the McNemar
 #' test.
@@ -2492,13 +2491,13 @@ test.mono.prop.bs <-function(alpha, f, n) {
 
 # ================= Sample Size for Desired Precision =======================
 #  size.ci.prop ============================================================
-#' Sample size for a single proportion confidence interval  
+#' Sample size for a proportion confidence interval  
 #'
 #'
 #' @description
-#' Computes the sample size required to estimate a single proportion with 
-#' desired confidence interval precision. Set the proportion planning value
-#' to .5 for a conservatively large sample size.
+#' Computes the sample size required to estimate a population proportion 
+#' with desired confidence interval precision. Set the proportion planning
+#' value to .5 for a conservatively large sample size.
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
@@ -2537,9 +2536,9 @@ size.ci.prop <- function(alpha, p, w) {
 #'
 #' @description
 #' Computes the sample size in each group (assuming equal sample sizes) required
-#' to estimate a difference of proportions with desired confidence interval 
-#' precision in a 2-group design. Set the proportion planning values to .5 for
-#' a conservatively large sample size.
+#' to estimate a difference of population proportions with desired confidence 
+#' interval precision in a 2-group design. Set the proportion planning values to
+#' .5 for a conservatively large sample size.
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
@@ -2580,8 +2579,8 @@ size.ci.prop2 <- function(alpha, p1, p2, w) {
 #'
 #' @description
 #' Computes the sample size in each group (assuming equal sample sizes) required
-#' to estimate a ratio of proportions with desired confidence interval precision 
-#' in a 2-group design.
+#' to estimate a ratio of population proportions with desired confidence interval
+#' precision in a 2-group design.
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
@@ -2623,9 +2622,9 @@ size.ci.ratio.prop2 <- function(alpha, p1, p2, r) {
 #'
 #' @description
 #' Computes the sample size in each group (assuming equal sample sizes) required 
-#' to estimate a linear contrast of proportions with desired confidence interval 
-#' precision in a between-subjects design. Set the proportion planning values to
-#' .5 for a conservatively large sample size.
+#' to estimate a linear contrast of population proportions with desired confidence
+#' interval precision in a between-subjects design. Set the proportion planning 
+#' values to .5 for a conservatively large sample size.
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
@@ -2665,11 +2664,11 @@ size.ci.lc.prop.bs <- function(alpha, p, w, v) {
 #'
 #'
 #' @description
-#' Computes the sample size required to estimate a proportion difference with 
-#' desired confidence interval precision in a paired-samples design. Set the 
-#' proportion planning values to .5 for a conservatively large sample size.
-#' Set the phi correlation planning value to the smallest value within a
-#' plausible range for a conservatively large sample size.
+#' Computes the sample size required to estimate a populatin proportion 
+#' difference with desired confidence interval precision in a paired-samples 
+#' design. Set the proportion planning values to .5 for a conservatively large
+#' sample size. Set the phi correlation planning value to the smallest value 
+#' within a plausible range for a conservatively large sample size.
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
@@ -2712,10 +2711,10 @@ size.ci.prop.ps <- function(alpha, p1, p2, phi, w) {
 #'
 #'
 #' @description
-#' Computes the sample size required to estimate a ratio of proportions 
-#' with desired confidence interval precision in a paired-samples design.
-#' Set the phi correlation planning value to the smallest value within a 
-#' plausible range for a conservatively large sample size. 
+#' Computes the sample size required to estimate a ratio of population 
+#' proportions with desired confidence interval precision in a paired-samples 
+#' design. Set the phi correlation planning value to the smallest value within 
+#' a plausible range for a conservatively large sample size. 
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
@@ -2758,10 +2757,10 @@ size.ci.ratio.prop.ps <- function(alpha, p1, p2, phi, r) {
 #'
 #'
 #' @description
-#' Computes the sample size required to estimate a G-index of agreement for 
-#' two dichotomous ratings with desired confidence interval precision.
-#' Set the G-index planning value to the smallest value within a plausible 
-#' range for a conservatively large sample size.
+#' Computes the sample size required to estimate a population G-index of 
+#' agreement for two dichotomous ratings with desired confidence interval 
+#' precision. Set the G-index planning value to the smallest value within a
+#' plausible range for a conservatively large sample size.
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
@@ -2799,8 +2798,8 @@ size.ci.agree <- function(alpha, G, w) {
 #' Sample size for a test of a single proportion 
 #'
 #' @description
-#' Computes the sample size required to test a single population proportion 
-#' with desired power using a correction for continuity in a 1-group design. 
+#' Computes the sample size required to test a population proportion with
+#' desired power using a correction for continuity in a 1-group design. 
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test 
