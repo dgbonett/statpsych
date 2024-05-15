@@ -1090,7 +1090,7 @@ ci.rsqr <- function(alpha, r2, s, n) {
 #'                                 
 #' @description
 #' Computes a Theil-Sen estimate and distribution-free confidence interval 
-#' for the slope of a simple linear regression model. An approximate 
+#' for the population slope in a simple linear regression model. An approximate 
 #' standard error is recovered from the confidence interval.
 #'
 #'
@@ -1323,12 +1323,12 @@ pi.cor <- function(alpha, cor, n1, n2) {
 
 #  ======================== Hypothesis Tests ==================================
 # test.cor ===================================================================
-#' Hypothesis test for a single Pearson or partial correlation 
+#' Hypothesis test for a Pearson or partial correlation 
 #'
 #'                        
 #' @description
-#' Computes a t test for a test of the null hypothesis that a Pearson or 
-#' partial correlations is equal to 0, or a z test using a Fisher 
+#' Computes a t test for a test of the null hypothesis that a population 
+#' Pearson or partial correlations is equal to 0, or a z test using a Fisher 
 #' transformation for a test of the null hypothesis that a Pearson or
 #' partial correlation is equal to some specified nonzero value. Set s = 0 
 #' for a Pearson correlation. The hypothesis testing results should be 
@@ -1395,14 +1395,14 @@ test.cor <- function(cor, n, s, h) {
 
 
 # test.spear ===================================================================
-#' Hypothesis test for a single Spearman correlation 
+#' Hypothesis test for a Spearman correlation 
 #'
 #'                      
 #' @description
-#' Computes a t test for a test of the null hypothesis that a Spearman 
-#' correlation is equal to 0, or a z test using a Fisher transformation for a 
-#' test of the null hypothesis that a Spearman correlation is equal to some 
-#' specified nonzero value. The hypothesis testing results should be 
+#' Computes a t test for a test of the null hypothesis that a population 
+#' Spearman correlation is equal to 0, or a z test using a Fisher transformation
+#' for a test of the null hypothesis that a Spearman correlation is equal to
+#' some specified nonzero value. The hypothesis testing results should be 
 #' accompanied with a confidence interval for the population Spearman
 #' correlation value.
 #'
@@ -1469,10 +1469,10 @@ test.spear <- function(cor, n, h) {
 #'
 #'
 #' @description
-#' Computes a z test for a difference of Pearson or partial correlations in  
-#' a 2-group design. Set s = 0 for a Pearson correlation. The hypothesis 
-#' testing results should be accompanied with a confidence interval for the 
-#' difference in population correlation values.
+#' Computes a z test for a difference of population Pearson or partial 
+#' correlations in a 2-group design. Set s = 0 for a Pearson correlation. 
+#' The hypothesis testing results should be accompanied with a confidence 
+#' interval for the difference in population correlation values.
 #'
 #'
 #' @param  cor1    estimated correlation for group 1
@@ -1527,9 +1527,9 @@ test.cor2 <- function(cor1, cor2, n1, n2, s) {
 #'
 #'
 #' @description
-#' Computes a z test for a difference of Spearman correlations in a 2-group
-#' design. The test statistic uses a Bonett-Wright standard error for each
-#' Spearman correlation. The hypothesis testing results should be 
+#' Computes a z test for a difference of population Spearman correlations in a 
+#' 2-group design. The test statistic uses a Bonett-Wright standard error for 
+#' each Spearman correlation. The hypothesis testing results should be 
 #' accompanied with a confidence interval for a difference in population 
 #' Spearman correlation values.
 #'
@@ -1590,8 +1590,8 @@ test.spear2 <- function(cor1, cor2, n1, n2) {
 #'
 #'
 #' @description
-#' Computes the total sample size required to estimate a slope with desired 
-#' confidence interval precision in a between-subjects design with a 
+#' Computes the total sample size required to estimate a population slope with
+#' desired confidence interval precision in a between-subjects design with a 
 #' quantitative factor. In an experimental design, the total sample size 
 #' would be allocated to the levels of the quantitative factor and it might
 #' be necessary to increase the total sample size to achieve equal sample
@@ -1637,7 +1637,7 @@ size.ci.slope <- function(alpha, evar, x, w) {
 #'
 #'
 #' @description
-#' Computes the sample size required to estimate a Pearson or
+#' Computes the sample size required to estimate a population Pearson or
 #' partial correlation with desired confidence interval precision. 
 #' Set s = 0 for a Pearson correlation. Set the correlation planning value
 #' to the smallest value within a plausible range for a conservatively 
@@ -1691,10 +1691,10 @@ size.ci.cor <- function(alpha, cor, s, w) {
 #'
 #'
 #' @description
-#' Computes the sample size required to estimate a Spearman correlation with 
-#' desired confidence interval precision. Set the correlation planning value
-#' to the smallest value within a plausible range for a conservatively 
-#' large sample size.
+#' Computes the sample size required to estimate a population Spearman correlation
+#' with desired confidence interval precision. Set the correlation planning value
+#' to the smallest value within a plausible range for a conservatively large 
+#' sample size.
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -1743,14 +1743,14 @@ size.ci.spear <- function(alpha, cor, w) {
 #'
 #'
 #' @description
-#' Computes the sample size required to estimate a point-biserial correlation
-#' with desired confidence interval precision in a two-group nonexperimental
-#' design with simple random sampling. A two-group nonexperimental design 
-#' implies two subpopulations (e.g., all boys and all girls in a school 
-#' district). This function requires a planning value for the proportion of 
-#' population members who belong to one of the two subpopulations. Set the
-#' correlation planning value to the smallest value within a plausible range
-#' for a conservatively large sample size.
+#' Computes the sample size required to estimate a population point-biserial 
+#' correlation with desired confidence interval precision in a two-group 
+#' nonexperimental design with simple random sampling. A two-group 
+#' nonexperimental design implies two subpopulations (e.g., all boys and all
+#' girls in a school district). This function requires a planning value for the
+#' proportion of population members who belong to one of the two subpopulations. 
+#' Set the correlation planning value to the smallest value within a plausible
+#' range for a conservatively large sample size.
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -1793,10 +1793,10 @@ size.ci.pbcor <- function(alpha, cor, w, p) {
 #'                       
 #'
 #' @description
-#' Computes the sample size required to estimate a squared multiple correlation
-#' in a random-x regression model with desired confidence interval precision.
-#' Set the planning value of the squared multiple correlation to 1/3 for a 
-#' conservatively large sample size. 
+#' Computes the sample size required to estimate a population squared multiple 
+#' correlation in a random-x regression model with desired confidence interval
+#' precision. Set the planning value of the squared multiple correlation to 1/3
+#' for a conservatively large sample size. 
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -1845,8 +1845,8 @@ size.ci.rsqr <- function(alpha, r2, s, w) {
 #'
 #'
 #' @description
-#' Computes the total sample size required to estimate a conditional mean of
-#' y at x = x* in a fixed-x simple linear regression model with desired 
+#' Computes the total sample size required to estimate a population conditional
+#' mean of y at x = x* in a fixed-x simple linear regression model with desired 
 #' confidence interval precision. In an experimental design, the total sample
 #' size would be allocated to the levels of the quantitative factor and it
 #' might be necessary to increase the total sample size to achieve equal 
@@ -1891,9 +1891,9 @@ size.ci.condmean <- function(alpha, evar, xvar, diff, w) {
 #'
 #' @description
 #' Computes the sample size for each group (assuming equal sample sizes) 
-#' required to estimate a linear contrast of means in an ANCOVA model with 
-#' desired confidence interval precision. In a nonexperimental design, the 
-#' sample size is affected by the magnitude of covariate mean differences 
+#' required to estimate a population linear contrast of means in an ANCOVA model
+#' with desired confidence interval precision. In a nonexperimental design,
+#' the sample size is affected by the magnitude of covariate mean differences 
 #' across groups. The covariate mean differences can be approximated by 
 #' specifying the largest standardized covariate mean difference across all 
 #' pairwise group differences and for all covariates. In an experiment, this
@@ -1941,10 +1941,10 @@ size.ci.lc.ancova <- function(alpha, evar, s, d, w, v) {
 #'
 #'
 #' @description
-#' Computes the approximate sample size required to estimate a standardized 
-#' indirect effect in a simple mediation model. The direct effect of the 
-#' independent (exogenous) variable on the response variable, controlling for
-#' the mediator variable, is assumed to be negligible. 
+#' Computes the approximate sample size required to estimate a population 
+#' standardized indirect effect in a simple mediation model. The direct effect
+#' of the independent (exogenous) variable on the response variable, controlling
+#' for the mediator variable, is assumed to be negligible. 
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -2039,9 +2039,9 @@ size.ci.cronbach2 <- function(alpha, rel1, rel2, r, w) {
 #' Sample size for a mean absolute prediction error confidence interval
 #'
 #'
-#' Computes the sample size required to estimate a mean absolute prediction
-#' error for a general linear model with desired confidence interval precision.
-#' Setting s = 0 gives the sample size requirement for a mean absolute 
+#' Computes the sample size required to estimate a population mean absolute 
+#' prediction error for a general linear model with desired confidence interval
+#' precision. Setting s = 0 gives the sample size requirement for a mean absolute 
 #' deviation in a one-group design. This function assumes that the prediction
 #' errors have an approximate normal distribution.
 #'
@@ -2093,10 +2093,11 @@ size.ci.mape <- function(alpha, mape, s, w) {
 #'
 #'
 #' @description
-#' Computes the sample size required to estimate a point-biserial correlation
-#' in a two-group design with desired confidence interval precision. Set the
-#' correlation planning value to the smallest value within a plausible range
-#' for a conservatively large sample size. Set R = 1 for equal sample sizes.
+#' Computes the sample size required to estimate a population point-biserial
+#' correlation in a two-group design with desired confidence interval precision. 
+#' Set the correlation planning value to the smallest value within a plausible 
+#' range for a conservatively large sample size. Set R = 1 for equal sample 
+#' sizes.
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -2143,10 +2144,10 @@ size.ci.pbcor <- function(alpha, cor, w, R) {
 #'
 #'                     
 #' @description
-#' Computes the sample size required to estimate a difference in Pearson or
-#' partial correlations with desired confidence interval precision in a 
-#' 2-group design. Set the correlation planning values to the smallest values
-#' within their plausible ranges for a conservatively large sample size.
+#' Computes the sample size required to estimate a difference in population 
+#' Pearson or partial correlations with desired confidence interval precision
+#' in a 2-group design. Set the correlation planning values to the smallest
+#' values within their plausible ranges for a conservatively large sample size.
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -2199,8 +2200,8 @@ size.ci.cor2 <- function(alpha, cor1, cor2, w) {
 #'
 #'                     
 #' @description
-#' Computes the sample size required to estimate a difference in Spearman
-#' correlations with desired confidence interval precision in a 2-group 
+#' Computes the sample size required to estimate a difference in population 
+#' Spearman correlations with desired confidence interval precision in a 2-group 
 #' design. Set the correlation planning values to the smallest values within 
 #' their plausible ranges for a conservatively large sample size.
 #'
@@ -2306,8 +2307,8 @@ size.test.slope <- function(alpha, pow, evar, x, slope, h) {
 #'
 #'
 #' @description
-#' Computes the sample size required to test a Pearson or a partial correlation 
-#' with desired power. Set s = 0 for a Pearson correlation. 
+#' Computes the sample size required to test a population Pearson or a partial
+#' correlation with desired power. Set s = 0 for a Pearson correlation. 
 #'
 #'  
 #' @param  alpha   alpha level for hypothesis test
@@ -2351,12 +2352,12 @@ size.test.cor <- function(alpha, pow, cor, s, h) {
 #'
 #'
 #' @description
-#' Computes the sample size required to perform an interval test for a Pearson
-#' or a partial correlation with desired power where the interval midpoint is 
-#' equal to zero. This function can be used to plan a study where the goal is
-#' to show that the population correlation is small. Set s = 0 for a Pearson 
-#' correlation. The correlation planning value must be a value within the 
-#' hypothesized interval. 
+#' Computes the sample size required to perform an interval test for a 
+#' population Pearson or a partial correlation with desired power where the 
+#' interval midpoint is equal to zero. This function can be used to plan a study
+#' where the goal is to show that the population correlation is small. Set s = 0
+#' for a Pearson correlation. The correlation planning value must be a value 
+#' within the hypothesized interval. 
 #'
 #'  
 #' @param  alpha   alpha level for hypothesis test
@@ -2402,9 +2403,9 @@ size.interval.cor <- function(alpha, pow, cor, s, h) {
 #'
 #'
 #' @description
-#' Computes the sample size required to test equality of two Pearson or partial
-#' correlation with desired power in a 2-group design. Set s = 0 for a Pearson 
-#' correlation. 
+#' Computes the sample size required to test the equality of two population 
+#' Pearson or partial correlations with desired power in a 2-group design. 
+#' Set s = 0 for a Pearson correlation. 
 #'
 #'  
 #' @param  alpha   alpha level for hypothesis test
@@ -2450,10 +2451,10 @@ size.test.cor2 <- function(alpha, pow, cor1, cor2, s) {
 #'
 #' @description
 #' Computes the sample size for each group (assuming equal sample sizes) required
-#' to test a linear contrast of means in an ANCOVA model with desired power. In a 
-#' nonexperimental design, the sample size is affected by the magnitude of 
-#' covariate mean differences across groups. The covariate mean differences can be 
-#' approximated by specifying the largest standardized covariate mean difference 
+#' to test a linear contrast of population means in an ANCOVA model with desired
+#' power. In a nonexperimental design, the sample size is affected by the magnitude
+#' of covariate mean differences across groups. The covariate mean differences can  
+#' be approximated by specifying the largest standardized covariate mean difference 
 #' across all pairwise comparisons and for all covariates. In an experiment, this 
 #' standardized mean difference is set to 0. Set the error variance planning 
 #' value to the largest value within a plausible range for a conservatively 
@@ -2551,8 +2552,8 @@ size.test.cronbach2 <- function(alpha, pow, rel1, rel2, r) {
 #'
 #'
 #' @description
-#' Computes the approximate power of a Pearson or partial correlation test for 
-#' a planned sample size. Set s = 0 for a Pearson correlation. 
+#' Computes the approximate power of a test for a population Pearson or partial
+#' correlation test for a planned sample size. Set s = 0 for a Pearson correlation. 
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test 
@@ -2652,8 +2653,8 @@ power.cor2 <- function(alpha, n1, n2, cor1, cor2, s) {
 #'
 #'
 #' @description
-#' Computes the contrast coefficients that are needed to estimate the slope of a
-#' line in a single factor design with a quantitative factor.
+#' Computes the contrast coefficients that are needed to estimate the slope of
+#' a line in a one-factor design with a quantitative factor.
 #'
 #'
 #' @param   x      vector of numeric factor levels
