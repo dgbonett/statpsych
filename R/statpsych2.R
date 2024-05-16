@@ -2946,8 +2946,7 @@ sim.ci.spear <- function(alpha, n, cor, dist1, dist2, rep) {
 
 
 #  adj.se =====================================================================
-#' Computes adjusted standard error for slope coefficients in an exploratory
-#' analysis
+#' Adjusted standard errors for slope coefficients in an exploratory analysis
 #'                              
 #'
 #' @description
@@ -3004,7 +3003,7 @@ adj.se <- function(alpha, mse1, mse2, df1, se, b) {
 
 
 #  fitindices =================================================================
-#' Computes SEM fit indices
+#' SEM fit indices
 #'
 #'
 #' @description
