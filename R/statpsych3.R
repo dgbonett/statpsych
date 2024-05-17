@@ -2169,7 +2169,7 @@ ci.ratio.poisson2 <- function(alpha, f1, f2, t1, t2) {
 #' @description
 #' Computes approximate prediction interval for the estimated proportion 
 #' in a future study with a planned sample size of n. The prediction interval
-#' uses a proportion estimate from a prior study that used a sample size of n0.
+#' uses a proportion estimate from a prior study that had a sample size of n0.
 #'
 #'
 #' @param  alpha  alpha value for 1-alpha confidence 
