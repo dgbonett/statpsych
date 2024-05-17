@@ -5023,6 +5023,68 @@ size.ci.second <- function(n0, w0, w) {
 }
 
 
+#  size.ci.mean.prior =========================================================
+#' Sample size for a mean confidence interval using a planning value from
+#' a prior study 
+#'
+#'                
+#' @description
+#' Computes the sample size required to estimate a population mean with
+#' desired confidence interval precision in applications where an estimated
+#' variance from a prior study is available. The actual confidence interval
+#' width in the planned study will depend on the value of the estimated 
+#' variance in the planned study. An estimated variance from a prior study 
+#' is used to predict the value of the estimated correlation in the planned 
+#' study, and the predicted variance estimate is then used in the sample 
+#' size computation.
+#'
+#' This sample size approach assumes that the population variance in the 
+#' prior study is very similar to the population variance in the planned 
+#' study. In a typical sample size analysis, this type of information is not
+#' available, and the researcher must use expert opinion to guess the value
+#' of the variance that will be observed in the planned study. The 
+#' \link[statpsych]{size.ci.mean}) function uses a variance planning value 
+#' that is based on expert opinion regarding the likely value of the 
+#' variance estimate that will be observed in the planned study. 
+#'
+#'
+#' @param  alpha1  alpha level for 1-alpha1 confidence in the planned study
+#' @param  alpha2  alpha level for the 1-alpha2 prediction interval 
+#' @param  var0    estimated variance in prior study
+#' @param  n0      sample size in prior study
+#' @param  w       desired confidence interval width
+#'
+#'
+#' @return
+#' Returns the required sample size
+#'
+#'
+#' @examples
+#' size.ci.mean.prior(.05, .10, 26.4, 25, 4)
+#'
+#' # Should return:
+#' # Sample size
+#' #          44
+#'
+#' @export                 
+size.ci.mean.prior <- function(alpha1, alpha2, var0, n0, w) {
+ if (var0 < 0) {stop("variance must be positive")}
+ ci <- ci.var.upper(alpha2, var0, n0)
+ ul <- ci[1,1]
+ n1 <- size.ci.mean(alpha1, ul, w)
+ pi <- pi.var.upper(alpha2, var0, n0, n1)
+ ul <- pi[1,1]
+ n2 <- size.ci.mean(alpha1, ul, w)
+ pi <- pi.var.upper(alpha2, var0, n0, n2)
+ ul <- pi[1,1]
+ n <- size.ci.mean(alpha1, ul, w)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size"
+ rownames(out) <- ""
+ return(out)
+}
+
+
 # ======================== Sample Size for Desired Power ======================
 #  size.test.mean ============================================================
 #' Sample size for a test of a mean
