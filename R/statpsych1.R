@@ -6174,7 +6174,7 @@ ci.var.upper <- function(alpha, var, n) {
 #' prediction limit is useful as a variance planning value for the sample size
 #' required to obtain a confidence interval with desired width. This strategy
 #' for specifying a variance planning value is useful in applications where the
-#' population variance in the prior study is assumed to be similar to the 
+#' population variance in the prior study is assumed to be very similar to the 
 #' population variance in the planned study. 
 #'
 #'
