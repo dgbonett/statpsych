@@ -6180,8 +6180,8 @@ ci.var.upper <- function(alpha, var, n) {
 #'
 #' @param  alpha  alpha value for upper 1-alpha confidence 
 #' @param  var    estimated variance from prior study
-#' @param  n1     sample size used to estimate variance
-#' @param  n2     planned sample size of future study
+#' @param  n0     sample size used to estimate variance
+#' @param  n      planned sample size of future study
 #'
 #'
 #' @return 
@@ -6203,9 +6203,9 @@ ci.var.upper <- function(alpha, var, n) {
 #' @importFrom stats qnorm
 #' @importFrom stats qf
 #' @export
-pi.var.upper <- function(alpha, var, n1, n2) {
+pi.var.upper <- function(alpha, var, n0, n) {
  z <- qnorm(1 - alpha)
- ul <- var*qf(1 - alpha, n2 - 1, n1 - 1)
+ ul <- var*qf(1 - alpha, n - 1, n0 - 1)
  out <- matrix(ul, nrow = 1, ncol = 1)
  colnames(out) <- "UL"
  rownames(out) <- ""
