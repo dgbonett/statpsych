@@ -1,4 +1,4 @@
-# ======================== Confidence Intervals ==============================
+# ======================== Confidence Intervals =============================
 #  ci.prop ================================================================== 
 #' Confidence intervals for a proportion
 #'
@@ -2786,6 +2786,99 @@ size.ci.agree <- function(alpha, G, w) {
  if (G > .999 || G < .001) {stop("G must be between .001 and .999")}
  z <- qnorm(1 - alpha/2)
  n <- ceiling(4*(1 - G^2)*(z/w)^2)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size"
+ rownames(out) <- ""
+ return(out)
+}
+
+
+#  size.ci.prop.prior =========================================================
+#' Sample size for a proportion confidence interval using a planning value 
+#' from a prior study
+#'
+#'                
+#' @description
+#' Computes the sample size required to estimate a population proportion with
+#' desired confidence interval precision in applications where an estimated
+#' proportion from a prior study is available. The actual confidence interval
+#' width in the planned study will depend on the value of the estimated 
+#' proportion in the planned study. An estimated proportion from a prior study
+#' is used to predict the value of the estimated proportion in the planned 
+#' study, and the predicted proportion estimate is then used in the sample size
+#' computation.
+#'
+#' This sample size approach assumes that the population proportion in the 
+#' prior study is very similar to the population proportion in the planned 
+#' study. In a typical sample size analysis, this type of information is not
+#' available, and the researcher must use expert opinion to guess the value of
+#' the proportion that will be observed in the planned study. The 
+#' \link[statpsych]{size.ci.prop}) function uses a proportion planning value 
+#' that is based on expert opinion regarding the likely value of the proportion 
+#' estimate that will be observed in the planned study.
+#'
+#'
+#' @param  alpha1  alpha level for 1-alpha1 confidence in the planned study
+#' @param  alpha2  alpha level for the 1-alpha2 prediction interval 
+#' @param  p0      estimated proportion in prior study
+#' @param  n0      sample size in prior study
+#' @param  w       desired confidence interval width
+#'
+#'
+#'
+#' @return
+#' Returns the required sample size
+#'
+#'
+#' @examples
+#' size.ci.prop.prior(.05, .20, .1425, 200, .1)
+#'
+#' # Should return:
+#' # Sample size
+#' #         318
+#'
+#'
+#' @importFrom stats qnorm
+#' @export                 
+size.ci.prop.prior <- function(alpha1, alpha2, p0, n0, w) {
+ if (p0 > .9999 || p0 < .0001) {stop("proportion must be between .0001 and .9999")}
+ z1 <- qnorm(1 - alpha1/2)
+ z2 <- qnorm(1 - alpha2/2)
+ p.adj <- (n0*p0 + 2)/(n0 + 4)
+ se <- sqrt(p.adj*(1 - p.adj)/(n0 + 4))
+ ll0 <- p.adj - z2*se
+ ul0 <- p.adj + z2*se
+ if (ll0 < .0001) {ll0 = .0001}
+ if (ul0 > .9999) {ul0 = .9999}
+ if (ll0 < .5 & ul0 > .5) {
+   p = .5
+   n <- ceiling(4*p*(1 - p)*(z1/w)^2)
+ } else {
+   if (abs(ll0 - .5) < abs(ul0 - .5)) (p = ll0)
+   if (abs(ll0 - .5) > abs(ul0 - .5)) (p = ul0)
+   n <- ceiling(4*p*(1 - p)*(z1/w)^2)
+   pi <- pi.prop(alpha2, p, n0, n)
+   ll <- pi[1,1]                                  
+   ul <- pi[1,2]
+   if (ll < .0001) {ll = .0001}
+   if (ul > .9999) {ul = .9999}
+   if (ll < .5 & ul > .5) {
+     p = .5
+     n <- ceiling(4*p*(1 - p)*(z1/w)^2)
+   } else {
+     if (abs(ll - .5) < abs(ul - .5)) (p = ll)
+     if (abs(ll - .5) > abs(ul - .5)) (p = ul)
+     n <- ceiling(4*p*(1 - p)*(z1/w)^2)
+ 	 pi <- pi.prop(alpha2, p, n0, n)
+     ll <- pi[1,1]                                  
+     ul <- pi[1,2]
+	 if (ll < .0001) {ll = .0001}
+     if (ul > .9999) {ul = .9999}
+	 if (abs(ll - .5) < abs(ul - .5)) (p = ll)
+     if (abs(ll - .5) > abs(ul - .5)) (p = ul)
+     n <- ceiling(4*p*(1 - p)*(z1/w)^2)
+   }
+ }	 
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
  rownames(out) <- ""
