@@ -1275,6 +1275,96 @@ ci.rel2 <- function(rel1, ll1, ul1, rel2, ll2, ul2) {
 }
 
 
+#  ci.bscor ==================================================================
+#' Confidence interval for a biserial correlation
+#'
+#'
+#' @description 
+#' Computes a confidence interval for a population biserial correlation. A
+#' biserial correlation can be used when one variable is quantitative and the 
+#' other variable has been artificially dichotomized to create two groups.
+#' The biserial correlation estimates the correlation between the observed 
+#' quantitative variable and the unobserved quantitative variable that has 
+#' been measured on a dichotomous scale. 
+#'
+#'  
+#' @param  alpha  alpha level for 1-alpha confidence
+#' @param  m1     estimated mean for group 1
+#' @param  m2     estimated mean for group 2
+#' @param  sd1    estimated standard deviation for group 1
+#' @param  sd2    estimated standard deviation for group 2
+#' @param  n1     sample size for group 1
+#' @param  n2	  sample size for group 2
+#'
+#'
+#' @details
+#' This function computes a point-biserial correlation and its standard error
+#' as a function of a standardized mean difference with a weighted variance
+#' standardizer. Then the point-biserial estimate is transformed into a 
+#' biserial correlation using the traditional adjustment. The adjustment is 
+#' also applied to the point-biserial standard error to obtain the standard 
+#' error for the biserial correlation. 
+#' 
+#' The biserial correlation assumes that the observed quantitative variable 
+#' and the unobserved quantitative variable have a bivariate normal 
+#' distribution. Bivariate normality is a crucial assumption underlying the
+#' transformation of a point-biserial correlation to a biserial correlation.
+#' Bivariate normality also implies equal variances of the observed 
+#' quantitative variable at each level of the dichotomized variable, and this
+#' assumption is made in the computation of the standard error.
+#'
+#'
+#' @references
+#' \insertRef{Bonett2020a}{statpsych}
+#'
+#'
+#' @return 
+#' Returns a 1-row matrix. The columns are:
+#' * Estimate - estimated biserial correlation
+#' * SE - standard error
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
+#' 
+#' 
+#' @examples
+#' ci.bscor(.05, 28.32, 21.48, 3.81, 3.09, 40, 40)
+#'
+#' # Should return:
+#' #   Estimate         SE        LL        UL
+#' #  0.8855666 0.06129908  0.7376327 0.984412
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export 
+ci.bscor <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
+ z <- qnorm(1 - alpha/2)
+ df1 <- n1 - 1
+ df2 <- n2 - 1
+ u <- n1/(n1 + n2)
+ a <- sqrt(u*(1 - u))/dnorm(qnorm(u))
+ s <- sqrt((df1*sd1^2 + df2*sd2^2)/(df1 + df2))
+ d <- (m1 - m2)/s
+ c <- (df1 + df2)/((n1 + n2)*(u*(1 - u)))
+ pbcor <- d/sqrt(d^2 + c)
+ bscor <- pbcor*a
+ if (bscor > 1) {bscor = .99999}
+ if (bscor < -1) {bscor = -.99999}
+ se.d <- sqrt(d^2*(1/n1 + 1/n2)/8 + 1/n1 + 1/n2)
+ se.pbcor <- (c/(d^2 + c)^(3/2))*se.d  
+ se.bscor <- se.pbcor*a 
+ lld <- d - z*se.d
+ uld <- d + z*se.d
+ ll <- a*lld/sqrt(lld^2 + c)
+ ul <- a*uld/sqrt(uld^2 + c)
+ if (ul > 1) {ul = 1}
+ if (ll < -1) {ll = -1}
+ out <- t(c(bscor, se.bscor, ll, ul))
+ colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
+ return(out)
+}
+
+
 #  pi.cor ===================================================================== 
 #' Prediction limit for an estimated correlation
 #'
