@@ -1281,15 +1281,15 @@ ci.rel2 <- function(rel1, ll1, ul1, rel2, ll2, ul2) {
 #'                                        
 #' @description
 #' Computes approximate prediction interval for the estimated Pearson 
-#' correlation in a future study with a planned sample size of n2. The 
-#' prediction interval uses a correlation estimate from a prior study that 
-#' used a sample size of n1. 
+#' correlation in a future study with a planned sample size of n. The 
+#' prediction interval uses a correlation estimate from a prior study 
+#' that had a sample size of n0. 
 #'
 #'
 #' @param  alpha  alpha value for 1-alpha confidence 
 #' @param  cor    estimated Pearson correlation from prior study
-#' @param  n1     sample size used to estimate correlation in prior study
-#' @param  n2     planned sample size of future study
+#' @param  n0     sample size used to estimate correlation in prior study
+#' @param  n      planned sample size of future study
 #'
 #'
 #' @return 
@@ -1307,11 +1307,11 @@ ci.rel2 <- function(rel1, ll1, ul1, rel2, ll2, ul2) {
 #' 
 #' @importFrom stats qnorm
 #' @export
-pi.cor <- function(alpha, cor, n1, n2) {
+pi.cor <- function(alpha, cor, n0, n) {
  z <- qnorm(1 - alpha/2)
  cor.z <- log((1 + abs(cor))/(1 - abs(cor)))/2
- ll0 <- cor.z - abs(cor)/(2*(n1 - 1)) - z*sqrt(1/(n1 - 3) + 1/(n2 - 3))
- ul0 <- cor.z - abs(cor)/(2*(n1 - 1)) + z*sqrt(1/(n1 - 3) + 1/(n2 - 3))
+ ll0 <- cor.z - abs(cor)/(2*(n0 - 1)) - z*sqrt(1/(n0 - 3) + 1/(n - 3))
+ ul0 <- cor.z - abs(cor)/(2*(n0 - 1)) + z*sqrt(1/(n0 - 3) + 1/(n - 3))
  ll <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
  ul <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
  out <- t(c(ll, ul))
