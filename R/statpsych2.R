@@ -2340,6 +2340,92 @@ size.ci.spear2 <- function(alpha, cor1, cor2, w) {
 }
 
 
+#  size.ci.cor.prior ==========================================================
+#' Sample size for a Pearson correlation confidence interval using a 
+#' planning value from a prior study
+#'
+#'                
+#' @description
+#' Computes the sample size required to estimate a Pearson correlation with
+#' desired confidence interval precision in applications where an estimated
+#' Pearson correlation from a prior study is available. The actual confidence
+#' interval width in the planned study will depend on the value of the
+#' estimated correlation in the planned study. An estimated correlation from
+#' a prior study is used to predict the value of the estimated correlation 
+#' in the planned study, and the predicted correlation estimate is then used 
+#' in the sample size computation.
+#'
+#' This sample size approach assumes that the population Pearson correlation 
+#' in the prior study is very similar to the population Pearson correlation in 
+#' the planned study. In a typical sample size analysis, this type of 
+#' information is not available, and the researcher must use expert opinion to 
+#' guess the value of the Pearson correlation that will be observed in the 
+#' planned study. The \link[statpsych]{size.ci.cor}) function uses a 
+#' correlation planning value that is based on expert opinion regarding the 
+#' likely value of the correlation estimate that will be observed in the 
+#' planned study.
+#'
+#'
+#' @param  alpha1  alpha level for 1-alpha1 confidence in the planned study
+#' @param  alpha2  alpha level for the 1-alpha2 prediction interval 
+#' @param  cor0    estimated correlation in prior study
+#' @param  n0      sample size in prior study
+#' @param  w       desired confidence interval width
+#'
+#'
+#' @return
+#' Returns the required sample size
+#'
+#'
+#' @examples
+#' size.ci.cor.prior(.05, .10, .438, 100, .2)
+#'
+#' # Should return:
+#' # Sample size
+#' #         331
+#'
+#'
+#' @importFrom stats qnorm
+#' @export                 
+size.ci.cor.prior <- function(alpha1, alpha2, cor0, n0, w) {
+ if (cor0 > .999 || cor0 < -.999) {stop("correlation must be between -.999 and .999")}
+ z1 <- qnorm(1 - alpha1/2)
+ z2 <- qnorm(1 - alpha2/2)
+ ci <- ci.cor(alpha2, cor0, 0, n0)
+ ll0 <- ci[1,3]                                  
+ ul0 <- ci[1,4]  
+ if (ll0 < 0 & ul0 > 0) {
+   cor = 0
+   n <- size.cor(alpha1, cor, 0, w)
+ } else {
+   if (abs(ll0) < abs(ul0)) {cor = ll0}
+   if (abs(ll0) > abs(ul0)) {cor = ul0}
+   n <- size.ci.cor(alpha1, cor, 0, w)
+   pi <- pi.cor(alpha2, cor0, n0, n)
+   ll <- pi[1,1]                                  
+   ul <- pi[1,2]
+   if (ll < 0 & ul > 0) {
+     cor = 0
+     n <- size.ci.cor(alpha1, cor, 0, w)
+   } else {
+     if (abs(ll) < abs(ul)) {cor = ll}
+     if (abs(ll) > abs(ul)) {cor = ul}
+     n <- size.ci.cor(alpha1, cor, 0, w)
+	 pi <- pi.cor(alpha2, cor0, n0, n)
+     ll <- pi[1,1]                                  
+     ul <- pi[1,2]
+	 if (abs(ll) < abs(ul)) {cor = ll}
+     if (abs(ll) > abs(ul)) {cor = ul}
+     n <- size.ci.cor(alpha1, cor, 0, w)
+   }
+ }	 
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size"
+ rownames(out) <- ""
+ return(out)
+}
+
+
 # ======================= Sample Size for Desired Power =======================
 #  size.test.slope ============================================================
 #' Sample size for a test of a slope
