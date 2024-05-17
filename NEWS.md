@@ -1,10 +1,45 @@
+statpsych version 1.6.0 (Release date: 2024/05/xx)
+===========
+
+Changes:
+
+* New functions:
+    * ci.mean.fpc -- Computes confidence interval for a mean with a finite population correction
+    * ci.prop.fpc -- Computes confidence interval for a proportion with a finite population correction
+    * ci.poisson -- Computes confidence interval for a Poisson rate
+    * ci.ratio.poisson2 -- Computes confidence interval for a ratio of Poisson rates in a 2-group design
+    * ci.bscor -- Computes confidence interval for a biserial correlation
+    * pi.cor -- Computes prediction interval for an estimated correlation
+    * pi.prop -- Computes prediction interval for an estimated proportion
+    * size.test.prop -- Computes sample size for a 1-group test of a proportion 
+    * size.test.prop2 -- Computes sample size for a 2-group test of a proportion difference
+    * test.cor -- Hypothesis test for a Pearson or partial correlation
+    * test.spear -- Hypothesis test for a Spearman correlation
+    * test.cor2 -- Hypothesis test for a 2-group Pearson or partial correlation difference
+    * test.spear2 -- Hypothesis test for a 2-group Spearman correlation difference
+    * test.mean -- Hypothesis test for a mean
+    * size.ci.pbcor -- Computes sample size for a point-biserial correlation confidence interval
+    * size.ci.cor2 -- Computes sample size for a 2-group Pearson correlation difference confidence interval
+    * size.ci.spear2 -- Computes sample size for a 2-group Spearman correlation difference confidence interval
+    * size.mean.prior -- Computes sample size for a mean confidence interval using a planning value from a prior study
+    * size.prop.prior -- Computes sample size for a proportion confidence interval using a planning value from a prior study
+    * size.cor.prior -- Computes sample size for a correlation confidence interval using a planning value from a prior study
+    * adj.se -- Computes adjusted standard errors for slope coefficients in an exploratory analysis
+    * fitindices -- Computes four SEM fit indices
+
+* Modifications:
+    * ci.var.upper now computes an exact upper limit rather than an approximate upper limit
+    * power computations are now more accurate for very small effect sizes in the power.cor, power.cor2, power.lc.meanc.bs, power.mean, power.mean2, power.mean.ps, power.prop, power.pro2, and power.prop.ps functions
+    * one-group function names that end with a "1" have been renamed and now exclude the "1" (for naming consistency and confusion with lower case L)
+
+
 statpsych version 1.5.0 (Release date: 2023/12/11)
 ===========
 
 Changes:
 
 * New functions:
-    * ci.cv1 -- Computes confidence interval for a single coefficient of variation
+    * ci.cv1 -- Computes confidence interval for a coefficient of variation
     * ci.ratio.cv2 -- Computes confidence interval for a ratio of coefficients of variation
     * ci.pv -- Computes confidence intervals for positive and negative predictive values with
           retrospective sampling
@@ -114,7 +149,7 @@ Changes:
     * size.ci.stdmean.ps -- now returns two rows, one for each standardizer
     * ci.mann -- now returns a confidence interval for P(y1 > y2) rather than P(y1 < y2).
 * Error Correction:
-    * ci.lc.std.mean.ws -- corrected an error in the standard errord
+    * ci.lc.std.mean.ws -- corrected an error in the standard error computation
     
 
 statpsych v1.2.0 (Release date: 2022/08/15)
@@ -129,7 +164,7 @@ Changes:
     * ci.2x2.mean.mixed - Confidence intervals for effects in a 2x2 mixed design for means
     * ci.2x2.prop.bs - Confidence intervals for effects in a 2x2 between-subjects design for proportions
     * ci.2x2.prop.mixed - Confidence intervals for effects in a 2x2 mixed design for proportions
-    * sim.ci.mean1 – Simulation of confidence interval for a single mean
+    * sim.ci.mean1 – Simulation of confidence interval for a mean
     * sim.ci.mean2 – Simulation of confidence interval for mean difference in a two-group design
     * sim.ci.mean.ps – Simulation of confidence interval for mean difference in a paired-samples design
     * sim.ci.median1 – Simulation of confidence interval for a single median
