@@ -654,7 +654,7 @@ ci.slope.prop.bs <- function(alpha, f, n, x) {
 #' Computes an adjusted Wald confidence interval for a difference of 
 #' population proportions in a paired-samples design. This function requires 
 #' the frequency counts from a 2 x 2 contingency table for two repeated 
-#' dichtomous measurements.
+#' dichotomous measurements.
 #'
 #'
 #' @param   alpha  alpha level for 1-alpha confidence
@@ -905,7 +905,7 @@ ci.oddsratio <- function(alpha, f00, f01, f10, f11) {
 #' 2 x 2 contingency table for two dichotomous variables. Digby H is sometimes
 #' used as a crude approximation to the tetrachoric correlation. Yule Y is 
 #' equal to the phi coefficient only when all marginal frequencies are equal.
-#' Bonett-Price Y* is a better approximation to the phi coeffiient when the
+#' Bonett-Price Y* is a better approximation to the phi coefficient when the
 #' marginal frequencies are not equal.
 #'
 #'
@@ -1648,7 +1648,7 @@ ci.cramer <- function(alpha, chisqr, r, c, n) {
 #'
 #' @description
 #' Computes adjusted Wald confidence intervals and tests for the AB 
-#' interaction effect, main effect of A, main efect of B, simple main effects
+#' interaction effect, main effect of A, main effect of B, simple main effects
 #' of A, and simple main effects of B in a 2x2 between-subjects factorial 
 #' design with a dichotomous response variable. The input vector of 
 #' frequency counts is f = \[ f11, f12, f21, f22 \], and the input vector of 
@@ -1771,7 +1771,7 @@ ci.2x2.prop.bs <- function(alpha, f, n) {
 #'
 #' @description
 #' Computes adjusted Wald confidence intervals and tests for the AB 
-#' interaction effect, main effect of A, main efect of B, simple main effects
+#' interaction effect, main effect of A, main effect of B, simple main effects
 #' of A, and simple main effects of B in a 2x2 mixed factorial design with a
 #' dichotomous response variable where Factor A is a within-subjects factor 
 #' and Factor B is a between-subjects factor. The 4x1 vector of frequency 
@@ -1915,8 +1915,8 @@ ci.2x2.prop.mixed <- function(alpha, group1, group2) {
 #'
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Posterior mean - posterior mean of Beta distributoin 
-#' * Posterior SD - posterior standard deviation of Beta distributoin 
+#' * Posterior mean - posterior mean of Beta distribution 
+#' * Posterior SD - posterior standard deviation of Beta distribution 
 #' * LL - lower limit of the credible interval
 #' * UL - upper limit of the credible interval
 #'
@@ -2045,12 +2045,12 @@ ci.pv <- function(alpha, f1, f2, n1, n2, prev) {
 #'                        
 #' @description
 #' Computes a confidence interval for a population Poisson rate. This function
-#' requires the number of occurances (f) of a specific event that were 
+#' requires the number of occurences (f) of a specific event that were 
 #' observed over a specific period of time (t).
 #'
 #'
 #' @param  alpha  alpha value for 1-alpha confidence 
-#' @param  f      number of event occurances
+#' @param  f      number of event occurences
 #' @param  t      time period 
 #'
 #'
@@ -2106,13 +2106,13 @@ ci.poisson <- function(alpha, f, t) {
 #' Computes a confidence interval for a ratio of population Poisson rates in a
 #' 2-group design. The confidence interval is based on the binomial method 
 #' with an Agresti-Coull confidence interval. This function requires the number 
-#' of occurances of a specific event (f) that were observed over a specific
+#' of occurences of a specific event (f) that were observed over a specific
 #' period of time (t) within each group.
 #'
 #'
 #' @param  alpha  alpha value for 1-alpha confidence 
-#' @param  f1     number of event occurances for group 1
-#' @param  f2     number of event occurances for group 2
+#' @param  f1     number of event occurences for group 1
+#' @param  f2     number of event occurences for group 2
 #' @param  t1     time period for group 1
 #' @param  t2     time period for group 2
 #'
@@ -2430,9 +2430,9 @@ test.prop.ps <- function(f00, f01, f10, f11) {
 #' comparisons of population proportions using group frequency counts and
 #' samples sizes as input. If one or more lower limits are greater than
 #' 0 and no upper limit is less than 0, then conclude that the population
-#' proportions are monotoic decreasing. If one or more upper limits are 
+#' proportions are monotonic decreasing. If one or more upper limits are 
 #' less than 0 and no lower limits are greater than 0, then conclude that
-#' the population proportions are monotoic increasing. Reject the hypothesis
+#' the population proportions are monotonic increasing. Reject the hypothesis
 #' of a monotonic trend if any lower limit is greater than 0 and any upper 
 #' limit is less than 0. 
 #'
