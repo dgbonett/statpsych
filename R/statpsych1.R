@@ -253,7 +253,7 @@ ci.mean2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' @param     m     	vector of estimated group means
 #' @param     sd    	vector of estimated group standard deviations
 #' @param     n     	vector of sample sizes
-#' @param     v     	vector of betwen-subjects contrast coefficients
+#' @param     v     	vector of between-subjects contrast coefficients
 #' 
 #'
 #' @return 
@@ -320,7 +320,7 @@ ci.lc.mean.bs <- function(alpha, m, sd, n, v) {
 
 #  ci.tukey ===================================================================
 #' Tukey-Kramer confidence intervals for all pairwise mean differences in a
-#' betwen-subjects design
+#' between-subjects design
 #' 
 #'
 #' @description
@@ -397,7 +397,7 @@ ci.tukey <-function(alpha, m, sd, n) {
 
 
 #  ci.slope.mean.bs ===========================================================
-#' Confidence interval for the slope of means in a onr-factor experimental 
+#' Confidence interval for the slope of means in a one-factor experimental 
 #' design with a quantitative between-subjects factor
 #' 
 #' 
@@ -645,7 +645,7 @@ ci.stdmean2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' @description
 #' Computes confidence intervals for a population standardized mean difference
 #' in a 2-group nonexperimental design with stratified random sampling (a random
-#' sample of a specificied size from each subpopulation) using a square root 
+#' sample of a specified size from each subpopulation) using a square root 
 #' weighted variance standardizer or single group standard deviation 
 #' standardizer.  Equality of variances is not assumed.
 #'
@@ -1455,7 +1455,7 @@ ci.cv <- function(alpha, m, sd, n) {
 #'
 #' @description
 #' Computes a confidence interval for a ratio of population coefficients of 
-#' variation (CV) in a 2-group degin. This confidence interval uses the
+#' variation (CV) in a 2-group design. This confidence interval uses the
 #' confidence interval for each CV and then uses the MOVER-DL method 
 #' (see Newcombe, page 138) to obtain a confidence interval for CV1/CV2. 
 #' The CV assumes ratio-scale scores.
@@ -2150,8 +2150,8 @@ ci.median.ps <- function(alpha, y1, y2) {
 #'
 #'
 #' @description
-#' Computes a distriibution-free confidence interval for a ratio of population
-#' medians in a  paired-samples design. Ratio-scale measurements are assumed.
+#' Computes a distribution-free confidence interval for a ratio of population
+#' medians in a paired-samples design. Ratio-scale measurements are assumed.
 #'
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
