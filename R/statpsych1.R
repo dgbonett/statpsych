@@ -4054,8 +4054,8 @@ ci.2x2.median.ws <- function(alpha, y11, y12, y21, y22) {
 #'
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Posterior mean - posterior mean of Normal distributoin 
-#' * Posterior SD - posterior standard deviation of Normal distributoin 
+#' * Posterior mean - posterior mean of Normal distribution 
+#' * Posterior SD - posterior standard deviation of Normal distribution 
 #' * LL - lower limit of the credible interval
 #' * UL - upper limit of the credible interval
 #'
@@ -4272,9 +4272,9 @@ test.kurtosis <- function(y) {
 #' not assumed. A Satterthwaite adjustment to the degrees of freedom is used  
 #' to improve the accuracy of the confidence intervals. If one or more lower
 #' limits are greater than 0 and no upper limit is less than 0, then conclude
-#' that the population means are monotoic decreasing. If one or more upper 
+#' that the population means are monotonic decreasing. If one or more upper 
 #' limits are less than 0 and no lower limits are greater than 0, then
-#' conclude that the population means are monotoic increasing. Reject the 
+#' conclude that the population means are monotonic increasing. Reject the 
 #' hypothesis of a monotonic trend if any lower limit is greater than 0 and 
 #' any upper limit is less than 0. 
 #'
@@ -5563,12 +5563,12 @@ size.test.mann <- function(alpha, pow, p) {
 
 
 #  size.test.sign =========================================================== 
-#' Sample size for a 1-group Sign test
+#' Sample size for a 1-group sign test
 #'
 #'
 #' @description
-#' Computes the sample size required for a 1-group Sign test with desired 
-#' power (see size.test.sign.ps for a paired-samples Sign test). The Sign 
+#' Computes the sample size required for a 1-group sign test with desired 
+#' power (see size.test.sign.ps for a paired-samples sign test). The Sign 
 #' test is a test of the null hypothesis that the population median is equal 
 #' to some specified value. This null hypothesis can also be expressed in
 #' terms of the proportion of scores in the population that are greater than 
@@ -5610,11 +5610,11 @@ size.test.sign <- function(alpha, pow, p) {
 
 
 #  size.test.sign.ps ========================================================= 
-#' Sample size for a paired-samples Sign test
+#' Sample size for a paired-samples sign test
 #'
 #'
 #' @description
-#' Computes sample size required for a paired-samples Sign test with desired 
+#' Computes sample size required for a paired-samples sign test with desired 
 #' power. The null hypothesis can be expressed in terms of a population 
 #' proportion. In a paired-samples experiment, the proportion is defined as 
 #' the proportion of members in the population with scores that would be 
@@ -6403,9 +6403,9 @@ test.anova.bs <- function(m, sd, n) {
 #'
 #' # Should return:
 #' #                                           A         B        AB
-#' # A treatment, B classification:     0.300000 0.5435540 0.1811847
-#' # A classification, B treatment:     0.484252 0.3804878 0.2047244
-#' # A classification, B classiciation: 0.300000 0.3804878 0.1268293
+#' # A treatment, B classification:      0.300000 0.5435540 0.1811847
+#' # A classification, B treatment:      0.484252 0.3804878 0.2047244
+#' # A classification, B classification: 0.300000 0.3804878 0.1268293
 #'  
 #' 
 #' @export
@@ -6426,7 +6426,7 @@ etasqr.gen.2way <- function(SSa, SSb, SSab, SSe) {
  colnames(out) <- c("A", "B", "AB")
  rownames1 <- c("A treatment, B classification:")
  rownames2 <- c("A classification, B treatment:")
- rownames3 <- c("A classification, B classiciation:")
+ rownames3 <- c("A classification, B classification:")
  rownames(out) <- c(rownames1, rownames2, rownames3)
  return(out)
 }
@@ -6448,7 +6448,7 @@ etasqr.gen.2way <- function(SSa, SSb, SSab, SSe) {
 #' @param   dist   type of distribution (1, 2, 3, 4,or 5)
 #' * 1 = Gaussian (skewness = 0 and excess kurtosis = 0) 
 #' * 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
-#' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
+#' * 3 = leptokurtic (skewness = 0 and excess kurtosis = 6)
 #' * 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
 #' * 5 = large skew (skewness = 2 and excess kurtosis = 6)
 #' @param   rep    number of Monte Carlo samples
@@ -6534,7 +6534,7 @@ sim.ci.mean <- function(alpha, n, dist, rep) {
 #' @param   dist2     type of distribution for group 2 (1, 2, 3, 4, or 5)
 #' * 1 = Gaussian (skewness = 0 and excess kurtosis = 0) 
 #' * 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
-#' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
+#' * 3 = leptokurtic (skewness = 0 and excess kurtosis = 6)
 #' * 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
 #' * 5 = large skew (skewness = 2 and excess kurtosis = 6)
 #' @param   rep       number of Monte Carlo samples
@@ -6658,7 +6658,7 @@ sim.ci.mean2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2, rep) {
 #' @param   dist2     type of distribution at level 2 (1, 2, 3, 4, or 5)
 #' * 1 = Gaussian (skewness = 0 and excess kurtosis = 0) 
 #' * 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
-#' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
+#' * 3 = leptokurtic (skewness = 0 and excess kurtosis = 6)
 #' * 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
 #' * 5 = large skew (skewness = 2 and excess kurtosis = 6)
 #' @param   rep       number of Monte Carlo samples
@@ -6752,7 +6752,7 @@ sim.ci.mean.ps <- function(alpha, n, sd.ratio, cor, dist1, dist2, rep) {
 #' @param   dist   type of distribution (1, 2, 3, 4, or 5) 
 #' * 1 = Gaussian (skewness = 0 and excess kurtosis = 0) 
 #' * 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
-#' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
+#' * 3 = leptokurtic (skewness = 0 and excess kurtosis = 6)
 #' * 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
 #' * 5 = large skew (skewness = 2 and excess kurtosis = 6)
 #' @param  rep     number of Monte Carlo samples
@@ -6878,7 +6878,7 @@ sim.ci.median <- function(alpha, n, dist, rep) {
 #' @param   dist2     type of distribution for group 2 (1, 2, 3, 4, or 5) 
 #' * 1 = Gaussian (skewness = 0 and excess kurtosis = 0) 
 #' * 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
-#' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
+#' * 3 = leptokurtic (skewness = 0 and excess kurtosis = 6)
 #' * 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
 #' * 5 = large skew (skewness = 2 and excess kurtosis = 6)
 #' @param   rep       number of Monte Carlo samples
@@ -7005,7 +7005,7 @@ sim.ci.median2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2, rep) {
 #' @param   dist2     type of distribution at level 2 (1, 2, 3, 4, or 5)
 #' * 1 = Gaussian (skewness = 0 and excess kurtosis = 0) 
 #' * 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
-#' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
+#' * 3 = leptokurtic (skewness = 0 and excess kurtosis = 6)
 #' * 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
 #' * 5 = large skew (skewness = 2 and excess kurtosis = 6)
 #' @param   rep       number of Monte Carlo samples
@@ -7138,7 +7138,7 @@ sim.ci.median.ps <- function(alpha, n, sd.ratio, cor, dist1, dist2, rep) {
 #' @param   dist2     type of distribution for group 2 (1, 2, 3, 4, or 5) 
 #' * 1 = Gaussian (skewness = 0 and excess kurtosis = 0) 
 #' * 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
-#' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
+#' * 3 = leptokurtic (skewness = 0 and excess kurtosis = 6)
 #' * 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
 #' * 5 = large skew (skewness = 2 and excess kurtosis = 6)
 #' @param   d         population standardized mean difference 
@@ -7259,7 +7259,7 @@ sim.ci.stdmean2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2, d, rep) {
 #' two types of standardized mean differences in a paired-samples design (see
 #' ci.stdmean.ps). Sample data for the two levels of the within-subjects factor
 #' can be generated from five different population distributions. All 
-#' distributions are scaled to have standard deviations of 1.0 at level 1.`
+#' distributions are scaled to have standard deviations of 1.0 at level 1.
 #'
 #' @param   alpha     alpha level for 1-alpha confidence
 #' @param   n         sample size 
@@ -7269,7 +7269,7 @@ sim.ci.stdmean2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2, d, rep) {
 #' @param   dist2     type of distribution at level 2 (1, 2, 3, 4, or 5) 
 #' * 1 = Gaussian (skewness = 0 and excess kurtosis = 0) 
 #' * 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
-#' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
+#' * 3 = leptokurtic (skewness = 0 and excess kurtosis = 6)
 #' * 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
 #' * 5 = large skew (skewness = 2 and excess kurtosis = 6)
 #' @param   d     population standardized mean difference 
