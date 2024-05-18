@@ -6,7 +6,7 @@
 #' @description
 #' Computes a Fisher confidence interval for a population Pearson correlation  
 #' or partial correlation with s control variables. Set s = 0 for a Pearson 
-#' correlation. A bias adjustmentment is used to reduce the bias of the Fisher
+#' correlation. A bias adjustment is used to reduce the bias of the Fisher
 #' transformed correlation. This function uses an estimated correlation as 
 #' input. Use the cor.test function for raw data input.
 #'
@@ -123,7 +123,7 @@ ci.spcor <- function(alpha, cor, r2, n) {
 #'
 #' @description
 #' Computes a confidence interval for a difference in population Pearson 
-#' correlations in a 2-group design. A bias adjustmentment is used to 
+#' correlations in a 2-group design. A bias adjustment is used to 
 #' reduce the bias of each Fisher transformed correlation.  
 #'
 #'  
@@ -190,7 +190,7 @@ ci.cor2 <- function(alpha, cor1, cor2, n1, n2) {
 #' @description 
 #' Computes a confidence interval for a difference in population Pearson 
 #' correlations that are estimated from the same sample and have one 
-#' variable in common. A bias adjustmentment is used to reduce the bias
+#' variable in common. A bias adjustment is used to reduce the bias
 #' of each Fisher transformed correlation. An approximate standard error
 #' is recovered from the confidence interval.
 #'
@@ -958,7 +958,7 @@ ci.lc.glm <-function(alpha, n, b, V, q) {
 #' Computes the estimate, standard error, and approximate confidence interval 
 #' for a linear contrast of any type of parameter (e.g., quartile, logistic
 #' regression slope, path coefficient) where each parameter value has
-#' been estimated from a different sample. The parameter vaues are assumed to 
+#' been estimated from a different sample. The parameter values are assumed to 
 #' be of the same type (e.g., all unstandardized path coefficients) and their 
 #' sampling distributions are assumed to be approximately normal.
 #'
@@ -1159,13 +1159,13 @@ ci.theil <- function(alpha, y, x) {
 #'
 #' @description
 #' Computes a confidence interval for a difference in population Cronbach 
-#' reliability coefficicents in a 2-group design. The number of measurements
+#' reliability coefficients in a 2-group design. The number of measurements
 #' (e.g., items or raters) used in each group need not be equal.
 #'
 #'  
 #' @param  alpha    alpha level for 1-alpha confidence
-#' @param  rel1     estimated Cronbach reliablity for group 1
-#' @param  rel2     estimated Cronbach reliablity for group 2
+#' @param  rel1     estimated Cronbach reliability for group 1
+#' @param  rel2     estimated Cronbach reliability for group 2
 #' @param  r1       number of measurements used in group 1
 #' @param  r2       number of measurements used in group 2
 #' @param  n1       sample size for group 1
@@ -1227,8 +1227,8 @@ ci.cronbach2 <- function(alpha, rel1, rel2, r1, r2, n1, n2) {
 #' @description 
 #' Computes a 100(1 - alpha)% confidence interval for a difference in 
 #' population reliabilities in a 2-group design. This function can be
-#' used with any type of reliablity coefficient (e.g., Cronbach alpha,
-#' McDonald omega, intraclass reliablitie). The function requires a
+#' used with any type of reliability coefficient (e.g., Cronbach alpha,
+#' McDonald omega, intraclass reliability). The function requires a
 #' point estimate and a 100(1 - alpha)% confidence interval for each
 #' reliability as input. 
 #'
@@ -2940,7 +2940,7 @@ random.yx <- function(n, my, mx, sdy, sdx, cor, dec) {
 #' @param   dist2     type of distribution for variable 2 (1, 2, 3, 4, or 5)
 #' * 1 = Gaussian (skewness = 0 and excess kurtosis = 0) 
 #' * 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
-#' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
+#' * 3 = leptokurtic (skewness = 0 and excess kurtosis = 6)
 #' * 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
 #' * 5 = large skew (skewness = 2 and excess kurtosis = 6)
 #' @param   rep       number of Monte Carlo samples
@@ -3039,7 +3039,7 @@ sim.ci.cor <- function(alpha, n, cor, dist1, dist2, rep) {
 #' @param   dist2     type of distribution for variable 2 (1, 2, 3, 4, or 5)
 #' * 1 = Gaussian (skewness = 0 and excess kurtosis = 0) 
 #' * 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
-#' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
+#' * 3 = leptokurtic (skewness = 0 and excess kurtosis = 6)
 #' * 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
 #' * 5 = large skew (skewness = 2 and excess kurtosis = 6)
 #' @param   rep      number of Monte Carlo samples
@@ -3049,7 +3049,7 @@ sim.ci.cor <- function(alpha, n, cor, dist1, dist2, rep) {
 #' Returns a 1-row matrix. The columns are:
 #' * Coverage - probability of confidence interval including population correlation  
 #' * Lower Error - probability of lower limit greater than population correlation
-#' * Upper Error - probability of upper limit less than population corrrelation
+#' * Upper Error - probability of upper limit less than population correlation
 #' * Ave CI Width - average confidence interval width
 #'
 #'
@@ -3129,9 +3129,9 @@ sim.ci.spear <- function(alpha, n, cor, dist1, dist2, rep) {
 #' Computes an adjusted standard error in a general linear model after one or 
 #' more predictor variables with nonsignificant slopes have been dropped from 
 #' the model. The adjusted standard error is then used to compute adjusted 
-#' p-values and adjusted confidence intervals. The the mean square error and
+#' p-values and adjusted confidence intervals. The mean square error and
 #' error degrees of freedom from the full model are used to compute the 
-#' adjusted standard errors. These adjusted results are less susceptable to
+#' adjusted standard errors. These adjusted results are less susceptible to
 #' the negative effects of an exploratory model selection. 
 #'
 #'  
@@ -3184,7 +3184,7 @@ adj.se <- function(alpha, mse1, mse2, df1, se, b) {
 #'
 #' @description
 #' Computes the normed fit index (NFI), adjusted normed fit index (adj NFI),
-#' compararive fit index (CFI), Tucker-Lewis fit index (TLI), and root mean
+#' comparative fit index (CFI), Tucker-Lewis fit index (TLI), and root mean
 #' square error of approximation index (RMSEA). Of the first four indices, the
 #' adj NFI index is recommended because it has smaller sampling variability
 #' than CFI and TLI and less negative bias than NFI.
