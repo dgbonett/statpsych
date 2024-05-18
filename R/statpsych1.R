@@ -6761,7 +6761,7 @@ sim.ci.mean.ps <- function(alpha, n, sd.ratio, cor, dist1, dist2, rep) {
 #' @return
 #' Returns a 1-row matrix. The columns are:
 #' * Coverage - probability of confidence interval including population median  
-#' * Lower Error - probability of lower limit greater than population mediann
+#' * Lower Error - probability of lower limit greater than population median
 #' * Upper Error - probability of upper limit less than population median
 #' * Ave CI Width - average confidence interval width
 #'
@@ -7394,7 +7394,7 @@ sim.ci.stdmean.ps <- function(alpha, n, sd.ratio, cor, dist1, dist2, d, rep) {
 #'
 #'
 #' @param   rel     reliability of the sum or average of r1 measurements
-#' @param   r1      number of measurements in the orginal scale 
+#' @param   r1      number of measurements in the original scale 
 #' @param   r2      number of measurements in the new scale
 #'
 #'
