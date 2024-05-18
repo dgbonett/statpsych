@@ -2516,7 +2516,7 @@ ci.cronbach <- function(alpha, rel, r, n) {
 #' @description
 #' Computes a confidence interval for a population reliability coefficient
 #' such as Cronbach's alpha or McDonald's omega using an estimate of the
-#' reliablity and its standard error. The standard error can be a robust
+#' reliability and its standard error. The standard error can be a robust
 #' standard error or bootstrap standard error obtained from an SEM program.
 #'
 #'  
@@ -2627,7 +2627,7 @@ ci.etasqr <- function(alpha, etasqr, df1, df2) {
 #'
 #' @description
 #' Computes confidence intervals and tests for the AB interaction effect, 
-#' main effect of A, main efect of B, simple main effects of A, and simple main
+#' main effect of A, main effect of B, simple main effects of A, and simple main
 #' effects of B in a 2x2 mixed factorial design with a quantitative response
 #' variable where Factor A is a within-subjects factor, and Factor B is a 
 #' between-subjects factor. A Satterthwaite adjustment to the degrees of 
@@ -2763,7 +2763,7 @@ ci.2x2.mean.mixed <- function(alpha, y11, y12, y21, y22) {
 #'
 #' @description
 #' Computes confidence intervals and tests for the AB interaction effect, 
-#' main effect of A, main efect of B, simple main effects of A, and simple main
+#' main effect of A, main effect of B, simple main effects of A, and simple main
 #' effects of B in a 2x2 within-subjects design with a quantitative response
 #' variable. 
 #'
@@ -2885,7 +2885,7 @@ ci.2x2.mean.ws <- function(alpha, y11, y12, y21, y22) {
 #'
 #' @description
 #' Computes confidence intervals and tests for the AB interaction effect, 
-#' main effect of A, main efect of B, simple main effects of A, and simple main
+#' main effect of A, main effect of B, simple main effects of A, and simple main
 #' effects of B in a 2x2 between-subjects design with a quantitative response
 #' variable. A Satterthwaite adjustment to the degrees of freedom is used and 
 #' equality of population variances is not assumed.
@@ -3030,12 +3030,12 @@ ci.2x2.mean.bs <- function(alpha, y11, y12, y21, y22) {
 #'
 #'
 #' @description
-#' Computes confidence intervals for standardized linear constrasts of means
-#' (AB interaction, main effect of A, main efect of B, simple main effects
+#' Computes confidence intervals for standardized linear contrasts of means
+#' (AB interaction, main effect of A, main effect of B, simple main effects
 #' of A, and simple main effects of B) in a 2x2 between-subjects design with  
 #' a quantitative response variable. Equality of population variances is not 
-#' assumed. An unweigthed variance standardizer is used, which is the 
-#' recommended standarizer when both factors are treatment factors.
+#' assumed. An unweighted variance standardizer is used, which is the 
+#' recommended standardizer when both factors are treatment factors.
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
@@ -3185,13 +3185,13 @@ ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
 
 
 # ci.2x2.median.bs =============================================================
-#' Computes tests and confidence intervals of effects in a 2x2 betwen-subjects 
+#' Computes tests and confidence intervals of effects in a 2x2 between-subjects 
 #' design for medians
 #'
 #'
 #' @description
 #' Computes distribution-free confidence intervals for the AB interaction 
-#' effect, main effect of A, main efect of B, simple main effects of A, and 
+#' effect, main effect of A, main effect of B, simple main effects of A, and 
 #' simple main effects of B in a 2x2 between-subjects design with a 
 #' quantitative response variable. The effects are defined in terms of medians
 #' rather than means. Tied scores are assumed to be rare.
@@ -3345,10 +3345,10 @@ ci.2x2.median.bs <- function(alpha, y11, y12, y21, y22) {
 #'
 #'
 #' @description
-#' Computes confidence intervals for standardized linear constrasts of means
-#' (AB interaction, main effect of A, main efect of B, simple main effects
+#' Computes confidence intervals for standardized linear contrasts of means
+#' (AB interaction, main effect of A, main effect of B, simple main effects
 #' of A, and simple main effects of B) in a 2x2 within-subjects design.
-#' Equality of population variances is not assumed. An unweigthed variance 
+#' Equality of population variances is not assumed. An unweighted variance 
 #' standardizer is used.
 #'
 #'
@@ -3516,13 +3516,12 @@ ci.2x2.stdmean.ws <- function(alpha, y11, y12, y21, y22) {
 
 
 # ci.2x2.stdmean.mixed ========================================================
-#' Computes confidence intervals of standardized effects in a 2x2 
-#' mixed design
+#' Computes confidence intervals of standardized effects in a 2x2 mixed design 
 #'
 #'                          
 #' @description
 #' Computes confidence intervals for the standardized AB interaction effect, 
-#' main effect of A, main efect of B, simple main effects of A, and simple main
+#' main effect of A, main effect of B, simple main effects of A, and simple main
 #' effects of B in a 2x2 mixed factorial design where Factor A is a 
 #' within-subjects factor, and Factor B is a between-subjects factor. Equality 
 #' of population variances is not assumed.
@@ -3668,9 +3667,9 @@ ci.2x2.stdmean.mixed <- function(alpha, y11, y12, y21, y22) {
 #'
 #' @description
 #' Computes distribution-free confidence intervals for the AB interaction
-#' effect, main effect of A, main efect of B, simple main effects of A, and
+#' effect, main effect of A, main effect of B, simple main effects of A, and
 #' simple main effects of B in a 2x2 mixed design where Factor A is the
-#' within-subjects factor and Factor B is the between subbjects factor. 
+#' within-subjects factor and Factor B is the between-subjects factor. 
 #' Effects are defined in terms of medians rather than means. Tied scores
 #' are assumed to be rare.
 #'
@@ -3828,7 +3827,7 @@ ci.2x2.median.mixed <- function(alpha, y11, y12, y21, y22) {
 #'
 #' @description
 #' Computes distribution-free confidence intervals for the AB interaction 
-#' effect, main effect of A, main efect of B, simple main effects of A, and
+#' effect, main effect of A, main effect of B, simple main effects of A, and
 #' simple main effects of B in a 2x2 within-subjects design. The effects are
 #' defined in terms of medians rather than means. Tied scores are assumed to
 #' be rare.
