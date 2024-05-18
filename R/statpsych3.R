@@ -586,7 +586,7 @@ ci.pairs.prop.bs <-function(alpha, f, n) {
 #'
 #' @description
 #' Computes a test statistic and an adjusted Wald confidence interval for the 
-#' populatin slope of proportions in a one-factor experimental design with a 
+#' population slope of proportions in a one-factor experimental design with a 
 #' quantitative between-subjects factor. 
 #'
 #'
