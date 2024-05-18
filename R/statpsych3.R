@@ -2664,7 +2664,7 @@ size.ci.lc.prop.bs <- function(alpha, p, w, v) {
 #'
 #'
 #' @description
-#' Computes the sample size required to estimate a populatin proportion 
+#' Computes the sample size required to estimate a population proportion 
 #' difference with desired confidence interval precision in a paired-samples 
 #' design. Set the proportion planning values to .5 for a conservatively large
 #' sample size. Set the phi correlation planning value to the smallest value 
@@ -2959,7 +2959,7 @@ size.test.prop <- function(alpha, pow, p, h) {
 #'
 #'
 #' @return
-#' Returns the required sample size for eachr group
+#' Returns the required sample size for each group
 #'
 #'
 #' @examples
@@ -3411,7 +3411,7 @@ power.prop2 <- function(alpha, n1, n2, p1, p2, es) {
 
 
 #  power.prop.ps ==============================================================
-#' Approximates the power of a paired-samples test of equal porportions for a
+#' Approximates the power of a paired-samples test of equal proportions for a
 #' planned sample size
 #'
 #'                     
