@@ -11,13 +11,11 @@ Changes:
     * ci.bscor -- Computes confidence interval for a biserial correlation
     * pi.cor -- Computes prediction interval for an estimated correlation
     * pi.prop -- Computes prediction interval for an estimated proportion
-    * size.test.prop -- Computes sample size for a 1-group test of a proportion 
-    * size.test.prop2 -- Computes sample size for a 2-group test of a proportion difference
     * test.cor -- Hypothesis test for a Pearson or partial correlation
     * test.spear -- Hypothesis test for a Spearman correlation
     * test.cor2 -- Hypothesis test for a 2-group Pearson or partial correlation difference
     * test.spear2 -- Hypothesis test for a 2-group Spearman correlation difference
-    * test.mean -- Hypothesis test for a mean
+    * test.mean -- Hypothesis test for a mean using summary information
     * size.ci.pbcor -- Computes sample size for a point-biserial correlation confidence interval
     * size.ci.cor2 -- Computes sample size for a 2-group Pearson correlation difference confidence interval
     * size.ci.spear2 -- Computes sample size for a 2-group Spearman correlation difference confidence interval
@@ -30,6 +28,7 @@ Changes:
 * Modifications:
     * ci.var.upper now computes an exact upper limit rather than an approximate upper limit
     * power computations are now more accurate for very small effect sizes in the power.cor, power.cor2, power.lc.meanc.bs, power.mean, power.mean2, power.mean.ps, power.prop, power.pro2, and power.prop.ps functions
+    * size.test.prop and size.test.prop2 now assume the test statistic will use a continuity correction
     * one-group function names that end with a "1" have been renamed and now exclude the "1" (for naming consistency and confusion with lower case L)
 
 
