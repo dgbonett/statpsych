@@ -1,4 +1,4 @@
-statpsych version 1.6.0 (Release date: 2024/06/04)
+statpsych version 1.6.0 (Release date: 2024/10/04)
 ===========
 
 Changes:
