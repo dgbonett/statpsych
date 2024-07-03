@@ -2886,6 +2886,64 @@ size.ci.prop.prior <- function(alpha1, alpha2, p0, n0, w) {
 }
 
 
+#  size.ci.tetra ==============================================================
+#' Sample size for a tetrachoric correlation confidence interval
+#'
+#'
+#' @description
+#' Computes the sample size required to estimate a tetrachoric correlation with
+#' desired confidence interval precision. Set the tetrachoric planning value to
+#' the smallest value within a plausible range for a conservatively large 
+#' sample size. 
+#'
+#'
+#' @param   alpha   alpha level for 1 - alpha confidence
+#' @param   p1      planning value for row 1 marginal proportion 
+#' @param   p2      planning value for column 1 marginal proportion
+#' @param   cor     tetrachoric planning value
+#' @param   w       desired confidence interval width
+#'
+#'
+#' @return
+#' Returns the required sample size
+#'
+#'
+#' @examples
+#' size.ci.tetra(.05, .4, .3, .5, .3)
+#'
+#' # Should return:
+#' #  Sample size
+#' #          296
+#'
+#'
+#' @importFrom stats qnorm
+#' @export
+size.ci.tetra <- function(alpha, p1, p2, cor, w) {
+ z <- qnorm(1 - alpha/2)
+ r1 <- p1
+ r2 <- 1 - r1
+ c1 <- p2
+ c2 <- 1 - p2
+ pmin <- min(c1, c2, r1, r2)
+ c <- (1 - abs(r1 - c1)/5 - (.5 - pmin)^2)/2
+ or <- (3.1416/acos(cor) - 1)^(1/c)
+ a <- or*(r1 + c1) + (r2 - c1)
+ b <- sqrt(a^2 - 4*r1*c1*or*(or - 1))
+ p11 <- (a - b)/(2*(or - 1))
+ p12 <- r1 - p11
+ p21 <- c1 - p11
+ p22 <- 1 - (p11 + p12 + p21)
+ k1 <- 3.1416*c*(or^c)
+ k2 <- sin(3.1416/(1 + or^c))
+ k3 <- (1 + or^c)^2
+ k <- k1*k2/k3
+ n <- ceiling((4*k^2*(z/w)^2)*(1/p11 + 1/p12 + 1/p21 + 1/p22))
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size"
+ rownames(out) <- ""
+ return(out)
+}
+
 # ===================== Sample Size for Desired Power ========================
 #  size.test.prop =========================================================== 
 #' Sample size for a test of a single proportion 
