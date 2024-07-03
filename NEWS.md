@@ -11,8 +11,8 @@ Changes:
     * ci.bscor -- Computes confidence interval for a biserial correlation
     * pi.cor -- Computes prediction interval for an estimated correlation
     * pi.prop -- Computes prediction interval for an estimated proportion
-    * test.cor -- Hypothesis test for a Pearson or partial correlation
-    * test.spear -- Hypothesis test for a Spearman correlation
+    * test.cor -- Hypothesis test for a Pearson or partial correlation (for zero or non-zero null hypotheses)
+    * test.spear -- Hypothesis test for a Spearman correlation (for zero or non-zero null hypotheses)
     * test.cor2 -- Hypothesis test for a 2-group Pearson or partial correlation difference
     * test.spear2 -- Hypothesis test for a 2-group Spearman correlation difference
     * test.mean -- Hypothesis test for a mean using summary information
