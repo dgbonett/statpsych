@@ -19,6 +19,7 @@ Changes:
     * size.ci.pbcor -- Computes sample size for a point-biserial correlation confidence interval
     * size.ci.cor2 -- Computes sample size for a 2-group Pearson correlation difference confidence interval
     * size.ci.spear2 -- Computes sample size for a 2-group Spearman correlation difference confidence interval
+    * size.ci.tetra -- Computes sample size for a tetrachoric correlation confidence interval
     * size.mean.prior -- Computes sample size for a mean confidence interval using a planning value from a prior study
     * size.prop.prior -- Computes sample size for a proportion confidence interval using a planning value from a prior study
     * size.cor.prior -- Computes sample size for a correlation confidence interval using a planning value from a prior study
@@ -29,7 +30,7 @@ Changes:
     * ci.var.upper now computes an exact upper limit rather than an approximate upper limit
     * power computations are now more accurate for very small effect sizes in the power.cor, power.cor2, power.lc.meanc.bs, power.mean, power.mean2, power.mean.ps, power.prop, power.pro2, and power.prop.ps functions
     * size.test.prop and size.test.prop2 now assume the test statistic will use a continuity correction
-    * one-group function names that end with a "1" have been renamed and now exclude the "1" (for naming consistency and avoid confusion with lower case L)
+    * one-group function names that end with a "1" have been renamed and now exclude the "1" (for naming consistency and to avoid confusion with lower case L)
 
 
 statpsych version 1.5.0 (Release date: 2023/12/11)
