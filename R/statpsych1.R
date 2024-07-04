@@ -7419,3 +7419,12 @@ spearmanbrown <- function(rel, r1, r2) {
  return(out)
 }
 
+
+# - Deprecated functions --------------------------------------------------
+#' @rdname ci.stdmean
+#' 
+#' @description
+#' ci.stdmean1 is deprecated and will soon be removed from statpsych; please switch to ci.stdmean
+#'  
+#' @export
+ci.stdmean1 <- ci.stdmean
