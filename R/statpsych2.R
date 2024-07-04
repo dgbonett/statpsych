@@ -2178,56 +2178,6 @@ size.ci.mape <- function(alpha, mape, s, w) {
 }
 
 
-#  size.ci.pbcor ==============================================================
-#' Sample size for a point-biserial correlation confidence interval 
-#'
-#'
-#' @description
-#' Computes the sample size required to estimate a population point-biserial
-#' correlation in a two-group design with desired confidence interval precision. 
-#' Set the correlation planning value to the smallest value within a plausible 
-#' range for a conservatively large sample size. Set R = 1 for equal sample 
-#' sizes.
-#'
-#'  
-#' @param  alpha  alpha level for 1-alpha confidence
-#' @param  cor    planning value of point-biserial correlation
-#' @param  w      desired confidence interval width
-#' @param  R      n2/n1 ratio
-#'
-#' 
-#' @references
-#' \insertRef{Bonett2020a}{statpsych}
-#'
-#'
-#' @return 
-#' Returns the required sample size for each group
-#' 
-#' 
-#' @examples
-#' size.ci.pbcor(.05, .30, .25, 2)
-#'
-#' # Should return:
-#' # n1   n2
-#' # 74  148
-#'  
-#' 
-#' @importFrom stats qnorm
-#' @export  
-size.ci.pbcor <- function(alpha, cor, w, R) {
- z <- qnorm(1 - alpha/2)
- k1 <- (1 + R)/R
- k2 <- cor^2/(2*(1 - cor^2)^2) + 1
- k3 <- (cor^2/(1 - cor^2) + 1)^(-3)
- n2 <- ceiling(k1*k2*k3*(z/w)^2)
- n1 <- ceiling(n2*R)
- out <- t(c(n1, n2))
- colnames(out) <- c("n1", "n2")
- rownames(out) <- ""
- return(out)
-}
-
-
 #  size.ci.cor2 ==============================================================
 #' Sample size for a 2-group Pearson correlation difference confidence 
 #' interval 
