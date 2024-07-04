@@ -16,7 +16,6 @@ Changes:
     * test.cor2 -- Hypothesis test for a 2-group Pearson or partial correlation difference
     * test.spear2 -- Hypothesis test for a 2-group Spearman correlation difference
     * test.mean -- Hypothesis test for a mean using summary information
-    * size.ci.pbcor -- Computes sample size for a point-biserial correlation confidence interval
     * size.ci.cor2 -- Computes sample size for a 2-group Pearson correlation difference confidence interval
     * size.ci.spear2 -- Computes sample size for a 2-group Spearman correlation difference confidence interval
     * size.ci.tetra -- Computes sample size for a tetrachoric correlation confidence interval
