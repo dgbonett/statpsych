@@ -1498,8 +1498,8 @@ test.cor <- function(cor, n, s, h) {
 #'
 #'
 #' @param  cor     estimated correlation 
-#' @param  n       sample size 
 #' @param  h       null hypothesis value of correlation
+#' @param  n       sample size 
 #'
 #'
 #' @return
@@ -1520,7 +1520,7 @@ test.cor <- function(cor, n, s, h) {
 #' #     0.471 3.009628 0.00261568
 #'
 #'
-#' test.spear1(.342, 0, 100)
+#' test.spear(.342, 0, 100)
 #'
 #' # Should return:
 #' #  Estimate        t df            p
@@ -1529,7 +1529,7 @@ test.cor <- function(cor, n, s, h) {
 #'
 #' @importFrom stats pnorm
 #' @export
-test.spear <- function(cor, n, h) {
+test.spear <- function(cor, h, n) {
  if (cor > .9999) {stop("correlation cannot be greater than .9999")}
  if (cor < -.9999) {stop("correlation cannot be less than -.9999")}
  if (h == 0) {
