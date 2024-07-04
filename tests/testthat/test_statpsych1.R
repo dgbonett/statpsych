@@ -1106,3 +1106,32 @@ test_that("ci.mean.fpc returns valid matrix", {
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)
 })
+
+
+test_that("test.mean returns valid number", {
+  colnames_expected <- c(
+    "t", "df", "p"
+  )
+  
+  
+  res <- test.mean(24.5, 3.65, 40, 23)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+
+test_that("size.ci.mean.prior returns valid matrix", {
+  colnames_expected <- c(
+    "Sample size"
+  )
+  
+  res <- size.ci.mean.prior(.05, .10, 26.4, 25, 4)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(res[[1,1]], 44)
+  testthat::expect_equal(colnames(res), colnames_expected)
+})

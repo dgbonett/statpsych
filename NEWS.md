@@ -20,9 +20,9 @@ Changes:
     * size.ci.cor2 -- Computes sample size for a 2-group Pearson correlation difference confidence interval
     * size.ci.spear2 -- Computes sample size for a 2-group Spearman correlation difference confidence interval
     * size.ci.tetra -- Computes sample size for a tetrachoric correlation confidence interval
-    * size.mean.prior -- Computes sample size for a mean confidence interval using a planning value from a prior study
-    * size.prop.prior -- Computes sample size for a proportion confidence interval using a planning value from a prior study
-    * size.cor.prior -- Computes sample size for a correlation confidence interval using a planning value from a prior study
+    * size.ci.mean.prior -- Computes sample size for a mean confidence interval using a planning value from a prior study
+    * size.ci.prop.prior -- Computes sample size for a proportion confidence interval using a planning value from a prior study
+    * size.ci.cor.prior -- Computes sample size for a correlation confidence interval using a planning value from a prior study
     * adj.se -- Computes adjusted standard errors for slope coefficients in an exploratory analysis
     * fitindices -- Computes four SEM fit indices
 

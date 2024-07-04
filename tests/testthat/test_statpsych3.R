@@ -641,3 +641,31 @@ test_that("pi.prop returns valid matrix", {
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)
 })
+
+
+test_that("size.ci.tetra returns valid matrix", {
+  colnames_expected <- c(
+    "Sample size"
+  )
+  
+  res <- size.ci.tetra(.05, .4, .3, .5, .3)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(res[[1,1]], 296)
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+test_that("size.ci.prop.prior returns valid matrix", {
+  colnames_expected <- c(
+    "Sample size"
+  )
+  
+  res <- size.ci.prop.prior(.05, .20, .1425, 200, .1)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(res[[1,1]], 318)
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
