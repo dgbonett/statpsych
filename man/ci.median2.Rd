@@ -16,17 +16,17 @@ ci.median2(alpha, y1, y2)
 \value{
 Returns a 1-row matrix. The columns are:
 \itemize{
-\item Median1 - estimated median from group 1
-\item Median2 - estimated median from group 2
-\item Median1-Median2 - estimated difference in medians
-\item SE - standard error of the difference
+\item Median1 - estimated median for group 1
+\item Median2 - estimated median for group 2
+\item Median1-Median2 - estimated difference of medians
+\item SE - standard error
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval
 }
 }
 \description{
-Computes a confidence interval for a difference of population medians in
-a 2-group design.
+Computes a distribution-free confidence interval for a difference of population
+medians in a 2-group design.
 }
 \examples{
 y1 <- c(32, 39, 26, 35, 43, 27, 40, 37, 34, 29)

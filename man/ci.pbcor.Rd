@@ -2,7 +2,7 @@
 % Please edit documentation in R/statpsych2.R
 \name{ci.pbcor}
 \alias{ci.pbcor}
-\title{Confidence interval for a point-biserial correlation}
+\title{Confidence intervals for point-biserial correlations}
 \usage{
 ci.pbcor(alpha, m1, m2, sd1, sd2, n1, n2)
 }

@@ -2,7 +2,8 @@
 % Please edit documentation in R/statpsych1.R
 \name{ci.2x2.median.ws}
 \alias{ci.2x2.median.ws}
-\title{Computes confidence intervals in a 2x2 within-subjects design for medians}
+\title{Computes confidence intervals of effects in a 2x2 within-subjects design
+for medians}
 \usage{
 ci.2x2.median.ws(alpha, y11, y12, y21, y22)
 }
@@ -27,10 +28,11 @@ Returns a 7-row matrix (one row per effect). The columns are:
 }
 }
 \description{
-Computes distribution-free confidence intervals based on medians for the AB
-interaction effect, main effect of A, main efect of B, simple main effects
-of A, and simple main effects of B in a 2x2 within-subjects design. Tied
-scores are assumed to be rare.
+Computes distribution-free confidence intervals for the AB interaction
+effect, main effect of A, main effect of B, simple main effects of A, and
+simple main effects of B in a 2x2 within-subjects design. The effects are
+defined in terms of medians rather than means. Tied scores are assumed to
+be rare.
 }
 \examples{
 y11 <- c(221, 402, 333, 301, 284, 182, 281, 230, 290, 182, 133, 278)

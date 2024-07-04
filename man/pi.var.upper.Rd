@@ -4,37 +4,41 @@
 \alias{pi.var.upper}
 \title{Upper prediction limit for an estimated variance}
 \usage{
-pi.var.upper(alpha, var, n1, n2)
+pi.var.upper(alpha, var, n0, n)
 }
 \arguments{
 \item{alpha}{alpha value for upper 1-alpha confidence}
 
 \item{var}{estimated variance from prior study}
 
-\item{n1}{sample size used to estimate variance}
+\item{n0}{sample size used to estimate variance}
 
-\item{n2}{planned sample size of future study}
+\item{n}{planned sample size of future study}
 }
 \value{
 Returns an upper prediction estimate (UL) of an estimated variance in a future study
 }
 \description{
-Computes an approximate upper prediction limit for the estimated variance
-in a future study for a planned sample size. The prediction limit uses a
-variance estimate from a prior study. The upper variance prediction limit
-is useful as a variance planning value for the sample size required to obtain
-a confidence interval with desired width. This strategy for specifying a
-variance planning value is useful in applications where the population variance
-in the prior study is assumed to be similar to the population variance in the
-planned study. This variance planning value can be used to revise the planned
-sample size in the future study.
+Computes an upper prediction limit for the estimated variance in a
+future study for a planned sample size. The prediction limit uses a
+variance estimate from a prior study. Several confidence interval
+sample size functions in this package require a planning value of the
+estimated variance that is expected in the planned study. The upper variance
+prediction limit is useful as a variance planning value for the sample size
+required to obtain a confidence interval with desired width. This strategy
+for specifying a variance planning value is useful in applications where the
+population variance in the prior study is assumed to be very similar to the
+population variance in the planned study.
 }
 \examples{
-pi.var.upper(.2, 15, 40, 100)
+pi.var.upper(.05, 15, 40, 100)
 
 # Should return:
-#       UL
-# 18.78522
+#      UL
+# 23.9724
  
 
+}
+\references{
+\insertRef{Hahn1972}{statpsych}
 }

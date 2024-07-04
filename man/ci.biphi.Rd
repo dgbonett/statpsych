@@ -27,10 +27,10 @@ Returns a 1-row matrix. The columns are:
 }
 }
 \description{
-Computes a confidence interval for a biserial-phi correlation using a
-transformation of a confidence interval for an odds ratio with .5 added to
-each cell frequency. This measure of association assumes the group variable
-is naturally dichotomous and the response variable is artificially
+Computes a confidence interval for a population biserial-phi correlation
+using a transformation of a confidence interval for an odds ratio with .5
+added to each cell frequency. This measure of association assumes the group
+variable is naturally dichotomous and the response variable is artificially
 dichotomous.
 }
 \examples{

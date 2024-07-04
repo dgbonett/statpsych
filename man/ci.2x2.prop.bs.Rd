@@ -20,14 +20,14 @@ Returns a 7-row matrix (one row per effect). The columns are:
 \item Estimate - adjusted estimate of effect
 \item SE - standard error
 \item z - z test statistic for test of null hypothesis
-\item p - p-value
+\item p - two-sided p-value
 \item LL - lower limit of the adjusted Wald confidence interval
 \item UL - upper limit of the adjusted Wald confidence interval
 }
 }
 \description{
 Computes adjusted Wald confidence intervals and tests for the AB
-interaction effect, main effect of A, main efect of B, simple main effects
+interaction effect, main effect of A, main effect of B, simple main effects
 of A, and simple main effects of B in a 2x2 between-subjects factorial
 design with a dichotomous response variable. The input vector of
 frequency counts is f = [ f11, f12, f21, f22 ], and the input vector of

@@ -22,7 +22,7 @@ sim.ci.median.ps(alpha, n, sd.ratio, cor, dist1, dist2, rep)
 \itemize{
 \item 1 = Gaussian (skewness = 0 and excess kurtosis = 0)
 \item 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
-\item 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
+\item 3 = leptokurtic (skewness = 0 and excess kurtosis = 6)
 \item 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
 \item 5 = large skew (skewness = 2 and excess kurtosis = 6)
 }}
@@ -40,15 +40,14 @@ Returns a 1-row matrix. The columns are:
 }
 \description{
 Performs a computer simulation of confidence interval performance for a
-median difference in a paired-samples design. Sample data within each level
-of the within-subjects factor can be generated from bivariate population
-distributions with five different marginal distributions. All distributions
-are scaled to have standard deviations of 1.0 at level 1. Bivariate random
-data with specified marginal skewness and kurtosis are generated using the
-unonr function in the mnonr package.
+population median difference in a paired-samples design. Sample data for the
+two levels of the within-subjects factor can be generated from bivariate
+population distributions with five different marginal distributions. All
+distributions are scaled to have standard deviations of 1.0 at level 1.
+Bivariate random data with specified marginal skewness and kurtosis are
+generated using the unonr function in the mnonr package.
 }
 \examples{
-# Only 1000 reps because CRAN runs all examples and requires short execution time.
 sim.ci.median.ps(.05, 30, 1.5, .7, 4, 3, 1000)
 
 # Should return (within sampling error):

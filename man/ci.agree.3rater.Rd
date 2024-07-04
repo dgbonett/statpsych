@@ -11,12 +11,12 @@ ci.agree.3rater(alpha, f)
 
 \item{f}{vector of frequency counts from 2x2x2 table where
 f = [ f111, f112, f121, f122, f211, f212, f221, f222 ],
-first subscript represents rating of rater 1,
-second subscript represents rating of rater 2, and
-third subscript represents rating of rater 3}
+first subscript represents the rating of rater 1,
+second subscript represents the rating of rater 2, and
+third subscript represents the rating of rater 3}
 }
 \value{
-Returns a 3-row matrix. The rows are:
+Returns a 7-row matrix. The rows are:
 \itemize{
 \item G(1,2): G-index for raters 1 and 2
 \item G(1,3): G-index for raters 1 and 3
@@ -30,8 +30,8 @@ Returns a 3-row matrix. The rows are:
 The columns are:
 \itemize{
 \item Estimate - estimate of G-index (two-rater, difference, or unanimous)
-\item LL - lower limit of confidence interval
-\item UL - upper limit of confidence interval
+\item LL - lower limit of adjusted Wald confidence interval
+\item UL - upper limit of adjusted Wald confidence interval
 }
 }
 \description{
@@ -41,6 +41,7 @@ computes adjusted Wald confidence intervals for differences of all pairs of
 G agreement. An adjusted Wald confidence interval for unanimous G agreement
 among the three raters is also computed. In the three-rater design,
 unanimous G agreement is equal to the average of all pairs of G agreement.
+The G-index corrects for chance agreement.
 }
 \examples{
 f <- c(100, 6, 4, 40, 20, 1, 9, 120)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/statpsych3.R
 \name{power.prop.ps}
 \alias{power.prop.ps}
-\title{Approximates the power of a paired-samples test of equal porportions for a
+\title{Approximates the power of a paired-samples test of equal proportions for a
 planned sample size}
 \usage{
 power.prop.ps(alpha, n, p1, p2, phi, es)
@@ -40,7 +40,7 @@ power.prop.ps(.05, 45, .5, .5, .4, .2)
 
 # Should return:
 #     Power
-# 0.6877652
+# 0.6877704
 
 
 }

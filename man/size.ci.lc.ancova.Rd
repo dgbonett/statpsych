@@ -24,9 +24,9 @@ Returns the required sample size for each group
 }
 \description{
 Computes the sample size for each group (assuming equal sample sizes)
-required to estimate a linear contrast of means in an ANCOVA model with
-desired confidence interval precision. In a nonexperimental design, the
-sample size is affected by the magnitude of covariate mean differences
+required to estimate a population linear contrast of means in an ANCOVA model
+with desired confidence interval precision. In a nonexperimental design,
+the sample size is affected by the magnitude of covariate mean differences
 across groups. The covariate mean differences can be approximated by
 specifying the largest standardized covariate mean difference across all
 pairwise group differences and for all covariates. In an experiment, this

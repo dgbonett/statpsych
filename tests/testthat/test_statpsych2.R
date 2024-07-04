@@ -505,12 +505,66 @@ test_that("ci.rel2 returns valid matrix", {
   testthat::expect_equal(colnames(res), colnames_expected)
 })
 
+
 test_that("ci.cronbach2 returns valid matrix", {
   colnames_expected <- c(
     "Estimate", "LL", "UL"
   )
   
   res <- ci.cronbach2(.05, .88, .76, 8, 8, 200, 250)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+test_that("ci.bscor returns valid matrix", {
+  colnames_expected <- c(
+    "Estimate", "SE", "LL", "UL"
+  )
+  
+  res <- ci.bscor(.05, 28.32, 21.48, 3.81, 3.09, 40, 40)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+test_that("pi.cor returns valid matrix", {
+  colnames_expected <- c(
+    "LL", "UL"
+  )
+  
+  res <- pi.cor(.1, .761, 50, 100)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+
+test_that("test.cor returns valid matrix", {
+  colnames_expected <- c(
+    "Estimate", "z", "p"
+  )
+  
+  res <- test.cor(.484, 100, 0, .2)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+test_that("test.spear returns valid matrix", {
+  colnames_expected <- c(
+    "Estimate", "z", "p"
+  )
+  
+  res <- test.spear(.471, .2, 100)
   
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))

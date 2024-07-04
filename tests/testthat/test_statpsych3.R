@@ -589,3 +589,55 @@ test_that("ci.pv returns valid matrix", {
   testthat::expect_equal(colnames(res), colnames_expected)
 })
 
+test_that("ci.prop.fpc returns valid matrix", {
+  colnames_expected <- c(
+    "Estimate", "SE", "LL",        "UL"
+  )
+  
+  res <- ci.prop.fpc(.05, 12, 100, 400)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+test_that("ci.poisson returns valid matrix", {
+  colnames_expected <- c(
+    "Estimate", "SE", "LL",        "UL"
+  )
+  
+  res <- ci.poisson(.05, 23, 5.25)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+test_that("ci.ratio.poisson2 returns valid matrix", {
+  colnames_expected <- c(
+    "Estimate", "LL",        "UL"
+  )
+  
+  res <- ci.ratio.poisson2(.05, 19, 5, 30, 40.5)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
+
+
+
+
+test_that("pi.prop returns valid matrix", {
+  colnames_expected <- c(
+    "LL", "UL"
+  )
+  
+  res <- pi.prop(.1, .225, 80, 120)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})

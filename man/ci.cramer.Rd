@@ -13,7 +13,7 @@ ci.cramer(alpha, chisqr, r, c, n)
 
 \item{r}{number of rows in contingency table}
 
-\item{c}{number of columns in contengency table}
+\item{c}{number of columns in contingency table}
 
 \item{n}{sample size}
 }

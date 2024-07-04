@@ -2,7 +2,7 @@
 % Please edit documentation in R/statpsych3.R
 \name{ci.condslope.log}
 \alias{ci.condslope.log}
-\title{Confidence interval for conditional (simple) slopes in a logistic model}
+\title{Confidence intervals for conditional (simple) slopes in a logistic model}
 \usage{
 ci.condslope.log(alpha, b1, b2, se1, se2, cov, lo, hi)
 }
@@ -29,9 +29,9 @@ Returns a 2-row matrix. The columns are:
 \item Estimate - estimated conditional slope
 \item exp(Estimate) - estimated exponentiated conditional slope
 \item z - z test statistic
-\item p - p-value
-\item LL - lower limit of the confidence interval
-\item UL - upper limit of the confidence interval
+\item p - two-sided p-value
+\item LL - lower limit of the exponentiated confidence interval
+\item UL - upper limit of the exponentiated confidence interval
 }
 }
 \description{

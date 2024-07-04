@@ -16,8 +16,8 @@ ci.ratio.sd2(alpha, y1, y2)
 \value{
 Returns a 1-row matrix. The columns are:
 \itemize{
-\item SD1 - estimated SD from group 1
-\item SD2 - estimated SD from group 2
+\item SD1 - estimated SD for group 1
+\item SD2 - estimated SD for group 2
 \item SD1/SD2 - estimate of SD ratio
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval

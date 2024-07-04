@@ -16,7 +16,7 @@ ci.lc.mean.bs(alpha, m, sd, n, v)
 
 \item{n}{vector of sample sizes}
 
-\item{v}{vector of betwen-subjects contrast coefficients}
+\item{v}{vector of between-subjects contrast coefficients}
 }
 \value{
 Returns a 2-row matrix. The columns are:
@@ -25,7 +25,7 @@ Returns a 2-row matrix. The columns are:
 \item SE - standard error
 \item t - t test statistic
 \item df - degrees of freedom
-\item p - p-value
+\item p - two-sided p-value
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval
 }

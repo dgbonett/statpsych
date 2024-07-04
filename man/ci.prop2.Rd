@@ -27,8 +27,8 @@ Returns a 1-row matrix. The columns are:
 }
 }
 \description{
-Computes an adjusted Wald confidence interval for a proportion difference
-in a 2-group design.
+Computes an adjusted Wald confidence interval for a population proportion
+difference in a 2-group design.
 }
 \examples{
 ci.prop2(.05, 35, 21, 150, 150)

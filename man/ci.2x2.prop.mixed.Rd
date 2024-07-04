@@ -10,9 +10,9 @@ ci.2x2.prop.mixed(alpha, group1, group2)
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
 
-\item{group1}{vector of frequency counts from 2x2 contingency table for Factor A in group 1}
+\item{group1}{vector of frequency counts from 2x2 contingency table in group 1}
 
-\item{group2}{vector of frequency counts from 2x2 contingency table for Factor A in group 2}
+\item{group2}{vector of frequency counts from 2x2 contingency table in group 2}
 }
 \value{
 Returns a 7-row matrix (one row per effect). The columns are:
@@ -20,14 +20,14 @@ Returns a 7-row matrix (one row per effect). The columns are:
 \item Estimate - adjusted estimate of effect
 \item SE - standard error of estimate
 \item z - z test statistic
-\item p - p-value
+\item p - two-sided p-value
 \item LL - lower limit of the adjusted Wald confidence interval
 \item UL - upper limit of the adjusted Wald confidence interval
 }
 }
 \description{
 Computes adjusted Wald confidence intervals and tests for the AB
-interaction effect, main effect of A, main efect of B, simple main effects
+interaction effect, main effect of A, main effect of B, simple main effects
 of A, and simple main effects of B in a 2x2 mixed factorial design with a
 dichotomous response variable where Factor A is a within-subjects factor
 and Factor B is a between-subjects factor. The 4x1 vector of frequency

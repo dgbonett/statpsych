@@ -9,7 +9,7 @@ ci.cronbach(alpha, rel, r, n)
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
 
-\item{rel}{estimated Cronbach's reliability}
+\item{rel}{estimated Cronbach reliability}
 
 \item{r}{number of measurements (items, raters, etc.)}
 
@@ -18,14 +18,15 @@ ci.cronbach(alpha, rel, r, n)
 \value{
 Returns a 1-row matrix. The columns are:
 \itemize{
+\item Estimate - estimated Cronbach reliability (from input)
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval
 }
 }
 \description{
 Computes a confidence interval for a population Cronbach reliability.
-The point estimate of Cronbach's reliability assumes essentially
-tau-equivalent measurements and this confidence interval assumes parallel
+The point estimate of Cronbach reliability assumes essentially
+tau-equivalent measurements and the confidence interval assumes parallel
 measurements.
 }
 \examples{

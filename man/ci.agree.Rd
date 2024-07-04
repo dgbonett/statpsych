@@ -20,14 +20,15 @@ Returns a 1-row matrix. The columns are:
 \itemize{
 \item Estimate - maximum likelihood estimate of G-index
 \item SE - standard error
-\item LL - lower limit of the confidence interval
-\item UL - upper limit of the confidence interval
+\item LL - lower limit of the adjusted Wald confidence interval
+\item UL - upper limit of the adjusted Wald confidence interval
 }
 }
 \description{
-Computes a confidence interval for a G-index of agreement between two
-polychotomous ratings. This function requires the number of objects that
-were given the same rating by both raters.
+Computes an adjusted Wald confidence interval for a G-index of agreement
+between two polychotomous ratings. This function requires the number of
+objects that were given the same rating by both raters. The G-index
+corrects for chance agreement.
 }
 \examples{
 ci.agree(.05, 100, 80, 4)

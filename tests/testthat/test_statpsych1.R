@@ -1093,3 +1093,16 @@ test_that("spearmanbrown returns valid matrix", {
   testthat::expect_equal(colnames(res), colnames_expected)
 })
 
+
+
+test_that("ci.mean.fpc returns valid matrix", {
+  colnames_expected <- c(
+    "Estimate", "SE", "LL",        "UL"
+  )
+  
+  res <- ci.mean.fpc(.05, 24.5, 3.65, 40, 300)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})

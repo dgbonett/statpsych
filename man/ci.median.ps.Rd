@@ -27,9 +27,10 @@ Returns a 1-row matrix. The columns are:
 }
 }
 \description{
-Computes a confidence interval for a difference of population medians in
-a paired-samples design. This function also computes the standard errors
-for each median and the covariance between the two estimated medians.
+Computes a distribution-free confidence interval for a difference of
+population medians in a paired-samples design. This function also computes
+the standard error of each median and the covariance between the two
+estimated medians.
 }
 \examples{
 y1 <- c(21, 4, 9, 12, 35, 18, 10, 22, 24, 1, 6, 8, 13, 16, 19)

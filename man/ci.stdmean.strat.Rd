@@ -2,7 +2,7 @@
 % Please edit documentation in R/statpsych1.R
 \name{ci.stdmean.strat}
 \alias{ci.stdmean.strat}
-\title{Confidence interval for a 2-group standardized mean difference with
+\title{Confidence intervals for a 2-group standardized mean difference with
 stratified sampling}
 \usage{
 ci.stdmean.strat(alpha, m1, m2, sd1, sd2, n1, n2, p1)
@@ -37,7 +37,7 @@ Returns a 3-row matrix. The columns are:
 \description{
 Computes confidence intervals for a population standardized mean difference
 in a 2-group nonexperimental design with stratified random sampling (a random
-sample of a specificied size from each subpopulation) using a square root
+sample of a specified size from each subpopulation) using a square root
 weighted variance standardizer or single group standard deviation
 standardizer.  Equality of variances is not assumed.
 }

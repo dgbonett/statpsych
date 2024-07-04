@@ -20,7 +20,7 @@ sim.ci.cor(alpha, n, cor, dist1, dist2, rep)
 \itemize{
 \item 1 = Gaussian (skewness = 0 and excess kurtosis = 0)
 \item 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
-\item 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
+\item 3 = leptokurtic (skewness = 0 and excess kurtosis = 6)
 \item 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
 \item 5 = large skew (skewness = 2 and excess kurtosis = 6)
 }}

@@ -18,6 +18,7 @@ ci.reliability(alpha, rel, se, n)
 \value{
 Returns a 1-row matrix. The columns are:
 \itemize{
+\item Estimate - estimated reliability (from input)
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval
 }
@@ -25,7 +26,7 @@ Returns a 1-row matrix. The columns are:
 \description{
 Computes a confidence interval for a population reliability coefficient
 such as Cronbach's alpha or McDonald's omega using an estimate of the
-reliablity and its standard error. The standard error can be a robust
+reliability and its standard error. The standard error can be a robust
 standard error or bootstrap standard error obtained from an SEM program.
 }
 \examples{

@@ -2,7 +2,7 @@
 % Please edit documentation in R/statpsych2.R
 \name{ci.condslope}
 \alias{ci.condslope}
-\title{Confidence interval for conditional (simple) slopes in a linear model}
+\title{Confidence intervals for conditional (simple) slopes in a linear model}
 \usage{
 ci.condslope(alpha, b1, b2, se1, se2, cov, lo, hi, dfe)
 }

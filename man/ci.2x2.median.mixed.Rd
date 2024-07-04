@@ -2,7 +2,7 @@
 % Please edit documentation in R/statpsych1.R
 \name{ci.2x2.median.mixed}
 \alias{ci.2x2.median.mixed}
-\title{Computes confidence intervals in a 2x2 mixed design for medians}
+\title{Computes confidence intervals of effects in a 2x2 mixed design for medians}
 \usage{
 ci.2x2.median.mixed(alpha, y11, y12, y21, y22)
 }
@@ -27,28 +27,29 @@ Returns a 7-row matrix (one row per effect). The columns are:
 }
 }
 \description{
-Computes distribution-free confidence intervals based on medians for the AB
-interaction effect, main effect of A, main efect of B, simple main effects
-of A, and simple main effects of B in a 2x2 mixed design where Factor A is
-the within-subjects factor and Factor B is the between subbjects factor.
-Tied scores are assumed to be rare.
+Computes distribution-free confidence intervals for the AB interaction
+effect, main effect of A, main effect of B, simple main effects of A, and
+simple main effects of B in a 2x2 mixed design where Factor A is the
+within-subjects factor and Factor B is the between-subjects factor.
+Effects are defined in terms of medians rather than means. Tied scores
+are assumed to be rare.
 }
 \examples{
-y11 <- c(18, 19, 20, 17, 20, 16)
-y12 <- c(19, 18, 19, 20, 17, 16)
-y21 <- c(19, 16, 16, 14, 16, 18)
-y22 <- c(16, 10, 12,  9, 13, 15)
+y11 <- c(18.3, 19.5, 20.1, 17.4, 20.5, 16.1)
+y12 <- c(19.1, 18.4, 19.8, 20.0, 17.2, 16.8)
+y21 <- c(19.2, 16.4, 16.5, 14.0, 16.9, 18.3)
+y22 <- c(16.5, 10.2, 12.7,  9.9, 13.5, 15.0)
 ci.2x2.median.mixed(.05, y11, y12, y21, y22)
 
 # Should return:
-#          Estimate       SE         LL       UL
-# AB:         -3.50 2.698647 -8.7892514 1.789251
-# A:           1.75 1.349324 -0.8946257 4.394626
-# B:           4.25 1.017564  2.2556114 6.244389
-# A at b1:     0.00 1.489007 -2.9184005 2.918400
-# A at b2:     3.50 2.250679 -0.9112492 7.911249
-# B at a1:     2.50 1.486420 -0.4133294 5.413329
-# B at a2:     6.00 1.871571  2.3317887 9.668211
+#          Estimate        SE         LL         UL
+# AB:        -3.450 1.6317863 -6.6482423 -0.2517577
+# A:          1.875 0.8158931  0.2758788  3.4741212
+# B:          3.925 1.4262367  1.1296274  6.7203726
+# A at b1:    0.150 1.4243192 -2.6416144  2.9416144
+# A at b2:    3.600 0.7962670  2.0393454  5.1606546
+# B at a1:    2.200 1.5812792 -0.8992503  5.2992503
+# B at a2:    5.650 1.7027101  2.3127496  8.9872504
 
 
 }

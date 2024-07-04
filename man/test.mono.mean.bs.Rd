@@ -32,9 +32,9 @@ group standard deviations, and samples sizes as input. Equal variances are
 not assumed. A Satterthwaite adjustment to the degrees of freedom is used
 to improve the accuracy of the confidence intervals. If one or more lower
 limits are greater than 0 and no upper limit is less than 0, then conclude
-that the population means are monotoic decreasing. If one or more upper
+that the population means are monotonic decreasing. If one or more upper
 limits are less than 0 and no lower limits are greater than 0, then
-conclude that the population means are monotoic increasing. Reject the
+conclude that the population means are monotonic increasing. Reject the
 hypothesis of a monotonic trend if any lower limit is greater than 0 and
 any upper limit is less than 0.
 }

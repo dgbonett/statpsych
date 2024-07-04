@@ -3211,7 +3211,7 @@ adj.se <- function(alpha, mse1, mse2, df1, se, b) {
 #' 
 #' @export  
 fitindices <- function(chi1, df1, chi2, df2, n) {
- if (chi2 = 0) {stop("chi2 must be a positive value")}
+ if (chi2 == 0) {stop("chi2 must be a positive value")}
  nfi <- 1 - chi1/chi2
  d1 <- chi1 - df1
  if (d1 < 0) {d1 = 0}

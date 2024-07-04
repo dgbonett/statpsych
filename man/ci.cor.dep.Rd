@@ -29,7 +29,7 @@ Returns a 1-row matrix. The columns are:
 \description{
 Computes a confidence interval for a difference in population Pearson
 correlations that are estimated from the same sample and have one
-variable in common. A bias adjustmentment is used to reduce the bias
+variable in common. A bias adjustment is used to reduce the bias
 of each Fisher transformed correlation. An approximate standard error
 is recovered from the confidence interval.
 }

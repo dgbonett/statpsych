@@ -31,8 +31,8 @@ The columns are:
 \itemize{
 \item Estimate - maximum likelihood estimate of G-index and difference
 \item SE - standard error
-\item LL - lower limit of confidence interval
-\item UL - upper limit of confidence interval
+\item LL - lower limit of adjusted Wald confidence interval
+\item UL - upper limit of adjusted Wald confidence interval
 }
 }
 \description{

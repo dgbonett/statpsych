@@ -24,7 +24,7 @@ Returns a 1-row matrix. The columns are:
 }
 \description{
 Computes a Theil-Sen estimate and distribution-free confidence interval
-for the slope of a simple linear regression model. An approximate
+for the population slope in a simple linear regression model. An approximate
 standard error is recovered from the confidence interval.
 }
 \examples{

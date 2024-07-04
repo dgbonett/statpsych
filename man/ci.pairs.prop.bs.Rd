@@ -21,15 +21,15 @@ of pairwise comparisons. The columns are:
 \item Estimate - adjusted estimate of proportion difference
 \item SE - adjusted standard error
 \item z - z test statistic
-\item p - p-value
+\item p - two-sided p-value
 \item LL - lower limit of the adjusted Wald confidence interval
 \item UL - upper limit of the adjusted Wald confidence interval
 }
 }
 \description{
-Computes adjusted Wald confidence intervals for all pairwise differences of
-proportions in a between-subjects design with a Bonferroni adjusted alpha
-level.
+Computes adjusted Wald confidence intervals for all pairwise differences
+of population proportions in a between-subjects design using a Bonferroni
+adjusted alpha level.
 }
 \examples{
 f <- c(111, 161, 132)

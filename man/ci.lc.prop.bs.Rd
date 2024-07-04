@@ -22,14 +22,14 @@ Returns a 1-row matrix. The columns are:
 \item Estimate - adjusted estimate of proportion linear contrast
 \item SE - adjusted standard error
 \item z - z test statistic
-\item p - p-value
+\item p - two-sided p-value
 \item LL - lower limit of the adjusted Wald confidence interval
 \item UL - upper limit of the adjusted Wald confidence interval
 }
 }
 \description{
 Computes an adjusted Wald confidence interval for a linear contrast of
-proportions in a betwen-subjects design.
+population proportions in a between-subjects design.
 }
 \examples{
 f <- c(26, 24, 38)

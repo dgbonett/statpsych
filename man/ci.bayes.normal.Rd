@@ -20,8 +20,8 @@ ci.bayes.normal(alpha, prior.mean, prior.sd, est, se)
 \value{
 Returns a 1-row matrix. The columns are:
 \itemize{
-\item Posterior mean - posterior mean of Normal distributoin
-\item Posterior SD - posterior standard deviation of Normal distributoin
+\item Posterior mean - posterior mean of Normal distribution
+\item Posterior SD - posterior standard deviation of Normal distribution
 \item LL - lower limit of the credible interval
 \item UL - upper limit of the credible interval
 }
@@ -29,7 +29,7 @@ Returns a 1-row matrix. The columns are:
 \description{
 Computes an approximate Bayesian credible interval for a normal prior
 distribution. This function can be used with any parameter estimator
-(e.g., mean, mean difference, linear contrast of means, slope coefficient
+(e.g., mean, mean difference, linear contrast of means, slope coefficient,
 standardized mean difference, standardized linear contrast of means, median,
 median difference, linear contrast of medians, etc.) that has an approximate
 normal sampling distribution. The mean and standard deviation of the posterior

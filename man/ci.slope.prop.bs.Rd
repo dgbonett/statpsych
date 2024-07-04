@@ -2,8 +2,8 @@
 % Please edit documentation in R/statpsych3.R
 \name{ci.slope.prop.bs}
 \alias{ci.slope.prop.bs}
-\title{Confidence interval for a slope of a proportion in a single-factor design
-with a quantitative between-subjects factor}
+\title{Confidence interval for a slope of a proportion in a single-factor
+experimental design with a quantitative between-subjects factor}
 \usage{
 ci.slope.prop.bs(alpha, f, n, x)
 }
@@ -22,15 +22,15 @@ Returns a 1-row matrix. The columns are:
 \item Estimate - adjusted slope estimate
 \item SE - adjusted standard error
 \item z - z test statistic
-\item p - p-value
+\item p - two-sided p-value
 \item LL - lower limit of the adjusted Wald confidence interval
 \item UL - upper limit of the adjusted Wald confidence interval
 }
 }
 \description{
 Computes a test statistic and an adjusted Wald confidence interval for the
-slope of proportions in a single-factor design with a quantitative
-between-subjects factor.
+population slope of proportions in a one-factor experimental design with a
+quantitative between-subjects factor.
 }
 \examples{
 f <- c(14, 27, 38)

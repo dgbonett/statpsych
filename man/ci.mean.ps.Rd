@@ -28,7 +28,7 @@ Returns a 1-row matrix. The columns are:
 \item SE - standard error
 \item t - t test statistic
 \item df - degrees of freedom
-\item p - p-value
+\item p - two-sided p-value
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval
 }
@@ -36,8 +36,8 @@ Returns a 1-row matrix. The columns are:
 \description{
 Computes a confidence interval for a population paired-samples mean
 difference using the estimated means, estimated standard deviations,
-estimated correlation, and sample size. Use the t.test function for
-raw data input.
+estimated correlation, and sample size. Also computes a paired-samples
+t-test. Use the t.test function for raw data input.
 }
 \examples{
 ci.mean.ps(.05, 58.2, 51.4, 7.43, 8.92, .537, 30)

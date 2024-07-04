@@ -11,7 +11,7 @@ size.ci.condmean(alpha, evar, xvar, diff, w)
 
 \item{evar}{planning value of within group (error) variance}
 
-\item{xvar}{variance of fixed predictor variables}
+\item{xvar}{variance of fixed predictor variable}
 
 \item{diff}{difference between x* and mean of x}
 
@@ -21,8 +21,8 @@ size.ci.condmean(alpha, evar, xvar, diff, w)
 Returns the required total sample size
 }
 \description{
-Computes the total sample size required to estimate a conditional mean of
-y at x = x* in a fixed-x simple linear regression model with desired
+Computes the total sample size required to estimate a population conditional
+mean of y at x = x* in a fixed-x simple linear regression model with desired
 confidence interval precision. In an experimental design, the total sample
 size would be allocated to the levels of the quantitative factor and it
 might be necessary to increase the total sample size to achieve equal

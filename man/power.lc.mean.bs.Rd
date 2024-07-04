@@ -39,7 +39,7 @@ power.lc.mean.bs(.05, n, var, 5, v)
 
 # Should return:
 #     Power
-# 0.7221139
+# 0.7221171
 
 
 }

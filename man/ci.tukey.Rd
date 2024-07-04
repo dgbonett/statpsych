@@ -3,7 +3,7 @@
 \name{ci.tukey}
 \alias{ci.tukey}
 \title{Tukey-Kramer confidence intervals for all pairwise mean differences in a
-betwen-subjects design}
+between-subjects design}
 \usage{
 ci.tukey(alpha, m, sd, n)
 }
@@ -24,7 +24,7 @@ of pairwise comparisons. The columns are:
 \item SE - standard error
 \item t - t test statistic
 \item df - degrees of freedom
-\item p - p-value
+\item p - two-sided p-value
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval
 }

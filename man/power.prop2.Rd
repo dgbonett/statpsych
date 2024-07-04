@@ -2,7 +2,7 @@
 % Please edit documentation in R/statpsych3.R
 \name{power.prop2}
 \alias{power.prop2}
-\title{Approximates the power of a two-sample proportion test for planned sample
+\title{Approximates the power of a 2-group proportion test for planned sample
 sizes}
 \usage{
 power.prop2(alpha, n1, n2, p1, p2, es)
@@ -36,7 +36,7 @@ power.prop2(.05, 60, 40, .5, .5, .2)
 
 # Should return:
 #     Power
-# 0.4998515
+# 0.4998959
 
 
 }

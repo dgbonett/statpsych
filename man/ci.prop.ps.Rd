@@ -28,9 +28,9 @@ Returns a 1-row matrix. The columns are:
 }
 \description{
 Computes an adjusted Wald confidence interval for a difference of
-proportions in a paired-samples design. This function requires the
-frequency counts from a 2 x 2 contingency table for two repeated
-dichtomous measurements.
+population proportions in a paired-samples design. This function requires
+the frequency counts from a 2 x 2 contingency table for two repeated
+dichotomous measurements.
 }
 \examples{
 ci.prop.ps(.05, 12, 4, 26, 6)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/statpsych1.R
 \name{etasqr.adj}
 \alias{etasqr.adj}
-\title{Bias adjusts an eta-squared estimate}
+\title{Bias adjustments for an eta-squared estimate}
 \usage{
 etasqr.adj(etasqr, dfeffect, dferror)
 }

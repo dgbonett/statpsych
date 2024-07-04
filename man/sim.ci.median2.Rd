@@ -22,7 +22,7 @@ sim.ci.median2(alpha, n1, n2, sd.ratio, dist1, dist2, rep)
 \itemize{
 \item 1 = Gaussian (skewness = 0 and excess kurtosis = 0)
 \item 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
-\item 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
+\item 3 = leptokurtic (skewness = 0 and excess kurtosis = 6)
 \item 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
 \item 5 = large skew (skewness = 2 and excess kurtosis = 6)
 }}
@@ -40,9 +40,9 @@ Returns a 1-row matrix. The columns are:
 }
 \description{
 Performs a computer simulation of the confidence interval performance for a
-difference of medians in a 2-group design. Sample data for each group can
-be generated from five different population distributions. All distributions
-are scaled to have standard deviations of 1.0 in group 1.
+difference of population medians in a 2-group design. Sample data for each
+group can be generated from five different population distributions. All
+distributions are scaled to have standard deviations of 1.0 in group 1.
 }
 \examples{
 sim.ci.median2(.05, 20, 20, 2, 5, 4, 5000)

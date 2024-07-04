@@ -13,8 +13,8 @@ slope.contrast(x)
 Returns the vector of contrast coefficients
 }
 \description{
-Computes the contrast coefficients to estimate the slope of a line in a
-single factor design with a quantitative factor.
+Computes the contrast coefficients that are needed to estimate the slope of
+a line in a one-factor design with a quantitative factor.
 }
 \examples{
 x <- c(25, 50, 75, 100)

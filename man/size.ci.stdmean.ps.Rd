@@ -23,10 +23,10 @@ Returns the required sample size for each standardizer
 Computes the sample size required to estimate two types of population
 standardized mean differences (unweighted standardizer and single group
 standardizer) with desired confidence interval precision in a paired-samples
-design. For a conservatively large sample size, set the standardized mean
-difference planning value to the largest value within a plausible range and
-set the Pearson correlation planning value to the smallest value within a
-plausible range.
+design. Set the standardized mean difference planning value to the largest
+value within a plausible range, and set the Pearson correlation planning
+value to the smallest value within a plausible range for a conservatively
+large sample size.
 }
 \examples{
 size.ci.stdmean.ps(.05, 1, .65, .6)
@@ -39,5 +39,5 @@ size.ci.stdmean.ps(.05, 1, .65, .6)
 
 }
 \references{
-\insertRef{Bonett2009}{statpsych}0
+\insertRef{Bonett2009}{statpsych}
 }

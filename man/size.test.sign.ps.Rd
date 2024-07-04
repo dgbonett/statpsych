@@ -2,7 +2,7 @@
 % Please edit documentation in R/statpsych1.R
 \name{size.test.sign.ps}
 \alias{size.test.sign.ps}
-\title{Sample size for a paired-samples Sign test}
+\title{Sample size for a paired-samples sign test}
 \usage{
 size.test.sign.ps(alpha, pow, p)
 }
@@ -17,21 +17,23 @@ size.test.sign.ps(alpha, pow, p)
 Returns the required sample size
 }
 \description{
-Computes sample size required for a Sign test with desired power in a
-paired-samples design. A planning value of the paired-samples Sign test
-parameter is required. In a paired-samples experiment, this parameter
-is the proportion of members in the population with scores that would be
+Computes sample size required for a paired-samples sign test with desired
+power. The null hypothesis can be expressed in terms of a population
+proportion. In a paired-samples experiment, the proportion is defined as
+the proportion of members in the population with scores that would be
 larger under treatment 1 than treatment 2. In a paired-samples
-nonexperiment, this parameter is the proportion of members in the
+nonexperiment, the proportion is the proportion of members in the
 population with measurement 1 scores that are larger than their
-measurement 2 scores.
+measurement 2 scores. Under the null hypothesis, the proportion is equal
+to .5. This function requires a planning value of this population
+proportion.
 }
 \examples{
 size.test.sign.ps(.05, .90, .75)
 
 # Should return:
 # Sample size
-#          32
+#          42
  
 
 }

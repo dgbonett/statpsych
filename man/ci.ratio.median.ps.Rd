@@ -16,16 +16,16 @@ ci.ratio.median.ps(alpha, y1, y2)
 \value{
 Returns a 1-row matrix. The columns are:
 \itemize{
-\item Median1 - estimated median from measurement 1
-\item Median2 - estimated median from measurement 2
+\item Median1 - estimated median for measurement 1
+\item Median2 - estimated median for measurement 2
 \item Median1/Median2 - estimated ratio of medians
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval
 }
 }
 \description{
-Computes a confidence interval for a ratio of population medians in a
-paired-samples design.
+Computes a distribution-free confidence interval for a ratio of population
+medians in a paired-samples design. Ratio-scale measurements are assumed.
 }
 \examples{
 y1 <- c(21, 4, 9, 12, 35, 18, 10, 22, 24, 1, 6, 8, 13, 16, 19)

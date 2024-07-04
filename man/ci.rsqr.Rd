@@ -18,7 +18,7 @@ ci.rsqr(alpha, r2, s, n)
 \value{
 Returns a 1-row matrix. The columns are:
 \itemize{
-\item R-squared - estimate of unadjusted R-squared
+\item R-squared - estimate of unadjusted R-squared (from input)
 \item adj R-squared - bias adjusted R-squared estimate
 \item SE - recovered standard error
 \item LL - lower limit of the confidence interval

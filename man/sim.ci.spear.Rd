@@ -20,7 +20,7 @@ sim.ci.spear(alpha, n, cor, dist1, dist2, rep)
 \itemize{
 \item 1 = Gaussian (skewness = 0 and excess kurtosis = 0)
 \item 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
-\item 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
+\item 3 = leptokurtic (skewness = 0 and excess kurtosis = 6)
 \item 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
 \item 5 = large skew (skewness = 2 and excess kurtosis = 6)
 }}
@@ -32,7 +32,7 @@ Returns a 1-row matrix. The columns are:
 \itemize{
 \item Coverage - probability of confidence interval including population correlation
 \item Lower Error - probability of lower limit greater than population correlation
-\item Upper Error - probability of upper limit less than population corrrelation
+\item Upper Error - probability of upper limit less than population correlation
 \item Ave CI Width - average confidence interval width
 }
 }

@@ -49,7 +49,7 @@ ci.lc.glm(.05, n, b, V, q)
 #  Should return:
 # (Intercept)          x1          x2 
 #   26.891111    3.648889    2.213333 
-# > ci.lc.glm(.05, n, b, V, q)
+#
 # Estimate        SE       t df           p       LL       UL
 # 2.931111 0.4462518 6.56829  7 0.000313428 1.875893 3.986329
 

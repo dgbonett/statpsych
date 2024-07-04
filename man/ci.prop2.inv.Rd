@@ -10,13 +10,13 @@ ci.prop2.inv(alpha, f1, f2, n1, n2)
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
 
-\item{f1}{number of participants in group 1 who have the attribute}
+\item{f1}{number of participants in group 1 who have the attribute (fixed)}
 
-\item{f2}{number of participants in group 2 who have the attribute}
+\item{f2}{number of participants in group 2 who have the attribute (fixed)}
 
-\item{n1}{sample size for group 1}
+\item{n1}{sample size for group 1 (random)}
 
-\item{n2}{sample size for group 2}
+\item{n2}{sample size for group 2 (random)}
 }
 \value{
 Returns a 1-row matrix. The columns are:

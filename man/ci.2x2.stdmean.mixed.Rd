@@ -2,8 +2,7 @@
 % Please edit documentation in R/statpsych1.R
 \name{ci.2x2.stdmean.mixed}
 \alias{ci.2x2.stdmean.mixed}
-\title{Computes confidence intervals of standardized effects in a 2x2
-mixed design}
+\title{Computes confidence intervals of standardized effects in a 2x2 mixed design}
 \usage{
 ci.2x2.stdmean.mixed(alpha, y11, y12, y21, y22)
 }
@@ -30,7 +29,7 @@ Returns a 7-row matrix (one row per effect). The columns are:
 }
 \description{
 Computes confidence intervals for the standardized AB interaction effect,
-main effect of A, main efect of B, simple main effects of A, and simple main
+main effect of A, main effect of B, simple main effects of A, and simple main
 effects of B in a 2x2 mixed factorial design where Factor A is a
 within-subjects factor, and Factor B is a between-subjects factor. Equality
 of population variances is not assumed.
@@ -53,4 +52,7 @@ ci.2x2.stdmean.mixed(.05, y11, y12, y21, y22)
 # B at a2:  2.88488027    2.66296641 0.7127726  1.4878717  4.2818889
 
 
+}
+\references{
+\insertRef{Bonett2008}{statpsych}
 }
