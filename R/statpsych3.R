@@ -2908,6 +2908,10 @@ size.ci.prop.prior <- function(alpha1, alpha2, p0, n0, w) {
 #' Returns the required sample size
 #'
 #'
+#' @references
+#' \insertRef{Bonett2005}{statpsych}
+#'
+#'
 #' @examples
 #' size.ci.tetra(.05, .4, .3, .5, .3)
 #'
@@ -2943,6 +2947,7 @@ size.ci.tetra <- function(alpha, p1, p2, cor, w) {
  rownames(out) <- ""
  return(out)
 }
+
 
 # ===================== Sample Size for Desired Power ========================
 #  size.test.prop =========================================================== 
