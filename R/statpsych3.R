@@ -980,15 +980,15 @@ ci.yule <- function(alpha, f00, f01, f10, f11) {
  return(out)
 }
           
-       
+
 #  ci.phi ====================================================================
 #' Confidence interval for a phi correlation
 #'
 #'
 #' @description
-#' Computes a confidence interval for a population phi correlation. This 
-#' function requires the frequency counts from a 2 x 2 contingency table for 
-#' two dichotomous variables. This measure of association is usually most 
+#' Computes a Fisher confidence interval for a population phi correlation. 
+#' This function requires the frequency counts from a 2 x 2 contingency table 
+#' for two dichotomous variables. This measure of association is usually most 
 #' appropriate when both dichotomous variables are naturally dichotomous.
 #'
 #'
@@ -1016,7 +1016,7 @@ ci.yule <- function(alpha, f00, f01, f10, f11) {
 #'
 #' # Should return:
 #' #  Estimate         SE         LL        UL
-#' #  0.1229976 0.05477117 0.01564805 0.2303471
+#' #  0.1229976 0.05477117 0.01462398 0.2285149
 #'
 #'
 #' @importFrom stats qnorm
@@ -1024,22 +1024,20 @@ ci.yule <- function(alpha, f00, f01, f10, f11) {
 ci.phi <- function(alpha, f00, f01, f10, f11) {
  z <- qnorm(1 - alpha/2)
  n <- f00 + f01 + f10 + f11
- p00 <- f00/n
- p01 <- f01/n
- p10 <- f10/n
- p11 <- f11/n;
- p0x <- (f00 + f01)/n
- p1x <- (f10 + f11)/n
- px0 <- (f00 + f10)/n
- px1 <- (f01 + f11)/n
+ p00 <- f00/n; p01 <- f01/n; p10 <- f10/n; p11 <- f11/n;
+ p0x <- (f00 + f01)/n; p1x <- (f10 + f11)/n
+ px0 <- (f00 + f10)/n; px1 <- (f01 + f11)/n
  phi <- (p11*p00 - p10*p01)/sqrt(p1x*p0x*px1*px0)
  v1 <- 1 - phi^2 
  v2 <- phi + .5*phi^3
  v3 <- (p0x - p1x)*(px0 - px1)/sqrt(p0x*p1x*px0*px1) 
  v4 <- (.75*phi^2)*((p0x - p1x)^2/(p0x*p1x) + (px0 - px1)^2/(px0*px1))
  se <- sqrt((v1 + v2*v3 - v4)/n)
- ll <- phi - z*se
- ul <- phi + z*se
+ zr <- log((1 + phi)/(1 - phi))/2 
+ ll0 <- zr - z*se/(1 - phi^2)
+ ul0 <- zr + z*se/(1 - phi^2)
+ ll <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
+ ul <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
  out <- t(c(phi, se, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  rownames(out) <- ""
