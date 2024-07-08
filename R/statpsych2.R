@@ -3080,8 +3080,8 @@ sim.ci.spear <- function(alpha, n, cor, dist1, dist2, rep) {
 #' @description
 #' Computes an adjusted standard error in a general linear model after one or 
 #' more predictor variables with nonsignificant slopes have been dropped from 
-#' the model. The adjusted standard error is then used to compute adjusted 
-#' p-values and adjusted confidence intervals. The mean square error and
+#' the model. The adjusted standard errors are then used to compute adjusted 
+#' t-values, p-values, and confidence intervals. The mean square error and
 #' error degrees of freedom from the full model are used to compute the 
 #' adjusted standard errors. These adjusted results are less susceptible to
 #' the negative effects of an exploratory model selection. 
@@ -3115,13 +3115,13 @@ sim.ci.spear <- function(alpha, n, cor, dist1, dist2, rep) {
 #' @importFrom stats qt
 #' @importFrom stats pt
 #' @export  
-adj.se <- function(alpha, mse1, mse2, df1, se, b) {
+adj.se <- function(alpha, mse1, mse2, dfe1, se, b) {
  s <- length(b)
- df <- rep(df1, s)
- tcrit <- qt(1 - alpha/2, df1)
+ df <- rep(dfe1, s)
+ tcrit <- qt(1 - alpha/2, dfe1)
  adjse <- se*sqrt(mse1/mse2)
  t <- b/adjse
- p <- 2*(1 - pt(abs(t),df1))
+ p <- 2*(1 - pt(abs(t),dfe1))
  ll <- b - tcrit*adjse
  ul <- b + tcrit*adjse
  out <- matrix(c(t(b), t(adjse), t(t), t(df), t(p), t(ll), t(ul)), s, 7)
