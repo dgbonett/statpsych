@@ -2348,7 +2348,7 @@ size.ci.cor.prior <- function(alpha1, alpha2, cor0, n0, w) {
  ul0 <- ci[1,4]  
  if (ll0 < 0 & ul0 > 0) {
    cor = 0
-   n <- size.cor(alpha1, cor, 0, w)
+   n <- size.ci.cor(alpha1, cor, 0, w)
  } else {
    if (abs(ll0) < abs(ul0)) {cor = ll0}
    if (abs(ll0) > abs(ul0)) {cor = ul0}
