@@ -31,6 +31,7 @@ Changes:
     * size.test.prop and size.test.prop2 now assume the test statistic will use a continuity correction
     * one-group function names that end with a "1" have been renamed and now exclude the "1" (for naming consistency and to avoid confusion with lower case L).
     * ci.mape2 has been renamed ci.ratio.mape2, and ci.cod2 has been renamed ci.ratio.cod2
+    * The ci.phi function now uses a Fisher transformation for improved coverage probability performance
 
 
 statpsych version 1.5.0 (Release date: 2023/12/11)
