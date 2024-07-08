@@ -19,8 +19,8 @@ Returns the required sample size
 \description{
 Computes the sample size required to estimate a population Spearman correlation
 with desired confidence interval precision. Set the correlation planning value
-to the smallest value within a plausible range for a conservatively large
-sample size.
+to the smallest absolute value within a plausible range for a conservatively
+large sample size.
 }
 \examples{
 size.ci.spear(.05, .362, .25)

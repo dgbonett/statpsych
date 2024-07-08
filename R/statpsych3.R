@@ -3580,3 +3580,15 @@ fix_imports <- function() {
   something <- Rdpack::append_to_Rd_list()
   res <- mathjaxr::preview_rd()
 }
+
+
+
+
+# - Deprecated functions --------------------------------------------------
+#' @rdname ci.prop
+#' 
+#' @description
+#' ci.prop1 is deprecated and will soon be removed from statpsych; please switch to ci.prop
+#'  
+#' @export
+ci.prop1 <- ci.prop

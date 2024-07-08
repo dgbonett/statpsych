@@ -2,9 +2,12 @@
 % Please edit documentation in R/statpsych1.R
 \name{ci.stdmean}
 \alias{ci.stdmean}
+\alias{ci.stdmean1}
 \title{Confidence interval for a standardized mean}
 \usage{
 ci.stdmean(alpha, m, sd, n, h)
+
+ci.stdmean1(alpha, m, sd, n, h)
 }
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
@@ -32,6 +35,8 @@ Computes a confidence interval for a population standardized mean
 difference from a hypothesized value. If the hypothesized value is set
 to 0, the reciprocals of the confidence interval endpoints gives a
 confidence interval for the coefficient of variation (see ci.cv).
+
+ci.stdmean1 is deprecated and will soon be removed from statpsych; please switch to ci.stdmean
 }
 \examples{
 ci.stdmean(.05, 24.5, 3.65, 40, 20)

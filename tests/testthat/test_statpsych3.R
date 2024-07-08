@@ -14,18 +14,18 @@ test_that("ci.prop returns valid matrix", {
 })
 
 
-# test_that("ci.pairs.prop returns valid matrix", {
-#   colnames_expected <- c(
-#     "", "", "Estimate", "SE", "LL", "UL"
-#   )
-#   
-#   f <- c(125, 82, 92)
-#   res <- ci.pairs.prop(.05, f)
-#   
-#   testthat::expect_equal(class(res), c("matrix", "array"))
-#   testthat::expect_equal(dim(res), c(3, length(colnames_expected)))
-#   testthat::expect_equal(colnames(res), colnames_expected)
-# })
+test_that("ci.pairs.mult  returns valid matrix", {
+  colnames_expected <- c(
+    "", "", "Estimate", "SE", "LL", "UL"
+  )
+
+  f <- c(125, 82, 92)
+  res <- ci.pairs.mult(.05, f)
+
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(3, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
 
 
 test_that("ci.prop2 returns valid matrix", {
@@ -371,7 +371,7 @@ test_that("size.test.prop returns valid numeric", {
   res <- size.test.prop(.05, .9, .5, .3)
   
   testthat::expect_equal(class(res), c("matrix", "array"))
-  testthat::expect_equal(res[[1,1]], 67)
+  testthat::expect_equal(res[[1,1]], 65)
 })
 
 

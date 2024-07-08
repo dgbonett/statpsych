@@ -2,9 +2,12 @@
 % Please edit documentation in R/statpsych1.R
 \name{ci.median}
 \alias{ci.median}
+\alias{ci.median1}
 \title{Confidence interval for a median}
 \usage{
 ci.median(alpha, y)
+
+ci.median1(alpha, y)
 }
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
@@ -22,6 +25,8 @@ Returns a 1-row matrix. The columns are:
 }
 \description{
 Computes a distribution-free confidence interval for a population median.
+
+ci.median1 is deprecated and will soon be removed from statpsych; please switch to ci.median
 }
 \examples{
 y <- c(30, 20, 15, 10, 10, 60, 20, 25, 20, 30, 10, 5, 50, 40,

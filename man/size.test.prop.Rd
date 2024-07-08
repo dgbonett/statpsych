@@ -27,7 +27,7 @@ size.test.prop(.05, .9, .5, .3)
 
 # Should return:
 # Sample size
-#          67
+#          65
 
 
 }

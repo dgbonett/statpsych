@@ -23,7 +23,8 @@ Returns the required sample size
 Computes the sample size required to estimate a difference in population
 Pearson or partial correlations with desired confidence interval precision
 in a 2-group design. Set the correlation planning values to the smallest
-values within their plausible ranges for a conservatively large sample size.
+absolute values within their plausible ranges for a conservatively large
+sample size.
 }
 \examples{
 size.ci.cor2(.05, .8, .5, .2)

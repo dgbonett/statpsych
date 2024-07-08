@@ -213,18 +213,18 @@ test_that("size.ci.spear returns valid numeric", {
 })
 
 
-# test_that("size.ci.pbcor returns valid numeric", {
-#   colnames_expected <- c(
-#     "Sample size"
-#   )
-#   
-#   res <- size.ci.pbcor(.05, .40, .25, .73)
-#   
-#   testthat::expect_equal(class(res), c("matrix", "array"))
-#   testthat::expect_equal(res[[1,1]], 168)
-#   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
-#   testthat::expect_equal(colnames(res), colnames_expected)
-# })
+test_that("size.ci.pbcor returns valid numeric", {
+  colnames_expected <- c(
+    "Sample size"
+  )
+
+  res <- size.ci.pbcor(.05, .40, .25, .73)
+
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(res[[1,1]], 168)
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
 
 
 test_that("size.ci.pbcor returns valid numeric", {

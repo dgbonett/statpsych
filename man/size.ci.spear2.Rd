@@ -22,8 +22,8 @@ Returns the required sample size
 \description{
 Computes the sample size required to estimate a difference in population
 Spearman correlations with desired confidence interval precision in a 2-group
-design. Set the correlation planning values to the smallest values within
-their plausible ranges for a conservatively large sample size.
+design. Set the correlation planning values to the smallest absolute values
+within their plausible ranges for a conservatively large sample size.
 }
 \examples{
 size.ci.spear2(.05, .8, .5, .2)

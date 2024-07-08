@@ -20,7 +20,9 @@ Returns the required sample size
 }
 \description{
 Computes the sample size required to estimate a Cronbach reliability
-with desired confidence interval precision.
+with desired confidence interval precision. Set the reliability planning
+value to the smallest value within a plausible range for a
+conservatively large sample size.
 }
 \examples{
 size.ci.cronbach(.05, .85, 5, .1)
