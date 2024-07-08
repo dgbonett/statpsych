@@ -4869,7 +4869,9 @@ size.ci.lc.stdmean.ws <- function(alpha, d, cor, w, q) {
 #'
 #'
 #' Computes the sample size required to estimate a Cronbach reliability
-#' with desired confidence interval precision.
+#' with desired confidence interval precision. Set the reliability planning 
+#' value to the smallest value within a plausible range for a 
+#' conservatively large sample size.
 #'
 #'
 #' @param  alpha  alpha value for 1-alpha confidence 
