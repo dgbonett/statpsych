@@ -4,14 +4,14 @@
 \alias{test.spear}
 \title{Hypothesis test for a Spearman correlation}
 \usage{
-test.spear(cor, n, h)
+test.spear(cor, h, n)
 }
 \arguments{
 \item{cor}{estimated correlation}
 
-\item{n}{sample size}
-
 \item{h}{null hypothesis value of correlation}
+
+\item{n}{sample size}
 }
 \value{
 Returns a 1-row matrix. The columns are:
@@ -37,7 +37,7 @@ test.spear(.471, .2, 100)
 #     0.471 3.009628 0.00261568
 
 
-test.spear1(.342, 0, 100)
+test.spear(.342, 0, 100)
 
 # Should return:
 #  Estimate        t df            p

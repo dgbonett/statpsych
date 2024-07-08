@@ -17,10 +17,12 @@ reference:
 - title: Miscellaneous
   desc:  Other functions, including functions for simulating data
   contents:
+  - adj.se
   - etasqr.gen.2way
   - etasqr.adj
+  - fitindices
   - iqv
-  - pi.score1
+  - pi.score
   - pi.score2
   - random.sample
   - random.y

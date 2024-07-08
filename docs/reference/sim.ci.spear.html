@@ -24,7 +24,7 @@ function in the mnonr package."><!-- mathjax --><script src="https://cdnjs.cloud
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statpsych</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.0</span>
       </span>
     </div>
 
@@ -90,7 +90,7 @@ function in the mnonr package.</p>
 <dt>dist2</dt>
 <dd><p>type of distribution for variable 2 (1, 2, 3, 4, or 5)</p><ul><li><p>1 = Gaussian (skewness = 0 and excess kurtosis = 0)</p></li>
 <li><p>2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)</p></li>
-<li><p>3 = leptokurtic (skewness = 0 and excess kurtsois = 6)</p></li>
+<li><p>3 = leptokurtic (skewness = 0 and excess kurtosis = 6)</p></li>
 <li><p>4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)</p></li>
 <li><p>5 = large skew (skewness = 2 and excess kurtosis = 6)</p></li>
 </ul></dd>
@@ -106,7 +106,7 @@ function in the mnonr package.</p>
 
 <p>Returns a 1-row matrix. The columns are:</p><ul><li><p>Coverage - probability of confidence interval including population correlation</p></li>
 <li><p>Lower Error - probability of lower limit greater than population correlation</p></li>
-<li><p>Upper Error - probability of upper limit less than population corrrelation</p></li>
+<li><p>Upper Error - probability of upper limit less than population correlation</p></li>
 <li><p>Ave CI Width - average confidence interval width</p></li>
 </ul></div>
 
@@ -114,7 +114,7 @@ function in the mnonr package.</p>
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">sim.ci.spear</span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">30</span>, <span class="fl">.7</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">1000</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      Coverage Lower Error Upper Error Ave CI Width</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]    0.956       0.014        0.03    0.4260759</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]    0.959        0.01       0.031    0.4326256</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Should return (within sampling error):</span></span></span>
 <span class="r-in"><span><span class="co">#      Coverage Lower Error Upper Error Ave CI Width</span></span></span>

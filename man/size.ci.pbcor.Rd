@@ -4,9 +4,7 @@
 \alias{size.ci.pbcor}
 \title{Sample size for a point-biserial correlation confidence interval}
 \usage{
-size.ci.pbcor(alpha, cor, w, R)
-
-size.ci.pbcor(alpha, cor, w, R)
+size.ci.pbcor(alpha, cor, w, p)
 }
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
@@ -15,14 +13,10 @@ size.ci.pbcor(alpha, cor, w, R)
 
 \item{w}{desired confidence interval width}
 
-\item{R}{n2/n1 ratio}
-
 \item{p}{proportion of members in one of the two subpopulations}
 }
 \value{
 Returns the required sample size
-
-Returns the required sample size for each group
 }
 \description{
 Computes the sample size required to estimate a population point-biserial
@@ -33,12 +27,6 @@ girls in a school district). This function requires a planning value for the
 proportion of population members who belong to one of the two subpopulations.
 Set the correlation planning value to the smallest value within a plausible
 range for a conservatively large sample size.
-
-Computes the sample size required to estimate a population point-biserial
-correlation in a two-group design with desired confidence interval precision.
-Set the correlation planning value to the smallest value within a plausible
-range for a conservatively large sample size. Set R = 1 for equal sample
-sizes.
 }
 \examples{
 size.ci.pbcor(.05, .40, .25, .73)
@@ -48,16 +36,7 @@ size.ci.pbcor(.05, .40, .25, .73)
 #         168
  
 
-size.ci.pbcor(.05, .30, .25, 2)
-
-# Should return:
-# n1   n2
-# 74  148
- 
-
 }
 \references{
-\insertRef{Bonett2020a}{statpsych}
-
 \insertRef{Bonett2020a}{statpsych}
 }

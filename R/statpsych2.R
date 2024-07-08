@@ -1335,6 +1335,7 @@ ci.rel2 <- function(rel1, ll1, ul1, rel2, ll2, ul2) {
 #'  
 #' 
 #' @importFrom stats qnorm
+#' @importFrom stats dnorm
 #' @export 
 ci.bscor <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
  z <- qnorm(1 - alpha/2)

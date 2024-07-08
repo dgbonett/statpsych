@@ -7420,6 +7420,7 @@ spearmanbrown <- function(rel, r1, r2) {
 }
 
 
+
 # - Deprecated functions --------------------------------------------------
 #' @rdname ci.stdmean
 #' 
@@ -7428,3 +7429,13 @@ spearmanbrown <- function(rel, r1, r2) {
 #'  
 #' @export
 ci.stdmean1 <- ci.stdmean
+
+
+# - Deprecated functions --------------------------------------------------
+#' @rdname ci.mean
+#' 
+#' @description
+#' ci.mean1 is deprecated and will soon be removed from statpsych; please switch to ci.dmean
+#'  
+#' @export
+ci.mean1 <- ci.mean

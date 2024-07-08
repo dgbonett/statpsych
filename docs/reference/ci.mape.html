@@ -22,7 +22,7 @@ the population prediction errors."><!-- mathjax --><script src="https://cdnjs.cl
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statpsych</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.0</span>
       </span>
     </div>
 
@@ -63,7 +63,7 @@ the population prediction errors.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ci.mape</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">res</span>, <span class="va">s</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ci.mape</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">res</span>, <span class="va">s</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -92,17 +92,17 @@ the population prediction errors.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2.70</span>, <span class="op">-</span><span class="fl">2.69</span>, <span class="op">-</span><span class="fl">1.32</span>, <span class="fl">1.02</span>, <span class="fl">1.23</span>, <span class="op">-</span><span class="fl">1.46</span>, <span class="fl">2.21</span>, <span class="op">-</span><span class="fl">2.10</span>, <span class="fl">2.56</span>,</span>
-<span class="r-in">      <span class="op">-</span><span class="fl">3.02</span>, <span class="op">-</span><span class="fl">1.55</span>, <span class="fl">1.46</span>, <span class="fl">4.02</span>, <span class="fl">2.34</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">ci.mape</span><span class="op">(</span><span class="fl">.05</span>, <span class="va">res</span>, <span class="fl">1</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      Estimate        SE       LL       UL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]   2.3744 0.3314752 1.806022 3.121654</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Should return:</span></span>
-<span class="r-in"><span class="co">#       Estimate        SE       LL       UL</span></span>
-<span class="r-in"><span class="co"># [1,]    2.3744 0.3314752 1.751678 3.218499</span></span>
-<span class="r-in"> </span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2.70</span>, <span class="op">-</span><span class="fl">2.69</span>, <span class="op">-</span><span class="fl">1.32</span>, <span class="fl">1.02</span>, <span class="fl">1.23</span>, <span class="op">-</span><span class="fl">1.46</span>, <span class="fl">2.21</span>, <span class="op">-</span><span class="fl">2.10</span>, <span class="fl">2.56</span>,</span></span>
+<span class="r-in"><span>      <span class="op">-</span><span class="fl">3.02</span>, <span class="op">-</span><span class="fl">1.55</span>, <span class="fl">1.46</span>, <span class="fl">4.02</span>, <span class="fl">2.34</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">ci.mape</span><span class="op">(</span><span class="fl">.05</span>, <span class="va">res</span>, <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Estimate        SE       LL       UL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    2.3744 0.3314752 1.806022 3.121654</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Should return:</span></span></span>
+<span class="r-in"><span><span class="co"># Estimate        SE       LL       UL</span></span></span>
+<span class="r-in"><span><span class="co">#   2.3744 0.3314752 1.751678 3.218499</span></span></span>
+<span class="r-in"><span> </span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>

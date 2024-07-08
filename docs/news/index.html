@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statpsych</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.0</span>
       </span>
     </div>
 
@@ -48,10 +48,42 @@
     </div>
 
     <div class="section level2">
-<h2 class="page-header" data-toc-text="1.5.0" id="statpsych-version-150-release-date-20231211">statpsych version 1.5.0 (Release date: 2023/12/11)<a class="anchor" aria-label="anchor" href="#statpsych-version-150-release-date-20231211"></a></h2>
+<h2 class="page-header" data-toc-text="1.6.0" id="statpsych-version-160-release-date-20247xx">statpsych version 1.6.0 (Release date: 2024/7/xx)<a class="anchor" aria-label="anchor" href="#statpsych-version-160-release-date-20247xx"></a></h2>
 <p>Changes:</p>
 <ul><li>New functions:
-<ul><li>ci.cv1 – Computes confidence interval for a single coefficient of variation</li>
+<ul><li>ci.mean.fpc – Computes confidence interval for a mean with a finite population correction</li>
+<li>ci.prop.fpc – Computes confidence interval for a proportion with a finite population correction</li>
+<li>ci.poisson – Computes confidence interval for a Poisson rate</li>
+<li>ci.ratio.poisson2 – Computes confidence interval for a ratio of Poisson rates in a 2-group design</li>
+<li>ci.bscor – Computes confidence interval for a biserial correlation</li>
+<li>pi.cor – Computes prediction interval for an estimated correlation</li>
+<li>pi.prop – Computes prediction interval for an estimated proportion</li>
+<li>test.cor – Hypothesis test for a Pearson or partial correlation (for zero or non-zero null hypotheses)</li>
+<li>test.spear – Hypothesis test for a Spearman correlation (for zero or non-zero null hypotheses)</li>
+<li>test.cor2 – Hypothesis test for a 2-group Pearson or partial correlation difference</li>
+<li>test.spear2 – Hypothesis test for a 2-group Spearman correlation difference</li>
+<li>test.mean – Hypothesis test for a mean using summary information</li>
+<li>size.ci.cor2 – Computes sample size for a 2-group Pearson correlation difference confidence interval</li>
+<li>size.ci.spear2 – Computes sample size for a 2-group Spearman correlation difference confidence interval</li>
+<li>size.ci.tetra – Computes sample size for a tetrachoric correlation confidence interval</li>
+<li>size.ci.mean.prior – Computes sample size for a mean confidence interval using a planning value from a prior study</li>
+<li>size.ci.prop.prior – Computes sample size for a proportion confidence interval using a planning value from a prior study</li>
+<li>size.ci.cor.prior – Computes sample size for a correlation confidence interval using a planning value from a prior study</li>
+<li>adj.se – Computes adjusted standard errors for slope coefficients in an exploratory analysis</li>
+<li>fitindices – Computes four SEM fit indices</li>
+</ul></li>
+<li>Modifications:
+<ul><li>ci.var.upper now computes an exact upper limit rather than an approximate upper limit</li>
+<li>power computations are now more accurate for very small effect sizes in the power.cor, power.cor2, power.lc.meanc.bs, power.mean, power.mean2, power.mean.ps, power.prop, power.pro2, and power.prop.ps functions</li>
+<li>size.test.prop and size.test.prop2 now assume the test statistic will use a continuity correction</li>
+<li>one-group function names that end with a “1” have been renamed and now exclude the “1” (for naming consistency and to avoid confusion with lower case L).</li>
+</ul></li>
+</ul></div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.5.0" id="statpsych-version-150-release-date-20231211">statpsych version 1.5.0 (Release date: 2023/12/11)<small>2023-12-20</small><a class="anchor" aria-label="anchor" href="#statpsych-version-150-release-date-20231211"></a></h2>
+<p>Changes:</p>
+<ul><li>New functions:
+<ul><li>ci.cv1 – Computes confidence interval for a coefficient of variation</li>
 <li>ci.ratio.cv2 – Computes confidence interval for a ratio of coefficients of variation</li>
 <li>ci.pv – Computes confidence intervals for positive and negative predictive values with retrospective sampling</li>
 <li>ci.2x2.stdmean.ws – Computes confidence intervals of standardized effects in a 2x2 within-subjects design</li>
@@ -141,7 +173,7 @@ a 2-group design</li>
 <li>ci.mann – now returns a confidence interval for P(y1 &gt; y2) rather than P(y1 &lt; y2).</li>
 </ul></li>
 <li>Error Correction:
-<ul><li>ci.lc.std.mean.ws – corrected an error in the standard errord</li>
+<ul><li>ci.lc.std.mean.ws – corrected an error in the standard error computation</li>
 </ul></li>
 </ul></div>
     <div class="section level2">
@@ -154,7 +186,7 @@ a 2-group design</li>
 <li>ci.2x2.mean.mixed - Confidence intervals for effects in a 2x2 mixed design for means</li>
 <li>ci.2x2.prop.bs - Confidence intervals for effects in a 2x2 between-subjects design for proportions</li>
 <li>ci.2x2.prop.mixed - Confidence intervals for effects in a 2x2 mixed design for proportions</li>
-<li>sim.ci.mean1 – Simulation of confidence interval for a single mean</li>
+<li>sim.ci.mean1 – Simulation of confidence interval for a mean</li>
 <li>sim.ci.mean2 – Simulation of confidence interval for mean difference in a two-group design</li>
 <li>sim.ci.mean.ps – Simulation of confidence interval for mean difference in a paired-samples design</li>
 <li>sim.ci.median1 – Simulation of confidence interval for a single median</li>

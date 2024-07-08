@@ -35,3 +35,6 @@ size.ci.tetra(.05, .4, .3, .5, .3)
 
 
 }
+\references{
+\insertRef{Bonett2005}{statpsych}
+}
