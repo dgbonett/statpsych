@@ -1730,7 +1730,7 @@ size.ci.slope <- function(alpha, evar, x, w) {
 #' Computes the sample size required to estimate a population Pearson or
 #' partial correlation with desired confidence interval precision. 
 #' Set s = 0 for a Pearson correlation. Set the correlation planning value
-#' to the smallest value within a plausible range for a conservatively 
+#' to the smallest absolute value within a plausible range for a conservatively 
 #' large sample size.
 #'
 #'  
@@ -1783,8 +1783,8 @@ size.ci.cor <- function(alpha, cor, s, w) {
 #' @description
 #' Computes the sample size required to estimate a population Spearman correlation
 #' with desired confidence interval precision. Set the correlation planning value
-#' to the smallest value within a plausible range for a conservatively large 
-#' sample size.
+#' to the smallest absolute value within a plausible range for a conservatively
+#' large sample size.
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -1839,8 +1839,8 @@ size.ci.spear <- function(alpha, cor, w) {
 #' nonexperimental design implies two subpopulations (e.g., all boys and all
 #' girls in a school district). This function requires a planning value for the
 #' proportion of population members who belong to one of the two subpopulations. 
-#' Set the correlation planning value to the smallest value within a plausible
-#' range for a conservatively large sample size.
+#' Set the correlation planning value to the smallest absolute value within a 
+#' plausible range for a conservatively large sample size.
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -2187,7 +2187,8 @@ size.ci.mape <- function(alpha, mape, s, w) {
 #' Computes the sample size required to estimate a difference in population 
 #' Pearson or partial correlations with desired confidence interval precision
 #' in a 2-group design. Set the correlation planning values to the smallest
-#' values within their plausible ranges for a conservatively large sample size.
+#' absolute values within their plausible ranges for a conservatively large
+#' sample size.
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -2242,8 +2243,8 @@ size.ci.cor2 <- function(alpha, cor1, cor2, w) {
 #' @description
 #' Computes the sample size required to estimate a difference in population 
 #' Spearman correlations with desired confidence interval precision in a 2-group 
-#' design. Set the correlation planning values to the smallest values within 
-#' their plausible ranges for a conservatively large sample size.
+#' design. Set the correlation planning values to the smallest absolute values
+#' within their plausible ranges for a conservatively large sample size.
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
