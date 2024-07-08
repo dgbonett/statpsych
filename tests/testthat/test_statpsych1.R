@@ -698,20 +698,20 @@ test_that("etasqr.gen.2way returns valid matrix", {
   testthat::expect_equal(colnames(res), colnames_expected)
 })
 
-# 
-# test_that("ci.cod2 returns valid matrix", {
-#   colnames_expected <- c(
-#     "COD1",      "COD2", "COD1/COD2",       "LL",       "UL"
-#   )
-#   
-#   y1 <- c(32, 39, 26, 35, 43, 27, 40, 37, 34, 29)
-#   y2 <- c(36, 44, 47, 42, 49, 39, 46, 31, 33, 48)
-#   res <- ci.cod2(.05, y1, y2)
-# 
-#   testthat::expect_equal(class(res), c("matrix", "array"))
-#   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
-#   testthat::expect_equal(colnames(res), colnames_expected)
-# })
+
+test_that("ci.ratio.cod2 returns valid matrix", {
+  colnames_expected <- c(
+    "COD1",      "COD2", "COD1/COD2",       "LL",       "UL"
+  )
+
+  y1 <- c(32, 39, 26, 35, 43, 27, 40, 37, 34, 29)
+  y2 <- c(36, 44, 47, 42, 49, 39, 46, 31, 33, 48)
+  res <- ci.ratio.cod2(.05, y1, y2)
+
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
 
 
 test_that("ci.etasqr returns valid matrix", {

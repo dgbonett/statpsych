@@ -490,21 +490,21 @@ test_that("size.ci.indirect returns valid matrix", {
 })
 
 
-# test_that("ci.mape2 returns valid matrix", {
-#   colnames_expected <- c(
-#     "MAPE1", "MAPE2", "MAPE1/MAPE2", "LL", "UL"
-#   )
-#   
-#   res1 <- c(-2.70, -2.69, -1.32, 1.02, 1.23, -1.46, 2.21, -2.10, 2.56, -3.02
-#           -1.55, 1.46, 4.02, 2.34)
-#   res2 <- c(-0.71, -0.89, 0.72, -0.35, 0.33 -0.92, 2.37, 0.51, 0.68, -0.85,
-#           -0.15, 0.77, -1.52, 0.89, -0.29, -0.23, -0.94, 0.93, -0.31 -0.04)
-#   res <- ci.mape2(.05, res1, res2, 1, 1)
-#   
-#   testthat::expect_equal(class(res), c("matrix", "array"))
-#   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
-#   testthat::expect_equal(colnames(res), colnames_expected)
-# })
+test_that("ci.ratio.mape2 returns valid matrix", {
+  colnames_expected <- c(
+    "MAPE1", "MAPE2", "MAPE1/MAPE2", "LL", "UL"
+  )
+
+  res1 <- c(-2.70, -2.69, -1.32, 1.02, 1.23, -1.46, 2.21, -2.10, 2.56, -3.02
+          -1.55, 1.46, 4.02, 2.34)
+  res2 <- c(-0.71, -0.89, 0.72, -0.35, 0.33 -0.92, 2.37, 0.51, 0.68, -0.85,
+          -0.15, 0.77, -1.52, 0.89, -0.29, -0.23, -0.94, 0.93, -0.31 -0.04)
+  res <- ci.ratio.mape2(.05, res1, res2, 1, 1)
+
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+})
 
 
 test_that("ci.rel2 returns valid matrix", {
