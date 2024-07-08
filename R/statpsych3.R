@@ -2980,7 +2980,7 @@ size.ci.tetra <- function(alpha, p1, p2, cor, w) {
 #'
 #' # Should return:
 #' # Sample size
-#' #          67
+#' #          65
 #'
 #'
 #' @importFrom stats qnorm
