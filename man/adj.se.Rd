@@ -4,7 +4,7 @@
 \alias{adj.se}
 \title{Adjusted standard errors for slope coefficients in an exploratory analysis}
 \usage{
-adj.se(alpha, mse1, mse2, df1, se, b)
+adj.se(alpha, mse1, mse2, dfe1, se, b)
 }
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
@@ -13,11 +13,11 @@ adj.se(alpha, mse1, mse2, df1, se, b)
 
 \item{mse2}{mean squared error in selected model}
 
+\item{dfe1}{error df in full model}
+
 \item{se}{vector of slope standard errors in selected model}
 
 \item{b}{vector of estimated slopes in selected model}
-
-\item{dfe1}{error df in full model}
 }
 \value{
 Returns adjusted standard error, t-statistic, p-value, and confidence interval
@@ -26,8 +26,8 @@ for each slope coefficient
 \description{
 Computes an adjusted standard error in a general linear model after one or
 more predictor variables with nonsignificant slopes have been dropped from
-the model. The adjusted standard error is then used to compute adjusted
-p-values and adjusted confidence intervals. The mean square error and
+the model. The adjusted standard errors are then used to compute adjusted
+t-values, p-values, and confidence intervals. The mean square error and
 error degrees of freedom from the full model are used to compute the
 adjusted standard errors. These adjusted results are less susceptible to
 the negative effects of an exploratory model selection.
