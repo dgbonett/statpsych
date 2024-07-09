@@ -10,7 +10,7 @@ spearmanbrown(rel, r1, r2)
 \arguments{
 \item{rel}{reliability of the sum or average of r1 measurements}
 
-\item{r1}{number of measurements in the orginal scale}
+\item{r1}{number of measurements in the original scale}
 
 \item{r2}{number of measurements in the new scale}
 }

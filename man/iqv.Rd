@@ -10,7 +10,7 @@ iqv(f)
 \item{f}{vector of multinomial frequency counts}
 }
 \value{
-Returns estimates of the Shannon, Berger, and Simpson qualitative indices
+Returns estimates of the Shannon, Berger, and Simpson indices
 }
 \description{
 Computes the Shannon, Berger, and Simpson indices of qualitative variation.

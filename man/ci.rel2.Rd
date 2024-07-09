@@ -30,9 +30,9 @@ Returns a 1-row matrix. The columns are:
 \description{
 Computes a 100(1 - alpha)\% confidence interval for a difference in
 population reliabilities in a 2-group design. This function can be
-used with any type of reliablity coefficient (e.g., Cronbach alpha,
-McDonald omega, intraclass reliablities). The function requires
-point estimates and 100(1 - alpha)\% confidence intervals for each
+used with any type of reliability coefficient (e.g., Cronbach alpha,
+McDonald omega, intraclass reliability). The function requires a
+point estimate and a 100(1 - alpha)\% confidence interval for each
 reliability as input.
 }
 \examples{

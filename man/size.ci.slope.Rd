@@ -19,8 +19,8 @@ size.ci.slope(alpha, evar, x, w)
 Returns the required total sample size
 }
 \description{
-Computes the total sample size required to estimate a slope with desired
-confidence interval precision in a between-subjects design with a
+Computes the total sample size required to estimate a population slope with
+desired confidence interval precision in a between-subjects design with a
 quantitative factor. In an experimental design, the total sample size
 would be allocated to the levels of the quantitative factor and it might
 be necessary to increase the total sample size to achieve equal sample

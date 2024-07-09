@@ -27,7 +27,7 @@ Returns a 1-row matrix. The columns are:
 \description{
 Computes a Fisher confidence interval for a population Pearson correlation
 or partial correlation with s control variables. Set s = 0 for a Pearson
-correlation. A bias adjustmentment is used to reduce the bias of the Fisher
+correlation. A bias adjustment is used to reduce the bias of the Fisher
 transformed correlation. This function uses an estimated correlation as
 input. Use the cor.test function for raw data input.
 }

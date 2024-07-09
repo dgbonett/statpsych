@@ -13,7 +13,7 @@ test.skew(y)
 Returns a 1-row matrix. The columns are:
 \itemize{
 \item Skewness - estimate of skewness coefficient
-\item p - Monte Carlo two-sided p-value for test of zero skewness
+\item p - Monte Carlo two-sided p-value
 }
 }
 \description{

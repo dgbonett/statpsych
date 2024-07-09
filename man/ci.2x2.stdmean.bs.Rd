@@ -3,7 +3,7 @@
 \name{ci.2x2.stdmean.bs}
 \alias{ci.2x2.stdmean.bs}
 \title{Computes confidence intervals of standardized effects in a 2x2
-between-subjects design for means}
+between-subjects design}
 \usage{
 ci.2x2.stdmean.bs(alpha, y11, y12, y21, y22)
 }
@@ -29,12 +29,12 @@ Returns a 7-row matrix (one row per effect). The columns are:
 }
 }
 \description{
-Computes confidence intervals for standardized linear constrasts of means
-(AB interaction, main effect of A, main efect of B, simple main effects
+Computes confidence intervals for standardized linear contrasts of means
+(AB interaction, main effect of A, main effect of B, simple main effects
 of A, and simple main effects of B) in a 2x2 between-subjects design with
 a quantitative response variable. Equality of population variances is not
-assumed. An unweigthed variance standardizer is used, which is the
-recommended standarizer when both factors are treatment factors.
+assumed. An unweighted variance standardizer is used, which is the
+recommended standardizer when both factors are treatment factors.
 }
 \examples{
 y11 <- c(14, 15, 11, 7, 16, 12, 15, 16, 10, 9)
@@ -54,4 +54,7 @@ ci.2x2.stdmean.bs(.05, y11, y12, y21, y22)
 # B at a2: -0.02842676    -0.0278304 0.4820369 -0.9732017  0.9163482
 
 
+}
+\references{
+\insertRef{Bonett2008}{statpsych}
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/statpsych3.R
 \name{ci.kappa}
 \alias{ci.kappa}
-\title{Confidence interval for a kappa reliability}
+\title{Confidence interval for two kappa reliability coefficients}
 \usage{
 ci.kappa(alpha, f00, f01, f10, f11)
 }
@@ -28,9 +28,8 @@ kappa. The results in row 2 are for Cohen's kappa. The columns are:
 }
 }
 \description{
-Computes a confidence interval for the intraclass kappa coefficient and
-Cohen's kappa coefficient for two dichotomous ratings. Both measures
-are intraclass reliability coefficients.
+Computes confidence intervals for the intraclass kappa coefficient and
+Cohen's kappa coefficient with two dichotomous ratings.
 }
 \examples{
 ci.kappa(.05, 31, 12, 4, 58)

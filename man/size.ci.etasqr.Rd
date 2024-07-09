@@ -16,7 +16,7 @@ size.ci.etasqr(alpha, etasqr, groups, w)
 \item{w}{desired confidence interval width}
 }
 \value{
-Returns the required sample size for each group group
+Returns the required sample size for each group
 }
 \description{
 Computes the sample size required to estimate an eta-squared coefficient

@@ -26,7 +26,7 @@ Returns a 1-row matrix. The columns are:
 }
 }
 \description{
-Computes a confidence interval for a ratio of proportions in a
+Computes a confidence interval for a ratio of population proportions in a
 paired-samples design. This function requires the frequency counts from
 a 2 x 2 contingency table for two repeated dichotomous measurements.
 }

@@ -34,7 +34,7 @@ each cell frequency. This function requires the frequency counts from a
 2 x 2 contingency table for two dichotomous variables. Digby H is sometimes
 used as a crude approximation to the tetrachoric correlation. Yule Y is
 equal to the phi coefficient only when all marginal frequencies are equal.
-Bonett-Price Y* is a better approximation to the phi coeffiient when the
+Bonett-Price Y* is a better approximation to the phi coefficient when the
 marginal frequencies are not equal.
 }
 \examples{

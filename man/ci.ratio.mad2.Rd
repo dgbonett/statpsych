@@ -16,8 +16,8 @@ ci.ratio.mad2(alpha, y1, y2)
 \value{
 Returns a 1-row matrix. The columns are:
 \itemize{
-\item MAD1 - estimated MAD from group 1
-\item MAD2 - estimated MAD from group 2
+\item MAD1 - estimated MAD for group 1
+\item MAD2 - estimated MAD for group 2
 \item MAD1/MAD2 - estimate of MAD ratio
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval

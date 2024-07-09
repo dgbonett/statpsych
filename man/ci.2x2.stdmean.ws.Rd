@@ -29,10 +29,10 @@ Returns a 7-row matrix (one row per effect). The columns are:
 }
 }
 \description{
-Computes confidence intervals for standardized linear constrasts of means
-(AB interaction, main effect of A, main efect of B, simple main effects
+Computes confidence intervals for standardized linear contrasts of means
+(AB interaction, main effect of A, main effect of B, simple main effects
 of A, and simple main effects of B) in a 2x2 within-subjects design.
-Equality of population variances is not assumed. An unweigthed variance
+Equality of population variances is not assumed. An unweighted variance
 standardizer is used.
 }
 \examples{
@@ -53,4 +53,7 @@ ci.2x2.stdmean.ws(.05, y11, y12, y21, y22)
 # B at a2: -0.01149923   -0.01096408 0.08595873 -0.179975237 0.1569768
 
 
+}
+\references{
+\insertRef{Bonett2008}{statpsych}
 }

@@ -19,10 +19,10 @@ size.ci.indirect(alpha, cor1, cor2, w)
 Returns the required sample size
 }
 \description{
-Computes the approximate sample size required to estimate a standardized
-indirect effect in a simple mediation model. The direct effect of the
-independent (exogenous) variable on the response variable, controlling for
-the mediator variable, is assumed to be negligible.
+Computes the approximate sample size required to estimate a population
+standardized indirect effect in a simple mediation model. The direct effect
+of the independent (exogenous) variable on the response variable, controlling
+for the mediator variable, is assumed to be negligible.
 }
 \examples{
 size.ci.indirect(.05, .4, .5, .2)

@@ -20,12 +20,14 @@ Returns a 1-row matrix. The columns are:
 \itemize{
 \item Estimate - ML estimate of proportion difference
 \item z - z test statistic
-\item p - p-value
+\item p - two-sided p-value
 }
 }
 \description{
-Computes a continuity-corrected z test for a difference of proportions in
-a 2-group design.
+Computes a continuity-corrected z-test for a difference of population
+proportions in a 2-group design. A confidence interval for a difference in
+population proportions is a recommended supplement to the z-test (see
+\link[statpsych]{ci.prop2}).
 }
 \examples{
 test.prop2(11, 26, 50, 50)

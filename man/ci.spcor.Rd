@@ -18,7 +18,7 @@ ci.spcor(alpha, cor, r2, n)
 \value{
 Returns a 1-row matrix. The columns are:
 \itemize{
-\item Estimate - estimated semipartial correlation
+\item Estimate - estimated semipartial correlation (from input)
 \item SE - standard error
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval

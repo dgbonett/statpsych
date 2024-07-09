@@ -25,14 +25,14 @@ Returns a 7-row matrix (one row per effect). The columns are:
 \item SE - standard error
 \item t - t test statistic
 \item df - degrees of freedom
-\item p - p-value
+\item p - two-sided p-value
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval
 }
 }
 \description{
 Computes confidence intervals and tests for the AB interaction effect,
-main effect of A, main efect of B, simple main effects of A, and simple main
+main effect of A, main effect of B, simple main effects of A, and simple main
 effects of B in a 2x2 between-subjects design with a quantitative response
 variable. A Satterthwaite adjustment to the degrees of freedom is used and
 equality of population variances is not assumed.

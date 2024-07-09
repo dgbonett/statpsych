@@ -15,26 +15,35 @@ size.test.prop2(alpha, pow, p1, p2, es)
 
 \item{p2}{planning value of proportion for group 2}
 
-\item{es}{planning value of proportion difference}
+\item{es}{planning value of proportion difference (effect size)}
 }
 \value{
-Returns the required sample size for eachr group
+Returns the required sample size for each group
 }
 \description{
 Computes the sample size in each group required to test a difference in
-population proportions with desired power in a 2-group design. This
-function requires planning values for both proportions. Set the proportion
-planning values to .5 for a conservatively large sample size. The
-planning value for the effect size (proportion difference) could be set equal
-to the difference of the two proportion planning values or it could be set
+population proportions with desired power and a continuity correction in a
+2-group design. This function requires planning values for both proportions.
+Set each proportion planning value to .5, or a value closest to .5 within
+a plausible range, for a conservatively large sample size requirement. This
+function does not use the typical sample size approach where the effect
+size is assumed to equal the difference in proportion planning values. This
+function does not require the planning value for the proportion difference
+(effect size) to equal the difference of the two proportion planning values;
+for example, the planning value of the proportion difference could be set
 equal to a minimally interesting effect size.
 }
 \examples{
-size.test.prop2(.05, .8, .2, .4, .2)
+size.test.prop2(.05, .8, .5, .5, .2)
 
 # Should return:
 # Sample size per group
-#                    79
+#                   109
+
+size.test.prop2(.05, .8, .3, .1, .2)
+# Should return:
+# Sample size per group
+#                    71
 
 
 }

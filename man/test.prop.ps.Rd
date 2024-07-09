@@ -20,13 +20,16 @@ Returns a 1-row matrix. The columns are:
 \itemize{
 \item Estimate - ML estimate of proportion difference
 \item z - z test statistic
-\item p - p-value
+\item p - two-sided p-value
 }
 }
 \description{
-Computes a continuity-corrected McNemar test for equality of proportions
-in a paired-samples design. This function requires the frequency counts
-from a 2 x 2 contingency table for two paired dichotomous measurements.
+Computes a continuity-corrected McNemar test for equality of population
+proportions in a paired-samples design. This function requires the frequency
+counts from a 2 x 2 contingency table for two paired dichotomous measurements.
+A confidence interval for a difference in population proportions (see
+\link[statpsych]{ci.prop.ps}) is a recommended supplement to the McNemar
+test.
 }
 \examples{
 test.prop.ps(156, 96, 68, 80)

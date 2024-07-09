@@ -2,7 +2,7 @@
 % Please edit documentation in R/statpsych1.R
 \name{ci.2x2.median.bs}
 \alias{ci.2x2.median.bs}
-\title{Computes tests and confidence intervals of effects in a 2x2 betwen-subjects
+\title{Computes tests and confidence intervals of effects in a 2x2 between-subjects
 design for medians}
 \usage{
 ci.2x2.median.bs(alpha, y11, y12, y21, y22)
@@ -28,27 +28,31 @@ Returns a 7-row matrix (one row per effect). The columns are:
 }
 }
 \description{
-Computes confidence intervals for the AB interaction effect, main effect of
-A, main efect of B, simple main effects of A, and simple main effects of B
-in a 2x2 between-subjects design with a quantitative response variable. The
-effects are defined in terms of medians rather than means.
+Computes distribution-free confidence intervals for the AB interaction
+effect, main effect of A, main effect of B, simple main effects of A, and
+simple main effects of B in a 2x2 between-subjects design with a
+quantitative response variable. The effects are defined in terms of medians
+rather than means. Tied scores are assumed to be rare.
 }
 \examples{
-y11 <- c(14, 15, 11, 7, 16, 12, 15, 16, 10, 9)
-y12 <- c(18, 24, 14, 18, 22, 21, 16, 17, 14, 13)
-y21 <- c(16, 11, 10, 17, 13, 18, 12, 16, 6, 15)
-y22 <- c(18, 17, 11, 9, 9, 13, 18, 15, 14, 11)
+y11 <- c(19.2, 21.1, 14.4, 13.3, 19.8, 15.9, 18.0, 19.1, 16.2, 14.6)
+y12 <- c(21.3, 27.0, 19.1, 21.5, 25.2, 24.1, 19.8, 19.7, 17.5, 16.0)
+y21 <- c(16.5, 11.3, 10.3, 17.7, 13.8, 18.2, 12.8, 16.2, 6.1, 15.2)
+y22 <- c(18.7, 17.3, 11.4, 12.4, 13.6, 13.8, 18.3, 15.0, 14.4, 11.9)
 ci.2x2.median.bs(.05, y11, y12, y21, y22)
 
 # Should return:
-#          Estimate       SE         LL         UL
-# AB:          -5.0 3.389735 -11.643758 1.64375833
-# A:            1.5 1.694867  -1.821879 4.82187916
-# B:           -2.0 1.694867  -5.321879 1.32187916
-# A at b1:     -1.0 2.152661  -5.219138 3.21913797
-# A at b2:      4.0 2.618464  -1.132095 9.13209504
-# B at a1:     -4.5 2.311542  -9.030539 0.03053939
-# B at a2:      0.5 2.479330  -4.359397 5.35939682
+#          Estimate       SE        LL         UL
+# AB:        -3.850 2.951019 -9.633891  1.9338914
+# A:          4.525 1.475510  1.633054  7.4169457
+# B:         -1.525 1.475510 -4.416946  1.3669457
+# A at b1:    2.600 1.992028 -1.304302  6.5043022
+# A at b2:    6.450 2.177232  2.182703 10.7172971
+# B at a1:   -3.450 2.045086 -7.458294  0.5582944
+# B at a2:    0.400 2.127472 -3.769769  4.5697694
 
 
+}
+\references{
+\insertRef{Bonett2002}{statpsych}
 }

@@ -7,10 +7,10 @@
 randomize(n)
 }
 \arguments{
-\item{n}{vector of sample sizes per group}
+\item{n}{k x 1 vector of sample sizes}
 }
 \value{
-Returns a vector of randomly generated group assignments.
+Returns a vector of randomly generated group assignments
 }
 \description{
 Randomly assigns a sample of participants into k groups.

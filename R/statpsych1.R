@@ -1,6 +1,6 @@
 # =========================== Confidence Intervals ===========================
-#  ci.mean1  =================================================================
-#' Confidence interval for a single mean
+#  ci.mean  =================================================================
+#' Confidence interval for a mean
 #'
 #'
 #' @description
@@ -28,7 +28,7 @@
 #'
 #'
 #' @examples
-#' ci.mean1(.05, 24.5, 3.65, 40)
+#' ci.mean(.05, 24.5, 3.65, 40)
 #'
 #' # Should return:
 #' # Estimate        SE       LL       UL
@@ -37,7 +37,7 @@
 #' 
 #' @importFrom stats qt
 #' @export
-ci.mean1 <- function(alpha, m, sd, n) {
+ci.mean <- function(alpha, m, sd, n) {
  df <- n - 1
  tcrit <- qt(1 - alpha/2, df)
  se <- sd/sqrt(n)
@@ -50,22 +50,72 @@ ci.mean1 <- function(alpha, m, sd, n) {
 }
 
 
-#  ci.stdmean1  ==============================================================
-#' Confidence interval for a single standardized mean
+#  ci.mean.fpc  ==============================================================
+#' Confidence interval for a mean with a finite population correction
 #'
 #'
 #' @description
-#' Computes a confidence interval for a population standardized mean 
-#' difference from a hypothesized value. If the hypothesized value is set
-#' to 0, the reciprocals of the confidence interval endpoints gives a 
-#' confidence interval for the coefficient of variation.
+#' Computes a confidence interval for a population mean with a finite 
+#' population correction (fpc) using the estimated mean, estimated standard 
+#' deviation, sample size, and population size. This function is useful when 
+#' the sample size is not a small fraction of the population size.
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  m	  estimated mean 
 #' @param  sd	  estimated standard deviation
 #' @param  n	  sample size
-#' @param  h      hypothesized value
+#' @param  N	  population size
+#'
+#'
+#' @return 
+#' Returns a 1-row matrix. The columns are:
+#' * Estimate - estimated mean
+#' * SE - standard error with fpc
+#' * LL - lower limit of the confidence interval with fpc
+#' * UL - upper limit of the confidence interval with fpc
+#' 
+#' 
+#' @examples
+#' ci.mean.fpc(.05, 24.5, 3.65, 40, 300)
+#'
+#' # Should return:
+#' # Estimate        SE       LL       UL
+#' #     24.5 0.5381631 23.41146 25.58854
+#'  
+#' 
+#' @importFrom stats qt
+#' @export
+ci.mean.fpc <- function(alpha, m, sd, n, N) {
+ if (n > N) {stop("n cannot be greater than N")}
+ df <- n - 1
+ tcrit <- qt(1 - alpha/2, df)
+ se <- (sd/sqrt(n))*sqrt((N - n)/(N - 1))
+ ll <- m - tcrit*se
+ ul <- m + tcrit*se
+ out <- t(c(m, se, ll, ul))
+ colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
+ return(out)
+}
+
+
+#  ci.stdmean  ==============================================================
+#' Confidence interval for a standardized mean
+#'
+#'
+#' @description
+#' Computes a confidence interval for a population standardized mean 
+#' difference from a hypothesized value. If the hypothesized value is set
+#' to 0, the reciprocals of the confidence interval endpoints gives a 
+#' confidence interval for the coefficient of variation (see ci.cv).
+#'
+#'  
+#' @param  alpha  alpha level for 1-alpha confidence
+#' @param  m	  estimated mean 
+#' @param  sd	  estimated standard deviation
+#' @param  n	  sample size
+#' @param  h      hypothesized value of mean
 #'
 #'
 #' @return 
@@ -82,7 +132,7 @@ ci.mean1 <- function(alpha, m, sd, n) {
 #'
 #'
 #' @examples
-#' ci.stdmean1(.05, 24.5, 3.65, 40, 20)
+#' ci.stdmean(.05, 24.5, 3.65, 40, 20)
 #'
 #' # Should return:
 #' # Estimate  adj Estimate        SE        LL       UL
@@ -91,7 +141,7 @@ ci.mean1 <- function(alpha, m, sd, n) {
 #' 
 #' @importFrom stats qnorm
 #' @export
-ci.stdmean1 <- function(alpha, m, sd, n, h) {
+ci.stdmean <- function(alpha, m, sd, n, h) {
  z <- qnorm(1 - alpha/2)
  df <- n - 1
  adj <- 1 - 3/(4*df - 1)
@@ -114,8 +164,9 @@ ci.stdmean1 <- function(alpha, m, sd, n, h) {
 #' @description
 #' Computes equal variance and unequal variance confidence intervals for a 
 #' population 2-group mean difference using the estimated means, estimated 
-#' standard deviations, and sample sizes. Use the t.test function for raw data
-#' input.
+#' standard deviations, and sample sizes. Also computes equal variance and
+#' unequal variance independent-samples t-tests. Use the t.test function for
+#' raw data input.
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -133,7 +184,7 @@ ci.stdmean1 <- function(alpha, m, sd, n, h) {
 #' * SE - standard error
 #' * t - t test statistic
 #' * df - degrees of freedom
-#' * p - p-value
+#' * p - two-sided p-value
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #' 
@@ -202,7 +253,7 @@ ci.mean2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' @param     m     	vector of estimated group means
 #' @param     sd    	vector of estimated group standard deviations
 #' @param     n     	vector of sample sizes
-#' @param     v     	vector of betwen-subjects contrast coefficients
+#' @param     v     	vector of between-subjects contrast coefficients
 #' 
 #'
 #' @return 
@@ -211,7 +262,7 @@ ci.mean2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' * SE - standard error
 #' * t - t test statistic
 #' * df - degrees of freedom
-#' * p - p-value
+#' * p - two-sided p-value
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #' 
@@ -269,7 +320,7 @@ ci.lc.mean.bs <- function(alpha, m, sd, n, v) {
 
 #  ci.tukey ===================================================================
 #' Tukey-Kramer confidence intervals for all pairwise mean differences in a
-#' betwen-subjects design
+#' between-subjects design
 #' 
 #'
 #' @description
@@ -293,7 +344,7 @@ ci.lc.mean.bs <- function(alpha, m, sd, n, v) {
 #' * SE - standard error
 #' * t - t test statistic
 #' * df - degrees of freedom
-#' * p - p-value
+#' * p - two-sided p-value
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #'
@@ -346,16 +397,16 @@ ci.tukey <-function(alpha, m, sd, n) {
 
 
 #  ci.slope.mean.bs ===========================================================
-#' Confidence interval for the slope of means in a single-factor design with a
-#' quantitative between-subjects factor
+#' Confidence interval for the slope of means in a one-factor experimental 
+#' design with a quantitative between-subjects factor
 #' 
 #' 
 #' @description
 #' Computes a test statistic and confidence interval for the slope of means in 
-#' a single-factor design with a quantitative between-subjects factor. This 
-#' function computes both the unequal variance and equal variance confidence
-#' intervals and test statistics. A Satterthwaite adjustment to the degrees of
-#' freedom is used with the unequal variance method. 
+#' a one-factor experimental design with a quantitative between-subjects 
+#' factor. This function computes both the unequal variance and equal variance
+#' confidence intervals and test statistics. A Satterthwaite adjustment to the
+#' degrees of freedom is used with the unequal variance method. 
 #'
 #'
 #' @param     alpha  	alpha level for 1-alpha confidence
@@ -371,7 +422,7 @@ ci.tukey <-function(alpha, m, sd, n) {
 #' * SE - standard error
 #' * t - t test statistic
 #' * df - degrees of freedom
-#' * p - p-value
+#' * p - two-sided p-value
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #' 
@@ -442,8 +493,8 @@ ci.slope.mean.bs <- function(alpha, m, sd, n, x) {
 #'
 #' @return 
 #' Returns a 1-row matrix. The columns are:
-#' * Mean1 - estimated mean from group 1
-#' * Mean2 - estimated mean from group 2
+#' * Mean1 - estimated mean for group 1
+#' * Mean2 - estimated mean for group 2
 #' * Mean1/Mean2- estimated mean ratio
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -468,6 +519,10 @@ ci.slope.mean.bs <- function(alpha, m, sd, n, x) {
 #' @importFrom stats var
 #' @export
 ci.ratio.mean2 <- function(alpha, y1, y2){
+ min1 <- min(y1)
+ min2 <- min(y2)
+ if (min1 < 0) {print("WARNING: ratio-scale scores cannot be negative")}
+ if (min2 < 0) {print("WARNING: ratio-scale scores cannot be negative")}
  n1 <- length(y1)
  n2 <- length(y2)
  m1 <- mean(y1)
@@ -489,7 +544,7 @@ ci.ratio.mean2 <- function(alpha, y1, y2){
 
 
 #  ci.stdmean2 ================================================================
-#' Confidence interval for a 2-group standardized mean difference
+#' Confidence intervals for a 2-group standardized mean difference
 #' 
 #'
 #' @description
@@ -583,14 +638,14 @@ ci.stdmean2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 	
 
 #  ci.stdmean.strat ===========================================================
-#' Confidence interval for a 2-group standardized mean difference with 
+#' Confidence intervals for a 2-group standardized mean difference with 
 #' stratified sampling
 #'
 #'
 #' @description
 #' Computes confidence intervals for a population standardized mean difference
 #' in a 2-group nonexperimental design with stratified random sampling (a random
-#' sample of a specificied size from each subpopulation) using a square root 
+#' sample of a specified size from each subpopulation) using a square root 
 #' weighted variance standardizer or single group standard deviation 
 #' standardizer.  Equality of variances is not assumed.
 #'
@@ -768,8 +823,8 @@ ci.lc.stdmean.bs <- function(alpha, m, sd, n, v) {
 #' @description
 #' Computes a confidence interval for a population paired-samples mean 
 #' difference using the estimated means, estimated standard deviations, 
-#' estimated correlation, and sample size. Use the t.test function for 
-#' raw data input.
+#' estimated correlation, and sample size. Also computes a paired-samples
+#' t-test. Use the t.test function for raw data input.
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -787,7 +842,7 @@ ci.lc.stdmean.bs <- function(alpha, m, sd, n, v) {
 #' * SE - standard error
 #' * t - t test statistic
 #' * df - degrees of freedom
-#' * p - p-value
+#' * p - two-sided p-value
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #' 
@@ -864,6 +919,10 @@ ci.mean.ps <- function(alpha, m1, m2, sd1, sd2, cor, n) {
 #' @export
 ci.ratio.mean.ps <- function(alpha, y1, y2){
  if (length(y1) != length(y2)) {stop("length of y1 must equal length of y2")}
+ min1 <- min(y1)
+ min2 <- min(y2)
+ if (min1 < 0) {print("WARNING: ratio-scale scores cannot be negative")}
+ if (min2 < 0) {print("WARNING: ratio-scale scores cannot be negative")}
  n <- length(y1)
  m1 <- mean(y1)
  m2 <- mean(y2)
@@ -885,7 +944,7 @@ ci.ratio.mean.ps <- function(alpha, y1, y2){
 
 
 #  ci.stdmean.ps =============================================================
-#' Confidence interval for a paired-samples standardized mean difference
+#' Confidence intervals for a paired-samples standardized mean difference
 #'
 #'
 #' @description
@@ -896,10 +955,10 @@ ci.ratio.mean.ps <- function(alpha, y1, y2){
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
-#' @param  m1     estimated mean of measurement 1
-#' @param  m2     estimated mean of measurement 2
-#' @param  sd1    estimated standard deviation of measurement 1
-#' @param  sd2    estimated standard deviation of measurement 2
+#' @param  m1     estimated mean for measurement 1
+#' @param  m2     estimated mean for measurement 2
+#' @param  sd1    estimated standard deviation for measurement 1
+#' @param  sd2    estimated standard deviation for measurement 2
 #' @param  cor    estimated correlation between measurements
 #' @param  n      sample size
 #'
@@ -979,8 +1038,8 @@ ci.stdmean.ps <- function(alpha, m1, m2, sd1, sd2, cor, n) {
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
-#' @param  m      vector of within-subjects estimated means
-#' @param  sd     vector of within-subjects estimated standard deviations
+#' @param  m      vector of estimated means for levels of within-subjects factor
+#' @param  sd     vector of estimated standard deviations for levels of within-subjects factor
 #' @param  cor    average estimated correlation of all measurement pairs
 #' @param  n      sample size
 #' @param  q      vector of within-subjects contrast coefficients
@@ -1049,8 +1108,8 @@ ci.lc.stdmean.ws <- function(alpha, m, sd, cor, n, q) {
 }
 
 
-#  ci.mad1 ====================================================================
-#' Confidence interval for a single mean absolute deviation 
+#  ci.mad ====================================================================
+#' Confidence interval for a mean absolute deviation 
 #'
 #'
 #' @description
@@ -1078,7 +1137,7 @@ ci.lc.stdmean.ws <- function(alpha, m, sd, cor, n, q) {
 #' @examples
 #' y <- c(30, 20, 15, 10, 10, 60, 20, 25, 20, 30, 10, 5, 50, 40, 
 #'        20, 10, 0, 20, 50)
-#' ci.mad1(.05, y)
+#' ci.mad(.05, y)
 #'
 #' # Should return:
 #' # Estimate       SE       LL       UL
@@ -1088,7 +1147,7 @@ ci.lc.stdmean.ws <- function(alpha, m, sd, cor, n, q) {
 #' @importFrom stats qnorm
 #' @importFrom stats sd
 #' @export
-ci.mad1 <- function(alpha, y) {
+ci.mad <- function(alpha, y) {
  n <- length(y)
  z <- qnorm(1 - alpha/2)
  c <- n/(n - 1)
@@ -1123,8 +1182,8 @@ ci.mad1 <- function(alpha, y) {
 #'
 #' @return 
 #' Returns a 1-row matrix. The columns are:
-#' * MAD1 - estimated MAD from group 1
-#' * MAD2 - estimated MAD from group 2
+#' * MAD1 - estimated MAD for group 1
+#' * MAD2 - estimated MAD for group 2
 #' * MAD1/MAD2 - estimate of MAD ratio
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -1200,8 +1259,8 @@ ci.ratio.mad2 <- function(alpha, y1, y2) {
 #'
 #' @return 
 #' Returns a 1-row matrix. The columns are:
-#' * SD1 - estimated SD from group 1
-#' * SD2 - estimated SD from group 2
+#' * SD1 - estimated SD for group 1
+#' * SD2 - estimated SD for group 2
 #' * SD1/SD2 - estimate of SD ratio
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -1332,17 +1391,17 @@ ci.ratio.mad.ps <- function(alpha, y1, y2) {
 }
 
 
-#  ci.cv1  ====================================================================
-#' Confidence interval for a single coefficient of variation
+#  ci.cv  ====================================================================
+#' Confidence interval for a coefficient of variation
 #'
 #'
 #' @description
 #' Computes a confidence interval for a population coefficient of variation
 #' (standard deviation divided by mean). This confidence interval is the
-#' reciprocal of a confidence interval for a standardized mean (see description
-#' of ci.stdmean1 function). An approximate standard error is recovered from
-#' the confidence interval. The coefficient of variation assumes ratio-scale
-#' scores.
+#' reciprocal of a confidence interval for a standardized mean (see 
+#' \link[statpsych]{ci.stdmean}). An approximate standard error is recovered
+#' from the confidence interval. The coefficient of variation assumes 
+#' ratio-scale scores.
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -1360,7 +1419,7 @@ ci.ratio.mad.ps <- function(alpha, y1, y2) {
 #' 
 #' 
 #' @examples
-#' ci.cv1(.05, 24.5, 3.65, 40)
+#' ci.cv(.05, 24.5, 3.65, 40)
 #'
 #' # Should return:
 #' #  Estimate        SE        LL       UL
@@ -1369,7 +1428,7 @@ ci.ratio.mad.ps <- function(alpha, y1, y2) {
 #' 
 #' @importFrom stats qnorm
 #' @export
-ci.cv1 <- function(alpha, m, sd, n) {
+ci.cv <- function(alpha, m, sd, n) {
  z <- qnorm(1 - alpha/2)
  df <- n - 1
  est.d <- m/sd
@@ -1396,7 +1455,7 @@ ci.cv1 <- function(alpha, m, sd, n) {
 #'
 #' @description
 #' Computes a confidence interval for a ratio of population coefficients of 
-#' variation (CV) in a 2-group degin. This confidence interval uses the
+#' variation (CV) in a 2-group design. This confidence interval uses the
 #' confidence interval for each CV and then uses the MOVER-DL method 
 #' (see Newcombe, page 138) to obtain a confidence interval for CV1/CV2. 
 #' The CV assumes ratio-scale scores.
@@ -1463,8 +1522,8 @@ ci.ratio.cv2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 }
 	
 
-#  ci.cod1 =================================================================== 
-#' Confidence interval for a single coefficient of dispersion
+#  ci.cod =================================================================== 
+#' Confidence interval for a coefficient of dispersion
 #'
 #'
 #' @description
@@ -1493,7 +1552,7 @@ ci.ratio.cv2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' @examples
 #' y <- c(30, 20, 15, 10, 10, 60, 20, 25, 20, 30, 10, 5, 50, 40,
 #'        20, 10, 0, 20, 50)
-#' ci.cod1(.05, y)
+#' ci.cod(.05, y)
 #'
 #' # Should return:
 #' #  Estimate        SE        LL       UL
@@ -1504,7 +1563,7 @@ ci.ratio.cv2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' @importFrom stats var
 #' @importFrom stats median
 #' @export
-ci.cod1 <-function(alpha, y) {
+ci.cod <-function(alpha, y) {
  z <- qnorm(1 - alpha/2)
  n <- length(y)
  c <- n/(n - 1)
@@ -1540,7 +1599,7 @@ ci.cod1 <-function(alpha, y) {
 }
 
 
-# ci.cod2 ====================================================================
+# ci.ratio.cod2 ====================================================================
 #' Confidence interval for a ratio of dispersion coefficients in a 2-group
 #' design
 #'
@@ -1567,7 +1626,7 @@ ci.cod1 <-function(alpha, y) {
 #' @examples
 #' y1 <- c(32, 39, 26, 35, 43, 27, 40, 37, 34, 29)
 #' y2 <- c(36, 44, 47, 42, 49, 39, 46, 31, 33, 48)
-#' ci.cod2(.05, y1, y2)
+#' ci.ratio.cod2(.05, y1, y2)
 #'
 #' # Should return:
 #' #      COD1      COD2 COD1/COD2       LL       UL
@@ -1578,7 +1637,11 @@ ci.cod1 <-function(alpha, y) {
 #' @importFrom stats var
 #' @importFrom stats median
 #' @export
-ci.cod2 <-function(alpha, y1, y2) {
+ci.ratio.cod2 <-function(alpha, y1, y2) {
+ min1 <- min(y1)
+ min2 <- min(y2)
+ if (min1 < 0) {stop("ERROR: ratio-scale scores cannot be negative")}
+ if (min2 < 0) {stop("ERROR: ratio-scale scores cannot be negative")}
  z <- qnorm(1 - alpha/2)
  n1 <- length(y1)
  c1 <- n1/(n1 - 1)
@@ -1641,8 +1704,8 @@ ci.cod2 <-function(alpha, y1, y2) {
 }
 
 
-#  ci.cqv1 =====================================================================
-#' Confidence interval for a single coefficient of quartile variation 
+#  ci.cqv =====================================================================
+#' Confidence interval for a coefficient of quartile variation 
 #'
 #'
 #' @description
@@ -1672,7 +1735,7 @@ ci.cod2 <-function(alpha, y1, y2) {
 #' @examples
 #' y <- c(30, 20, 15, 10, 10, 60, 20, 25, 20, 30, 10, 5, 50, 40,
 #'        20, 10, 0, 20, 50)
-#' ci.cqv1(.05, y)
+#' ci.cqv(.05, y)
 #'
 #' # Should return:
 #' # Estimate        SE        LL       UL
@@ -1683,7 +1746,7 @@ ci.cod2 <-function(alpha, y1, y2) {
 #' @importFrom stats quantile
 #' @importFrom stats pbinom
 #' @export
-ci.cqv1 <- function(alpha, y) {
+ci.cqv <- function(alpha, y) {
  n <- length(y)
  c <- n/(n - 1)
  y <- sort(y)
@@ -1725,12 +1788,12 @@ ci.cqv1 <- function(alpha, y) {
 }
 
 
-#  ci.median1 =================================================================
-#' Confidence interval for a single median 
+#  ci.median =================================================================
+#' Confidence interval for a median 
 #'
 #'
 #' @description
-#' Computes a confidence interval for a single population median.
+#' Computes a distribution-free confidence interval for a population median.
 #'
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
@@ -1752,7 +1815,7 @@ ci.cqv1 <- function(alpha, y) {
 #' @examples
 #' y <- c(30, 20, 15, 10, 10, 60, 20, 25, 20, 30, 10, 5, 50, 40,
 #'        20, 10, 0, 20, 50)
-#' ci.median1(.05, y)
+#' ci.median(.05, y)
 #'
 #' # Should return:
 #' # Estimate       SE LL UL
@@ -1763,7 +1826,7 @@ ci.cqv1 <- function(alpha, y) {
 #' @importFrom stats pbinom
 #' @importFrom stats median
 #' @export
-ci.median1 <- function(alpha, y) {
+ci.median <- function(alpha, y) {
  n <- length(y)
  y <- sort(y)
  z <- qnorm(1 - alpha/2)
@@ -1791,8 +1854,8 @@ ci.median1 <- function(alpha, y) {
 #'
 #'
 #' @description
-#' Computes a confidence interval for a difference of population medians in
-#' a 2-group design.
+#' Computes a distribution-free confidence interval for a difference of population
+#' medians in a 2-group design.
 #'
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
@@ -1802,10 +1865,10 @@ ci.median1 <- function(alpha, y) {
 #'
 #' @return 
 #' Returns a 1-row matrix. The columns are:
-#' * Median1 - estimated median from group 1
-#' * Median2 - estimated median from group 2
-#' * Median1-Median2 - estimated difference in medians
-#' * SE - standard error of the difference
+#' * Median1 - estimated median for group 1
+#' * Median2 - estimated median for group 2
+#' * Median1-Median2 - estimated difference of medians
+#' * SE - standard error 
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #'
@@ -1866,8 +1929,8 @@ ci.median2 <- function(alpha, y1, y2) {
 #'
 #'
 #' @description
-#' Computes a confidence interval for a ratio of population medians of 
-#' ratio-scale measurements in a 2-group design.
+#' Computes a distribution-free confidence interval for a ratio of population 
+#' medians of ratio-scale measurements in a 2-group design.
 #' 
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
@@ -1903,6 +1966,10 @@ ci.median2 <- function(alpha, y1, y2) {
 #' @importFrom stats median
 #' @export
 ci.ratio.median2 <- function(alpha, y1, y2) {
+ min1 <- min(y1)
+ min2 <- min(y2)
+ if (min1 < 0) {stop("ERROR: ratio-scale scores cannot be negative")}
+ if (min2 < 0) {stop("ERROR: ratio-scale scores cannot be negative")}
  z <- qnorm(1 - alpha/2)
  n1 <- length(y1)
  y1 <- sort(y1)
@@ -1941,10 +2008,10 @@ ci.ratio.median2 <- function(alpha, y1, y2) {
 #'
 #'
 #' @description
-#' Computes a confidence interval for a linear contrast of medians in a  
-#' between-subjects design using estimated medians and their standard errors.
-#' The sample median and standard error for each group can be computed using
-#' the ci.median1 function.
+#' Computes a distribution-free confidence interval for a linear contrast of 
+#' medians in a between-subjects design using estimated medians and their 
+#' standard errors. The sample median and standard error for each group can be
+#' computed using the \link[statpsych]{ci.median}) function.
 #'
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
@@ -1996,9 +2063,10 @@ ci.lc.median.bs <- function(alpha, m, se, v) {
 #'
 #'
 #' @description
-#' Computes a confidence interval for a difference of population medians in 
-#' a paired-samples design. This function also computes the standard errors
-#' for each median and the covariance between the two estimated medians.
+#' Computes a distribution-free confidence interval for a difference of 
+#' population medians in a paired-samples design. This function also computes
+#' the standard error of each median and the covariance between the two 
+#' estimated medians.
 #'
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
@@ -2082,8 +2150,8 @@ ci.median.ps <- function(alpha, y1, y2) {
 #'
 #'
 #' @description
-#' Computes a confidence interval for a ratio of population medians in a 
-#' paired-samples design.
+#' Computes a distribution-free confidence interval for a ratio of population
+#' medians in a paired-samples design. Ratio-scale measurements are assumed.
 #'
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
@@ -2093,8 +2161,8 @@ ci.median.ps <- function(alpha, y1, y2) {
 #'
 #' @return 
 #' Returns a 1-row matrix. The columns are:
-#' * Median1 - estimated median from measurement 1
-#' * Median2 - estimated median from measurement 2
+#' * Median1 - estimated median for measurement 1
+#' * Median2 - estimated median for measurement 2
 #' * Median1/Median2 - estimated ratio of medians
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -2120,6 +2188,10 @@ ci.median.ps <- function(alpha, y1, y2) {
 #' @export
 ci.ratio.median.ps <- function(alpha, y1, y2) {
  if (length(y1) != length(y2)) {stop("length of y1 must equal length of y2")}
+ min1 <- min(y1)
+ min2 <- min(y2)
+ if (min1 < 0) {stop("ERROR: ratio-scale scores cannot be negative")}
+ if (min2 < 0) {stop("ERROR: ratio-scale scores cannot be negative")}
  z <- qnorm(1 - alpha/2)
  n <- length(y1)
  med1 <- median(y1)
@@ -2158,7 +2230,7 @@ ci.ratio.median.ps <- function(alpha, y1, y2) {
 }
 
 
-#  ci.sign1 ================================================================== 
+#  ci.sign ================================================================== 
 #' Confidence interval for the parameter of the one-sample sign test
 #'
 #'
@@ -2190,7 +2262,7 @@ ci.ratio.median.ps <- function(alpha, y1, y2) {
 #' @examples
 #' y <- c(30, 20, 15, 10, 10, 60, 20, 25, 20, 30, 10, 5, 50, 40, 20, 10,
 #'         0, 20, 50)
-#' ci.sign1(.05, y, 9)
+#' ci.sign(.05, y, 9)
 #'
 #' # Should return:
 #' # Estimate        SE        LL        UL
@@ -2199,7 +2271,7 @@ ci.ratio.median.ps <- function(alpha, y1, y2) {
 #'
 #' @importFrom stats qnorm
 #' @export
-ci.sign1 <- function(alpha, y, h) {
+ci.sign <- function(alpha, y, h) {
  z <- qnorm(1 - alpha/2)
  f <- sum(as.integer(y > h))
  n <- length(y)
@@ -2293,7 +2365,7 @@ ci.mann <- function(alpha, y1, y2){
 }
 
 
-#  ci.random.anova1 ===========================================================
+#  ci.random.anova ===========================================================
 #' Confidence intervals for parameters of one-way random effects ANOVA
 #'
 #'
@@ -2308,7 +2380,7 @@ ci.mann <- function(alpha, y1, y2){
 #' @param   alpha  1 - alpha confidence 
 #' @param   m      vector of estimated group means 
 #' @param   sd     vector of estimated group standard deviations 
-#' @param   n      sample size per group
+#' @param   n      common sample size in each group
 #'
 #'
 #' @return 
@@ -2328,7 +2400,7 @@ ci.mann <- function(alpha, y1, y2){
 #' @examples
 #' m <- c(56.1, 51.2, 60.3, 68.2, 48.9, 70.5)
 #' sd <- c(9.45, 8.79, 9.71, 8.90, 8.31, 9.75)
-#' ci.random.anova1(.05, m, sd, 20)
+#' ci.random.anova(.05, m, sd, 20)
 #'
 #' # Should return:
 #' #                 Estimate         LL         UL
@@ -2342,7 +2414,7 @@ ci.mann <- function(alpha, y1, y2){
 #' @importFrom stats qnorm
 #' @importFrom stats qt
 #' @export
-ci.random.anova1 <- function(alpha, m, sd, n) {
+ci.random.anova <- function(alpha, m, sd, n) {
  z <- qnorm(1 - alpha/2)
  a <- length(m)
  t <- qt(1 - alpha/2, a - 1)
@@ -2388,19 +2460,20 @@ ci.random.anova1 <- function(alpha, m, sd, n) {
 #'
 #' @description
 #' Computes a confidence interval for a population Cronbach reliability. 
-#' The point estimate of Cronbach's reliability assumes essentially 
-#' tau-equivalent measurements and this confidence interval assumes parallel
+#' The point estimate of Cronbach reliability assumes essentially 
+#' tau-equivalent measurements and the confidence interval assumes parallel
 #' measurements. 
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
-#' @param  rel    estimated Cronbach's reliability  
+#' @param  rel    estimated Cronbach reliability  
 #' @param  r      number of measurements (items, raters, etc.)
 #' @param  n	  sample size
 #'
 #'
 #' @return 
 #' Returns a 1-row matrix. The columns are:
+#' * Estimate - estimated Cronbach reliability (from input)
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #' 
@@ -2443,7 +2516,7 @@ ci.cronbach <- function(alpha, rel, r, n) {
 #' @description
 #' Computes a confidence interval for a population reliability coefficient
 #' such as Cronbach's alpha or McDonald's omega using an estimate of the
-#' reliablity and its standard error. The standard error can be a robust
+#' reliability and its standard error. The standard error can be a robust
 #' standard error or bootstrap standard error obtained from an SEM program.
 #'
 #'  
@@ -2455,6 +2528,7 @@ ci.cronbach <- function(alpha, rel, r, n) {
 #'
 #' @return 
 #' Returns a 1-row matrix. The columns are:
+#' * Estimate - estimated reliability (from input)
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #' 
@@ -2553,7 +2627,7 @@ ci.etasqr <- function(alpha, etasqr, df1, df2) {
 #'
 #' @description
 #' Computes confidence intervals and tests for the AB interaction effect, 
-#' main effect of A, main efect of B, simple main effects of A, and simple main
+#' main effect of A, main effect of B, simple main effects of A, and simple main
 #' effects of B in a 2x2 mixed factorial design with a quantitative response
 #' variable where Factor A is a within-subjects factor, and Factor B is a 
 #' between-subjects factor. A Satterthwaite adjustment to the degrees of 
@@ -2573,7 +2647,7 @@ ci.etasqr <- function(alpha, etasqr, df1, df2) {
 #' * SE - standard error 
 #' * t - t test statistic 
 #' * df - degrees of freedom
-#' * p - p-value 
+#' * p - two-sided p-value 
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #'
@@ -2689,7 +2763,7 @@ ci.2x2.mean.mixed <- function(alpha, y11, y12, y21, y22) {
 #'
 #' @description
 #' Computes confidence intervals and tests for the AB interaction effect, 
-#' main effect of A, main efect of B, simple main effects of A, and simple main
+#' main effect of A, main effect of B, simple main effects of A, and simple main
 #' effects of B in a 2x2 within-subjects design with a quantitative response
 #' variable. 
 #'
@@ -2707,7 +2781,7 @@ ci.2x2.mean.mixed <- function(alpha, y11, y12, y21, y22) {
 #' * SE - standard error 
 #' * t - t test statistic 
 #' * df - degrees of freedom
-#' * p - p-value 
+#' * p - two-sided p-value 
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #'
@@ -2811,7 +2885,7 @@ ci.2x2.mean.ws <- function(alpha, y11, y12, y21, y22) {
 #'
 #' @description
 #' Computes confidence intervals and tests for the AB interaction effect, 
-#' main effect of A, main efect of B, simple main effects of A, and simple main
+#' main effect of A, main effect of B, simple main effects of A, and simple main
 #' effects of B in a 2x2 between-subjects design with a quantitative response
 #' variable. A Satterthwaite adjustment to the degrees of freedom is used and 
 #' equality of population variances is not assumed.
@@ -2830,7 +2904,7 @@ ci.2x2.mean.ws <- function(alpha, y11, y12, y21, y22) {
 #' * SE - standard error 
 #' * t - t test statistic 
 #' * df - degrees of freedom
-#' * p - p-value 
+#' * p - two-sided p-value 
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #'
@@ -2952,16 +3026,16 @@ ci.2x2.mean.bs <- function(alpha, y11, y12, y21, y22) {
 
 # ci.2x2.stdmean.bs ============================================================
 #' Computes confidence intervals of standardized effects in a 2x2 
-#' between-subjects design for means 
+#' between-subjects design 
 #'
 #'
 #' @description
-#' Computes confidence intervals for standardized linear constrasts of means
-#' (AB interaction, main effect of A, main efect of B, simple main effects
+#' Computes confidence intervals for standardized linear contrasts of means
+#' (AB interaction, main effect of A, main effect of B, simple main effects
 #' of A, and simple main effects of B) in a 2x2 between-subjects design with  
 #' a quantitative response variable. Equality of population variances is not 
-#' assumed. An unweigthed variance standardizer is used, which is the 
-#' recommended standarizer when both factors are treatment factors.
+#' assumed. An unweighted variance standardizer is used, which is the 
+#' recommended standardizer when both factors are treatment factors.
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
@@ -2978,6 +3052,10 @@ ci.2x2.mean.bs <- function(alpha, y11, y12, y21, y22) {
 #' * SE - standard error 
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
+#'
+#'
+#' @references
+#' \insertRef{Bonett2008}{statpsych}
 #'
 #'
 #' @examples
@@ -3107,15 +3185,16 @@ ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
 
 
 # ci.2x2.median.bs =============================================================
-#' Computes tests and confidence intervals of effects in a 2x2 betwen-subjects 
+#' Computes tests and confidence intervals of effects in a 2x2 between-subjects 
 #' design for medians
 #'
 #'
 #' @description
-#' Computes confidence intervals for the AB interaction effect, main effect of
-#' A, main efect of B, simple main effects of A, and simple main effects of B 
-#' in a 2x2 between-subjects design with a quantitative response variable. The
-#' effects are defined in terms of medians rather than means.
+#' Computes distribution-free confidence intervals for the AB interaction 
+#' effect, main effect of A, main effect of B, simple main effects of A, and 
+#' simple main effects of B in a 2x2 between-subjects design with a 
+#' quantitative response variable. The effects are defined in terms of medians
+#' rather than means. Tied scores are assumed to be rare.
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
@@ -3133,22 +3212,26 @@ ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
 #' * UL - upper limit of the confidence interval
 #'
 #'
+#' @references
+#' \insertRef{Bonett2002}{statpsych}
+#'
+#'
 #' @examples
-#' y11 <- c(14, 15, 11, 7, 16, 12, 15, 16, 10, 9)
-#' y12 <- c(18, 24, 14, 18, 22, 21, 16, 17, 14, 13)
-#' y21 <- c(16, 11, 10, 17, 13, 18, 12, 16, 6, 15)
-#' y22 <- c(18, 17, 11, 9, 9, 13, 18, 15, 14, 11)
+#' y11 <- c(19.2, 21.1, 14.4, 13.3, 19.8, 15.9, 18.0, 19.1, 16.2, 14.6)
+#' y12 <- c(21.3, 27.0, 19.1, 21.5, 25.2, 24.1, 19.8, 19.7, 17.5, 16.0)
+#' y21 <- c(16.5, 11.3, 10.3, 17.7, 13.8, 18.2, 12.8, 16.2, 6.1, 15.2)
+#' y22 <- c(18.7, 17.3, 11.4, 12.4, 13.6, 13.8, 18.3, 15.0, 14.4, 11.9)
 #' ci.2x2.median.bs(.05, y11, y12, y21, y22)
 #'
 #' # Should return:
-#' #          Estimate       SE         LL         UL
-#' # AB:          -5.0 3.389735 -11.643758 1.64375833
-#' # A:            1.5 1.694867  -1.821879 4.82187916
-#' # B:           -2.0 1.694867  -5.321879 1.32187916
-#' # A at b1:     -1.0 2.152661  -5.219138 3.21913797
-#' # A at b2:      4.0 2.618464  -1.132095 9.13209504
-#' # B at a1:     -4.5 2.311542  -9.030539 0.03053939
-#' # B at a2:      0.5 2.479330  -4.359397 5.35939682
+#' #          Estimate       SE        LL         UL
+#' # AB:        -3.850 2.951019 -9.633891  1.9338914
+#' # A:          4.525 1.475510  1.633054  7.4169457
+#' # B:         -1.525 1.475510 -4.416946  1.3669457
+#' # A at b1:    2.600 1.992028 -1.304302  6.5043022
+#' # A at b2:    6.450 2.177232  2.182703 10.7172971
+#' # B at a1:   -3.450 2.045086 -7.458294  0.5582944
+#' # B at a2:    0.400 2.127472 -3.769769  4.5697694
 #'
 #'
 #' @importFrom stats qnorm
@@ -3262,10 +3345,10 @@ ci.2x2.median.bs <- function(alpha, y11, y12, y21, y22) {
 #'
 #'
 #' @description
-#' Computes confidence intervals for standardized linear constrasts of means
-#' (AB interaction, main effect of A, main efect of B, simple main effects
+#' Computes confidence intervals for standardized linear contrasts of means
+#' (AB interaction, main effect of A, main effect of B, simple main effects
 #' of A, and simple main effects of B) in a 2x2 within-subjects design.
-#' Equality of population variances is not assumed. An unweigthed variance 
+#' Equality of population variances is not assumed. An unweighted variance 
 #' standardizer is used.
 #'
 #'
@@ -3283,6 +3366,10 @@ ci.2x2.median.bs <- function(alpha, y11, y12, y21, y22) {
 #' * SE - standard error 
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
+#'
+#'
+#' @references
+#' \insertRef{Bonett2008}{statpsych}
 #'
 #'
 #' @examples
@@ -3429,13 +3516,12 @@ ci.2x2.stdmean.ws <- function(alpha, y11, y12, y21, y22) {
 
 
 # ci.2x2.stdmean.mixed ========================================================
-#' Computes confidence intervals of standardized effects in a 2x2 
-#' mixed design
+#' Computes confidence intervals of standardized effects in a 2x2 mixed design 
 #'
 #'                          
 #' @description
 #' Computes confidence intervals for the standardized AB interaction effect, 
-#' main effect of A, main efect of B, simple main effects of A, and simple main
+#' main effect of A, main effect of B, simple main effects of A, and simple main
 #' effects of B in a 2x2 mixed factorial design where Factor A is a 
 #' within-subjects factor, and Factor B is a between-subjects factor. Equality 
 #' of population variances is not assumed.
@@ -3455,6 +3541,10 @@ ci.2x2.stdmean.ws <- function(alpha, y11, y12, y21, y22) {
 #' * SE - standard error 
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
+#'
+#'
+#' @references
+#' \insertRef{Bonett2008}{statpsych}
 #'
 #'
 #' @examples
@@ -3572,15 +3662,16 @@ ci.2x2.stdmean.mixed <- function(alpha, y11, y12, y21, y22) {
 
 
 # ci.2x2.median.mixed =========================================================
-#' Computes confidence intervals in a 2x2 mixed design for medians
+#' Computes confidence intervals of effects in a 2x2 mixed design for medians
 #'
 #'
 #' @description
-#' Computes distribution-free confidence intervals based on medians for the AB 
-#' interaction effect, main effect of A, main efect of B, simple main effects 
-#' of A, and simple main effects of B in a 2x2 mixed design where Factor A is 
-#' the within-subjects factor and Factor B is the between subbjects factor. 
-#' Tied scores are assumed to be rare.
+#' Computes distribution-free confidence intervals for the AB interaction
+#' effect, main effect of A, main effect of B, simple main effects of A, and
+#' simple main effects of B in a 2x2 mixed design where Factor A is the
+#' within-subjects factor and Factor B is the between-subjects factor. 
+#' Effects are defined in terms of medians rather than means. Tied scores
+#' are assumed to be rare.
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
@@ -3603,21 +3694,21 @@ ci.2x2.stdmean.mixed <- function(alpha, y11, y12, y21, y22) {
 #'
 #'
 #' @examples
-#' y11 <- c(18, 19, 20, 17, 20, 16)
-#' y12 <- c(19, 18, 19, 20, 17, 16)
-#' y21 <- c(19, 16, 16, 14, 16, 18)
-#' y22 <- c(16, 10, 12,  9, 13, 15)
+#' y11 <- c(18.3, 19.5, 20.1, 17.4, 20.5, 16.1)
+#' y12 <- c(19.1, 18.4, 19.8, 20.0, 17.2, 16.8)
+#' y21 <- c(19.2, 16.4, 16.5, 14.0, 16.9, 18.3)
+#' y22 <- c(16.5, 10.2, 12.7,  9.9, 13.5, 15.0)
 #' ci.2x2.median.mixed(.05, y11, y12, y21, y22)
 #'
 #' # Should return:
-#' #          Estimate       SE         LL       UL
-#' # AB:         -3.50 2.698647 -8.7892514 1.789251
-#' # A:           1.75 1.349324 -0.8946257 4.394626
-#' # B:           4.25 1.017564  2.2556114 6.244389
-#' # A at b1:     0.00 1.489007 -2.9184005 2.918400
-#' # A at b2:     3.50 2.250679 -0.9112492 7.911249
-#' # B at a1:     2.50 1.486420 -0.4133294 5.413329
-#' # B at a2:     6.00 1.871571  2.3317887 9.668211
+#' #          Estimate        SE         LL         UL
+#' # AB:        -3.450 1.6317863 -6.6482423 -0.2517577
+#' # A:          1.875 0.8158931  0.2758788  3.4741212
+#' # B:          3.925 1.4262367  1.1296274  6.7203726
+#' # A at b1:    0.150 1.4243192 -2.6416144  2.9416144
+#' # A at b2:    3.600 0.7962670  2.0393454  5.1606546
+#' # B at a1:    2.200 1.5812792 -0.8992503  5.2992503
+#' # B at a2:    5.650 1.7027101  2.3127496  8.9872504
 #'
 #'
 #' @importFrom stats qnorm
@@ -3730,14 +3821,16 @@ ci.2x2.median.mixed <- function(alpha, y11, y12, y21, y22) {
 
 
 # ci.2x2.median.ws ============================================================
-#' Computes confidence intervals in a 2x2 within-subjects design for medians
+#' Computes confidence intervals of effects in a 2x2 within-subjects design
+#' for medians
 #'
 #'
 #' @description
-#' Computes distribution-free confidence intervals based on medians for the AB 
-#' interaction effect, main effect of A, main efect of B, simple main effects 
-#' of A, and simple main effects of B in a 2x2 within-subjects design. Tied 
-#' scores are assumed to be rare.
+#' Computes distribution-free confidence intervals for the AB interaction 
+#' effect, main effect of A, main effect of B, simple main effects of A, and
+#' simple main effects of B in a 2x2 within-subjects design. The effects are
+#' defined in terms of medians rather than means. Tied scores are assumed to
+#' be rare.
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
@@ -3945,7 +4038,7 @@ ci.2x2.median.ws <- function(alpha, y11, y12, y21, y22) {
 #' @description
 #' Computes an approximate Bayesian credible interval for a normal prior 
 #' distribution. This function can be used with any parameter estimator 
-#' (e.g., mean, mean difference, linear contrast of means, slope coefficient
+#' (e.g., mean, mean difference, linear contrast of means, slope coefficient,
 #' standardized mean difference, standardized linear contrast of means, median,
 #' median difference, linear contrast of medians, etc.) that has an approximate
 #' normal sampling distribution. The mean and standard deviation of the posterior
@@ -3961,8 +4054,8 @@ ci.2x2.median.ws <- function(alpha, y11, y12, y21, y22) {
 #'
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Posterior mean - posterior mean of Normal distributoin 
-#' * Posterior SD - posterior standard deviation of Normal distributoin 
+#' * Posterior mean - posterior mean of Normal distribution 
+#' * Posterior SD - posterior standard deviation of Normal distribution 
 #' * LL - lower limit of the credible interval
 #' * UL - upper limit of the credible interval
 #'
@@ -3995,6 +4088,56 @@ ci.bayes.normal <- function(alpha, prior.mean, prior.sd, est, se) {
 
 
 #  =========================== Hypothesis tests ==============================
+#  test.mean  =================================================================
+#' Hypothesis test for a mean
+#'
+#'
+#' @description
+#' Computes a one-sample t-test for a population mean using the estimated 
+#' mean, estimated standard deviation, sample size, and null hypothesis value. 
+#' Use the t.test function for raw data input. A confidence interval for a 
+#' population mean is a recommended supplement to the t-test (see \link[statpsych]{ci.mean}).
+#'
+#'  
+#' @param  m	  estimated mean 
+#' @param  sd	  estimated standard deviation
+#' @param  n	  sample size
+#' @param  h	  null hypothesis value of mean
+#'
+#'
+#' @return 
+#' Returns a 1-row matrix. The columns are:
+#' * t - t test statistic
+#' * df - degrees of freedom
+#' * p - two-sided p-value
+#' 
+#' 
+#' @references
+#' \insertRef{Snedecor1980}{statpsych}
+#'
+#'
+#' @examples
+#' test.mean(24.5, 3.65, 40, 23)
+#'
+#' # Should return:
+#' #         t df          p
+#' #  2.599132 39 0.01312665
+#'  
+#' 
+#' @importFrom stats pt
+#' @export
+test.mean <- function(m, sd, n, h) {
+ df <- n - 1
+ se <- sd/sqrt(n)
+ t <- (m - h)/se
+ p <- 2*(1 - pt(abs(t), df))
+ out <- t(c(t, df, p))
+ colnames(out) <- c("t", "df", "p")
+ rownames(out) <- ""
+ return(out)
+}
+
+
 #  test.skew =================================================================
 #' Computes p-value for test of skewness
 #'
@@ -4015,7 +4158,7 @@ ci.bayes.normal <- function(alpha, prior.mean, prior.sd, est, se) {
 #' @return
 #' Returns a 1-row matrix. The columns are:
 #' * Skewness - estimate of skewness coefficient
-#' * p - Monte Carlo two-sided p-value for test of zero skewness
+#' * p - Monte Carlo two-sided p-value
 #'
 #'
 #' @examples
@@ -4077,7 +4220,7 @@ test.skew <- function(y) {
 #' Returns a 1-row matrix. The columns are:
 #' * Kurtosis - estimate of kurtosis coefficient
 #' * Excess - estimate of excess kurtosis (kurtosis - 3)
-#' * p - Monte Carlo two-sided p-value for test of zero excess kurtosis
+#' * p - Monte Carlo two-sided p-value
 #'
 #'
 #' @examples
@@ -4129,9 +4272,9 @@ test.kurtosis <- function(y) {
 #' not assumed. A Satterthwaite adjustment to the degrees of freedom is used  
 #' to improve the accuracy of the confidence intervals. If one or more lower
 #' limits are greater than 0 and no upper limit is less than 0, then conclude
-#' that the population means are monotoic decreasing. If one or more upper 
+#' that the population means are monotonic decreasing. If one or more upper 
 #' limits are less than 0 and no lower limits are greater than 0, then
-#' conclude that the population means are monotoic increasing. Reject the 
+#' conclude that the population means are monotonic increasing. Reject the 
 #' hypothesis of a monotonic trend if any lower limit is greater than 0 and 
 #' any upper limit is less than 0. 
 #'
@@ -4190,12 +4333,12 @@ test.mono.mean.bs <-function(alpha, m, sd, n) {
 
 
 # ====================== Sample Size for Desired Precision ====================
-# size.ci.mean1 ===============================================================
-#' Sample size for a single mean confidence interval
+# size.ci.mean ===============================================================
+#' Sample size for a mean confidence interval
 #'
 #'
 #' @description
-#' Computes the sample size required to estimate a single population mean with
+#' Computes the sample size required to estimate a population mean with
 #' desired confidence interval precision. Set the variance planning value to   
 #' the largest value within a plausible range for a conservatively large  
 #' sample size. 
@@ -4210,7 +4353,7 @@ test.mono.mean.bs <-function(alpha, m, sd, n) {
 #'
 #'
 #' @examples
-#' size.ci.mean1(.05, 264.4, 10)
+#' size.ci.mean(.05, 264.4, 10)
 #'
 #' # Should return:
 #' # Sample size
@@ -4219,7 +4362,7 @@ test.mono.mean.bs <-function(alpha, m, sd, n) {
 #' 
 #' @importFrom stats qnorm
 #' @export
-size.ci.mean1 <- function(alpha, var, w) {
+size.ci.mean <- function(alpha, var, w) {
  z <- qnorm(1 - alpha/2)
  n <- ceiling(4*var*(z/w)^2 + z^2/2)
  out <- matrix(n, nrow = 1, ncol = 1)
@@ -4523,10 +4666,10 @@ size.ci.mean.ps <- function(alpha, var, cor, w) {
 #' Computes the sample size required to estimate two types of population 
 #' standardized mean differences (unweighted standardizer and single group
 #' standardizer) with desired confidence interval precision in a paired-samples
-#' design. For a conservatively large sample size, set the standardized mean 
-#' difference planning value to the largest value within a plausible range and 
-#' set the Pearson correlation planning value to the smallest value within a 
-#' plausible range.
+#' design. Set the standardized mean difference planning value to the largest 
+#' value within a plausible range, and set the Pearson correlation planning 
+#' value to the smallest value within a plausible range for a conservatively
+#' large sample size.
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -4536,7 +4679,7 @@ size.ci.mean.ps <- function(alpha, var, cor, w) {
 #'
 #'
 #' @references
-#' \insertRef{Bonett2009}{statpsych}0
+#' \insertRef{Bonett2009}{statpsych}
 #'
 #'
 #' @return 
@@ -4726,7 +4869,9 @@ size.ci.lc.stdmean.ws <- function(alpha, d, cor, w, q) {
 #'
 #'
 #' Computes the sample size required to estimate a Cronbach reliability
-#' with desired confidence interval precision.
+#' with desired confidence interval precision. Set the reliability planning 
+#' value to the smallest value within a plausible range for a 
+#' conservatively large sample size.
 #'
 #'
 #' @param  alpha  alpha value for 1-alpha confidence 
@@ -4792,7 +4937,7 @@ size.ci.cronbach <- function(alpha, rel, r, w) {
 #'
 #' 
 #' @return 
-#' Returns the required sample size for each group group
+#' Returns the required sample size for each group
 #' 
 #' 
 #' @examples
@@ -4879,9 +5024,71 @@ size.ci.second <- function(n0, w0, w) {
 }
 
 
+#  size.ci.mean.prior =========================================================
+#' Sample size for a mean confidence interval using a planning value from
+#' a prior study 
+#'
+#'                
+#' @description
+#' Computes the sample size required to estimate a population mean with
+#' desired confidence interval precision in applications where an estimated
+#' variance from a prior study is available. The actual confidence interval
+#' width in the planned study will depend on the value of the estimated 
+#' variance in the planned study. An estimated variance from a prior study 
+#' is used to predict the value of the estimated correlation in the planned 
+#' study, and the predicted variance estimate is then used in the sample 
+#' size computation.
+#'
+#' This sample size approach assumes that the population variance in the 
+#' prior study is very similar to the population variance in the planned 
+#' study. In a typical sample size analysis, this type of information is not
+#' available, and the researcher must use expert opinion to guess the value
+#' of the variance that will be observed in the planned study. The 
+#' \link[statpsych]{size.ci.mean}) function uses a variance planning value 
+#' that is based on expert opinion regarding the likely value of the 
+#' variance estimate that will be observed in the planned study. 
+#'
+#'
+#' @param  alpha1  alpha level for 1-alpha1 confidence in the planned study
+#' @param  alpha2  alpha level for the 1-alpha2 prediction interval 
+#' @param  var0    estimated variance in prior study
+#' @param  n0      sample size in prior study
+#' @param  w       desired confidence interval width
+#'
+#'
+#' @return
+#' Returns the required sample size
+#'
+#'
+#' @examples
+#' size.ci.mean.prior(.05, .10, 26.4, 25, 4)
+#'
+#' # Should return:
+#' # Sample size
+#' #          44
+#'
+#' @export                 
+size.ci.mean.prior <- function(alpha1, alpha2, var0, n0, w) {
+ if (var0 < 0) {stop("variance must be positive")}
+ ci <- ci.var.upper(alpha2, var0, n0)
+ ul <- ci[1,1]
+ n1 <- size.ci.mean(alpha1, ul, w)
+ pi <- pi.var.upper(alpha2, var0, n0, n1)
+ ul <- pi[1,1]
+ n2 <- size.ci.mean(alpha1, ul, w)
+ pi <- pi.var.upper(alpha2, var0, n0, n2)
+ ul <- pi[1,1]
+ n <- size.ci.mean(alpha1, ul, w)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size"
+ rownames(out) <- ""
+ return(out)
+}
+
+
 # ======================== Sample Size for Desired Power ======================
-#  size.test.mean1 ============================================================
-#' Sample size for a test of a single mean
+#  size.test.mean ============================================================
+#' Sample size for a test of a mean
 #'
 #'
 #' @description
@@ -4902,7 +5109,7 @@ size.ci.second <- function(n0, w0, w) {
 #'
 #'
 #' @examples
-#' size.test.mean1(.05, .9, 80.5, 7)
+#' size.test.mean(.05, .9, 80.5, 7)
 #'
 #' # Should return:
 #' # Sample size
@@ -4911,7 +5118,7 @@ size.ci.second <- function(n0, w0, w) {
 #' 
 #' @importFrom stats qnorm
 #' @export
-size.test.mean1 <- function(alpha, pow, var, es) {
+size.test.mean <- function(alpha, pow, var, es) {
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
  n <- ceiling(var*(za + zb)^2/es^2 + za^2/2)
@@ -5357,15 +5564,19 @@ size.test.mann <- function(alpha, pow, p) {
 }
 
 
-#  size.test.sign1 =========================================================== 
-#' Sample size for a 1-sample Sign test
+#  size.test.sign =========================================================== 
+#' Sample size for a 1-group sign test
 #'
 #'
 #' @description
-#' Computes the sample size required for a Sign test with desired power in a 
-#' 1-sample design. A planning value of the 1-sample Sign test parameter value
-#' is required. This parameter is the proportion of members in the population 
-#' with scores greater than the hypothesized value. 
+#' Computes the sample size required for a 1-group sign test with desired 
+#' power (see size.test.sign.ps for a paired-samples sign test). The Sign 
+#' test is a test of the null hypothesis that the population median is equal 
+#' to some specified value. This null hypothesis can also be expressed in
+#' terms of the proportion of scores in the population that are greater than 
+#' the hypothesized population median value. Under the null hypothesis, this
+#' proportion is equal to .5. This function requires a planning value of this 
+#' population proportion.
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test 
@@ -5378,21 +5589,21 @@ size.test.mann <- function(alpha, pow, p) {
 #'
 #'
 #' @examples
-#' size.test.sign1(.05, .90, .3)
+#' size.test.sign(.05, .90, .3)
 #'
 #' # Should return:
 #' # Sample size
-#' #          56
+#' #          67
 #'  
 #' 
 #' @importFrom stats qnorm
 #' @export
-size.test.sign1 <- function(alpha, pow, p) {
+size.test.sign <- function(alpha, pow, p) {
  if (p > .9999 || p < .0001) {stop("proportion must be between .0001 and .9999")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
- es <- p - .5
- n <- ceiling(p*(1 - p)*(za + zb)^2/es^2)
+ n0 <- ceiling((za*sqrt(.25) + zb*sqrt(p*(1 - p)))^2/((p - .5)^2))
+ n <- n0 + 1/abs(p - .5)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
  rownames(out) <- ""
@@ -5401,18 +5612,20 @@ size.test.sign1 <- function(alpha, pow, p) {
 
 
 #  size.test.sign.ps ========================================================= 
-#' Sample size for a paired-samples Sign test
+#' Sample size for a paired-samples sign test
 #'
 #'
 #' @description
-#' Computes sample size required for a Sign test with desired power in a 
-#' paired-samples design. A planning value of the paired-samples Sign test 
-#' parameter is required. In a paired-samples experiment, this parameter 
-#' is the proportion of members in the population with scores that would be 
+#' Computes sample size required for a paired-samples sign test with desired 
+#' power. The null hypothesis can be expressed in terms of a population 
+#' proportion. In a paired-samples experiment, the proportion is defined as 
+#' the proportion of members in the population with scores that would be 
 #' larger under treatment 1 than treatment 2. In a paired-samples 
-#' nonexperiment, this parameter is the proportion of members in the  
+#' nonexperiment, the proportion is the proportion of members in the  
 #' population with measurement 1 scores that are larger than their
-#' measurement 2 scores.
+#' measurement 2 scores. Under the null hypothesis, the proportion is equal
+#' to .5. This function requires a planning value of this population 
+#' proportion.
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test 
@@ -5429,7 +5642,7 @@ size.test.sign1 <- function(alpha, pow, p) {
 #'
 #' # Should return:
 #' # Sample size
-#' #          32
+#' #          42
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -5438,8 +5651,8 @@ size.test.sign.ps <- function(alpha, pow, p) {
  if (p > .9999 || p < .0001) {stop("proportion must be between .0001 and .9999")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
- es <- p - .5
- n <- ceiling(p*(1 - p)*(za + zb)^2/es^2)
+ n0 <- ceiling((za*sqrt(.25) + zb*sqrt(p*(1 - p)))^2/((p - .5)^2))
+ n <- n0 + 1/abs(p - .5)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
  rownames(out) <- ""
@@ -5494,7 +5707,7 @@ size.test.cronbach <- function(alpha, pow, rel, r, h) {
 
 
 # ======================= Power for Planned Sample Size =======================
-#  power.mean1 ================================================================
+#  power.mean ================================================================
 #' Approximates the power of a one-sample t-test for a planned sample size
 #'
 #'
@@ -5508,7 +5721,7 @@ size.test.cronbach <- function(alpha, pow, rel, r, h) {
 #' @param  alpha  alpha level for hypothesis test 
 #' @param  n      planned sample size
 #' @param  var    planning value of response variable variance 
-#' @param  es     planning value of mean minus hypothesized value
+#' @param  es     planning value of mean minus null hypothesis value
 #'
 #'
 #' @return
@@ -5516,21 +5729,23 @@ size.test.cronbach <- function(alpha, pow, rel, r, h) {
 #'
 #'
 #' @examples
-#' power.mean1(.05, 15, 80.5, 7)
+#' power.mean(.05, 15, 80.5, 7)
 #'
 #' # Should return:
 #' #     Power
-#' # 0.8021661
+#' # 0.8021669
 #'
 #'
 #' @importFrom stats qt
 #' @importFrom stats pt
 #' @export
-power.mean1 <- function(alpha, n, var, es) { 
+power.mean <- function(alpha, n, var, es) { 
  df <- n - 1
  t <- qt(1 - alpha/2, df)
  z <- abs(es)/sqrt(var/n)
- pow <- 1 - pt(t, df, z)
+ pow1 <- 1 - pt(t, df, z)
+ pow2 <- 1 - pt(t, df, -z)
+ pow <- pow1 + pow2
  out <- matrix(pow, nrow = 1, ncol = 1)
  colnames(out) <- "Power"
  rownames(out) <- ""
@@ -5568,7 +5783,7 @@ power.mean1 <- function(alpha, n, var, es) {
 #'
 #' # Should return:
 #' #     Power
-#' # 0.8398413
+#' # 0.8398417
 #'
 #'
 #' @importFrom stats qt
@@ -5578,7 +5793,9 @@ power.mean2 <- function(alpha, n1, n2, var1, var2, es) {
  df <- (var1/n1 + var2/n2)^2/(var1^2/(n1^2*(n1 - 1)) + var2^2/(n2^2*(n2 - 1)))
  t <- qt(1 - alpha/2, df)
  z <- abs(es)/sqrt(var1/n1 + var2/n2)
- pow <- 1 - pt(t, df, z)
+ pow1 <- 1 - pt(t, df, z)
+ pow2 <- 1 - pt(t, df, -z)
+ pow <- pow1 + pow2
  out <- matrix(pow, nrow = 1, ncol = 1)
  colnames(out) <- "Power"
  rownames(out) <- ""
@@ -5621,7 +5838,7 @@ power.mean2 <- function(alpha, n1, n2, var1, var2, es) {
 #'
 #' # Should return:
 #' #     Power
-#' # 0.7221139
+#' # 0.7221171
 #'
 #'
 #' @importFrom stats qt
@@ -5633,7 +5850,9 @@ power.lc.mean.bs <- function(alpha, n, var, es, v) {
  df <- (se^4)/sum(((v^4)*(var^2)/(n^2*(n - 1))))
  t <- qt(1 - alpha/2, df)
  z <- abs(es)/se
- pow <- 1 - pt(t, df, z)
+ pow1 <- 1 - pt(t, df, z)
+ pow2 <- 1 - pt(t, df, -z)
+ pow <- pow1 + pow2
  out <- matrix(pow, nrow = 1, ncol = 1)
  colnames(out) <- "Power"
  rownames(out) <- ""
@@ -5671,7 +5890,7 @@ power.lc.mean.bs <- function(alpha, n, var, es, v) {
 #'
 #' # Should return:
 #' #     Power
-#' # 0.9074353
+#' # 0.9074354
 #'
 #'
 #' @importFrom stats qt
@@ -5682,7 +5901,9 @@ power.mean.ps <- function(alpha, n, var1, var2, es, cor) {
  df <- n - 1
  t <- qt(1 - alpha/2, df)
  z <- abs(es)/sqrt((var1 + var2 - 2*cor*sqrt(var1*var2))/n)
- pow <- 1 - pt(t, df, z)
+ pow1 <- 1 - pt(t, df, z)
+ pow2 <- 1 - pt(t, df, -z)
+ pow <- pow1 + pow2
  out <- matrix(pow, nrow = 1, ncol = 1)
  colnames(out) <- "Power"
  rownames(out) <- ""
@@ -5691,7 +5912,7 @@ power.mean.ps <- function(alpha, n, var1, var2, es, cor) {
 
 
 # ============================== Miscellaneous ===============================
-#  pi.score1 ================================================================= 
+#  pi.score ================================================================= 
 #' Prediction interval for one score
 #'
 #'
@@ -5715,7 +5936,7 @@ power.mean.ps <- function(alpha, n, var1, var2, es, cor) {
 #'
 #'
 #' @examples
-#' pi.score1(.05, 24.5, 3.65, 40)
+#' pi.score(.05, 24.5, 3.65, 40)
 #'
 #' # Should return:
 #' # Predicted  df       LL       UL
@@ -5724,7 +5945,7 @@ power.mean.ps <- function(alpha, n, var1, var2, es, cor) {
 #' 
 #' @importFrom stats qt
 #' @export
-pi.score1 <- function(alpha, m, sd, n) {
+pi.score <- function(alpha, m, sd, n) {
  df <- n - 1
  tcrit <- qt(1 - alpha/2, df)
  se <- sqrt(sd^2 + sd^2/n)
@@ -5818,10 +6039,10 @@ pi.score2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
-#' @param  m1     estimated mean from group 1
-#' @param  m2     estimated mean from group 2
-#' @param  sd1    estimated standard deviation from group 1
-#' @param  sd2    estimated standard deviation from group 2
+#' @param  m1     estimated mean for measurement 1
+#' @param  m2     estimated mean for measurement 2
+#' @param  sd1    estimated standard deviation for measurement 1
+#' @param  sd2    estimated standard deviation for measurement 2
 #' @param  cor    estimated correlation of paired scores
 #' @param  n      sample size
 #'
@@ -5899,11 +6120,11 @@ random.sample <- function(popsize, samsize) {
 #' Randomly assigns a sample of participants into k groups.
 #'
 #'
-#' @param  n   vector of sample sizes per group
+#' @param  n   k x 1 vector of sample sizes
 #'
 #'
 #' @return 
-#' Returns a vector of randomly generated group assignments.
+#' Returns a vector of randomly generated group assignments
 #'
 #'  
 #' @examples
@@ -5965,14 +6186,14 @@ random.y <- function(n, m, sd, min, max, dec) {
 
 
 #  ci.var.upper =============================================================== 
-#' Upper confidence limit of variance
+#' Upper confidence limit of a variance
 #'
 #'
 #' @description
-#' Computes an upper limit for a population variance using an estimated variance 
-#' from a sample of size n in a prior study. The upper limit can be used as 
-#' a variance planning value in sample size functions that require a variance 
-#' planning value.
+#' Computes an upper confidence limit for a population variance using an 
+#' estimated variance from a sample of size n in a prior study. The upper limit
+#' can be used as a variance planning value in sample size functions for 
+#' desired power that require a planning value of the population variance.
 #'
 #'
 #' @param  alpha  alpha value for 1-alpha confidence (one-sided)
@@ -6008,40 +6229,46 @@ ci.var.upper <- function(alpha, var, n) {
 #'
 #'                        
 #' @description
-#' Computes an approximate upper prediction limit for the estimated variance 
-#' in a future study for a planned sample size. The prediction limit uses a 
-#' variance estimate from a prior study. The upper variance prediction limit
-#' is useful as a variance planning value for the sample size required to obtain
-#' a confidence interval with desired width. This strategy for specifying a 
-#' variance planning value is useful in applications where the population variance
-#' in the prior study is assumed to be similar to the population variance in the
-#' planned study. This variance planning value can be used to revise the planned 
-#' sample size in the future study.
+#' Computes an upper prediction limit for the estimated variance in a
+#' future study for a planned sample size. The prediction limit uses a 
+#' variance estimate from a prior study. Several confidence interval 
+#' sample size functions in this package require a planning value of the
+#' estimated variance that is expected in the planned study. The upper variance
+#' prediction limit is useful as a variance planning value for the sample size
+#' required to obtain a confidence interval with desired width. This strategy
+#' for specifying a variance planning value is useful in applications where the
+#' population variance in the prior study is assumed to be very similar to the 
+#' population variance in the planned study. 
 #'
 #'
 #' @param  alpha  alpha value for upper 1-alpha confidence 
 #' @param  var    estimated variance from prior study
-#' @param  n1     sample size used to estimate variance
-#' @param  n2     planned sample size of future study
+#' @param  n0     sample size used to estimate variance
+#' @param  n      planned sample size of future study
 #'
 #'
 #' @return 
 #' Returns an upper prediction estimate (UL) of an estimated variance in a future study
 #'
 #'
+#' @references
+#' \insertRef{Hahn1972}{statpsych}
+#'
+#'
 #' @examples
-#' pi.var.upper(.2, 15, 40, 100)
+#' pi.var.upper(.05, 15, 40, 100)
 #'
 #' # Should return:
-#' #       UL
-#' # 18.78522
+#' #      UL
+#' # 23.9724
 #'  
 #' 
 #' @importFrom stats qnorm
+#' @importFrom stats qf
 #' @export
-pi.var.upper <- function(alpha, var, n1, n2) {
+pi.var.upper <- function(alpha, var, n0, n) {
  z <- qnorm(1 - alpha)
- ul <- exp(log(var) + z*sqrt(2/(n1 - 1) + 2/(n2 - 1)))
+ ul <- var*qf(1 - alpha, n - 1, n0 - 1)
  out <- matrix(ul, nrow = 1, ncol = 1)
  colnames(out) <- "UL"
  rownames(out) <- ""
@@ -6050,7 +6277,7 @@ pi.var.upper <- function(alpha, var, n1, n2) {
 
 
 #  etasqr.adj =================================================================
-#' Bias adjusts an eta-squared estimate
+#' Bias adjustments for an eta-squared estimate
 #'
 #'
 #' @description
@@ -6088,15 +6315,14 @@ etasqr.adj <- function(etasqr, dfeffect, dferror) {
 }
 
 
-#  test.anova1.bs =============================================================
+#  test.anova.bs =============================================================
 #' Between-subjects F statistic and eta-squared from summary information 
 #'
 #'
 #' @description
 #' Computes the F statistic, p-value, eta-squared, and adjusted eta-squared 
-#' for the main effect of Factor A in a one-way between-subjects ANOVA using
-#' the estimated group means, estimated group standard deviations, and group
-#' sample sizes.  
+#' for the main effect in a one-way between-subjects ANOVA using the estimated
+#' group means, estimated group standard deviations, and group sample sizes.  
 #'
 #'
 #' @param   m       vector of estimated group means
@@ -6109,7 +6335,6 @@ etasqr.adj <- function(etasqr, dfeffect, dferror) {
 #' * F - F statistic for test of null hypothesis
 #' * dfA - degrees of freedom for between-subjects factor
 #' * dfE - error degrees of freedom
-#' * dfA - degrees of freedom for between-subjects factor
 #' * p - p-value for F-test
 #' * Eta-squared - estimate of eta-squared
 #' * adj Eta-squared - a bias adjusted estimate of eta-squared
@@ -6119,7 +6344,7 @@ etasqr.adj <- function(etasqr, dfeffect, dferror) {
 #' m <- c(12.4, 8.6, 10.5)
 #' sd <- c(3.84, 3.12, 3.48)
 #' n <- c(20, 20, 20)
-#' test.anova1.bs(m, sd, n)
+#' test.anova.bs(m, sd, n)
 #'
 #' #  Should return:
 #' #        F dfA  dfE           p Eta-squared  adj Eta-squared
@@ -6128,25 +6353,25 @@ etasqr.adj <- function(etasqr, dfeffect, dferror) {
 #' 
 #' @importFrom stats pf
 #' @export
-test.anova1.bs <- function(m, sd, n) {
-  a <- length(m)
-  nt <- sum(n)
-  dfe <- nt - a
-  dfa <- a - 1
-  v <- sd^2
-  grandmean <- sum(n*m)/nt
-  SSe <- sum((n - 1)*v)
-  MSe <- SSe/dfe
-  SSa <- sum(n*(m - grandmean)^2)
-  MSa <- SSa/dfa
-  F <- MSa/MSe
-  p <- 1 - pf(F, dfa, dfe)
-  etasqr <- SSa/(SSa + SSe)
-  adjetasqr <- 1 - (dfa + dfe)*(1 - etasqr)/dfe
-  out <- t(c(F, dfa, dfe, p, etasqr, adjetasqr))
-  colnames(out) <- c("F", "dfA",  "dfE", "p", "Eta-squared", "adj Eta-squared")
-  rownames(out) <- ""
-  return(out)
+test.anova.bs <- function(m, sd, n) {
+ a <- length(m)
+ nt <- sum(n)
+ dfe <- nt - a
+ dfa <- a - 1
+ v <- sd^2
+ grandmean <- sum(n*m)/nt
+ SSe <- sum((n - 1)*v)
+ MSe <- SSe/dfe
+ SSa <- sum(n*(m - grandmean)^2)
+ MSa <- SSa/dfa
+ F <- MSa/MSe
+ p <- 1 - pf(F, dfa, dfe)
+ etasqr <- SSa/(SSa + SSe)
+ adjetasqr <- 1 - (dfa + dfe)*(1 - etasqr)/dfe
+ out <- t(c(F, dfa, dfe, p, etasqr, adjetasqr))
+ colnames(out) <- c("F", "dfA",  "dfE", "p", "Eta-squared", "adj Eta-squared")
+ rownames(out) <- ""
+ return(out)
 }
 
 
@@ -6158,8 +6383,8 @@ test.anova1.bs <- function(m, sd, n) {
 #' Computes generalized eta-square estimates in a two-factor design where one
 #' or both factors are classification factors. If both factors are treatment
 #' factors, then partial eta-square estimates are typically recommended.
-#' Use the estimates from this function in the etasqr.adj function to obtain
-#' bias adjusted estimates.
+#' The eta-squared estimates from this function can be used in the 
+#' \link[statpsych]{etasqr.adj}) function to obtain bias adjusted estimates.
 #'
 #'
 #' @param  SSa    sum of squares for factor A
@@ -6180,9 +6405,9 @@ test.anova1.bs <- function(m, sd, n) {
 #'
 #' # Should return:
 #' #                                           A         B        AB
-#' # A treatment, B classification:     0.300000 0.5435540 0.1811847
-#' # A classification, B treatment:     0.484252 0.3804878 0.2047244
-#' # A classification, B classiciation: 0.300000 0.3804878 0.1268293
+#' # A treatment, B classification:      0.300000 0.5435540 0.1811847
+#' # A classification, B treatment:      0.484252 0.3804878 0.2047244
+#' # A classification, B classification: 0.300000 0.3804878 0.1268293
 #'  
 #' 
 #' @export
@@ -6203,19 +6428,19 @@ etasqr.gen.2way <- function(SSa, SSb, SSab, SSe) {
  colnames(out) <- c("A", "B", "AB")
  rownames1 <- c("A treatment, B classification:")
  rownames2 <- c("A classification, B treatment:")
- rownames3 <- c("A classification, B classiciation:")
+ rownames3 <- c("A classification, B classification:")
  rownames(out) <- c(rownames1, rownames2, rownames3)
  return(out)
 }
 
 
-#  sim.ci.mean1 ===============================================================
-#' Simulates confidence interval coverage probability for single mean
+#  sim.ci.mean ===============================================================
+#' Simulates confidence interval coverage probability for a mean
 #'
 #'                               
 #' @description
 #' Performs a computer simulation of the confidence interval performance for a 
-#' single mean. Sample data can be generated from five different population 
+#' population mean. Sample data can be generated from five different population 
 #' distributions. All distributions are scaled to have standard deviations
 #' of 1.0.
 #'
@@ -6225,7 +6450,7 @@ etasqr.gen.2way <- function(SSa, SSb, SSab, SSe) {
 #' @param   dist   type of distribution (1, 2, 3, 4,or 5)
 #' * 1 = Gaussian (skewness = 0 and excess kurtosis = 0) 
 #' * 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
-#' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
+#' * 3 = leptokurtic (skewness = 0 and excess kurtosis = 6)
 #' * 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
 #' * 5 = large skew (skewness = 2 and excess kurtosis = 6)
 #' @param   rep    number of Monte Carlo samples
@@ -6240,7 +6465,7 @@ etasqr.gen.2way <- function(SSa, SSb, SSab, SSe) {
 #'
 #'
 #' @examples
-#' sim.ci.mean1(.05, 40, 4, 1000)
+#' sim.ci.mean(.05, 40, 4, 1000)
 #'
 #' # Should return (within sampling error):
 #' # Coverage Lower Error Upper Error Ave CI Width
@@ -6253,7 +6478,7 @@ etasqr.gen.2way <- function(SSa, SSb, SSab, SSe) {
 #' @importFrom stats rt
 #' @importFrom stats rgamma
 #' @export
-sim.ci.mean1 <- function(alpha, n, dist, rep) {
+sim.ci.mean <- function(alpha, n, dist, rep) {
  tcrit <- qt(1 - alpha/2, n - 1)
  if (dist == 1) {
    y <- matrix(rnorm(rep*n), nrow = rep)
@@ -6297,10 +6522,10 @@ sim.ci.mean1 <- function(alpha, n, dist, rep) {
 #'                               
 #' @description
 #' Performs a computer simulation of separate variance and pooled variance 
-#' confidence interval performance for a mean difference in a 2-group design.
-#' Sample data within each group can be generated from five different 
-#' population distributions. All distributions are scaled to have a standard 
-#' deviation of 1.0 in group 1. 
+#' confidence interval performance for a population mean difference in a 
+#' 2-group design. Sample data within each group can be generated from five 
+#' different population distributions. All distributions are scaled to have
+#' a standard deviation of 1.0 in group 1. 
 #'
 #'
 #' @param   alpha     alpha level for 1-alpha confidence
@@ -6311,7 +6536,7 @@ sim.ci.mean1 <- function(alpha, n, dist, rep) {
 #' @param   dist2     type of distribution for group 2 (1, 2, 3, 4, or 5)
 #' * 1 = Gaussian (skewness = 0 and excess kurtosis = 0) 
 #' * 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
-#' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
+#' * 3 = leptokurtic (skewness = 0 and excess kurtosis = 6)
 #' * 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
 #' * 5 = large skew (skewness = 2 and excess kurtosis = 6)
 #' @param   rep       number of Monte Carlo samples
@@ -6418,9 +6643,9 @@ sim.ci.mean2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2, rep) {
 #'
 #'                               
 #' @description
-#' Performs a computer simulation of confidence interval performance for a mean 
-#' difference in a paired-samples design. Sample data within each level of the 
-#' within-subjects factor can be generated from bivariate population
+#' Performs a computer simulation of confidence interval performance for a
+#' population mean difference in a paired-samples design. Sample data for the two
+#' levels of the within-subjects factor can be generated from bivariate population
 #' distributions with five different marginal distributions. All distributions
 #' are scaled to have standard deviations of 1.0 at level 1. Bivariate random
 #' data with specified marginal skewness and kurtosis are generated using the
@@ -6435,7 +6660,7 @@ sim.ci.mean2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2, rep) {
 #' @param   dist2     type of distribution at level 2 (1, 2, 3, 4, or 5)
 #' * 1 = Gaussian (skewness = 0 and excess kurtosis = 0) 
 #' * 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
-#' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
+#' * 3 = leptokurtic (skewness = 0 and excess kurtosis = 6)
 #' * 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
 #' * 5 = large skew (skewness = 2 and excess kurtosis = 6)
 #' @param   rep       number of Monte Carlo samples
@@ -6513,13 +6738,13 @@ sim.ci.mean.ps <- function(alpha, n, sd.ratio, cor, dist1, dist2, rep) {
 }
 
 
-#  sim.ci.median1 =============================================================
-#' Simulates confidence interval coverage probability for single median
+#  sim.ci.median =============================================================
+#' Simulates confidence interval coverage probability for a median
 #'
 #'                                      
 #' @description
 #' Performs a computer simulation of the confidence interval performance for 
-#' a single median. Sample data can be generated from five different 
+#' a population median. Sample data can be generated from five different 
 #' population distributions. All distributions are scaled to have standard 
 #' deviations of 1.0.
 #'
@@ -6529,7 +6754,7 @@ sim.ci.mean.ps <- function(alpha, n, sd.ratio, cor, dist1, dist2, rep) {
 #' @param   dist   type of distribution (1, 2, 3, 4, or 5) 
 #' * 1 = Gaussian (skewness = 0 and excess kurtosis = 0) 
 #' * 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
-#' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
+#' * 3 = leptokurtic (skewness = 0 and excess kurtosis = 6)
 #' * 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
 #' * 5 = large skew (skewness = 2 and excess kurtosis = 6)
 #' @param  rep     number of Monte Carlo samples
@@ -6538,13 +6763,13 @@ sim.ci.mean.ps <- function(alpha, n, sd.ratio, cor, dist1, dist2, rep) {
 #' @return
 #' Returns a 1-row matrix. The columns are:
 #' * Coverage - probability of confidence interval including population median  
-#' * Lower Error - probability of lower limit greater than population mediann
+#' * Lower Error - probability of lower limit greater than population median
 #' * Upper Error - probability of upper limit less than population median
 #' * Ave CI Width - average confidence interval width
 #'
 #'
 #' @examples
-#' sim.ci.median1(.05, 20, 5, 1000)
+#' sim.ci.median(.05, 20, 5, 1000)
 #'
 #' # Should return (within sampling error):
 #' # Coverage Lower Error Upper Error Ave CI Width
@@ -6557,7 +6782,7 @@ sim.ci.mean.ps <- function(alpha, n, sd.ratio, cor, dist1, dist2, rep) {
 #' @importFrom stats rt
 #' @importFrom stats rgamma
 #' @export
-sim.ci.median1 <- function(alpha, n, dist, rep) {
+sim.ci.median <- function(alpha, n, dist, rep) {
  zcrit <- qnorm(1 - alpha/2)
  o <- round((n - zcrit*sqrt(n))/2)
  if (o < 1) {o = 1}
@@ -6643,9 +6868,9 @@ sim.ci.median1 <- function(alpha, n, dist, rep) {
 #'                                          
 #' @description
 #' Performs a computer simulation of the confidence interval performance for a 
-#' difference of medians in a 2-group design. Sample data for each group can
-#' be generated from five different population distributions. All distributions
-#' are scaled to have standard deviations of 1.0 in group 1.
+#' difference of population medians in a 2-group design. Sample data for each
+#' group can be generated from five different population distributions. All 
+#' distributions are scaled to have standard deviations of 1.0 in group 1.
 #'
 #' @param   alpha     alpha level for 1-alpha confidence
 #' @param   n1        sample size for group 1
@@ -6655,7 +6880,7 @@ sim.ci.median1 <- function(alpha, n, dist, rep) {
 #' @param   dist2     type of distribution for group 2 (1, 2, 3, 4, or 5) 
 #' * 1 = Gaussian (skewness = 0 and excess kurtosis = 0) 
 #' * 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
-#' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
+#' * 3 = leptokurtic (skewness = 0 and excess kurtosis = 6)
 #' * 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
 #' * 5 = large skew (skewness = 2 and excess kurtosis = 6)
 #' @param   rep       number of Monte Carlo samples
@@ -6767,12 +6992,12 @@ sim.ci.median2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2, rep) {
 #'                               
 #' @description
 #' Performs a computer simulation of confidence interval performance for a 
-#' median difference in a paired-samples design. Sample data within each level
-#' of the within-subjects factor can be generated from bivariate population
-#' distributions with five different marginal distributions. All distributions
-#' are scaled to have standard deviations of 1.0 at level 1. Bivariate random 
-#' data with specified marginal skewness and kurtosis are generated using the
-#' unonr function in the mnonr package. 
+#' population median difference in a paired-samples design. Sample data for the
+#' two levels of the within-subjects factor can be generated from bivariate 
+#' population distributions with five different marginal distributions. All 
+#' distributions are scaled to have standard deviations of 1.0 at level 1. 
+#' Bivariate random data with specified marginal skewness and kurtosis are 
+#' generated using the unonr function in the mnonr package. 
 #'
 #' @param   alpha     alpha level for 1-alpha confidence
 #' @param   n         sample size 
@@ -6782,7 +7007,7 @@ sim.ci.median2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2, rep) {
 #' @param   dist2     type of distribution at level 2 (1, 2, 3, 4, or 5)
 #' * 1 = Gaussian (skewness = 0 and excess kurtosis = 0) 
 #' * 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
-#' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
+#' * 3 = leptokurtic (skewness = 0 and excess kurtosis = 6)
 #' * 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
 #' * 5 = large skew (skewness = 2 and excess kurtosis = 6)
 #' @param   rep       number of Monte Carlo samples
@@ -6797,7 +7022,6 @@ sim.ci.median2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2, rep) {
 #'
 #'
 #' @examples
-#' # Only 1000 reps because CRAN runs all examples and requires short execution time.
 #' sim.ci.median.ps(.05, 30, 1.5, .7, 4, 3, 1000)
 #'
 #' # Should return (within sampling error):
@@ -6903,10 +7127,10 @@ sim.ci.median.ps <- function(alpha, n, sd.ratio, cor, dist1, dist2, rep) {
 #'                                      
 #' @description
 #' Performs a computer simulation of confidence interval performance for  
-#' two types of standardized mean differences in a 2-group design. Sample 
-#' data for each group can be generated from five different population 
-#' distributions. All distributions are scaled to have standard deviations 
-#' of 1.0 in group 1.
+#' two types of standardized mean differences in a 2-group design (see
+#' ci.stdmean2). Sample data for each group can be generated from five 
+#' different population distributions. All distributions are scaled to have
+#' standard deviations of 1.0 in group 1.
 #'
 #' @param   alpha     alpha level for 1-alpha confidence
 #' @param   n1        sample size for group 1
@@ -6916,7 +7140,7 @@ sim.ci.median.ps <- function(alpha, n, sd.ratio, cor, dist1, dist2, rep) {
 #' @param   dist2     type of distribution for group 2 (1, 2, 3, 4, or 5) 
 #' * 1 = Gaussian (skewness = 0 and excess kurtosis = 0) 
 #' * 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
-#' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
+#' * 3 = leptokurtic (skewness = 0 and excess kurtosis = 6)
 #' * 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
 #' * 5 = large skew (skewness = 2 and excess kurtosis = 6)
 #' @param   d         population standardized mean difference 
@@ -7034,10 +7258,10 @@ sim.ci.stdmean2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2, d, rep) {
 #'                                              
 #' @description
 #' Performs a computer simulation of confidence interval performance for  
-#' two types of standardized mean differences in a paired-samples design. 
-#' Sample data for each level of the within-subjects factor can be generated 
-#' from five different population distributions. All distributions are scaled
-#' to have standard deviations of 1.0 at level 1.
+#' two types of standardized mean differences in a paired-samples design (see
+#' ci.stdmean.ps). Sample data for the two levels of the within-subjects factor
+#' can be generated from five different population distributions. All 
+#' distributions are scaled to have standard deviations of 1.0 at level 1.
 #'
 #' @param   alpha     alpha level for 1-alpha confidence
 #' @param   n         sample size 
@@ -7047,7 +7271,7 @@ sim.ci.stdmean2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2, d, rep) {
 #' @param   dist2     type of distribution at level 2 (1, 2, 3, 4, or 5) 
 #' * 1 = Gaussian (skewness = 0 and excess kurtosis = 0) 
 #' * 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
-#' * 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
+#' * 3 = leptokurtic (skewness = 0 and excess kurtosis = 6)
 #' * 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
 #' * 5 = large skew (skewness = 2 and excess kurtosis = 6)
 #' @param   d     population standardized mean difference 
@@ -7172,7 +7396,7 @@ sim.ci.stdmean.ps <- function(alpha, n, sd.ratio, cor, dist1, dist2, d, rep) {
 #'
 #'
 #' @param   rel     reliability of the sum or average of r1 measurements
-#' @param   r1      number of measurements in the orginal scale 
+#' @param   r1      number of measurements in the original scale 
 #' @param   r2      number of measurements in the new scale
 #'
 #'
@@ -7197,3 +7421,31 @@ spearmanbrown <- function(rel, r1, r2) {
  return(out)
 }
 
+
+
+# - Deprecated functions --------------------------------------------------
+#' @rdname ci.stdmean
+#' 
+#' @description
+#' ci.stdmean1 is deprecated and will soon be removed from statpsych; please switch to ci.stdmean
+#'  
+#' @export
+ci.stdmean1 <- ci.stdmean
+
+
+#' @rdname ci.mean
+#' 
+#' @description
+#' ci.mean1 is deprecated and will soon be removed from statpsych; please switch to ci.mean
+#'  
+#' @export
+ci.mean1 <- ci.mean
+
+
+#' @rdname ci.median
+#' 
+#' @description
+#' ci.median1 is deprecated and will soon be removed from statpsych; please switch to ci.median
+#'  
+#' @export
+ci.median1 <- ci.median

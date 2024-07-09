@@ -19,14 +19,14 @@ size.ci.pbcor(alpha, cor, w, p)
 Returns the required sample size
 }
 \description{
-Computes the sample size required to estimate a point-biserial correlation
-with desired confidence interval precision in a two-group nonexperimental
-design with simple random sampling. A two-group nonexperimental design
-implies two subpopulations (e.g., all boys and all girls in a school
-district). This function requires a planning value for the proportion of
-population members who belong to one of the two subpopulations. Set the
-correlation planning value to the smallest value within a plausible range
-for a conservatively large sample size.
+Computes the sample size required to estimate a population point-biserial
+correlation with desired confidence interval precision in a two-group
+nonexperimental design with simple random sampling. A two-group
+nonexperimental design implies two subpopulations (e.g., all boys and all
+girls in a school district). This function requires a planning value for the
+proportion of population members who belong to one of the two subpopulations.
+Set the correlation planning value to the smallest absolute value within a
+plausible range for a conservatively large sample size.
 }
 \examples{
 size.ci.pbcor(.05, .40, .25, .73)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/statpsych1.R
 \name{ci.var.upper}
 \alias{ci.var.upper}
-\title{Upper confidence limit of variance}
+\title{Upper confidence limit of a variance}
 \usage{
 ci.var.upper(alpha, var, n)
 }
@@ -17,10 +17,10 @@ ci.var.upper(alpha, var, n)
 Returns an upper limit (UL) variance planning value
 }
 \description{
-Computes an upper limit for a population variance using an estimated variance
-from a sample of size n in a prior study. The upper limit can be used as
-a variance planning value in sample size functions that require a variance
-planning value.
+Computes an upper confidence limit for a population variance using an
+estimated variance from a sample of size n in a prior study. The upper limit
+can be used as a variance planning value in sample size functions for
+desired power that require a planning value of the population variance.
 }
 \examples{
 ci.var.upper(.25, 15, 60)

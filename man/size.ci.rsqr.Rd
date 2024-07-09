@@ -19,10 +19,10 @@ size.ci.rsqr(alpha, r2, s, w)
 Returns the required sample size
 }
 \description{
-Computes the sample size required to estimate a squared multiple correlation
-in a random-x regression model with desired confidence interval precision.
-Set the planning value of the squared multiple correlation to 1/3 for a
-conservatively large sample size.
+Computes the sample size required to estimate a population squared multiple
+correlation in a random-x regression model with desired confidence interval
+precision. Set the planning value of the squared multiple correlation to 1/3
+for a conservatively large sample size.
 }
 \examples{
 size.ci.rsqr(.05, .25, 5, .2)

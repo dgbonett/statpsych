@@ -22,7 +22,7 @@ then the normality assumption can be rejected due to platykurtosis."><!-- mathja
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statpsych</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.0</span>
       </span>
     </div>
 
@@ -78,7 +78,7 @@ then the normality assumption can be rejected due to platykurtosis.</p>
 
 <p>Returns a 1-row matrix. The columns are:</p><ul><li><p>Kurtosis - estimate of kurtosis coefficient</p></li>
 <li><p>Excess - estimate of excess kurtosis (kurtosis - 3)</p></li>
-<li><p>p - Monte Carlo two-sided p-value for test of zero excess kurtosis</p></li>
+<li><p>p - Monte Carlo two-sided p-value</p></li>
 </ul></div>
 
     <div id="ref-examples">
@@ -86,7 +86,7 @@ then the normality assumption can be rejected due to platykurtosis.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fl">20</span>, <span class="fl">15</span>, <span class="fl">10</span>, <span class="fl">10</span>, <span class="fl">60</span>, <span class="fl">20</span>, <span class="fl">25</span>, <span class="fl">20</span>, <span class="fl">30</span>, <span class="fl">10</span>, <span class="fl">5</span>, <span class="fl">50</span>, <span class="fl">40</span>, <span class="fl">95</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">test.kurtosis</span><span class="op">(</span><span class="va">y</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Kurtosis Excess      p</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    4.8149 1.8149 0.0399</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    4.8149 1.8149 0.0394</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Should return:</span></span></span>
 <span class="r-in"><span><span class="co"># Kurtosis  Excess      p</span></span></span>

@@ -14,12 +14,12 @@ test_that("ci.cramer returns valid matrix", {
 })
 
 
-test_that("sim.ci.mean1 returns valid matrix", {
+test_that("sim.ci.mean returns valid matrix", {
   colnames_expected <- c(
      "Coverage", "Lower Error", "Upper Error", "Ave CI Width"
   )
 
-  res <- sim.ci.mean1(.05, 40, 4, 100)
+  res <- sim.ci.mean(.05, 40, 4, 100)
 
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
@@ -53,12 +53,12 @@ test_that("sim.ci.mean.ps returns valid matrix", {
 })
 
 
-test_that("sim.ci.median1 returns valid matrix", {
+test_that("sim.ci.median returns valid matrix", {
   colnames_expected <- c(
     "Coverage", "Lower Error", "Upper Error", "Ave CI Width"
   )
 
-  res <- sim.ci.median1(.05, 20, 5, 100)
+  res <- sim.ci.median(.05, 20, 5, 100)
 
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))

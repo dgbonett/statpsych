@@ -17,7 +17,7 @@ size.test.slope(alpha, pow, evar, x, slope, h)
 
 \item{slope}{planning value of slope}
 
-\item{h}{hypothesized value of slope}
+\item{h}{null hypothesis value of slope}
 }
 \value{
 Returns the required total sample size

@@ -10,9 +10,9 @@ ci.cronbach2(alpha, rel1, rel2, r1, r2, n1, n2)
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
 
-\item{rel1}{estimated Cronbach reliablity for group 1}
+\item{rel1}{estimated Cronbach reliability for group 1}
 
-\item{rel2}{estimated Cronbach reliablity for group 2}
+\item{rel2}{estimated Cronbach reliability for group 2}
 
 \item{r1}{number of measurements used in group 1}
 
@@ -32,7 +32,7 @@ Returns a 1-row matrix. The columns are:
 }
 \description{
 Computes a confidence interval for a difference in population Cronbach
-reliability coefficicents in a 2-group design. The number of measurements
+reliability coefficients in a 2-group design. The number of measurements
 (e.g., items or raters) used in each group need not be equal.
 }
 \examples{

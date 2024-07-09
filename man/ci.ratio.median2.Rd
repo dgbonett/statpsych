@@ -24,8 +24,8 @@ Returns a 1-row matrix. The columns are:
 }
 }
 \description{
-Computes a confidence interval for a ratio of population medians of
-ratio-scale measurements in a 2-group design.
+Computes a distribution-free confidence interval for a ratio of population
+medians of ratio-scale measurements in a 2-group design.
 }
 \examples{
 y2 <- c(32, 39, 26, 35, 43, 27, 40, 37, 34, 29, 49, 42, 40)

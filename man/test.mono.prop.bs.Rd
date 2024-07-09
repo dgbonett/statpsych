@@ -29,9 +29,9 @@ Computes simultaneous confidence intervals for all adjacent pairwise
 comparisons of population proportions using group frequency counts and
 samples sizes as input. If one or more lower limits are greater than
 0 and no upper limit is less than 0, then conclude that the population
-proportions are monotoic decreasing. If one or more upper limits are
+proportions are monotonic decreasing. If one or more upper limits are
 less than 0 and no lower limits are greater than 0, then conclude that
-the population proportions are monotoic increasing. Reject the hypothesis
+the population proportions are monotonic increasing. Reject the hypothesis
 of a monotonic trend if any lower limit is greater than 0 and any upper
 limit is less than 0.
 }

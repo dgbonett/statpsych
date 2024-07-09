@@ -19,10 +19,10 @@ size.ci.cor(alpha, cor, s, w)
 Returns the required sample size
 }
 \description{
-Computes the sample size required to estimate a Pearson or
+Computes the sample size required to estimate a population Pearson or
 partial correlation with desired confidence interval precision.
 Set s = 0 for a Pearson correlation. Set the correlation planning value
-to the smallest value within a plausible range for a conservatively
+to the smallest absolute value within a plausible range for a conservatively
 large sample size.
 }
 \examples{

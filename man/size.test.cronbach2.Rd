@@ -12,9 +12,9 @@ size.test.cronbach2(alpha, pow, rel1, rel2, r)
 
 \item{pow}{desired power}
 
-\item{rel1}{group 1 reliability planning value}
+\item{rel1}{reliability planning value for group 1}
 
-\item{rel2}{group 2 reliability planning value}
+\item{rel2}{reliability planning value for group 2}
 
 \item{r}{number of measurements (items, raters)}
 }

@@ -12,9 +12,9 @@ size.test.cor2(alpha, pow, cor1, cor2, s)
 
 \item{pow}{desired power}
 
-\item{cor1}{planning value of correlation}
+\item{cor1}{planning value of correlation for group 1}
 
-\item{cor2}{planning value of correlation}
+\item{cor2}{planning value of correlation for group 2}
 
 \item{s}{number of control variables}
 }
@@ -22,9 +22,9 @@ size.test.cor2(alpha, pow, cor1, cor2, s)
 Returns the required sample size for each group
 }
 \description{
-Computes the sample size required to test equality of two Pearson or partial
-correlation with desired power in a 2-group design. Set s = 0 for a Pearson
-correlation.
+Computes the sample size required to test the equality of two population
+Pearson or partial correlations with desired power in a 2-group design.
+Set s = 0 for a Pearson correlation.
 }
 \examples{
 size.test.cor2(.05, .8, .4, .2, 0)

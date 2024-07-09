@@ -14,7 +14,7 @@ Returns a 1-row matrix. The columns are:
 \itemize{
 \item Kurtosis - estimate of kurtosis coefficient
 \item Excess - estimate of excess kurtosis (kurtosis - 3)
-\item p - Monte Carlo two-sided p-value for test of zero excess kurtosis
+\item p - Monte Carlo two-sided p-value
 }
 }
 \description{

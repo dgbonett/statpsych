@@ -17,10 +17,10 @@ size.ci.agree(alpha, G, w)
 Returns the required sample size
 }
 \description{
-Computes the sample size required to estimate a G-index of agreement for
-two dichotomous ratings with desired confidence interval precision.
-Set the G-index planning value to the smallest value within a plausible
-range for a conservatively large sample size.
+Computes the sample size required to estimate a population G-index of
+agreement for two dichotomous ratings with desired confidence interval
+precision. Set the G-index planning value to the smallest value within a
+plausible range for a conservatively large sample size.
 }
 \examples{
 size.ci.agree(.05, .8, .2)

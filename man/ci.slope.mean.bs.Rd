@@ -2,8 +2,8 @@
 % Please edit documentation in R/statpsych1.R
 \name{ci.slope.mean.bs}
 \alias{ci.slope.mean.bs}
-\title{Confidence interval for the slope of means in a single-factor design with a
-quantitative between-subjects factor}
+\title{Confidence interval for the slope of means in a one-factor experimental
+design with a quantitative between-subjects factor}
 \usage{
 ci.slope.mean.bs(alpha, m, sd, n, x)
 }
@@ -25,17 +25,17 @@ Returns a 2-row matrix. The columns are:
 \item SE - standard error
 \item t - t test statistic
 \item df - degrees of freedom
-\item p - p-value
+\item p - two-sided p-value
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval
 }
 }
 \description{
 Computes a test statistic and confidence interval for the slope of means in
-a single-factor design with a quantitative between-subjects factor. This
-function computes both the unequal variance and equal variance confidence
-intervals and test statistics. A Satterthwaite adjustment to the degrees of
-freedom is used with the unequal variance method.
+a one-factor experimental design with a quantitative between-subjects
+factor. This function computes both the unequal variance and equal variance
+confidence intervals and test statistics. A Satterthwaite adjustment to the
+degrees of freedom is used with the unequal variance method.
 }
 \examples{
 m <- c(33.5, 37.9, 38.0, 44.1)

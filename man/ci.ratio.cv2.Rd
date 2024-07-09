@@ -32,7 +32,7 @@ Returns a 1-row matrix. The columns are:
 }
 \description{
 Computes a confidence interval for a ratio of population coefficients of
-variation (CV) in a 2-group degin. This confidence interval uses the
+variation (CV) in a 2-group design. This confidence interval uses the
 confidence interval for each CV and then uses the MOVER-DL method
 (see Newcombe, page 138) to obtain a confidence interval for CV1/CV2.
 The CV assumes ratio-scale scores.

@@ -27,7 +27,7 @@ Returns a 1-row matrix. The columns are:
 }
 }
 \description{
-Computes a confidence interval for a difference in population Spearman
+Computes a confidence interval for a difference of population Spearman
 correlations in a 2-group design.
 }
 \examples{

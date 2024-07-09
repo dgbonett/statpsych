@@ -2,7 +2,7 @@
 % Please edit documentation in R/statpsych1.R
 \name{ci.stdmean2}
 \alias{ci.stdmean2}
-\title{Confidence interval for a 2-group standardized mean difference}
+\title{Confidence intervals for a 2-group standardized mean difference}
 \usage{
 ci.stdmean2(alpha, m1, m2, sd1, sd2, n1, n2)
 }

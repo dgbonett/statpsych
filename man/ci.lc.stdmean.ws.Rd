@@ -10,9 +10,9 @@ ci.lc.stdmean.ws(alpha, m, sd, cor, n, q)
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
 
-\item{m}{vector of within-subjects estimated means}
+\item{m}{vector of estimated means for levels of within-subjects factor}
 
-\item{sd}{vector of within-subjects estimated standard deviations}
+\item{sd}{vector of estimated standard deviations for levels of within-subjects factor}
 
 \item{cor}{average estimated correlation of all measurement pairs}
 

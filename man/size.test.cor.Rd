@@ -15,14 +15,14 @@ size.test.cor(alpha, pow, cor, s, h)
 
 \item{s}{number of control variables}
 
-\item{h}{hypothesized value of correlation}
+\item{h}{null hypothesis value of correlation}
 }
 \value{
 Returns the required sample size
 }
 \description{
-Computes the sample size required to test a Pearson or a partial correlation
-with desired power. Set s = 0 for a Pearson correlation.
+Computes the sample size required to test a population Pearson or a partial
+correlation with desired power. Set s = 0 for a Pearson correlation.
 }
 \examples{
 size.test.cor(.05, .9, .45, 0, 0)

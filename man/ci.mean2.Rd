@@ -28,7 +28,7 @@ Returns a 2-row matrix. The columns are:
 \item SE - standard error
 \item t - t test statistic
 \item df - degrees of freedom
-\item p - p-value
+\item p - two-sided p-value
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval
 }
@@ -36,8 +36,9 @@ Returns a 2-row matrix. The columns are:
 \description{
 Computes equal variance and unequal variance confidence intervals for a
 population 2-group mean difference using the estimated means, estimated
-standard deviations, and sample sizes. Use the t.test function for raw data
-input.
+standard deviations, and sample sizes. Also computes equal variance and
+unequal variance independent-samples t-tests. Use the t.test function for
+raw data input.
 }
 \examples{
 ci.mean2(.05, 15.4, 10.3, 2.67, 2.15, 30, 20)

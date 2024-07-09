@@ -21,9 +21,9 @@ Returns the required sample size for each group
 }
 \description{
 Computes the sample size in each group (assuming equal sample sizes) required
-to estimate a linear contrast of proportions with desired confidence interval
-precision in a between-subjects design. Set the proportion planning values to
-.5 for a conservatively large sample size.
+to estimate a linear contrast of population proportions with desired confidence
+interval precision in a between-subjects design. Set the proportion planning
+values to .5 for a conservatively large sample size.
 }
 \examples{
 p <- c(.25, .30, .50, .50)

@@ -9,9 +9,9 @@ ci.cor2(alpha, cor1, cor2, n1, n2)
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
 
-\item{cor1}{estimated Pearson correlation in group 1}
+\item{cor1}{estimated Pearson correlation for group 1}
 
-\item{cor2}{estimated Pearson correlation in group 2}
+\item{cor2}{estimated Pearson correlation for group 2}
 
 \item{n1}{sample size for group 1}
 
@@ -28,7 +28,7 @@ Returns a 1-row matrix. The columns are:
 }
 \description{
 Computes a confidence interval for a difference in population Pearson
-correlations in a 2-group design. A bias adjustmentment is used to
+correlations in a 2-group design. A bias adjustment is used to
 reduce the bias of each Fisher transformed correlation.
 }
 \examples{

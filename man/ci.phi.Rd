@@ -27,17 +27,17 @@ Returns a 1-row matrix. The columns are:
 }
 }
 \description{
-Computes a confidence interval for a phi correlation. This function requires
-the frequency counts from a 2 x 2 contingency table for two dichotomous
-variables. This measure of association is usually most appropriate when both
-dichotomous variables are naturally dichotomous.
+Computes a Fisher confidence interval for a population phi correlation.
+This function requires the frequency counts from a 2 x 2 contingency table
+for two dichotomous variables. This measure of association is usually most
+appropriate when both dichotomous variables are naturally dichotomous.
 }
 \examples{
 ci.phi(.05, 229, 28, 96, 24)
 
 # Should return:
 #  Estimate         SE         LL        UL
-# 0.1229976 0.05746271 0.01037273 0.2356224
+#  0.1229976 0.05477117 0.01462398 0.2285149
 
 
 }

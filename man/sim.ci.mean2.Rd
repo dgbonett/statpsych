@@ -22,7 +22,7 @@ sim.ci.mean2(alpha, n1, n2, sd.ratio, dist1, dist2, rep)
 \itemize{
 \item 1 = Gaussian (skewness = 0 and excess kurtosis = 0)
 \item 2 = platykurtic (skewness = 0 and excess kurtosis = -1.2)
-\item 3 = leptokurtic (skewness = 0 and excess kurtsois = 6)
+\item 3 = leptokurtic (skewness = 0 and excess kurtosis = 6)
 \item 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
 \item 5 = large skew (skewness = 2 and excess kurtosis = 6)
 }}
@@ -40,10 +40,10 @@ Returns a 1-row matrix. The columns are:
 }
 \description{
 Performs a computer simulation of separate variance and pooled variance
-confidence interval performance for a mean difference in a 2-group design.
-Sample data within each group can be generated from five different
-population distributions. All distributions are scaled to have a standard
-deviation of 1.0 in group 1.
+confidence interval performance for a population mean difference in a
+2-group design. Sample data within each group can be generated from five
+different population distributions. All distributions are scaled to have
+a standard deviation of 1.0 in group 1.
 }
 \examples{
 sim.ci.mean2(.05, 30, 25, 1.5, 4, 5, 1000)

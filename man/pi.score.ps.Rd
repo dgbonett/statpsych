@@ -10,13 +10,13 @@ pi.score.ps(alpha, m1, m2, sd1, sd2, cor, n)
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
 
-\item{m1}{estimated mean from group 1}
+\item{m1}{estimated mean for measurement 1}
 
-\item{m2}{estimated mean from group 2}
+\item{m2}{estimated mean for measurement 2}
 
-\item{sd1}{estimated standard deviation from group 1}
+\item{sd1}{estimated standard deviation for measurement 1}
 
-\item{sd2}{estimated standard deviation from group 2}
+\item{sd2}{estimated standard deviation for measurement 2}
 
 \item{cor}{estimated correlation of paired scores}
 

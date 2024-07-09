@@ -2,7 +2,7 @@
 % Please edit documentation in R/statpsych2.R
 \name{size.interval.cor}
 \alias{size.interval.cor}
-\title{Sample size for a finite interval test of a Pearson or partial correlation}
+\title{Sample size for an interval test of a Pearson or partial correlation}
 \usage{
 size.interval.cor(alpha, pow, cor, s, h)
 }
@@ -21,10 +21,12 @@ size.interval.cor(alpha, pow, cor, s, h)
 Returns the required sample size
 }
 \description{
-Computes the sample size required to perform a finite interval test for a
-Pearson or a partial correlation with desired power. Set s = 0 for a
-Pearson correlation. The correlation planning value must be a value within
-the hypothesized finite interval.
+Computes the sample size required to perform an interval test for a
+population Pearson or a partial correlation with desired power where the
+interval midpoint is equal to zero. This function can be used to plan a study
+where the goal is to show that the population correlation is small. Set s = 0
+for a Pearson correlation. The correlation planning value must be a value
+within the hypothesized interval.
 }
 \examples{
 size.interval.cor(.05, .8, .1, 0, .25)
