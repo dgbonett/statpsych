@@ -3046,7 +3046,7 @@ size.test.prop <- function(alpha, pow, p, h) {
 size.test.prop2 <- function(alpha, pow, p1, p2, es) {
  if (p1 > .9999 || p1 < .0001) {stop("p1 must be between .0001 and .9999")}
  if (p2 > .9999 || p2 < .0001) {stop("p2 must be between .0001 and .9999")}
- if (es < .001) {stop("effect size must be greater than .001")}
+ if (es == 0) {stop("effect size cannot equal 0")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
  p0 <- (p1 + p2)/2
@@ -3099,6 +3099,7 @@ size.test.prop2 <- function(alpha, pow, p1, p2, es) {
 #' @importFrom stats qnorm
 #' @export
 size.test.lc.prop.bs <- function(alpha, pow, p, es, v) {
+ if (es == 0) {stop("effect size cannot equal 0")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
  n <- ceiling((t(v)%*%diag(p*(1 - p))%*%v)*(za + zb)^2/es^2)
@@ -3251,6 +3252,7 @@ size.supinf.prop2 <- function(alpha, pow, p1, p2, h) {
 #' @export
 size.test.prop.ps <- function(alpha, pow, p1, p2, phi, es) {
  if (phi > .999 || phi < -.999) {stop("phi must be between -.999 and .999")}
+ if (es == 0) {stop("effect size cannot equal 0")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
  cov <- phi*sqrt(p1*p2*(1 - p1)*(1 - p2))
