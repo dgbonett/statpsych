@@ -5119,6 +5119,7 @@ size.ci.mean.prior <- function(alpha1, alpha2, var0, n0, w) {
 #' @importFrom stats qnorm
 #' @export
 size.test.mean <- function(alpha, pow, var, es) {
+ if (es == 0) {stop("effect size cannot equal 0")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
  n <- ceiling(var*(za + zb)^2/es^2 + za^2/2)
@@ -5162,6 +5163,7 @@ size.test.mean <- function(alpha, pow, var, es) {
 #' @importFrom stats qnorm
 #' @export
 size.test.mean2 <- function(alpha, pow, var, es, R) {
+ if (es == 0) {stop("effect size cannot equal 0")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
  n1 <- ceiling(var*(1 + 1/R)*(za + zb)^2/es^2 + za^2/4)
@@ -5208,6 +5210,7 @@ size.test.mean2 <- function(alpha, pow, var, es, R) {
 #' @importFrom stats qnorm
 #' @export
 size.test.lc.mean.bs <- function(alpha, pow, var, es, v) {
+ if (es == 0) {stop("effect size cannot equal 0")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
  m <- length(v) - sum(v == 0)
@@ -5352,6 +5355,7 @@ size.supinf.mean2 <- function(alpha, pow, var, es, h) {
 #' @export
 size.test.mean.ps <- function(alpha, pow, var, es, cor) {
  if (cor > .999 || cor < -.999) {stop("correlation must be between -.999 and .999")}
+ if (es == 0) {stop("effect size cannot equal 0")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
  n <- ceiling(2*var*(1 - cor)*(za + zb)^2/es^2 + za^2/2)
@@ -5400,6 +5404,7 @@ size.test.mean.ps <- function(alpha, pow, var, es, cor) {
 #' @export
 size.test.lc.mean.ws <- function(alpha, pow, var, es, cor, q) {
  if (cor > .999 || cor < -.999) {stop("correlation must be between -.999 and .999")}
+ if (es == 0) {stop("effect size cannot equal 0")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
  n <- ceiling(var*(1 - cor)*(t(q)%*%q)*(za + zb)^2/es^2 + za^2/2)
