@@ -2617,7 +2617,7 @@ size.test.lc.ancova <- function(alpha, pow, evar, es, s, d, v) {
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
  k <- length(v)
- n <- ceiling((evar*(1 + d^2/4)*t(v)%*%v)*(za + zb)^2/es^2 + s + za^2/k)
+ n <- ceiling((evar*(1 + d^2/4)*t(v)%*%v)*(za + zb)^2/es^2 + s + za^2/(2*k))
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size per group"
  rownames(out) <- ""
