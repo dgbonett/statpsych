@@ -2608,7 +2608,7 @@ size.test.cor2 <- function(alpha, pow, cor1, cor2, s) {
 #'
 #' # Should return:
 #' # Sample size per group
-#' #                    47
+#' #                    46
 #'  
 #' 
 #' @importFrom stats qnorm
