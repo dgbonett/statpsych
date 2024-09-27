@@ -3816,12 +3816,64 @@ iqv <- function(f) {
 }
 
 
+#  exp.slope ================================================================== 
+#' Confidence interval for an exponentiated slope
+#'
+#'
+#' @description
+#' Computes confidence intervals for exp(B) and 100{exp(B) - 1]% where B is
+#' a population slope coefficient in a binary logit, ordinal logit, or
+#' log-Poisson model. This function is useful with software that does not
+#' have an option to compute exp(B) and 100[exp(B) - 1]%.
+#'
+#'
+#' @param  alpha  alpha level for 1-alpha confidence
+#' @param  b      estimated slope coefficient
+#' @param  se     slope standard error
+#'
+#'
+#' @return
+#' Returns a 2-row matrix. The first row gives the results for exp(B), and the 
+#' the second row gives the results for 100[exp(B) - 1]%. The columns are:
+#' * Estimate - estimate of exp(B) or 100[exp(B) - 1]%
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
+#'
+#'
+#' @examples
+#' exp.slope(.05, .502, .0396)
+#'
+#' # Should return:
+#' #                   Estimate        LL       UL
+#' # exp(B)            1.652022  1.528651  1.78535
+#' # 100[exp(B) - 1}% 65.202201 52.865066 78.53502
+#'
+#'
+#' @importFrom stats qnorm
+#' @export
+exp.slope <- function(alpha, b, se) { 
+  z <- qnorm(1 - alpha/2)
+  est1 <- exp(b)
+  est2 <- 100*(exp(b) - 1)
+  ll0 <- b - z*se
+  ul0 <- b + z*se
+  LL1 <- exp(ll0)
+  UL1 <- exp(ul0)
+  LL2 <- 100*(LL1 - 1)
+  UL2 <- 100*(UL1 - 1)
+  out1 <- t(c(est1, LL1, UL1))
+  out2 <- t(c(est2, LL2, UL2))
+  out <- rbind(out1, out2)
+  colnames(out) = c("Estimate", "LL", "UL")
+  rownames(out) = c("exp(B)", "100[exp(B) - 1}%")
+  return (out)
+}
+
+
 fix_imports <- function() {
   something <- Rdpack::append_to_Rd_list()
   res <- mathjaxr::preview_rd()
 }
-
-
 
 
 # - Deprecated functions --------------------------------------------------
