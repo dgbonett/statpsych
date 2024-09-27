@@ -2952,6 +2952,244 @@ size.ci.tetra <- function(alpha, p1, p2, cor, w) {
 }
 
 
+#  size.ci.oddsratio ==========================================================
+#' Sample size for an odds ratio confidence interval
+#'
+#'
+#' @description
+#' Computes the sample size required to estimate an odds ratio with desired 
+#' confidence interval precision. 
+#'
+#'
+#' @param   alpha   alpha level for 1 - alpha confidence
+#' @param   p1      planning value for row 1 marginal proportion 
+#' @param   p2      planning value for column 1 marginal proportion
+#' @param   or      planning value of odds ratio
+#' @param   r       desired upper to lower confidence interval endpoint ratio
+#'
+#'
+#' @return
+#' Returns the required sample size
+#'
+#'
+#' @examples
+#' size.ci.oddsratio(.05, .3, .2, 5.5, 3.0)
+#'
+#' # Should return:
+#' #  Sample size
+#' #          356
+#'
+#'
+#' @importFrom stats qnorm
+#' @export
+size.ci.oddsratio <- function(alpha, p1, p2, or, r) {
+ if (or < 0) {stop("odds ratio must be positive")}
+ z <- qnorm(1 - alpha/2)
+ r1 <- p1
+ r2 <- 1 - r1
+ c1 <- p2
+ c2 <- 1 - p2
+ a <- or*(r1 + c1) + (r2 - c1)
+ b <- sqrt(a^2 - 4*r1*c1*or*(or - 1))
+ p00 <- (a - b)/(2*(or - 1))
+ p01 <- r1 - p00
+ p10 <- c1 - p00
+ p11 <- 1 - (p00 + p01 + p10)
+ n0 <- ceiling(4*(1/p00 + 1/p01 + 1/p10 + 1/p11)*(z/log(r))^2)
+ ci <- ci.oddsratio(alpha, n0*p00, n0*p01, n0*p10, n0*p11)
+ r0 <- ci[4]/ci[3]
+ n <- ceiling(n0*(log(r0)/log(r))^2)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size"
+ rownames(out) <- ""
+ return(out)
+}
+
+
+#  size.ci.yule ================================================================
+#' Sample size for a Yule's Q confidence interval
+#'
+#'
+#' @description
+#' Computes the sample size required to estimate Yule's Q with desired 
+#' confidence interval precision. Set the Yule's Q planning value to the
+#' smallest absolute value within a plausible range for a conservatively large 
+#' sample size. 
+#'
+#'
+#' @param   alpha   alpha level for 1 - alpha confidence
+#' @param   p1      planning value for row 1 marginal proportion 
+#' @param   p2      planning value for column 1 marginal proportion
+#' @param   Q       planning value of Yule's Q
+#' @param   w       desired confidence interval width
+#'
+#'
+#' @return
+#' Returns the required sample size
+#'
+#'
+#' @examples
+#' size.ci.yule(.05, .3, .2, .5, .4)
+#'
+#' # Should return:
+#' #  Sample size
+#' #          354
+#'
+#'
+#' @importFrom stats qnorm
+#' @export
+size.ci.yule <- function(alpha, p1, p2, Q, w) {
+ if (Q > .999 || Q < -.999) {stop("Q must be between -.999 and .999")}
+ z <- qnorm(1 - alpha/2)
+ r1 <- p1
+ r2 <- 1 - r1
+ c1 <- p2
+ c2 <- 1 - p2
+ or <- (Q + 1)/(1 - Q)
+ a <- or*(r1 + c1) + (r2 - c1)
+ b <- sqrt(a^2 - 4*r1*c1*or*(or - 1))
+ p00 <- (a - b)/(2*(or - 1))
+ p01 <- r1 - p00
+ p10 <- c1 - p00
+ p11 <- 1 - (p00 + p01 + p10)
+ n0 <- ceiling((1 - Q^2)^2*(1/p00 + 1/p01 + 1/p10 + 1/p11)*(z/w)^2)
+ ci <- ci.yule(alpha, n0*p00, n0*p01, n0*p10, n0*p11)
+ w0 <- ci[1,4] - ci[1,3]
+ n <- ceiling(n0*(w0/w)^2)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size"
+ rownames(out) <- ""
+ return(out)
+}
+
+
+# size.ci.phi =================================================================
+#' Sample size for phi correlation confidence interval
+#'
+#'
+#' @description
+#' Computes the sample size required to estimate a phi correlation with desired 
+#' confidence interval precision. Set the phi correlation planning value to the
+#' smallest absolute value within a plausible range for a conservatively large 
+#' sample size.
+#'
+#'
+#' @param   alpha   alpha level for 1 - alpha confidence
+#' @param   p1      planning value for row 1 marginal proportion 
+#' @param   p2      planning value for column 1 marginal proportion
+#' @param   phi     planning value for phi correlation
+#' @param   w       desired confidence interval width
+#'
+#'
+#' @return
+#' Returns the required sample size
+#'
+#'
+#' @examples
+#' size.ci.phi(.05, .7, .8, .35, .2)
+#'
+#' # Should return:
+#' #  Sample size
+#' #          416
+#'
+#'
+#' @importFrom stats qnorm
+#' @export
+size.ci.phi <- function(alpha, p1, p2, phi, w) {
+ if (phi > .999 || phi < -.999) {stop("phi must be between -.999 and .999")}
+ z <- qnorm(1 - alpha/2)
+ r1 <- p1
+ r2 <- 1 - r1
+ c1 <- p2
+ c2 <- 1 - p2
+ phimax <- sqrt(c1*r2/(r1*c2))
+ if (phimax > 1) {phimax = 1/phimax}
+ phimin <- sqrt(c2*r2/(r1*c1))
+ if (phimin > 1) {phimin = 1/phimin}
+ if (phi > phimax) {stop("phi is too large for given marginal proportions")}
+ if (phi < -phimin) {stop("phi is too small for given marginal proportions")}
+ a <- sqrt(r1*r2*c1*c2)
+ p00 <- a*phi + r1*c1
+ p01 <- r1 - p00
+ p10 <- c1 - p00
+ p11 <- 1 - (p00 + p01 + p10)
+ v1 <- 1 - phi^2 
+ v2 <- phi + .5*phi^3
+ v3 <- (r1 - r2)*(c1 - c2)/sqrt(r1*r2*c1*c2) 
+ v4 <- (.75*phi^2)*((r1 - r2)^2/(r1*r2) + (c1 - c2)^2/(c1*c2))
+ v <-(v1 + v2*v3 - v4)
+ n0 <- ceiling(4*v*(z/w)^2)
+ ci <- ci.phi(alpha, n0*p00, n0*p01, n0*p10, n0*p11)
+ w0 <- ci[4] - ci[3]
+ n <- ceiling(n0*(w0/w)^2)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size"
+ rownames(out) <- ""
+ return(out)
+}
+
+
+# size.ci.biphi ===============================================================
+#' Sample size for biserial-phi correlation confidence interval
+#'
+#'
+#' @description
+#' Computes the sample size required to estimate a biserial-phi correlation 
+#' with desired confidence interval precision. Set the biserial-phi planning 
+#' value to the smallest absolute value within a plausible range for a 
+#' conservatively large sample size. The column variable is assumed to be
+#' naturally dichotomous and the row variable is assumed to be artificially
+#' dichotomous.
+#'
+#'
+#' @param   alpha   alpha level for 1 - alpha confidence
+#' @param   p1      planning value for row 1 marginal proportion 
+#' @param   p2      planning value for column 1 marginal proportion
+#' @param   cor     planning value for biserial-phi correlation
+#' @param   w       desired confidence interval width
+#'
+#'
+#' @return
+#' Returns the required sample size
+#'
+#'
+#' @examples
+#' size.ci.biphi(.05, .2, .5, .3, .4)
+#'
+#' # Should return:
+#' #  Sample size
+#' #          195
+#'
+#'
+#' @importFrom stats qnorm
+#' @export
+size.ci.biphi <- function(alpha, p1, p2, cor, w) {
+ if (cor > .999 || cor < -.999) {stop("correlation must be between -.999 and .999")}
+ z <- qnorm(1 - alpha/2)
+ r1 <- p1
+ r2 <- 1 - r1
+ c1 <- p2
+ c2 <- 1 - p2
+ or <- exp(sqrt(c1*c2)*cor/((1 - cor)))
+ a <- or*(r1 + c1) + (r2 - c1)
+ b <- sqrt(a^2 - 4*r1*c1*or*(or - 1))
+ p00 <- (a - b)/(2*(or - 1))
+ p01 <- r1 - p00
+ p10 <- c1 - p00
+ p11 <- 1 - (p00 + p01 + p10)
+ c <- 2.89/(c1*c2)
+ v <- c^2/(log(or)^2 + c)^3
+ n0 <- ceiling(4*v*(1/p00 + 1/p01 + 1/p10 + 1/p11)*(z/w)^2)
+ ci <- ci.biphi(alpha, n0*p00, n0*p01, n0*c1, n0*(1 - c1))
+ w0 <- ci[4] - ci[3]
+ n <- ceiling(n0*(w0/w)^2)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size"
+ rownames(out) <- ""
+ return(out)
+}
+
+
 # ===================== Sample Size for Desired Power ========================
 #  size.test.prop =========================================================== 
 #' Sample size for a test of a single proportion 
