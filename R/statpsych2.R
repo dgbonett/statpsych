@@ -3292,7 +3292,7 @@ sim.ci.spear <- function(alpha, n, cor, dist1, dist2, rep) {
 #'                              
 #'
 #' @description
-#' Computes an adjusted standard error in a general linear model after one or 
+#' Computes adjusted standard errors in a general linear model after one or 
 #' more predictor variables with nonsignificant slopes have been dropped from 
 #' the model. The adjusted standard errors are then used to compute adjusted 
 #' t-values, p-values, and confidence intervals. The mean square error and
