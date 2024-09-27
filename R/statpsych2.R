@@ -2378,6 +2378,110 @@ size.ci.cor.prior <- function(alpha1, alpha2, cor0, n0, w) {
 }
 
 
+#  size.ci.ancova2 =========================================================
+#' Sample size for a 2-group ANCOVA confidence interval
+#'
+#'
+#' @description
+#' Computes the sample size for each group required to estimate a mean 
+#' difference in a 2-group ANCOVA model with desired confidence interval 
+#' precision. In a nonexperimental design, the sample size is affected by 
+#' the magnitude of covariate mean differences across groups. The covariate
+#' mean differences can be approximated by specifying the largest 
+#' standardized covariate mean difference of all covariates. In an 
+#' experiment, this standardized mean difference should be set to 0. Set 
+#' the error variance planning value to the largest value within a 
+#' plausible range for a conservatively large sample size.
+#'
+#'  
+#' @param  alpha  alpha level for 1-alpha confidence
+#' @param  evar   planning value of within group (error) variance
+#' @param  s      number of covariates 
+#' @param  d      largest standardized mean difference of all covariates
+#' @param  w      desired confidence interval width
+#' @param  R      ratio of n2/n1
+#'
+#' 
+#' @return 
+#' Returns the required sample size for each group
+#' 
+#' 
+#' @examples
+#' size.ci.ancova2(.05, 1.37, 1, 0, 1.5, 1)
+#'
+#' # Should return:
+#' #  n1 n2
+#' #  21 21
+#'
+#' size.ci.ancova2(.05, 1.37, 1, 0, 1.5, 2)
+#'
+#' # Should return:
+#' #  n1 n2
+#' #  16 32
+#'
+#' size.ci.ancova2(.05, 1.37, 1, .75, 1.5, 1)
+#'
+#' # Should return:
+#' #  n1 n2
+#' #  24 24
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export  
+size.ci.ancova2 <- function(alpha, evar, s, d, w, R) {
+ z <- qnorm(1 - alpha/2)
+ n1 <- ceiling(4*evar*(1 + d^2/4)*(1 + 1/R)*(z/w)^2 + s + z^2/4)
+ n2 <- ceiling(R*n1)
+ out <- t(c(n1, n2))
+ colnames(out) <- c("n1", "n2")
+ rownames(out) <- ""
+ return(out)
+}
+
+
+#  size.ci.slope.gen ==========================================================
+#' Sample size for a slope confidence interval in a general statistical model  
+#'
+#'
+#' @description
+#' Computes the sample size required to estimate a slope coefficient with 
+#' desired confidence interval precision in any general statistical model. 
+#' This function requires a standard error estimate for the slope of interest 
+#' from a prior or pilot study and the sample size that was used in the prior 
+#' or pilot study. 
+#'
+#'  
+#' @param  alpha  alpha level for 1-alpha confidence
+#' @param  se     standard error of slope from prior/pilot study
+#' @param  n0     sample size used in prior/pilot study 
+#' @param  s      number of predictor variables in model
+#' @param  w      desired confidence interval width
+#'
+#' 
+#' @return 
+#' Returns the required sample size
+#' 
+#' 
+#' @examples
+#' size.ci.slope.gen(.05, 3.15, 50, 2, 5)
+#'
+#' # Should return:
+#' #  Sample size
+#' #          308
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export  
+size.ci.slope.gen <- function(alpha, se, n0, s, w) {
+ z <- qnorm(1 - alpha/2)
+ n <- ceiling(4*n0*se^2*(z/w)^2 + s + 1)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size"
+ rownames(out) <- ""
+ return(out)
+}
+
+
 # ======================= Sample Size for Desired Power =======================
 #  size.test.slope ============================================================
 #' Sample size for a test of a slope
@@ -2669,6 +2773,116 @@ size.test.cronbach2 <- function(alpha, pow, rel1, rel2, r) {
  n <- ceiling((4*r/(r - 1))*(za + zb)^2/log(e)^2 + 2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size per group"
+ rownames(out) <- ""
+ return(out)
+}
+
+
+#  size.test.ancova2 ==========================================================
+#' Sample size for a 2-group ANCOVA hypothesis test
+#'
+#'
+#' @description
+#' Computes the sample size for each group required to test a mean difference
+#' in an ANCOVA model with desired power in a 2-group design. In a 
+#' nonexperimental design, the sample size is affected by the magnitude of 
+#' covariate mean differences across groups. The covariate mean differences can
+#' be approximated by specifying the largest standardized covariate mean 
+#' difference across of all covariates. In an experiment, this standardized 
+#' mean difference is set to 0. Set the error variance planning value to the 
+#' largest value within a plausible range for a conservatively large sample 
+#' size.
+#'
+#'  
+#' @param  alpha   alpha level for hypothesis test
+#' @param  pow     desired power
+#' @param  evar    planning value of within-group (error) variance
+#' @param  es      planning value of mean difference
+#' @param  s       number of covariates 
+#' @param  d       largest standardized mean difference of all covariates
+#' @param  R       n2/n1 rartio
+#'
+#' 
+#' @return 
+#' Returns the required sample size for each group
+#' 
+#' 
+#' @examples
+#' size.test.ancova2(.05, .9, 1.37, .7, 1, 0, 1)
+#'
+#' # Should return:
+#' #  n1 n2
+#' #  61 61
+#'
+#' size.test.ancova2(.05, .9, 1.37, .7, 1, 0, 2)
+#'
+#' # Should return:
+#' #  n1 n2
+#' #  47 94
+#'
+#' size.test.ancova2(.05, .9, 1.37, .7, 1, .5, 1)
+#'
+#' # Should return:
+#' #  n1 n2
+#' #  65 65
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export
+size.test.ancova2 <- function(alpha, pow, evar, es, s, d, R) {
+ if (es == 0) {stop("effect size cannot be zero")}
+ za <- qnorm(1 - alpha/2)
+ zb <- qnorm(pow)
+ n1 <- ceiling((evar*(1 + d^2/4)*(1 + 1/R))*(za + zb)^2/es^2 + s + za^2/4)
+ n2 <- ceiling(R*n1)
+ out <- t(c(n1, n2))
+ colnames(out) <- c("n1", "n2")
+ rownames(out) <- ""
+ return(out)
+}
+
+
+#  size.test.slope.gen ========================================================
+#' Sample size for a slope hypothesis test in a general statistical model  
+#'
+#'
+#' @description
+#' Computes the sample size required to test a null hypothesis with desired
+#' power that a population slope coefficient in any general statistical is 
+#' equal to zero. This function requires a standard error estimate for the 
+#' slope of interest from a prior or pilot study and the sample size that was
+#' used in the prior or pilot study. 
+#'
+#'  
+#' @param  alpha  alpha level for 1-alpha confidence
+#' @param  pow    desired power
+#' @param  se     standard error of slope from prior/pilot study
+#' @param  n0     sample size used in prior/pilot study 
+#' @param  s      number of predictor variables in model
+#' @param  b      planning value of population slope
+#'
+#' 
+#' @return 
+#' Returns the required sample size
+#' 
+#' 
+#' @examples
+#' size.test.slope.gen(.05, .8, 3.15, 50, 2, 5)
+#'
+#' # Should return:
+#' #  Sample size
+#' #          159
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export  
+size.test.slope.gen <- function(alpha, pow, se, n0, s, b) {
+ if (b == 0) {stop("slope planning value cannot be zero")}
+ za <- qnorm(1 - alpha/2)
+ zb <- qnorm(pow)
+ n <- ceiling(n0*se^2*(za + zb)^2/b^2 + s + 1)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size"
  rownames(out) <- ""
  return(out)
 }
