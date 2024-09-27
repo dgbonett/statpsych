@@ -1,3 +1,20 @@
+statpsych version 1.7.0 (Release date: 2024/11/xx)
+===========
+
+Changes:
+
+* New functions:
+    * size.ci.oddsratio -- Computes sample size for an odds ratio confidence interval
+    * size.ci.yule -- Computes sample size for Yule's Q confidence interval
+    * size.ci.phi -- Computes sample size for a phi correlation confidence interval
+    * size.ci.biphi -- Computes sample size for a biserial-phi correlation confidence interval
+    * size.ci.ancova2 -- Computes sample size for a 2-group ANCOVA confidence interval
+    * size.ci.slope.gen -- Computes sample size for a slope coefficient confidence interval in a general model
+    * size.test.ancova2 -- Computes sample size for a 2-group ANCOVA hypothesis test
+    * size.test.slope.gen -- Computes sample size for a slope coefficient hypothesis test in a general model
+    * exp.slope -- Computes confidence intervals for exp(B) and 100(exp(B) - 1)% 
+
+
 statpsych version 1.6.0 (Release date: 2024/07/08)
 ===========
 
