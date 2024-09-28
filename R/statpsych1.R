@@ -3034,8 +3034,9 @@ ci.2x2.mean.bs <- function(alpha, y11, y12, y21, y22) {
 #' (AB interaction, main effect of A, main effect of B, simple main effects
 #' of A, and simple main effects of B) in a 2x2 between-subjects design with  
 #' a quantitative response variable. Equality of population variances is not 
-#' assumed. An unweighted variance standardizer is used, which is the 
-#' recommended standardizer when both factors are treatment factors.
+#' assumed. A square root unweighted average variance standardizer is used,
+#' which is the recommended standardizer when both factors are treatment 
+#' factors.
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
@@ -3349,6 +3350,7 @@ ci.2x2.median.bs <- function(alpha, y11, y12, y21, y22) {
 #' (AB interaction, main effect of A, main effect of B, simple main effects
 #' of A, and simple main effects of B) in a 2x2 within-subjects design.
 #' Equality of population variances is not assumed. An unweighted variance 
+#' standardizer is used. A square root unweigthed average variance 
 #' standardizer is used.
 #'
 #'
@@ -3524,7 +3526,8 @@ ci.2x2.stdmean.ws <- function(alpha, y11, y12, y21, y22) {
 #' main effect of A, main effect of B, simple main effects of A, and simple main
 #' effects of B in a 2x2 mixed factorial design where Factor A is a 
 #' within-subjects factor, and Factor B is a between-subjects factor. Equality 
-#' of population variances is not assumed.
+#' of population variances is not assumed. A square root unweigthed average 
+#' variance standardizer is used.
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
@@ -3594,7 +3597,6 @@ ci.2x2.stdmean.mixed <- function(alpha, y11, y12, y21, y22) {
  cor1 <- cor(y11, y21)
  cor2 <- cor(y12, y22)
  s <- sqrt((sd1^2 + sd2^2 + sd3^2 + sd4^2)/4)
- # check v0
  v01 <- (sd1^4 + sd3^4 + 2*(cor1^2*sd1^2*sd3^2))/(32*s^4*df1)
  v02 <- (sd2^4 + sd4^4 + 2*(cor2^2*sd2^2*sd4^2))/(32*s^4*df2)
  v0 <- v01 + v02
