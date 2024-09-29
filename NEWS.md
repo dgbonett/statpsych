@@ -12,7 +12,9 @@ Changes:
     * size.ci.slope.gen -- Computes sample size for a slope coefficient confidence interval in a general model
     * size.test.ancova2 -- Computes sample size for a 2-group ANCOVA hypothesis test
     * size.test.slope.gen -- Computes sample size for a slope coefficient hypothesis test in a general model
-    * exp.slope -- Computes confidence intervals for exp(B) and 100(exp(B) - 1)% 
+    * exp.slope -- Computes confidence intervals for exp(B) and 100(exp(B) - 1)%
+* Error Corrections:
+    * ci.2x2.stdmean.mixed -- corrected an error in the standard error computation
 
 
 statpsych version 1.6.0 (Release date: 2024/07/08)
@@ -41,7 +43,6 @@ Changes:
     * size.ci.cor.prior -- Computes sample size for a correlation confidence interval using a planning value from a prior study
     * adj.se -- Computes adjusted standard errors for slope coefficients in an exploratory analysis
     * fitindices -- Computes four SEM fit indices
-
 * Modifications:
     * ci.var.upper now computes an exact upper limit rather than an approximate upper limit
     * power computations are now more accurate for very small effect sizes in the power.cor, power.cor2, power.lc.meanc.bs, power.mean, power.mean2, power.mean.ps, power.prop, power.pro2, and power.prop.ps functions
@@ -75,8 +76,8 @@ Changes:
     * size.ci.pbcor -- Computes the sample size requirement for a point-biserial correlation confidence interval
     * size.ci.mape1 -- Computes the sample size requirement for a mean absolute prediction error confidence interval
 * Error Corrections:
-    * corrected CI error in ci.cramer
-    * corrected SE error in ci.lc.stdmean.ws
+    * ci.cramer -- corrected an error in the CI computation 
+    * ci.lc.stdmean.ws -- corrected an error in the standard error computation
 * Modifications:
     * both biased and bias adjusted estimates are now reported in ci.stdmean1, ci.stdmean2, 
            ci.stdmean.ps, ci.stdmean.strat, and ci.2x2.stdmean.bs
@@ -167,7 +168,7 @@ Changes:
     * size.ci.stdmean.ps -- now returns two rows, one for each standardizer
     * ci.mann -- now returns a confidence interval for P(y1 > y2) rather than P(y1 < y2).
 * Error Correction:
-    * ci.lc.std.mean.ws -- corrected an error in the standard error computation
+    * ci.lc.stdmean.ws -- corrected an error in the standard error computation
     
 
 statpsych v1.2.0 (Release date: 2022/08/15)
@@ -193,7 +194,7 @@ Changes:
     * The ci.cor, ci.cor2, and ci.cor.dep functions now uses a bias adjustment to reduce the bias of the Fisher transformed correlations
     * The ci.median1 function now uses the same standard error formula as the ci.median2, ci.ratio.median2, and ci.median.ps functions
 * Error Correction:
-    * Corrected an error for the standard error computation in the ci.indirect function
+    * ci.indirect -- Corrected an error in the standard error computation
     
 
 statpsych v1.1.0 (Release date: 2022/06/30)
