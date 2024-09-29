@@ -1190,10 +1190,10 @@ ci.tetra <- function(alpha, f00, f01, f10, f11) {
 #'
 #'
 #' @param   alpha  alpha level for 1-alpha confidence
-#' @param   f00    number of objects rated y = 0 and x = 0
-#' @param   f01    number of objects rated y = 0 and x = 1
-#' @param   f10    number of objects rated y = 1 and x = 0
-#' @param   f11    number of objects rated y = 1 and x = 1
+#' @param   f00    number of objects rated 0 by both Rater 1 and Rater 2
+#' @param   f01    number of objects rated 0 by Rater 1 and 1 by Rater 2
+#' @param   f10    number of objects rated 1 by Rater 1 and 0 by Rater 2
+#' @param   f11    number of objects rated 1 by both Rater 1 and Rater 2
 #'
 #'
 #' @return
