@@ -1586,10 +1586,9 @@ ci.popsize <- function(alpha, f00, f01, f10) {
 #'
 #' @description
 #' Computes a confidence interval for a population Cramer's V coefficient
-#' of nominal association for an r x s contingency table and its approximate
-#' standard error. The confidence interval is based on a noncentral chi-square 
-#' distribution, and an approximate standard error is recovered from the
-#' confidence interval.
+#' of nominal association for an r x s contingency table. The confidence interval 
+#' is based on a noncentral chi-square distribution, and an approximate standard 
+#' error is recovered from the confidence interval.
 #'
 #'
 #' @param  alpha    alpha value for 1-alpha confidence
