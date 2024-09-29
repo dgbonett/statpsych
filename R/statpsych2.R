@@ -23,7 +23,7 @@
 #'
 #' @return 
 #' Returns a 1-row matrix. The columns are:
-#' * Estimate - estimated correlation
+#' * Estimate - estimated correlation (from input)
 #' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -956,11 +956,10 @@ ci.lc.glm <-function(alpha, n, b, V, q) {
 #'                                              
 #' @description
 #' Computes the estimate, standard error, and approximate confidence interval 
-#' for a linear contrast of any type of parameter (e.g., quartile, logistic
-#' regression slope, path coefficient) where each parameter value has
+#' for a linear contrast of any type of parameter where each parameter value has
 #' been estimated from a different sample. The parameter values are assumed to 
-#' be of the same type (e.g., all unstandardized path coefficients) and their 
-#' sampling distributions are assumed to be approximately normal.
+#' be of the same type and their sampling distributions are assumed to be 
+#' approximately normal.
 #'
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
