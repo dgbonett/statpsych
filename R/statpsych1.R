@@ -2011,12 +2011,12 @@ ci.ratio.median2 <- function(alpha, y1, y2) {
 #' Computes a distribution-free confidence interval for a linear contrast of 
 #' medians in a between-subjects design using estimated medians and their 
 #' standard errors. The sample median and standard error for each group can be
-#' computed using the \link[statpsych]{ci.median}) function.
+#' computed using the \link[statpsych]{ci.median} function.
 #'
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
 #' @param  m       vector of estimated group medians
-#' @param  se      vector of group standard errors 
+#' @param  se      vector of estimated group standard errors 
 #' @param  v       vector of between-subjects contrast coefficients
 #'
 #'
