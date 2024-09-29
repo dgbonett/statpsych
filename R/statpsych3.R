@@ -1256,7 +1256,10 @@ ci.kappa <- function(alpha, f00, f01, f10, f11) {
 #' Computes an adjusted Wald confidence interval for a G-index of agreement
 #' between two polychotomous ratings. This function requires the number of 
 #' objects that were given the same rating by both raters. The G-index
-#' corrects for chance agreement.
+#' corrects for chance agreement. The G-index is a better measure of 
+#' agreement than Cohen's kappa, and the confidence interval for the G-index
+#' used here has better small-sample properties than the confidence interval
+#' for Cohen's kappa.  
 #'
 #'
 #' @param   alpha  alpha level for 1-alpha confidence
