@@ -2620,6 +2620,7 @@ ci.etasqr <- function(alpha, etasqr, df1, df2) {
  return(out)
 }
 
+
 # ci.2x2.mean.mixed ===========================================================
 #' Computes tests and confidence intervals of effects in a 2x2 mixed design 
 #' for means
@@ -2627,7 +2628,7 @@ ci.etasqr <- function(alpha, etasqr, df1, df2) {
 #'
 #' @description
 #' Computes confidence intervals and tests for the AB interaction effect, 
-#' main effect of A, main effect of B, simple main effects of A, and simple main
+#' main effect of A, main efect of B, simple main effects of A, and simple main
 #' effects of B in a 2x2 mixed factorial design with a quantitative response
 #' variable where Factor A is a within-subjects factor, and Factor B is a 
 #' between-subjects factor. A Satterthwaite adjustment to the degrees of 
@@ -2635,10 +2636,10 @@ ci.etasqr <- function(alpha, etasqr, df1, df2) {
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
-#' @param   y11     vector of scores at level 1 of A and level 1 of B
-#' @param   y12     vector of scores at level 1 of A and level 2 of B
-#' @param   y21     vector of scores at level 2 of A and level 1 of B
-#' @param   y22     vector of scores at level 2 of A and level 2 of B
+#' @param   y11     vector of scores at level 1 of A and level 1 of B (group 1)
+#' @param   y12     vector of scores at level 1 of A and level 2 of B (group 2)
+#' @param   y21     vector of scores at level 2 of A and level 1 of B (group 1)
+#' @param   y22     vector of scores at level 2 of A and level 2 of B (group 2)
 #'
 #'
 #' @return
@@ -2647,15 +2648,15 @@ ci.etasqr <- function(alpha, etasqr, df1, df2) {
 #' * SE - standard error 
 #' * t - t test statistic 
 #' * df - degrees of freedom
-#' * p - two-sided p-value 
+#' * p - p-value 
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #'
 #'
 #' @examples
 #' y11 <- c(18, 19, 20, 17, 20, 16)
-#' y12 <- c(19, 18, 19, 20, 17, 16)
-#' y21 <- c(19, 16, 16, 14, 16, 18)
+#' y12 <- c(19, 16, 16, 14, 16, 18)
+#' y21 <- c(19, 18, 19, 20, 17, 16)
 #' y22 <- c(16, 10, 12,  9, 13, 15)
 #' ci.2x2.mean.mixed(.05, y11, y12, y21, y22)
 #'
@@ -2674,18 +2675,19 @@ ci.etasqr <- function(alpha, etasqr, df1, df2) {
 #' @importFrom stats pt
 #' @export
 ci.2x2.mean.mixed <- function(alpha, y11, y12, y21, y22) {
- if (length(y11) != length(y12)) {stop("length of y11 must equal length of y12")}
- if (length(y21) != length(y22)) {stop("length of y21 must equal length of y22")}
+ if (length(y11) != length(y21)) {stop("length of y11 must equal length of y21")}
+ if (length(y12) != length(y22)) {stop("length of y12 must equal length of y22")}
  n1 <- length(y11)
- n2 <- length(y21)
- diff1 <- y11 - y12
- diff2 <- y21 - y22
- ave1 <- (y11 + y12)/2
- ave2 <- (y21 + y22)/2
+ n2 <- length(y12)
+ diff1 <- y11 - y21
+ diff2 <- y12 - y22
+ ave1 <- (y11 + y21)/2
+ ave2 <- (y12 + y22)/2
  vd1 <- var(diff1)
  vd2 <- var(diff2)
  va1 <- var(ave1)
  va2 <- var(ave2)
+ # AB
  est1 <- mean(diff1) - mean(diff2)
  se1 <- sqrt(vd1/n1 + vd2/n2)
  df1 <- (se1^4)/(vd1^2/(n1^3 - n1^2) + vd2^2/(n2^3 - n2^2))
@@ -2695,6 +2697,7 @@ ci.2x2.mean.mixed <- function(alpha, y11, y12, y21, y22) {
  LL1 <- est1 - tcrit1*se1
  UL1 <- est1 + tcrit1*se1
  row1 <- c(est1, se1, t1, df1, p1, LL1, UL1)
+ # A
  est2 <- (mean(diff1) + mean(diff2))/2
  se2 <- sqrt(vd1/n1 + vd2/n2)/2
  df2 <- (se2^4)/(vd1^2/((n1^3 - n1^2)*16) + vd2^2/((n2^3 - n2^2)*16))
@@ -2704,6 +2707,7 @@ ci.2x2.mean.mixed <- function(alpha, y11, y12, y21, y22) {
  LL2 <- est2 - tcrit2*se2
  UL2 <- est2 + tcrit2*se2
  row2 <- c(est2, se2, t2, df2, p2, LL2, UL2)
+ # B
  est3 <- mean(ave1) - mean(ave2)
  se3 <- sqrt(va1/n1 + va2/n2)
  df3 <- (se3^4)/(va1^2/(n1^3 - n1^2) + va2^2/(n2^3 - n2^2))
@@ -2713,6 +2717,7 @@ ci.2x2.mean.mixed <- function(alpha, y11, y12, y21, y22) {
  LL3 <- est3 - tcrit3*se3
  UL3 <- est3 + tcrit3*se3
  row3 <- c(est3, se3, t3, df3, p3, LL3, UL3)
+ # A at b1
  est4 <- mean(diff1)
  se4 <- sqrt(vd1/n1)
  df4 <- n1 - 1
@@ -2722,6 +2727,7 @@ ci.2x2.mean.mixed <- function(alpha, y11, y12, y21, y22) {
  LL4 <- est4 - tcrit4*se4
  UL4 <- est4 + tcrit4*se4
  row4 <- c(est4, se4, t4, df4, p4, LL4, UL4)
+ # A at b2
  est5 <- mean(diff2)
  se5 <- sqrt(vd2/n2)
  df5 <- n2 - 1
@@ -2731,18 +2737,20 @@ ci.2x2.mean.mixed <- function(alpha, y11, y12, y21, y22) {
  LL5 <- est5 - tcrit5*se5
  UL5 <- est5 + tcrit5*se5
  row5 <- c(est5, se5, t5, df5, p5, LL5, UL5)
- est6 <- mean(y11) - mean(y21)
- se6 <- sqrt(var(y11)/n1 + var(y21)/n2)
- df6 <- (se6^4)/(var(y11)^2/(n1^3 - n1^2) + var(y21)^2/(n2^3 - n2^2))
+ # B at a1
+ est6 <- mean(y11) - mean(y12)
+ se6 <- sqrt(var(y11)/n1 + var(y12)/n2)
+ df6 <- (se6^4)/(var(y11)^2/(n1^3 - n1^2) + var(y12)^2/(n2^3 - n2^2))
  tcrit6 <- qt(1 - alpha/2, df6)
  t6 <- est6/se6
  p6 <- 2*(1 - pt(abs(t6), df6))
  LL6 <- est6 - tcrit6*se6
  UL6 <- est6 + tcrit6*se6
  row6 <- c(est6, se6, t6, df6, p6, LL6, UL6)
- est7 <- mean(y12) - mean(y22)
- se7 <- sqrt(var(y12)/n1 + var(y22)/n2)
- df7 <- (se7^4)/(var(y12)^2/(n1^3 - n1^2) + var(y22)^2/(n2^3 - n2^2))
+ # B at a2
+ est7 <- mean(y21) - mean(y22)
+ se7 <- sqrt(var(y21)/n1 + var(y22)/n2)
+ df7 <- (se7^4)/(var(y21)^2/(n1^3 - n1^2) + var(y22)^2/(n2^3 - n2^2))
  tcrit7 <- qt(1 - alpha/2, df7)
  t7 <- est7/se7
  p7 <- 2*(1 - pt(abs(t7), df7))
@@ -3518,12 +3526,13 @@ ci.2x2.stdmean.ws <- function(alpha, y11, y12, y21, y22) {
 
 
 # ci.2x2.stdmean.mixed ========================================================
-#' Computes confidence intervals of standardized effects in a 2x2 mixed design 
+#' Computes confidence intervals of standardized effects in a 2x2 
+#' mixed design
 #'
 #'                          
 #' @description
 #' Computes confidence intervals for the standardized AB interaction effect, 
-#' main effect of A, main effect of B, simple main effects of A, and simple main
+#' main effect of A, main efect of B, simple main effects of A, and simple main
 #' effects of B in a 2x2 mixed factorial design where Factor A is a 
 #' within-subjects factor, and Factor B is a between-subjects factor. Equality 
 #' of population variances is not assumed. A square root unweigthed average 
@@ -3531,10 +3540,10 @@ ci.2x2.stdmean.ws <- function(alpha, y11, y12, y21, y22) {
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
-#' @param   y11     vector of scores at level 1 of A in group 1 
-#' @param   y12     vector of scores at level 2 of A in group 1
-#' @param   y21     vector of scores at level 1 of A in group 2
-#' @param   y22     vector of scores at level 2 of A in group 2
+#' @param   y11     vector of scores at level 1 of A and level 1 of B (group 1)
+#' @param   y12     vector of scores at level 1 of A and level 2 of B (group 2)
+#' @param   y21     vector of scores at level 2 of A and level 1 of B (group 1)
+#' @param   y22     vector of scores at level 2 of A and level 2 of B (group 2)
 #'
 #'
 #' @return
@@ -3552,40 +3561,40 @@ ci.2x2.stdmean.ws <- function(alpha, y11, y12, y21, y22) {
 #'
 #' @examples
 #' y11 <- c(18, 19, 20, 17, 20, 16)
-#' y12 <- c(19, 18, 19, 20, 17, 16)
-#' y21 <- c(19, 16, 16, 14, 16, 18)
+#' y12 <- c(19, 16, 16, 14, 16, 18)
+#' y21 <- c(19, 18, 19, 20, 17, 16)
 #' y22 <- c(16, 10, 12,  9, 13, 15)
 #' ci.2x2.stdmean.mixed(.05, y11, y12, y21, y22)
 #'
 #' # Should return:
-#' #             Estimate  adj Estimate        SE         LL         UL
-#' # AB:      -1.95153666   -1.80141845 0.5424100 -3.0146407 -0.8884326
-#' # A:        1.06061775    1.01125934 0.2780119  0.5157244  1.6055111
-#' # B:        1.90911195    1.76225718 0.5743510  0.7834047  3.0348192
-#' # A at b1:  0.08484942    0.07589163 0.4649598 -0.8264549  0.9961538
-#' # A at b2:  2.03638608    1.82139908 0.2964013  1.4554502  2.6173219
-#' # B at a1:  0.93334362    0.86154796 0.5487927 -0.1422703  2.0089575
-#' # B at a2:  2.88488027    2.66296641 0.7127726  1.4878717  4.2818889
+#' #             Estimate adj Estimate        SE          LL         UL
+#' # AB:      -1.95153666  -1.80141845 0.5407442 -3.01137589 -0.8916974
+#' # A:        1.06061775   1.01125934 0.2797699  0.51227884  1.6089567
+#' # B:        1.90911195   1.76225718 0.5758855  0.78039715  3.0378267
+#' # A at b1:  0.08484942   0.07589163 0.4650441 -0.82662027  0.9963191
+#' # A at b2:  2.03638608   1.82139908 0.2995604  1.44925855  2.6235136
+#' # B at a1:  0.93334362   0.86154796 0.5036429 -0.05377836  1.9204656
+#' # B at a2:  2.88488027   2.66296641 0.7477246  1.41936706  4.3503935
 #'
 #'
 #' @importFrom stats qnorm
 #' @export
 ci.2x2.stdmean.mixed <- function(alpha, y11, y12, y21, y22) {
- if (length(y11) != length(y12)) {stop("length of y11 must equal length of y12")}
- if (length(y21) != length(y22)) {stop("length of y21 must equal length of y22")}
+ if (length(y11) != length(y21)) {stop("length of y11 must equal length of y21")}
+ if (length(y12) != length(y22)) {stop("length of y12 must equal length of y22")}
  z <- qnorm(1 - alpha/2)
  n1 <- length(y11)
- n2 <- length(y21)
+ n2 <- length(y12)
  df1 <- n1 - 1
  df2 <- n2 - 1
  adj1 <- 1 - 3/(4*(df1 + df2) - 1)
  adj2 <- sqrt((n1 - 2)/df1)
  adj3 <- sqrt((n2 - 2)/df2)
  adj4 <- sqrt((n1 + n2 - 2)/(n1 + n2 - 1))
- diff1 <- y11 - y12
- diff2 <- y21 - y22
- ave1 <- (y11 + y12)/2
- ave2 <- (y21 + y22)/2
+ diff1 <- y11 - y21
+ diff2 <- y12 - y22
+ ave1 <- (y11 + y21)/2
+ ave2 <- (y12 + y22)/2
  vd1 <- var(diff1)
  vd2 <- var(diff2)
  va1 <- var(ave1)
@@ -3641,7 +3650,7 @@ ci.2x2.stdmean.mixed <- function(alpha, y11, y12, y21, y22) {
  UL5 <- est5 + z*se5
  row5 <- c(est5, est5u, se5, LL5, UL5)
  # B at a1
- est6 <- (mean(y11) - mean(y21))/s
+ est6 <- (mean(y11) - mean(y12))/s
  est6u <- adj1*est6
  v6 <- var(y11)/df1 + var(y21)/df2
  se6 <- sqrt(est6*v0/s^4 + v6/s^2)
@@ -3649,7 +3658,7 @@ ci.2x2.stdmean.mixed <- function(alpha, y11, y12, y21, y22) {
  UL6 <- est6 + z*se6
  row6 <- c(est6, est6u, se6, LL6, UL6)
  # B at a2
- est7 <- (mean(y12) - mean(y22))/s
+ est7 <- (mean(y21) - mean(y22))/s
  est7u <- adj1*est7
  v7 <- var(y12)/df1 + var(y22)/df2
  se7 <- sqrt(est7*v0/s^4 + v7/s^2)
@@ -3664,23 +3673,22 @@ ci.2x2.stdmean.mixed <- function(alpha, y11, y12, y21, y22) {
 
 
 # ci.2x2.median.mixed =========================================================
-#' Computes confidence intervals of effects in a 2x2 mixed design for medians
+#' Computes confidence intervals in a 2x2 mixed design for medians
 #'
 #'
 #' @description
-#' Computes distribution-free confidence intervals for the AB interaction
-#' effect, main effect of A, main effect of B, simple main effects of A, and
-#' simple main effects of B in a 2x2 mixed design where Factor A is the
-#' within-subjects factor and Factor B is the between-subjects factor. 
-#' Effects are defined in terms of medians rather than means. Tied scores
-#' are assumed to be rare.
+#' Computes distribution-free confidence intervals for the AB 
+#' interaction effect, main effect of A, main efect of B, simple main effects 
+#' of A, and simple main effects of B in a 2x2 mixed design where Factor A is 
+#' the within-subjects factor and Factor B is the between subjects factor. 
+#' Tied scores are assumed to be rare.
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
-#' @param   y11     vector of scores at level 1 of A in group 1
-#' @param   y12     vector of scores at level 2 of A in group 1
-#' @param   y21     vector of scores at level 1 of A in group 2
-#' @param   y22     vector of scores at level 2 of A in group 2
+#' @param   y11     vector of scores at level 1 of A and level 1 of B (group 1)
+#' @param   y12     vector of scores at level 1 of A and level 2 of B (group 2)
+#' @param   y21     vector of scores at level 2 of A and level 1 of B (group 1)
+#' @param   y22     vector of scores at level 2 of A and level 2 of B (group 2)
 #'
 #'
 #' @return
@@ -3697,8 +3705,8 @@ ci.2x2.stdmean.mixed <- function(alpha, y11, y12, y21, y22) {
 #'
 #' @examples
 #' y11 <- c(18.3, 19.5, 20.1, 17.4, 20.5, 16.1)
-#' y12 <- c(19.1, 18.4, 19.8, 20.0, 17.2, 16.8)
-#' y21 <- c(19.2, 16.4, 16.5, 14.0, 16.9, 18.3)
+#' y12 <- c(19.2, 16.4, 16.5, 14.0, 16.9, 18.3)
+#' y21 <- c(19.1, 18.4, 19.8, 20.0, 17.2, 16.8)
 #' y22 <- c(16.5, 10.2, 12.7,  9.9, 13.5, 15.0)
 #' ci.2x2.median.mixed(.05, y11, y12, y21, y22)
 #'
@@ -3718,18 +3726,18 @@ ci.2x2.stdmean.mixed <- function(alpha, y11, y12, y21, y22) {
 #' @importFrom stats median
 #' @export
 ci.2x2.median.mixed <- function(alpha, y11, y12, y21, y22) {
- if (length(y11) != length(y12)) {stop("length of y11 must equal length of y12")}
- if (length(y21) != length(y22)) {stop("length of y21 must equal length of y22")}
+ if (length(y11) != length(y21)) {stop("length of y11 must equal length of y21")}
+ if (length(y12) != length(y22)) {stop("length of y12 must equal length of y22")}
  z <- qnorm(1 - alpha/2)
  n1 <- length(y11)
- n2 <- length(y21)
+ n2 <- length(y12)
  median11 <- median(y11)
  median12 <- median(y12)
  median21 <- median(y21)
  median22 <- median(y22)
  # Group 1
  a1 <- (y11 < median11)
- a2 <- (y12 < median12)
+ a2 <- (y21 < median21)
  a3 <- a1 + a2
  a4 <- sum(a3 == 2)
  a <- round(n1/2 - sqrt(n1))
@@ -3737,21 +3745,21 @@ ci.2x2.median.mixed <- function(alpha, y11, y12, y21, y22) {
  p <- pbinom(a - 1, size = n1, prob = .5)
  z0 <- qnorm(1 - p)
  y11 <- sort(y11)
- y12 <- sort(y12)
+ y21 <- sort(y21)
  L1 <- y11[a]
  U1 <- y11[n1 - a + 1]
  se11 <- (U1 - L1)/(2*z0)
- L2 <- y12[a]
- U2 <- y12[n1 - a + 1]
- se12 <- (U2 - L2)/(2*z0)
+ L2 <- y21[a]
+ U2 <- y21[n1 - a + 1]
+ se21 <- (U2 - L2)/(2*z0)
  if (n1/2 == trunc(n1/2)) {
    p00 <- (sum(a4) + .25)/(n1 + 1)
  } else {
    p00 <- (sum(a4) + .25)/n1 
  }
- cov1 <- (4*p00 - 1)*se11*se12
+ cov1 <- (4*p00 - 1)*se11*se21
  # Group 2
- a1 <- (y21 < median21)
+ a1 <- (y12 < median12)
  a2 <- (y22 < median22)
  a3 <- a1 + a2
  a4 <- sum(a3 == 2)
@@ -3759,11 +3767,11 @@ ci.2x2.median.mixed <- function(alpha, y11, y12, y21, y22) {
  if (a < 1) {a = 1}
  p <- pbinom(a - 1, size = n2, prob = .5)
  z0 <- qnorm(1 - p)
- y21 <- sort(y21)
+ y12 <- sort(y12)
  y22 <- sort(y22)
- L1 <- y21[a]
- U1 <- y21[n2 - a + 1]
- se21 <- (U1 - L1)/(2*z0)
+ L1 <- y12[a]
+ U1 <- y12[n2 - a + 1]
+ se12 <- (U1 - L1)/(2*z0)
  L2 <- y22[a]
  U2 <- y22[n2 - a + 1]
  se22 <- (U2 - L2)/(2*z0)
@@ -3772,10 +3780,10 @@ ci.2x2.median.mixed <- function(alpha, y11, y12, y21, y22) {
  } else {
    p00 <- (sum(a4) + .25)/n2 
  }
- cov2 <- (4*p00 - 1)*se21*se22
+ cov2 <- (4*p00 - 1)*se12*se22
  # AB
  est1 <- (median11 - median12) - (median21 - median22)
- se1 <- sqrt(se11^2 + se12^2 - 2*cov1 + se21^2 + se22^2 - 2*cov2)
+ se1 <- sqrt(se11^2 + se21^2 - 2*cov1 + se12^2 + se22^2 - 2*cov2)
  LL1 <- est1 - z*se1
  UL1 <- est1 + z*se1
  row1 <- c(est1, se1, LL1, UL1)
@@ -3787,31 +3795,31 @@ ci.2x2.median.mixed <- function(alpha, y11, y12, y21, y22) {
  row2 <- c(est2, se2, LL2, UL2)
  # B
  est3 <- (median11 + median12)/2 - (median21 + median22)/2
- se3 <- sqrt(se11^2 + se12^2 + 2*cov1 + se21^2 + se22^2 + 2*cov2)/2
+ se3 <- sqrt(se11^2 + se21^2 + 2*cov1 + se12^2 + se22^2 + 2*cov2)/2
  LL3 <- est3 - z*se3
  UL3 <- est3 + z*se3
  row3 <- c(est3, se3, LL3, UL3)
  # A at b1
- est4 <- median11 - median12
- se4 <- sqrt(se11^2 + se12^2 - 2*cov1)
+ est4 <- median11 - median21
+ se4 <- sqrt(se11^2 + se21^2 - 2*cov1)
  LL4 <- est4 - z*se4
  UL4 <- est4 + z*se4
  row4 <- c(est4, se4, LL4, UL4)
  # A at b2
- est5 <- median21 - median22
- se5 <- sqrt(se21^2 + se22^2 - 2*cov2)
+ est5 <- median12 - median22
+ se5 <- sqrt(se12^2 + se22^2 - 2*cov2)
  LL5 <- est5 - z*se5
  UL5 <- est5 + z*se5
  row5 <- c(est5, se5, LL5, UL5)
  #B at a1
- est6 <- median11 - median21
- se6 <- sqrt(se11^2 + se21^2)
+ est6 <- median11 - median12
+ se6 <- sqrt(se11^2 + se12^2)
  LL6 <- est6 - z*se6
  UL6 <- est6 + z*se6
  row6 <- c(est6, se6, LL6, UL6)
  #B at a2
- est7 <- median12 - median22
- se7 <- sqrt(se12^2 + se22^2)
+ est7 <- median21 - median22
+ se7 <- sqrt(se21^2 + se22^2)
  LL7 <- est7 - z*se7
  UL7 <- est7 + z*se7
  row7 <- c(est7, se7, LL7, UL7)
