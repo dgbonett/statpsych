@@ -896,7 +896,7 @@ ci.indirect <- function(alpha, b1, b2, se1, se2) {
 #' @param   n      sample size
 #' @param   b      vector of parameter estimates from coef(object)
 #' @param   V      covariance matrix of parameter estimates from vcov(object)
-#' @param   q      vector of coefficients
+#' @param   q      vector of contrast coefficients
 #'
 #'
 #' @return 
