@@ -1794,6 +1794,7 @@ ci.cqv <- function(alpha, y) {
 #'
 #' @description
 #' Computes a distribution-free confidence interval for a population median.
+#' Tied scores are assumed to be rare.
 #'
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
@@ -1855,7 +1856,8 @@ ci.median <- function(alpha, y) {
 #'
 #' @description
 #' Computes a distribution-free confidence interval for a difference of population
-#' medians in a 2-group design.
+#' medians in a 2-group design. Tied scores within each group are assumed to be 
+#' rare.
 #'
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
@@ -1930,7 +1932,8 @@ ci.median2 <- function(alpha, y1, y2) {
 #'
 #' @description
 #' Computes a distribution-free confidence interval for a ratio of population 
-#' medians of ratio-scale measurements in a 2-group design.
+#' medians of ratio-scale measurements in a 2-group design. Tied scores are
+#' within each group assumed to be rare.
 #' 
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
@@ -2011,7 +2014,7 @@ ci.ratio.median2 <- function(alpha, y1, y2) {
 #' Computes a distribution-free confidence interval for a linear contrast of 
 #' medians in a between-subjects design using estimated medians and their 
 #' standard errors. The sample median and standard error for each group can be
-#' computed using the \link[statpsych]{ci.median} function.
+#' computed using the \link[statpsych]{ci.median} function. 
 #'
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
@@ -2066,7 +2069,8 @@ ci.lc.median.bs <- function(alpha, m, se, v) {
 #' Computes a distribution-free confidence interval for a difference of 
 #' population medians in a paired-samples design. This function also computes
 #' the standard error of each median and the covariance between the two 
-#' estimated medians.
+#' estimated medians. Tied scores within each measurement are assumed to be
+#' rare.
 #'
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
@@ -2152,6 +2156,7 @@ ci.median.ps <- function(alpha, y1, y2) {
 #' @description
 #' Computes a distribution-free confidence interval for a ratio of population
 #' medians in a paired-samples design. Ratio-scale measurements are assumed.
+#' Tied scores within each measurement are assumed to be rare.
 #'
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
@@ -3205,7 +3210,7 @@ ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
 #' effect, main effect of A, main effect of B, simple main effects of A, and 
 #' simple main effects of B in a 2x2 between-subjects design with a 
 #' quantitative response variable. The effects are defined in terms of medians
-#' rather than means. Tied scores are assumed to be rare.
+#' rather than means. Tied scores within each group are assumed to be rare.
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
@@ -3683,7 +3688,8 @@ ci.2x2.stdmean.mixed <- function(alpha, y11, y12, y21, y22) {
 #' interaction effect, main effect of A, main efect of B, simple main effects 
 #' of A, and simple main effects of B in a 2x2 mixed design where Factor A is 
 #' the within-subjects factor and Factor B is the between subjects factor. 
-#' Tied scores are assumed to be rare.
+#' Tied scores within each group and within each within-subjects level are 
+#' assumed to be rare.
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
@@ -3841,8 +3847,8 @@ ci.2x2.median.mixed <- function(alpha, y11, y12, y21, y22) {
 #' Computes distribution-free confidence intervals for the AB interaction 
 #' effect, main effect of A, main effect of B, simple main effects of A, and
 #' simple main effects of B in a 2x2 within-subjects design. The effects are
-#' defined in terms of medians rather than means. Tied scores are assumed to
-#' be rare.
+#' defined in terms of medians rather than means. Tied scores within each
+#' level combination are assumed to be rare.
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
