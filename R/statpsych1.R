@@ -2235,9 +2235,11 @@ ci.ratio.median.ps <- function(alpha, y1, y2) {
 #'
 #'
 #' @description
-#' Computes adjusted Wald interval for the population proportion of 
+#' Computes an adjusted Wald interval for the population proportion of 
 #' quantitative scores that are greater than the null hypothesis value
-#' of the population median in a one-sample sign test.
+#' of the population median in a one-sample sign test. This proportion
+#' is a measure of effect size that can be reported along with the
+#' sign test.
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
