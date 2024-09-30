@@ -874,8 +874,8 @@ ci.condslope.log <- function(alpha, b1, b2, se1, se2, cov, lo, hi) {
 #' ci.oddsratio(.05, 229, 28, 96, 24)
 #'
 #' # Should return:
-#' #      Estimate        SE       LL       UL
-#' # [1,] 2.044451 0.6154578 1.133267 3.688254
+#' #  Estimate        SE       LL       UL
+#' #  2.044451 0.6154578 1.133267 3.688254
 #'
 #'
 #' @importFrom stats qnorm
@@ -889,6 +889,7 @@ ci.oddsratio <- function(alpha, f00, f01, f10, f11) {
  ul <- exp(log(or) + z*se.lor)
  out <- t(c(or, se.or, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
