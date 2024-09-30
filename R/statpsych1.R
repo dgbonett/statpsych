@@ -343,7 +343,7 @@ ci.lc.mean.bs <- function(alpha, m, sd, n, v) {
 #' * Estimate - estimated mean difference
 #' * SE - standard error
 #' * t - t test statistic
-#' * df - degrees of freedom
+#' * df - degrees of freedom (unadjusted)
 #' * p - two-sided p-value
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -6298,7 +6298,7 @@ pi.var.upper <- function(alpha, var, n0, n) {
 
 
 #  etasqr.adj =================================================================
-#' Bias adjustments for an eta-squared estimate
+#' Bias adjustment for an eta-squared estimate
 #'
 #'
 #' @description
@@ -6405,7 +6405,7 @@ test.anova.bs <- function(m, sd, n) {
 #' or both factors are classification factors. If both factors are treatment
 #' factors, then partial eta-square estimates are typically recommended.
 #' The eta-squared estimates from this function can be used in the 
-#' \link[statpsych]{etasqr.adj}) function to obtain bias adjusted estimates.
+#' \link[statpsych]{etasqr.adj} function to obtain bias adjusted estimates.
 #'
 #'
 #' @param  SSa    sum of squares for factor A
