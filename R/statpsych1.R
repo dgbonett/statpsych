@@ -1323,7 +1323,7 @@ ci.ratio.sd2 <- function(alpha, y1, y2) {
   
 
 #  ci.ratio.mad.ps ========================================================== 
-#' Confidence interval for a paired-sample MAD ratio 
+#' Confidence interval for a paired-samples MAD ratio 
 #'
 #'
 #' @description
@@ -2261,9 +2261,7 @@ ci.ratio.median.ps <- function(alpha, y1, y2) {
 #'
 #'
 #' @references
-#' Agresti, A, & Coull, BA (1998) Approximate is better than “exact” for 
-#' interval estimation of binomial proportions. American Statistician, 52,
-#' 119–126. doi: 10.1080/00031305.1998.10480550
+#' \insertRef{Agresti1998}{statpsych}
 #'
 #'
 #' @examples
