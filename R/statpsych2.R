@@ -2944,14 +2944,14 @@ power.cor <- function(alpha, n, cor, h, s) {
 #' @description
 #' Computes the approximate power of a test for equal population Pearson or
 #' partial correlations in a 2-group design for planned sample sizes. Set
-#' s = 0 for a Pearson correlation. 
+#' s = 0 for Pearson correlations. 
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test 
 #' @param  n1     planned sample size for group 1
 #' @param  n2     planned sample size for group 2
 #' @param  cor1   planning value of correlation for group 1 
-#' @param  cor2   planning value of correlation for group 1 
+#' @param  cor2   planning value of correlation for group 2 
 #' @param  s      number of control variables
 #'
 #'
