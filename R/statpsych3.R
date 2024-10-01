@@ -167,6 +167,7 @@ ci.prop.fpc <- function(alpha, f, n, N) {
 ci.pairs.mult <-function(alpha, f) {
  zcrit <- qnorm(1 - alpha/2)
  a <- length(f)
+ if (a < 3) {stop("at least 3 categories are required")}
  n <- sum(f)
  p.ml <- f/n
  diff.ml <- outer(p.ml, p.ml, '-')
@@ -2542,15 +2543,16 @@ size.ci.prop <- function(alpha, p, w) {
 #'
 #' @description
 #' Computes the sample size in each group (assuming equal sample sizes) required
-#' to estimate a difference of population proportions with desired confidence 
-#' interval precision in a 2-group design. Set the proportion planning values to
-#' .5 for a conservatively large sample size.
+#' to estimate a difference of proportions with desired confidence interval 
+#' precision in a 2-group design. Set the proportion planning values to .5 for
+#' a conservatively large sample size. Set R = 1 for equal sample sizes.
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
 #' @param  p1     planning value of proportion for group 1
 #' @param  p2     planning value of proportion for group 2
 #' @param  w      desired confidence interval width
+#' @param  R      n2/n1 ratio
 #'
 #'
 #' @return
@@ -2567,13 +2569,14 @@ size.ci.prop <- function(alpha, p, w) {
 #'
 #' @importFrom stats qnorm
 #' @export                 
-size.ci.prop2 <- function(alpha, p1, p2, w) {
+size.ci.prop2 <- function(alpha, p1, p2, w, R) {
  if (p1 > .9999 || p1 < .0001) {stop("p1 must be between .0001 and .9999")}
  if (p2 > .9999 || p2 < .0001) {stop("p2 must be between .0001 and .9999")}
  z <- qnorm(1 - alpha/2)
- n <- ceiling(4*(p1*(1 - p1) + p2*(1 - p2))*(z/w)^2)
- out <- matrix(n, nrow = 1, ncol = 1)
- colnames(out) <- "Sample size per group"
+ n1 <- ceiling(4*(p1*(1 - p1) + p2*(1 - p2)/R)*(z/w)^2)
+ n2 <- ceiling(R*n1)
+ out <- t(c(n1, n2))
+ colnames(out) <- c("n1", "n2")
  rownames(out) <- ""
  return(out)
 }
