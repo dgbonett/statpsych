@@ -5060,7 +5060,7 @@ size.ci.second <- function(n0, w0, w) {
 #' study. In a typical sample size analysis, this type of information is not
 #' available, and the researcher must use expert opinion to guess the value
 #' of the variance that will be observed in the planned study. The 
-#' \link[statpsych]{size.ci.mean}) function uses a variance planning value 
+#' \link[statpsych]{size.ci.mean} function uses a variance planning value 
 #' that is based on expert opinion regarding the likely value of the 
 #' variance estimate that will be observed in the planned study. 
 #'
