@@ -6523,6 +6523,12 @@ etasqr.gen.2way <- function(SSa, SSb, SSab, SSe) {
 #'
 #'
 #' @examples
+#' sim.ci.mean(.05, 10, 1, 5000)
+#'
+#' # Should return (within sampling error):
+#' # Coverage Lower Error Upper Error Ave CI Width
+#' #   0.9484      0.0264      0.0252     1.392041
+#'
 #' sim.ci.mean(.05, 40, 4, 1000)
 #'
 #' # Should return (within sampling error):
@@ -6609,10 +6615,17 @@ sim.ci.mean <- function(alpha, n, dist, rep) {
 #'
 #'
 #' @examples
+#' sim.ci.mean2(.05, 30, 25, 1.5, 1, 1, 1000)
+#'
+#' # Should return (within sampling error):
+#' #                              Coverage Lower Error Upper Error Ave CI Width
+#' # Equal Variances Assumed:      0.93988      0.0322     0.02792     1.354437
+#' # Equal Variances Not Assumed:  0.94904      0.0262     0.02476     1.411305
+#'
 #' sim.ci.mean2(.05, 30, 25, 1.5, 4, 5, 1000)
 #'
 #' # Should return (within sampling error):
-#' #                             Coverage Lower Error Upper Error Ave CI Width
+#' #                              Coverage Lower Error Upper Error Ave CI Width
 #' # Equal Variances Assumed:      0.93986     0.04022     0.01992     1.344437
 #' # Equal Variances Not Assumed:  0.94762     0.03862     0.01376     1.401305
 #'
@@ -6737,7 +6750,7 @@ sim.ci.mean2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2, rep) {
 #'
 #' # Should return (within sampling error):
 #' # Coverage Lower Error Upper Error Ave CI Width
-#' #  0.93815     0.05125      0.0106    0.7778518
+#' #  0.94415     0.04525      0.0106    0.7818518
 #'
 #'
 #' @importFrom stats qt
