@@ -5,7 +5,7 @@ Changes:
 
 * New functions:
     * size.ci.oddsratio -- Computes sample size for an odds ratio confidence interval
-    * size.ci.yule -- Computes sample size for Yule's Q confidence interval
+    * size.ci.yule -- Computes sample size for a Yule's Q confidence interval
     * size.ci.phi -- Computes sample size for a phi correlation confidence interval
     * size.ci.biphi -- Computes sample size for a biserial-phi correlation confidence interval
     * size.ci.ancova2 -- Computes sample size for a 2-group ANCOVA confidence interval
