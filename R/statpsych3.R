@@ -3251,14 +3251,13 @@ size.test.prop <- function(alpha, pow, p, h) {
 #' Computes the sample size in each group required to test a difference in 
 #' population proportions with desired power and a continuity correction in a
 #' 2-group design. This function requires planning values for both proportions. 
-#' Set each proportion planning value to .5, or a value closest to .5 within
-#' a plausible range, for a conservatively large sample size requirement. This
-#' function does not use the typical sample size approach where the effect 
-#' size is assumed to equal the difference in proportion planning values. This
-#' function does not require the planning value for the proportion difference 
-#' (effect size) to equal the difference of the two proportion planning values;
-#' for example, the planning value of the proportion difference could be set 
-#' equal to a minimally interesting effect size.
+#' Set each proportion planning value to .5 for a conservatively large sample
+#' size requirement. This function does not use the typical sample size approach
+#' where the effect size is assumed to equal the difference in proportion 
+#' planning values. This function does not require the planning value for the 
+#' proportion difference (effect size) to equal the difference of the two 
+#' proportion planning values; for example, the planning value of the proportion 
+#' difference could be set equal to a minimally interesting effect size.
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test 
