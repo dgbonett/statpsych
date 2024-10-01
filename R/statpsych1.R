@@ -4494,7 +4494,7 @@ size.ci.stdmean2 <- function(alpha, d, w, R) {
 #' design. This function requires planning values for each mean and the sample 
 #' size requirement is very sensitive to these planning values. Set the 
 #' variance planning value to the largest value within a plausible range for a
-#' conservatively large sample size. 
+#' conservatively large sample size. Set R = 1 for equal sample sizes.
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
