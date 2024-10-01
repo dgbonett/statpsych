@@ -2311,7 +2311,7 @@ size.ci.spear2 <- function(alpha, cor1, cor2, w) {
 #' the planned study. In a typical sample size analysis, this type of 
 #' information is not available, and the researcher must use expert opinion to 
 #' guess the value of the Pearson correlation that will be observed in the 
-#' planned study. The \link[statpsych]{size.ci.cor}) function uses a 
+#' planned study. The \link[statpsych]{size.ci.cor} function uses a 
 #' correlation planning value that is based on expert opinion regarding the 
 #' likely value of the correlation estimate that will be observed in the 
 #' planned study.
