@@ -1423,7 +1423,7 @@ pi.cor <- function(alpha, cor, n0, n) {
 #' partial correlation is equal to some specified nonzero value. Set s = 0 
 #' for a Pearson correlation. The hypothesis testing results should be 
 #' accompanied with a confidence interval for the population Pearson or
-#' partial correlation value.
+#' partial correlation value ((see \link[statpsych]{ci.cor}).
 #'
 #'
 #' @param  cor     estimated correlation 
@@ -1439,9 +1439,6 @@ pi.cor <- function(alpha, cor, n0, n) {
 #' * p - two-sided p-value
 #'
 #'
-#' @seealso \link[statpsych]{ci.cor}
-#' 
-#' 
 #' @examples
 #' test.cor(.484, 100, 0, .2)
 #'
@@ -1494,7 +1491,7 @@ test.cor <- function(cor, n, s, h) {
 #' for a test of the null hypothesis that a Spearman correlation is equal to
 #' some specified nonzero value. The hypothesis testing results should be 
 #' accompanied with a confidence interval for the population Spearman
-#' correlation value.
+#' correlation value (see \link[statpsych]{ci.spear}).
 #'
 #'
 #' @param  cor     estimated correlation 
@@ -1509,9 +1506,6 @@ test.cor <- function(cor, n, s, h) {
 #' * p - two-sided p-value
 #'
 #'
-#' @seealso \link[statpsych]{ci.spear}
-#' 
-#' 
 #' @examples
 #' test.spear(.471, .2, 100)
 #'
@@ -1562,7 +1556,8 @@ test.spear <- function(cor, h, n) {
 #' Computes a z test for a difference of population Pearson or partial 
 #' correlations in a 2-group design. Set s = 0 for a Pearson correlation. 
 #' The hypothesis testing results should be accompanied with a confidence 
-#' interval for the difference in population correlation values.
+#' interval for the difference in population correlation values 
+#' (see \link[statpsych]{ci.cor2}).
 #'
 #'
 #' @param  cor1    estimated correlation for group 1
@@ -1579,9 +1574,6 @@ test.spear <- function(cor, h, n) {
 #' * p - two-sided p-value
 #'
 #'
-#' @seealso \link[statpsych]{ci.cor2}
-#' 
-#' 
 #' @examples
 #' test.cor2(.684, .437, 100, 125, 0)
 #'
@@ -1621,7 +1613,7 @@ test.cor2 <- function(cor1, cor2, n1, n2, s) {
 #' 2-group design. The test statistic uses a Bonett-Wright standard error for 
 #' each Spearman correlation. The hypothesis testing results should be 
 #' accompanied with a confidence interval for a difference in population 
-#' Spearman correlation values.
+#' Spearman correlation values (see \link[statpsych]{ci.spear2}).
 #'
 #'
 #' @param  cor1    estimated Spearman correlation for group 1
@@ -1637,9 +1629,6 @@ test.cor2 <- function(cor1, cor2, n1, n2, s) {
 #' * p - two-sided p-value
 #'
 #'
-#' @seealso \link[statpsych]{ci.spear2}
-#' 
-#' 
 #' @references
 #' \insertRef{Bonett2000}{statpsych}
 #'
