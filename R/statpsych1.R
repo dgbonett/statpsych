@@ -4395,9 +4395,9 @@ size.ci.mean <- function(alpha, var, w) {
 #' @description
 #' Computes the sample size for each group required to estimate a population 
 #' mean difference with desired confidence interval precision in a 2-group 
-#' design. Set R = 1 for equal sample sizes. Set the variance planning value   
-#' to the largest value within a plausible range for a conservatively large  
-#' sample size. 
+#' design. Set the variance planning value to the largest value within a 
+#' plausible range for a conservatively large sample size. Set R = 1 for 
+#' equal sample sizes.
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
@@ -4416,6 +4416,18 @@ size.ci.mean <- function(alpha, var, w) {
 #' # Should return:
 #' # n1  n2
 #' # 47  47
+#'
+#' size.ci.mean2(.05, 37.1, 5, 3)
+#'
+#' # Should return:
+#' # n1  n2
+#' # 32  96
+#'
+#' size.ci.mean2(.05, 37.1, 5, .5)
+#'
+#' # Should return:
+#' # n1  n2
+#' # 70  35
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -4465,6 +4477,13 @@ size.ci.mean2 <- function(alpha, var, w, R) {
 #' #                              n1  n2
 #' # Unweighted standardizer:    132 132
 #' # Single group standardizer:  141 141
+#'
+#' size.ci.stdmean2(.05, .75, .5, 2)
+#'
+#' # Should return:
+#' #                              n1  n2
+#' # Unweighted standardizer:     99 198
+#' # Single group standardizer:  106 212
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -4510,6 +4529,12 @@ size.ci.stdmean2 <- function(alpha, d, w, R) {
 #'
 #'
 #' @examples
+#' size.ci.ratio.mean2(.05, .4, 3.5, 3.1, 1.2, 1)
+#'
+#' # Should return:
+#' # n1   n2
+#' # 70   70
+#'
 #' size.ci.ratio.mean2(.05, .4, 3.5, 3.1, 1.2, 2)
 #'
 #' # Should return:
@@ -5174,6 +5199,18 @@ size.test.mean <- function(alpha, pow, var, es) {
 #' # Should return:
 #' # n1  n2
 #' # 27  27
+#'
+#' size.test.mean2(.05, .95, 100, 10, 3) 
+#'
+#' # Should return:
+#' # n1  n2
+#' # 19  57
+#'
+#' size.test.mean2(.05, .95, 100, 10, .5) 
+#'
+#' # Should return:
+#' # n1  n2
+#' # 40  20
 #'  
 #' 
 #' @importFrom stats qnorm
