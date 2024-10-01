@@ -7283,6 +7283,8 @@ sim.ci.stdmean2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2, d, rep) {
 #' ci.stdmean.ps). Sample data for the two levels of the within-subjects factor
 #' can be generated from five different population distributions. All 
 #' distributions are scaled to have standard deviations of 1.0 at level 1.
+#' Bivariate random data with specified marginal skewness and kurtosis are 
+#' generated using the unonr function in the mnonr package. 
 #'
 #' @param   alpha     alpha level for 1-alpha confidence
 #' @param   n         sample size 
