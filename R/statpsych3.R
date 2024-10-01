@@ -2560,11 +2560,17 @@ size.ci.prop <- function(alpha, p, w) {
 #'
 #'
 #' @examples
-#' size.ci.prop2(.05, .4, .2, .15)
+#' size.ci.prop2(.05, .4, .2, .15, 1)
 #'
 #' # Should return:
-#' # Sample size per group
-#' #                   274
+#' #   n1  n2
+#' #  274 274
+#'
+#' size.ci.prop2(.05, .4, .2, .15, .5)
+#'
+#' # Should return:
+#' #   n1  n2
+#' #  383 192
 #'
 #'
 #' @importFrom stats qnorm
