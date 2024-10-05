@@ -2623,16 +2623,17 @@ size.interval.cor <- function(alpha, pow, cor, s, h) {
 #'
 #'
 #' @description
-#' Computes the sample size required to test the equality of two population 
-#' Pearson or partial correlations with desired power in a 2-group design. 
-#' Set s = 0 for a Pearson correlation. 
+#' Computes the sample size required to test equality of two Pearson or partial
+#' correlation with desired power in a 2-group design. Set s = 0 for a Pearson 
+#' correlation. Set R = 1 for equal sample sizes.
 #'
 #'  
 #' @param  alpha   alpha level for hypothesis test
 #' @param  pow     desired power
-#' @param  cor1    planning value of correlation for group 1
-#' @param  cor2    planning value of correlation for group 2
+#' @param  cor1    planning value of correlation
+#' @param  cor2    planning value of correlation
 #' @param  s       number of control variables
+#' @param  R       n2/n1 ratio
 #'
 #' 
 #' @return 
@@ -2640,16 +2641,22 @@ size.interval.cor <- function(alpha, pow, cor, s, h) {
 #' 
 #' 
 #' @examples
-#' size.test.cor2(.05, .8, .4, .2, 0)
+#' size.test.cor2(.05, .8, .4, .2, 0, 1)
 #'
 #' # Should return:
-#' # Sample size per group
-#' #                   325
+#' #  n1  n2
+#' # 325 325
+#'
+#' size.test.cor2(.05, .8, .4, .2, 0, 2)
+#'
+#' # Should return:
+#' #  n1  n2
+#' # 245 490
 #'  
 #' 
 #' @importFrom stats qnorm
 #' @export  
-size.test.cor2 <- function(alpha, pow, cor1, cor2, s) {
+size.test.cor2 <- function(alpha, pow, cor1, cor2, s, R) {
  if (cor1 > .999 || cor1 < -.999) {stop("cor1 must be between -.999 and .999")}
  if (cor2 > .999 || cor2 < -.999) {stop("cor2 must be between -.999 and .999")}
  za <- qnorm(1 - alpha/2)
@@ -2657,9 +2664,10 @@ size.test.cor2 <- function(alpha, pow, cor1, cor2, s) {
  zr1 <- log((1 + cor1)/(1 - cor1))/2
  zr2 <- log((1 + cor2)/(1 - cor2))/2
  es <- zr1 - zr2
- n <- ceiling(2*(za + zb)^2/es^2 + s + 3)
- out <- matrix(n, nrow = 1, ncol = 1)
- colnames(out) <- "Sample size per group"
+ n1 <- ceiling((1 + 1/R)*(za + zb)^2/es^2 + s + 3)
+ n2 <- ceiling(R*n1)
+ out <- t(c(n1, n2))
+ colnames(out) <- c("n1", "n2")
  rownames(out) <- ""
  return(out)
 }
