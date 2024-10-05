@@ -15,6 +15,7 @@ Changes:
     * exp.slope -- Computes confidence intervals for exp(B) and 100(exp(B) - 1)%
 * Modiifications
     * size.ci.prop2 can now solve for both equal and unequal sample sizes
+    * size.ci.ratio.prop2 can now solve for both equal and unequal sample sizes
 * Error Corrections:
     * ci.2x2.stdmean.mixed -- corrected an error in the standard error computation
 
