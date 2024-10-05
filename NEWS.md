@@ -170,8 +170,6 @@ Changes:
     * size.ci.stdmean2 -- now returns two rows, one for each standardizer
     * size.ci.stdmean.ps -- now returns two rows, one for each standardizer
     * ci.mann -- now returns a confidence interval for P(y1 > y2) rather than P(y1 < y2).
-* Error Correction:
-    * ci.lc.stdmean.ws -- corrected an error in the standard error computation
     
 
 statpsych v1.2.0 (Release date: 2022/08/15)
