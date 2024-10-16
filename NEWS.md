@@ -12,6 +12,7 @@ Changes:
     * size.ci.slope.gen -- Computes sample size for a slope coefficient confidence interval in a general model
     * size.test.ancova2 -- Computes sample size for a 2-group ANCOVA hypothesis test
     * size.test.slope.gen -- Computes sample size for a slope coefficient hypothesis test in a general model
+    * signal -- Computes parameter estimates in a Yes/No signal detection study
     * exp.slope -- Computes confidence intervals for exp(B) and 100(exp(B) - 1)%
 * Modifications
     * size.ci.prop2 can now solve for equal or unequal sample sizes
