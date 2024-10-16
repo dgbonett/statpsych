@@ -3889,6 +3889,66 @@ exp.slope <- function(alpha, b, se) {
 }
 
 
+#  signal ===================================================================== 
+#' Parameter estimates for a signal detection study
+#'
+#'
+#' @description
+#' Computes the hit rate, false alarm rate, d-prime, threshold, and bias 
+#' for one participant (observer) in a Yes/No signal detection study. 
+#' An equal-variance Gausian model is assumed. The parameter estimates are 
+#' computed after adding .5 to the number of "Yes" responses in each condtion
+#' (the signal and noise conditions) and adding 1 to the number of signal 
+#' trials and to the number of noise trails. In memory recognition studies,
+#' the observers is first presented with set of words or images to study, 
+#' and is later presented with another set of words or images where some
+#' items are from the first list (old items) and some items are new items.
+#'
+#'
+#' @param   f1    number of "Yes" responses in the stimulus (old item) trials 
+#' @param   f2    number of "Yes" responses in the noise (new item) trials
+#' @param   n1    number of stimulus (or old item) trials
+#' @param   n2    number of noise (or new item) trials
+#'
+#'
+#' @return
+#' Returns a 1-row matrix. The columns are:
+#' * HR - estimate of hit rate 
+#' * FAR - estimate of false alarm rate
+#' * d-prime - estimate of d-prime
+#' * Threshold - estimate of threshold (criterion)
+#' * Bias - estimate of threshold minus d-prime/2
+#'
+#'
+#' @references
+#' \insertRef{Wickens2002}{statpsych}        
+#'
+#'
+#' @examples
+#' signal(82, 46, 100, 100)
+#'
+#' # Should return:
+#' #         HR      FAR  d-prime  Threshold       Bias
+#' #  0.8168317 0.460396 1.002793 0.09943603 -0.4019603
+#'
+#'
+#' @importFrom stats qnorm
+#' @export
+signal <- function(f1, f2, n1, n2) { 
+  hr <- (f1 + .5)/(n1 + 1)
+  far <- (f2 + .5)/(n2 + 1)
+  zh <- qnorm(hr)
+  zf <- qnorm(far)
+  d <- zh - zf
+  lam <- qnorm(1 - far)
+  bias <- lam - d/2
+  out <- t(c(hr, far, d, lam, bias))
+  colnames(out) = c("HR", "FAR", "d-prime", "Threshold", "Bias")
+  rownames(out) = ""
+  return (out)
+}
+
+
 fix_imports <- function() {
   something <- Rdpack::append_to_Rd_list()
   res <- mathjaxr::preview_rd()
