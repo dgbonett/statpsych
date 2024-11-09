@@ -4062,8 +4062,8 @@ ci.2x2.median.ws <- function(alpha, y11, y12, y21, y22) {
 #'
 #'
 #' @param   alpha        alpha level for 1-alpha credibility interval
-#' @param   prior.mean   mean of prior Normal distribution    
-#' @param   prior.sd     standard deviation of prior Normal distribution 
+#' @param   prior_mean   mean of prior Normal distribution    
+#' @param   prior_sd     standard deviation of prior Normal distribution 
 #' @param   est          sample estimate
 #' @param   se           standard error of sample estimate
 #'
@@ -4090,13 +4090,13 @@ ci.2x2.median.ws <- function(alpha, y11, y12, y21, y22) {
 #'
 #' @importFrom stats qnorm
 #' @export
-ci.bayes.normal <- function(alpha, prior.mean, prior.sd, est, se) {
+ci.bayes.normal <- function(alpha, prior_mean, prior_sd, est, se) {
  zcrit <- qnorm(1 - alpha/2)
- post.sd <- sqrt(1/(1/prior.sd^2 + 1/se^2))
- post.mean <- ((prior.mean/prior.sd^2) + est/se^2)/(1/prior.sd^2 + 1/se^2)
- ll <- post.mean - zcrit*post.sd
- ul <- post.mean + zcrit*post.sd
- out <- t(c(post.mean, post.sd, ll, ul))
+ post_sd <- sqrt(1/(1/prior_sd^2 + 1/se^2))
+ post_mean <- ((prior_mean/prior_sd^2) + est/se^2)/(1/prior_sd^2 + 1/se^2)
+ ll <- post_mean - zcrit*post_sd
+ ul <- post_mean + zcrit*post_sd
+ out <- t(c(post_mean, post_sd, ll, ul))
  colnames(out) <- c("Posterior mean", "Posterior SD", "LL", "UL")
  rownames(out) <- ""
  return(out)
