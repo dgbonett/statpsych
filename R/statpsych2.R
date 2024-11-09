@@ -1411,6 +1411,131 @@ pi.cor <- function(alpha, cor, n0, n) {
 }
 
 
+# ci.bayes.cor ============================================================
+#' Bayesian credible interval for a Pearson or partial correlation with a
+#' skeptical prior
+#'
+#'
+#' @description
+#' Computes an approximate Bayesian credible interval for a Pearson or  
+#' partial correlation with a skeptical prior. The skeptical prior 
+#' distribution is Normal with a mean of 0 and a small standard deviation.
+#' A skeptical prior assumes that the population correlation is within 
+#' a range of small values (-r to r) and the prior standard deviation 
+#' can be set to r/2. A Pearson or partial correlation that is less than
+#' .2 in absolute value is typically considered "small", and the prior
+#' standard deviation could then be set to .2/2 = .1. Set s = 0 for a 
+#' Pearson correlation. A correlation value that is considered to be
+#' "small" will depend on the application.
+#'
+#'
+#' @param   alpha        alpha level for 1-alpha credibility interval
+#' @param   prior_sd     standard deviation of skeptical prior distribution 
+#' @param   cor          estimated Pearson or partial correlation
+#' @param   s	     	 number of control variables
+#' @param   n            sample size
+#'
+#'
+#' @return
+#' Returns a 1-row matrix. The columns are:
+#' * Posterior mean - posterior mean (Bayesian estimate of correlation)
+#' * LL - lower limit of the credible interval
+#' * UL - upper limit of the credible interval
+#'
+#'
+#' @examples
+#' ci.bayes.cor(.05, .1, .536, 0, 50)
+#'
+#' # Should return:
+#' # Posterior mean         LL        UL
+#' #      0.1873765 0.02795441 0.3375031
+#'
+#' ci.bayes.cor(.05, .1, .536, 0, 300)
+#'
+#' # Should return:
+#' #  Posterior mean        LL        UL
+#' #       0.4195068 0.3352449 0.4971107
+#'
+#'
+#' @importFrom stats qnorm
+#' @export
+ci.bayes.cor <- function(alpha, prior_sd, cor, s, n) {
+ z <- qnorm(1 - alpha/2)
+ se <- 1/sqrt(n - s - 3)
+ zr <- log((1 + cor)/(1 - cor))/2 - cor/(2*(n - 1))
+ post_sd <- sqrt(1/(1/prior_sd^2 + 1/se^2))
+ post_mean <- (zr/se^2)/(1/prior_sd^2 + 1/se^2)
+ ll0 <- post_mean - z*post_sd
+ ul0 <- post_mean + z*post_sd
+ mean <- (exp(2*post_mean) - 1)/(exp(2*post_mean) + 1)
+ ll <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
+ ul <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
+ out <- t(c(mean, ll, ul))
+ colnames(out) <- c("Posterior mean", "LL", "UL")
+ rownames(out) <- ""
+ return(out)
+}
+
+
+# ci.bayes.spcor ============================================================
+#' Bayesian credible interval for a semipartial correlation with a
+#' skeptical prior
+#'
+#'
+#' @description
+#' Computes an approximate Bayesian credible interval for a semipartial 
+#' correlation with a skeptical prior. The skeptical prior distribution is
+#' Normal with a mean of 0 and a small standard deviation. A skeptical prior 
+#' assumes that the population semipartial correlation is within a range of 
+#' small values (-r to r) and the prior standard deviation can be set to 
+#' r/2. A semipartial correlation that is less than .2 in absolute value is 
+#' typically considered "small", and the prior standard deviation could then
+#' be set to .2/2 = .1. A semipartial correlation value that is considered to 
+#' be "small" will depend on the application. This function requires the
+#' standard error of the estimated semipartial correlation which can be 
+#' obtained from the ci.spcor function. 
+#'
+#'
+#' @param   alpha        alpha level for 1-alpha credibility interval
+#' @param   prior_sd     standard deviation of skeptical prior distribution 
+#' @param   cor          estimated semipartial partial correlation
+#' @param   se	     	 standard error of estimated semipartial correlation
+#'
+#'
+#' @return
+#' Returns a 1-row matrix. The columns are:
+#' * Posterior mean - posterior mean (Bayesian estimate of correlation)
+#' * LL - lower limit of the credible interval
+#' * UL - upper limit of the credible interval
+#'
+#'
+#' @examples
+#' ci.bayes.spcor(.05, .1, .582, .137)
+#'
+#' # Should return:
+#' #  Posterior mean        LL        UL
+#' #       0.2272797 0.07288039 0.3710398
+#'
+#'
+#' @importFrom stats qnorm
+#' @export
+ci.bayes.spcor <- function(alpha, prior_sd, cor, se) {
+ z <- qnorm(1 - alpha/2)
+ zr <- log((1 + cor)/(1 - cor))/2 
+ post_sd <- sqrt(1/(1/prior_sd^2 + 1/se^2))
+ post_mean <- (zr/se^2)/(1/prior_sd^2 + 1/se^2)
+ ll0 <- post_mean - z*post_sd
+ ul0 <- post_mean + z*post_sd
+ mean <- (exp(2*post_mean) - 1)/(exp(2*post_mean) + 1)
+ ll <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
+ ul <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
+ out <- t(c(mean, ll, ul))
+ colnames(out) <- c("Posterior mean", "LL", "UL")
+ rownames(out) <- ""
+ return(out)
+}
+
+
 #  ======================== Hypothesis Tests ==================================
 # test.cor ===================================================================
 #' Hypothesis test for a Pearson or partial correlation 
