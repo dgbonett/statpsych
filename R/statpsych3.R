@@ -1914,8 +1914,8 @@ ci.2x2.prop.mixed <- function(alpha, group1, group2) {
 #'
 #'
 #' @param   alpha        alpha level for 1-alpha credibility interval
-#' @param   prior.mean   mean of prior Beta distribution    
-#' @param   prior.sd     standard deviation of prior Beta distribution 
+#' @param   prior_mean   mean of prior Beta distribution    
+#' @param   prior_sd     standard deviation of prior Beta distribution 
 #' @param   f            number of participants who have the attribute
 #' @param   n            sample size
 #'
@@ -1937,25 +1937,25 @@ ci.2x2.prop.mixed <- function(alpha, group1, group2) {
 #'
 #' # Should return:
 #' # Posterior mean Posterior SD       LL        UL
-#' #           0.15   0.03273268  0.09218 0.2188484
+#' #      0.1723577   0.03419454 0.1111747 0.2436185
 #'
 #'
 #' @importFrom stats qnorm
 #' @importFrom stats qbeta
 #' @export
-ci.bayes.prop <- function(alpha, prior.mean, prior.sd, f, n) {
- if (prior.sd^2 >= prior.mean*(1 - prior.mean)) {stop("prior SD is too large")}
+ci.bayes.prop <- function(alpha, prior_mean, prior_sd, f, n) {
+ if (prior_sd^2 >= prior_mean*(1 - prior_mean)) {stop("prior SD is too large")}
  if (f > n) {stop("f cannot be greater than n")}
  zcrit <- qnorm(1 - alpha/2)
- a <- ((1 - prior.mean)/prior.sd^2 - 1/prior.mean)*prior.mean^2
- b <- a*(1/prior.mean - 1)
- post.mean <- (f + a)/(n + a + b)
- post.sd <- sqrt((f + a)*(n - f + b)/((n + a + b)^2*(a + b + n - 1)))
- post.a <- a + f
- post.b <- b + n - f
- ll <- qbeta(alpha/2, post.a, post.b)
- ul <- qbeta(1 - alpha/2, post.a, post.b)
- out <- t(c(post.mean, post.sd, ll, ul))
+ a <- ((1 - prior_mean)/prior_sd^2 - 1/prior_mean)*prior_mean^2
+ b <- a*(1/prior_mean - 1)
+ post_mean <- (f + a)/(n + a + b)
+ post_sd <- sqrt((f + a)*(n - f + b)/((n + a + b)^2*(a + b + n - 1)))
+ post_a <- a + f
+ post_b <- b + n - f
+ ll <- qbeta(alpha/2, post_a, post_b)
+ ul <- qbeta(1 - alpha/2, post_a, post_b)
+ out <- t(c(post_mean, post_sd, ll, ul))
  colnames(out) <- c("Posterior mean", "Posterior SD", "LL", "UL")
  rownames(out) <- ""
  return(out)
