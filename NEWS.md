@@ -14,6 +14,8 @@ Changes:
     * size.test.slope.gen -- Computes sample size for a slope coefficient hypothesis test in a general model
     * signal -- Computes parameter estimates in a Yes/No signal detection study
     * exp.slope -- Computes confidence intervals for exp(B) and 100(exp(B) - 1)%
+    * ci.bayes.cor -- Computes Bayesian credible interval for a Pearson or partial correlation with a skeptical prior
+    * ci.bayes.spcor -- Computes Bayesian credible interval for a semipartial correlation with a skeptical prior
 * Modifications
     * size.ci.prop2 can now solve for equal or unequal sample sizes
     * size.ci.ratio.prop2 can now solve for equal or unequal sample sizes
