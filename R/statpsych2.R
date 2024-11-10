@@ -1421,12 +1421,13 @@ pi.cor <- function(alpha, cor, n0, n) {
 #' partial correlation with a skeptical prior. The skeptical prior 
 #' distribution is Normal with a mean of 0 and a small standard deviation.
 #' A skeptical prior assumes that the population correlation is within 
-#' a range of small values (-r to r) and the prior standard deviation 
-#' can be set to r/2. A Pearson or partial correlation that is less than
-#' .2 in absolute value is typically considered "small", and the prior
-#' standard deviation could then be set to .2/2 = .1. Set s = 0 for a 
-#' Pearson correlation. A correlation value that is considered to be
-#' "small" will depend on the application.
+#' a range of small values (-r to r). If the skeptic is 95% confident that
+#' the population correlation is between -r and r, then the prior standard
+#' deviation can be set to r/1.96. A correlation that is less than .2 in 
+#' absolute value is typically considered to be "small", and the prior 
+#' standard deviation could then be set to .2/1.96. A correlation value
+#' that is considered to be small will depend on the application. Set s = 0
+#' for a Pearson correlation. 
 #'
 #'
 #' @param   alpha        alpha level for 1-alpha credibility interval
@@ -1487,13 +1488,14 @@ ci.bayes.cor <- function(alpha, prior_sd, cor, s, n) {
 #' correlation with a skeptical prior. The skeptical prior distribution is
 #' Normal with a mean of 0 and a small standard deviation. A skeptical prior 
 #' assumes that the population semipartial correlation is within a range of 
-#' small values (-r to r) and the prior standard deviation can be set to 
-#' r/2. A semipartial correlation that is less than .2 in absolute value is 
-#' typically considered "small", and the prior standard deviation could then
-#' be set to .2/2 = .1. A semipartial correlation value that is considered to 
-#' be "small" will depend on the application. This function requires the
-#' standard error of the estimated semipartial correlation which can be 
-#' obtained from the ci.spcor function. 
+#' small values (-r to r). If the skeptic is 95% confident that the population
+#' correlation is between -r and r, then the prior standard deviation can be 
+#' set to r/1.96. A semipartial correlation that is less than .2 in absolute 
+#' value is typically considered to be "small", and the prior standard 
+#' deviation could then be set to .2/1.96 = .1. A semipartial correlation value
+#' that is considered to be small will depend on the application. This function 
+#' requires the standard error of the estimated semipartial correlation which
+#' can be obtained from the ci.spcor function. 
 #'
 #'
 #' @param   alpha        alpha level for 1-alpha credibility interval
