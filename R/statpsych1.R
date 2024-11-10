@@ -7487,8 +7487,8 @@ sim.ci.stdmean.ps <- function(alpha, n, sd.ratio, cor, dist1, dist2, d, rep) {
 #'
 #' @export
 spearmanbrown <- function(rel, r1, r2) {
- rel.r2 <- (r2/r1)*rel/(1 + (r2/r1 - 1)*rel)
- out <- matrix(rel.r2, nrow = 1, ncol = 1)
+ rel_r2 <- (r2/r1)*rel/(1 + (r2/r1 - 1)*rel)
+ out <- matrix(rel_r2, nrow = 1, ncol = 1)
  colnames(out) <- "Reliability of r2 measurements"
  rownames(out) <- ""
  return(out)
