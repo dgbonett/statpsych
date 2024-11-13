@@ -2582,14 +2582,14 @@ size.ci.ancova2 <- function(alpha, evar, s, d, w, R) {
 #'
 #' # Should return:
 #' #  Sample size
-#' #          308
+#' #          305
 #'  
 #' 
 #' @importFrom stats qnorm
 #' @export  
 size.ci.slope.gen <- function(alpha, se, n0, s, w) {
  z <- qnorm(1 - alpha/2)
- n <- ceiling(4*n0*se^2*(z/w)^2 + s + 1)
+ n <- ceiling(4*n0*se^2*(z/w)^2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
  rownames(out) <- ""
@@ -2994,7 +2994,7 @@ size.test.ancova2 <- function(alpha, pow, evar, es, s, d, R) {
 #'
 #' # Should return:
 #' #  Sample size
-#' #          159
+#' #          156
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -3003,7 +3003,7 @@ size.test.slope.gen <- function(alpha, pow, se, n0, s, b) {
  if (b == 0) {stop("slope planning value cannot be zero")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
- n <- ceiling(n0*se^2*(za + zb)^2/b^2 + s + 1)
+ n <- ceiling(n0*se^2*(za + zb)^2/b^2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
  rownames(out) <- ""
