@@ -2569,7 +2569,6 @@ size.ci.ancova2 <- function(alpha, evar, s, d, w, R) {
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  se     standard error of slope from prior/pilot study
 #' @param  n0     sample size used in prior/pilot study 
-#' @param  s      number of predictor variables in model
 #' @param  w      desired confidence interval width
 #'
 #' 
@@ -2578,7 +2577,7 @@ size.ci.ancova2 <- function(alpha, evar, s, d, w, R) {
 #' 
 #' 
 #' @examples
-#' size.ci.slope.gen(.05, 3.15, 50, 2, 5)
+#' size.ci.slope.gen(.05, 3.15, 50, 5)
 #'
 #' # Should return:
 #' #  Sample size
@@ -2587,7 +2586,7 @@ size.ci.ancova2 <- function(alpha, evar, s, d, w, R) {
 #' 
 #' @importFrom stats qnorm
 #' @export  
-size.ci.slope.gen <- function(alpha, se, n0, s, w) {
+size.ci.slope.gen <- function(alpha, se, n0, w) {
  z <- qnorm(1 - alpha/2)
  n <- ceiling(4*n0*se^2*(z/w)^2)
  out <- matrix(n, nrow = 1, ncol = 1)
@@ -2981,7 +2980,6 @@ size.test.ancova2 <- function(alpha, pow, evar, es, s, d, R) {
 #' @param  pow    desired power
 #' @param  se     standard error of slope from prior/pilot study
 #' @param  n0     sample size used in prior/pilot study 
-#' @param  s      number of predictor variables in model
 #' @param  b      planning value of population slope
 #'
 #' 
@@ -2990,7 +2988,7 @@ size.test.ancova2 <- function(alpha, pow, evar, es, s, d, R) {
 #' 
 #' 
 #' @examples
-#' size.test.slope.gen(.05, .8, 3.15, 50, 2, 5)
+#' size.test.slope.gen(.05, .8, 3.15, 50, 5)
 #'
 #' # Should return:
 #' #  Sample size
@@ -2999,7 +2997,7 @@ size.test.ancova2 <- function(alpha, pow, evar, es, s, d, R) {
 #' 
 #' @importFrom stats qnorm
 #' @export  
-size.test.slope.gen <- function(alpha, pow, se, n0, s, b) {
+size.test.slope.gen <- function(alpha, pow, se, n0, b) {
  if (b == 0) {stop("slope planning value cannot be zero")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
