@@ -6243,6 +6243,76 @@ random.y <- function(n, m, sd, min, max, dec) {
 } 
 
 
+#  pi.var =================================================================== 
+#' Prediction limits for an estimated variance
+#'
+#'                        
+#' @description
+#' Computes a two-sided or one-sided prediction limit for the estimated 
+#' variance in a future study for a planned sample size. The prediction limit
+#' uses a variance estimate from a prior study. 
+#'
+#' Several confidence interval sample size functions in this package require
+#' a planning value of the estimated variance that is expected in the planned
+#' study. A one-sided upper variance prediction limit is useful as a variance
+#' planning value for the sample size required to obtain a confidence interval
+#' with desired width. This strategy for specifying a variance planning value 
+#' is useful in applications where the population variance in the prior study
+#' is assumed to be very similar to the population variance in the planned
+#' study. 
+#'
+#'
+#' @param  alpha  alpha value for upper 1-alpha confidence 
+#' @param  var    estimated variance from prior study
+#' @param  n0     sample size used to estimate variance
+#' @param  n      planned sample size of future study
+#' @param  type   
+#' * set to 1 for two-sided prediction interval 
+#' * set to 2 for one-sided upper prediction limit 
+#' * set to 3 for one-sided lower prediction limit 
+#'
+#'
+#' @return 
+#' Returns two-sided or one-sided prediction limits of an estimate variance
+#' in a future study
+#'
+#'
+#' @references
+#' \insertRef{Hahn1972}{statpsych}
+#'
+#'
+#' @examples
+#' pi.var(.05, 15, 40, 100, 2)
+#'
+#' # Should return:
+#' #      UL
+#' # 23.9724
+#'  
+#' 
+#' @importFrom stats qf
+#' @export
+pi.var <- function(alpha, var, n0, n, type) {
+ if (type == 1) {
+  ll <- var*qf(alpha/2, n - 1, n0 - 1)
+  ul <- var*qf(1 - alpha/2, n - 1, n0 - 1)
+  out <- t(c(ll, ul))
+  colnames(out) <- c("LL", "UL")
+ }
+ else if (type == 2) {
+  ul <- var*qf(1 - alpha, n - 1, n0 - 1)
+  out <- matrix(ul, nrow = 1, ncol = 1)
+  colnames(out) <- "UL"
+ }
+ else {
+  ll <- var*qf(alpha, n - 1, n0 - 1)
+  out <- matrix(ll, nrow = 1, ncol = 1)
+  colnames(out) <- "LL"
+ }
+ rownames(out) <- ""
+ return(out)
+}
+
+
 #  ci.var.upper =============================================================== 
 #' Upper confidence limit of a variance
 #'
