@@ -1366,29 +1366,42 @@ ci.bscor <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 
 
 #  pi.cor ===================================================================== 
-#' Prediction limit for an estimated correlation
+#' Prediction limits for an estimated correlation
 #'
 #'                                        
 #' @description
-#' Computes approximate prediction interval for the estimated Pearson 
-#' correlation in a future study with a planned sample size of n. The 
-#' prediction interval uses a correlation estimate from a prior study 
-#' that had a sample size of n0. 
+#' Computes approximate one-sided or two-sided prediction limits for the 
+#' estimated Pearson correlation in a future study with a planned sample 
+#' size of n. The prediction interval uses a correlation estimate from a
+#' prior study that had a sample size of n0. 
+#'
+#' Several confidence interval sample size functions in this package require
+#' a planning value of the estimated Pearson correlation that is expected 
+#' in the planned study. A one-sided lower correlation prediction limit is 
+#' useful as a correlation planning value for the sample size required to 
+#' obtain a confidence interval with desired width. This strategy for 
+#' specifying a correlation planning value is useful in applications where 
+#' the population correlation in the prior study is assumed to be very similar
+#' to the population correlation in the planned study. 
 #'
 #'
 #' @param  alpha  alpha value for 1-alpha confidence 
 #' @param  cor    estimated Pearson correlation from prior study
 #' @param  n0     sample size used to estimate correlation in prior study
 #' @param  n      planned sample size of future study
+#' @param  type   
+#' * set to 1 for two-sided prediction interval 
+#' * set to 2 for one-sided upper prediction limit 
+#' * set to 3 for one-sided lower prediction limit 
 #'
 #'
 #' @return 
-#' Returns a prediction interval of an estimated correlation in a 
-#' future study
+#' Returns one-sided or two-sided prediction limits of an estimated 
+#' Pearson correlation in a future study
 #'
 #'
 #' @examples
-#' pi.cor(.1, .761, 50, 100)
+#' pi.cor(.1, .761, 50, 100, 1)
 #'
 #' # Should return:
 #' #         LL        UL
@@ -1397,15 +1410,33 @@ ci.bscor <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' 
 #' @importFrom stats qnorm
 #' @export
-pi.cor <- function(alpha, cor, n0, n) {
- z <- qnorm(1 - alpha/2)
- cor.z <- log((1 + abs(cor))/(1 - abs(cor)))/2
- ll0 <- cor.z - abs(cor)/(2*(n0 - 1)) - z*sqrt(1/(n0 - 3) + 1/(n - 3))
- ul0 <- cor.z - abs(cor)/(2*(n0 - 1)) + z*sqrt(1/(n0 - 3) + 1/(n - 3))
- ll <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
- ul <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
- out <- t(c(ll, ul))
- colnames(out) <- c("LL", "UL")
+pi.cor <- function(alpha, cor, n0, n, type) {
+ if (type ==1) {
+  z <- qnorm(1 - alpha/2)
+  cor.z <- log((1 + abs(cor))/(1 - abs(cor)))/2
+  ll0 <- cor.z - abs(cor)/(2*(n0 - 1)) - z*sqrt(1/(n0 - 3) + 1/(n - 3))
+  ul0 <- cor.z - abs(cor)/(2*(n0 - 1)) + z*sqrt(1/(n0 - 3) + 1/(n - 3))
+  ll <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
+  ul <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
+  out <- t(c(ll, ul))
+  colnames(out) <- c("LL", "UL")
+ }
+ else if (type == 2) {
+  z <- qnorm(1 - alpha)
+  cor.z <- log((1 + abs(cor))/(1 - abs(cor)))/2
+  ul0 <- cor.z - abs(cor)/(2*(n0 - 1)) + z*sqrt(1/(n0 - 3) + 1/(n - 3))
+  ul <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
+  out <- matrix(ul, nrow = 1, ncol = 1)
+  colnames(out) <- "UL"
+ }
+ else {
+  z <- qnorm(1 - alpha)
+  cor.z <- log((1 + abs(cor))/(1 - abs(cor)))/2
+  ll0 <- cor.z - abs(cor)/(2*(n0 - 1)) - z*sqrt(1/(n0 - 3) + 1/(n - 3))
+  ll <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
+  out <- matrix(ll, nrow = 1, ncol = 1)
+  colnames(out) <- "LL"
+ }
  rownames(out) <- ""
  return(out)
 }
