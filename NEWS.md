@@ -22,6 +22,7 @@ Changes:
     * size.ci.ratio.prop2 can now solve for equal or unequal sample sizes
     * size.test.cor2 can now solve for equal or unequal sample sizes
     * pi.cor now has options for one-sided and two-sided prediction limits
+    * pi.prop now has options for one-sided and two-sided prediction limits
 * Error Corrections:
     * ci.2x2.stdmean.mixed -- corrected an error in the standard error computation
 
