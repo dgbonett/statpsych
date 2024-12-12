@@ -1411,7 +1411,7 @@ ci.bscor <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' @importFrom stats qnorm
 #' @export
 pi.cor <- function(alpha, cor, n0, n, type) {
- if (type ==1) {
+ if (type == 1) {
   z <- qnorm(1 - alpha/2)
   cor.z <- log((1 + abs(cor))/(1 - abs(cor)))/2
   ll0 <- cor.z - abs(cor)/(2*(n0 - 1)) - z*sqrt(1/(n0 - 3) + 1/(n - 3))
