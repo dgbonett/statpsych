@@ -2174,15 +2174,36 @@ ci.ratio.poisson2 <- function(alpha, f1, f2, t1, t2) {
 #'
 #'                        
 #' @description
-#' Computes approximate prediction interval for the estimated proportion 
-#' in a future study with a planned sample size of n. The prediction interval
-#' uses a proportion estimate from a prior study that had a sample size of n0.
+#' Computes approximate one-sided or two-sided prediction interval for the 
+#' estimated proportion in a future study with a planned sample size of n. 
+#' The prediction interval uses a proportion estimate from a prior study that
+#' had a sample size of n0.
+#'
+#' Several confidence interval sample size functions in this package require
+#' a planning value of the estimated proportion that is expected in the
+#' planned study. A one-sided proportion prediction limit is useful as a 
+#' proportion planning value for the sample size required to obtain a 
+#' confidence interval with desired width. This strategy for specifying a 
+#' proportion planning value is useful in applications where the population 
+#' proportion in the prior study is assumed to be very similar to the 
+#' population proportion in the planned study. 
+#'
+#' For sample size planning, use an upper prediction limit if the population
+#' proportion is assumed to be less than .5. If the upper prediction limit is
+#' greater than .5, then set the proportion planning value to .5. Use a lower
+#' prediction limit if the population proportion is asumed to be greater than
+#' .5. If the lower prediction limit is less than .5, then set the proportion 
+#' planning value to .5.
 #'
 #'
 #' @param  alpha  alpha value for 1-alpha confidence 
 #' @param  prop   estimated proportion from prior study
 #' @param  n0     sample size used to estimate proportion in prior study 
 #' @param  n      planned sample size of future study
+#' @param  type   
+#' * set to 1 for two-sided prediction interval 
+#' * set to 2 for one-sided upper prediction limit 
+#' * set to 3 for one-sided lower prediction limit 
 #'
 #'
 #' @return 
@@ -2191,7 +2212,7 @@ ci.ratio.poisson2 <- function(alpha, f1, f2, t1, t2) {
 #'
 #'
 #' @examples
-#' pi.prop(.1, .225, 80, 120)
+#' pi.prop(.1, .225, 80, 120, 1)
 #'
 #' # Should return:
 #' #         LL       UL
@@ -2200,13 +2221,27 @@ ci.ratio.poisson2 <- function(alpha, f1, f2, t1, t2) {
 #' 
 #' @importFrom stats qnorm
 #' @export
-pi.prop <- function(alpha, prop, n0, n) {
- z <- qnorm(1 - alpha/2)
+pi.prop <- function(alpha, prop, n0, n, type) {
  p <- (n0*prop + 2)/(n0 + 4)
- ll <- p - z*sqrt(p*(1 - p)/(n0 + 4) + p*(1 - p)/(n + 4))
- ul <- p + z*sqrt(p*(1 - p)/(n0 + 4) + p*(1 - p)/(n + 4))
- out <- t(c(ll, ul))
- colnames(out) <- c("LL", "UL")
+ if (type == 1) {
+   z <- qnorm(1 - alpha/2)
+   ll <- p - z*sqrt(p*(1 - p)/(n0 + 4) + p*(1 - p)/(n + 4))
+   ul <- p + z*sqrt(p*(1 - p)/(n0 + 4) + p*(1 - p)/(n + 4))
+   out <- t(c(ll, ul))
+   colnames(out) <- c("LL", "UL")
+ }
+ else if (type == 2) {
+   z <- qnorm(1 - alpha)
+   ul <- p + z*sqrt(p*(1 - p)/(n0 + 4) + p*(1 - p)/(n + 4))
+   out <- matrix(ul, nrow = 1, ncol = 1)
+   colnames(out) <- "UL"
+ }
+ else {
+   z <- qnorm(1 - alpha)
+   ll <- p - z*sqrt(p*(1 - p)/(n0 + 4) + p*(1 - p)/(n + 4))
+   out <- matrix(ll, nrow = 1, ncol = 1)
+   colnames(out) <- "LL"
+ }
  rownames(out) <- ""
  return(out)
 }
