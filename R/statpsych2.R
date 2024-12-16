@@ -2164,8 +2164,8 @@ size.ci.condmean <- function(alpha, evar, xvar, diff, w) {
 #' @export  
 size.ci.lc.ancova <- function(alpha, evar, s, d, w, v) {
  z <- qnorm(1 - alpha/2)
- k <- length(v)
- n <- ceiling(4*evar*(1 + d^2/4)*(t(v)%*%v)*(z/w)^2 + s + z^2/(2*k))
+ m <- length(v) - sum(v == 0)
+ n <- ceiling(4*evar*(1 + d^2/4)*(t(v)%*%v)*(z/w)^2 + s + z^2/(2*m))
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size per group"
  rownames(out) <- ""
@@ -2873,8 +2873,8 @@ size.test.cor2 <- function(alpha, pow, cor1, cor2, s, R) {
 size.test.lc.ancova <- function(alpha, pow, evar, es, s, d, v) {
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
- k <- length(v)
- n <- ceiling((evar*(1 + d^2/4)*t(v)%*%v)*(za + zb)^2/es^2 + s + za^2/(2*k))
+ m <- length(v) - sum(v == 0)
+ n <- ceiling((evar*(1 + d^2/4)*t(v)%*%v)*(za + zb)^2/es^2 + s + za^2/(2*m))
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size per group"
  rownames(out) <- ""
