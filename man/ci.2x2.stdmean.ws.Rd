@@ -33,6 +33,7 @@ Computes confidence intervals for standardized linear contrasts of means
 (AB interaction, main effect of A, main effect of B, simple main effects
 of A, and simple main effects of B) in a 2x2 within-subjects design.
 Equality of population variances is not assumed. An unweighted variance
+standardizer is used. A square root unweigthed average variance
 standardizer is used.
 }
 \examples{

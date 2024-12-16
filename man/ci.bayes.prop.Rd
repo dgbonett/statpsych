@@ -4,14 +4,14 @@
 \alias{ci.bayes.prop}
 \title{Bayesian credible interval for a proportion}
 \usage{
-ci.bayes.prop(alpha, prior.mean, prior.sd, f, n)
+ci.bayes.prop(alpha, prior_mean, prior_sd, f, n)
 }
 \arguments{
 \item{alpha}{alpha level for 1-alpha credibility interval}
 
-\item{prior.mean}{mean of prior Beta distribution}
+\item{prior_mean}{mean of prior Beta distribution}
 
-\item{prior.sd}{standard deviation of prior Beta distribution}
+\item{prior_sd}{standard deviation of prior Beta distribution}
 
 \item{f}{number of participants who have the attribute}
 
@@ -40,7 +40,7 @@ ci.bayes.prop(.05, .4, .1, 12, 100)
 
 # Should return:
 # Posterior mean Posterior SD       LL        UL
-#           0.15   0.03273268  0.09218 0.2188484
+#      0.1723577   0.03419454 0.1111747 0.2436185
 
 
 }

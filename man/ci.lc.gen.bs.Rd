@@ -27,11 +27,10 @@ Returns a 1-row matrix. The columns are:
 }
 \description{
 Computes the estimate, standard error, and approximate confidence interval
-for a linear contrast of any type of parameter (e.g., quartile, logistic
-regression slope, path coefficient) where each parameter value has
+for a linear contrast of any type of parameter where each parameter value has
 been estimated from a different sample. The parameter values are assumed to
-be of the same type (e.g., all unstandardized path coefficients) and their
-sampling distributions are assumed to be approximately normal.
+be of the same type and their sampling distributions are assumed to be
+approximately normal.
 }
 \examples{
 est <- c(3.86, 4.57, 2.29, 2.88)

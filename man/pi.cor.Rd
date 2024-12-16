@@ -2,9 +2,9 @@
 % Please edit documentation in R/statpsych2.R
 \name{pi.cor}
 \alias{pi.cor}
-\title{Prediction limit for an estimated correlation}
+\title{Prediction limits for an estimated correlation}
 \usage{
-pi.cor(alpha, cor, n0, n)
+pi.cor(alpha, cor, n0, n, type)
 }
 \arguments{
 \item{alpha}{alpha value for 1-alpha confidence}
@@ -14,19 +14,34 @@ pi.cor(alpha, cor, n0, n)
 \item{n0}{sample size used to estimate correlation in prior study}
 
 \item{n}{planned sample size of future study}
+
+\item{type}{\itemize{
+\item set to 1 for two-sided prediction interval
+\item set to 2 for one-sided upper prediction limit
+\item set to 3 for one-sided lower prediction limit
+}}
 }
 \value{
-Returns a prediction interval of an estimated correlation in a
-future study
+Returns one-sided or two-sided prediction limits of an estimated
+Pearson correlation in a future study
 }
 \description{
-Computes approximate prediction interval for the estimated Pearson
-correlation in a future study with a planned sample size of n. The
-prediction interval uses a correlation estimate from a prior study
-that had a sample size of n0.
+Computes approximate one-sided or two-sided prediction limits for the
+estimated Pearson correlation in a future study with a planned sample
+size of n. The prediction interval uses a correlation estimate from a
+prior study that had a sample size of n0.
+
+Several confidence interval sample size functions in this package require
+a planning value of the estimated Pearson correlation that is expected
+in the planned study. A one-sided lower correlation prediction limit is
+useful as a correlation planning value for the sample size required to
+obtain a confidence interval with desired width. This strategy for
+specifying a correlation planning value is useful in applications where
+the population correlation in the prior study is assumed to be very similar
+to the population correlation in the planned study.
 }
 \examples{
-pi.cor(.1, .761, 50, 100)
+pi.cor(.1, .761, 50, 100, 1)
 
 # Should return:
 #         LL        UL

@@ -23,7 +23,7 @@ of pairwise comparisons. The columns are:
 \item Estimate - estimated mean difference
 \item SE - standard error
 \item t - t test statistic
-\item df - degrees of freedom
+\item df - degrees of freedom (unadjusted)
 \item p - two-sided p-value
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval

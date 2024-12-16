@@ -1,4 +1,4 @@
-statpsych version 1.7.0 (Release date: 2024/12/xx)
+statpsych version 1.7.0 (Release date: 2024/12/16)
 ===========
 
 Changes:
@@ -18,11 +18,11 @@ Changes:
     * ci.bayes.spcor -- Computes Bayesian credible interval for a semipartial correlation with a skeptical prior
     * pi.var -- Computes one-sided or two-sided prediction limits for an estimated variance in a future study (will replace pi.var.upper)
 * Modifications
-    * size.ci.prop2 can now solve for equal or unequal sample sizes
-    * size.ci.ratio.prop2 can now solve for equal or unequal sample sizes
-    * size.test.cor2 can now solve for equal or unequal sample sizes
-    * pi.cor now has options for one-sided and two-sided prediction limits
-    * pi.prop now has options for one-sided and two-sided prediction limits
+    * size.ci.prop2 can now solve for equal or unequal sample sizes.  Requires a new argumnet, R, specifying the ratio of sample sizes and now returns a 2-column matrix.
+    * size.ci.ratio.prop2 can now solve for equal or unequal sample sizes.  Requires a new argument, R, specifying the ratio of sample sizes and now returns a 2-column matrix.
+    * size.test.cor2 can now solve for equal or unequal sample sizes.  Requires a new argument, R, specifying the ratio of sample sizes, and returns a 2-column matrix
+    * pi.cor now has options for one-sided and two-sided prediction limits.  It requires a new argument, type
+    * pi.prop now has options for one-sided and two-sided prediction limits.  It requires a new argument, type
 * Error Corrections:
     * ci.2x2.stdmean.mixed -- corrected an error in the standard error computation
 

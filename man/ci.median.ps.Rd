@@ -30,18 +30,19 @@ Returns a 1-row matrix. The columns are:
 Computes a distribution-free confidence interval for a difference of
 population medians in a paired-samples design. This function also computes
 the standard error of each median and the covariance between the two
-estimated medians.
+estimated medians. Tied scores within each measurement are assumed to be
+rare.
 }
 \examples{
-y1 <- c(21, 4, 9, 12, 35, 18, 10, 22, 24, 1, 6, 8, 13, 16, 19)
-y2 <- c(67, 28, 30, 28, 52, 40, 25, 37, 44, 10, 14, 20, 28, 40, 51)
+y1 <- c(21.1, 4.9, 9.2, 12.4, 35.8, 18.1, 10.7, 22.9, 24.0, 1.2, 6.1, 8.3, 13.1, 16.2)
+y2 <- c(67.0, 28.1, 30.9, 28.6, 52.0, 40.8, 25.8, 37.4, 44.9, 10.3, 14.9, 20.2, 28.8, 40.6)
 ci.median.ps(.05, y1, y2)
 
 # Should return:
-# Median1 Median2 Median1-Median2       SE        LL        UL  
-#      13      30             -17 3.362289 -23.58996 -10.41004 
-#      SE1      SE2      COV
-# 3.085608 4.509735 9.276849
+#  Median1 Median2 Median1-Median2       SE        LL        UL
+#    12.75   29.85           -17.1 3.704248 -24.36019 -9.839807
+#       SE1      SE2     COV
+#  3.379695 4.968956 11.1957
 
 
 }

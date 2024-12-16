@@ -24,14 +24,13 @@ Returns the required sample size for each group
 Computes the sample size in each group required to test a difference in
 population proportions with desired power and a continuity correction in a
 2-group design. This function requires planning values for both proportions.
-Set each proportion planning value to .5, or a value closest to .5 within
-a plausible range, for a conservatively large sample size requirement. This
-function does not use the typical sample size approach where the effect
-size is assumed to equal the difference in proportion planning values. This
-function does not require the planning value for the proportion difference
-(effect size) to equal the difference of the two proportion planning values;
-for example, the planning value of the proportion difference could be set
-equal to a minimally interesting effect size.
+Set each proportion planning value to .5 for a conservatively large sample
+size requirement. This function does not use the typical sample size approach
+where the effect size is assumed to equal the difference in proportion
+planning values. This function does not require the planning value for the
+proportion difference (effect size) to equal the difference of the two
+proportion planning values; for example, the planning value of the proportion
+difference could be set equal to a minimally interesting effect size.
 }
 \examples{
 size.test.prop2(.05, .8, .5, .5, .2)

@@ -2915,7 +2915,7 @@ size.ci.prop.prior <- function(alpha1, alpha2, p0, n0, w) {
    if (abs(ll0 - .5) < abs(ul0 - .5)) (p = ll0)
    if (abs(ll0 - .5) > abs(ul0 - .5)) (p = ul0)
    n <- ceiling(4*p*(1 - p)*(z1/w)^2)
-   pi <- pi.prop(alpha2, p, n0, n)
+   pi <- pi.prop(alpha2, p, n0, n, type = 1)
    ll <- pi[1,1]                                  
    ul <- pi[1,2]
    if (ll < .0001) {ll = .0001}
@@ -2927,7 +2927,7 @@ size.ci.prop.prior <- function(alpha1, alpha2, p0, n0, w) {
      if (abs(ll - .5) < abs(ul - .5)) (p = ll)
      if (abs(ll - .5) > abs(ul - .5)) (p = ul)
      n <- ceiling(4*p*(1 - p)*(z1/w)^2)
- 	 pi <- pi.prop(alpha2, p, n0, n)
+ 	 pi <- pi.prop(alpha2, p, n0, n, type = 1)
      ll <- pi[1,1]                                  
      ul <- pi[1,2]
 	 if (ll < .0001) {ll = .0001}
@@ -3870,15 +3870,15 @@ iqv <- function(f) {
 }
 
 
-#  exp.slope ================================================================== 
+#  expon.slope ================================================================== 
 #' Confidence interval for an exponentiated slope
 #'
 #'
 #' @description
-#' Computes confidence intervals for exp(B) and 100{exp(B) - 1]% where B is
+#' Computes confidence intervals for exp(B) and 100 \[ exp(B) - 1 \] \\% where B is
 #' a population slope coefficient in a binary logit, ordinal logit, or
 #' log-Poisson model. This function is useful with software that does not
-#' have an option to compute exp(B) and 100[exp(B) - 1]%.
+#' have an option to compute exp(B) and 100 \[ exp(B) - 1 \] \\%.
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -3888,24 +3888,24 @@ iqv <- function(f) {
 #'
 #' @return
 #' Returns a 2-row matrix. The first row gives the results for exp(B), and the 
-#' the second row gives the results for 100[exp(B) - 1]%. The columns are:
-#' * Estimate - estimate of exp(B) or 100[exp(B) - 1]%
+#' the second row gives the results for 100 \[ exp(B) - 1 \] \\%. The columns are:
+#' * Estimate - estimate of exp(B) or 100 \[ exp(B) - 1 \] \\%
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #'
 #'
 #' @examples
-#' exp.slope(.05, .502, .0396)
+#' expon.slope(.05, .502, .0396)
 #'
 #' # Should return:
 #' #                   Estimate        LL       UL
 #' # exp(B)            1.652022  1.528651  1.78535
-#' # 100[exp(B) - 1}% 65.202201 52.865066 78.53502
+#' # 100[exp(B) - 1]% 65.202201 52.865066 78.53502
 #'
 #'
 #' @importFrom stats qnorm
 #' @export
-exp.slope <- function(alpha, b, se) { 
+expon.slope <- function(alpha, b, se) { 
   z <- qnorm(1 - alpha/2)
   est1 <- exp(b)
   est2 <- 100*(exp(b) - 1)
@@ -3919,7 +3919,7 @@ exp.slope <- function(alpha, b, se) {
   out2 <- t(c(est2, LL2, UL2))
   out <- rbind(out1, out2)
   colnames(out) = c("Estimate", "LL", "UL")
-  rownames(out) = c("exp(B)", "100[exp(B) - 1}%")
+  rownames(out) = c("exp(B)", "100[exp(B) - 1]%")
   return (out)
 }
 

@@ -4,7 +4,7 @@
 \alias{size.ci.ratio.prop2}
 \title{Sample size for a 2-group proportion ratio confidence interval}
 \usage{
-size.ci.ratio.prop2(alpha, p1, p2, r)
+size.ci.ratio.prop2(alpha, p1, p2, r, R)
 }
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
@@ -14,21 +14,29 @@ size.ci.ratio.prop2(alpha, p1, p2, r)
 \item{p2}{planning value of proportion for group 2}
 
 \item{r}{desired upper to lower confidence interval endpoint ratio}
+
+\item{R}{n2/n1 ratio}
 }
 \value{
 Returns the required sample size for each group
 }
 \description{
-Computes the sample size in each group (assuming equal sample sizes) required
-to estimate a ratio of population proportions with desired confidence interval
-precision in a 2-group design.
+Computes the sample size in each group required to estimate a ratio of
+proportions with desired confidence interval precision in a 2-group design.
+Set R = 1 for equal sample sizes.
 }
 \examples{
-size.ci.ratio.prop2(.05, .2, .1, 2)
+size.ci.ratio.prop2(.05, .2, .1, 2, 1)
 
 # Should return:
-# Sample size per group
-#                   416
+#   n1  n2
+#  416 416
+
+size.ci.ratio.prop2(.05, .2, .1, 2, .5)
+
+# Should return:
+#   n1  n2
+#  704 352
 
 
 }

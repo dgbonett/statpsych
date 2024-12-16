@@ -2499,7 +2499,7 @@ size.ci.cor.prior <- function(alpha1, alpha2, cor0, n0, w) {
    if (abs(ll0) < abs(ul0)) {cor = ll0}
    if (abs(ll0) > abs(ul0)) {cor = ul0}
    n <- size.ci.cor(alpha1, cor, 0, w)
-   pi <- pi.cor(alpha2, cor0, n0, n)
+   pi <- pi.cor(alpha2, cor0, n0, n, type = 1)
    ll <- pi[1,1]                                  
    ul <- pi[1,2]
    if (ll < 0 & ul > 0) {
@@ -2509,7 +2509,7 @@ size.ci.cor.prior <- function(alpha1, alpha2, cor0, n0, w) {
      if (abs(ll) < abs(ul)) {cor = ll}
      if (abs(ll) > abs(ul)) {cor = ul}
      n <- size.ci.cor(alpha1, cor, 0, w)
-	 pi <- pi.cor(alpha2, cor0, n0, n)
+	 pi <- pi.cor(alpha2, cor0, n0, n, type = 1)
      ll <- pi[1,1]                                  
      ul <- pi[1,2]
 	 if (abs(ll) < abs(ul)) {cor = ll}

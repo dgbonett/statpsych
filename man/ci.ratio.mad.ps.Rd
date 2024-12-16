@@ -2,7 +2,7 @@
 % Please edit documentation in R/statpsych1.R
 \name{ci.ratio.mad.ps}
 \alias{ci.ratio.mad.ps}
-\title{Confidence interval for a paired-sample MAD ratio}
+\title{Confidence interval for a paired-samples MAD ratio}
 \usage{
 ci.ratio.mad.ps(alpha, y1, y2)
 }

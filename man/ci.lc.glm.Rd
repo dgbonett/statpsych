@@ -15,7 +15,7 @@ ci.lc.glm(alpha, n, b, V, q)
 
 \item{V}{covariance matrix of parameter estimates from vcov(object)}
 
-\item{q}{vector of coefficients}
+\item{q}{vector of contrast coefficients}
 }
 \value{
 Returns a 1-row matrix. The columns are:

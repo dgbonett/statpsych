@@ -4,7 +4,7 @@
 \alias{pi.prop}
 \title{Prediction interval for an estimated proportion}
 \usage{
-pi.prop(alpha, prop, n0, n)
+pi.prop(alpha, prop, n0, n, type)
 }
 \arguments{
 \item{alpha}{alpha value for 1-alpha confidence}
@@ -14,18 +14,41 @@ pi.prop(alpha, prop, n0, n)
 \item{n0}{sample size used to estimate proportion in prior study}
 
 \item{n}{planned sample size of future study}
+
+\item{type}{\itemize{
+\item set to 1 for two-sided prediction interval
+\item set to 2 for one-sided upper prediction limit
+\item set to 3 for one-sided lower prediction limit
+}}
 }
 \value{
 Returns a prediction interval for an estimated proportion in a future
 study
 }
 \description{
-Computes approximate prediction interval for the estimated proportion
-in a future study with a planned sample size of n. The prediction interval
-uses a proportion estimate from a prior study that had a sample size of n0.
+Computes approximate one-sided or two-sided prediction interval for the
+estimated proportion in a future study with a planned sample size of n.
+The prediction interval uses a proportion estimate from a prior study that
+had a sample size of n0.
+
+Several confidence interval sample size functions in this package require
+a planning value of the estimated proportion that is expected in the
+planned study. A one-sided proportion prediction limit is useful as a
+proportion planning value for the sample size required to obtain a
+confidence interval with desired width. This strategy for specifying a
+proportion planning value is useful in applications where the population
+proportion in the prior study is assumed to be very similar to the
+population proportion in the planned study.
+
+For sample size planning, use an upper prediction limit if the population
+proportion is assumed to be less than .5. If the upper prediction limit is
+greater than .5, then set the proportion planning value to .5. Use a lower
+prediction limit if the population proportion is asumed to be greater than
+.5. If the lower prediction limit is less than .5, then set the proportion
+planning value to .5.
 }
 \examples{
-pi.prop(.1, .225, 80, 120)
+pi.prop(.1, .225, 80, 120, 1)
 
 # Should return:
 #         LL       UL

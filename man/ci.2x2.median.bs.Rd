@@ -32,7 +32,7 @@ Computes distribution-free confidence intervals for the AB interaction
 effect, main effect of A, main effect of B, simple main effects of A, and
 simple main effects of B in a 2x2 between-subjects design with a
 quantitative response variable. The effects are defined in terms of medians
-rather than means. Tied scores are assumed to be rare.
+rather than means. Tied scores within each group are assumed to be rare.
 }
 \examples{
 y11 <- c(19.2, 21.1, 14.4, 13.3, 19.8, 15.9, 18.0, 19.1, 16.2, 14.6)

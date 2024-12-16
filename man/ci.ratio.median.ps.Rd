@@ -26,6 +26,7 @@ Returns a 1-row matrix. The columns are:
 \description{
 Computes a distribution-free confidence interval for a ratio of population
 medians in a paired-samples design. Ratio-scale measurements are assumed.
+Tied scores within each measurement are assumed to be rare.
 }
 \examples{
 y1 <- c(21, 4, 9, 12, 35, 18, 10, 22, 24, 1, 6, 8, 13, 16, 19)

@@ -5,33 +5,41 @@
 \title{Sample size for a test of equal Pearson or partial correlation in a 2-group
 design}
 \usage{
-size.test.cor2(alpha, pow, cor1, cor2, s)
+size.test.cor2(alpha, pow, cor1, cor2, s, R)
 }
 \arguments{
 \item{alpha}{alpha level for hypothesis test}
 
 \item{pow}{desired power}
 
-\item{cor1}{planning value of correlation for group 1}
+\item{cor1}{planning value of correlation}
 
-\item{cor2}{planning value of correlation for group 2}
+\item{cor2}{planning value of correlation}
 
 \item{s}{number of control variables}
+
+\item{R}{n2/n1 ratio}
 }
 \value{
 Returns the required sample size for each group
 }
 \description{
-Computes the sample size required to test the equality of two population
-Pearson or partial correlations with desired power in a 2-group design.
-Set s = 0 for a Pearson correlation.
+Computes the sample size required to test equality of two Pearson or partial
+correlation with desired power in a 2-group design. Set s = 0 for a Pearson
+correlation. Set R = 1 for equal sample sizes.
 }
 \examples{
-size.test.cor2(.05, .8, .4, .2, 0)
+size.test.cor2(.05, .8, .4, .2, 0, 1)
 
 # Should return:
-# Sample size per group
-#                   325
+#  n1  n2
+# 325 325
+
+size.test.cor2(.05, .8, .4, .2, 0, 2)
+
+# Should return:
+#  n1  n2
+# 245 490
  
 
 }

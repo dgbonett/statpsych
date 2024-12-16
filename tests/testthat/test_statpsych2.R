@@ -10,6 +10,8 @@ test_that("ci.cor returns valid matrix", {
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)
+  
+  testthat::expect_snapshot(res)
 })
 
 
@@ -23,6 +25,8 @@ test_that("ci.spcor returns valid matrix", {
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)
+  
+  testthat::expect_snapshot(res)
 })
 
 
@@ -36,6 +40,8 @@ test_that("ci.cor2 returns valid matrix", {
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)
+  
+  testthat::expect_snapshot(res)
 })
 
 
@@ -49,6 +55,8 @@ test_that("ci.cor.dep returns valid matrix", {
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)
+  
+  testthat::expect_snapshot(res)
 })
 
 
@@ -62,6 +70,8 @@ test_that("ci.cor2.gen returns valid matrix", {
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)
+  
+  testthat::expect_snapshot(res)
 })
 
 
@@ -75,6 +85,8 @@ test_that("ci.pbcor returns valid matrix", {
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(dim(res), c(2, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)
+  
+  testthat::expect_snapshot(res)
 })
 
 
@@ -90,6 +102,8 @@ test_that("ci.spear returns valid matrix", {
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)
+  
+  testthat::expect_snapshot(res)
 })
 
 
@@ -105,6 +119,8 @@ test_that("ci.spear2 returns valid matrix", {
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)
+  
+  testthat::expect_snapshot(res)
 })
 
 
@@ -120,6 +136,8 @@ test_that("ci.mape returns valid matrix", {
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)
+  
+  testthat::expect_snapshot(res)
 })
 
 
@@ -133,6 +151,8 @@ test_that("ci.condslope returns valid matrix", {
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(dim(res), c(2, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)
+  
+  testthat::expect_snapshot(res)
 })
 
 
@@ -150,6 +170,8 @@ test_that("ci.lc.reg returns valid matrix", {
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)
+  
+  testthat::expect_snapshot(res)
 })
 
 
@@ -163,6 +185,8 @@ test_that("ci.fisher returns valid matrix", {
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)
+  
+  testthat::expect_snapshot(res)
 })
 
 
@@ -176,6 +200,8 @@ test_that("ci.indirect returns valid matrix", {
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)
+  
+  #testthat::expect_snapshot(res)
 })
 
 
@@ -186,6 +212,8 @@ test_that("size.ci.slope returns valid numeric", {
 
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(res[[1,1]], 83)
+  
+  testthat::expect_snapshot(res)
 })
 
 
@@ -195,6 +223,8 @@ test_that("size.ci.cor returns valid numeric", {
   
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(res[[1,1]], 188)
+  
+  testthat::expect_snapshot(res)
 })
 
 
@@ -210,6 +240,8 @@ test_that("size.ci.spear returns valid numeric", {
   testthat::expect_equal(res[[1,1]], 200)
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)
+  
+  testthat::expect_snapshot(res)
 })
 
 
@@ -224,6 +256,8 @@ test_that("size.ci.pbcor returns valid numeric", {
   testthat::expect_equal(res[[1,1]], 168)
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)
+  
+  testthat::expect_snapshot(res)
 })
 
 
@@ -238,6 +272,8 @@ test_that("size.ci.pbcor returns valid numeric", {
   testthat::expect_equal(res[[1,1]], 168)
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)
+  
+  testthat::expect_snapshot(res)
 })
 
 
@@ -247,6 +283,8 @@ test_that("size.ci.rsqr returns valid numeric", {
   
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(res[[1,1]], 226)
+  
+  testthat::expect_snapshot(res)
 })
 
 
@@ -256,6 +294,8 @@ test_that("size.ci.condmean returns valid numeric", {
   
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(res[[1,1]], 210)
+  
+  testthat::expect_snapshot(res)
 })
 
 
@@ -266,6 +306,8 @@ test_that("size.ci.lc.ancova returns valid numeric", {
   
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(res[[1,1]], 21)
+  
+  testthat::expect_snapshot(res)
 })
 
 
@@ -276,6 +318,8 @@ test_that("size.test.slope returns valid numeric", {
   
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(res[[1,1]], 100)
+  
+  testthat::expect_snapshot(res)
 })
 
 
@@ -285,6 +329,8 @@ test_that("size.test.cor returns valid numeric", {
   
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(res[[1,1]], 48)
+  
+  testthat::expect_snapshot(res)
 })
 
 
@@ -295,6 +341,8 @@ test_that("size.interval.cor returns valid numeric", {
   
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(res[[1,1]], 360)
+  
+  testthat::expect_snapshot(res)
 })
 
 
@@ -304,7 +352,9 @@ test_that("size.test.lc.ancova returns valid numeric", {
   res <- size.test.lc.ancova(.05, .9, 1.37, .7, 1, 0, v)
   
   testthat::expect_equal(class(res), c("matrix", "array"))
-  testthat::expect_equal(res[[1,1]], 47)
+  testthat::expect_equal(res[[1,1]], 46)
+  
+  testthat::expect_snapshot(res)
 })
 
 
@@ -317,6 +367,8 @@ test_that("ci.indirect returns valid matrix", {
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(dim(res), c(4, 1))
   testthat::expect_equal(colnames(res), colnames_expected)
+  
+  # testthat::expect_snapshot(res)
 })
   
 
@@ -330,6 +382,8 @@ test_that("random.yx returns valid data.frame", {
   testthat::expect_equal(class(res), c("data.frame"))
   testthat::expect_equal(dim(res), c(10, length(res)))
   testthat::expect_equal(colnames(res), colnames_expected)
+  
+  #testthat::expect_snapshot(res)
 })
 
 
@@ -343,6 +397,8 @@ test_that("ci.rsqr returns valid matrix", {
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)
+  
+  testthat::expect_snapshot(res)
 })
 
 
@@ -359,6 +415,8 @@ test_that("ci.lc.gen.bs returns valid matrix", {
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)
+  
+  testthat::expect_snapshot(res)
 })
 
 
@@ -381,6 +439,8 @@ test_that("ci.lc.glm returns valid matrix", {
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)
+  
+  testthat::expect_snapshot(res)
 })
 
 
@@ -396,6 +456,8 @@ test_that("ci.theil returns valid matrix", {
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)
+  
+  testthat::expect_snapshot(res)
 })
 
 
@@ -409,6 +471,8 @@ test_that("power.cor returns valid matrix", {
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)
+  
+  testthat::expect_snapshot(res)
 })
 
 test_that("power.cor2 returns valid matrix", {
@@ -421,19 +485,30 @@ test_that("power.cor2 returns valid matrix", {
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)
+  
+  testthat::expect_snapshot(res)
 })
 
 
 test_that("size.test.cor2 returns valid matrix", {
   colnames_expected <- c(
-    "Sample size per group"
+    "n1", "n2"
   )
   
-  res <- size.test.cor2(.05, .8, .4, .2, 0)
+  res <- size.test.cor2(.05, .8, .4, .2, 0, 1)
   
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)
+  testthat::expect_equal(res[[1,1]], 325)
+  testthat::expect_equal(res[[1,2]], 325)
+  
+  res <- size.test.cor2(.05, .8, .4, .2, 0, 2)
+  testthat::expect_equal(res[[1,1]], 245)
+  testthat::expect_equal(res[[1,2]], 490)
+  
+  testthat::expect_snapshot(res)
+  
 })
 
 
@@ -447,6 +522,8 @@ test_that("size.test.cronbach2 returns valid matrix", {
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)
+  
+  testthat::expect_snapshot(res)
 })
 
 
@@ -460,6 +537,8 @@ test_that("size.ci.cronbach2 returns valid matrix", {
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)
+  
+  testthat::expect_snapshot(res)
 })
 
 
@@ -474,6 +553,8 @@ test_that("size.ci.mape returns valid numeric", {
   testthat::expect_equal(res[[1,1]], 57)
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)
+  
+  testthat::expect_snapshot(res)
 })
 
 
@@ -487,6 +568,8 @@ test_that("size.ci.indirect returns valid matrix", {
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)
+  
+  testthat::expect_snapshot(res)
 })
 
 
@@ -504,6 +587,8 @@ test_that("ci.ratio.mape2 returns valid matrix", {
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)
+  
+  testthat::expect_snapshot(res)
 })
 
 
@@ -517,6 +602,8 @@ test_that("ci.rel2 returns valid matrix", {
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)
+  
+  testthat::expect_snapshot(res)
 })
 
 
@@ -530,6 +617,8 @@ test_that("ci.cronbach2 returns valid matrix", {
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)
+  
+  testthat::expect_snapshot(res)
 })
 
 
@@ -543,6 +632,8 @@ test_that("ci.bscor returns valid matrix", {
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)
+  
+  testthat::expect_snapshot(res)
 })
 
 
@@ -551,11 +642,16 @@ test_that("pi.cor returns valid matrix", {
     "LL", "UL"
   )
   
-  res <- pi.cor(.1, .761, 50, 100)
+  res <- pi.cor(.1, .761, 50, 100, 1)
   
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)
+  testthat::expect_equal(res[1,1], 0.60340924)
+  testthat::expect_equal(res[1,2], 0.85732237)
+  
+  testthat::expect_snapshot(res)
+  
 })
 
 
@@ -570,6 +666,8 @@ test_that("test.cor returns valid matrix", {
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)
+  
+  testthat::expect_snapshot(res)
 })
 
 
@@ -583,6 +681,8 @@ test_that("test.spear returns valid matrix", {
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)
+  
+  testthat::expect_snapshot(res)
 })
 
 
@@ -596,6 +696,8 @@ test_that("test.cor2 returns valid matrix", {
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)
+  
+  testthat::expect_snapshot(res)
 })
 
 
@@ -609,6 +711,8 @@ test_that("test.spear2 returns valid matrix", {
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)
+  
+  testthat::expect_snapshot(res)
 })
 
 
@@ -623,6 +727,8 @@ test_that("size.ci.cor2 returns valid matrix", {
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
   testthat::expect_equal(res[[1,1]], 271)
   testthat::expect_equal(colnames(res), colnames_expected)
+  
+  testthat::expect_snapshot(res)
 })
 
 
@@ -637,6 +743,8 @@ test_that("size.ci.spear2 returns valid matrix", {
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
   testthat::expect_equal(res[[1,1]], 314)
   testthat::expect_equal(colnames(res), colnames_expected)
+  
+  testthat::expect_snapshot(res)
 })
 
 
@@ -646,11 +754,13 @@ test_that("size.ci.cor.prior returns valid matrix", {
   )
   
   res <- size.ci.cor.prior(.05, .10, .438, 100, .2)
-  
+         
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
   testthat::expect_equal(res[[1,1]], 331)
   testthat::expect_equal(colnames(res), colnames_expected)
+  
+  testthat::expect_snapshot(res)
 })
 
 
@@ -666,6 +776,8 @@ test_that("adj.se returns valid matrix", {
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(dim(res), c(3, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)
+  
+  testthat::expect_snapshot(res)
 })
 
 
@@ -679,5 +791,64 @@ test_that("fitindices returns valid matrix", {
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)
+  
+  testthat::expect_snapshot(res)
+})
+
+
+
+test_that("size.ci.biphi example", {
+  res <- size.ci.biphi(.05, .2, .5, .3, .4)
+  testthat::expect_snapshot(res)
+})
+
+
+
+test_that("size.ci.ancova2 example", {
+  res <- size.ci.ancova2(.05, 1.37, 1, 0, 1.5, 2)
+  testthat::expect_snapshot(res)
+})
+
+
+test_that("size.ci.slope.gen example", {
+  res <- size.ci.slope.gen(.05, 3.15, 50, 5)
+  testthat::expect_snapshot(res)
+})
+
+
+test_that("size.test.ancova2 example", {
+  res <- size.test.ancova2(.05, .9, 1.37, .7, 1, 0, 2)
+  testthat::expect_snapshot(res)
+})
+
+
+test_that("size.test.slope.gen example", {
+  res <- size.test.slope.gen(.05, .8, 3.15, 50, 5)
+  testthat::expect_snapshot(res)
+})
+
+
+test_that("signal example", {
+  res <- signal(82, 46, 100, 100)
+  testthat::expect_snapshot(res)
+})
+
+
+test_that("expon.slope example", {
+  res <- expon.slope(.05, .502, .0396)
+  testthat::expect_snapshot(res)
+})
+
+
+
+test_that("ci.bayes.cor example", {
+  res <- ci.bayes.cor(.05, .1, .536, 0, 50)
+  testthat::expect_snapshot(res)
+})
+
+
+test_that("ci.bayes.spcor example", {
+  res <- ci.bayes.spcor(.05, .1, .582, .137)
+  testthat::expect_snapshot(res)
 })
 

@@ -41,7 +41,7 @@ size.test.lc.ancova(.05, .9, 1.37, .7, 1, 0, v)
 
 # Should return:
 # Sample size per group
-#                    47
+#                    46
  
 
 }

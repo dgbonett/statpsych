@@ -4,14 +4,14 @@
 \alias{ci.bayes.normal}
 \title{Bayesian credible interval for a normal prior distribution}
 \usage{
-ci.bayes.normal(alpha, prior.mean, prior.sd, est, se)
+ci.bayes.normal(alpha, prior_mean, prior_sd, est, se)
 }
 \arguments{
 \item{alpha}{alpha level for 1-alpha credibility interval}
 
-\item{prior.mean}{mean of prior Normal distribution}
+\item{prior_mean}{mean of prior Normal distribution}
 
-\item{prior.sd}{standard deviation of prior Normal distribution}
+\item{prior_sd}{standard deviation of prior Normal distribution}
 
 \item{est}{sample estimate}
 

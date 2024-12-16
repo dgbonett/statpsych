@@ -32,6 +32,18 @@ size.test.mean2(.05, .95, 100, 10, 1)
 # Should return:
 # n1  n2
 # 27  27
+
+size.test.mean2(.05, .95, 100, 10, 3) 
+
+# Should return:
+# n1  n2
+# 19  57
+
+size.test.mean2(.05, .95, 100, 10, .5) 
+
+# Should return:
+# n1  n2
+# 40  20
  
 
 }

@@ -31,25 +31,25 @@ Returns a 7-row matrix (one row per effect). The columns are:
 Computes distribution-free confidence intervals for the AB interaction
 effect, main effect of A, main effect of B, simple main effects of A, and
 simple main effects of B in a 2x2 within-subjects design. The effects are
-defined in terms of medians rather than means. Tied scores are assumed to
-be rare.
+defined in terms of medians rather than means. Tied scores within each
+level combination are assumed to be rare.
 }
 \examples{
-y11 <- c(221, 402, 333, 301, 284, 182, 281, 230, 290, 182, 133, 278)
+y11 <- c(222, 402, 333, 301, 284, 182, 281, 230, 290, 182, 133, 278)
 y12 <- c(221, 371, 340, 288, 293, 150, 317, 211, 286, 161, 126, 234)
 y21 <- c(219, 371, 314, 279, 284, 155, 278, 185, 296, 169, 118, 229)
-y22 <- c(170, 332, 280, 273, 272, 160, 260, 204, 252, 153, 137, 221)
+y22 <- c(170, 332, 280, 273, 272, 160, 260, 204, 252, 153, 137, 223)
 ci.2x2.median.ws(.05, y11, y12, y21, y22)
 
 # Should return:
-#          Estimate       SE         LL        UL
-# AB:          2.50 21.050122 -38.757482 43.75748
-# A:          24.75  9.603490   5.927505 43.57250
-# B:          18.25  9.101881   0.410641 36.08936
-# A at b1:    26.00 11.813742   2.845491 49.15451
-# A at b2:    23.50 16.323093  -8.492675 55.49267
-# B at a1:    19.50 15.710347 -11.291715 50.29171
-# B at a2:    17.00 11.850202  -6.225970 40.22597
+#          Estimate        SE           LL       UL
+# AB:          3.50 21.050122 -37.75748155 44.75748
+# A:          24.25  9.603490   5.42750463 43.07250
+# B:          17.75  9.101881  -0.08935904 35.58936
+# A at b1:    26.00 11.813742   2.84549058 49.15451
+# A at b2:    22.50 16.323093  -9.49267494 54.49267
+# B at a1:    19.50 15.710347 -11.29171468 50.29171
+# B at a2:    16.00 11.850202  -7.22596953 39.22597
 
 
 }

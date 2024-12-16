@@ -46,10 +46,17 @@ different population distributions. All distributions are scaled to have
 a standard deviation of 1.0 in group 1.
 }
 \examples{
+sim.ci.mean2(.05, 30, 25, 1.5, 1, 1, 1000)
+
+# Should return (within sampling error):
+#                              Coverage Lower Error Upper Error Ave CI Width
+# Equal Variances Assumed:      0.93988      0.0322     0.02792     1.354437
+# Equal Variances Not Assumed:  0.94904      0.0262     0.02476     1.411305
+
 sim.ci.mean2(.05, 30, 25, 1.5, 4, 5, 1000)
 
 # Should return (within sampling error):
-#                             Coverage Lower Error Upper Error Ave CI Width
+#                              Coverage Lower Error Upper Error Ave CI Width
 # Equal Variances Assumed:      0.93986     0.04022     0.01992     1.344437
 # Equal Variances Not Assumed:  0.94762     0.03862     0.01376     1.401305
 

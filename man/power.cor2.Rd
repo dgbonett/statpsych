@@ -16,7 +16,7 @@ power.cor2(alpha, n1, n2, cor1, cor2, s)
 
 \item{cor1}{planning value of correlation for group 1}
 
-\item{cor2}{planning value of correlation for group 1}
+\item{cor2}{planning value of correlation for group 2}
 
 \item{s}{number of control variables}
 }
@@ -26,7 +26,7 @@ Returns the approximate power of the test
 \description{
 Computes the approximate power of a test for equal population Pearson or
 partial correlations in a 2-group design for planned sample sizes. Set
-s = 0 for a Pearson correlation.
+s = 0 for Pearson correlations.
 }
 \examples{
 power.cor2(.05, 200, 200, .4, .2, 0)

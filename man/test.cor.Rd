@@ -30,7 +30,7 @@ transformation for a test of the null hypothesis that a Pearson or
 partial correlation is equal to some specified nonzero value. Set s = 0
 for a Pearson correlation. The hypothesis testing results should be
 accompanied with a confidence interval for the population Pearson or
-partial correlation value.
+partial correlation value ((see \link[statpsych]{ci.cor}).
 }
 \examples{
 test.cor(.484, 100, 0, .2)
@@ -47,7 +47,4 @@ test.cor(.372, 100, 0, 0)
 #     0.372 3.967337 98 0.000138436
 
 
-}
-\seealso{
-\link[statpsych]{ci.cor}
 }

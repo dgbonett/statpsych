@@ -33,6 +33,13 @@ size.ci.stdmean2(.05, .75, .5, 1)
 #                              n1  n2
 # Unweighted standardizer:    132 132
 # Single group standardizer:  141 141
+
+size.ci.stdmean2(.05, .75, .5, 2)
+
+# Should return:
+#                              n1  n2
+# Unweighted standardizer:     99 198
+# Single group standardizer:  106 212
  
 
 }
