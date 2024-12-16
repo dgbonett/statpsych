@@ -25,6 +25,7 @@ Changes:
     * pi.prop now has options for one-sided and two-sided prediction limits.  It requires a new argument, type
 * Error Corrections:
     * ci.2x2.stdmean.mixed -- corrected an error in the standard error computation
+    * size.test.lc.ancova -- corrected an error in the sample size formula
 
 
 statpsych version 1.6.0 (Release date: 2024/07/08)
