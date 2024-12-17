@@ -1,4 +1,4 @@
-statpsych version 1.7.0 (Release date: 2024/12/16)
+statpsych version 1.7.0 (Release date: 2024/12/17)
 ===========
 
 Changes:
@@ -23,9 +23,10 @@ Changes:
     * size.test.cor2 can now solve for equal or unequal sample sizes.  Requires a new argument, R, specifying the ratio of sample sizes, and returns a 2-column matrix
     * pi.cor now has options for one-sided and two-sided prediction limits.  It requires a new argument, type
     * pi.prop now has options for one-sided and two-sided prediction limits.  It requires a new argument, type
+    * the definition of the subscripts in the ci.2x2.mean.mixed, ci.2x2.median.mixed, and ci.2x2.stdmean.mixed functions have been changed so that the first subscript now specifies factor A and the second subscript specified factor B. 
 * Error Corrections:
     * ci.2x2.stdmean.mixed -- corrected an error in the standard error computation
-    * size.test.lc.ancova -- corrected an error in the sample size formula
+    * size.test.lc.ancova -- corrected a minor error in the sample size formula
 
 
 statpsych version 1.6.0 (Release date: 2024/07/08)
