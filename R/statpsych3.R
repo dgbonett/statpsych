@@ -3875,10 +3875,10 @@ iqv <- function(f) {
 #'
 #'
 #' @description
-#' Computes confidence intervals for exp(B) and 100 \[ exp(B) - 1 \] \\% where B is
-#' a population slope coefficient in a binary logit, ordinal logit, or
-#' log-Poisson model. This function is useful with software that does not
-#' have an option to compute exp(B) and 100 \[ exp(B) - 1 \] \\%.
+#' Computes confidence intervals for exp(B) - 1 (as a percent) and exp(B) 
+#' where B is a population slope coefficient in a binary logit, ordinal
+#' logit, or log-Poisson model. This function is useful with software that 
+#' does not have an option to compute exp(B) and exp(B) - 1.
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -3888,8 +3888,8 @@ iqv <- function(f) {
 #'
 #' @return
 #' Returns a 2-row matrix. The first row gives the results for exp(B), and the 
-#' the second row gives the results for 100 \[ exp(B) - 1 \] \\%. The columns are:
-#' * Estimate - estimate of exp(B) or 100 \[ exp(B) - 1 \] \\%
+#' the second row gives the results for exp(B) - 1 (as a percent). The columns are:
+#' * Estimate - estimate of exp(B) or exp(B) - 1
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #'
