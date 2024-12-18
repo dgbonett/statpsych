@@ -15,18 +15,18 @@ expon.slope(alpha, b, se)
 }
 \value{
 Returns a 2-row matrix. The first row gives the results for exp(B), and the
-the second row gives the results for 100 [ exp(B) - 1 ] \\\%. The columns are:
+the second row gives the results for exp(B) - 1 (as a percent). The columns are:
 \itemize{
-\item Estimate - estimate of exp(B) or 100 [ exp(B) - 1 ] \\\%
+\item Estimate - estimate of exp(B) or exp(B) - 1
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval
 }
 }
 \description{
-Computes confidence intervals for exp(B) and 100 [ exp(B) - 1 ] \\\% where B is
-a population slope coefficient in a binary logit, ordinal logit, or
-log-Poisson model. This function is useful with software that does not
-have an option to compute exp(B) and 100 [ exp(B) - 1 ] \\\%.
+Computes confidence intervals for exp(B) - 1 (as a percent) and exp(B)
+where B is a population slope coefficient in a binary logit, ordinal
+logit, or log-Poisson model. This function is useful with software that
+does not have an option to compute exp(B) and exp(B) - 1.
 }
 \examples{
 expon.slope(.05, .502, .0396)

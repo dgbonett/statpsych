@@ -28,7 +28,8 @@ prediction limit is useful as a variance planning value for the sample size
 required to obtain a confidence interval with desired width. This strategy
 for specifying a variance planning value is useful in applications where the
 population variance in the prior study is assumed to be very similar to the
-population variance in the planned study.
+population variance in the planned study. This function will be replaced with
+pi.var which computes both one-sided and two-sided prediction limits.
 }
 \examples{
 pi.var.upper(.05, 15, 40, 100)

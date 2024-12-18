@@ -1,9 +1,8 @@
-pandoc: 3.1.11
-pkgdown: 2.0.7
+pandoc: '3.2'
+pkgdown: 2.1.0
 pkgdown_sha: ~
 articles: {}
-last_built: 2024-07-08T17:43Z
+last_built: 2024-12-18T23:50Z
 urls:
   reference: https://dgbonett.github.io/statpsych/reference
   article: https://dgbonett.github.io/statpsych/articles
-
