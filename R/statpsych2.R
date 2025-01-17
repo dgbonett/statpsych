@@ -2487,8 +2487,6 @@ size.ci.spear2 <- function(alpha, cor1, cor2, w) {
 #' @export                 
 size.ci.cor.prior <- function(alpha1, alpha2, cor0, n0, w) {
  if (cor0 > .999 || cor0 < -.999) {stop("correlation must be between -.999 and .999")}
- z1 <- qnorm(1 - alpha1/2)
- z2 <- qnorm(1 - alpha2/2)
  ci <- ci.cor(alpha2, cor0, 0, n0)
  ll0 <- ci[1,3]                                  
  ul0 <- ci[1,4]  
