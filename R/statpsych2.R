@@ -1569,6 +1569,147 @@ ci.bayes.spcor <- function(alpha, prior_sd, cor, se) {
 }
 
 
+#  ci.slope.mean.bs ===========================================================
+#' Confidence interval for the slope of means in a one-factor experimental 
+#' design with a quantitative between-subjects factor
+#' 
+#' 
+#' @description
+#' Computes a test statistic and confidence interval for the slope of means in 
+#' a one-factor experimental design with a quantitative between-subjects 
+#' factor. This function computes both the unequal variance and equal variance
+#' confidence intervals and test statistics. A Satterthwaite adjustment to the
+#' degrees of freedom is used with the unequal variance method. 
+#'
+#'
+#' @param     alpha  	alpha level for 1-alpha confidence
+#' @param     m     	vector of sample means
+#' @param     sd    	vector of sample standard deviations
+#' @param     n     	vector of sample sizes
+#' @param     x     	vector of numeric predictor variable values
+#' 
+#'
+#' @return 
+#' Returns a 2-row matrix. The columns are:
+#' * Estimate - estimated slope
+#' * SE - standard error
+#' * t - t test statistic
+#' * df - degrees of freedom
+#' * p - two-sided p-value
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
+#' 
+#' 
+#' @examples
+#' m <- c(33.5, 37.9, 38.0, 44.1)
+#' sd <- c(3.84, 3.84, 3.65, 4.98)
+#' n <- c(10,10,10,10)
+#' x <- c(5, 10, 20, 30)
+#' ci.slope.mean.bs(.05, m, sd, n, x)
+#'
+#' # Should return:
+#' #                               Estimate         SE        t       df
+#' # Equal Variances Assumed:     0.3664407 0.06770529 5.412290 36.00000
+#' # Equal Variances Not Assumed: 0.3664407 0.07336289 4.994905 18.65826
+#' #                                         p        LL        UL
+#' # Equal Variances Assumed:     4.242080e-06 0.2291280 0.5037534
+#' # Equal Variances Not Assumed: 8.468223e-05 0.2126998 0.5201815
+#'
+#'
+#' @importFrom stats qt
+#' @importFrom stats pt
+#' @export
+ci.slope.mean.bs <- function(alpha, m, sd, n, x) {
+ mx <- mean(x)
+ ssx <- sum((x - mx)^2)
+ v <- (x - mx)/ssx
+ est <- t(v)%*%m 
+ k <- length(m)
+ df1 <- sum(n) - k
+ v1 <- sum((n - 1)*sd^2)/df1
+ se1 <- sqrt(v1*t(v)%*%solve(diag(n))%*%v)
+ t1 <- est/se1
+ p1 <- 2*(1 - pt(abs(t1),df1))
+ tcrit1 <- qt(1 - alpha/2, df1)
+ ll1 <- est - tcrit1*se1
+ ul1 <- est + tcrit1*se1
+ v2 <- diag(sd^2)%*%(solve(diag(n)))
+ se2 <- sqrt(t(v)%*%v2%*%v)
+ t2 <- est/se2
+ df2 <- (se2^4)/sum(((v^4)*(sd^4)/(n^2*(n - 1))))
+ p2 <- 2*(1 - pt(abs(t2),df2))
+ tcrit2 <- qt(1 - alpha/2, df2)
+ ll2 <- est - tcrit2*se2
+ ul2 <- est + tcrit2*se2
+ out1 <- t(c(est, se1, t1, df1, p1, ll1, ul1))
+ out2 <- t(c(est, se2, t2, df2, p2, ll2, ul2))
+ out <- rbind(out1, out2)
+ colnames(out) <- c("Estimate", "SE", "t", "df", "p", "LL", "UL")
+ rownames(out) <- c("Equal Variances Assumed:", "Equal Variances Not Assumed:")
+ return(out)
+}
+
+
+#  ci.slope.median.bs =========================================================
+#' Confidence interval for the slope of medians in a one-factor experimental 
+#' design with a quantitative between-subjects factor
+#' 
+#' 
+#' @description
+#' Computes a distrbution-free test and confidence interval for the slope 
+#' of medians in a one-factor experimental design with a quantitative 
+#' between-subjects factor using sample group medians and standard errors
+#' as input. The sample median and standard error for each group can be 
+#' computed using the \link[statpsych]{ci.median} function. 
+#'
+#'
+#' @param     alpha  	alpha level for 1-alpha confidence
+#' @param     m     	vector of sample median
+#' @param     se    	vector of standard errors
+#' @param     x     	vector of numeric predictor variable values
+#' 
+#'
+#' @return 
+#' Returns a 1-row matrix. The columns are:
+#' * Estimate - estimated slope
+#' * SE - standard error
+#' * z - z test statistic 
+#' * p - two-sided p-value
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
+#' 
+#' 
+#' @examples
+#' m <- c(33.5, 37.9, 38.0, 44.1)
+#' se <- c(0.84, 0.94, 1.65, 2.98)
+#' x <- c(5, 10, 20, 30)
+#' ci.slope.median.bs(.05, m, se, x)
+#'
+#' # Should return:
+#' #   Estimate        SE        z           p        LL        UL
+#' #  0.3664407 0.1163593 3.149216 0.001637091 0.1383806 0.5945008
+#'
+#'
+#' @importFrom stats qnorm
+#' @importFrom stats pnorm
+#' @export
+ci.slope.median.bs <- function(alpha, m, se, x) {
+ zcrit <- qnorm( 1 - alpha/2)
+ mx <- mean(x)
+ ssx <- sum((x - mx)^2)
+ v <- (x - mx)/ssx
+ est <- t(v)%*%m 
+ se <- sqrt(t(v)%*%diag(se^2)%*%v)
+ z <- est/se
+ p <- 2*(1 - pnorm(abs(z)))
+ ll <- est - zcrit*se
+ ul <- est + zcrit*se
+ out <- t(c(est, se, z, p, ll, ul))
+ colnames(out) <- c("Estimate", "SE", "z", "p", "LL", "UL")
+ rownames(out) <- ""
+ return(out)
+}
+
 #  ======================== Hypothesis Tests ==================================
 # test.cor ===================================================================
 #' Hypothesis test for a Pearson or partial correlation 
@@ -1817,6 +1958,141 @@ test.spear2 <- function(cor1, cor2, n1, n2) {
  out <- t(c(diff, z, pval))
  colnames(out) <- c("Estimate", "z", "p")
  rownames(out) <- ""
+ return(out)
+}
+
+
+#  test.mono.mean.bs ==========================================================
+#' Test of a monotonic trend in means for an ordered between-subjects factor
+#' 
+#'                     
+#' @description
+#' Computes simultaneous confidence intervals for all adjacent pairwise
+#' comparisons of population means using estimated group means, estimated 
+#' group standard deviations, and samples sizes as input. Equal variances are 
+#' not assumed. A Satterthwaite adjustment to the degrees of freedom is used  
+#' to improve the accuracy of the confidence intervals. If one or more lower
+#' limits are greater than 0 and no upper limit is less than 0, then conclude
+#' that the population means are monotonic decreasing. If one or more upper 
+#' limits are less than 0 and no lower limits are greater than 0, then
+#' conclude that the population means are monotonic increasing. Reject the 
+#' hypothesis of a monotonic trend if any lower limit is greater than 0 and 
+#' any upper limit is less than 0. 
+#'
+#'
+#' @param  alpha   alpha level for simultaneous 1-alpha confidence
+#' @param  m       vector of estimated group means
+#' @param  sd      vector of estimated group standard deviations
+#' @param  n       vector of sample sizes
+#'
+#'
+#' @return 
+#' Returns a matrix with the number of rows equal to the number
+#' of adjacent pairwise comparisons. The columns are:
+#' * Estimate - estimated mean difference
+#' * SE - standard error
+#' * LL - one-sided lower limit of the confidence interval
+#' * UL - one-sided upper limit of the confidence interval
+#'
+#'
+#' @examples
+#' m <- c(12.86, 24.57, 36.29, 53.21)
+#' sd <- c(13.185, 12.995, 14.773, 15.145)
+#' n <- c(20, 20, 20, 20)
+#' test.mono.mean.bs(.05, m, sd, n)
+#'
+#' # Should return:
+#' #     Estimate       SE        LL         UL
+#' # 1 2   -11.71 4.139530 -22.07803 -1.3419744
+#' # 2 3   -11.72 4.399497 -22.74731 -0.6926939
+#' # 3 4   -16.92 4.730817 -28.76921 -5.0707936
+#'
+#'
+#' @importFrom stats qt
+#' @export
+test.mono.mean.bs <-function(alpha, m, sd, n) {
+ a <- length(m)
+ v <- sd^2
+ m1 <- m[1: a - 1]
+ m2 <- m[2: a]
+ Estimate <- m1 - m2
+ v1 <- v[1: a - 1]
+ v2 <- v[2: a]
+ n1 <- n[1: a - 1]
+ n2 <- n[2: a]
+ SE <- sqrt(v1/n1 + v2/n2)
+ t <- Estimate/SE
+ df <- SE^4/(v1^2/(n1^2*(n1 - 1)) + v2^2/(n2^2*(n2 - 1)))
+ tcrit <- qt(1 - alpha/(2*(a - 1)), df)
+ LL <- Estimate - tcrit*SE
+ UL <- Estimate + tcrit*SE
+ pair = cbind(seq(1, a - 1), seq(2, a))
+ out <- cbind(pair, Estimate, SE, LL, UL)
+ rownames(out) <- rep("", a - 1)
+ return(out)
+}
+
+
+#  test.mono.median.bs ==========================================================
+#' Test of a monotonic trend in medians for an ordered between-subjects factor
+#' 
+#'                     
+#' @description
+#' Computes simultaneous confidence intervals for all adjacent pairwise
+#' comparisons of population medians using sample group medians and 
+#' standard errors as input. If one or more lower limits are greater than 0  
+#' and no upper limit is less than 0, then conclude that the population 
+#' medians are monotonic decreasing. If one or more upper limits are less 
+#' than 0 and no lower limits are greater than 0, then conclude that the 
+#' population medians are monotonic increasing. Reject the hypothesis of a
+#' monotonic trend if any lower limit is greater than 0 and any upper limit
+#' is less than 0. The sample median and standard error for each group
+#' can be computed using the \link[statpsych]{ci.median} function. 
+#'
+#'
+#' @param  alpha   alpha level for simultaneous 1-alpha confidence
+#' @param  m       vector of estimated group medians
+#' @param  se      vector of estimated group standard errors
+#'
+#'
+#' @return 
+#' Returns a matrix with the number of rows equal to the number
+#' of adjacent pairwise comparisons. The columns are:
+#' * Estimate - estimated median difference
+#' * SE - standard error
+#' * LL - one-sided lower limit of the confidence interval
+#' * UL - one-sided upper limit of the confidence interval
+#'
+#'
+#' @examples
+#' m <- c(12.86, 24.57, 36.29, 53.21)
+#' se <- c(2.85, 2.99, 3.73, 3.88)
+#' test.mono.median.bs(.05, m, se)
+#'
+#' # Should return:
+#' #      Estimate       SE        LL         UL
+#' #  1 2   -11.71 4.130690 -21.59879 -1.8212115
+#' #  2 3   -11.72 4.780481 -23.16438 -0.2756247
+#' #  3 4   -16.92 5.382128 -29.80471 -4.0352947
+#'
+#'
+#' @importFrom stats qnorm
+#' @export
+test.mono.median.bs <-function(alpha, m, se) {
+ a <- length(m)
+ v <- se^2
+ m1 <- m[1: a - 1]
+ m2 <- m[2: a]
+ Estimate <- m1 - m2
+ v1 <- v[1: a - 1]
+ v2 <- v[2: a]
+ SE <- sqrt(v1 + v2)
+ zcrit <- qnorm(1 - alpha/(2*(a - 1)))
+ LL <- Estimate - zcrit*SE
+ UL <- Estimate + zcrit*SE
+ pair = cbind(seq(1, a - 1), seq(2, a))
+ out <- cbind(pair, Estimate, SE, LL, UL)
+ rownames(out) <- rep("", a - 1)
  return(out)
 }
 
