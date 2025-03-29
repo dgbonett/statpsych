@@ -3348,6 +3348,7 @@ size.test.slope.gen <- function(alpha, pow, se, n0, b) {
 #' @export
 power.cor <- function(alpha, n, cor, h, s) {
  if (cor > .999 | cor < -.999) {stop("correlation must be between -.999 and .999")}
+ if (h > .999 | h < -.999) {stop("h must be between -.999 and .999")}
  za <- qnorm(1 - alpha/2)
  f1 <- log((1 + cor)/(1 - cor))/2 
  f2 <- log((1 + h)/(1 - h))/2
