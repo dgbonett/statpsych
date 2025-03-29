@@ -2417,7 +2417,7 @@ ci.random.anova <- function(alpha, m, sd, n) {
 #' @importFrom stats qf
 #' @export
 ci.cronbach <- function(alpha, rel, r, n) {
- if (rel > .999 || rel < .001) {stop("reliability must be between .001 and .999")}
+ if (rel > .999 | rel < .001) {stop("reliability must be between .001 and .999")}
  se <- sqrt((2*r*(1 - rel)^2)/((r - 1)*(n - 2)))
  df1 <- n - 1
  df2 <- n*(r - 1)
@@ -2468,7 +2468,7 @@ ci.cronbach <- function(alpha, rel, r, n) {
 #' @importFrom stats qf
 #' @export
 ci.reliability <- function(alpha, rel, se, n) {
- if (rel > .999 || rel < .001) {stop("reliability must be between .001 and .999")}
+ if (rel > .999 | rel < .001) {stop("reliability must be between .001 and .999")}
  z <- qnorm(1 - alpha/2)
  b <- log(n/(n - 1))
  ll <- 1 - exp(log(1 - rel) - b + z*sqrt(se^2/(1 - rel)^2))
@@ -4587,7 +4587,7 @@ size.ci.mean.ps <- function(alpha, var, cor, w) {
 #' @importFrom stats qnorm
 #' @export
 size.ci.stdmean.ps <- function(alpha, d, cor, w) {
- if (cor > .999 || cor < -.999) {stop("correlation must be between -.999 and .999")}
+ if (cor > .999 | cor < -.999) {stop("correlation must be between -.999 and .999")}
  z <- qnorm(1 - alpha/2)
  n1 <- ceiling((d^2*(1 + cor^2) + 8*(1 - cor))*(z/w)^2)
  n2 <- ceiling((2*d^2 + 8*(1 - cor))*(z/w)^2)
@@ -4638,7 +4638,7 @@ size.ci.stdmean.ps <- function(alpha, d, cor, w) {
 #' @importFrom stats qnorm
 #' @export
 size.ci.ratio.mean.ps <- function(alpha, var, m1, m2, cor, r) {
- if (cor > .999 || cor < -.999) {stop("correlation must be between -.999 and .999")}
+ if (cor > .999 | cor < -.999) {stop("correlation must be between -.999 and .999")}
  z <- qnorm(1 - alpha/2)
  n <- ceiling(8*var*(1/m1^2 + 1/m2^2 - 2*cor/(m1*m2))*(z/log(r))^2 + z^2/2)
  out <- matrix(n, nrow = 1, ncol = 1)
@@ -4685,7 +4685,7 @@ size.ci.ratio.mean.ps <- function(alpha, var, m1, m2, cor, r) {
 #' @importFrom stats qnorm
 #' @export
 size.ci.lc.mean.ws <- function(alpha, var, cor, w, q) {
- if (cor > .999 || cor < -.999) {stop("correlation must be between -.999 and .999")}
+ if (cor > .999 | cor < -.999) {stop("correlation must be between -.999 and .999")}
  z <- qnorm(1 - alpha/2)
  k <- length(q)
  n <- ceiling(4*(1 - cor)*var*(t(q)%*%q)*(z/w)^2 + z^2/2)
@@ -4739,7 +4739,7 @@ size.ci.lc.mean.ws <- function(alpha, var, cor, w, q) {
 #' @importFrom stats qnorm
 #' @export
 size.ci.lc.stdmean.ws <- function(alpha, d, cor, w, q) {
- if (cor > .999 || cor < -.999) {stop("correlation must be between -.999 and .999")}
+ if (cor > .999 | cor < -.999) {stop("correlation must be between -.999 and .999")}
  z <- qnorm(1 - alpha/2)
  a <- length(q)
  n1 <- ceiling((2*d^2*(1 + (a - 1)*cor^2)/a + 4*(1 - cor)*(t(q)%*%q))*(z/w)^2)
@@ -4789,7 +4789,7 @@ size.ci.lc.stdmean.ws <- function(alpha, d, cor, w, q) {
 #' @importFrom stats qnorm
 #' @export
 size.ci.cronbach <- function(alpha, rel, r, w) {
- if (rel > .999 || rel < .001) {stop("reliability must be between .001 and .999")}
+ if (rel > .999 | rel < .001) {stop("reliability must be between .001 and .999")}
  z <- qnorm(1 - alpha/2)
  n0 <- ceiling((8*r/(r - 1))*(1 - rel)^2*(z/w)^2 + 2)
  df1 <- n0 - 1
@@ -4843,6 +4843,7 @@ size.ci.etasqr <- function(alpha, etasqr, groups, w) {
  alpha1 <- alpha/2
  alpha2 <- 1 - alpha1
  if (etasqr <= .001) {stop("etasqr must be greater than .001")}
+ if (etasqr >= .999) {stop("etasqr must be less than .999")}
  if (w >= .999) {stop("CI width must be less than .999")}
  if (w <= .001) {stop("CI width must be greater than .001")}
  df1 <- groups - 1
@@ -5255,7 +5256,7 @@ size.supinf.mean2 <- function(alpha, pow, var, es, h) {
 #' @importFrom stats qnorm
 #' @export
 size.test.mean.ps <- function(alpha, pow, var, es, cor) {
- if (cor > .999 || cor < -.999) {stop("correlation must be between -.999 and .999")}
+ if (cor > .999 | cor < -.999) {stop("correlation must be between -.999 and .999")}
  if (es == 0) {stop("effect size cannot equal 0")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
@@ -5304,7 +5305,7 @@ size.test.mean.ps <- function(alpha, pow, var, es, cor) {
 #' @importFrom stats qnorm
 #' @export
 size.test.lc.mean.ws <- function(alpha, pow, var, es, cor, q) {
- if (cor > .999 || cor < -.999) {stop("correlation must be between -.999 and .999")}
+ if (cor > .999 | cor < -.999) {stop("correlation must be between -.999 and .999")}
  if (es == 0) {stop("effect size cannot equal 0")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
@@ -5356,7 +5357,7 @@ size.test.lc.mean.ws <- function(alpha, pow, var, es, cor, q) {
 #' @importFrom stats qnorm
 #' @export
 size.equiv.mean.ps <- function(alpha, pow, var, es, cor, h) {
- if (cor > .999 || cor < -.999) {stop("correlation must be between -.999 and .999")}
+ if (cor > .999 | cor < -.999) {stop("correlation must be between -.999 and .999")}
  if (h <= abs(es)) {stop("|es| must be less than h")}
  za <- qnorm(1 - alpha)
  zb <- qnorm(1 - (1 - pow)/2)
@@ -5407,7 +5408,7 @@ size.equiv.mean.ps <- function(alpha, pow, var, es, cor, h) {
 #' @importFrom stats qnorm
 #' @export
 size.supinf.mean.ps <- function(alpha, pow, var, es, cor, h) {
- if (cor > .999 || cor < -.999) {stop("correlation must be between -.999 and .999")}
+ if (cor > .999 | cor < -.999) {stop("correlation must be between -.999 and .999")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
  n <- ceiling(2*var*(1 - cor)*(za + zb)^2/(es - h)^2 + za^2/2)
@@ -5458,7 +5459,7 @@ size.supinf.mean.ps <- function(alpha, pow, var, es, cor, h) {
 #' @importFrom stats qnorm
 #' @export
 size.test.mann <- function(alpha, pow, p) {
- if (p > .999 || p < .001) {stop("Mann-Whitney parameter must be between .001 and .999")}
+ if (p > .999 | p < .001) {stop("Mann-Whitney parameter must be between .001 and .999")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
  es <- p - .5;
@@ -5505,7 +5506,7 @@ size.test.mann <- function(alpha, pow, p) {
 #' @importFrom stats qnorm
 #' @export
 size.test.sign <- function(alpha, pow, p) {
- if (p > .9999 || p < .0001) {stop("proportion must be between .0001 and .9999")}
+ if (p > .9999 | p < .0001) {stop("proportion must be between .0001 and .9999")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
  n0 <- ceiling((za*sqrt(.25) + zb*sqrt(p*(1 - p)))^2/((p - .5)^2))
@@ -5554,7 +5555,7 @@ size.test.sign <- function(alpha, pow, p) {
 #' @importFrom stats qnorm
 #' @export
 size.test.sign.ps <- function(alpha, pow, p) {
- if (p > .9999 || p < .0001) {stop("proportion must be between .0001 and .9999")}
+ if (p > .9999 | p < .0001) {stop("proportion must be between .0001 and .9999")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
  n0 <- ceiling((za*sqrt(.25) + zb*sqrt(p*(1 - p)))^2/((p - .5)^2))
@@ -5600,7 +5601,7 @@ size.test.sign.ps <- function(alpha, pow, p) {
 #' @importFrom stats qnorm
 #' @export
 size.test.cronbach <- function(alpha, pow, rel, r, h) {
- if (rel > .999 || rel < .001) {stop("reliability must be between .001 and .999")}
+ if (rel > .999 | rel < .001) {stop("reliability must be between .001 and .999")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
  e <- (1 - rel)/(1 - h)
@@ -5803,7 +5804,7 @@ power.lc.mean.bs <- function(alpha, n, var, es, v) {
 #' @importFrom stats pt
 #' @export
 power.mean.ps <- function(alpha, n, var1, var2, es, cor) {
- if (cor > .999 || cor < -.999) {stop("correlation must be between -.999 and .999")}
+ if (cor > .999 | cor < -.999) {stop("correlation must be between -.999 and .999")}
  df <- n - 1
  t <- qt(1 - alpha/2, df)
  z <- abs(es)/sqrt((var1 + var2 - 2*cor*sqrt(var1*var2))/n)
@@ -5972,7 +5973,7 @@ pi.score2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' @importFrom stats qt
 #' @export
 pi.score.ps <- function(alpha, m1, m2, sd1, sd2, cor, n) {
- if (cor > .999 || cor < -.999) {stop("correlation must be between -.999 and .999")}
+ if (cor > .999 | cor < -.999) {stop("correlation must be between -.999 and .999")}
  df <- n - 1
  tcrit <- qt(1 - alpha/2, df)
  est <- m1 - m2
@@ -6282,7 +6283,7 @@ pi.var.upper <- function(alpha, var, n0, n) {
 #' 
 #' @export
 etasqr.adj <- function(etasqr, dfeffect, dferror) {
- if (etasqr > .999 || etasqr < .001) {stop("etasqr must be between .001 and .999")}
+ if (etasqr > .999 | etasqr < .001) {stop("etasqr must be between .001 and .999")}
  adj <- 1 - (dferror + dfeffect)*(1 - etasqr)/dferror
  if (adj < 0) {adj = 0}
  out <- matrix(adj, nrow = 1, ncol = 1)
@@ -6676,7 +6677,7 @@ sim.ci.mean2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2, rep) {
 #' @importFrom mnonr unonr
 #' @export
 sim.ci.mean.ps <- function(alpha, n, sd.ratio, cor, dist1, dist2, rep) {
- if (cor > .999 || cor < -.999) {stop("correlation must be between -.999 and .999")}
+ if (cor > .999 | cor < -.999) {stop("correlation must be between -.999 and .999")}
  tcrit <- qt(1 - alpha/2, n - 1)
  if (dist1 == 1) {
    skw1 <- 0; kur1 <- 0
@@ -7023,7 +7024,7 @@ sim.ci.median2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2, rep) {
 #' @importFrom mnonr unonr
 #' @export
 sim.ci.median.ps <- function(alpha, n, sd.ratio, cor, dist1, dist2, rep) {
- if (cor > .999 || cor < -.999) {stop("correlation must be between -.999 and .999")}
+ if (cor > .999 | cor < -.999) {stop("correlation must be between -.999 and .999")}
  zcrit <- qnorm(1 - alpha/2)
  o <- round(n/2 - sqrt(n))
  if (o < 1) {o = 1}
@@ -7291,7 +7292,7 @@ sim.ci.stdmean2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2, d, rep) {
 #' @importFrom mnonr unonr
 #' @export
 sim.ci.stdmean.ps <- function(alpha, n, sd.ratio, cor, dist1, dist2, d, rep) {
- if (cor > .999 || cor < -.999) {stop("correlation must be between -.999 and .999")}
+ if (cor > .999 | cor < -.999) {stop("correlation must be between -.999 and .999")}
  zcrit <- qnorm(1 - alpha/2)
  df <- n - 1
  adj1 <- sqrt((n - 2)/df)
