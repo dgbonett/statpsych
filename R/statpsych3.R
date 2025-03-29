@@ -1,11 +1,12 @@
 # ======================== Confidence Intervals =============================
-#  ci.prop ================================================================== 
+#  ci.prop ==================================================================== 
 #' Confidence intervals for a proportion
 #'
 #'
 #' @description
-#' Computes adjusted Wald and Wilson confidence intervals for a population
-#' proportion. The Wilson confidence interval uses a continuity correction.
+#' Computes adjusted Wald (Agresi-Coull), Wilson, and exact confidence intervals 
+#' for a population proportion. The Wilson confidence interval uses a 
+#' continuity correction.
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
@@ -16,16 +17,23 @@
 #' @return
 #' Returns a 2-row matrix. The columns of row 1 are:
 #' * Estimate - adjusted estimate of proportion
-#' * SE - adjusted standard error
+#' * SE - standard error of adjusted estimate
 #' * LL - lower limit of the adjusted Wald confidence interval
 #' * UL - upper limit of the adjusted Wald confidence interval
 #'
 #'
 #' The columns of row 2 are:
 #' * Estimate - ML estimate of proportion
-#' * SE - standard error
+#' * SE - standard error of ML estimate
 #' * LL - lower limit of the Wilson confidence interval
 #' * UL - upper limit of the Wilson confidence interval
+#'
+#'
+#' The columns of row 3 are:
+#' * Estimate - ML estimate of proportion
+#' * SE - standard error of ML estimate
+#' * LL - lower limit of the exact confidence interval
+#' * UL - upper limit of the exact confidence interval
 #'
 #'
 #' @references
@@ -39,6 +47,7 @@
 #' #                  Estimate         SE         LL        UL
 #' # Adjusted Wald   0.1346154 0.03346842 0.06901848 0.2002123
 #' # Wilson with cc  0.1200000 0.03249615 0.06625153 0.2039772
+#' # Exact           0.1200000 0.03249615 0.06356890 0.2002357
 #'
 #'
 #' @importFrom stats qnorm
@@ -60,11 +69,14 @@ ci.prop <- function(alpha, f, n) {
  UL.adj <- p.adj + z*se.adj
  if (LL.adj < 0) {LL.adj = 0}
  if (UL.adj > 1) {UL.adj = 1}
+ LL.exact <- qbeta(alpha/2, f, n - f + 1)
+ UL.exact <- qbeta(1 - alpha/2, f + 1, n - f)
  out1 <- t(c(p.adj, se.adj, LL.adj, UL.adj))
  out2 <- t(c(p.mle, se.mle, LL.wil, UL.wil))
- out <- rbind(out1, out2)
+ out3 <- t(c(p.mle, se.mle, LL.exact, UL.exact))
+ out <- rbind(out1, out2, out3)
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
- rownames(out) <- c("Adjusted Wald", "Wilson with cc")
+ rownames(out) <- c("Adjusted Wald", "Wilson with cc", "Exact")
  return(out)
 }
 
