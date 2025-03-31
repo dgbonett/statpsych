@@ -4976,6 +4976,56 @@ size.ci.mean.prior <- function(alpha1, alpha2, var0, n0, w) {
 }
 
 
+# size.ci.cv ===============================================================
+#' Sample size for a coefficient of variation 
+#'                       
+#'
+#' @description
+#' Computes an approximate sample size required to estimate a population 
+#' coefficient of variation (CV) with desired confidence interval precision.
+#' Set the CV planning value to the largest value within a plausible range 
+#' for a conservatively large sample size. 
+#'
+#' @param  alpha  alpha level for 1-alpha confidence
+#' @param  CV     planning value of coefficient of variation
+#' @param  w      desired confidence interval width
+#'
+#'
+#' @return 
+#' Returns the required sample size
+#'
+#'
+#' @examples
+#' size.ci.cv(.05, .25, .10)
+#'
+#' # Should return:
+#' # Sample size
+#' #          60
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export
+size.ci.cv <- function(alpha, CV, w) {
+ z <- qnorm(1 - alpha/2)
+ n1 <- ceiling(4*CV^2*(z/w)^2) + 1
+ if (n1 < 5) {n1 = 5}
+ ci <- ci.cv(alpha, 1, CV, n1)
+ ll <- ci[1,3]                                  
+ ul <- ci[1,4]                                  
+ n2 <- ceiling(n1*((ul - ll)/w)^2)
+ if (n2 < 5) {n2 = 5}
+ ci <- ci.cv(alpha, 1, CV, n2)
+ ll <- ci[1,3]                                  
+ ul <- ci[1,4]                                  
+ n3 <- ceiling(n2*((ul - ll)/w)^2)
+ if (n3 < 5) {n3 = 5}
+ out <- matrix(n3, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size"
+ rownames(out) <- ""
+ return(out)
+}
+
+
 # ======================== Sample Size for Desired Power ======================
 #  size.test.mean ============================================================
 #' Sample size for a test of a mean
