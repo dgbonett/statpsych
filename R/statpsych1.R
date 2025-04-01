@@ -5007,7 +5007,7 @@ size.ci.mean.prior <- function(alpha1, alpha2, var0, n0, w) {
 #' @export
 size.ci.cv <- function(alpha, CV, w) {
  z <- qnorm(1 - alpha/2)
- n1 <- ceiling(4*(CV^2/2 + CV^4)*(z/w)^2) + 1
+ n1 <- ceiling(2*CV^2*(z/w)^2) + 1
  if (n1 < 5) {n1 = 5}
  ci <- ci.cv(alpha, 1, CV, n1)
  ll <- ci[1,3]                                  
