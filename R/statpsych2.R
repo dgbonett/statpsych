@@ -2868,7 +2868,9 @@ size.ci.ancova2 <- function(alpha, evar, s, d, w, R) {
 #' desired confidence interval precision in any general statistical model. 
 #' This function requires a standard error estimate for the slope of interest 
 #' from a prior or pilot study and the sample size that was used in the prior 
-#' or pilot study. 
+#' or pilot study. This function can be used with either unstandardized or
+#' standardized slopes. This function also can be used with unstandardized or
+#' standardized factor loadings from a confirmatory factor analysis model.
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -3275,8 +3277,8 @@ size.test.ancova2 <- function(alpha, pow, evar, es, s, d, R) {
 #'
 #' @description
 #' Computes the sample size required to test a null hypothesis with desired
-#' power that a population slope coefficient in any general statistical is 
-#' equal to zero. This function requires a standard error estimate for the 
+#' power that a population slope coefficient in any general statistical model 
+#' is equal to zero. This function requires a standard error estimate for the 
 #' slope of interest from a prior or pilot study and the sample size that was
 #' used in the prior or pilot study. 
 #'
