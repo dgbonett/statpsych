@@ -1413,9 +1413,9 @@ ci.bscor <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 pi.cor <- function(alpha, cor, n0, n, type) {
  if (type == 1) {
   z <- qnorm(1 - alpha/2)
-  cor.z <- log((1 + abs(cor))/(1 - abs(cor)))/2
-  ll0 <- cor.z - abs(cor)/(2*(n0 - 1)) - z*sqrt(1/(n0 - 3) + 1/(n - 3))
-  ul0 <- cor.z - abs(cor)/(2*(n0 - 1)) + z*sqrt(1/(n0 - 3) + 1/(n - 3))
+  cor.z <- log((1 + cor)/(1 - cor))/2
+  ll0 <- cor.z - cor/(2*(n0 - 1)) - z*sqrt(1/(n0 - 3) + 1/(n - 3))
+  ul0 <- cor.z - cor/(2*(n0 - 1)) + z*sqrt(1/(n0 - 3) + 1/(n - 3))
   ll <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
   ul <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
   out <- t(c(ll, ul))
@@ -1423,16 +1423,16 @@ pi.cor <- function(alpha, cor, n0, n, type) {
  }
  else if (type == 2) {
   z <- qnorm(1 - alpha)
-  cor.z <- log((1 + abs(cor))/(1 - abs(cor)))/2
-  ul0 <- cor.z - abs(cor)/(2*(n0 - 1)) + z*sqrt(1/(n0 - 3) + 1/(n - 3))
+  cor.z <- log((1 + cor)/(1 - cor))/2
+  ul0 <- cor.z - cor/(2*(n0 - 1)) + z*sqrt(1/(n0 - 3) + 1/(n - 3))
   ul <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
   out <- matrix(ul, nrow = 1, ncol = 1)
   colnames(out) <- "UL"
  }
  else {
   z <- qnorm(1 - alpha)
-  cor.z <- log((1 + abs(cor))/(1 - abs(cor)))/2
-  ll0 <- cor.z - abs(cor)/(2*(n0 - 1)) - z*sqrt(1/(n0 - 3) + 1/(n - 3))
+  cor.z <- log((1 + cor)/(1 - cor))/2
+  ll0 <- cor.z - cor/(2*(n0 - 1)) - z*sqrt(1/(n0 - 3) + 1/(n - 3))
   ll <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
   out <- matrix(ll, nrow = 1, ncol = 1)
   colnames(out) <- "LL"
