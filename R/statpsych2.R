@@ -2503,8 +2503,8 @@ size.ci.indirect <- function(alpha, cor1, cor2, w) {
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test 
-#' @param  rel1   group 1 reliability planning value
-#' @param  rel2   group 2 reliability planning value
+#' @param  rel1   reliability planning value for group 1
+#' @param  rel2   reliability planning value for group 2
 #' @param  r      number of measurements (items, raters)
 #' @param  w      desired confidence interval width
 #'
@@ -2615,8 +2615,8 @@ size.ci.mape <- function(alpha, mape, s, w) {
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
-#' @param  cor1   group 1 correlation planning value
-#' @param  cor2   group 2 correlation planning value
+#' @param  cor1   correlation planning value for group 1
+#' @param  cor2   correlation planning value for group 2
 #' @param  w      desired confidence interval width
 #'
 #' 
@@ -2671,8 +2671,8 @@ size.ci.cor2 <- function(alpha, cor1, cor2, w) {
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
-#' @param  cor1   group 1 Spearman correlation planning value
-#' @param  cor2   group 2 Spearman correlation planning value
+#' @param  cor1   Spearman correlation planning value for group 1
+#' @param  cor2   Spearman correlation planning value for group 2
 #' @param  w      desired confidence interval width
 #'
 #' 
@@ -3063,8 +3063,8 @@ size.interval.cor <- function(alpha, pow, cor, s, h) {
 #'  
 #' @param  alpha   alpha level for hypothesis test
 #' @param  pow     desired power
-#' @param  cor1    planning value of correlation
-#' @param  cor2    planning value of correlation
+#' @param  cor1    correlation planning value for group 1
+#' @param  cor2    correlation planning value for group 2
 #' @param  s       number of control variables
 #' @param  R       n2/n1 ratio
 #'
@@ -3380,8 +3380,8 @@ power.cor <- function(alpha, n, cor, h, s) {
 #' @param  alpha  alpha level for hypothesis test 
 #' @param  n1     planned sample size for group 1
 #' @param  n2     planned sample size for group 2
-#' @param  cor1   planning value of correlation for group 1 
-#' @param  cor2   planning value of correlation for group 2 
+#' @param  cor1   correlation planning value for group 1 
+#' @param  cor2   correlation planning value for group 2 
 #' @param  s      number of control variables
 #'
 #'
