@@ -1,3 +1,29 @@
+statpsych version 1.8.0 (Release date: 2025/06/xx)
+===========
+
+Changes:
+
+* New functions:
+    * test.mono.median.bs -- Hypothesis test of a monotonic trend in medians for an ordered between-subjects factor
+    * ci.slope.median.bs -- Computes confidence interval for the slope of medians in a one-factor experimental design with a quantitative between-subjects factor
+    * size.ci.cv -- Computes sample size for a coefficient of variation confidence interval in a 1-group design
+    * size.ci.median -- Computes sample size for a median confidence interval in a 1-group design
+    * size.ci.median2 -- Computes sample size for a median difference confidence interval in a 2-group design
+    * size.ci.lc.median.bs -- Computes sample size for a linear contrast of medians confidence interval in a between-subjects design
+    * size.ci.gen -- Computes sample size for a confidence interval for any type of parameter in a 1-group design
+    * size.ci.gen2 -- Computes sample size for a confidence interval for the difference in any type of parameter in a 2-group design
+    * size.test.gen -- Computes sample size for a test of any type of parameter in a 1-group design
+    * size.test.gen2 -- Computes sample size for a test of the difference of any type of parameter in a 2-group design
+* Modifications:
+    * ci.prop now adds an exact confidence interval
+* Deleted functions:
+    * ci.mean1 has been replaced with ci.mean
+    * ci.prop1 has been replaced with ci.prop
+    * ci.median1 has been replaced with ci.median
+    * ci.stdmean1 has been replaced with ci.stdmean
+    * pi.var.upper has been replaced with pi.var
+    
+
 statpsych version 1.7.0 (Release date: 2024/12/17)
 ===========
 
