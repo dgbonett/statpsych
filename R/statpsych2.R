@@ -2903,6 +2903,105 @@ size.ci.slope.gen <- function(alpha, se, n0, w) {
 }
 
 
+#  size.ci.gen ============================================================
+#' Sample size for a confidence interval for any type of parameter
+#'
+#'
+#' @description
+#' Computes the sample size required to estimate a single population parameter
+#' with desired precision in a 1-group design using a standard error for the
+#' parameter estimate from a prior or pilot study. This function can be used 
+#' with any type of parameter where the standard error of the parameter 
+#' estimate is a function of the square root of the sample size (most parameter 
+#' estimates have this property). This function also assumes that the sampling 
+#' distribution of the parameter estimate is approximately normal in large 
+#' samples.
+#'
+#'
+#' @param  alpha  alpha level for hypothesis test 
+#' @param  se     standard error of parameter estimate from prior/pilot study
+#' @param  n0     sample size of prior/pilot study
+#' @param  w      desired confidence interval width
+#'
+#'
+#' @return 
+#' Returns the required sample size 
+#'
+#'
+#' @examples
+#' size.ci.gen(.05, 2.89, 30, 8)
+#'
+#' # Should return:
+#' # Sample size
+#' #          61
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export
+size.ci.gen <- function(alpha, se, n0, w) {
+ if (w <= 0) {stop("width must be a positive value")}
+ warn <- "Warning: alpha level is typically less than .25"
+ if (alpha > .25) {message(warn)}
+ za <- qnorm(1 - alpha/2)
+ n <- ceiling(4*n0*se^2*(za/w)^2)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size"
+ rownames(out) <- ""
+ return(out)
+}
+
+
+#  size.ci.gen2 ============================================================
+#' Sample size for a confidence interval for the difference of any type of 
+#' parameter
+#'
+#'
+#' @description
+#' Computes the sample size required to estimate a difference in population
+#' parameters with desired precision in a 2-group design using a standard
+#' error for a parameter estimate from a prior or pilot study. This function
+#' can be used with any type of parameter where the standard error of the 
+#' parameter estimate is a function of the square root of the sample size 
+#' (most parameter estimates have this property). This function also assumes 
+#' that the sampling distribution of the parameter estimate is approximately
+#' normal in large samples. Set R = 1 for equal sample sizes.
+#'
+#'
+#' @param  alpha  alpha level for hypothesis test 
+#' @param  se     standard error of parameter estimate from prior/pilot study
+#' @param  n0     sample size of prior/pilot study
+#' @param  w      desired confidence interval width
+#' @param  R      n2/n1 ratio
+#'
+#'
+#' @return 
+#' Returns the required sample size for each group 
+#'
+#'
+#' @examples
+#' size.ci.gen2(.05, .175, 30, .8, 1)
+#'
+#' # Should return:
+#' # n1  n2
+#' # 45  45
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export
+size.ci.gen2 <- function(alpha, se, n0, w, R) {
+ if (w <= 0) {stop("width must be a positive value")}
+ warn <- "Warning: alpha level is typically less than .25"
+ if (alpha > .25) {message(warn)}
+ za <- qnorm(1 - alpha/2)
+ n1 <- ceiling(4*(1 + 1/R)*n0*se^2*(za/w)^2)
+ n2 <- ceiling(R*n1)
+ out <- t(c(n1, n2))
+ colnames(out) <- c("n1", "n2")
+ rownames(out) <- ""
+ return(out)
+}
+
+
 # ======================= Sample Size for Desired Power =======================
 #  size.test.slope ============================================================
 #' Sample size for a test of a slope
@@ -3311,6 +3410,107 @@ size.test.slope.gen <- function(alpha, pow, se, n0, b) {
  n <- ceiling(n0*se^2*(za + zb)^2/b^2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
+ rownames(out) <- ""
+ return(out)
+}
+
+
+#  size.test.gen ============================================================
+#' Sample size for a test of any type of parameter
+#'
+#'
+#' @description
+#' Computes the sample size required to test a single population parameter with 
+#' desired power in a 1-group design using a standard error for the parameter
+#' estimate from a prior or pilot study. This function can be used with any type
+#' of parameter where the standard error of the parameter estimate is a 
+#' function of the square root of the sample size (most parameter estimates have
+#' this property). This function also assumes that the sampling distribution of 
+#' the parameter estimate is approximately normal in large samples.
+#'
+#'
+#' @param  alpha  alpha level for hypothesis test 
+#' @param  pow    desired power
+#' @param  se     standard error of parameter estimate from prior/pilot study
+#' @param  n0     sample size of prior/pilot study
+#' @param  es     planning value of parameter minus null hypothesis value
+#'
+#'
+#' @return 
+#' Returns the required sample size 
+#'
+#'
+#' @examples
+#' size.test.gen(.05, .8, 2.89, 30, 5)
+#'
+#' # Should return:
+#' # Sample size
+#' #          79
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export
+size.test.gen <- function(alpha, pow, se, n0, es) {
+ if (es == 0) {stop("effect size cannot equal 0")}
+ warn <- "Warning: alpha level is typically less than .25"
+ if (alpha > .25) {message(warn)}
+ za <- qnorm(1 - alpha/2)
+ zb <- qnorm(pow)
+ n <- ceiling(n0*se^2*(za + zb)^2/es^2)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size"
+ rownames(out) <- ""
+ return(out)
+}
+
+
+#  size.test.gen2 ============================================================
+#' Sample size for a test of 2-group difference for any type of parameter
+#'
+#'
+#' @description
+#' Computes the sample size per group required to test a difference in two
+#' populatation parameters with desired power using a standard error for a 
+#' single parameter estimate from a prior or pilot study. This function can be
+#' used with any type of parameter where the standard error of the parameter 
+#' estimate is a function of the square root of the sample size (most parameter 
+#' estimates have this property). This function also assumes that the sampling
+#' distribution of the parameter estimate is approximately normal in large 
+#' samples. Set R = 1 for equal sample sizes.
+#'
+#'
+#' @param  alpha  alpha level for hypothesis test 
+#' @param  pow    desired power
+#' @param  se     standard error of parameter estimate from prior/pilot study
+#' @param  n0     sample size of prior/pilot study
+#' @param  es     planning value of parameter difference
+#' @param  R      n2/n1 ratio
+#'
+#'
+#' @return 
+#' Returns the required sample size for each group 
+#'
+#'
+#' @examples
+#' size.test.gen2(.05, .85, .175, 30, .5, 1)
+#'
+#' # Should return:
+#' # n1  n2
+#' # 66  66
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export
+size.test.gen2 <- function(alpha, pow, se, n0, es, R) {
+ if (es == 0) {stop("effect size cannot equal 0")}
+ warn <- "Warning: alpha level is typically less than .25"
+ if (alpha > .25) {message(warn)}
+ za <- qnorm(1 - alpha/2)
+ zb <- qnorm(pow)
+ n1 <- ceiling((1 + 1/R)*n0*se^2*(za + zb)^2/es^2)
+ n2 <- ceiling(R*n1)
+ out <- t(c(n1, n2))
+ colnames(out) <- c("n1", "n2")
  rownames(out) <- ""
  return(out)
 }
