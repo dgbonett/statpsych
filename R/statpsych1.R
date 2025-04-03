@@ -5026,6 +5026,244 @@ size.ci.cv <- function(alpha, CV, w) {
 }
 
 
+# size.ci.median ===============================================================
+#' Sample size for a median confidence interval
+#'
+#'
+#' @description
+#' Computes the sample size required to estimate a population median with
+#' desired confidence interval precision. Set the variance planning value to   
+#' the largest value within a plausible range for a conservatively large  
+#' sample size. The sample size requirement depends on the shape of the
+#' distribution. Select one of the four distribution options (Normal, Logistic,
+#' Laplace, Exponential) that approximates the most likely distribution shape
+#' in the planned study. Select the Normal distribution for a conservatively
+#' large sample size requirement.
+#'
+#' @param  alpha  alpha level for 1-alpha confidence
+#' @param  var    planning value of response variable variance
+#' @param  w      desired confidence interval width
+#' @parm   dist   
+#' * set to 1 for Normal distribution (skew = 0, kurtosis = 3) 
+#' * set to 2 for Logistic distribution (skew = 0, kurtosis = 4.2)  
+#' * set to 3 for Laplace distribution (skew = 0, kurtosis = 6)
+#' * set to 4 for Gamma(5) (skew = .89, kurtosis = 4.2)
+#' * set to 5 for Exponential distribution (skew = 2, kurtosis = 9) 
+#'
+#'
+#' @return 
+#' Returns the required sample size
+#'
+#'
+#' @references
+#' \insertRef{Bonett2002}{statpsych}
+#'
+#'
+#' @examples
+#' size.ci.median(.05, 264.4, 10, 1)
+#'
+#' # Should return:
+#' # Sample size
+#' #          64
+#'  
+#' size.ci.median(.05, 264.4, 10, 3)
+#'
+#' # Should return:
+#' # Sample size
+#' #          21
+#'
+#'
+#' @importFrom stats qnorm
+#' @export
+size.ci.median <- function(alpha, var, w, dist) {
+ z <- qnorm(1 - alpha/2)
+ if (dist == 1) {
+  c <- 6.28*var 
+ }
+ else if (dist == 2){
+  c <- 4.66*var
+ }
+ else if (dist == 3){
+  c <- 2.00*var
+ }
+ else if (dist == 4){
+  c <- 5.90*var
+ }
+ else if (dist == 5){
+  c <- 4.00*var
+ }
+ else {
+  stop("invalid distribution option")
+ }
+ n <- ceiling(c*(z/w)^2)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size"
+ rownames(out) <- ""
+ return(out)
+}
+
+
+#  size.ci.median2  ============================================================ 
+#' Sample size for a 2-group median difference confidence interval
+#'
+#'
+#' @description
+#' Computes the sample size for each group required to estimate a population 
+#' median difference with desired confidence interval precision in a 2-group 
+#' design. Set the variance planning value to the largest value within a 
+#' plausible range for a conservatively large sample size. The sample size 
+#' requirement depends on the shape of the distribution. Select one of the 
+#' four distribution options (Normal, Logistic, Laplace, Exponential) that 
+#' approximates the most likely distribution shape in the planned study. 
+#' Select the Normal distribution for a conservatively large sample size 
+#' requirement. Set R = 1 for equal sample sizes.
+#'
+#'
+#' @param  alpha  alpha level for 1-alpha confidence 
+#' @param  var    planning value of average within-group variance
+#' @param  w      desired confidence interval width
+#' @param  R      n2/n1 ratio 
+#' @parm   dist  
+#' * set to 1 for Normal distribution (skew = 0, kurtosis = 3) 
+#' * set to 2 for Logistic distribution (skew = 0, kurtosis = 4.2)  
+#' * set to 3 for Laplace distribution (skew = 0, kurtosis = 6)
+#' * set to 4 for Gamma(5) (skew = .89, kurtosis = 4.2)
+#' * set to 5 for Exponential distribution (skew = 2, kurtosis = 9)  
+#'
+#'
+#' @return 
+#' Returns the required sample size for each group
+#'
+#'
+#' @references
+#' \insertRef{Bonett2002}{statpsych}
+#'
+#'
+#' @examples
+#' size.ci.median2(.05, 37.1, 5, 1, 1)
+#'
+#' # Should return:
+#' # n1  n2
+#' # 47  47
+#'
+#' size.ci.median2(.05, 37.1, 5, 1, 4)
+#'
+#' # Should return:
+#' # n1  n2
+#' # 32  96
+#'
+#' @importFrom stats qnorm
+#' @export
+size.ci.median2 <- function(alpha, var, w, R, dist) {
+ z <- qnorm(1 - alpha/2)
+ if (dist == 1) {
+  c <- 6.28*var 
+ }
+ else if (dist == 2){
+  c <- 4.66*var
+ }
+ else if (dist == 3){
+  c <- 2.00*var
+ }
+ else if (dist == 4){
+  c <- 5.90*var
+ }
+ else if (dist == 5){
+  c <- 4.00*var
+ }
+ else {
+  stop("invalid distribution option")
+ }
+ n1 <- ceiling(c*(1 + 1/R)*(z/w)^2)
+ n2 <- ceiling(R*n1)
+ out <- t(c(n1, n2))
+ colnames(out) <- c("n1", "n2")
+ rownames(out) <- ""
+ return(out)
+}
+
+
+#  size.ci.lc.median.bs ========================================================
+#' Sample size for a between-subjects median linear contrast confidence interval
+#'
+#'
+#' @description
+#' Computes the sample size in each group (assuming equal sample sizes) 
+#' required to estimate a linear contrast of population medians with desired 
+#' confidence interval precision in a between-subjects design. Set the 
+#' variance planning value to the largest value within a plausible range
+#' for a conservatively large sample size. The sample size requirement depends
+#' on the shape of the distribution. Select one of the four distribution 
+#' options (Normal, Logistic, Laplace, Exponential) that approximates the most
+#' likely distribution shape in the planned study. Select the Normal 
+#' distribution for a conservatively large sample size requirement.
+#'
+#'
+#' @param  alpha  alpha level for 1-alpha confidence 
+#' @param  var    planning value of average within-group variance  
+#' @param  w      desired confidence interval width
+#' @param  v      vector of between-subjects contrast coefficients 
+#' @parm   dist   
+#' * set to 1 for Normal distribution (skew = 0, kurtosis = 3) 
+#' * set to 2 for Logistic distribution (skew = 0, kurtosis = 4.2)  
+#' * set to 3 for Laplace distribution (skew = 0, kurtosis = 6)
+#' * set to 4 for Gamma(5) (skew = .89, kurtosis = 4.2)
+#' * set to 5 for Exponential distribution (skew = 2, kurtosis = 9) 
+#'
+#'
+#' @return 
+#' Returns the required sample size for each group
+#'
+#'
+#' @references
+#' \insertRef{Bonett2002}{statpsych}
+#'
+#'
+#' @examples
+#' v <- c(.5, .5, -1)
+#' size.ci.lc.median.bs(.05, 5.62, 2.0, v, 1)
+#'
+#' # Should return:
+#' # Sample size per group
+#' #                    51
+#'
+#' size.ci.lc.median.bs(.05, 5.62, 2.0, v, 4)
+#'
+#' # Should return:
+#' # Sample size per group
+#' #                    33
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export
+size.ci.lc.median.bs <- function(alpha, var, w, v, dist) {
+ z <- qnorm(1 - alpha/2)
+ if (dist == 1) {
+  c <- 6.28*var 
+ }
+ else if (dist == 2){
+  c <- 4.66*var
+ }
+ else if (dist == 3){
+  c <- 2.00*var
+ }
+ else if (dist == 4){
+  c <- 5.90*var
+ }
+ else if (dist == 5){
+  c <- 4.00*var
+ }
+ else {
+  stop("invalid distribution option")
+ }
+ n <- ceiling(c*(t(v)%*%v)*(z/w)^2)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size per group"
+ rownames(out) <- ""
+ return(out)
+}
+
+
 # ======================== Sample Size for Desired Power ======================
 #  size.test.mean ============================================================
 #' Sample size for a test of a mean
