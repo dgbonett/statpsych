@@ -4963,10 +4963,10 @@ size.ci.mean.prior <- function(alpha1, alpha2, var0, n0, w) {
  ci <- ci.var.upper(alpha2, var0, n0)
  ul <- ci[1,1]
  n1 <- size.ci.mean(alpha1, ul, w)
- pi <- pi.var.upper(alpha2, var0, n0, n1)
+ pi <- pi.var(alpha2, var0, n0, n1, 2)
  ul <- pi[1,1]
  n2 <- size.ci.mean(alpha1, ul, w)
- pi <- pi.var.upper(alpha2, var0, n0, n2)
+ pi <- pi.var(alpha2, var0, n0, n2, 2)
  ul <- pi[1,1]
  n <- size.ci.mean(alpha1, ul, w)
  out <- matrix(n, nrow = 1, ncol = 1)
