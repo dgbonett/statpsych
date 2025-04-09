@@ -1784,8 +1784,8 @@ ci.2x2.prop.bs <- function(alpha, f, n) {
 
 
 #  ci.2x2.prop.mixed ==========================================================
-#' Computes tests and confidence intervals of effects in a 2x2 mixed factorial
-#' design for proportions 
+#' Computes tests and confidence intervals of effects in a 2x2 mixed design
+#' for proportions 
 #'
 #'
 #' @description
