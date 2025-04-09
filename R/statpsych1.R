@@ -2554,7 +2554,7 @@ ci.etasqr <- function(alpha, etasqr, df1, df2) {
 #' Computes confidence intervals and tests for the AB interaction effect, 
 #' main effect of A, main efect of B, simple main effects of A, and simple main
 #' effects of B in a 2x2 mixed factorial design with a quantitative response
-#' variable where Factor A is a within-subjects factor, and Factor B is a 
+#' variable where Factor A is a within-subjects factor and Factor B is a 
 #' between-subjects factor. A Satterthwaite adjustment to the degrees of 
 #' freedom is used and equality of population variances is not assumed.
 #'
@@ -2572,7 +2572,7 @@ ci.etasqr <- function(alpha, etasqr, df1, df2) {
 #' * SE - standard error 
 #' * t - t test statistic 
 #' * df - degrees of freedom
-#' * p - p-value 
+#' * p - two-sided p-value 
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #'
@@ -2696,8 +2696,8 @@ ci.2x2.mean.mixed <- function(alpha, y11, y12, y21, y22) {
 #' @description
 #' Computes confidence intervals and tests for the AB interaction effect, 
 #' main effect of A, main effect of B, simple main effects of A, and simple main
-#' effects of B in a 2x2 within-subjects design with a quantitative response
-#' variable. 
+#' effects of B in a 2x2 within-subjects factorial design with a quantitative
+#' response variable. 
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
@@ -2818,9 +2818,9 @@ ci.2x2.mean.ws <- function(alpha, y11, y12, y21, y22) {
 #' @description
 #' Computes confidence intervals and tests for the AB interaction effect, 
 #' main effect of A, main effect of B, simple main effects of A, and simple main
-#' effects of B in a 2x2 between-subjects design with a quantitative response
-#' variable. A Satterthwaite adjustment to the degrees of freedom is used and 
-#' equality of population variances is not assumed.
+#' effects of B in a 2x2 between-subjects factorial design with a quantitative 
+#' response variable. A Satterthwaite adjustment to the degrees of freedom is 
+#' used and equality of population variances is not assumed.
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
@@ -2962,13 +2962,12 @@ ci.2x2.mean.bs <- function(alpha, y11, y12, y21, y22) {
 #'
 #'
 #' @description
-#' Computes confidence intervals for standardized linear contrasts of means
-#' (AB interaction, main effect of A, main effect of B, simple main effects
-#' of A, and simple main effects of B) in a 2x2 between-subjects design with  
-#' a quantitative response variable. Equality of population variances is not 
-#' assumed. A square root unweighted average variance standardizer is used,
-#' which is the recommended standardizer when both factors are treatment 
-#' factors.
+#' Computes confidence intervals for standardized AB interaction effect, main 
+#' effect of A, main effect of B, simple main effects of A, and simple main 
+#' effects of B in a 2x2 between-subjects factorial design with a quantitative 
+#' response variable. Equality of population variances is not assumed. A 
+#' square root unweighted average variance standardizer is used, which is the 
+#' recommended standardizer when both factors are treatment factors.
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
@@ -3125,7 +3124,7 @@ ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
 #' @description
 #' Computes distribution-free confidence intervals for the AB interaction 
 #' effect, main effect of A, main effect of B, simple main effects of A, and 
-#' simple main effects of B in a 2x2 between-subjects design with a 
+#' simple main effects of B in a 2x2 between-subjects factorial design with a 
 #' quantitative response variable. The effects are defined in terms of medians
 #' rather than means. Tied scores within each group are assumed to be rare.
 #'
@@ -3278,12 +3277,11 @@ ci.2x2.median.bs <- function(alpha, y11, y12, y21, y22) {
 #'
 #'
 #' @description
-#' Computes confidence intervals for standardized linear contrasts of means
-#' (AB interaction, main effect of A, main effect of B, simple main effects
-#' of A, and simple main effects of B) in a 2x2 within-subjects design.
-#' Equality of population variances is not assumed. An unweighted variance 
-#' standardizer is used. A square root unweigthed average variance 
-#' standardizer is used.
+#' Computes confidence intervals for standardized AB interaction effect, main 
+#' effect of A, main effect of B, simple main effects of A, and simple main
+#' effects of B in a 2x2 within-subjects factorial design. Equality of 
+#' population variances is not assumed. A square root unweigthed average
+#' variance standardizer is used.
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
@@ -3603,10 +3601,10 @@ ci.2x2.stdmean.mixed <- function(alpha, y11, y12, y21, y22) {
 #' @description
 #' Computes distribution-free confidence intervals for the AB 
 #' interaction effect, main effect of A, main efect of B, simple main effects 
-#' of A, and simple main effects of B in a 2x2 mixed design where Factor A is 
-#' the within-subjects factor and Factor B is the between subjects factor. 
-#' Tied scores within each group and within each within-subjects level are 
-#' assumed to be rare.
+#' of A, and simple main effects of B in a 2x2 mixed factorial design where 
+#' Factor A is the within-subjects factor and Factor B is the between subjects
+#' factor. Tied scores within each group and within each within-subjects level
+#' are assumed to be rare.
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
@@ -3763,9 +3761,9 @@ ci.2x2.median.mixed <- function(alpha, y11, y12, y21, y22) {
 #' @description
 #' Computes distribution-free confidence intervals for the AB interaction 
 #' effect, main effect of A, main effect of B, simple main effects of A, and
-#' simple main effects of B in a 2x2 within-subjects design. The effects are
-#' defined in terms of medians rather than means. Tied scores within each
-#' level combination are assumed to be rare.
+#' simple main effects of B in a 2x2 within-subjects factorial design. The 
+#' effects are defined in terms of medians rather than means. Tied scores 
+#' within each level combination are assumed to be rare.
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
