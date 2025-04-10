@@ -1330,7 +1330,7 @@ ci.agree <- function(alpha, n, f, k) {
 #' within each group and the difference of G-indices. 
 #'
 #'
-#' @param  alpha   alpha level for simultaneous 1-alpha confidence
+#' @param  alpha   alpha level for 1-alpha confidence
 #' @param  n1      sample size (objects) in group 1
 #' @param  f1      number of objects rated in agreement in group 1
 #' @param  n2      sample size (objects) in group 2
