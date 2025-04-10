@@ -243,10 +243,10 @@ ci.mean2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #'
 #' @description
 #' Computes a test statistic and confidence interval for a linear contrast
-#' of means. This function computes both unequal variance and equal
-#' variance confidence intervals and test statistics. A Satterthwaite 
-#' adjustment to the degrees of freedom is used with the unequal variance 
-#' method. 
+#' of means in a between-subjects design. This function computes both unequal
+#' variance and equal variance confidence intervals and test statistics. A 
+#' Satterthwaite adjustment to the degrees of freedom is used with the 
+#' unequal variance method. 
 #'
 #'
 #' @param     alpha  	alpha level for 1-alpha confidence
