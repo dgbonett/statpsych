@@ -1449,8 +1449,9 @@ ci.ratio.cv2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' Computes a confidence interval for a population coefficient of 
 #' dispersion (COD). The COD is a mean absolute deviation from the median 
 #' divided by the median. The coefficient of dispersion assumes ratio-scale 
-#' scores and is a robust alternative to the coefficient of variation (see ci.cv). 
-#' An approximate standard error is recovered from the confidence interval.
+#' scores and is a robust alternative to the coefficient of variation
+#' (see \link[statpsych]{ci.cv}). An approximate standard error is 
+#' recovered from the confidence interval.
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
 #' @param  y       vector of scores
@@ -1632,8 +1633,8 @@ ci.ratio.cod2 <-function(alpha, y1, y2) {
 #' of quartile variation which is defined as (Q3 - Q1)/(Q3 + Q1) where Q1 is the 
 #' 25th percentile and Q3 is the 75th percentile. The coefficient of quartile
 #' variation assumes ratio-scale scores and is a robust alternative to the 
-#' coefficient of variation. The 25th and 75th percentiles are computed using 
-#' the type = 2 method (SAS default).
+#' coefficient of variation (see \link[statpsych]{ci.cv}). The 25th and 75th
+#' percentiles are computed using the type = 2 method (SAS default).
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
 #' @param  y       vector of scores
