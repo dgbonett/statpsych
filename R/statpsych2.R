@@ -396,7 +396,8 @@ ci.pbcor <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #'
 #'
 #' @description
-#' Computes a Fisher confidence interval for a population Spearman correlation.  
+#' Computes a Fisher confidence interval for a population Spearman correlation. 
+#' This function is not appropropriate for ordered categorical variables.
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -453,7 +454,8 @@ ci.spear <- function(alpha, y, x) {
 #'
 #' @description
 #' Computes a confidence interval for a difference of population Spearman 
-#' correlations in a 2-group design. 
+#' correlations in a 2-group design. This function is not appropropriate 
+#' for ordered categorical variables.
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -1587,7 +1589,7 @@ ci.bayes.spcor <- function(alpha, prior_sd, cor, se) {
 #' @param     m     	vector of sample means
 #' @param     sd    	vector of sample standard deviations
 #' @param     n     	vector of sample sizes
-#' @param     x     	vector of numeric predictor variable values
+#' @param     x     	vector of quantiative factor values
 #' 
 #'
 #' @return 
@@ -1667,7 +1669,7 @@ ci.slope.mean.bs <- function(alpha, m, sd, n, x) {
 #' @param     alpha  	alpha level for 1-alpha confidence
 #' @param     m     	vector of sample median
 #' @param     se    	vector of standard errors
-#' @param     x     	vector of numeric predictor variable values
+#' @param     x     	vector of quantitative factor values
 #' 
 #'
 #' @return 
