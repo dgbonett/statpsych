@@ -343,8 +343,8 @@ ci.lc.mean.bs <- function(alpha, m, sd, n, v) {
 #' * Estimate - estimated mean difference
 #' * SE - standard error
 #' * t - t test statistic
-#' * df - degrees of freedom (unadjusted)
-#' * p - two-sided p-value
+#' * df - degrees of freedom 
+#' * p - two-sided Tukey p-value
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #'
