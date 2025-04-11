@@ -2219,7 +2219,7 @@ ci.ratio.poisson2 <- function(alpha, f1, f2, t1, t2) {
 #'
 #'
 #' @return 
-#' Returns a prediction interval for an estimated proportion in a future 
+#' Returns one-sided or two-sided prediction limit(s) for an estimated proportion in a future 
 #' study
 #'
 #'
