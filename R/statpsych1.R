@@ -108,7 +108,7 @@ ci.mean.fpc <- function(alpha, m, sd, n, N) {
 #' Computes a confidence interval for a population standardized mean 
 #' difference from a hypothesized value. If the hypothesized value is set
 #' to 0, the reciprocals of the confidence interval endpoints gives a 
-#' confidence interval for the coefficient of variation (see ci.cv).
+#' confidence interval for the coefficient of variation (see \link[statpsych]{ci.cv}).
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -2442,6 +2442,8 @@ ci.cronbach <- function(alpha, rel, r, n) {
 #' such as Cronbach's alpha or McDonald's omega using an estimate of the
 #' reliability and its standard error. The standard error can be a robust
 #' standard error or bootstrap standard error obtained from an SEM program.
+#' Use \link[statpsych]{ci.cronbach} for Cronbach's alpha if parallel
+#' measurements can be assumed.
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
