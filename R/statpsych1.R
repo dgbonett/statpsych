@@ -6410,7 +6410,7 @@ random.y <- function(n, m, sd, min, max, dec) {
 #'
 #'
 #' @return 
-#' Returns two-sided or one-sided prediction limits of an estimate variance
+#' Returns two-sided or one-sided prediction limit(s) of an estimate variance
 #' in a future study
 #'
 #'
@@ -6482,59 +6482,6 @@ pi.var <- function(alpha, var, n0, n, type) {
 ci.var.upper <- function(alpha, var, n) {
  chi <- qchisq(alpha, (n - 1))
  ul <- (n - 1)*var/chi
- out <- matrix(ul, nrow = 1, ncol = 1)
- colnames(out) <- "UL"
- rownames(out) <- ""
- return(out)
-}
-
-
-#  pi.var.upper =============================================================== 
-#' Upper prediction limit for an estimated variance
-#'
-#'                        
-#' @description
-#' Computes an upper prediction limit for the estimated variance in a
-#' future study for a planned sample size. The prediction limit uses a 
-#' variance estimate from a prior study. Several confidence interval 
-#' sample size functions in this package require a planning value of the
-#' estimated variance that is expected in the planned study. The upper variance
-#' prediction limit is useful as a variance planning value for the sample size
-#' required to obtain a confidence interval with desired width. This strategy
-#' for specifying a variance planning value is useful in applications where the
-#' population variance in the prior study is assumed to be very similar to the 
-#' population variance in the planned study. This function will be replaced with
-#' pi.var which computes both one-sided and two-sided prediction limits.
-#'
-#'
-#' @param  alpha  alpha value for upper 1-alpha confidence 
-#' @param  var    estimated variance from prior study
-#' @param  n0     sample size used to estimate variance
-#' @param  n      planned sample size of future study
-#'
-#'
-#' @return 
-#' Returns an upper prediction estimate (UL) of an estimated variance in a future study
-#'
-#'
-#' @references
-#' \insertRef{Hahn1972}{statpsych}
-#'
-#'
-#' @examples
-#' pi.var.upper(.05, 15, 40, 100)
-#'
-#' # Should return:
-#' #      UL
-#' # 23.9724
-#'  
-#' 
-#' @importFrom stats qnorm
-#' @importFrom stats qf
-#' @export
-pi.var.upper <- function(alpha, var, n0, n) {
- z <- qnorm(1 - alpha)
- ul <- var*qf(1 - alpha, n - 1, n0 - 1)
  out <- matrix(ul, nrow = 1, ncol = 1)
  colnames(out) <- "UL"
  rownames(out) <- ""
