@@ -812,8 +812,8 @@ ci.mean.ps <- function(alpha, m1, m2, sd1, sd2, cor, n) {
 #'
 #' @return 
 #' Returns a 1-row matrix. The columns are:
-#' * Mean1 - estimated measurement 1 mean
-#' * Mean2 - estimated measurement 2 mean
+#' * Mean1 - estimated mean for measurement 1 
+#' * Mean2 - estimated mean for measurement 2 
 #' * Mean1/Mean2 - estimate of mean ratio
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -1862,8 +1862,8 @@ ci.median2 <- function(alpha, y1, y2) {
 #'
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Median1 - estimated median from group 1
-#' * Median2 - estimated median from group 2
+#' * Median1 - estimated median for group 1
+#' * Median2 - estimated median for group 2
 #' * Median1/Median2 - estimated ratio of medians
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
