@@ -1399,7 +1399,7 @@ ci.bscor <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #'
 #'
 #' @return 
-#' Returns one-sided or two-sided prediction limits of an estimated 
+#' Returns one-sided or two-sided prediction limit(s) of an estimated 
 #' Pearson correlation in a future study
 #'
 #'
@@ -1409,6 +1409,12 @@ ci.bscor <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' # Should return:
 #' #         LL        UL
 #' #  0.6034092 0.8573224
+#'  
+#' pi.cor(.1, .761, 50, 100, 3)
+#'
+#' # Should return:
+#' #         LL
+#' #  0.6428751
 #'  
 #' 
 #' @importFrom stats qnorm
