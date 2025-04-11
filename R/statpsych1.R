@@ -1004,7 +1004,6 @@ ci.lc.stdmean.ws <- function(alpha, m, sd, cor, n, q) {
  v1 <- est1^2/(2*a^2*s^4*df)
  v2 <- sum(sd^4)
  v0 <- sd^2%*%t(sd^2)
- # error in v3 formula corrected in version 1.3
  # error in v5 formula corrected in version 1.5
  v3 <- cor^2*sum((v0 - diag(diag(v0))))
  v4 <- sum(q^2*sd^2)
