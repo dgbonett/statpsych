@@ -7403,7 +7403,7 @@ sim.ci.stdmean2 <- function(alpha, n1, n2, sd2, dist1, dist2, d, rep) {
  df3 <- n1 + n2 - 2
  adj1 <- 1 - 3/(4*df3 - 1)
  adj2 <- 1 - 3/(4*df1 - 1)
- diff1 <- d*sqrt((1 + sd.ratio^2)/2)
+ diff1 <- d*sqrt((1 + sd2^2)/2)
  diff2 <- d
  k <- 0; w1 <- 0; w2 <- 0; e11 <- 0; e12 <- 0; e21 <- 0; e22 <- 0
  est1 <- 0; est2 <- 0;
