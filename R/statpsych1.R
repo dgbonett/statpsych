@@ -6295,7 +6295,7 @@ pi.score.ps <- function(alpha, m1, m2, sd1, sd2, cor, n) {
 #' @examples
 #' random.sample(3000, 25)
 #'
-#' # Should return:
+#' # Should return random numbers such as:
 #' #  [1]   37   94  134  186  212  408  485  697  722  781  998 1055 
 #' # [13] 1182 1224 1273 1335 1452 1552 1783 1817 2149 2188 2437 2850 2936
 #'  
@@ -6326,7 +6326,7 @@ random.sample <- function(popsize, samsize) {
 #' n <- c(10, 10, 5)
 #' randomize(n)
 #'
-#' # Should return:
+#' # Should return random numbers such as:
 #' # [1] 2 3 2 1 1 2 3 3 2 1 2 1 3 1 1 2 3 1 1 2 2 1 1 2 2
 #'  
 #' 
@@ -6363,7 +6363,7 @@ randomize <- function(n) {
 #' @examples
 #' random.y(10, 3.6, 2.8, 1, 7, 0) 
 #'
-#' # Should return:
+#' # Should return random numbers such as:
 #' # [1] 2 7 7 1 6 3 1 3 2 1
 #'  
 #' 
