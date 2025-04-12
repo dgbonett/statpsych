@@ -6654,7 +6654,7 @@ etasqr.gen.2way <- function(SSa, SSb, SSab, SSe) {
 #' @description
 #' Performs a computer simulation of the confidence interval performance for a 
 #' population mean. Sample data can be generated from five different population 
-#' distributions. All distributions are scaled to have standard deviations
+#' distributions. All distributions are scaled to have a standard deviation
 #' of 1.0.
 #'
 #'
@@ -6744,13 +6744,13 @@ sim.ci.mean <- function(alpha, n, dist, rep) {
 #' confidence interval performance for a population mean difference in a 
 #' 2-group design. Sample data within each group can be generated from five 
 #' different population distributions. All distributions are scaled to have
-#' a standard deviation of 1.0 in group 1. 
+#' a standard deviation of 1.0 for group 1. 
 #'
 #'
 #' @param   alpha     alpha level for 1-alpha confidence
 #' @param   n1        sample size in group 1
 #' @param   n2        sample size in group 2
-#' @param   sd.ratio  ratio of population standard deviations (sd2/sd1)
+#' @param   sd2	      population standard deviation for group 2
 #' @param   dist1     type of distribution for group 1 (1, 2, 3, 4, or 5)
 #' @param   dist2     type of distribution for group 2 (1, 2, 3, 4, or 5)
 #' * 1 = Gaussian (skewness = 0 and excess kurtosis = 0) 
@@ -6791,7 +6791,7 @@ sim.ci.mean <- function(alpha, n, dist, rep) {
 #' @importFrom stats rt
 #' @importFrom stats rgamma
 #' @export
-sim.ci.mean2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2, rep) {
+sim.ci.mean2 <- function(alpha, n1, n2, sd2, dist1, dist2, rep) {
  df1 <- n1 + n2 - 2
  tcrit1 <- qt(1 - alpha/2, df1)
  if (dist1 == 1) {
@@ -6811,20 +6811,20 @@ sim.ci.mean2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2, rep) {
    popmean1 <- 1
  }
  if (dist2 == 1) {
-   y2 <- matrix(sd.ratio*rnorm(rep*n2), nrow = rep)
+   y2 <- matrix(sd2*rnorm(rep*n2), nrow = rep)
    popmean2 <- 0
  } else if (dist2 == 2) {
-   y2 <- matrix(sd.ratio*3.464*runif(rep*n2), nrow = rep)
-   popmean2 <- sd.ratio*1.732
+   y2 <- matrix(sd2*3.464*runif(rep*n2), nrow = rep)
+   popmean2 <- sd2*1.732
  } else if (dist2 == 3) {
-   y2 <- matrix(sd.ratio*.7745*rt(rep*n2, 5), nrow = rep)
+   y2 <- matrix(sd2*.7745*rt(rep*n2, 5), nrow = rep)
    popmean2 <- 0
  } else if (dist2 == 4) {
-   y2 <- matrix(sd.ratio*.5*rgamma(rep*n2, 4), nrow = rep)
-   popmean2 <- sd.ratio*2
+   y2 <- matrix(sd2*.5*rgamma(rep*n2, 4), nrow = rep)
+   popmean2 <- sd2*2
  } else {
-   y2 <- matrix(sd.ratio*rgamma(rep*n2, 1), nrow = rep)
-   popmean2<- sd.ratio
+   y2 <- matrix(sd2*rgamma(rep*n2, 1), nrow = rep)
+   popmean2<- sd2
  }
  popdiff <- popmean1 - popmean2
  m1 <- rowMeans(y1)
@@ -6873,14 +6873,14 @@ sim.ci.mean2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2, rep) {
 #' population mean difference in a paired-samples design. Sample data for the two
 #' levels of the within-subjects factor can be generated from bivariate population
 #' distributions with five different marginal distributions. All distributions
-#' are scaled to have standard deviations of 1.0 at level 1. Bivariate random
+#' are scaled to have a standard deviation of 1.0 at level 1. Bivariate random
 #' data with specified marginal skewness and kurtosis are generated using the
 #' unonr function in the mnonr package. 
 #'
 #'
 #' @param   alpha     alpha level for 1-alpha confidence
 #' @param   n         sample size 
-#' @param   sd.ratio  ratio of population standard deviations
+#' @param   sd2       population standard deviation at level 2
 #' @param   cor       population correlation of paired observations
 #' @param   dist1     type of distribution at level 1 (1, 2, 3, 4, or 5)
 #' @param   dist2     type of distribution at level 2 (1, 2, 3, 4, or 5)
@@ -6911,7 +6911,7 @@ sim.ci.mean2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2, rep) {
 #' @importFrom stats qt
 #' @importFrom mnonr unonr
 #' @export
-sim.ci.mean.ps <- function(alpha, n, sd.ratio, cor, dist1, dist2, rep) {
+sim.ci.mean.ps <- function(alpha, n, sd2, cor, dist1, dist2, rep) {
  if (cor > .999 | cor < -.999) {stop("correlation must be between -.999 and .999")}
  tcrit <- qt(1 - alpha/2, n - 1)
  if (dist1 == 1) {
@@ -6936,7 +6936,7 @@ sim.ci.mean.ps <- function(alpha, n, sd.ratio, cor, dist1, dist2, rep) {
  } else {
    skw2 <- 2; kur2 <- 6
  }
- V <- matrix(c(1, cor*sd.ratio, cor*sd.ratio, sd.ratio^2), 2, 2)
+ V <- matrix(c(1, cor*sd2, cor*sd2, sd2^2), 2, 2)
  w <- 0; k <- 0; e1 <-0; e2 <- 0
  repeat {
    k <- k + 1
@@ -6971,8 +6971,8 @@ sim.ci.mean.ps <- function(alpha, n, sd.ratio, cor, dist1, dist2, rep) {
 #' @description
 #' Performs a computer simulation of the confidence interval performance for 
 #' a population median. Sample data can be generated from five different 
-#' population distributions. All distributions are scaled to have standard 
-#' deviations of 1.0.
+#' population distributions. All distributions are scaled to have a standard 
+#' deviation of 1.0.
 #'
 #'
 #' @param   alpha  alpha level for 1-alpha confidence
@@ -7096,12 +7096,12 @@ sim.ci.median <- function(alpha, n, dist, rep) {
 #' Performs a computer simulation of the confidence interval performance for a 
 #' difference of population medians in a 2-group design. Sample data for each
 #' group can be generated from five different population distributions. All 
-#' distributions are scaled to have standard deviations of 1.0 in group 1.
+#' distributions are scaled to have a standard deviation of 1.0 for group 1.
 #'
 #' @param   alpha     alpha level for 1-alpha confidence
 #' @param   n1        sample size for group 1
 #' @param   n2        sample size for group 2
-#' @param   sd.ratio  ratio of population standard deviations (sd2/sd1)
+#' @param   sd2       population standard deviation for group 2
 #' @param   dist1     type of distribution for group 1 (1, 2, 3, 4, or 5) 
 #' @param   dist2     type of distribution for group 2 (1, 2, 3, 4, or 5) 
 #' * 1 = Gaussian (skewness = 0 and excess kurtosis = 0) 
@@ -7134,7 +7134,7 @@ sim.ci.median <- function(alpha, n, dist, rep) {
 #' @importFrom stats rt
 #' @importFrom stats rgamma
 #' @export
-sim.ci.median2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2, rep) {
+sim.ci.median2 <- function(alpha, n1, n2, sd2, dist1, dist2, rep) {
  zcrit <- qnorm(1 - alpha/2)
  o1 <- round((n1/2 - sqrt(n1)))
  if (o1 < 1) {o1 = 1}
@@ -7164,20 +7164,20 @@ sim.ci.median2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2, rep) {
      popmedian1 <- 0.690
    }
    if (dist2 == 1) {
-     y2 <- sd.ratio*rnorm(n2)
+     y2 <- sd2*rnorm(n2)
      popmedian2 <- 0
    } else if (dist2 == 2) {
-     y2 <- sd.ratio*3.464*runif(n2)
-     popmedian2 <- sd.ratio*1.732
+     y2 <- sd2*3.464*runif(n2)
+     popmedian2 <- sd2*1.732
    } else if (dist2 == 3) {
-     y2 <- sd.ratio*.7745*rt(n2, 5)
+     y2 <- sd2*.7745*rt(n2, 5)
      popmedian2 <- 0
    } else if (dist2 == 4) {
-     y2 <- sd.ratio*.5*rgamma(n2, 4)
-     popmedian2 <- sd.ratio*1.837
+     y2 <- s2*.5*rgamma(n2, 4)
+     popmedian2 <- sd2*1.837
    } else {
-     y2 <- sd.ratio*rgamma(n2, 1)
-     popmedian2 <- sd.ratio*0.690
+     y2 <- sd2*rgamma(n2, 1)
+     popmedian2 <- sd2*0.690
    }
    popdiff <- popmedian1 - popmedian2
    y1 <- sort(y1)
@@ -7221,13 +7221,13 @@ sim.ci.median2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2, rep) {
 #' population median difference in a paired-samples design. Sample data for the
 #' two levels of the within-subjects factor can be generated from bivariate 
 #' population distributions with five different marginal distributions. All 
-#' distributions are scaled to have standard deviations of 1.0 at level 1. 
+#' distributions are scaled to have a standard deviation of 1.0 at level 1. 
 #' Bivariate random data with specified marginal skewness and kurtosis are 
 #' generated using the unonr function in the mnonr package. 
 #'
 #' @param   alpha     alpha level for 1-alpha confidence
 #' @param   n         sample size 
-#' @param   sd.ratio  ratio of population standard deviations
+#' @param   sd2       population standard deviation at level 2
 #' @param   cor       population correlation of paired observations
 #' @param   dist1     type of distribution at level 1 (1, 2, 3, 4, or 5)
 #' @param   dist2     type of distribution at level 2 (1, 2, 3, 4, or 5)
@@ -7258,7 +7258,7 @@ sim.ci.median2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2, rep) {
 #' @importFrom stats qnorm
 #' @importFrom mnonr unonr
 #' @export
-sim.ci.median.ps <- function(alpha, n, sd.ratio, cor, dist1, dist2, rep) {
+sim.ci.median.ps <- function(alpha, n, sd2, cor, dist1, dist2, rep) {
  if (cor > .999 | cor < -.999) {stop("correlation must be between -.999 and .999")}
  zcrit <- qnorm(1 - alpha/2)
  o <- round(n/2 - sqrt(n))
@@ -7292,13 +7292,13 @@ sim.ci.median.ps <- function(alpha, n, sd.ratio, cor, dist1, dist2, rep) {
    popmedian2 <- 0
  } else if (dist2 == 4) {
    skw2 <- 1; kur2 <- 1.5
-   popmedian2 <- -.163*sd.ratio
+   popmedian2 <- -.163*sd2
  } else {
    skw2 <- 2; kur2 <- 6
-   popmedian2 <- -.313*sd.ratio
+   popmedian2 <- -.313*sd2
  }
  popdiff <- popmedian1 - popmedian2
- V <- matrix(c(1, cor*sd.ratio, cor*sd.ratio, sd.ratio^2), 2, 2)
+ V <- matrix(c(1, cor*sd2, cor*sd2, sd2^2), 2, 2)
  w <- 0; k <- 0; e1 <- 0; e2 <- 0
  repeat {
    k <- k + 1
@@ -7356,12 +7356,12 @@ sim.ci.median.ps <- function(alpha, n, sd.ratio, cor, dist1, dist2, rep) {
 #' two types of standardized mean differences in a 2-group design (see
 #' ci.stdmean2). Sample data for each group can be generated from five 
 #' different population distributions. All distributions are scaled to have
-#' standard deviations of 1.0 in group 1.
+#' a standard deviation of 1.0 for group 1.
 #'
 #' @param   alpha     alpha level for 1-alpha confidence
 #' @param   n1        sample size for group 1
 #' @param   n2        sample size for group 2
-#' @param   sd.ratio  ratio of population standard deviations (sd2/sd1)
+#' @param   sd2       population standard deviation for group 2
 #' @param   dist1     type of distribution for group 1 (1, 2, 3, 4, or 5) 
 #' @param   dist2     type of distribution for group 2 (1, 2, 3, 4, or 5) 
 #' * 1 = Gaussian (skewness = 0 and excess kurtosis = 0) 
@@ -7396,7 +7396,7 @@ sim.ci.median.ps <- function(alpha, n, sd.ratio, cor, dist1, dist2, rep) {
 #' @importFrom stats rt
 #' @importFrom stats rgamma
 #' @export
-sim.ci.stdmean2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2, d, rep) {
+sim.ci.stdmean2 <- function(alpha, n1, n2, sd2, dist1, dist2, d, rep) {
  zcrit <- qnorm(1 - alpha/2)
  df1 <- n1 - 1
  df2 <- n2 - 1
@@ -7421,15 +7421,15 @@ sim.ci.stdmean2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2, d, rep) {
      y1 <- rgamma(n1, 1) - 1 
    }
    if (dist2 == 1) {
-     y0 <- sd.ratio*rnorm(n2)
+     y0 <- sd2*rnorm(n2)
    } else if (dist2 == 2) {
-     y0 <- sd.ratio*3.464*runif(n2) - sd.ratio*1.734 
+     y0 <- sd2*3.464*runif(n2) - sd2*1.734 
    } else if (dist2 == 3) {
-     y0 <- sd.ratio*.7745*rt(n2, 5) 
+     y0 <- sd2*.7745*rt(n2, 5) 
    } else if (dist2 == 4) {
-     y0 <- sd.ratio*.5*rgamma(n2, 4) - sd.ratio*2 
+     y0 <- sd2*.5*rgamma(n2, 4) - sd2*2 
    } else {
-     y0 <- sd.ratio*rgamma(n2, 1) - sd.ratio  
+     y0 <- sd2*rgamma(n2, 1) - sd2  
    }
    m1 <- mean(y1) + diff1
    m2 <- mean(y1) + diff2
@@ -7487,13 +7487,13 @@ sim.ci.stdmean2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2, d, rep) {
 #' two types of standardized mean differences in a paired-samples design (see
 #' ci.stdmean.ps). Sample data for the two levels of the within-subjects factor
 #' can be generated from five different population distributions. All 
-#' distributions are scaled to have standard deviations of 1.0 at level 1.
+#' distributions are scaled to have a standard deviation of 1.0 at level 1.
 #' Bivariate random data with specified marginal skewness and kurtosis are 
 #' generated using the unonr function in the mnonr package. 
 #'
 #' @param   alpha     alpha level for 1-alpha confidence
 #' @param   n         sample size 
-#' @param   sd.ratio  ratio of population standard deviations (sd2/sd1)
+#' @param   sd2       population standard deviation at level 2
 #' @param   cor       correlation between paired measurements
 #' @param   dist1     type of distribution at level 1 (1, 2, 3, 4, or 5) 
 #' @param   dist2     type of distribution at level 2 (1, 2, 3, 4, or 5) 
@@ -7502,7 +7502,7 @@ sim.ci.stdmean2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2, d, rep) {
 #' * 3 = leptokurtic (skewness = 0 and excess kurtosis = 6)
 #' * 4 = moderate skew (skewness = 1 and excess kurtosis = 1.5)
 #' * 5 = large skew (skewness = 2 and excess kurtosis = 6)
-#' @param   d     population standardized mean difference 
+#' @param   d        population standardized mean difference 
 #' @param   rep      number of Monte Carlo samples
 #'  
 #' 
@@ -7526,13 +7526,13 @@ sim.ci.stdmean2 <- function(alpha, n1, n2, sd.ratio, dist1, dist2, d, rep) {
 #' @importFrom stats qnorm
 #' @importFrom mnonr unonr
 #' @export
-sim.ci.stdmean.ps <- function(alpha, n, sd.ratio, cor, dist1, dist2, d, rep) {
+sim.ci.stdmean.ps <- function(alpha, n, sd2, cor, dist1, dist2, d, rep) {
  if (cor > .999 | cor < -.999) {stop("correlation must be between -.999 and .999")}
  zcrit <- qnorm(1 - alpha/2)
  df <- n - 1
  adj1 <- sqrt((n - 2)/df)
  adj2 <- 1 - 3/(4*df - 1)
- diff1 <- d*sqrt((1 + sd.ratio^2)/2)
+ diff1 <- d*sqrt((1 + sd2^2)/2)
  diff2 <- d
  k <- 0; w1 <- 0; w2 <- 0; e11 <- 0; e12 <- 0; e21 <- 0; e22 <- 0
  est1 <- 0; est2 <- 0
@@ -7558,7 +7558,7 @@ sim.ci.stdmean.ps <- function(alpha, n, sd.ratio, cor, dist1, dist2, d, rep) {
  } else {
    skw2 <- 2; kur2 <- 6
  }
- V <- matrix(c(1, cor*sd.ratio, cor*sd.ratio, sd.ratio^2), 2, 2)
+ V <- matrix(c(1, cor*sd2, cor*sd2, sd2^2), 2, 2)
  repeat {
    k <- k + 1
    y <- unonr(n, c(0, 0), V, skewness = c(skw1, skw2), kurtosis = c(kur1, kur2))
