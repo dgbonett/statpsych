@@ -4765,7 +4765,7 @@ size.ci.lc.stdmean.ws <- function(alpha, d, cor, w, q) {
 #'
 #' @param  alpha  alpha value for 1-alpha confidence 
 #' @param  rel    reliability planning value
-#' @param  r      number of measurements
+#' @param  r      number of measurements (items, raters, forms)
 #' @param  w      desired confidence interval width
 #'
 #'
