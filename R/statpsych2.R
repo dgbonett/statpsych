@@ -2368,11 +2368,11 @@ size.ci.rsqr <- function(alpha, r2, s, w) {
 #'
 #' @description
 #' Computes the total sample size required to estimate a population conditional
-#' mean of y at x = x* in a fixed-x simple linear regression model with desired 
-#' confidence interval precision. In an experimental design, the total sample
-#' size would be allocated to the levels of the quantitative factor and it
-#' might be necessary to increase the total sample size to achieve equal 
-#' sample sizes. Set the error variance planning value to the largest value 
+#' mean of y at x = x* in a fixed-x linear regression model with desired 
+#' confidence interval precision. The total sample size would be allocated to
+#' the levels of the quantitative factor, and it might be necessary to increase 
+#' the total sample size to give the desired sample size at each level of
+#' the fixed factor. Set the error variance planning value to the largest value 
 #' within a plausible range for a conservatively large sample size.
 #'
 #'  
