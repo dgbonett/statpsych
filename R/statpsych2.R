@@ -2122,7 +2122,7 @@ test.mono.median.bs <-function(alpha, m, se) {
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
-#' @param  evar   planning value of within group (error) variance
+#' @param  evar   planning value of within-group (error) variance
 #' @param  x      vector of x values of the quantitative factor
 #' @param  w      desired confidence interval width
 #'
@@ -2883,8 +2883,7 @@ size.ci.ancova2 <- function(alpha, evar, s, d, w, R) {
 #' This function requires a standard error estimate for the slope of interest 
 #' from a prior or pilot study and the sample size that was used in the prior 
 #' or pilot study. This function can be used with either unstandardized or
-#' standardized slopes. This function also can be used with unstandardized or
-#' standardized factor loadings from a confirmatory factor analysis model.
+#' standardized slopes. 
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
