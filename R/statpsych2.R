@@ -2878,12 +2878,14 @@ size.ci.ancova2 <- function(alpha, evar, s, d, w, R) {
 #'
 #'
 #' @description
-#' Computes the sample size required to estimate a slope coefficient with 
-#' desired confidence interval precision in any general statistical model. 
+#' Computes the sample size required to estimate a slope coefficient with
+#' desired confidence interval precision in any type of statistical model. 
 #' This function requires a standard error estimate for the slope of interest 
 #' from a prior or pilot study and the sample size that was used in the prior 
-#' or pilot study. This function can be used with either unstandardized or
-#' standardized slopes. 
+#' or pilot study. This function can be used for both unstandardized and
+#' standardized slopes. This function also can be used for both unstandardized 
+#' and standardized factor loadings in a confirmatory factor analysis model.
+#' This function will soon be replaced with size.ci.gen.
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -2922,13 +2924,12 @@ size.ci.slope.gen <- function(alpha, se, n0, w) {
 #'
 #' @description
 #' Computes the sample size required to estimate a single population parameter
-#' with desired precision in a 1-group design using a standard error for the
-#' parameter estimate from a prior or pilot study. This function can be used 
-#' with any type of parameter where the standard error of the parameter 
-#' estimate is a function of the square root of the sample size (most parameter 
-#' estimates have this property). This function also assumes that the sampling 
-#' distribution of the parameter estimate is approximately normal in large 
-#' samples.
+#' with desired precision using a standard error for the parameter estimate 
+#' from a prior or pilot study. This function can be used with any type of 
+#' parameter where the standard error of the parameter estimate is a function
+#' of the square root of the sample size (most parameter estimates have this
+#' property). This function also assumes that the sampling distribution of the 
+#' parameter estimate is approximately normal in large samples.
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test 
@@ -3392,7 +3393,10 @@ size.test.ancova2 <- function(alpha, pow, evar, es, s, d, R) {
 #' power that a population slope coefficient in any general statistical model 
 #' is equal to zero. This function requires a standard error estimate for the 
 #' slope of interest from a prior or pilot study and the sample size that was
-#' used in the prior or pilot study. 
+#' used in the prior or pilot study. This function can be used for both 
+#' unstandardized and standardized slopes. This function also can be used for 
+#' both unstandardized and standardized factor loadings in a confirmatory
+#' factor analysis model. This function will soon be replaced with size.test.gen.
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -3434,12 +3438,12 @@ size.test.slope.gen <- function(alpha, pow, se, n0, b) {
 #'
 #' @description
 #' Computes the sample size required to test a single population parameter with 
-#' desired power in a 1-group design using a standard error for the parameter
-#' estimate from a prior or pilot study. This function can be used with any type
-#' of parameter where the standard error of the parameter estimate is a 
-#' function of the square root of the sample size (most parameter estimates have
-#' this property). This function also assumes that the sampling distribution of 
-#' the parameter estimate is approximately normal in large samples.
+#' desired power using a standard error for the parameter estimate from a prior
+#' or pilot study. This function can be used with any type of parameter where the
+#' standard error of the parameter estimate is a function of the square root of the
+#' sample size (most parameter estimates have this property). This function also 
+#' assumes that the sampling distribution of the parameter estimate is 
+#' approximately normal in large samples.
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test 
