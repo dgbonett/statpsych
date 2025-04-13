@@ -440,8 +440,9 @@ ci.tukey <-function(alpha, m, sd, n) {
 ci.ratio.mean2 <- function(alpha, y1, y2){
  min1 <- min(y1)
  min2 <- min(y2)
- if (min1 < 0) {print("WARNING: ratio-scale scores cannot be negative")}
- if (min2 < 0) {print("WARNING: ratio-scale scores cannot be negative")}
+ warn <- "Warning: ratio-scale scores cannot be negative"
+ if (min1 < 0) {message(warn)}
+ if (min2 < 0) {message(warn)}
  n1 <- length(y1)
  n2 <- length(y2)
  m1 <- mean(y1)
@@ -840,8 +841,9 @@ ci.ratio.mean.ps <- function(alpha, y1, y2){
  if (length(y1) != length(y2)) {stop("length of y1 must equal length of y2")}
  min1 <- min(y1)
  min2 <- min(y2)
- if (min1 < 0) {print("WARNING: ratio-scale scores cannot be negative")}
- if (min2 < 0) {print("WARNING: ratio-scale scores cannot be negative")}
+ warn <- "Warning: ratio-scale scores cannot be negative"
+ if (min1 < 0) {message(warn)}
+ if (min2 < 0) {message(warn)}
  n <- length(y1)
  m1 <- mean(y1)
  m2 <- mean(y2)
