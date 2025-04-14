@@ -3263,7 +3263,7 @@ size.ci.biphi <- function(alpha, p1, p2, cor, w) {
 #'
 #' @description
 #' Computes the sample size required to test a population proportion with
-#' desired power using a correction for continuity in a 1-group design. 
+#' desired power (using a correction for continuity) in a 1-group design. 
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test 
@@ -3310,12 +3310,10 @@ size.test.prop <- function(alpha, pow, p, h) {
 #'
 #' @description
 #' Computes the sample size in each group required to test a difference in 
-#' population proportions with desired power and a continuity correction in a
-#' 2-group design. This function requires planning values for both proportions. 
+#' population proportions with desired power (using a continuity correction) in
+#' a 2-group design. This function requires planning values for both proportions. 
 #' Set each proportion planning value to .5 for a conservatively large sample
-#' size requirement. This function does not use the typical sample size approach
-#' where the effect size is assumed to equal the difference in proportion 
-#' planning values. This function does not require the planning value for the 
+#' size requirement. This function does not require the planning value for the 
 #' proportion difference (effect size) to equal the difference of the two 
 #' proportion planning values; for example, the planning value of the proportion 
 #' difference could be set equal to a minimally interesting effect size.
