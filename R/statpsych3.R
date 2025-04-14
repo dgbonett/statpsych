@@ -2963,7 +2963,7 @@ size.ci.prop.prior <- function(alpha1, alpha2, p0, n0, w) {
 #' @description
 #' Computes the sample size required to estimate a tetrachoric correlation with
 #' desired confidence interval precision. Set the tetrachoric planning value to
-#' the smallest value within a plausible range for a conservatively large 
+#' the smallest absolute value within a plausible range for a conservatively large 
 #' sample size. 
 #'
 #'
@@ -3426,7 +3426,8 @@ size.test.lc.prop.bs <- function(alpha, pow, p, es, v) {
 #' The absolute difference in the proportion planning values must be less than h.  
 #' Equivalence tests often require a very large sample size. Equivalence tests 
 #' usually use 2 x alpha rather than alpha (e.g., use alpha = .10 rather than
-#' alpha = .05).
+#' alpha = .05). This function sets the effect size equal to the difference in
+#' proportion planning values.
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test 
@@ -3528,8 +3529,8 @@ size.supinf.prop2 <- function(alpha, pow, p1, p2, h) {
 #' sample size. The planning value for the effect size (proportion difference)
 #' could be set equal to the difference of the two proportion planning values 
 #' or it could be set equal to a minimally interesting effect size. Set the
-#' phi correlation planning value to the smallest value within a plausible range
-#' for a conservatively large sample size.
+#' phi correlation planning value to the smallest absolute value within a
+#' plausible range for a conservatively large sample size.
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test 
@@ -3581,8 +3582,8 @@ size.test.prop.ps <- function(alpha, pow, p1, p2, phi, es) {
 #' require a very large sample size. Equivalence tests usually use 2 x alpha 
 #' rather than alpha (e.g., use alpha = .10 rather alpha = .05). This function
 #' sets the effect size equal to the difference in proportion planning values. 
-#' Set the phi correlation planning value to the smallest value within a 
-#' plausible range for a conservatively large sample size.
+#' Set the phi correlation planning value to the smallest absolute value within 
+#' a plausible range for a conservatively large sample size.
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test 
@@ -3636,10 +3637,9 @@ size.equiv.prop.ps <- function(alpha, pow, p1, p2, phi, h) {
 #' for the range of practical equivalence and specify values of p1 and p2 such
 #' that p1 - p2 > h. For an inferiority test, specify the lower limit (-h) for 
 #' the range of practical equivalence and specify values of p1 and p2 such  
-#' that p1 - p2 > -h. This function sets the effect size equal to the 
-#' difference in proportion planning values. Set the phi correlation planning 
-#' value to the smallest value within a plausible range for a conservatively 
-#' large sample size.
+#' that p1 - p2 > -h. This function sets the effect size equal to p1 - p2.
+#' Set the phi correlation planning value to the smallest absolute value within
+#' a plausible range for a conservatively large sample size.
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test 
