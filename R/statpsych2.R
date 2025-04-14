@@ -885,7 +885,7 @@ ci.indirect <- function(alpha, b1, b2, se1, se2) {
 }
 
 
-#  ci.lc.gml ==================================================================
+#  ci.lc.glm ==================================================================
 #' Confidence interval for a linear contrast of general linear model parameters
 #'
 #'                                  
@@ -908,7 +908,7 @@ ci.indirect <- function(alpha, b1, b2, se1, se2) {
 #' * SE - standard error
 #' * t - t test statistic 
 #' * df - degrees of freedom
-#' * p - p-value 
+#' * p - two-sided p-value 
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval 
 #'
