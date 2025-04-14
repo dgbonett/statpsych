@@ -4198,6 +4198,66 @@ test.kurtosis <- function(y) {
 }
 
 
+#  test.anova.bs =============================================================
+#' Between-subjects F statistic and eta-squared from summary information 
+#'
+#'
+#' @description
+#' Computes the F statistic, p-value, eta-squared, and adjusted eta-squared 
+#' for the main effect in a one-way between-subjects ANOVA using the estimated
+#' group means, estimated group standard deviations, and group sample sizes.  
+#'
+#'
+#' @param   m       vector of estimated group means
+#' @param   sd      vector of estimated group standard deviations
+#' @param   n       vector of group sample sizes
+#'
+#'
+#' @return 
+#' Returns a 1-row matrix. The columns are:
+#' * F - F statistic for test of null hypothesis
+#' * dfA - degrees of freedom for between-subjects factor
+#' * dfE - error degrees of freedom
+#' * p - p-value 
+#' * Eta-squared - estimate of eta-squared
+#' * adj Eta-squared - a bias adjusted estimate of eta-squared
+#'
+#'
+#' @examples
+#' m <- c(12.4, 8.6, 10.5)
+#' sd <- c(3.84, 3.12, 3.48)
+#' n <- c(20, 20, 20)
+#' test.anova.bs(m, sd, n)
+#'
+#' #  Should return:
+#' #        F dfA  dfE           p Eta-squared  adj Eta-squared
+#' # 5.919585   2   57 0.004614428   0.1719831        0.1429298
+#'  
+#' 
+#' @importFrom stats pf
+#' @export
+test.anova.bs <- function(m, sd, n) {
+ a <- length(m)
+ nt <- sum(n)
+ dfe <- nt - a
+ dfa <- a - 1
+ v <- sd^2
+ grandmean <- sum(n*m)/nt
+ SSe <- sum((n - 1)*v)
+ MSe <- SSe/dfe
+ SSa <- sum(n*(m - grandmean)^2)
+ MSa <- SSa/dfa
+ F <- MSa/MSe
+ p <- 1 - pf(F, dfa, dfe)
+ etasqr <- SSa/(SSa + SSe)
+ adjetasqr <- 1 - (dfa + dfe)*(1 - etasqr)/dfe
+ out <- t(c(F, dfa, dfe, p, etasqr, adjetasqr))
+ colnames(out) <- c("F", "dfA",  "dfE", "p", "Eta-squared", "adj Eta-squared")
+ rownames(out) <- ""
+ return(out)
+}
+
+
 # ====================== Sample Size for Desired Precision ====================
 # size.ci.mean ===============================================================
 #' Sample size for a mean confidence interval
@@ -6527,66 +6587,6 @@ etasqr.adj <- function(etasqr, dfeffect, dferror) {
  if (adj < 0) {adj = 0}
  out <- matrix(adj, nrow = 1, ncol = 1)
  colnames(out) <- "adj Eta-squared"
- rownames(out) <- ""
- return(out)
-}
-
-
-#  test.anova.bs =============================================================
-#' Between-subjects F statistic and eta-squared from summary information 
-#'
-#'
-#' @description
-#' Computes the F statistic, p-value, eta-squared, and adjusted eta-squared 
-#' for the main effect in a one-way between-subjects ANOVA using the estimated
-#' group means, estimated group standard deviations, and group sample sizes.  
-#'
-#'
-#' @param   m       vector of estimated group means
-#' @param   sd      vector of estimated group standard deviations
-#' @param   n       vector of group sample sizes
-#'
-#'
-#' @return 
-#' Returns a 1-row matrix. The columns are:
-#' * F - F statistic for test of null hypothesis
-#' * dfA - degrees of freedom for between-subjects factor
-#' * dfE - error degrees of freedom
-#' * p - p-value for F-test
-#' * Eta-squared - estimate of eta-squared
-#' * adj Eta-squared - a bias adjusted estimate of eta-squared
-#'
-#'
-#' @examples
-#' m <- c(12.4, 8.6, 10.5)
-#' sd <- c(3.84, 3.12, 3.48)
-#' n <- c(20, 20, 20)
-#' test.anova.bs(m, sd, n)
-#'
-#' #  Should return:
-#' #        F dfA  dfE           p Eta-squared  adj Eta-squared
-#' # 5.919585   2   57 0.004614428   0.1719831        0.1429298
-#'  
-#' 
-#' @importFrom stats pf
-#' @export
-test.anova.bs <- function(m, sd, n) {
- a <- length(m)
- nt <- sum(n)
- dfe <- nt - a
- dfa <- a - 1
- v <- sd^2
- grandmean <- sum(n*m)/nt
- SSe <- sum((n - 1)*v)
- MSe <- SSe/dfe
- SSa <- sum(n*(m - grandmean)^2)
- MSa <- SSa/dfa
- F <- MSa/MSe
- p <- 1 - pf(F, dfa, dfe)
- etasqr <- SSa/(SSa + SSe)
- adjetasqr <- 1 - (dfa + dfe)*(1 - etasqr)/dfe
- out <- t(c(F, dfa, dfe, p, etasqr, adjetasqr))
- colnames(out) <- c("F", "dfA",  "dfE", "p", "Eta-squared", "adj Eta-squared")
  rownames(out) <- ""
  return(out)
 }
