@@ -3285,7 +3285,7 @@ size.test.lc.ancova <- function(alpha, pow, evar, es, s, d, v) {
 #' @param  pow    desired power
 #' @param  rel1   reliability planning value for group 1
 #' @param  rel2   reliability planning value for group 2
-#' @param  r      number of measurements (items, raters)
+#' @param  r      number of measurements (items, raters, forms)
 #'
 #'
 #' @return 
