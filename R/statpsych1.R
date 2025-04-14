@@ -5773,9 +5773,9 @@ size.test.mann <- function(alpha, pow, p) {
 #' test is a test of the null hypothesis that the population median is equal 
 #' to some specified value. This null hypothesis can also be expressed in
 #' terms of the proportion of scores in the population that are greater than 
-#' the hypothesized population median value. Under the null hypothesis, this
-#' proportion is equal to .5. This function requires a planning value of this 
-#' population proportion.
+#' the hypothesized population median value. Under the null hypothesis, the
+#' population proportion is equal to .5. This function requires a planning 
+#' value of the population proportion.
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test 
@@ -5822,8 +5822,8 @@ size.test.sign <- function(alpha, pow, p) {
 #' larger under treatment 1 than treatment 2. In a paired-samples 
 #' nonexperiment, the proportion is the proportion of members in the  
 #' population with measurement 1 scores that are larger than their
-#' measurement 2 scores. Under the null hypothesis, the proportion is equal
-#' to .5. This function requires a planning value of this population 
+#' measurement 2 scores. Under the null hypothesis, the population proportion
+#' is equal to to .5. This function requires a planning value of the population 
 #' proportion.
 #'
 #'
@@ -7624,7 +7624,7 @@ sim.ci.stdmean.ps <- function(alpha, n, sd2, cor, dist1, dist2, d, rep) {
 #' Computes the reliability of a scale that is the sum or average of r2 
 #' parallel measurements given the reliability of a scale that is the sum or
 #' average of r1 parallel measurements. The "measurements" can be items, 
-#' trials, raters, or occasions.
+#' forms, raters, or occasions.
 #'
 #'
 #' @param   rel     reliability of the sum or average of r1 measurements
