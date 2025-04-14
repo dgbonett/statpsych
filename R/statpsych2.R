@@ -1731,7 +1731,7 @@ ci.slope.median.bs <- function(alpha, m, se, x) {
 #' partial correlation is equal to some specified nonzero value. Set s = 0 
 #' for a Pearson correlation. The hypothesis testing results should be 
 #' accompanied with a confidence interval for the population Pearson or
-#' partial correlation value ((see \link[statpsych]{ci.cor}).
+#' partial correlation value (see \link[statpsych]{ci.cor}).
 #'
 #'
 #' @param  cor     estimated correlation 
@@ -1743,7 +1743,7 @@ ci.slope.median.bs <- function(alpha, m, se, x) {
 #' @return
 #' Returns a 1-row matrix. The columns are:
 #' * Estimate - estimate of correlation 
-#' * t or z - t test statistic (for h = 0) or z test statistic
+#' * t or z - t test statistic (for h = 0) or z test statistic (for nonzero h)
 #' * p - two-sided p-value
 #'
 #'
@@ -1810,7 +1810,7 @@ test.cor <- function(cor, n, s, h) {
 #' @return
 #' Returns a 1-row matrix. The columns are:
 #' * Estimate - estimate of correlation 
-#' * t or z - t test statistic (for h = 0) or z test statistic
+#' * t or z - t test statistic (for h = 0) or z test statistic (for nonzero h)
 #' * p - two-sided p-value
 #'
 #'
