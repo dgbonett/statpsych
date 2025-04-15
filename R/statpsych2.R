@@ -2506,9 +2506,9 @@ size.ci.indirect <- function(alpha, cor1, cor2, w) {
 #' interval
 #'
 #'
-#' Computes the sample size required to estimate a difference in population
-#' Cronbach reliability coefficients with desired precision in a 2-group
-#' design. 
+#' Computes the sample size per group (assuming equal sample sizes) required
+#' to estimate a difference in population Cronbach reliability coefficients
+#' with desired precision in a 2-group design. 
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test 
