@@ -1068,6 +1068,7 @@ ci.lc.stdmean.ws <- function(alpha, m, sd, cor, n, q) {
 #' @importFrom stats sd
 #' @export
 ci.mad <- function(alpha, y) {
+ y <- na.omit(y)
  n <- length(y)
  z <- qnorm(1 - alpha/2)
  c <- n/(n - 1)
@@ -1486,6 +1487,7 @@ ci.ratio.cv2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' @export
 ci.cod <-function(alpha, y) {
  z <- qnorm(1 - alpha/2)
+ y <- na.omit(y)
  n <- length(y)
  c <- n/(n - 1)
  a1 <- round((n + 1)/2 - sqrt(n))
@@ -1668,6 +1670,7 @@ ci.ratio.cod2 <-function(alpha, y1, y2) {
 #' @importFrom stats pbinom
 #' @export
 ci.cqv <- function(alpha, y) {
+ y <- na.omit(y)
  n <- length(y)
  c <- n/(n - 1)
  y <- sort(y)
@@ -1749,6 +1752,7 @@ ci.cqv <- function(alpha, y) {
 #' @importFrom stats median
 #' @export
 ci.median <- function(alpha, y) {
+ y <- na.omit(y)
  n <- length(y)
  y <- sort(y)
  z <- qnorm(1 - alpha/2)
@@ -2198,6 +2202,7 @@ ci.ratio.median.ps <- function(alpha, y1, y2) {
 #' @importFrom stats qnorm
 #' @export
 ci.sign <- function(alpha, y, h) {
+ y <- na.omit(y)
  z <- qnorm(1 - alpha/2)
  f <- sum(as.integer(y > h))
  n <- length(y)
@@ -2261,7 +2266,7 @@ ci.sign <- function(alpha, y, h) {
 #' @importFrom stats qnorm
 #' @export
 ci.mann <- function(alpha, y1, y2){
- z <- qnorm(1 - .05/2)
+ z <- qnorm(1 - alpha/2)
  y <- c(y1,y2)
  n1 <- length(y1)
  n2 <- length(y2)
@@ -4112,6 +4117,7 @@ test.mean <- function(m, sd, n, h) {
 #' @export
 test.skew <- function(y) {
  rep <- 250000
+ y <- na.omit(y)
  n = length(y)
  a <- sqrt((n - 1)/n)
  m <- mean(y)
@@ -4174,6 +4180,7 @@ test.skew <- function(y) {
 #' @export
 test.kurtosis <- function(y) {
  rep <- 250000
+ y <- na.omit(y)
  n = length(y)
  a <- sqrt((n - 1)/n)
  m <- mean(y)
