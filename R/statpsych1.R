@@ -438,6 +438,8 @@ ci.tukey <-function(alpha, m, sd, n) {
 #' @importFrom stats var
 #' @export
 ci.ratio.mean2 <- function(alpha, y1, y2){
+ y1 <- na.omit(y1)
+ y2 <- na.omit(y2)
  min1 <- min(y1)
  min2 <- min(y2)
  warn <- "Warning: ratio-scale scores cannot be negative"
@@ -1130,6 +1132,8 @@ ci.mad <- function(alpha, y) {
 #' @export
 ci.ratio.mad2 <- function(alpha, y1, y2) {
  z <- qnorm(1 - alpha/2)
+ y1 <- na.omit(y1)
+ y2 <- na.omit(y2)
  n1 <- length(y1)
  c1 <- n1/(n1 - 1)
  n2 <- length(y2)
@@ -1206,6 +1210,8 @@ ci.ratio.mad2 <- function(alpha, y1, y2) {
 #' @export
 ci.ratio.sd2 <- function(alpha, y1, y2) {
  z <- qnorm(1 - alpha/2)
+ y1 <- na.omit(y1)
+ y2 <- na.omit(y2)
  sd1 <- sd(y1)
  sd2 <- sd(y2)
  v1 <- sd1^2
@@ -1561,6 +1567,8 @@ ci.cod <-function(alpha, y) {
 #' @importFrom stats median
 #' @export
 ci.ratio.cod2 <-function(alpha, y1, y2) {
+ y1 <- na.omit(y1)
+ y2 <- na.omit(y2)
  min1 <- min(y1)
  min2 <- min(y2)
  if (min1 < 0) {stop("ERROR: ratio-scale scores cannot be negative")}
@@ -1820,6 +1828,8 @@ ci.median <- function(alpha, y) {
 #' @export
 ci.median2 <- function(alpha, y1, y2) {
  z <- qnorm(1 - alpha/2)
+ y1 <- na.omit(y1)
+ y2 <- na.omit(y2)
  n1 <- length(y1)
  y1 <- sort(y1)
  n2 <- length(y2)
@@ -1894,6 +1904,8 @@ ci.median2 <- function(alpha, y1, y2) {
 #' @importFrom stats median
 #' @export
 ci.ratio.median2 <- function(alpha, y1, y2) {
+ y1 <- na.omit(y1)
+ y2 <- na.omit(y2)
  min1 <- min(y1)
  min2 <- min(y2)
  if (min1 < 0) {stop("ERROR: ratio-scale scores cannot be negative")}
@@ -2267,6 +2279,8 @@ ci.sign <- function(alpha, y, h) {
 #' @export
 ci.mann <- function(alpha, y1, y2){
  z <- qnorm(1 - alpha/2)
+ y1 <- na.omit(y1)
+ y2 <- na.omit(y2)
  y <- c(y1,y2)
  n1 <- length(y1)
  n2 <- length(y2)
@@ -2872,6 +2886,10 @@ ci.2x2.mean.ws <- function(alpha, y11, y12, y21, y22) {
 #' @importFrom stats pt
 #' @export
 ci.2x2.mean.bs <- function(alpha, y11, y12, y21, y22) {
+ y11 <- na.omit(y11)
+ y12 <- na.omit(y12)
+ y21 <- na.omit(y21)
+ y22 <- na.omit(y22)
  n11 <- length(y11)
  n12 <- length(y12)
  n21 <- length(y21)
@@ -3021,6 +3039,10 @@ ci.2x2.mean.bs <- function(alpha, y11, y12, y21, y22) {
 #' @export
 ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
  z <- qnorm(1 - alpha/2)
+ y11 <- na.omit(y11)
+ y12 <- na.omit(y12)
+ y21 <- na.omit(y21)
+ y22 <- na.omit(y22)
  n11 <- length(y11)
  n12 <- length(y12)
  n21 <- length(y21)
@@ -3181,6 +3203,10 @@ ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
 #' @export
 ci.2x2.median.bs <- function(alpha, y11, y12, y21, y22) {
  zcrit <- qnorm(1 - alpha/2)
+ y11 <- na.omit(y11)
+ y12 <- na.omit(y12)
+ y21 <- na.omit(y21)
+ y22 <- na.omit(y22)
  n11 <- length(y11)
  n12 <- length(y12)
  n21 <- length(y21)
