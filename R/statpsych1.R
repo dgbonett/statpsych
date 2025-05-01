@@ -841,6 +841,10 @@ ci.mean.ps <- function(alpha, m1, m2, sd1, sd2, cor, n) {
 #' @export
 ci.ratio.mean.ps <- function(alpha, y1, y2){
  if (length(y1) != length(y2)) {stop("length of y1 must equal length of y2")}
+ y = cbind(y1, y2)
+ y = na.omit(y)
+ y1 = y[,1]
+ y2 = y[,2]
  min1 <- min(y1)
  min2 <- min(y2)
  warn <- "Warning: ratio-scale scores cannot be negative"
@@ -1291,6 +1295,10 @@ ci.ratio.sd2 <- function(alpha, y1, y2) {
 #' @export
 ci.ratio.mad.ps <- function(alpha, y1, y2) {
  if (length(y1) != length(y2)) {stop("length of y1 must equal length of y2")}
+ y = cbind(y1, y2)
+ y = na.omit(y)
+ y1 = y[,1]
+ y2 = y[,2]
  z <- qnorm(1 - alpha/2)
  n <- length(y1); 
  c <- n/(n - 1)
@@ -2049,6 +2057,10 @@ ci.lc.median.bs <- function(alpha, m, se, v) {
 #' @export
 ci.median.ps <- function(alpha, y1, y2) {
  if (length(y1) != length(y2)) {stop("length of y1 must equal length of y2")}
+ y = cbind(y1, y2)
+ y = na.omit(y)
+ y1 = y[,1]
+ y2 = y[,2]
  z <- qnorm(1 - alpha/2)
  n <- length(y1)
  median1 <- median(y1)
@@ -2130,6 +2142,10 @@ ci.median.ps <- function(alpha, y1, y2) {
 #' @export
 ci.ratio.median.ps <- function(alpha, y1, y2) {
  if (length(y1) != length(y2)) {stop("length of y1 must equal length of y2")}
+ y = cbind(y1, y2)
+ y = na.omit(y)
+ y1 = y[,1]
+ y2 = y[,2]
  min1 <- min(y1)
  min2 <- min(y2)
  if (min1 < 0) {stop("ERROR: ratio-scale scores cannot be negative")}
