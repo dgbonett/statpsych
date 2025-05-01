@@ -430,6 +430,11 @@ ci.pbcor <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' @importFrom stats qnorm
 #' @export
 ci.spear <- function(alpha, y, x) {
+ if (length(y) != length(x)) {stop("length of y must equal length of x")}
+ y_x = cbind(y, x)
+ y_x = na.omit(y_x)
+ y = y_x[,1]
+ x = y_x[,2]
  z <- qnorm(1 - alpha/2)
  n <- length(y)
  yr <- rank(y)
@@ -557,6 +562,7 @@ ci.spear2 <- function(alpha, cor1, cor2, n1, n2) {
 #' @importFrom stats sd
 #' @export
 ci.mape <- function(alpha, res, s) {
+ res <- na.omit(res)
  n <- length(res)
  df <- n - s - 1
  z <- qnorm(1 - alpha/2)
@@ -621,6 +627,8 @@ ci.mape <- function(alpha, res, s) {
 #' @importFrom stats sd
 #' @export
 ci.ratio.mape2 <- function(alpha, res1, res2, s1, s2) {
+ res1 <- na.omit(res1)
+ res2 <- na.omit(res2)
  z <- qnorm(1 - alpha/2)
  n1 <- length(res1)
  df1 <- n1 - s1 - 1
@@ -1126,31 +1134,36 @@ ci.rsqr <- function(alpha, r2, s, n) {
 #' @importFrom stats qnorm
 #' @export
 ci.theil <- function(alpha, y, x) {
-  z <- qnorm(1 - alpha/2)
-  n = length(x)
-  x.p <- t(combn(x,2))
-  y.p <- t(combn(y,2))
-  y.d <- y.p[,1] - y.p[,2]
-  x.d <- x.p[,1] - x.p[,2]
-  s = which(x.d != 0, arr.ind = T)
-  x.diff <- x.d[s]
-  y.diff <- y.d[s]
-  k <- length(x.diff)
-  c = z*sqrt(k*(2*n + 5)/9) 
-  o1 <- floor((k - c)/2)
-  if (o1 < 1) {o1 = 1}
-  o2 <- ceiling((k + c)/2 + 1)
-  if (o2 > k) {o2 = k}
-  b <- y.diff/x.diff
-  b <- sort(b)
-  est <- median(b)
-  ll <- b[o1]
-  ul <- b[o2]
-  se <- (ul - ll)/(2*z)
-  out <- t(c(est, se, ll, ul))
-  colnames(out) = c("Estimate", "SE", "LL", "UL")
-  rownames(out) <- ""
-  return(out)
+ if (length(y) != length(x)) {stop("length of y must equal length of x")}
+ y_x = cbind(y, x)
+ y_x = na.omit(y_x)
+ y = y_x[,1]
+ x = y_x[,2]
+ z <- qnorm(1 - alpha/2)
+ n = length(x)
+ x.p <- t(combn(x,2))
+ y.p <- t(combn(y,2))
+ y.d <- y.p[,1] - y.p[,2]
+ x.d <- x.p[,1] - x.p[,2]
+ s = which(x.d != 0, arr.ind = T)
+ x.diff <- x.d[s]
+ y.diff <- y.d[s]
+ k <- length(x.diff)
+ c = z*sqrt(k*(2*n + 5)/9) 
+ o1 <- floor((k - c)/2)
+ if (o1 < 1) {o1 = 1}
+ o2 <- ceiling((k + c)/2 + 1)
+ if (o2 > k) {o2 = k}
+ b <- y.diff/x.diff
+ b <- sort(b)
+ est <- median(b)
+ ll <- b[o1]
+ ul <- b[o2]
+ se <- (ul - ll)/(2*z)
+ out <- t(c(est, se, ll, ul))
+ colnames(out) = c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
+ return(out)
 }
 
 
