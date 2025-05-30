@@ -2,8 +2,8 @@
 % Please edit documentation in R/statpsych3.R
 \name{ci.2x2.prop.mixed}
 \alias{ci.2x2.prop.mixed}
-\title{Computes tests and confidence intervals of effects in a 2x2 mixed factorial
-design for proportions}
+\title{Computes tests and confidence intervals of effects in a 2x2 mixed design
+for proportions}
 \usage{
 ci.2x2.prop.mixed(alpha, group1, group2)
 }

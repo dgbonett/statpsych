@@ -16,8 +16,8 @@ ci.ratio.mean.ps(alpha, y1, y2)
 \value{
 Returns a 1-row matrix. The columns are:
 \itemize{
-\item Mean1 - estimated measurement 1 mean
-\item Mean2 - estimated measurement 2 mean
+\item Mean1 - estimated mean for measurement 1
+\item Mean2 - estimated mean for measurement 2
 \item Mean1/Mean2 - estimate of mean ratio
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval

@@ -16,8 +16,8 @@ ci.ratio.median2(alpha, y1, y2)
 \value{
 Returns a 1-row matrix. The columns are:
 \itemize{
-\item Median1 - estimated median from group 1
-\item Median2 - estimated median from group 2
+\item Median1 - estimated median for group 1
+\item Median2 - estimated median for group 2
 \item Median1/Median2 - estimated ratio of medians
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval

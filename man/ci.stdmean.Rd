@@ -34,7 +34,7 @@ Returns a 1-row matrix. The columns are:
 Computes a confidence interval for a population standardized mean
 difference from a hypothesized value. If the hypothesized value is set
 to 0, the reciprocals of the confidence interval endpoints gives a
-confidence interval for the coefficient of variation (see ci.cv).
+confidence interval for the coefficient of variation (see \link[statpsych]{ci.cv}).
 
 ci.stdmean1 is deprecated and will soon be removed from statpsych; please switch to ci.stdmean
 }

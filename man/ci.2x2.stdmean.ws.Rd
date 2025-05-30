@@ -29,12 +29,11 @@ Returns a 7-row matrix (one row per effect). The columns are:
 }
 }
 \description{
-Computes confidence intervals for standardized linear contrasts of means
-(AB interaction, main effect of A, main effect of B, simple main effects
-of A, and simple main effects of B) in a 2x2 within-subjects design.
-Equality of population variances is not assumed. An unweighted variance
-standardizer is used. A square root unweigthed average variance
-standardizer is used.
+Computes confidence intervals for standardized AB interaction effect, main
+effect of A, main effect of B, simple main effects of A, and simple main
+effects of B in a 2x2 within-subjects factorial design. Equality of
+population variances is not assumed. A square root unweigthed average
+variance standardizer is used.
 }
 \examples{
 y11 <- c(21, 39, 32, 29, 27, 17, 27, 21, 28, 17, 12, 27)

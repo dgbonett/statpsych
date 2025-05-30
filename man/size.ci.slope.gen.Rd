@@ -20,10 +20,13 @@ Returns the required sample size
 }
 \description{
 Computes the sample size required to estimate a slope coefficient with
-desired confidence interval precision in any general statistical model.
+desired confidence interval precision in any type of statistical model.
 This function requires a standard error estimate for the slope of interest
 from a prior or pilot study and the sample size that was used in the prior
-or pilot study.
+or pilot study. This function can be used for both unstandardized and
+standardized slopes. This function also can be used for both unstandardized
+and standardized factor loadings in a confirmatory factor analysis model.
+This function will soon be replaced with size.ci.gen.
 }
 \examples{
 size.ci.slope.gen(.05, 3.15, 50, 5)

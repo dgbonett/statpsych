@@ -24,7 +24,7 @@ Returns a 1-row matrix. The columns are:
 \item SE - standard error
 \item t - t test statistic
 \item df - degrees of freedom
-\item p - p-value
+\item p - two-sided p-value
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval
 }

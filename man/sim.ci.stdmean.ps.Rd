@@ -5,14 +5,14 @@
 \title{Simulates confidence interval coverage probability for a standardized mean
 difference in a paired-samples design}
 \usage{
-sim.ci.stdmean.ps(alpha, n, sd.ratio, cor, dist1, dist2, d, rep)
+sim.ci.stdmean.ps(alpha, n, sd2, cor, dist1, dist2, d, rep)
 }
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
 
 \item{n}{sample size}
 
-\item{sd.ratio}{ratio of population standard deviations (sd2/sd1)}
+\item{sd2}{population standard deviation at level 2}
 
 \item{cor}{correlation between paired measurements}
 
@@ -45,7 +45,7 @@ Performs a computer simulation of confidence interval performance for
 two types of standardized mean differences in a paired-samples design (see
 ci.stdmean.ps). Sample data for the two levels of the within-subjects factor
 can be generated from five different population distributions. All
-distributions are scaled to have standard deviations of 1.0 at level 1.
+distributions are scaled to have a standard deviation of 1.0 at level 1.
 Bivariate random data with specified marginal skewness and kurtosis are
 generated using the unonr function in the mnonr package.
 }

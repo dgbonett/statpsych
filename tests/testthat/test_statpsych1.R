@@ -1221,20 +1221,6 @@ test_that("pi.var example", {
   testthat::expect_snapshot(res)
 })
 
-test_that("pi.var.upper returns valid matrix", {
-  colnames_expected <- c(
-    "UL"
-  )
-  
-  res <- pi.var.upper(.2, 15, 40, 100)
-  
-  testthat::expect_equal(class(res), c("matrix", "array"))
-  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
-  testthat::expect_equal(colnames(res), colnames_expected)
-  
-  testthat::expect_snapshot(res)
-})
-
 
 test_that("ci.bayes.normal returns valid matrix", {
   colnames_expected <- c(

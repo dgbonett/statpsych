@@ -17,7 +17,7 @@ test.spear(cor, h, n)
 Returns a 1-row matrix. The columns are:
 \itemize{
 \item Estimate - estimate of correlation
-\item t or z - t test statistic (for h = 0) or z test statistic
+\item t or z - t test statistic (for h = 0) or z test statistic (for nonzero h)
 \item p - two-sided p-value
 }
 }

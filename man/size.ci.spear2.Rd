@@ -10,9 +10,9 @@ size.ci.spear2(alpha, cor1, cor2, w)
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
 
-\item{cor1}{group 1 Spearman correlation planning value}
+\item{cor1}{Spearman correlation planning value for group 1}
 
-\item{cor2}{group 2 Spearman correlation planning value}
+\item{cor2}{Spearman correlation planning value for group 2}
 
 \item{w}{desired confidence interval width}
 }

@@ -103,6 +103,7 @@
 <url><loc>https://dgbonett.github.io/statpsych/reference/ci.sign.html</loc></url>
 <url><loc>https://dgbonett.github.io/statpsych/reference/ci.sign1.html</loc></url>
 <url><loc>https://dgbonett.github.io/statpsych/reference/ci.slope.mean.bs.html</loc></url>
+<url><loc>https://dgbonett.github.io/statpsych/reference/ci.slope.median.bs.html</loc></url>
 <url><loc>https://dgbonett.github.io/statpsych/reference/ci.slope.prop.bs.html</loc></url>
 <url><loc>https://dgbonett.github.io/statpsych/reference/ci.spcor.html</loc></url>
 <url><loc>https://dgbonett.github.io/statpsych/reference/ci.spear.html</loc></url>
@@ -168,11 +169,15 @@
 <url><loc>https://dgbonett.github.io/statpsych/reference/size.ci.cor2.html</loc></url>
 <url><loc>https://dgbonett.github.io/statpsych/reference/size.ci.cronbach.html</loc></url>
 <url><loc>https://dgbonett.github.io/statpsych/reference/size.ci.cronbach2.html</loc></url>
+<url><loc>https://dgbonett.github.io/statpsych/reference/size.ci.cv.html</loc></url>
 <url><loc>https://dgbonett.github.io/statpsych/reference/size.ci.etasqr.html</loc></url>
+<url><loc>https://dgbonett.github.io/statpsych/reference/size.ci.gen.html</loc></url>
+<url><loc>https://dgbonett.github.io/statpsych/reference/size.ci.gen2.html</loc></url>
 <url><loc>https://dgbonett.github.io/statpsych/reference/size.ci.indirect.html</loc></url>
 <url><loc>https://dgbonett.github.io/statpsych/reference/size.ci.lc.ancova.html</loc></url>
 <url><loc>https://dgbonett.github.io/statpsych/reference/size.ci.lc.mean.bs.html</loc></url>
 <url><loc>https://dgbonett.github.io/statpsych/reference/size.ci.lc.mean.ws.html</loc></url>
+<url><loc>https://dgbonett.github.io/statpsych/reference/size.ci.lc.median.bs.html</loc></url>
 <url><loc>https://dgbonett.github.io/statpsych/reference/size.ci.lc.prop.bs.html</loc></url>
 <url><loc>https://dgbonett.github.io/statpsych/reference/size.ci.lc.stdmean.bs.html</loc></url>
 <url><loc>https://dgbonett.github.io/statpsych/reference/size.ci.lc.stdmean.ws.html</loc></url>
@@ -183,6 +188,8 @@
 <url><loc>https://dgbonett.github.io/statpsych/reference/size.ci.mean.ps.html</loc></url>
 <url><loc>https://dgbonett.github.io/statpsych/reference/size.ci.mean1.html</loc></url>
 <url><loc>https://dgbonett.github.io/statpsych/reference/size.ci.mean2.html</loc></url>
+<url><loc>https://dgbonett.github.io/statpsych/reference/size.ci.median.html</loc></url>
+<url><loc>https://dgbonett.github.io/statpsych/reference/size.ci.median2.html</loc></url>
 <url><loc>https://dgbonett.github.io/statpsych/reference/size.ci.oddsratio.html</loc></url>
 <url><loc>https://dgbonett.github.io/statpsych/reference/size.ci.pbcor.html</loc></url>
 <url><loc>https://dgbonett.github.io/statpsych/reference/size.ci.phi.html</loc></url>
@@ -219,6 +226,8 @@
 <url><loc>https://dgbonett.github.io/statpsych/reference/size.test.cor2.html</loc></url>
 <url><loc>https://dgbonett.github.io/statpsych/reference/size.test.cronbach.html</loc></url>
 <url><loc>https://dgbonett.github.io/statpsych/reference/size.test.cronbach2.html</loc></url>
+<url><loc>https://dgbonett.github.io/statpsych/reference/size.test.gen.html</loc></url>
+<url><loc>https://dgbonett.github.io/statpsych/reference/size.test.gen2.html</loc></url>
 <url><loc>https://dgbonett.github.io/statpsych/reference/size.test.lc.ancova.html</loc></url>
 <url><loc>https://dgbonett.github.io/statpsych/reference/size.test.lc.mean.bs.html</loc></url>
 <url><loc>https://dgbonett.github.io/statpsych/reference/size.test.lc.mean.ws.html</loc></url>
@@ -246,6 +255,7 @@
 <url><loc>https://dgbonett.github.io/statpsych/reference/test.kurtosis.html</loc></url>
 <url><loc>https://dgbonett.github.io/statpsych/reference/test.mean.html</loc></url>
 <url><loc>https://dgbonett.github.io/statpsych/reference/test.mono.mean.bs.html</loc></url>
+<url><loc>https://dgbonett.github.io/statpsych/reference/test.mono.median.bs.html</loc></url>
 <url><loc>https://dgbonett.github.io/statpsych/reference/test.mono.prop.bs.html</loc></url>
 <url><loc>https://dgbonett.github.io/statpsych/reference/test.prop.bs.html</loc></url>
 <url><loc>https://dgbonett.github.io/statpsych/reference/test.prop.html</loc></url>

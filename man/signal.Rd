@@ -32,7 +32,7 @@ An equal-variance Gausian model is assumed. The parameter estimates are
 computed after adding .5 to the number of "Yes" responses in each condtion
 (the signal and noise conditions) and adding 1 to the number of signal
 trials and to the number of noise trails. In memory recognition studies,
-the observers is first presented with set of words or images to study,
+the observer is first presented with set of words or images to study,
 and is later presented with another set of words or images where some
 items are from the first list (old items) and some items are new items.
 }

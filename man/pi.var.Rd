@@ -22,7 +22,7 @@ pi.var(alpha, var, n0, n, type)
 }}
 }
 \value{
-Returns two-sided or one-sided prediction limits of an estimate variance
+Returns two-sided or one-sided prediction limit(s) of an estimate variance
 in a future study
 }
 \description{

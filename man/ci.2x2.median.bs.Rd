@@ -30,7 +30,7 @@ Returns a 7-row matrix (one row per effect). The columns are:
 \description{
 Computes distribution-free confidence intervals for the AB interaction
 effect, main effect of A, main effect of B, simple main effects of A, and
-simple main effects of B in a 2x2 between-subjects design with a
+simple main effects of B in a 2x2 between-subjects factorial design with a
 quantitative response variable. The effects are defined in terms of medians
 rather than means. Tied scores within each group are assumed to be rare.
 }

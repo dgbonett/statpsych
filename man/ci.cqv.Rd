@@ -25,8 +25,8 @@ Computes a distribution-free confidence interval for a population coefficient
 of quartile variation which is defined as (Q3 - Q1)/(Q3 + Q1) where Q1 is the
 25th percentile and Q3 is the 75th percentile. The coefficient of quartile
 variation assumes ratio-scale scores and is a robust alternative to the
-coefficient of variation. The 25th and 75th percentiles are computed using
-the type = 2 method (SAS default).
+coefficient of variation (see \link[statpsych]{ci.cv}). The 25th and 75th
+percentiles are computed using the type = 2 method (SAS default).
 }
 \examples{
 y <- c(30, 20, 15, 10, 10, 60, 20, 25, 20, 30, 10, 5, 50, 40,

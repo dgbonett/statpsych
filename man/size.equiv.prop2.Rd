@@ -28,7 +28,8 @@ practical equivalence, -h to h, for the difference in population proportions.
 The absolute difference in the proportion planning values must be less than h.
 Equivalence tests often require a very large sample size. Equivalence tests
 usually use 2 x alpha rather than alpha (e.g., use alpha = .10 rather than
-alpha = .05).
+alpha = .05). This function sets the effect size equal to the difference in
+proportion planning values.
 }
 \examples{
 size.equiv.prop2(.1, .8, .30, .35, .15)

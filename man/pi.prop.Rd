@@ -22,7 +22,7 @@ pi.prop(alpha, prop, n0, n, type)
 }}
 }
 \value{
-Returns a prediction interval for an estimated proportion in a future
+Returns one-sided or two-sided prediction limit(s) for an estimated proportion in a future
 study
 }
 \description{

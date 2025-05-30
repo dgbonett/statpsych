@@ -9,7 +9,7 @@ test_that("ci.prop returns valid matrix", {
   res <- ci.prop(.05, 12, 100)
   
   testthat::expect_equal(class(res), c("matrix", "array"))
-  testthat::expect_equal(dim(res), c(2, length(colnames_expected)))
+  testthat::expect_equal(dim(res), c(3, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)
   
   testthat::expect_snapshot(res)

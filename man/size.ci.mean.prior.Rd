@@ -27,13 +27,16 @@ desired confidence interval precision in applications where an estimated
 variance from a prior study is available. The actual confidence interval
 width in the planned study will depend on the value of the estimated
 variance in the planned study. An estimated variance from a prior study
-is used to predict the value of the estimated correlation in the planned
-study, and the predicted variance estimate is then used in the sample
-size computation.
+can be used to compute an upper prediction limit for the estimated variance
+in the planned study. The upper prediction limit is then used as the variance
+planning value.  Using a larger confidence level (1 - alpha2) for the
+upper prediction limit will increase the probability that the width of
+of the confidence interval for the population mean in the planned study
+will be less than or equal to the desired width.
 
 This sample size approach assumes that the population variance in the
 prior study is very similar to the population variance in the planned
-study. In a typical sample size analysis, this type of information is not
+study. However, this type of prior information is typically not
 available, and the researcher must use expert opinion to guess the value
 of the variance that will be observed in the planned study. The
 \link[statpsych]{size.ci.mean} function uses a variance planning value

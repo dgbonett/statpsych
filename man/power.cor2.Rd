@@ -14,9 +14,9 @@ power.cor2(alpha, n1, n2, cor1, cor2, s)
 
 \item{n2}{planned sample size for group 2}
 
-\item{cor1}{planning value of correlation for group 1}
+\item{cor1}{correlation planning value for group 1}
 
-\item{cor2}{planning value of correlation for group 2}
+\item{cor2}{correlation planning value for group 2}
 
 \item{s}{number of control variables}
 }

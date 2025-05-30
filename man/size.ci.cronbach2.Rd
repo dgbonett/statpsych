@@ -10,11 +10,11 @@ size.ci.cronbach2(alpha, rel1, rel2, r, w)
 \arguments{
 \item{alpha}{alpha level for hypothesis test}
 
-\item{rel1}{group 1 reliability planning value}
+\item{rel1}{reliability planning value for group 1}
 
-\item{rel2}{group 2 reliability planning value}
+\item{rel2}{reliability planning value for group 2}
 
-\item{r}{number of measurements (items, raters)}
+\item{r}{number of measurements (items, raters, forms)}
 
 \item{w}{desired confidence interval width}
 }
@@ -22,9 +22,9 @@ size.ci.cronbach2(alpha, rel1, rel2, r, w)
 Returns the required sample size for each group
 }
 \description{
-Computes the sample size required to estimate a difference in population
-Cronbach reliability coefficients with desired precision in a 2-group
-design.
+Computes the sample size per group (assuming equal sample sizes) required
+to estimate a difference in population Cronbach reliability coefficients
+with desired precision in a 2-group design.
 }
 \examples{
 size.ci.cronbach2(.05, .85, .70, 8, .15)

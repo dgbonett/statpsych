@@ -6,6 +6,7 @@
                       Estimate         SE         LL        UL
       Adjusted Wald  0.1346154 0.03346842 0.06901848 0.2002123
       Wilson with cc 0.1200000 0.03249615 0.06625153 0.2039772
+      Exact          0.1200000 0.03249615 0.06356890 0.2002357
 
 # ci.pairs.mult  returns valid matrix
 

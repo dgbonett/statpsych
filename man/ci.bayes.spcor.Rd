@@ -33,7 +33,7 @@ small values (-r to r). If the skeptic is 95\% confident that the population
 correlation is between -r and r, then the prior standard deviation can be
 set to r/1.96. A semipartial correlation that is less than .2 in absolute
 value is typically considered to be "small", and the prior standard
-deviation could then be set to .2/1.96 = .1. A semipartial correlation value
+deviation could then be set to .2/1.96. A semipartial correlation value
 that is considered to be small will depend on the application. This function
 requires the standard error of the estimated semipartial correlation which
 can be obtained from the ci.spcor function.

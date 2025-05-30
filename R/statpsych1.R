@@ -5156,7 +5156,7 @@ size.ci.cv <- function(alpha, CV, w) {
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  var    planning value of response variable variance
 #' @param  w      desired confidence interval width
-#' @parm   dist   
+#' @param   dist   
 #' * set to 1 for Normal distribution (skew = 0, kurtosis = 3) 
 #' * set to 2 for Logistic distribution (skew = 0, kurtosis = 4.2)  
 #' * set to 3 for Laplace distribution (skew = 0, kurtosis = 6)
@@ -5236,7 +5236,7 @@ size.ci.median <- function(alpha, var, w, dist) {
 #' @param  var    planning value of average within-group variance
 #' @param  w      desired confidence interval width
 #' @param  R      n2/n1 ratio 
-#' @parm   dist  
+#' @param   dist  
 #' * set to 1 for Normal distribution (skew = 0, kurtosis = 3) 
 #' * set to 2 for Logistic distribution (skew = 0, kurtosis = 4.2)  
 #' * set to 3 for Laplace distribution (skew = 0, kurtosis = 6)
@@ -5316,7 +5316,7 @@ size.ci.median2 <- function(alpha, var, w, R, dist) {
 #' @param  var    planning value of average within-group variance  
 #' @param  w      desired confidence interval width
 #' @param  v      vector of between-subjects contrast coefficients 
-#' @parm   dist   
+#' @param   dist   
 #' * set to 1 for Normal distribution (skew = 0, kurtosis = 3) 
 #' * set to 2 for Logistic distribution (skew = 0, kurtosis = 4.2)  
 #' * set to 3 for Laplace distribution (skew = 0, kurtosis = 6)

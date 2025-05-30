@@ -19,7 +19,7 @@ test.cor(cor, n, s, h)
 Returns a 1-row matrix. The columns are:
 \itemize{
 \item Estimate - estimate of correlation
-\item t or z - t test statistic (for h = 0) or z test statistic
+\item t or z - t test statistic (for h = 0) or z test statistic (for nonzero h)
 \item p - two-sided p-value
 }
 }
@@ -30,7 +30,7 @@ transformation for a test of the null hypothesis that a Pearson or
 partial correlation is equal to some specified nonzero value. Set s = 0
 for a Pearson correlation. The hypothesis testing results should be
 accompanied with a confidence interval for the population Pearson or
-partial correlation value ((see \link[statpsych]{ci.cor}).
+partial correlation value (see \link[statpsych]{ci.cor}).
 }
 \examples{
 test.cor(.484, 100, 0, .2)

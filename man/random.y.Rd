@@ -30,7 +30,7 @@ for generating hypothetical data for classroom demonstrations.
 \examples{
 random.y(10, 3.6, 2.8, 1, 7, 0) 
 
-# Should return:
+# Should return random numbers such as:
 # [1] 2 7 7 1 6 3 1 3 2 1
  
 

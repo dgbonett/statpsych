@@ -34,7 +34,7 @@ Returns a 1-row matrix. The columns are:
 \description{
 Performs a computer simulation of the confidence interval performance for a
 population mean. Sample data can be generated from five different population
-distributions. All distributions are scaled to have standard deviations
+distributions. All distributions are scaled to have a standard deviation
 of 1.0.
 }
 \examples{

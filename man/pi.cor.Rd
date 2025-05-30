@@ -22,7 +22,7 @@ pi.cor(alpha, cor, n0, n, type)
 }}
 }
 \value{
-Returns one-sided or two-sided prediction limits of an estimated
+Returns one-sided or two-sided prediction limit(s) of an estimated
 Pearson correlation in a future study
 }
 \description{
@@ -46,6 +46,12 @@ pi.cor(.1, .761, 50, 100, 1)
 # Should return:
 #         LL        UL
 #  0.6034092 0.8573224
+ 
+pi.cor(.1, .761, 50, 100, 3)
+
+# Should return:
+#         LL
+#  0.6428751
  
 
 }

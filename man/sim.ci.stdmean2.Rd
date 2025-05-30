@@ -5,7 +5,7 @@
 \title{Simulates confidence interval coverage probability for a standardized mean
 difference in a 2-group design}
 \usage{
-sim.ci.stdmean2(alpha, n1, n2, sd.ratio, dist1, dist2, d, rep)
+sim.ci.stdmean2(alpha, n1, n2, sd2, dist1, dist2, d, rep)
 }
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
@@ -14,7 +14,7 @@ sim.ci.stdmean2(alpha, n1, n2, sd.ratio, dist1, dist2, d, rep)
 
 \item{n2}{sample size for group 2}
 
-\item{sd.ratio}{ratio of population standard deviations (sd2/sd1)}
+\item{sd2}{population standard deviation for group 2}
 
 \item{dist1}{type of distribution for group 1 (1, 2, 3, 4, or 5)}
 
@@ -45,7 +45,7 @@ Performs a computer simulation of confidence interval performance for
 two types of standardized mean differences in a 2-group design (see
 ci.stdmean2). Sample data for each group can be generated from five
 different population distributions. All distributions are scaled to have
-standard deviations of 1.0 in group 1.
+a standard deviation of 1.0 for group 1.
 }
 \examples{
 sim.ci.stdmean2(.05, 20, 20, 1.5, 3, 4, .75, 5000)

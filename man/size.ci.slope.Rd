@@ -9,7 +9,7 @@ size.ci.slope(alpha, evar, x, w)
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
 
-\item{evar}{planning value of within group (error) variance}
+\item{evar}{planning value of within-group (error) variance}
 
 \item{x}{vector of x values of the quantitative factor}
 

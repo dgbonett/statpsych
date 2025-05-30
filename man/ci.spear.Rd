@@ -24,6 +24,7 @@ Returns a 1-row matrix. The columns are:
 }
 \description{
 Computes a Fisher confidence interval for a population Spearman correlation.
+This function is not appropropriate for ordered categorical variables.
 }
 \examples{
 y <- c(21, 4, 9, 12, 35, 18, 10, 22, 24, 1, 6, 8, 13, 16, 19)

@@ -22,9 +22,9 @@ power (see size.test.sign.ps for a paired-samples sign test). The Sign
 test is a test of the null hypothesis that the population median is equal
 to some specified value. This null hypothesis can also be expressed in
 terms of the proportion of scores in the population that are greater than
-the hypothesized population median value. Under the null hypothesis, this
-proportion is equal to .5. This function requires a planning value of this
-population proportion.
+the hypothesized population median value. Under the null hypothesis, the
+population proportion is equal to .5. This function requires a planning
+value of the population proportion.
 }
 \examples{
 size.test.sign(.05, .90, .3)

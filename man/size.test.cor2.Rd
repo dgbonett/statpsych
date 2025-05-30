@@ -12,9 +12,9 @@ size.test.cor2(alpha, pow, cor1, cor2, s, R)
 
 \item{pow}{desired power}
 
-\item{cor1}{planning value of correlation}
+\item{cor1}{correlation planning value for group 1}
 
-\item{cor2}{planning value of correlation}
+\item{cor2}{correlation planning value for group 2}
 
 \item{s}{number of control variables}
 
