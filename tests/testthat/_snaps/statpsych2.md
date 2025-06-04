@@ -470,3 +470,53 @@
        Posterior mean         LL        UL
             0.2272797 0.07288039 0.3710398
 
+# test.mono.median.bs example
+
+    Code
+      res
+    Output
+           Estimate       SE        LL         UL
+       1 2   -11.71 4.130690 -21.59879 -1.8212115
+       2 3   -11.72 4.780481 -23.16438 -0.2756247
+       3 4   -16.92 5.382128 -29.80471 -4.0352947
+
+# ci.slope.median.bs example
+
+    Code
+      res
+    Output
+        Estimate        SE        z           p        LL        UL
+       0.3664407 0.1163593 3.149216 0.001637091 0.1383806 0.5945008
+
+# size.ci.gen example
+
+    Code
+      res
+    Output
+       Sample size
+                61
+
+# size.ci.gen2 example
+
+    Code
+      res
+    Output
+       n1 n2
+       45 45
+
+# size.test.gen(.05, .8, 2.89, 30, 5) example
+
+    Code
+      res
+    Output
+       Sample size
+                79
+
+# size.test.gen2(.05, .85, .175, 30, .5, 1) example
+
+    Code
+      res
+    Output
+       n1 n2
+       66 66
+

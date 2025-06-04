@@ -852,3 +852,43 @@ test_that("ci.bayes.spcor example", {
   testthat::expect_snapshot(res)
 })
 
+
+test_that("test.mono.median.bs example", {
+  m <- c(12.86, 24.57, 36.29, 53.21)
+  se <- c(2.85, 2.99, 3.73, 3.88)
+  res <- test.mono.median.bs(.05, m, se)
+  testthat::expect_snapshot(res)
+})
+
+
+test_that("ci.slope.median.bs example", {
+  m <- c(33.5, 37.9, 38.0, 44.1)
+  se <- c(0.84, 0.94, 1.65, 2.98)
+  x <- c(5, 10, 20, 30)
+  res <- ci.slope.median.bs(.05, m, se, x)
+  testthat::expect_snapshot(res)
+})
+
+
+test_that("size.ci.gen example", {
+  res <- size.ci.gen(.05, 2.89, 30, 8)
+  testthat::expect_snapshot(res)
+})
+
+
+test_that("size.ci.gen2 example", {
+  res <- size.ci.gen2(.05, .175, 30, .8, 1)
+  testthat::expect_snapshot(res)
+})
+
+
+test_that("size.test.gen(.05, .8, 2.89, 30, 5) example", {
+  res <- size.test.gen(.05, .8, 2.89, 30, 5)
+  testthat::expect_snapshot(res)
+})
+
+
+test_that("size.test.gen2(.05, .85, .175, 30, .5, 1) example", {
+  res <- size.test.gen2(.05, .85, .175, 30, .5, 1)
+  testthat::expect_snapshot(res)
+})

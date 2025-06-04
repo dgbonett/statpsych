@@ -1300,3 +1300,29 @@ test_that("size.ci.mean.prior returns valid matrix", {
   testthat::expect_snapshot(res)
 })
 
+
+
+test_that("size.ci.cv example", {
+  res <- size.ci.cv(.05, .25, .10)
+  testthat::expect_snapshot(res)
+})
+
+
+
+test_that("size.ci.median example", {
+  res <- size.ci.median(.05, 264.4, 10, 1)
+  testthat::expect_snapshot(res)
+})
+
+
+test_that("size.ci.median2 example", {
+  res <- size.ci.median2(.05, 37.1, 5, 1, 1)
+  testthat::expect_snapshot(res)
+})
+
+
+test_that("size.ci.lc.median.bs example", {
+  v <- c(.5, .5, -1)
+  res <- size.ci.lc.median.bs(.05, 5.62, 2.0, v, 1)
+  testthat::expect_snapshot(res)
+})
