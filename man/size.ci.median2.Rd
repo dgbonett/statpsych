@@ -42,13 +42,13 @@ size.ci.median2(.05, 37.1, 5, 1, 1)
 
 # Should return:
 # n1  n2
-# 47  47
+# 72  72
 
-size.ci.median2(.05, 37.1, 5, 1, 4)
+size.ci.median2(.05, 37.1, 5, 2, 4)
 
 # Should return:
 # n1  n2
-# 32  96
+# 51 102
 
 }
 \references{
