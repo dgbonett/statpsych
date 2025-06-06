@@ -2,12 +2,9 @@
 % Please edit documentation in R/statpsych3.R
 \name{ci.prop}
 \alias{ci.prop}
-\alias{ci.prop1}
 \title{Confidence intervals for a proportion}
 \usage{
 ci.prop(alpha, f, n)
-
-ci.prop1(alpha, f, n)
 }
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
@@ -45,8 +42,6 @@ The columns of row 3 are:
 Computes adjusted Wald (Agresi-Coull), Wilson, and exact confidence intervals
 for a population proportion. The Wilson confidence interval uses a
 continuity correction.
-
-ci.prop1 is deprecated and will soon be removed from statpsych; please switch to ci.prop
 }
 \examples{
 ci.prop(.05, 12, 100)

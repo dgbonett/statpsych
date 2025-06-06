@@ -62,9 +62,11 @@
 <url><loc>https://dgbonett.github.io/statpsych/reference/ci.mean.fpc.html</loc></url>
 <url><loc>https://dgbonett.github.io/statpsych/reference/ci.mean.html</loc></url>
 <url><loc>https://dgbonett.github.io/statpsych/reference/ci.mean.ps.html</loc></url>
+<url><loc>https://dgbonett.github.io/statpsych/reference/ci.mean1.html</loc></url>
 <url><loc>https://dgbonett.github.io/statpsych/reference/ci.mean2.html</loc></url>
 <url><loc>https://dgbonett.github.io/statpsych/reference/ci.median.html</loc></url>
 <url><loc>https://dgbonett.github.io/statpsych/reference/ci.median.ps.html</loc></url>
+<url><loc>https://dgbonett.github.io/statpsych/reference/ci.median1.html</loc></url>
 <url><loc>https://dgbonett.github.io/statpsych/reference/ci.median2.html</loc></url>
 <url><loc>https://dgbonett.github.io/statpsych/reference/ci.oddsratio.html</loc></url>
 <url><loc>https://dgbonett.github.io/statpsych/reference/ci.pairs.mult.html</loc></url>
@@ -78,6 +80,7 @@
 <url><loc>https://dgbonett.github.io/statpsych/reference/ci.prop.html</loc></url>
 <url><loc>https://dgbonett.github.io/statpsych/reference/ci.prop.inv.html</loc></url>
 <url><loc>https://dgbonett.github.io/statpsych/reference/ci.prop.ps.html</loc></url>
+<url><loc>https://dgbonett.github.io/statpsych/reference/ci.prop1.html</loc></url>
 <url><loc>https://dgbonett.github.io/statpsych/reference/ci.prop1.inv.html</loc></url>
 <url><loc>https://dgbonett.github.io/statpsych/reference/ci.prop2.html</loc></url>
 <url><loc>https://dgbonett.github.io/statpsych/reference/ci.prop2.inv.html</loc></url>
@@ -111,6 +114,7 @@
 <url><loc>https://dgbonett.github.io/statpsych/reference/ci.stdmean.html</loc></url>
 <url><loc>https://dgbonett.github.io/statpsych/reference/ci.stdmean.ps.html</loc></url>
 <url><loc>https://dgbonett.github.io/statpsych/reference/ci.stdmean.strat.html</loc></url>
+<url><loc>https://dgbonett.github.io/statpsych/reference/ci.stdmean1.html</loc></url>
 <url><loc>https://dgbonett.github.io/statpsych/reference/ci.stdmean2.html</loc></url>
 <url><loc>https://dgbonett.github.io/statpsych/reference/ci.tetra.html</loc></url>
 <url><loc>https://dgbonett.github.io/statpsych/reference/ci.theil.html</loc></url>
