@@ -7226,7 +7226,7 @@ sim.ci.median2 <- function(alpha, n1, n2, sd2, dist1, dist2, rep) {
      y2 <- sd2*.7745*rt(n2, 5)
      popmedian2 <- 0
    } else if (dist2 == 4) {
-     y2 <- s2*.5*rgamma(n2, 4)
+     y2 <- sd2*.5*rgamma(n2, 4)
      popmedian2 <- sd2*1.837
    } else {
      y2 <- sd2*rgamma(n2, 1)
