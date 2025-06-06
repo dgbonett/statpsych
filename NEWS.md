@@ -1,4 +1,4 @@
-statpsych version 1.8.0 (Release date: 2025/06/xx)
+statpsych version 1.8.0 (Release date: 2025/06/06)
 ===========
 
 Changes:
