@@ -428,6 +428,7 @@ ci.pbcor <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #'  
 #' 
 #' @importFrom stats qnorm
+#' @importFrom stats na.omit
 #' @export
 ci.spear <- function(alpha, y, x) {
  if (length(y) != length(x)) {stop("length of y must equal length of x")}
@@ -560,6 +561,7 @@ ci.spear2 <- function(alpha, cor1, cor2, n1, n2) {
 #' 
 #' @importFrom stats qnorm
 #' @importFrom stats sd
+#' @importFrom stats na.omit
 #' @export
 ci.mape <- function(alpha, res, s) {
  res <- na.omit(res)
@@ -625,6 +627,7 @@ ci.mape <- function(alpha, res, s) {
 #' 
 #' @importFrom stats qnorm
 #' @importFrom stats sd
+#' @importFrom stats na.omit
 #' @export
 ci.ratio.mape2 <- function(alpha, res1, res2, s1, s2) {
  res1 <- na.omit(res1)
@@ -1132,6 +1135,7 @@ ci.rsqr <- function(alpha, r2, s, n) {
 #'
 #'
 #' @importFrom stats qnorm
+#' @importFrom stats na.omit
 #' @export
 ci.theil <- function(alpha, y, x) {
  if (length(y) != length(x)) {stop("length of y must equal length of x")}
