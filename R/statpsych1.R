@@ -436,6 +436,7 @@ ci.tukey <-function(alpha, m, sd, n) {
 #'
 #' @importFrom stats qt
 #' @importFrom stats var
+#' @importFrom stats na.omit
 #' @export
 ci.ratio.mean2 <- function(alpha, y1, y2){
  y1 <- na.omit(y1)
@@ -838,6 +839,7 @@ ci.mean.ps <- function(alpha, m1, m2, sd1, sd2, cor, n) {
 #'
 #' @importFrom stats qt
 #' @importFrom stats cor
+#' @importFrom stats na.omit
 #' @export
 ci.ratio.mean.ps <- function(alpha, y1, y2){
  if (length(y1) != length(y2)) {stop("length of y1 must equal length of y2")}
@@ -1072,6 +1074,8 @@ ci.lc.stdmean.ws <- function(alpha, m, sd, cor, n, q) {
 #'
 #' @importFrom stats qnorm
 #' @importFrom stats sd
+#' @importFrom stats median
+#' @importFrom stats na.omit
 #' @export
 ci.mad <- function(alpha, y) {
  y <- na.omit(y)
@@ -1133,6 +1137,7 @@ ci.mad <- function(alpha, y) {
 #' @importFrom stats qnorm
 #' @importFrom stats sd
 #' @importFrom stats median
+#' @importFrom stats na.omit
 #' @export
 ci.ratio.mad2 <- function(alpha, y1, y2) {
  z <- qnorm(1 - alpha/2)
@@ -1211,6 +1216,7 @@ ci.ratio.mad2 <- function(alpha, y1, y2) {
 #'
 #' @importFrom stats qnorm
 #' @importFrom stats sd
+#' @importFrom stats na.omit
 #' @export
 ci.ratio.sd2 <- function(alpha, y1, y2) {
  z <- qnorm(1 - alpha/2)
@@ -1292,6 +1298,7 @@ ci.ratio.sd2 <- function(alpha, y1, y2) {
 #' @importFrom stats qnorm
 #' @importFrom stats sd
 #' @importFrom stats median
+#' @importFrom stats na.omit
 #' @export
 ci.ratio.mad.ps <- function(alpha, y1, y2) {
  if (length(y1) != length(y2)) {stop("length of y1 must equal length of y2")}
@@ -1498,6 +1505,7 @@ ci.ratio.cv2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' @importFrom stats qnorm
 #' @importFrom stats var
 #' @importFrom stats median
+#' @importFrom stats na.omit
 #' @export
 ci.cod <-function(alpha, y) {
  z <- qnorm(1 - alpha/2)
@@ -1573,6 +1581,7 @@ ci.cod <-function(alpha, y) {
 #' @importFrom stats qnorm
 #' @importFrom stats var
 #' @importFrom stats median
+#' @importFrom stats na.omit
 #' @export
 ci.ratio.cod2 <-function(alpha, y1, y2) {
  y1 <- na.omit(y1)
@@ -1684,6 +1693,7 @@ ci.ratio.cod2 <-function(alpha, y1, y2) {
 #' @importFrom stats qnorm
 #' @importFrom stats quantile
 #' @importFrom stats pbinom
+#' @importFrom stats na.omit
 #' @export
 ci.cqv <- function(alpha, y) {
  y <- na.omit(y)
@@ -1766,6 +1776,7 @@ ci.cqv <- function(alpha, y) {
 #' @importFrom stats qnorm
 #' @importFrom stats pbinom
 #' @importFrom stats median
+#' @importFrom stats na.omit
 #' @export
 ci.median <- function(alpha, y) {
  y <- na.omit(y)
@@ -1833,6 +1844,7 @@ ci.median <- function(alpha, y) {
 #' @importFrom stats qnorm
 #' @importFrom stats median
 #' @importFrom stats pbinom
+#' @importFrom stats na.omit
 #' @export
 ci.median2 <- function(alpha, y1, y2) {
  z <- qnorm(1 - alpha/2)
@@ -1910,6 +1922,7 @@ ci.median2 <- function(alpha, y1, y2) {
 #' @importFrom stats qnorm
 #' @importFrom stats pbinom
 #' @importFrom stats median
+#' @importFrom stats na.omit
 #' @export
 ci.ratio.median2 <- function(alpha, y1, y2) {
  y1 <- na.omit(y1)
@@ -2054,6 +2067,7 @@ ci.lc.median.bs <- function(alpha, m, se, v) {
 #' @importFrom stats qnorm
 #' @importFrom stats pbinom
 #' @importFrom stats median
+#' @importFrom stats na.omit
 #' @export
 ci.median.ps <- function(alpha, y1, y2) {
  if (length(y1) != length(y2)) {stop("length of y1 must equal length of y2")}
@@ -2139,6 +2153,7 @@ ci.median.ps <- function(alpha, y1, y2) {
 #' @importFrom stats qnorm
 #' @importFrom stats pbinom
 #' @importFrom stats median
+#' @importFrom stats na.omit
 #' @export
 ci.ratio.median.ps <- function(alpha, y1, y2) {
  if (length(y1) != length(y2)) {stop("length of y1 must equal length of y2")}
@@ -2228,6 +2243,7 @@ ci.ratio.median.ps <- function(alpha, y1, y2) {
 #'
 #'
 #' @importFrom stats qnorm
+#' @importFrom stats na.omit
 #' @export
 ci.sign <- function(alpha, y, h) {
  y <- na.omit(y)
@@ -2292,6 +2308,7 @@ ci.sign <- function(alpha, y, h) {
 #'
 #'
 #' @importFrom stats qnorm
+#' @importFrom stats na.omit
 #' @export
 ci.mann <- function(alpha, y1, y2){
  z <- qnorm(1 - alpha/2)
@@ -2900,6 +2917,7 @@ ci.2x2.mean.ws <- function(alpha, y11, y12, y21, y22) {
 #'
 #' @importFrom stats qt
 #' @importFrom stats pt
+#' @importFrom stats na.omit
 #' @export
 ci.2x2.mean.bs <- function(alpha, y11, y12, y21, y22) {
  y11 <- na.omit(y11)
@@ -3052,6 +3070,7 @@ ci.2x2.mean.bs <- function(alpha, y11, y12, y21, y22) {
 #'
 #'
 #' @importFrom stats qnorm
+#' @importFrom stats na.omit
 #' @export
 ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
  z <- qnorm(1 - alpha/2)
@@ -3216,6 +3235,7 @@ ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
 #' @importFrom stats qnorm
 #' @importFrom stats pbinom
 #' @importFrom stats median
+#' @importFrom stats na.omit
 #' @export
 ci.2x2.median.bs <- function(alpha, y11, y12, y21, y22) {
  zcrit <- qnorm(1 - alpha/2)
@@ -4156,6 +4176,7 @@ test.mean <- function(m, sd, n, h) {
 #'
 #' @importFrom stats rnorm
 #' @importFrom stats sd
+#' @importFrom stats na.omit
 #' @export
 test.skew <- function(y) {
  rep <- 250000
@@ -4219,6 +4240,7 @@ test.skew <- function(y) {
 #'
 #' @importFrom stats rnorm
 #' @importFrom stats sd
+#' @importFrom stats na.omit
 #' @export
 test.kurtosis <- function(y) {
  rep <- 250000
