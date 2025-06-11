@@ -3652,6 +3652,8 @@ power.cor2 <- function(alpha, n1, n2, cor1, cor2, s) {
 }
 
 
+
+
 # ============================= Miscellaneous =================================
 #  slope.contrast =============================================================
 #' Contrast coefficients for the slope of a quantitative factor
