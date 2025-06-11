@@ -19,7 +19,7 @@ Returns a 1-row matrix. The columns are:
 \item F - F statistic for test of null hypothesis
 \item dfA - degrees of freedom for between-subjects factor
 \item dfE - error degrees of freedom
-\item p - p-value for F-test
+\item p - p-value
 \item Eta-squared - estimate of eta-squared
 \item adj Eta-squared - a bias adjusted estimate of eta-squared
 }

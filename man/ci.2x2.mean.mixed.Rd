@@ -10,13 +10,13 @@ ci.2x2.mean.mixed(alpha, y11, y12, y21, y22)
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
 
-\item{y11}{vector of scores at level 1 of A and level 1 of B}
+\item{y11}{vector of scores at level 1 of A and level 1 of B (group 1)}
 
-\item{y12}{vector of scores at level 1 of A and level 2 of B}
+\item{y12}{vector of scores at level 1 of A and level 2 of B (group 2)}
 
-\item{y21}{vector of scores at level 2 of A and level 1 of B}
+\item{y21}{vector of scores at level 2 of A and level 1 of B (group 1)}
 
-\item{y22}{vector of scores at level 2 of A and level 2 of B}
+\item{y22}{vector of scores at level 2 of A and level 2 of B (group 2)}
 }
 \value{
 Returns a 7-row matrix (one row per effect). The columns are:
@@ -32,16 +32,16 @@ Returns a 7-row matrix (one row per effect). The columns are:
 }
 \description{
 Computes confidence intervals and tests for the AB interaction effect,
-main effect of A, main effect of B, simple main effects of A, and simple main
+main effect of A, main efect of B, simple main effects of A, and simple main
 effects of B in a 2x2 mixed factorial design with a quantitative response
-variable where Factor A is a within-subjects factor, and Factor B is a
+variable where Factor A is a within-subjects factor and Factor B is a
 between-subjects factor. A Satterthwaite adjustment to the degrees of
 freedom is used and equality of population variances is not assumed.
 }
 \examples{
 y11 <- c(18, 19, 20, 17, 20, 16)
-y12 <- c(19, 18, 19, 20, 17, 16)
-y21 <- c(19, 16, 16, 14, 16, 18)
+y12 <- c(19, 16, 16, 14, 16, 18)
+y21 <- c(19, 18, 19, 20, 17, 16)
 y22 <- c(16, 10, 12,  9, 13, 15)
 ci.2x2.mean.mixed(.05, y11, y12, y21, y22)
 

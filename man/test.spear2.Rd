@@ -28,7 +28,7 @@ Computes a z test for a difference of population Spearman correlations in a
 2-group design. The test statistic uses a Bonett-Wright standard error for
 each Spearman correlation. The hypothesis testing results should be
 accompanied with a confidence interval for a difference in population
-Spearman correlation values.
+Spearman correlation values (see \link[statpsych]{ci.spear2}).
 }
 \examples{
 test.spear2(.684, .437, 100, 125)
@@ -41,7 +41,4 @@ test.spear2(.684, .437, 100, 125)
 }
 \references{
 \insertRef{Bonett2000}{statpsych}
-}
-\seealso{
-\link[statpsych]{ci.spear2}
 }

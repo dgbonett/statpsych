@@ -16,7 +16,7 @@ size.test.cronbach2(alpha, pow, rel1, rel2, r)
 
 \item{rel2}{reliability planning value for group 2}
 
-\item{r}{number of measurements (items, raters)}
+\item{r}{number of measurements (items, raters, forms)}
 }
 \value{
 Returns the required sample size for each group

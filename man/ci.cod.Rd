@@ -21,11 +21,12 @@ Returns a 1-row matrix. The columns are:
 }
 }
 \description{
-Computes a confidence interval for a population coefficient of dispersion
-which is defined as a mean absolute deviation from the median divided by a
-median. The coefficient of dispersion assumes ratio-scale scores and is a
-robust alternative to the coefficient of variation. An approximate
-standard error is recovered from the confidence interval.
+Computes a confidence interval for a population coefficient of
+dispersion (COD). The COD is a mean absolute deviation from the median
+divided by the median. The coefficient of dispersion assumes ratio-scale
+scores and is a robust alternative to the coefficient of variation
+(see \link[statpsych]{ci.cv}). An approximate standard error is
+recovered from the confidence interval.
 }
 \examples{
 y <- c(30, 20, 15, 10, 10, 60, 20, 25, 20, 30, 10, 5, 50, 40,

@@ -5,14 +5,14 @@
 \title{Simulates confidence interval coverage probability for a paired-samples mean
 difference}
 \usage{
-sim.ci.mean.ps(alpha, n, sd.ratio, cor, dist1, dist2, rep)
+sim.ci.mean.ps(alpha, n, sd2, cor, dist1, dist2, rep)
 }
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
 
 \item{n}{sample size}
 
-\item{sd.ratio}{ratio of population standard deviations}
+\item{sd2}{population standard deviation at level 2}
 
 \item{cor}{population correlation of paired observations}
 
@@ -43,7 +43,7 @@ Performs a computer simulation of confidence interval performance for a
 population mean difference in a paired-samples design. Sample data for the two
 levels of the within-subjects factor can be generated from bivariate population
 distributions with five different marginal distributions. All distributions
-are scaled to have standard deviations of 1.0 at level 1. Bivariate random
+are scaled to have a standard deviation of 1.0 at level 1. Bivariate random
 data with specified marginal skewness and kurtosis are generated using the
 unonr function in the mnonr package.
 }
@@ -52,7 +52,7 @@ sim.ci.mean.ps(.05, 30, 1.5, .7, 4, 5, 1000)
 
 # Should return (within sampling error):
 # Coverage Lower Error Upper Error Ave CI Width
-#  0.93815     0.05125      0.0106    0.7778518
+#  0.94415     0.04525      0.0106    0.7818518
 
 
 }

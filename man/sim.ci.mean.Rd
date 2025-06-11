@@ -34,10 +34,16 @@ Returns a 1-row matrix. The columns are:
 \description{
 Performs a computer simulation of the confidence interval performance for a
 population mean. Sample data can be generated from five different population
-distributions. All distributions are scaled to have standard deviations
+distributions. All distributions are scaled to have a standard deviation
 of 1.0.
 }
 \examples{
+sim.ci.mean(.05, 10, 1, 5000)
+
+# Should return (within sampling error):
+# Coverage Lower Error Upper Error Ave CI Width
+#   0.9484      0.0264      0.0252     1.392041
+
 sim.ci.mean(.05, 40, 4, 1000)
 
 # Should return (within sampling error):

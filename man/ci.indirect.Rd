@@ -9,9 +9,9 @@ ci.indirect(alpha, b1, b2, se1, se2)
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
 
-\item{b1}{unstandardized slope estimate for first path}
+\item{b1}{slope estimate for first path}
 
-\item{b2}{unstandardized slope estimate for second path}
+\item{b2}{slope estimate for second path}
 
 \item{se1}{standard error for b1}
 
@@ -28,14 +28,15 @@ Returns a 1-row matrix. The columns are:
 }
 \description{
 Computes a Monte Carlo confidence interval (500,000 trials) for a population
-unstandardized indirect effect in a path model and a Sobel standard error.
-This function is not recommended for a standardized indirect effect. The
-Monte Carlo method is general in that the slope estimates and standard
-errors do not need to be OLS estimates with homoscedastic standard errors.
-For example, LAD slope estimates and their standard errors, OLS slope
-estimates and heteroscedastic-consistent standard errors, and (in models
-with no direct effects) distribution-free Theil-Sen slope estimates with
-recovered standard errors also could be used.
+unstandardized or standardized indirect effect in a path model and a Sobel
+standard error. This function is not recommended for a standardized indirect
+if the standardized slopes are greater than .4 The Monte Carlo method is
+general in that the slope estimates and standard errors do not need to be
+OLS estimates with homoscedastic standard errors. For example, LAD slope
+estimates and their standard errors, OLS slope estimates and
+heteroscedastic-consistent standard errors also could be used. In models
+with no direct effects, distribution-free Theil-Sen slope estimates with
+recovered standard errors (see \link[statpsych]{ci.theil}) also could be used.
 }
 \examples{
 ci.indirect (.05, 2.48, 1.92, .586, .379)

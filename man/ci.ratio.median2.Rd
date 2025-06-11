@@ -16,8 +16,8 @@ ci.ratio.median2(alpha, y1, y2)
 \value{
 Returns a 1-row matrix. The columns are:
 \itemize{
-\item Median1 - estimated median from group 1
-\item Median2 - estimated median from group 2
+\item Median1 - estimated median for group 1
+\item Median2 - estimated median for group 2
 \item Median1/Median2 - estimated ratio of medians
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval
@@ -25,7 +25,8 @@ Returns a 1-row matrix. The columns are:
 }
 \description{
 Computes a distribution-free confidence interval for a ratio of population
-medians of ratio-scale measurements in a 2-group design.
+medians of ratio-scale measurements in a 2-group design. Tied scores are
+within each group assumed to be rare.
 }
 \examples{
 y2 <- c(32, 39, 26, 35, 43, 27, 40, 37, 34, 29, 49, 42, 40)

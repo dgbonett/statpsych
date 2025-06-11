@@ -33,9 +33,9 @@ Returns a 7-row matrix (one row per effect). The columns are:
 \description{
 Computes confidence intervals and tests for the AB interaction effect,
 main effect of A, main effect of B, simple main effects of A, and simple main
-effects of B in a 2x2 between-subjects design with a quantitative response
-variable. A Satterthwaite adjustment to the degrees of freedom is used and
-equality of population variances is not assumed.
+effects of B in a 2x2 between-subjects factorial design with a quantitative
+response variable. A Satterthwaite adjustment to the degrees of freedom is
+used and equality of population variances is not assumed.
 }
 \examples{
 y11 <- c(14, 15, 11, 7, 16, 12, 15, 16, 10, 9)

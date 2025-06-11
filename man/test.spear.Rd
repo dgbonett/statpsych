@@ -17,7 +17,7 @@ test.spear(cor, h, n)
 Returns a 1-row matrix. The columns are:
 \itemize{
 \item Estimate - estimate of correlation
-\item t or z - t test statistic (for h = 0) or z test statistic
+\item t or z - t test statistic (for h = 0) or z test statistic (for nonzero h)
 \item p - two-sided p-value
 }
 }
@@ -27,7 +27,7 @@ Spearman correlation is equal to 0, or a z test using a Fisher transformation
 for a test of the null hypothesis that a Spearman correlation is equal to
 some specified nonzero value. The hypothesis testing results should be
 accompanied with a confidence interval for the population Spearman
-correlation value.
+correlation value (see \link[statpsych]{ci.spear}).
 }
 \examples{
 test.spear(.471, .2, 100)
@@ -44,7 +44,4 @@ test.spear(.342, 0, 100)
 #     0.342 3.602881 98 0.0004965008
 
 
-}
-\seealso{
-\link[statpsych]{ci.spear}
 }

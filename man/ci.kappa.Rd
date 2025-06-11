@@ -9,13 +9,13 @@ ci.kappa(alpha, f00, f01, f10, f11)
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
 
-\item{f00}{number of objects rated y = 0 and x = 0}
+\item{f00}{number of objects rated 0 by both Rater 1 and Rater 2}
 
-\item{f01}{number of objects rated y = 0 and x = 1}
+\item{f01}{number of objects rated 0 by Rater 1 and 1 by Rater 2}
 
-\item{f10}{number of objects rated y = 1 and x = 0}
+\item{f10}{number of objects rated 1 by Rater 1 and 0 by Rater 2}
 
-\item{f11}{number of objects rated y = 1 and x = 1}
+\item{f11}{number of objects rated 1 by both Rater 1 and Rater 2}
 }
 \value{
 Returns a 2-row matrix. The results in row 1 are for the intraclass

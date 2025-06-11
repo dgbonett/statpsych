@@ -32,10 +32,10 @@ Returns a 2-row matrix. The columns are:
 }
 \description{
 Computes a test statistic and confidence interval for a linear contrast
-of means. This function computes both unequal variance and equal
-variance confidence intervals and test statistics. A Satterthwaite
-adjustment to the degrees of freedom is used with the unequal variance
-method.
+of means in a between-subjects design. This function computes both unequal
+variance and equal variance confidence intervals and test statistics. A
+Satterthwaite adjustment to the degrees of freedom is used with the
+unequal variance method.
 }
 \examples{
 m <- c(33.5, 37.9, 38.0, 44.1)

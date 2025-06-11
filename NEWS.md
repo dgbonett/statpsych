@@ -1,3 +1,60 @@
+statpsych version 1.8.0 (Release date: 2025/06/06)
+===========
+
+Changes:
+
+* New functions:
+    * test.mono.median.bs -- Hypothesis test of a monotonic trend in medians for an ordered between-subjects factor
+    * ci.slope.median.bs -- Computes confidence interval for the slope of medians in a one-factor experimental design with a quantitative between-subjects factor
+    * size.ci.cv -- Computes sample size for a coefficient of variation confidence interval in a 1-group design
+    * size.ci.median -- Computes sample size for a median confidence interval in a 1-group design
+    * size.ci.median2 -- Computes sample size for a median difference confidence interval in a 2-group design
+    * size.ci.lc.median.bs -- Computes sample size for a linear contrast of medians confidence interval in a between-subjects design
+    * size.ci.gen -- Computes sample size for a confidence interval for any type of parameter in a 1-group design
+    * size.ci.gen2 -- Computes sample size for a confidence interval for the difference in any type of parameter in a 2-group design
+    * size.test.gen -- Computes sample size for a test of any type of parameter in a 1-group design
+    * size.test.gen2 -- Computes sample size for a test of the difference of any type of parameter in a 2-group design
+* Modifications:
+    * ci.prop now adds an exact confidence interval
+* Deleted functions:
+    * ci.mean1 has been replaced with ci.mean
+    * ci.prop1 has been replaced with ci.prop
+    * ci.median1 has been replaced with ci.median
+    * ci.stdmean1 has been replaced with ci.stdmean
+    * pi.var.upper has been replaced with pi.var
+    
+
+statpsych version 1.7.0 (Release date: 2024/12/17)
+===========
+
+Changes:
+
+* New functions:
+    * size.ci.oddsratio -- Computes sample size for an odds ratio confidence interval
+    * size.ci.yule -- Computes sample size for a Yule's Q confidence interval
+    * size.ci.phi -- Computes sample size for a phi correlation confidence interval
+    * size.ci.biphi -- Computes sample size for a biserial-phi correlation confidence interval
+    * size.ci.ancova2 -- Computes sample size for a 2-group ANCOVA confidence interval
+    * size.ci.slope.gen -- Computes sample size for a slope coefficient confidence interval in a general model
+    * size.test.ancova2 -- Computes sample size for a 2-group ANCOVA hypothesis test
+    * size.test.slope.gen -- Computes sample size for a slope coefficient hypothesis test in a general model
+    * signal -- Computes parameter estimates in a Yes/No signal detection study
+    * exp.slope -- Computes confidence intervals for exp(B) and 100(exp(B) - 1)%
+    * ci.bayes.cor -- Computes Bayesian credible interval for a Pearson or partial correlation with a skeptical prior
+    * ci.bayes.spcor -- Computes Bayesian credible interval for a semipartial correlation with a skeptical prior
+    * pi.var -- Computes one-sided or two-sided prediction limits for an estimated variance in a future study (will replace pi.var.upper)
+* Modifications
+    * size.ci.prop2 can now solve for equal or unequal sample sizes.  Requires a new argumnet, R, specifying the ratio of sample sizes and now returns a 2-column matrix.
+    * size.ci.ratio.prop2 can now solve for equal or unequal sample sizes.  Requires a new argument, R, specifying the ratio of sample sizes and now returns a 2-column matrix.
+    * size.test.cor2 can now solve for equal or unequal sample sizes.  Requires a new argument, R, specifying the ratio of sample sizes, and returns a 2-column matrix
+    * pi.cor now has options for one-sided and two-sided prediction limits.  It requires a new argument, type
+    * pi.prop now has options for one-sided and two-sided prediction limits.  It requires a new argument, type
+    * the definition of the subscripts in the ci.2x2.mean.mixed, ci.2x2.median.mixed, and ci.2x2.stdmean.mixed functions have been changed so that the first subscript now specifies factor A and the second subscript specified factor B. 
+* Error Corrections:
+    * ci.2x2.stdmean.mixed -- corrected an error in the standard error computation
+    * size.test.lc.ancova -- corrected a minor error in the sample size formula
+
+
 statpsych version 1.6.0 (Release date: 2024/07/08)
 ===========
 
@@ -24,7 +81,6 @@ Changes:
     * size.ci.cor.prior -- Computes sample size for a correlation confidence interval using a planning value from a prior study
     * adj.se -- Computes adjusted standard errors for slope coefficients in an exploratory analysis
     * fitindices -- Computes four SEM fit indices
-
 * Modifications:
     * ci.var.upper now computes an exact upper limit rather than an approximate upper limit
     * power computations are now more accurate for very small effect sizes in the power.cor, power.cor2, power.lc.meanc.bs, power.mean, power.mean2, power.mean.ps, power.prop, power.pro2, and power.prop.ps functions
@@ -58,8 +114,8 @@ Changes:
     * size.ci.pbcor -- Computes the sample size requirement for a point-biserial correlation confidence interval
     * size.ci.mape1 -- Computes the sample size requirement for a mean absolute prediction error confidence interval
 * Error Corrections:
-    * corrected CI error in ci.cramer
-    * corrected SE error in ci.lc.stdmean.ws
+    * ci.cramer -- corrected an error in the CI computation 
+    * ci.lc.stdmean.ws -- corrected an error in the standard error computation
 * Modifications:
     * both biased and bias adjusted estimates are now reported in ci.stdmean1, ci.stdmean2, 
            ci.stdmean.ps, ci.stdmean.strat, and ci.2x2.stdmean.bs
@@ -149,8 +205,6 @@ Changes:
     * size.ci.stdmean2 -- now returns two rows, one for each standardizer
     * size.ci.stdmean.ps -- now returns two rows, one for each standardizer
     * ci.mann -- now returns a confidence interval for P(y1 > y2) rather than P(y1 < y2).
-* Error Correction:
-    * ci.lc.std.mean.ws -- corrected an error in the standard error computation
     
 
 statpsych v1.2.0 (Release date: 2022/08/15)
@@ -176,7 +230,7 @@ Changes:
     * The ci.cor, ci.cor2, and ci.cor.dep functions now uses a bias adjustment to reduce the bias of the Fisher transformed correlations
     * The ci.median1 function now uses the same standard error formula as the ci.median2, ci.ratio.median2, and ci.median.ps functions
 * Error Correction:
-    * Corrected an error for the standard error computation in the ci.indirect function
+    * ci.indirect -- Corrected an error in the standard error computation
     
 
 statpsych v1.1.0 (Release date: 2022/06/30)

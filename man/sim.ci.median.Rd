@@ -34,8 +34,8 @@ Returns a 1-row matrix. The columns are:
 \description{
 Performs a computer simulation of the confidence interval performance for
 a population median. Sample data can be generated from five different
-population distributions. All distributions are scaled to have standard
-deviations of 1.0.
+population distributions. All distributions are scaled to have a standard
+deviation of 1.0.
 }
 \examples{
 sim.ci.median(.05, 20, 5, 1000)

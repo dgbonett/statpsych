@@ -28,6 +28,8 @@ Computes a confidence interval for a population reliability coefficient
 such as Cronbach's alpha or McDonald's omega using an estimate of the
 reliability and its standard error. The standard error can be a robust
 standard error or bootstrap standard error obtained from an SEM program.
+Use \link[statpsych]{ci.cronbach} for Cronbach's alpha if parallel
+measurements can be assumed.
 }
 \examples{
 ci.reliability(.05, .88, .0147, 100)

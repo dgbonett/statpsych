@@ -30,10 +30,9 @@ paired-samples design. For a superiority test, specify the upper limit (h)
 for the range of practical equivalence and specify values of p1 and p2 such
 that p1 - p2 > h. For an inferiority test, specify the lower limit (-h) for
 the range of practical equivalence and specify values of p1 and p2 such
-that p1 - p2 > -h. This function sets the effect size equal to the
-difference in proportion planning values. Set the phi correlation planning
-value to the smallest value within a plausible range for a conservatively
-large sample size.
+that p1 - p2 > -h. This function sets the effect size equal to p1 - p2.
+Set the phi correlation planning value to the smallest absolute value within
+a plausible range for a conservatively large sample size.
 }
 \examples{
 size.supinf.prop.ps(.05, .9, .35, .20, .45, .05)

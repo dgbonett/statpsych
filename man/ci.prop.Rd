@@ -2,12 +2,9 @@
 % Please edit documentation in R/statpsych3.R
 \name{ci.prop}
 \alias{ci.prop}
-\alias{ci.prop1}
 \title{Confidence intervals for a proportion}
 \usage{
 ci.prop(alpha, f, n)
-
-ci.prop1(alpha, f, n)
 }
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
@@ -20,7 +17,7 @@ ci.prop1(alpha, f, n)
 Returns a 2-row matrix. The columns of row 1 are:
 \itemize{
 \item Estimate - adjusted estimate of proportion
-\item SE - adjusted standard error
+\item SE - standard error of adjusted estimate
 \item LL - lower limit of the adjusted Wald confidence interval
 \item UL - upper limit of the adjusted Wald confidence interval
 }
@@ -28,16 +25,23 @@ Returns a 2-row matrix. The columns of row 1 are:
 The columns of row 2 are:
 \itemize{
 \item Estimate - ML estimate of proportion
-\item SE - standard error
+\item SE - standard error of ML estimate
 \item LL - lower limit of the Wilson confidence interval
 \item UL - upper limit of the Wilson confidence interval
 }
+
+The columns of row 3 are:
+\itemize{
+\item Estimate - ML estimate of proportion
+\item SE - standard error of ML estimate
+\item LL - lower limit of the exact confidence interval
+\item UL - upper limit of the exact confidence interval
+}
 }
 \description{
-Computes adjusted Wald and Wilson confidence intervals for a population
-proportion. The Wilson confidence interval uses a continuity correction.
-
-ci.prop1 is deprecated and will soon be removed from statpsych; please switch to ci.prop
+Computes adjusted Wald (Agresi-Coull), Wilson, and exact confidence intervals
+for a population proportion. The Wilson confidence interval uses a
+continuity correction.
 }
 \examples{
 ci.prop(.05, 12, 100)
@@ -46,6 +50,7 @@ ci.prop(.05, 12, 100)
 #                  Estimate         SE         LL        UL
 # Adjusted Wald   0.1346154 0.03346842 0.06901848 0.2002123
 # Wilson with cc  0.1200000 0.03249615 0.06625153 0.2039772
+# Exact           0.1200000 0.03249615 0.06356890 0.2002357
 
 
 }

@@ -4,7 +4,7 @@
 \alias{size.ci.prop2}
 \title{Sample size for a 2-group proportion difference confidence interval}
 \usage{
-size.ci.prop2(alpha, p1, p2, w)
+size.ci.prop2(alpha, p1, p2, w, R)
 }
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
@@ -14,22 +14,30 @@ size.ci.prop2(alpha, p1, p2, w)
 \item{p2}{planning value of proportion for group 2}
 
 \item{w}{desired confidence interval width}
+
+\item{R}{n2/n1 ratio}
 }
 \value{
 Returns the required sample size for each group
 }
 \description{
-Computes the sample size in each group (assuming equal sample sizes) required
-to estimate a difference of population proportions with desired confidence
-interval precision in a 2-group design. Set the proportion planning values to
-.5 for a conservatively large sample size.
+Computes the sample size in each group required to estimate a difference
+of proportions with desired confidence interval precision in a 2-group
+design. Set the proportion planning values to .5 for a conservatively
+large sample size. Set R = 1 for equal sample sizes.
 }
 \examples{
-size.ci.prop2(.05, .4, .2, .15)
+size.ci.prop2(.05, .4, .2, .15, 1)
 
 # Should return:
-# Sample size per group
-#                   274
+#   n1  n2
+#  274 274
+
+size.ci.prop2(.05, .4, .2, .15, .5)
+
+# Should return:
+#   n1  n2
+#  383 192
 
 
 }

@@ -28,10 +28,9 @@ Returns a 1-row matrix. The columns are:
 }
 \description{
 Computes a confidence interval for a population Cramer's V coefficient
-of nominal association for an r x s contingency table and its approximate
-standard error. The confidence interval is based on a noncentral chi-square
-distribution, and an approximate standard error is recovered from the
-confidence interval.
+of nominal association for an r x s contingency table. The confidence interval
+is based on a noncentral chi-square distribution, and an approximate standard
+error is recovered from the confidence interval.
 }
 \examples{
 ci.cramer(.05, 19.21, 2, 3, 200)

@@ -2,12 +2,9 @@
 % Please edit documentation in R/statpsych1.R
 \name{ci.mean}
 \alias{ci.mean}
-\alias{ci.mean1}
 \title{Confidence interval for a mean}
 \usage{
 ci.mean(alpha, m, sd, n)
-
-ci.mean1(alpha, m, sd, n)
 }
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
@@ -31,8 +28,6 @@ Returns a 1-row matrix. The columns are:
 Computes a confidence interval for a population mean using the estimated
 mean, estimated standard deviation, and sample size. Use the t.test function
 for raw data input.
-
-ci.mean1 is deprecated and will soon be removed from statpsych; please switch to ci.mean
 }
 \examples{
 ci.mean(.05, 24.5, 3.65, 40)

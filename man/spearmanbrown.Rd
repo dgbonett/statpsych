@@ -21,7 +21,7 @@ Returns the reliability of the sum or average of r2 measurements
 Computes the reliability of a scale that is the sum or average of r2
 parallel measurements given the reliability of a scale that is the sum or
 average of r1 parallel measurements. The "measurements" can be items,
-trials, raters, or occasions.
+forms, raters, or occasions.
 }
 \examples{
 spearmanbrown(.6, 10, 20)

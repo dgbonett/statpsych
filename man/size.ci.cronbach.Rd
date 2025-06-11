@@ -11,7 +11,7 @@ size.ci.cronbach(alpha, rel, r, w)
 
 \item{rel}{reliability planning value}
 
-\item{r}{number of measurements}
+\item{r}{number of measurements (items, raters, forms)}
 
 \item{w}{desired confidence interval width}
 }

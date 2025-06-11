@@ -29,7 +29,8 @@ Returns a 1-row matrix. The columns are:
 Computes a z test for a difference of population Pearson or partial
 correlations in a 2-group design. Set s = 0 for a Pearson correlation.
 The hypothesis testing results should be accompanied with a confidence
-interval for the difference in population correlation values.
+interval for the difference in population correlation values
+(see \link[statpsych]{ci.cor2}).
 }
 \examples{
 test.cor2(.684, .437, 100, 125, 0)
@@ -39,7 +40,4 @@ test.cor2(.684, .437, 100, 125, 0)
 #    0.247 2.705709 0.006815877
 
 
-}
-\seealso{
-\link[statpsych]{ci.cor2}
 }

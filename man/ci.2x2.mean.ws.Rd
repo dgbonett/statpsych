@@ -33,8 +33,8 @@ Returns a 7-row matrix (one row per effect). The columns are:
 \description{
 Computes confidence intervals and tests for the AB interaction effect,
 main effect of A, main effect of B, simple main effects of A, and simple main
-effects of B in a 2x2 within-subjects design with a quantitative response
-variable.
+effects of B in a 2x2 within-subjects factorial design with a quantitative
+response variable.
 }
 \examples{
 y11 <- c(1,2,3,4,5,7,7)

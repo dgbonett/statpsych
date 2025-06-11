@@ -35,8 +35,8 @@ cell frequency. This function requires the frequency counts from a
 ci.oddsratio(.05, 229, 28, 96, 24)
 
 # Should return:
-#      Estimate        SE       LL       UL
-# [1,] 2.044451 0.6154578 1.133267 3.688254
+#  Estimate        SE       LL       UL
+#  2.044451 0.6154578 1.133267 3.688254
 
 
 }

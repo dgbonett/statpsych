@@ -26,16 +26,17 @@ Returns a 1-row matrix. The columns are:
 }
 \description{
 Computes a distribution-free confidence interval for a difference of population
-medians in a 2-group design.
+medians in a 2-group design. Tied scores within each group are assumed to be
+rare.
 }
 \examples{
-y1 <- c(32, 39, 26, 35, 43, 27, 40, 37, 34, 29)
-y2 <- c(36, 44, 47, 42, 49, 39, 46, 31, 33, 48)
+y1 <- c(32.1, 39.8, 26.3, 35.0, 43.1, 27.0, 40.9, 37.4, 34.0, 29.2)
+y2 <- c(36.8, 44.0, 47.1, 42.7, 49.0, 39.6, 46.2, 31.6, 33.1, 48.4)
 ci.median2(.05, y1, y2)
 
 # Should return:
-# Median1 Median2 Median1-Median2       SE        LL          UL
-#    34.5      43            -8.5 4.316291 -16.95977 -0.04022524
+#  Median1 Median2 Median1-Median2       SE        LL         UL
+#     34.5   43.35           -8.85 4.494993 -17.66002 -0.0399751
 
 
 }

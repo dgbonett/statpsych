@@ -24,8 +24,8 @@ the proportion of members in the population with scores that would be
 larger under treatment 1 than treatment 2. In a paired-samples
 nonexperiment, the proportion is the proportion of members in the
 population with measurement 1 scores that are larger than their
-measurement 2 scores. Under the null hypothesis, the proportion is equal
-to .5. This function requires a planning value of this population
+measurement 2 scores. Under the null hypothesis, the population proportion
+is equal to to .5. This function requires a planning value of the population
 proportion.
 }
 \examples{

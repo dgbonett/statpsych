@@ -20,7 +20,7 @@ Returns the required sample size
 }
 \description{
 Computes the sample size required to test a population proportion with
-desired power using a correction for continuity in a 1-group design.
+desired power (using a correction for continuity) in a 1-group design.
 }
 \examples{
 size.test.prop(.05, .9, .5, .3)

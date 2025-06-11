@@ -1,11 +1,12 @@
 # ======================== Confidence Intervals =============================
-#  ci.prop ================================================================== 
+#  ci.prop ==================================================================== 
 #' Confidence intervals for a proportion
 #'
 #'
 #' @description
-#' Computes adjusted Wald and Wilson confidence intervals for a population
-#' proportion. The Wilson confidence interval uses a continuity correction.
+#' Computes adjusted Wald (Agresi-Coull), Wilson, and exact confidence intervals 
+#' for a population proportion. The Wilson confidence interval uses a 
+#' continuity correction.
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
@@ -16,16 +17,23 @@
 #' @return
 #' Returns a 2-row matrix. The columns of row 1 are:
 #' * Estimate - adjusted estimate of proportion
-#' * SE - adjusted standard error
+#' * SE - standard error of adjusted estimate
 #' * LL - lower limit of the adjusted Wald confidence interval
 #' * UL - upper limit of the adjusted Wald confidence interval
 #'
 #'
 #' The columns of row 2 are:
 #' * Estimate - ML estimate of proportion
-#' * SE - standard error
+#' * SE - standard error of ML estimate
 #' * LL - lower limit of the Wilson confidence interval
 #' * UL - upper limit of the Wilson confidence interval
+#'
+#'
+#' The columns of row 3 are:
+#' * Estimate - ML estimate of proportion
+#' * SE - standard error of ML estimate
+#' * LL - lower limit of the exact confidence interval
+#' * UL - upper limit of the exact confidence interval
 #'
 #'
 #' @references
@@ -39,6 +47,7 @@
 #' #                  Estimate         SE         LL        UL
 #' # Adjusted Wald   0.1346154 0.03346842 0.06901848 0.2002123
 #' # Wilson with cc  0.1200000 0.03249615 0.06625153 0.2039772
+#' # Exact           0.1200000 0.03249615 0.06356890 0.2002357
 #'
 #'
 #' @importFrom stats qnorm
@@ -60,11 +69,14 @@ ci.prop <- function(alpha, f, n) {
  UL.adj <- p.adj + z*se.adj
  if (LL.adj < 0) {LL.adj = 0}
  if (UL.adj > 1) {UL.adj = 1}
+ LL.exact <- qbeta(alpha/2, f, n - f + 1)
+ UL.exact <- qbeta(1 - alpha/2, f + 1, n - f)
  out1 <- t(c(p.adj, se.adj, LL.adj, UL.adj))
  out2 <- t(c(p.mle, se.mle, LL.wil, UL.wil))
- out <- rbind(out1, out2)
+ out3 <- t(c(p.mle, se.mle, LL.exact, UL.exact))
+ out <- rbind(out1, out2, out3)
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
- rownames(out) <- c("Adjusted Wald", "Wilson with cc")
+ rownames(out) <- c("Adjusted Wald", "Wilson with cc", "Exact")
  return(out)
 }
 
@@ -167,6 +179,7 @@ ci.prop.fpc <- function(alpha, f, n, N) {
 ci.pairs.mult <-function(alpha, f) {
  zcrit <- qnorm(1 - alpha/2)
  a <- length(f)
+ if (a < 3) {stop("at least 3 categories are required")}
  n <- sum(f)
  p.ml <- f/n
  diff.ml <- outer(p.ml, p.ml, '-')
@@ -874,8 +887,8 @@ ci.condslope.log <- function(alpha, b1, b2, se1, se2, cov, lo, hi) {
 #' ci.oddsratio(.05, 229, 28, 96, 24)
 #'
 #' # Should return:
-#' #      Estimate        SE       LL       UL
-#' # [1,] 2.044451 0.6154578 1.133267 3.688254
+#' #  Estimate        SE       LL       UL
+#' #  2.044451 0.6154578 1.133267 3.688254
 #'
 #'
 #' @importFrom stats qnorm
@@ -889,6 +902,7 @@ ci.oddsratio <- function(alpha, f00, f01, f10, f11) {
  ul <- exp(log(or) + z*se.lor)
  out <- t(c(or, se.or, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -1190,10 +1204,10 @@ ci.tetra <- function(alpha, f00, f01, f10, f11) {
 #'
 #'
 #' @param   alpha  alpha level for 1-alpha confidence
-#' @param   f00    number of objects rated y = 0 and x = 0
-#' @param   f01    number of objects rated y = 0 and x = 1
-#' @param   f10    number of objects rated y = 1 and x = 0
-#' @param   f11    number of objects rated y = 1 and x = 1
+#' @param   f00    number of objects rated 0 by both Rater 1 and Rater 2
+#' @param   f01    number of objects rated 0 by Rater 1 and 1 by Rater 2
+#' @param   f10    number of objects rated 1 by Rater 1 and 0 by Rater 2
+#' @param   f11    number of objects rated 1 by both Rater 1 and Rater 2
 #'
 #'
 #' @return
@@ -1256,7 +1270,10 @@ ci.kappa <- function(alpha, f00, f01, f10, f11) {
 #' Computes an adjusted Wald confidence interval for a G-index of agreement
 #' between two polychotomous ratings. This function requires the number of 
 #' objects that were given the same rating by both raters. The G-index
-#' corrects for chance agreement.
+#' corrects for chance agreement. The G-index is a better measure of 
+#' agreement than Cohen's kappa, and the confidence interval for the G-index
+#' used here has better small-sample properties than the confidence interval
+#' for Cohen's kappa.  
 #'
 #'
 #' @param   alpha  alpha level for 1-alpha confidence
@@ -1313,7 +1330,7 @@ ci.agree <- function(alpha, n, f, k) {
 #' within each group and the difference of G-indices. 
 #'
 #'
-#' @param  alpha   alpha level for simultaneous 1-alpha confidence
+#' @param  alpha   alpha level for 1-alpha confidence
 #' @param  n1      sample size (objects) in group 1
 #' @param  f1      number of objects rated in agreement in group 1
 #' @param  n2      sample size (objects) in group 2
@@ -1583,10 +1600,9 @@ ci.popsize <- function(alpha, f00, f01, f10) {
 #'
 #' @description
 #' Computes a confidence interval for a population Cramer's V coefficient
-#' of nominal association for an r x s contingency table and its approximate
-#' standard error. The confidence interval is based on a noncentral chi-square 
-#' distribution, and an approximate standard error is recovered from the
-#' confidence interval.
+#' of nominal association for an r x s contingency table. The confidence interval 
+#' is based on a noncentral chi-square distribution, and an approximate standard 
+#' error is recovered from the confidence interval.
 #'
 #'
 #' @param  alpha    alpha value for 1-alpha confidence
@@ -1768,8 +1784,8 @@ ci.2x2.prop.bs <- function(alpha, f, n) {
 
 
 #  ci.2x2.prop.mixed ==========================================================
-#' Computes tests and confidence intervals of effects in a 2x2 mixed factorial
-#' design for proportions 
+#' Computes tests and confidence intervals of effects in a 2x2 mixed design
+#' for proportions 
 #'
 #'
 #' @description
@@ -1910,8 +1926,8 @@ ci.2x2.prop.mixed <- function(alpha, group1, group2) {
 #'
 #'
 #' @param   alpha        alpha level for 1-alpha credibility interval
-#' @param   prior.mean   mean of prior Beta distribution    
-#' @param   prior.sd     standard deviation of prior Beta distribution 
+#' @param   prior_mean   mean of prior Beta distribution    
+#' @param   prior_sd     standard deviation of prior Beta distribution 
 #' @param   f            number of participants who have the attribute
 #' @param   n            sample size
 #'
@@ -1933,25 +1949,25 @@ ci.2x2.prop.mixed <- function(alpha, group1, group2) {
 #'
 #' # Should return:
 #' # Posterior mean Posterior SD       LL        UL
-#' #           0.15   0.03273268  0.09218 0.2188484
+#' #      0.1723577   0.03419454 0.1111747 0.2436185
 #'
 #'
 #' @importFrom stats qnorm
 #' @importFrom stats qbeta
 #' @export
-ci.bayes.prop <- function(alpha, prior.mean, prior.sd, f, n) {
- if (prior.sd^2 >= prior.mean*(1 - prior.mean)) {stop("prior SD is too large")}
+ci.bayes.prop <- function(alpha, prior_mean, prior_sd, f, n) {
+ if (prior_sd^2 >= prior_mean*(1 - prior_mean)) {stop("prior SD is too large")}
  if (f > n) {stop("f cannot be greater than n")}
  zcrit <- qnorm(1 - alpha/2)
- a <- ((1 - prior.mean)/prior.sd^2 - 1/prior.mean)*prior.mean^2
- b <- a*(1/prior.mean - 1)
- post.mean <- (f + a)/(n + a + b)
- post.sd <- sqrt((f + a)*(n - f + b)/((n + a + b)^2*(a + b + n - 1)))
- post.a <- a + f
- post.b <- b + n - f
- ll <- qbeta(alpha/2, post.a, post.b)
- ul <- qbeta(1 - alpha/2, post.a, post.b)
- out <- t(c(post.mean, post.sd, ll, ul))
+ a <- ((1 - prior_mean)/prior_sd^2 - 1/prior_mean)*prior_mean^2
+ b <- a*(1/prior_mean - 1)
+ post_mean <- (f + a)/(n + a + b)
+ post_sd <- sqrt((f + a)*(n - f + b)/((n + a + b)^2*(a + b + n - 1)))
+ post_a <- a + f
+ post_b <- b + n - f
+ ll <- qbeta(alpha/2, post_a, post_b)
+ ul <- qbeta(1 - alpha/2, post_a, post_b)
+ out <- t(c(post_mean, post_sd, ll, ul))
  colnames(out) <- c("Posterior mean", "Posterior SD", "LL", "UL")
  rownames(out) <- ""
  return(out)
@@ -2170,24 +2186,45 @@ ci.ratio.poisson2 <- function(alpha, f1, f2, t1, t2) {
 #'
 #'                        
 #' @description
-#' Computes approximate prediction interval for the estimated proportion 
-#' in a future study with a planned sample size of n. The prediction interval
-#' uses a proportion estimate from a prior study that had a sample size of n0.
+#' Computes approximate one-sided or two-sided prediction interval for the 
+#' estimated proportion in a future study with a planned sample size of n. 
+#' The prediction interval uses a proportion estimate from a prior study that
+#' had a sample size of n0.
+#'
+#' Several confidence interval sample size functions in this package require
+#' a planning value of the estimated proportion that is expected in the
+#' planned study. A one-sided proportion prediction limit is useful as a 
+#' proportion planning value for the sample size required to obtain a 
+#' confidence interval with desired width. This strategy for specifying a 
+#' proportion planning value is useful in applications where the population 
+#' proportion in the prior study is assumed to be very similar to the 
+#' population proportion in the planned study. 
+#'
+#' For sample size planning, use an upper prediction limit if the population
+#' proportion is assumed to be less than .5. If the upper prediction limit is
+#' greater than .5, then set the proportion planning value to .5. Use a lower
+#' prediction limit if the population proportion is asumed to be greater than
+#' .5. If the lower prediction limit is less than .5, then set the proportion 
+#' planning value to .5.
 #'
 #'
 #' @param  alpha  alpha value for 1-alpha confidence 
 #' @param  prop   estimated proportion from prior study
 #' @param  n0     sample size used to estimate proportion in prior study 
 #' @param  n      planned sample size of future study
+#' @param  type   
+#' * set to 1 for two-sided prediction interval 
+#' * set to 2 for one-sided upper prediction limit 
+#' * set to 3 for one-sided lower prediction limit 
 #'
 #'
 #' @return 
-#' Returns a prediction interval for an estimated proportion in a future 
+#' Returns one-sided or two-sided prediction limit(s) for an estimated proportion in a future 
 #' study
 #'
 #'
 #' @examples
-#' pi.prop(.1, .225, 80, 120)
+#' pi.prop(.1, .225, 80, 120, 1)
 #'
 #' # Should return:
 #' #         LL       UL
@@ -2196,13 +2233,27 @@ ci.ratio.poisson2 <- function(alpha, f1, f2, t1, t2) {
 #' 
 #' @importFrom stats qnorm
 #' @export
-pi.prop <- function(alpha, prop, n0, n) {
- z <- qnorm(1 - alpha/2)
+pi.prop <- function(alpha, prop, n0, n, type) {
  p <- (n0*prop + 2)/(n0 + 4)
- ll <- p - z*sqrt(p*(1 - p)/(n0 + 4) + p*(1 - p)/(n + 4))
- ul <- p + z*sqrt(p*(1 - p)/(n0 + 4) + p*(1 - p)/(n + 4))
- out <- t(c(ll, ul))
- colnames(out) <- c("LL", "UL")
+ if (type == 1) {
+   z <- qnorm(1 - alpha/2)
+   ll <- p - z*sqrt(p*(1 - p)/(n0 + 4) + p*(1 - p)/(n + 4))
+   ul <- p + z*sqrt(p*(1 - p)/(n0 + 4) + p*(1 - p)/(n + 4))
+   out <- t(c(ll, ul))
+   colnames(out) <- c("LL", "UL")
+ }
+ else if (type == 2) {
+   z <- qnorm(1 - alpha)
+   ul <- p + z*sqrt(p*(1 - p)/(n0 + 4) + p*(1 - p)/(n + 4))
+   out <- matrix(ul, nrow = 1, ncol = 1)
+   colnames(out) <- "UL"
+ }
+ else {
+   z <- qnorm(1 - alpha)
+   ll <- p - z*sqrt(p*(1 - p)/(n0 + 4) + p*(1 - p)/(n + 4))
+   out <- matrix(ll, nrow = 1, ncol = 1)
+   colnames(out) <- "LL"
+ }
  rownames(out) <- ""
  return(out)
 }
@@ -2523,7 +2574,7 @@ test.mono.prop.bs <-function(alpha, f, n) {
 #' @importFrom stats qnorm
 #' @export                 
 size.ci.prop <- function(alpha, p, w) {
- if (p > .9999 || p < .0001) {stop("proportion must be between .0001 and .9999")}
+ if (p > .9999 | p < .0001) {stop("proportion must be between .0001 and .9999")}
  z <- qnorm(1 - alpha/2)
  n <- ceiling(4*p*(1 - p)*(z/w)^2)
  out <- matrix(n, nrow = 1, ncol = 1)
@@ -2538,16 +2589,17 @@ size.ci.prop <- function(alpha, p, w) {
 #'
 #'
 #' @description
-#' Computes the sample size in each group (assuming equal sample sizes) required
-#' to estimate a difference of population proportions with desired confidence 
-#' interval precision in a 2-group design. Set the proportion planning values to
-#' .5 for a conservatively large sample size.
+#' Computes the sample size in each group required to estimate a difference
+#' of proportions with desired confidence interval precision in a 2-group 
+#' design. Set the proportion planning values to .5 for a conservatively 
+#' large sample size. Set R = 1 for equal sample sizes.
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
 #' @param  p1     planning value of proportion for group 1
 #' @param  p2     planning value of proportion for group 2
 #' @param  w      desired confidence interval width
+#' @param  R      n2/n1 ratio
 #'
 #'
 #' @return
@@ -2555,22 +2607,29 @@ size.ci.prop <- function(alpha, p, w) {
 #'
 #'
 #' @examples
-#' size.ci.prop2(.05, .4, .2, .15)
+#' size.ci.prop2(.05, .4, .2, .15, 1)
 #'
 #' # Should return:
-#' # Sample size per group
-#' #                   274
+#' #   n1  n2
+#' #  274 274
+#'
+#' size.ci.prop2(.05, .4, .2, .15, .5)
+#'
+#' # Should return:
+#' #   n1  n2
+#' #  383 192
 #'
 #'
 #' @importFrom stats qnorm
 #' @export                 
-size.ci.prop2 <- function(alpha, p1, p2, w) {
- if (p1 > .9999 || p1 < .0001) {stop("p1 must be between .0001 and .9999")}
- if (p2 > .9999 || p2 < .0001) {stop("p2 must be between .0001 and .9999")}
+size.ci.prop2 <- function(alpha, p1, p2, w, R) {
+ if (p1 > .9999 | p1 < .0001) {stop("p1 must be between .0001 and .9999")}
+ if (p2 > .9999 | p2 < .0001) {stop("p2 must be between .0001 and .9999")}
  z <- qnorm(1 - alpha/2)
- n <- ceiling(4*(p1*(1 - p1) + p2*(1 - p2))*(z/w)^2)
- out <- matrix(n, nrow = 1, ncol = 1)
- colnames(out) <- "Sample size per group"
+ n1 <- ceiling(4*(p1*(1 - p1) + p2*(1 - p2)/R)*(z/w)^2)
+ n2 <- ceiling(R*n1)
+ out <- t(c(n1, n2))
+ colnames(out) <- c("n1", "n2")
  rownames(out) <- ""
  return(out)
 }
@@ -2581,15 +2640,16 @@ size.ci.prop2 <- function(alpha, p1, p2, w) {
 #'
 #'
 #' @description
-#' Computes the sample size in each group (assuming equal sample sizes) required
-#' to estimate a ratio of population proportions with desired confidence interval
-#' precision in a 2-group design.
+#' Computes the sample size in each group required to estimate a ratio of 
+#' proportions with desired confidence interval precision in a 2-group design. 
+#' Set R = 1 for equal sample sizes.
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
 #' @param  p1     planning value of proportion for group 1
 #' @param  p2     planning value of proportion for group 2
 #' @param  r      desired upper to lower confidence interval endpoint ratio
+#' @param  R      n2/n1 ratio
 #'
 #'
 #' @return
@@ -2597,22 +2657,29 @@ size.ci.prop2 <- function(alpha, p1, p2, w) {
 #'
 #'
 #' @examples
-#' size.ci.ratio.prop2(.05, .2, .1, 2)
+#' size.ci.ratio.prop2(.05, .2, .1, 2, 1)
 #'
 #' # Should return:
-#' # Sample size per group
-#' #                   416
+#' #   n1  n2
+#' #  416 416
+#'
+#' size.ci.ratio.prop2(.05, .2, .1, 2, .5)
+#'
+#' # Should return:
+#' #   n1  n2
+#' #  704 352
 #'
 #'
 #' @importFrom stats qnorm
 #' @export   
-size.ci.ratio.prop2 <- function(alpha, p1, p2, r) {
- if (p1 > .9999 || p1 < .0001) {stop("p1 must be between .0001 and .9999")}
- if (p2 > .9999 || p2 < .0001) {stop("p2 must be between .0001 and .9999")}
+size.ci.ratio.prop2 <- function(alpha, p1, p2, r, R) {
+ if (p1 > .9999 | p1 < .0001) {stop("p1 must be between .0001 and .9999")}
+ if (p2 > .9999 | p2 < .0001) {stop("p2 must be between .0001 and .9999")}
  z <- qnorm(1 - alpha/2)
- n <- ceiling(4*((1 - p1)/p1 + (1 - p2)/p2)*(z/log(r))^2)
- out <- matrix(n, nrow = 1, ncol = 1)
- colnames(out) <- "Sample size per group"
+ n1 <- ceiling(4*((1 - p1)/p1 + (1 - p2)/(R*p2))*(z/log(r))^2)
+ n2 <- ceiling(R*n1)
+ out <- t(c(n1, n2))
+ colnames(out) <- c("n1", "n2")
  rownames(out) <- ""
  return(out)
 }
@@ -2696,9 +2763,9 @@ size.ci.lc.prop.bs <- function(alpha, p, w, v) {
 #' @importFrom stats qnorm
 #' @export  
 size.ci.prop.ps <- function(alpha, p1, p2, phi, w) {
- if (phi > .999 || phi < -.999) {stop("phi must be between -.999 and .999")}
- if (p1 > .9999 || p1 < .0001) {stop("p1 must be between .0001 and .9999")}
- if (p2 > .9999 || p2 < .0001) {stop("p2 must be between .0001 and .9999")}
+ if (phi > .999 | phi < -.999) {stop("phi must be between -.999 and .999")}
+ if (p1 > .9999 | p1 < .0001) {stop("p1 must be between .0001 and .9999")}
+ if (p2 > .9999 | p2 < .0001) {stop("p2 must be between .0001 and .9999")}
  z <- qnorm(1 - alpha/2)
  cov <- phi*sqrt(p1*p2*(1 - p1)*(1 - p2))
  n <- ceiling((4*(p1*(1 - p1) + p2*(1 - p2) - 2*cov))*(z/w)^2)
@@ -2742,9 +2809,9 @@ size.ci.prop.ps <- function(alpha, p1, p2, phi, w) {
 #' @importFrom stats qnorm
 #' @export  
 size.ci.ratio.prop.ps <- function(alpha, p1, p2, phi, r) {
- if (phi > .999 || phi < -.999) {stop("phi must be between -.999 and .999")}
- if (p1 > .9999 || p1 < .0001) {stop("p1 must be between .0001 and .9999")}
- if (p2 > .9999 || p2 < .0001) {stop("p2 must be between .0001 and .9999")}
+ if (phi > .999 | phi < -.999) {stop("phi must be between -.999 and .999")}
+ if (p1 > .9999 | p1 < .0001) {stop("p1 must be between .0001 and .9999")}
+ if (p2 > .9999 | p2 < .0001) {stop("p2 must be between .0001 and .9999")}
  z <- qnorm(1 - alpha/2)
  cov <- phi*sqrt((1 - p1)*(1 - p2)/(p1*p2))
  n <- ceiling(4*((1 - p1)/p1 + (1 - p2)/p2 - 2*cov)*(z/log(r))^2)
@@ -2786,7 +2853,7 @@ size.ci.ratio.prop.ps <- function(alpha, p1, p2, phi, r) {
 #' @importFrom stats qnorm
 #' @export
 size.ci.agree <- function(alpha, G, w) {
- if (G > .999 || G < .001) {stop("G must be between .001 and .999")}
+ if (G > .999 | G < .001) {stop("G must be between .001 and .999")}
  z <- qnorm(1 - alpha/2)
  n <- ceiling(4*(1 - G^2)*(z/w)^2)
  out <- matrix(n, nrow = 1, ncol = 1)
@@ -2844,7 +2911,7 @@ size.ci.agree <- function(alpha, G, w) {
 #' @importFrom stats qnorm
 #' @export                 
 size.ci.prop.prior <- function(alpha1, alpha2, p0, n0, w) {
- if (p0 > .9999 || p0 < .0001) {stop("proportion must be between .0001 and .9999")}
+ if (p0 > .9999 | p0 < .0001) {stop("proportion must be between .0001 and .9999")}
  z1 <- qnorm(1 - alpha1/2)
  z2 <- qnorm(1 - alpha2/2)
  p.adj <- (n0*p0 + 2)/(n0 + 4)
@@ -2860,7 +2927,7 @@ size.ci.prop.prior <- function(alpha1, alpha2, p0, n0, w) {
    if (abs(ll0 - .5) < abs(ul0 - .5)) (p = ll0)
    if (abs(ll0 - .5) > abs(ul0 - .5)) (p = ul0)
    n <- ceiling(4*p*(1 - p)*(z1/w)^2)
-   pi <- pi.prop(alpha2, p, n0, n)
+   pi <- pi.prop(alpha2, p, n0, n, type = 1)
    ll <- pi[1,1]                                  
    ul <- pi[1,2]
    if (ll < .0001) {ll = .0001}
@@ -2872,7 +2939,7 @@ size.ci.prop.prior <- function(alpha1, alpha2, p0, n0, w) {
      if (abs(ll - .5) < abs(ul - .5)) (p = ll)
      if (abs(ll - .5) > abs(ul - .5)) (p = ul)
      n <- ceiling(4*p*(1 - p)*(z1/w)^2)
- 	 pi <- pi.prop(alpha2, p, n0, n)
+ 	 pi <- pi.prop(alpha2, p, n0, n, type = 1)
      ll <- pi[1,1]                                  
      ul <- pi[1,2]
 	 if (ll < .0001) {ll = .0001}
@@ -2896,7 +2963,7 @@ size.ci.prop.prior <- function(alpha1, alpha2, p0, n0, w) {
 #' @description
 #' Computes the sample size required to estimate a tetrachoric correlation with
 #' desired confidence interval precision. Set the tetrachoric planning value to
-#' the smallest value within a plausible range for a conservatively large 
+#' the smallest absolute value within a plausible range for a conservatively large 
 #' sample size. 
 #'
 #'
@@ -2952,13 +3019,251 @@ size.ci.tetra <- function(alpha, p1, p2, cor, w) {
 }
 
 
+#  size.ci.oddsratio ==========================================================
+#' Sample size for an odds ratio confidence interval
+#'
+#'
+#' @description
+#' Computes the sample size required to estimate an odds ratio with desired 
+#' confidence interval precision. 
+#'
+#'
+#' @param   alpha   alpha level for 1 - alpha confidence
+#' @param   p1      planning value for row 1 marginal proportion 
+#' @param   p2      planning value for column 1 marginal proportion
+#' @param   or      planning value of odds ratio
+#' @param   r       desired upper to lower confidence interval endpoint ratio
+#'
+#'
+#' @return
+#' Returns the required sample size
+#'
+#'
+#' @examples
+#' size.ci.oddsratio(.05, .3, .2, 5.5, 3.0)
+#'
+#' # Should return:
+#' #  Sample size
+#' #          356
+#'
+#'
+#' @importFrom stats qnorm
+#' @export
+size.ci.oddsratio <- function(alpha, p1, p2, or, r) {
+ if (or < 0) {stop("odds ratio must be positive")}
+ z <- qnorm(1 - alpha/2)
+ r1 <- p1
+ r2 <- 1 - r1
+ c1 <- p2
+ c2 <- 1 - p2
+ a <- or*(r1 + c1) + (r2 - c1)
+ b <- sqrt(a^2 - 4*r1*c1*or*(or - 1))
+ p00 <- (a - b)/(2*(or - 1))
+ p01 <- r1 - p00
+ p10 <- c1 - p00
+ p11 <- 1 - (p00 + p01 + p10)
+ n0 <- ceiling(4*(1/p00 + 1/p01 + 1/p10 + 1/p11)*(z/log(r))^2)
+ ci <- ci.oddsratio(alpha, n0*p00, n0*p01, n0*p10, n0*p11)
+ r0 <- ci[4]/ci[3]
+ n <- ceiling(n0*(log(r0)/log(r))^2)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size"
+ rownames(out) <- ""
+ return(out)
+}
+
+
+#  size.ci.yule ================================================================
+#' Sample size for a Yule's Q confidence interval
+#'
+#'
+#' @description
+#' Computes the sample size required to estimate Yule's Q with desired 
+#' confidence interval precision. Set the Yule's Q planning value to the
+#' smallest absolute value within a plausible range for a conservatively large 
+#' sample size. 
+#'
+#'
+#' @param   alpha   alpha level for 1 - alpha confidence
+#' @param   p1      planning value for row 1 marginal proportion 
+#' @param   p2      planning value for column 1 marginal proportion
+#' @param   Q       planning value of Yule's Q
+#' @param   w       desired confidence interval width
+#'
+#'
+#' @return
+#' Returns the required sample size
+#'
+#'
+#' @examples
+#' size.ci.yule(.05, .3, .2, .5, .4)
+#'
+#' # Should return:
+#' #  Sample size
+#' #          354
+#'
+#'
+#' @importFrom stats qnorm
+#' @export
+size.ci.yule <- function(alpha, p1, p2, Q, w) {
+ if (Q > .999 | Q < -.999) {stop("Q must be between -.999 and .999")}
+ z <- qnorm(1 - alpha/2)
+ r1 <- p1
+ r2 <- 1 - r1
+ c1 <- p2
+ c2 <- 1 - p2
+ or <- (Q + 1)/(1 - Q)
+ a <- or*(r1 + c1) + (r2 - c1)
+ b <- sqrt(a^2 - 4*r1*c1*or*(or - 1))
+ p00 <- (a - b)/(2*(or - 1))
+ p01 <- r1 - p00
+ p10 <- c1 - p00
+ p11 <- 1 - (p00 + p01 + p10)
+ n0 <- ceiling((1 - Q^2)^2*(1/p00 + 1/p01 + 1/p10 + 1/p11)*(z/w)^2)
+ ci <- ci.yule(alpha, n0*p00, n0*p01, n0*p10, n0*p11)
+ w0 <- ci[1,4] - ci[1,3]
+ n <- ceiling(n0*(w0/w)^2)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size"
+ rownames(out) <- ""
+ return(out)
+}
+
+
+# size.ci.phi =================================================================
+#' Sample size for phi correlation confidence interval
+#'
+#'
+#' @description
+#' Computes the sample size required to estimate a phi correlation with desired 
+#' confidence interval precision. Set the phi correlation planning value to the
+#' smallest absolute value within a plausible range for a conservatively large 
+#' sample size.
+#'
+#'
+#' @param   alpha   alpha level for 1 - alpha confidence
+#' @param   p1      planning value for row 1 marginal proportion 
+#' @param   p2      planning value for column 1 marginal proportion
+#' @param   phi     planning value for phi correlation
+#' @param   w       desired confidence interval width
+#'
+#'
+#' @return
+#' Returns the required sample size
+#'
+#'
+#' @examples
+#' size.ci.phi(.05, .7, .8, .35, .2)
+#'
+#' # Should return:
+#' #  Sample size
+#' #          416
+#'
+#'
+#' @importFrom stats qnorm
+#' @export
+size.ci.phi <- function(alpha, p1, p2, phi, w) {
+ if (phi > .999 | phi < -.999) {stop("phi must be between -.999 and .999")}
+ z <- qnorm(1 - alpha/2)
+ r1 <- p1
+ r2 <- 1 - r1
+ c1 <- p2
+ c2 <- 1 - p2
+ phimax <- sqrt(c1*r2/(r1*c2))
+ if (phimax > 1) {phimax = 1/phimax}
+ phimin <- sqrt(c2*r2/(r1*c1))
+ if (phimin > 1) {phimin = 1/phimin}
+ if (phi > phimax) {stop("phi is too large for given marginal proportions")}
+ if (phi < -phimin) {stop("phi is too small for given marginal proportions")}
+ a <- sqrt(r1*r2*c1*c2)
+ p00 <- a*phi + r1*c1
+ p01 <- r1 - p00
+ p10 <- c1 - p00
+ p11 <- 1 - (p00 + p01 + p10)
+ v1 <- 1 - phi^2 
+ v2 <- phi + .5*phi^3
+ v3 <- (r1 - r2)*(c1 - c2)/sqrt(r1*r2*c1*c2) 
+ v4 <- (.75*phi^2)*((r1 - r2)^2/(r1*r2) + (c1 - c2)^2/(c1*c2))
+ v <-(v1 + v2*v3 - v4)
+ n0 <- ceiling(4*v*(z/w)^2)
+ ci <- ci.phi(alpha, n0*p00, n0*p01, n0*p10, n0*p11)
+ w0 <- ci[4] - ci[3]
+ n <- ceiling(n0*(w0/w)^2)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size"
+ rownames(out) <- ""
+ return(out)
+}
+
+
+# size.ci.biphi ===============================================================
+#' Sample size for biserial-phi correlation confidence interval
+#'
+#'
+#' @description
+#' Computes the sample size required to estimate a biserial-phi correlation 
+#' with desired confidence interval precision. Set the biserial-phi planning 
+#' value to the smallest absolute value within a plausible range for a 
+#' conservatively large sample size. The column variable is assumed to be
+#' naturally dichotomous and the row variable is assumed to be artificially
+#' dichotomous.
+#'
+#'
+#' @param   alpha   alpha level for 1 - alpha confidence
+#' @param   p1      planning value for row 1 marginal proportion 
+#' @param   p2      planning value for column 1 marginal proportion
+#' @param   cor     planning value for biserial-phi correlation
+#' @param   w       desired confidence interval width
+#'
+#'
+#' @return
+#' Returns the required sample size
+#'
+#'
+#' @examples
+#' size.ci.biphi(.05, .2, .5, .3, .4)
+#'
+#' # Should return:
+#' #  Sample size
+#' #          195
+#'
+#'
+#' @importFrom stats qnorm
+#' @export
+size.ci.biphi <- function(alpha, p1, p2, cor, w) {
+ if (cor > .999 | cor < -.999) {stop("correlation must be between -.999 and .999")}
+ z <- qnorm(1 - alpha/2)
+ r1 <- p1
+ r2 <- 1 - r1
+ c1 <- p2
+ c2 <- 1 - p2
+ or <- exp(sqrt(c1*c2)*cor/((1 - cor)))
+ a <- or*(r1 + c1) + (r2 - c1)
+ b <- sqrt(a^2 - 4*r1*c1*or*(or - 1))
+ p00 <- (a - b)/(2*(or - 1))
+ p01 <- r1 - p00
+ p10 <- c1 - p00
+ p11 <- 1 - (p00 + p01 + p10)
+ c <- 2.89/(c1*c2)
+ v <- c^2/(log(or)^2 + c)^3
+ n0 <- ceiling(4*v*(1/p00 + 1/p01 + 1/p10 + 1/p11)*(z/w)^2)
+ ci <- ci.biphi(alpha, n0*p00, n0*p01, n0*c1, n0*(1 - c1))
+ w0 <- ci[4] - ci[3]
+ n <- ceiling(n0*(w0/w)^2)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size"
+ rownames(out) <- ""
+ return(out)
+}
+
+
 # ===================== Sample Size for Desired Power ========================
 #  size.test.prop =========================================================== 
 #' Sample size for a test of a single proportion 
 #'
 #' @description
 #' Computes the sample size required to test a population proportion with
-#' desired power using a correction for continuity in a 1-group design. 
+#' desired power (using a correction for continuity) in a 1-group design. 
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test 
@@ -2986,8 +3291,8 @@ size.ci.tetra <- function(alpha, p1, p2, cor, w) {
 #' @importFrom stats qnorm
 #' @export
 size.test.prop <- function(alpha, pow, p, h) {
- if (p > .9999 || p < .0001) {stop("proportion must be between .0001 and .9999")}
- if (h > .9999 || h < .0001) {stop("null hypothesis value must be between .0001 and .9999")}
+ if (p > .9999 | p < .0001) {stop("proportion must be between .0001 and .9999")}
+ if (h > .9999 | h < .0001) {stop("null hypothesis value must be between .0001 and .9999")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
  n0 <- ceiling((za*sqrt(h*(1 - h)) + zb*sqrt(p*(1 - p)))^2/((p - h)^2))
@@ -3005,16 +3310,13 @@ size.test.prop <- function(alpha, pow, p, h) {
 #'
 #' @description
 #' Computes the sample size in each group required to test a difference in 
-#' population proportions with desired power and a continuity correction in a
-#' 2-group design. This function requires planning values for both proportions. 
-#' Set each proportion planning value to .5, or a value closest to .5 within
-#' a plausible range, for a conservatively large sample size requirement. This
-#' function does not use the typical sample size approach where the effect 
-#' size is assumed to equal the difference in proportion planning values. This
-#' function does not require the planning value for the proportion difference 
-#' (effect size) to equal the difference of the two proportion planning values;
-#' for example, the planning value of the proportion difference could be set 
-#' equal to a minimally interesting effect size.
+#' population proportions with desired power (using a continuity correction) in
+#' a 2-group design. This function requires planning values for both proportions. 
+#' Set each proportion planning value to .5 for a conservatively large sample
+#' size requirement. This function does not require the planning value for the 
+#' proportion difference (effect size) to equal the difference of the two 
+#' proportion planning values; for example, the planning value of the proportion 
+#' difference could be set equal to a minimally interesting effect size.
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test 
@@ -3044,9 +3346,9 @@ size.test.prop <- function(alpha, pow, p, h) {
 #' @importFrom stats qnorm
 #' @export
 size.test.prop2 <- function(alpha, pow, p1, p2, es) {
- if (p1 > .9999 || p1 < .0001) {stop("p1 must be between .0001 and .9999")}
- if (p2 > .9999 || p2 < .0001) {stop("p2 must be between .0001 and .9999")}
- if (es < .001) {stop("effect size must be greater than .001")}
+ if (p1 > .9999 | p1 < .0001) {stop("p1 must be between .0001 and .9999")}
+ if (p2 > .9999 | p2 < .0001) {stop("p2 must be between .0001 and .9999")}
+ if (es == 0) {stop("effect size cannot equal 0")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
  p0 <- (p1 + p2)/2
@@ -3068,11 +3370,11 @@ size.test.prop2 <- function(alpha, pow, p1, p2, es) {
 #' @description
 #' Computes the sample size in each group (assuming equal sample sizes) required
 #' to test a linear contrast of population proportions with desired power in a 
-#' between-subjects design. This function requires planning values for all 
-#' proportions. Set the proportion planning values to .5 for a conservatively 
-#' large sample size. The planning value for the effect size (linear contrast of 
-#' proportions) could be set equal to the linear contrast of proportion planning 
-#' values or it could be set equal to a minimally interesting effect size.
+#' between-subjects design. The planning value for the effect size (linear 
+#' contrast of proportions) could be set equal to the linear contrast of 
+#' proportion planning values or it could be set equal to a minimally interesting
+#' effect size. For a conservatively large sample size, set the proportion planning
+#' values to .5 and set the effect size to a minimally interesting value. 
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test 
@@ -3099,6 +3401,7 @@ size.test.prop2 <- function(alpha, pow, p1, p2, es) {
 #' @importFrom stats qnorm
 #' @export
 size.test.lc.prop.bs <- function(alpha, pow, p, es, v) {
+ if (es == 0) {stop("effect size cannot equal 0")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
  n <- ceiling((t(v)%*%diag(p*(1 - p))%*%v)*(za + zb)^2/es^2)
@@ -3121,7 +3424,8 @@ size.test.lc.prop.bs <- function(alpha, pow, p, es, v) {
 #' The absolute difference in the proportion planning values must be less than h.  
 #' Equivalence tests often require a very large sample size. Equivalence tests 
 #' usually use 2 x alpha rather than alpha (e.g., use alpha = .10 rather than
-#' alpha = .05).
+#' alpha = .05). This function sets the effect size equal to the difference in
+#' proportion planning values.
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test 
@@ -3147,8 +3451,8 @@ size.test.lc.prop.bs <- function(alpha, pow, p, es, v) {
 #' @export
 size.equiv.prop2 <- function(alpha, pow, p1, p2, h) {
  if (h <= abs(p1 - p2)) {stop("|p1 - p2| must be less than h")}
- if (p1 > .9999 || p1 < .0001) {stop("p1 must be between .0001 and .9999")}
- if (p2 > .9999 || p2 < .0001) {stop("p2 must be between .0001 and .9999")}
+ if (p1 > .9999 | p1 < .0001) {stop("p1 must be between .0001 and .9999")}
+ if (p2 > .9999 | p2 < .0001) {stop("p2 must be between .0001 and .9999")}
  za <- qnorm(1 - alpha)
  zb <- qnorm(1 - (1 - pow)/2)
  es <- p1 - p2
@@ -3197,8 +3501,8 @@ size.equiv.prop2 <- function(alpha, pow, p1, p2, h) {
 #' @importFrom stats qnorm
 #' @export
 size.supinf.prop2 <- function(alpha, pow, p1, p2, h) {
- if (p1 > .9999 || p1 < .0001) {stop("p1 must be between .0001 and .9999")}
- if (p2 > .9999 || p2 < .0001) {stop("p2 must be between .0001 and .9999")}
+ if (p1 > .9999 | p1 < .0001) {stop("p1 must be between .0001 and .9999")}
+ if (p2 > .9999 | p2 < .0001) {stop("p2 must be between .0001 and .9999")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
  es <- p1 - p2
@@ -3223,8 +3527,8 @@ size.supinf.prop2 <- function(alpha, pow, p1, p2, h) {
 #' sample size. The planning value for the effect size (proportion difference)
 #' could be set equal to the difference of the two proportion planning values 
 #' or it could be set equal to a minimally interesting effect size. Set the
-#' phi correlation planning value to the smallest value within a plausible range
-#' for a conservatively large sample size.
+#' phi correlation planning value to the smallest absolute value within a
+#' plausible range for a conservatively large sample size.
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test 
@@ -3250,7 +3554,8 @@ size.supinf.prop2 <- function(alpha, pow, p1, p2, h) {
 #' @importFrom stats qnorm
 #' @export
 size.test.prop.ps <- function(alpha, pow, p1, p2, phi, es) {
- if (phi > .999 || phi < -.999) {stop("phi must be between -.999 and .999")}
+ if (phi > .999 | phi < -.999) {stop("phi must be between -.999 and .999")}
+ if (es == 0) {stop("effect size cannot equal 0")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
  cov <- phi*sqrt(p1*p2*(1 - p1)*(1 - p2))
@@ -3275,8 +3580,8 @@ size.test.prop.ps <- function(alpha, pow, p1, p2, phi, es) {
 #' require a very large sample size. Equivalence tests usually use 2 x alpha 
 #' rather than alpha (e.g., use alpha = .10 rather alpha = .05). This function
 #' sets the effect size equal to the difference in proportion planning values. 
-#' Set the phi correlation planning value to the smallest value within a 
-#' plausible range for a conservatively large sample size.
+#' Set the phi correlation planning value to the smallest absolute value within 
+#' a plausible range for a conservatively large sample size.
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test 
@@ -3302,10 +3607,10 @@ size.test.prop.ps <- function(alpha, pow, p1, p2, phi, es) {
 #' @importFrom stats qnorm
 #' @export
 size.equiv.prop.ps <- function(alpha, pow, p1, p2, phi, h) {
- if (phi > .999 || phi < -.999) {stop("phi must be between -.999 and .999")}
+ if (phi > .999 | phi < -.999) {stop("phi must be between -.999 and .999")}
  if (h <= abs(p1 - p2)) {stop("|p1 - p2| must be less than h")}
- if (p1 > .9999 || p1 < .0001) {stop("p1 must be between .0001 and .9999")}
- if (p2 > .9999 || p2 < .0001) {stop("p2 must be between .0001 and .9999")}
+ if (p1 > .9999 | p1 < .0001) {stop("p1 must be between .0001 and .9999")}
+ if (p2 > .9999 | p2 < .0001) {stop("p2 must be between .0001 and .9999")}
  za <- qnorm(1 - alpha)
  zb <- qnorm(1 - (1 - pow)/2)
  cov <- phi*sqrt(p1*p2*(1 - p1)*(1 - p2))
@@ -3330,10 +3635,9 @@ size.equiv.prop.ps <- function(alpha, pow, p1, p2, phi, h) {
 #' for the range of practical equivalence and specify values of p1 and p2 such
 #' that p1 - p2 > h. For an inferiority test, specify the lower limit (-h) for 
 #' the range of practical equivalence and specify values of p1 and p2 such  
-#' that p1 - p2 > -h. This function sets the effect size equal to the 
-#' difference in proportion planning values. Set the phi correlation planning 
-#' value to the smallest value within a plausible range for a conservatively 
-#' large sample size.
+#' that p1 - p2 > -h. This function sets the effect size equal to p1 - p2.
+#' Set the phi correlation planning value to the smallest absolute value within
+#' a plausible range for a conservatively large sample size.
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test 
@@ -3359,9 +3663,9 @@ size.equiv.prop.ps <- function(alpha, pow, p1, p2, phi, h) {
 #' @importFrom stats qnorm
 #' @export
 size.supinf.prop.ps <- function(alpha, pow, p1, p2, phi, h) {
- if (phi > .999 || phi < -.999) {stop("phi must be between -.999 and .999")}
- if (p1 > .9999 || p1 < .0001) {stop("p1 must be between .0001 and .9999")}
- if (p2 > .9999 || p2 < .0001) {stop("p2 must be between .0001 and .9999")}
+ if (phi > .999 | phi < -.999) {stop("phi must be between -.999 and .999")}
+ if (p1 > .9999 | p1 < .0001) {stop("p1 must be between .0001 and .9999")}
+ if (p2 > .9999 | p2 < .0001) {stop("p2 must be between .0001 and .9999")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
  cov <- phi*sqrt(p1*p2*(1 - p1)*(1 - p2))
@@ -3409,7 +3713,7 @@ size.supinf.prop.ps <- function(alpha, pow, p1, p2, phi, h) {
 #' @importFrom stats pnorm
 #' @export
 power.prop <- function(alpha, n, p, es) {
- if (p > .9999 || p < .0001) {stop("proportion must be between .0001 and .9999")}
+ if (p > .9999 | p < .0001) {stop("proportion must be between .0001 and .9999")}
  za <- qnorm(1 - alpha/2)
  z1 <- abs(es)/sqrt(p*(1 - p)/n) - za
  z2 <- abs(es)/sqrt(p*(1 - p)/n) + za
@@ -3461,8 +3765,8 @@ power.prop <- function(alpha, n, p, es) {
 #' @importFrom stats pnorm
 #' @export
 power.prop2 <- function(alpha, n1, n2, p1, p2, es) {
- if (p1 > .9999 || p1 < .0001) {stop("p1 must be between .0001 and .9999")}
- if (p2 > .9999 || p2 < .0001) {stop("p2 must be between .0001 and .9999")}
+ if (p1 > .9999 | p1 < .0001) {stop("p1 must be between .0001 and .9999")}
+ if (p2 > .9999 | p2 < .0001) {stop("p2 must be between .0001 and .9999")}
  za <- qnorm(1 - alpha/2)
  z1 <- abs(es)/sqrt(p1*(1 - p1)/n1 + p2*(1 - p2)/n2) - za
  z2 <- abs(es)/sqrt(p1*(1 - p1)/n1 + p2*(1 - p2)/n2) + za
@@ -3518,9 +3822,9 @@ power.prop2 <- function(alpha, n1, n2, p1, p2, es) {
 #' @importFrom stats pnorm
 #' @export
 power.prop.ps <- function(alpha, n, p1, p2, phi, es) {
- if (phi > .999 || phi < -.999) {stop("phi must be between -.999 and .999")}
- if (p1 > .9999 || p1 < .0001) {stop("p1 must be between .0001 and .9999")}
- if (p2 > .9999 || p2 < .0001) {stop("p2 must be between .0001 and .9999")}
+ if (phi > .999 | phi < -.999) {stop("phi must be between -.999 and .999")}
+ if (p1 > .9999 | p1 < .0001) {stop("p1 must be between .0001 and .9999")}
+ if (p2 > .9999 | p2 < .0001) {stop("p2 must be between .0001 and .9999")}
  za <- qnorm(1 - alpha/2)
  v <- 2*phi*sqrt(p1*(1 - p1)*p2*(1 - p2))
  z1 <- abs(es)/sqrt((p1*(1 - p1) + p2*(1 - p2) - v)/n) - za
@@ -3576,19 +3880,123 @@ iqv <- function(f) {
 }
 
 
+#  expon.slope ================================================================== 
+#' Confidence interval for an exponentiated slope
+#'
+#'
+#' @description
+#' Computes confidence intervals for exp(B) - 1 (as a percent) and exp(B) 
+#' where B is a population slope coefficient in a binary logit, ordinal
+#' logit, or log-Poisson model. This function is useful with software that 
+#' does not have an option to compute exp(B) and exp(B) - 1.
+#'
+#'
+#' @param  alpha  alpha level for 1-alpha confidence
+#' @param  b      estimated slope coefficient
+#' @param  se     slope standard error
+#'
+#'
+#' @return
+#' Returns a 2-row matrix. The first row gives the results for exp(B), and the 
+#' the second row gives the results for exp(B) - 1 (as a percent). The columns are:
+#' * Estimate - estimate of exp(B) or exp(B) - 1
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
+#'
+#'
+#' @examples
+#' expon.slope(.05, .502, .0396)
+#'
+#' # Should return:
+#' #                   Estimate        LL       UL
+#' # exp(B)            1.652022  1.528651  1.78535
+#' # 100[exp(B) - 1]% 65.202201 52.865066 78.53502
+#'
+#'
+#' @importFrom stats qnorm
+#' @export
+expon.slope <- function(alpha, b, se) { 
+  z <- qnorm(1 - alpha/2)
+  est1 <- exp(b)
+  est2 <- 100*(exp(b) - 1)
+  ll0 <- b - z*se
+  ul0 <- b + z*se
+  LL1 <- exp(ll0)
+  UL1 <- exp(ul0)
+  LL2 <- 100*(LL1 - 1)
+  UL2 <- 100*(UL1 - 1)
+  out1 <- t(c(est1, LL1, UL1))
+  out2 <- t(c(est2, LL2, UL2))
+  out <- rbind(out1, out2)
+  colnames(out) = c("Estimate", "LL", "UL")
+  rownames(out) = c("exp(B)", "100[exp(B) - 1]%")
+  return (out)
+}
+
+
+#  signal ===================================================================== 
+#' Parameter estimates for a signal detection study
+#'
+#'
+#' @description
+#' Computes the hit rate, false alarm rate, d-prime, threshold, and bias 
+#' for one participant (observer) in a Yes/No signal detection study. 
+#' An equal-variance Gausian model is assumed. The parameter estimates are 
+#' computed after adding .5 to the number of "Yes" responses in each condtion
+#' (the signal and noise conditions) and adding 1 to the number of signal 
+#' trials and to the number of noise trails. In memory recognition studies,
+#' the observer is first presented with set of words or images to study, 
+#' and is later presented with another set of words or images where some
+#' items are from the first list (old items) and some items are new items.
+#'
+#'
+#' @param   f1    number of "Yes" responses in the stimulus (old item) trials 
+#' @param   f2    number of "Yes" responses in the noise (new item) trials
+#' @param   n1    number of stimulus (or old item) trials
+#' @param   n2    number of noise (or new item) trials
+#'
+#'
+#' @return
+#' Returns a 1-row matrix. The columns are:
+#' * HR - estimate of hit rate 
+#' * FAR - estimate of false alarm rate
+#' * d-prime - estimate of d-prime
+#' * Threshold - estimate of threshold (criterion)
+#' * Bias - estimate of threshold minus d-prime/2
+#'
+#'
+#' @references
+#' \insertRef{Wickens2002}{statpsych}        
+#'
+#'
+#' @examples
+#' signal(82, 46, 100, 100)
+#'
+#' # Should return:
+#' #         HR      FAR  d-prime  Threshold       Bias
+#' #  0.8168317 0.460396 1.002793 0.09943603 -0.4019603
+#'
+#'
+#' @importFrom stats qnorm
+#' @export
+signal <- function(f1, f2, n1, n2) { 
+  hr <- (f1 + .5)/(n1 + 1)
+  far <- (f2 + .5)/(n2 + 1)
+  zh <- qnorm(hr)
+  zf <- qnorm(far)
+  d <- zh - zf
+  lam <- qnorm(1 - far)
+  bias <- lam - d/2
+  out <- t(c(hr, far, d, lam, bias))
+  colnames(out) = c("HR", "FAR", "d-prime", "Threshold", "Bias")
+  rownames(out) = ""
+  return (out)
+}
+
+
 fix_imports <- function() {
   something <- Rdpack::append_to_Rd_list()
   res <- mathjaxr::preview_rd()
 }
 
 
-
-
-# - Deprecated functions --------------------------------------------------
-#' @rdname ci.prop
-#' 
-#' @description
-#' ci.prop1 is deprecated and will soon be removed from statpsych; please switch to ci.prop
-#'  
-#' @export
-ci.prop1 <- ci.prop

@@ -7,7 +7,7 @@
 ci.agree2(alpha, n1, f1, n2, f2, r)
 }
 \arguments{
-\item{alpha}{alpha level for simultaneous 1-alpha confidence}
+\item{alpha}{alpha level for 1-alpha confidence}
 
 \item{n1}{sample size (objects) in group 1}
 

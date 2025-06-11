@@ -5,7 +5,7 @@
 \title{Simulates confidence interval coverage probability for a median difference
 in a 2-group design}
 \usage{
-sim.ci.median2(alpha, n1, n2, sd.ratio, dist1, dist2, rep)
+sim.ci.median2(alpha, n1, n2, sd2, dist1, dist2, rep)
 }
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
@@ -14,7 +14,7 @@ sim.ci.median2(alpha, n1, n2, sd.ratio, dist1, dist2, rep)
 
 \item{n2}{sample size for group 2}
 
-\item{sd.ratio}{ratio of population standard deviations (sd2/sd1)}
+\item{sd2}{population standard deviation for group 2}
 
 \item{dist1}{type of distribution for group 1 (1, 2, 3, 4, or 5)}
 
@@ -42,7 +42,7 @@ Returns a 1-row matrix. The columns are:
 Performs a computer simulation of the confidence interval performance for a
 difference of population medians in a 2-group design. Sample data for each
 group can be generated from five different population distributions. All
-distributions are scaled to have standard deviations of 1.0 in group 1.
+distributions are scaled to have a standard deviation of 1.0 for group 1.
 }
 \examples{
 sim.ci.median2(.05, 20, 20, 2, 5, 4, 5000)

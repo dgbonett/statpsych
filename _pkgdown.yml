@@ -1,6 +1,7 @@
 url: https://dgbonett.github.io/statpsych
 
 template:
+  bootstrap: 5
   params:
     bootswatch: cosmo
 
@@ -20,6 +21,7 @@ reference:
   - adj.se
   - etasqr.gen.2way
   - etasqr.adj
+  - expon.slope
   - fitindices
   - iqv
   - pi.score
@@ -28,6 +30,7 @@ reference:
   - random.y
   - random.yx
   - randomize
+  - signal
   - slope.contrast
   - spearmanbrown
 

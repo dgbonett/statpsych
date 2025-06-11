@@ -31,8 +31,8 @@ proportion planning values can be set to .5 for a conservatively large
 sample size. The planning value for the effect size (proportion difference)
 could be set equal to the difference of the two proportion planning values
 or it could be set equal to a minimally interesting effect size. Set the
-phi correlation planning value to the smallest value within a plausible range
-for a conservatively large sample size.
+phi correlation planning value to the smallest absolute value within a
+plausible range for a conservatively large sample size.
 }
 \examples{
 size.test.prop.ps(.05, .80, .4, .3, .5, .1)

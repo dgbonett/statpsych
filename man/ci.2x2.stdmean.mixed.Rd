@@ -2,20 +2,21 @@
 % Please edit documentation in R/statpsych1.R
 \name{ci.2x2.stdmean.mixed}
 \alias{ci.2x2.stdmean.mixed}
-\title{Computes confidence intervals of standardized effects in a 2x2 mixed design}
+\title{Computes confidence intervals of standardized effects in a 2x2
+mixed design}
 \usage{
 ci.2x2.stdmean.mixed(alpha, y11, y12, y21, y22)
 }
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
 
-\item{y11}{vector of scores at level 1 of A in group 1}
+\item{y11}{vector of scores at level 1 of A and level 1 of B (group 1)}
 
-\item{y12}{vector of scores at level 2 of A in group 1}
+\item{y12}{vector of scores at level 1 of A and level 2 of B (group 2)}
 
-\item{y21}{vector of scores at level 1 of A in group 2}
+\item{y21}{vector of scores at level 2 of A and level 1 of B (group 1)}
 
-\item{y22}{vector of scores at level 2 of A in group 2}
+\item{y22}{vector of scores at level 2 of A and level 2 of B (group 2)}
 }
 \value{
 Returns a 7-row matrix (one row per effect). The columns are:
@@ -29,27 +30,28 @@ Returns a 7-row matrix (one row per effect). The columns are:
 }
 \description{
 Computes confidence intervals for the standardized AB interaction effect,
-main effect of A, main effect of B, simple main effects of A, and simple main
+main effect of A, main efect of B, simple main effects of A, and simple main
 effects of B in a 2x2 mixed factorial design where Factor A is a
 within-subjects factor, and Factor B is a between-subjects factor. Equality
-of population variances is not assumed.
+of population variances is not assumed. A square root unweigthed average
+variance standardizer is used.
 }
 \examples{
 y11 <- c(18, 19, 20, 17, 20, 16)
-y12 <- c(19, 18, 19, 20, 17, 16)
-y21 <- c(19, 16, 16, 14, 16, 18)
+y12 <- c(19, 16, 16, 14, 16, 18)
+y21 <- c(19, 18, 19, 20, 17, 16)
 y22 <- c(16, 10, 12,  9, 13, 15)
 ci.2x2.stdmean.mixed(.05, y11, y12, y21, y22)
 
 # Should return:
-#             Estimate  adj Estimate        SE         LL         UL
-# AB:      -1.95153666   -1.80141845 0.5424100 -3.0146407 -0.8884326
-# A:        1.06061775    1.01125934 0.2780119  0.5157244  1.6055111
-# B:        1.90911195    1.76225718 0.5743510  0.7834047  3.0348192
-# A at b1:  0.08484942    0.07589163 0.4649598 -0.8264549  0.9961538
-# A at b2:  2.03638608    1.82139908 0.2964013  1.4554502  2.6173219
-# B at a1:  0.93334362    0.86154796 0.5487927 -0.1422703  2.0089575
-# B at a2:  2.88488027    2.66296641 0.7127726  1.4878717  4.2818889
+#             Estimate adj Estimate        SE          LL         UL
+# AB:      -1.95153666  -1.80141845 0.5407442 -3.01137589 -0.8916974
+# A:        1.06061775   1.01125934 0.2797699  0.51227884  1.6089567
+# B:        1.90911195   1.76225718 0.5758855  0.78039715  3.0378267
+# A at b1:  0.08484942   0.07589163 0.4650441 -0.82662027  0.9963191
+# A at b2:  2.03638608   1.82139908 0.2995604  1.44925855  2.6235136
+# B at a1:  0.93334362   0.86154796 0.5036429 -0.05377836  1.9204656
+# B at a2:  2.88488027   2.66296641 0.7477246  1.41936706  4.3503935
 
 
 }

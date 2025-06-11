@@ -5,7 +5,7 @@
 \title{Simulates confidence interval coverage probability for a 2-group mean
 difference}
 \usage{
-sim.ci.mean2(alpha, n1, n2, sd.ratio, dist1, dist2, rep)
+sim.ci.mean2(alpha, n1, n2, sd2, dist1, dist2, rep)
 }
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
@@ -14,7 +14,7 @@ sim.ci.mean2(alpha, n1, n2, sd.ratio, dist1, dist2, rep)
 
 \item{n2}{sample size in group 2}
 
-\item{sd.ratio}{ratio of population standard deviations (sd2/sd1)}
+\item{sd2}{population standard deviation for group 2}
 
 \item{dist1}{type of distribution for group 1 (1, 2, 3, 4, or 5)}
 
@@ -43,13 +43,20 @@ Performs a computer simulation of separate variance and pooled variance
 confidence interval performance for a population mean difference in a
 2-group design. Sample data within each group can be generated from five
 different population distributions. All distributions are scaled to have
-a standard deviation of 1.0 in group 1.
+a standard deviation of 1.0 for group 1.
 }
 \examples{
+sim.ci.mean2(.05, 30, 25, 1.5, 1, 1, 1000)
+
+# Should return (within sampling error):
+#                              Coverage Lower Error Upper Error Ave CI Width
+# Equal Variances Assumed:      0.93988      0.0322     0.02792     1.354437
+# Equal Variances Not Assumed:  0.94904      0.0262     0.02476     1.411305
+
 sim.ci.mean2(.05, 30, 25, 1.5, 4, 5, 1000)
 
 # Should return (within sampling error):
-#                             Coverage Lower Error Upper Error Ave CI Width
+#                              Coverage Lower Error Upper Error Ave CI Width
 # Equal Variances Assumed:      0.93986     0.04022     0.01992     1.344437
 # Equal Variances Not Assumed:  0.94762     0.03862     0.01376     1.401305
 
