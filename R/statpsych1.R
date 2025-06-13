@@ -1887,8 +1887,8 @@ ci.median2 <- function(alpha, y1, y2) {
 #'
 #' @description
 #' Computes a distribution-free confidence interval for a ratio of population 
-#' medians of ratio-scale measurements in a 2-group design. Tied scores are
-#' within each group assumed to be rare.
+#' medians of ratio-scale measurements in a 2-group design. Tied scores 
+#' within each group are assumed to be rare.
 #' 
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
@@ -6340,7 +6340,7 @@ pi.score2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
  tcrit1 <- qt(1 - alpha/2, df1)
  ll1 <- est - tcrit1*se1
  ul1 <- est + tcrit1*se1
- se2 <- sqrt(sd1^2 + sd2^2 + sd1^1/n1 + sd2^2/n2)
+ se2 <- sqrt(sd1^2 + sd2^2 + sd1^2/n1 + sd2^2/n2)
  c1 <- sd1^2 + sd1^2/n1
  c2 <- sd2^2 + sd2^2/n2
  df2 <- 1/((1/(n1 - 1))*(c1/(c1 + c2))^2 + (1/(n2 - 1))*(c2/(c1 + c2))^2)
