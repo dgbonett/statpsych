@@ -28,11 +28,11 @@
 #'
 #'
 #' @examples
-#' ci.mean(.05, 24.5, 3.65, 40)
+#' ci.mean(.05, 38.3, 8.14, 10)
 #'
 #' # Should return:
 #' # Estimate        SE       LL       UL
-#' #     24.5 0.5771157 23.33267 25.66733
+#' #     38.3  2.574094 32.47699 44.12301
 #'  
 #' 
 #' @importFrom stats qt
@@ -1764,13 +1764,12 @@ ci.cqv <- function(alpha, y) {
 #'
 #'
 #' @examples
-#' y <- c(30.2, 20.4, 15.1, 10.2, 10.5, 60.8, 20.8, 25.0, 20.7, 30.9, 10.8, 5.1,
-#'          50.9, 40.0, 20.9, 10.8, 0, 20.5, 50.8)
+#' y <- c(25, 29, 35, 36, 36, 40, 41, 43, 44, 54)
 #' ci.median(.05, y)
 #'
 #' # Should return:
-#' #  Estimate       SE   LL   UL
-#' #      20.7 4.292277 10.8 30.9
+#' #  Estimate       SE  LL  UL
+#' #        38 3.261774  29  44
 #'
 #'
 #' @importFrom stats qnorm
@@ -4069,11 +4068,11 @@ ci.2x2.median.ws <- function(alpha, y11, y12, y21, y22) {
 #'
 #'
 #' @examples
-#' ci.bayes.normal(.05, 30, 2, 24.5, 0.577)
+#' ci.bayes.normal(.05, 50, 5, 38.3, 2.57)
 #'
 #' # Should return:
 #' # Posterior mean Posterior SD       LL       UL
-#' #        24.9226    0.5543895 23.83602 26.00919
+#' #       40.74511     2.285735 36.26515 45.22506
 #'
 #'
 #' @importFrom stats qnorm
@@ -4121,11 +4120,11 @@ ci.bayes.normal <- function(alpha, prior_mean, prior_sd, est, se) {
 #'
 #'
 #' @examples
-#' test.mean(24.5, 3.65, 40, 23)
+#' test.mean(7.9, 3.05, 100, 7)
 #'
 #' # Should return:
-#' #         t df          p
-#' #  2.599132 39 0.01312665
+#' #         t df           p
+#' #   2.95082 99 0.003956349
 #'  
 #' 
 #' @importFrom stats pt
@@ -4350,7 +4349,7 @@ test.anova.bs <- function(m, sd, n) {
 #'
 #'
 #' @examples
-#' size.ci.mean(.05, 264.4, 10)
+#' size.ci.mean(.05, 6.0, 1.5)
 #'
 #' # Should return:
 #' # Sample size
@@ -5028,11 +5027,11 @@ size.ci.etasqr <- function(alpha, etasqr, groups, w) {
 #'
 #'
 #' @examples
-#' size.ci.second(20, 5.3, 2.5)
+#' size.ci.second(25, 4.38, 2.0)
 #'
 #' # Should return:
 #' # Second-stage sample size
-#' #                       70
+#' #                       95
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -5086,11 +5085,11 @@ size.ci.second <- function(n0, w0, w) {
 #'
 #'
 #' @examples
-#' size.ci.mean.prior(.05, .10, 26.4, 25, 4)
+#' size.ci.mean.prior(.05, .10, 0.71, 204, .4)
 #'
 #' # Should return:
 #' # Sample size
-#' #          44
+#' #          88
 #'
 #' @export                 
 size.ci.mean.prior <- function(alpha1, alpha2, var0, n0, w) {
@@ -5422,11 +5421,11 @@ size.ci.lc.median.bs <- function(alpha, var, w, v, dist) {
 #'
 #'
 #' @examples
-#' size.test.mean(.05, .9, 80.5, 7)
+#' size.test.mean(.05, .9, 8.2, 1.5)
 #'
 #' # Should return:
 #' # Sample size
-#' #          20
+#' #          41
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -6605,11 +6604,11 @@ pi.var <- function(alpha, var, n0, n, type) {
 #'
 #'
 #' @examples
-#' ci.var.upper(.25, 15, 60)
+#' ci.var.upper(.10, 1.45, 100)
 #'
 #' # Should return:
 #' #       UL
-#' # 17.23264
+#' # 1.762447
 #'  
 #' 
 #' @importFrom stats qchisq
