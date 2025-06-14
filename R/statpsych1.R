@@ -194,15 +194,14 @@ ci.stdmean <- function(alpha, m, sd, n, h) {
 #'
 #'
 #' @examples
-#' ci.mean2(.05, 15.4, 10.3, 2.67, 2.15, 30, 20)
-#'
+#' ci.mean2(.05, 19.4, 11.3, 2.70, 2.10, 40, 40)
 #' # Should return:
-#' #                              Estimate       SE        t      df      
-#' # Equal Variances Assumed:          5.1 1.602248 3.183029 48.0000 
-#' # Equal Variances Not Assumed:      5.1 1.406801 3.625247 44.1137 
-#' #                                          p       LL       UL
-#' # Equal Variances Assumed:      0.0025578586 1.878465 8.321535
-#' # Equal Variances Not Assumed:  0.0007438065 2.264986 7.935014
+#' #                              Estimate        SE        t       df p
+#' # Equal Variances Assumed:          8.1 0.5408327 14.97691 78.00000 0
+#' # Equal Variances Not Assumed:      8.1 0.5408327 14.97691 73.54385 0
+#' #                                    LL       UL
+#' # Equal Variances Assumed:     7.023285 9.176715
+#' # Equal Variances Not Assumed: 7.022256 9.177744
 #'
 #'
 #' @importFrom stats qt
@@ -503,14 +502,14 @@ ci.ratio.mean2 <- function(alpha, y1, y2){
 #'
 #'
 #' @examples
-#' ci.stdmean2(.05, 35.1, 26.7, 7.32, 6.98, 30, 30)
+#' ci.stdmean2(.05, 20.9, 19.1, 3.85, 3.19, 50, 50)
 #' 
 #' # Should return:
-#' #                          Estimate  adj Estimate        SE        LL       UL
-#' # Unweighted standardizer: 1.174493      1.159240 0.2844012 0.6170771 1.731909
-#' # Weighted standardizer:   1.174493      1.159240 0.2802826 0.6251494 1.723837
-#' # Group 1 standardizer:    1.147541      1.117605 0.2975582 0.5643375 1.730744
-#' # Group 2 standardizer:    1.203438      1.172044 0.3120525 0.5918268 1.815050
+#' #                           Estimate adj Estimate        SE         LL        UL
+#' # Unweighted standardizer: 0.5091311    0.5052248 0.2053887 0.10657659 0.9116857
+#' # Weighted standardizer:   0.5091311    0.5052248 0.2032794 0.11071079 0.9075515
+#' # Group 1 standardizer:    0.4675325    0.4603397 0.1914405 0.09231597 0.8427490
+#' # Group 2 standardizer:    0.5642633    0.5555823 0.2310489 0.11141582 1.0171108
 #'
 #'
 #' @importFrom stats qnorm
@@ -1831,13 +1830,13 @@ ci.median <- function(alpha, y) {
 #'
 #'
 #' @examples
-#' y1 <- c(32.1, 39.8, 26.3, 35.0, 43.1, 27.0, 40.9, 37.4, 34.0, 29.2)
-#' y2 <- c(36.8, 44.0, 47.1, 42.7, 49.0, 39.6, 46.2, 31.6, 33.1, 48.4)
+#' y1 = c(70, 394, 43, 95, 62, 128, 2, 203, 81, 436, 85, 35, 156, 1, 3, 27, 63, 181, 184, 18)
+#' y2 = c(102, 120, 78, 78, 417, 124, 86, 171, 176, 129, 230,194, 100, 157, 306, 411, 164, 103, 193, 312)
 #' ci.median2(.05, y1, y2)
 #'
 #' # Should return:
-#' #  Median1 Median2 Median1-Median2       SE        LL         UL
-#' #     34.5   43.35           -8.85 4.494993 -17.66002 -0.0399751
+#' #  Median1 Median2 Median1-Median2       SE        LL        UL
+#' #     75.5   160.5             -85 37.11502 -157.7441 -12.25589
 #'
 #'
 #' @importFrom stats qnorm
@@ -2297,13 +2296,13 @@ ci.sign <- function(alpha, y, h) {
 #'
 #'
 #' @examples
-#' y2 <- c(36, 44, 47, 42, 49, 39, 46, 31, 33, 48)
-#' y1 <- c(32, 39, 26, 35, 43, 27, 40, 37, 34, 29)
+#' y1 <- c(9.4, 10.3, 58.3, 106.0, 31.0, 46.2, 12.0, 19.0, 135.0, 159.0)
+#' y2 <- c(14.6, 5.1, 8.1, 22.7, 6.4, 4.4, 19.0, 3.2)
 #' ci.mann(.05, y1, y2)
 #'
 #' # Should return:
 #' # Estimate        SE        LL UL
-#' #    0.795 0.1401834 0.5202456  1
+#' #  0.86875 0.1222202 0.6292028  1
 #'
 #'
 #' @importFrom stats qnorm
@@ -4391,23 +4390,17 @@ size.ci.mean <- function(alpha, var, w) {
 #'
 #'
 #' @examples
-#' size.ci.mean2(.05, 37.1, 5, 1)
+#' size.ci.mean2(.01, 81, 12, 1)
 #'
 #' # Should return:
 #' # n1  n2
-#' # 47  47
+#' # 32  32
 #'
-#' size.ci.mean2(.05, 37.1, 5, 3)
-#'
-#' # Should return:
-#' # n1  n2
-#' # 32  96
-#'
-#' size.ci.mean2(.05, 37.1, 5, .5)
+#' size.ci.mean2(.05, 4.0, 2.5, 2)
 #'
 #' # Should return:
 #' # n1  n2
-#' # 70  35
+#' # 16  32
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -4451,19 +4444,19 @@ size.ci.mean2 <- function(alpha, var, w, R) {
 #'
 #'
 #' @examples
-#' size.ci.stdmean2(.05, .75, .5, 1)
+#' size.ci.stdmean2(.05, 1.0, .5, 1)
 #'
 #' # Should return:
 #' #                              n1  n2
-#' # Unweighted standardizer:    132 132
-#' # Single group standardizer:  141 141
+#' # Unweighted standardizer:    139 139
+#' # Single group standardizer:  154 154
 #'
-#' size.ci.stdmean2(.05, .75, .5, 2)
+#' size.ci.stdmean2(.05, 1.0, .5, 2)
 #'
 #' # Should return:
 #' #                              n1  n2
-#' # Unweighted standardizer:     99 198
-#' # Single group standardizer:  106 212
+#' # Unweighted standardizer:    104 208
+#' # Single group standardizer:  116 232
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -6321,12 +6314,12 @@ pi.score <- function(alpha, m, sd, n) {
 #'
 #'
 #' @examples
-#' pi.score2(.05, 29.57, 18.35, 2.68, 1.92, 40, 45)
+#' pi.score2(.05, 19.4, 11.3, 2.70, 2.10, 40, 40)
 #'
 #' # Should return:
 #' #                              Predicted       df       LL       UL
-#' # Equal Variances Assumed:         11.22 83.00000 4.650454 17.78955
-#' # Equal Variances Not Assumed:     11.22 72.34319 4.603642 17.83636
+#' # Equal Variances Assumed:           8.1 78.00000 1.205659 14.99434
+#' # Equal Variances Not Assumed:       8.1 73.54385 1.199073 15.00093
 #'  
 #' 
 #' @importFrom stats qt
