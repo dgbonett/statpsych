@@ -841,13 +841,13 @@ ci.mean.ps <- function(alpha, m1, m2, sd1, sd2, cor, n) {
 #'
 #'
 #' @examples
-#' y1 <- c(3.3, 3.6, 3.0, 3.1, 3.9, 4.2, 3.5, 3.3)
-#' y2 <- c(3.0, 3.1, 2.7, 2.6, 3.2, 3.8, 3.2, 3.0)
+#' y1 = c(76.41, 66.91, 81.06, 74.78, 83.76, 89.31, 78.78, 87.06, 82.61, 76.74, 88.33, 86.18)
+#' y2 = c(59.85, 60.64, 84.86, 68.16, 71.53, 86.18, 67.30, 65.46, 83.50, 66.76, 88.37, 65.02)
 #' ci.ratio.mean.ps(.05, y1, y2)
 #'
 #' # Should return:
-#' #  Mean1 Mean2 Mean1/Mean2      LL       UL
-#' # 3.4875 3.075    1.134146 1.09417 1.175583
+#' #    Mean1   Mean2 Mean1/Mean2       LL       UL
+#' # 80.99417 72.3025    1.120213 1.040747 1.205745
 #'
 #'
 #' @importFrom stats qt
@@ -919,13 +919,13 @@ ci.ratio.mean.ps <- function(alpha, y1, y2){
 #'
 #'
 #' @examples
-#' ci.stdmean.ps(.05, 110.4, 102.1, 15.3, 14.6, .75, 25)
+#' ci.stdmean.ps(.05, 602.4, 705.6, 33.17, 51.08, .769, 8)
 #'
 #' # Should return:
-#' #                              Estimate  adj Estimate        SE        LL        UL
-#' # Unweighted standardizer:    0.5550319     0.5433457 0.1609934 0.2394905 0.8705732
-#' # Measurement 1 standardizer: 0.5424837     0.5253526 0.1615500 0.2258515 0.8591158
-#' # Measurement 2 standardizer: 0.5684932     0.5505407 0.1692955 0.2366800 0.9003063
+#' #                              Estimate adj Estimate        SE        LL         UL
+#' # Unweighted standardizer:    -2.396304    -2.218547 0.6520927 -3.674383 -1.1182260
+#' # Measurement 1 standardizer: -3.111245    -2.765551 0.9136207 -4.901909 -1.3205815
+#' # Measurement 2 standardizer: -2.020360    -1.795876 0.5932811 -3.183170 -0.8575506
 #'
 #'
 #' @importFrom stats qnorm
@@ -2153,13 +2153,13 @@ ci.median.ps <- function(alpha, y1, y2) {
 #'
 #'
 #' @examples
-#' y1 <- c(21, 4, 9, 12, 35, 18, 10, 22, 24, 1, 6, 8, 13, 16, 19)
-#' y2 <- c(67, 28, 30, 28, 52, 40, 25, 37, 44, 10, 14, 20, 28, 40, 51)
+#' y1 = c(76.41, 66.91, 81.06, 74.78, 83.76, 89.31, 78.78, 87.06, 82.61, 76.74, 88.33, 86.18)
+#' y2 = c(59.85, 60.64, 84.86, 68.16, 71.53, 86.18, 67.30, 65.46, 83.50, 66.76, 88.37, 65.02)
 #' ci.ratio.median.ps(.05, y1, y2)
 #'
 #' # Should return:
-#' # Median1  Median2   Median1/Median2        LL        UL
-#' #      13       30         0.4333333 0.3094838 0.6067451
+#' # Median1  Median2  Median1/Median2        LL        UL
+#' #  81.835    67.73         1.208253  1.069251  1.365326
 #'
 #'
 #' @importFrom stats qnorm
@@ -4665,11 +4665,11 @@ size.ci.lc.stdmean.bs <- function(alpha, d, w, v) {
 #'
 #'
 #' @examples
-#' size.ci.mean.ps(.05, 265, .8, 10)
+#' size.ci.mean.ps(.05, 5.0, .5, 2.0)
 #'
 #' # Should return:
 #' # Sample size
-#' #          19
+#' #          22
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -4813,11 +4813,11 @@ size.ci.ratio.mean.ps <- function(alpha, var, m1, m2, cor, r) {
 #'
 #' @examples
 #' q <- c(.5, .5, -.5, -.5)
-#' size.ci.lc.mean.ws(.05, 265, .8, 10, q)
+#' size.ci.lc.mean.ws(.05, 161.9, .77, 4, q)
 #'
 #' # Should return:
 #' # Sample size
-#' #          11
+#' #          38
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -4865,13 +4865,13 @@ size.ci.lc.mean.ws <- function(alpha, var, cor, w, q) {
 #'
 #'
 #' @examples
-#' q <- c(.5, .5, -.5, -.5)
-#' size.ci.lc.stdmean.ws(.05, 1, .7, .6, q)
+#' q <- c(1/3, 1/3, 1/3, -1)
+#' size.ci.lc.stdmean.ws(.05, .5, .7, .4, q)
 #'
 #' # Should return:
 #' #                            Sample size
-#' # Unweighted standardizer:            26
-#' # Single level standardizer:          35
+#' # Unweighted standardizer:            46
+#' # Single level standardizer:          51
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -4916,11 +4916,11 @@ size.ci.lc.stdmean.ws <- function(alpha, d, cor, w, q) {
 #'
 #'
 #' @examples
-#' size.ci.cronbach(.05, .85, 5, .1)
+#' size.ci.cronbach(.05, .75, 5, .15)
 #'
 #' # Should return:
 #' # Sample size
-#' #          89
+#' #         109
 #'  
 #' 
 #' @importFrom stats qf
@@ -5730,12 +5730,12 @@ size.test.mean.ps <- function(alpha, pow, var, es, cor) {
 #'
 #'
 #' @examples
-#' q <- c(.5, .5, -.5, -.5)
-#' size.test.lc.mean.ws(.05, .90, 50.7, 2, .8, q)
+#' q <- c(1, -1, -1, 1)
+#' size.test.lc.mean.ws(.05, .95, 15.0, 3, .8, q)
 #'
 #' # Should return:
 #' # Sample size
-#' #          29
+#' #          20
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -5783,11 +5783,11 @@ size.test.lc.mean.ws <- function(alpha, pow, var, es, cor, q) {
 #'
 #'
 #' @examples
-#' size.equiv.mean.ps(.10, .85, 15, .5, .7, 1.5)
+#' size.equiv.mean.ps(.10, .90, 25, .5, .75, 2)
 #'
 #' # Should return:
 #' # Sample size
-#' #          68
+#' #          49
 #'  
 #' 
 #' @importFrom stats qnorm
