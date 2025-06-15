@@ -271,9 +271,23 @@ ci.mean2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #'
 #'
 #' @examples
+#' m <- c(24.9, 23.1, 16.4)
+#' sd <- c(5.21, 4.67, 4.98)
+#' n <- c(30, 30, 30)
+#' v <- c(.5, .5, -1)
+#' ci.lc.mean.bs(.05, m, sd, n, v)
+#'
+#' # Should return:
+#' #                              Estimate       SE        t       df
+#' # Equal Variances Assumed:          7.6 1.108703 6.854854 87.00000
+#' # Equal Variances Not Assumed:      7.6 1.111135 6.839851 57.58812
+#' #                                         p       LL       UL
+#' # Equal Variances Assumed:     9.804579e-10 5.396332 9.803668
+#' # Equal Variances Not Assumed: 5.617069e-09 5.375482 9.824518
+#'
 #' m <- c(33.5, 37.9, 38.0, 44.1)
 #' sd <- c(3.84, 3.84, 3.65, 4.98)
-#' n <- c(10,10,10,10)
+#' n <- c(10, 10, 10, 10)
 #' v <- c(.5, .5, -.5, -.5)
 #' ci.lc.mean.bs(.05, m, sd, n, v)
 #'
@@ -680,17 +694,17 @@ ci.stdmean.strat <- function(alpha, m1, m2, sd1, sd2, n1, n2, p1) {
 #'
 #'
 #' @examples
-#' m <- c(33.5, 37.9, 38.0, 44.1)
-#' sd <- c(3.84, 3.84, 3.65, 4.98)
-#' n <- c(10,10,10,10)
+#' m <- c(6.94, 7.15, 4.60, 3.68)
+#' sd <- c(2.21, 2.83, 2.29, 1.90)
+#' n <- c(40, 40, 40, 40)
 #' v <- c(.5, .5, -.5, -.5)
 #' ci.lc.stdmean.bs(.05, m, sd, n, v)
 #'
 #' # Should return:
-#' #                           Estimate  adj Estimate        SE        LL         UL
-#' # Unweighted standardizer: -1.301263     -1.273964 0.3692800 -2.025039 -0.5774878
-#' # Weighted standardizer:   -1.301263     -1.273964 0.3514511 -1.990095 -0.6124317
-#' # Group 1 standardizer:    -1.393229     -1.273810 0.4849842 -2.343781 -0.4426775
+#' #                          Estimate adj Estimate        SE        LL       UL
+#' # Unweighted standardizer: 1.245878     1.239878 0.1762080 0.9005164 1.591239
+#' # Weighted standardizer:   1.245878     1.239878 0.1731330 0.9065434 1.585212
+#' # Group 1 standardizer:    1.314480     1.289038 0.2251544 0.8731850 1.755774
 #'
 #'
 #' @importFrom stats qnorm
@@ -2561,11 +2575,11 @@ ci.reliability <- function(alpha, rel, se, n) {
 #'
 #'
 #' @examples
-#' ci.etasqr(.05, .241, 3, 116)
+#' ci.etasqr(.05, .15, 2, 57)
 #'
 #' # Should return:
-#' # Eta-squared  adj Eta-squared         SE        LL        UL
-#' #       0.241        0.2213707 0.06258283 0.1040229 0.3493431
+#' # Eta-squared  adj Eta-squared         SE         LL        UL
+#' #        0.15        0.1201754 0.07413871 0.01019499 0.3008134
 #'  
 #' 
 #' @importFrom stats pf
@@ -4551,12 +4565,12 @@ size.ci.ratio.mean2 <- function(alpha, var, m1, m2, r, R) {
 #'
 #'
 #' @examples
-#' v <- c(.5, .5, -1)
-#' size.ci.lc.mean.bs(.05, 5.62, 2.0, v)
+#' v <- c(.5, .5, -.5, -.5)
+#' size.ci.lc.mean.bs(.05, 8.0, 3.0, v)
 #'
 #' # Should return:
 #' # Sample size per group
-#' #                    34
+#' #                    15
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -4602,13 +4616,13 @@ size.ci.lc.mean.bs <- function(alpha, var, w, v) {
 #'
 #'
 #' @examples
-#' v <- c(.5, .5, -.5, -.5)
-#' size.ci.lc.stdmean.bs(.05, 1, .6, v)
+#' v <- c(.5, .5, -1)
+#' size.ci.lc.stdmean.bs(.05, .8, .6, v)
 #'
 #' # Should return:
 #' #                            Sample size per group
-#' # Unweighted standardizer:                      49
-#' # Single group standardizer:                    65
+#' # Unweighted standardizer:                      69
+#' # Single group standardizer:                    78
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -4954,11 +4968,11 @@ size.ci.cronbach <- function(alpha, rel, r, w) {
 #' 
 #' 
 #' @examples
-#' size.ci.etasqr(.05, .333, 3, .2)
+#' size.ci.etasqr(.05, .2, 3, .15)
 #'
 #' # Should return:
 #' # Sample size per group 
-#' #                    63
+#' #                   103
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -5516,6 +5530,13 @@ size.test.mean2 <- function(alpha, pow, var, es, R) {
 #'
 #'
 #' @examples
+#' v <- c(1/4, 1/4, 1/4, 1/4, -1)
+#' size.test.lc.mean.bs(.05, .90, 1, .5, v)
+#'
+#' # Should return:
+#' # Sample size per group
+#' #                    53
+#'
 #' v <- c(1, -1, -1, 1)
 #' size.test.lc.mean.bs(.05, .90, 27.5, 5, v)
 #'
