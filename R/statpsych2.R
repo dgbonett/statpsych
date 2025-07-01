@@ -30,11 +30,17 @@
 #' 
 #' 
 #' @examples
-#' ci.cor(.05, .536, 0, 50)
+#' ci.cor(.05, .60, 0, 150)
 #'
 #' # Should return:
-#' # Estimate        SE        LL        UL
-#' #    0.536 0.1018149 0.2978573 0.7058914
+#' # Estimate         SE        LL        UL
+#' #      0.6 0.05243084 0.4849825 0.6925236
+#'
+#' ci.cor(.05, .70, 1, 135)
+#'
+#' # Should return:
+#' # Estimate         SE       LL        UL
+#' #      0.7 0.04405729 0.600191 0.7762763
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -89,11 +95,11 @@ ci.cor <- function(alpha, cor, s, n) {
 #'
 #'
 #' @examples
-#' ci.spcor(.05, .582, .699, 20)
+#' ci.spcor(.05, -.355, .230, 236)
 #'
 #' # Should return:
-#' # Estimate        SE        LL        UL
-#' #    0.582 0.1374298 0.2525662 0.7905182
+#' # Estimate         SE         LL         UL
+#' #   -0.355 0.05426308 -0.4564698 -0.2444144
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -147,11 +153,11 @@ ci.spcor <- function(alpha, cor, r2, n) {
 #'
 #'
 #' @examples
-#' ci.cor2(.05, .886, .802, 200, 200)
+#' ci.cor2(.05, .64, .31, 200, 200)
 #'
 #' # Should return:
 #' # Estimate         SE         LL        UL
-#' #    0.084 0.02967934 0.02803246 0.1463609
+#' #     0.33 0.07692066  0.1797046 0.4813704
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -290,11 +296,11 @@ ci.cor.dep <- function(alpha, cor1, cor2, cor12, n) {
 #'
 #'
 #' @examples
-#' ci.cor2.gen(.4, .35, .47, .2, .1, .32)
+#' ci.cor2.gen(.64, .55, .71, .31, .18, .43)
 #'
 #' # Should return:
-#' # Estimate   LL        UL
-#' #      0.2 0.07 0.3220656
+#' # Estimate    LL        UL
+#' #      0.33 0.18 0.4776482
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -1044,11 +1050,11 @@ ci.lc.gen.bs <- function(alpha, est, se, v) {
 #'
 #'
 #' @examples
-#' ci.rsqr(.05, .241, 3, 116)
+#' ci.rsqr(.05, .247, 4, 150)
 #'
 #' # Should return:
 #' # R-squared adj R-squared         SE         LL        UL  
-#' #     0.241     0.2206696 0.06752263 0.09819599 0.3628798
+#' #     0.247     0.2262276 0.06023682  0.1152485 0.3513725
 #'  
 #' 
 #' @importFrom stats qf
@@ -2149,12 +2155,12 @@ test.mono.median.bs <-function(alpha, m, se) {
 #' 
 #' 
 #' @examples
-#' x <- c(2, 5, 8)
-#' size.ci.slope(.05, 31.1, x, 1)
+#' x <- c(5, 7, 9)
+#' size.ci.slope(.05, 300, x, 5)
 #'
 #' # Should return:
 #' # Total sample size
-#' #                83
+#' #                73
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -2198,11 +2204,11 @@ size.ci.slope <- function(alpha, evar, x, w) {
 #' 
 #' 
 #' @examples
-#' size.ci.cor(.05, .362, 0, .25)
+#' size.ci.cor(.05, .3, 0, .2)
 #'
 #' # Should return:
 #' # Sample size
-#' #         188
+#' #         320
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -2349,11 +2355,11 @@ size.ci.pbcor <- function(alpha, cor, w, p) {
 #' 
 #' 
 #' @examples
-#' size.ci.rsqr(.05, .25, 5, .2)
+#' size.ci.rsqr(.05, .3, 5, .2)
 #' 
 #' # Should return:
 #' # Sample size
-#' #         214
+#' #         227
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -2454,12 +2460,12 @@ size.ci.condmean <- function(alpha, evar, xvar, diff, w) {
 #' 
 #' 
 #' @examples
-#' v <- c(1, -1)
-#' size.ci.lc.ancova(.05, 1.37, 1, 0, 1.5, v)
+#' v <- c(.5, .5, -.5, -.5)
+#' size.ci.lc.ancova(.05, 6.4, 1, 0, 3.0, v)
 #'
 #' # Should return:
 #' # Sample size per group
-#' #                    21
+#' #                    13
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -2783,11 +2789,11 @@ size.ci.spear2 <- function(alpha, cor1, cor2, w) {
 #'
 #'
 #' @examples
-#' size.ci.cor.prior(.05, .10, .438, 100, .2)
+#' size.ci.cor.prior(.05, .10, -.56, 120, .2)
 #'
 #' # Should return:
 #' # Sample size
-#' #         331
+#' #         263
 #'
 #'
 #' @importFrom stats qnorm
@@ -3106,11 +3112,17 @@ size.test.slope <- function(alpha, pow, evar, x, slope, h) {
 #' 
 #' 
 #' @examples
-#' size.test.cor(.05, .9, .45, 0, 0)
+#' size.test.cor(.05, .95, -.50, 0, 0)
 #'
 #' # Should return:
 #' # Sample size
-#' #          48
+#' #          47
+#'
+#' size.test.cor(.05, .90, .4, 2, 0)
+#'
+#' # Should return:
+#' # Sample size
+#' #          64
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -3155,11 +3167,11 @@ size.test.cor <- function(alpha, pow, cor, s, h) {
 #' 
 #' 
 #' @examples
-#' size.interval.cor(.05, .8, .1, 0, .25)
+#' size.interval.cor(.05, .9, .1, 0, .3)
 #'
 #' # Should return:
 #' # Sample size
-#' #         360
+#' #         251
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -3266,12 +3278,12 @@ size.test.cor2 <- function(alpha, pow, cor1, cor2, s, R) {
 #' 
 #' 
 #' @examples
-#' v <- c(.5, .5, -1)
-#' size.test.lc.ancova(.05, .9, 1.37, .7, 1, 0, v)
+#' v <- c(.25, .25, .25, .25, -1)
+#' size.test.lc.ancova(.05, .9, 17.5, 4.0, 2, 0, v)
 #'
 #' # Should return:
 #' # Sample size per group
-#' #                    46
+#' #                    17
 #'  
 #' 
 #' @importFrom stats qnorm
