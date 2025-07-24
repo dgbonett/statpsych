@@ -4390,7 +4390,8 @@ size.ci.mean <- function(alpha, var, w) {
 #' mean difference with desired confidence interval precision in a 2-group 
 #' design. Set the variance planning value to the largest value within a 
 #' plausible range for a conservatively large sample size. Set R = 1 for 
-#' equal sample sizes.
+#' equal sample sizes. For unequal sample sizes, this function assumes 
+#' approximately equal population variances.
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
@@ -4440,7 +4441,8 @@ size.ci.mean2 <- function(alpha, var, w, R) {
 #' group standardizer) with desired confidence interval precision in a 2-group 
 #' design. Set the standardized mean difference planning value to the largest 
 #' value within a plausible range for a conservatively large sample size. Set
-#' R = 1 for equal sample sizes.
+#' R = 1 for equal sample sizes. For unequal sample sizes, this function assumes 
+#' approximately equal population variances.
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -4500,7 +4502,9 @@ size.ci.stdmean2 <- function(alpha, d, w, R) {
 #' design. This function requires planning values for each mean and the sample 
 #' size requirement is very sensitive to these planning values. Set the 
 #' variance planning value to the largest value within a plausible range for a
-#' conservatively large sample size. Set R = 1 for equal sample sizes.
+#' conservatively large sample size. Set R = 1 for equal sample sizes. For
+#' unequal sample sizes, this function assumes approximately equal population
+#' variances.
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -5457,7 +5461,9 @@ size.test.mean <- function(alpha, pow, var, es) {
 #' Computes the sample size in each group required  to test a difference in 
 #' population means with desired power in a 2-group design. Set the variance 
 #' planning value to the largest value within a plausible range for a 
-#' conservatively large sample size. Set R =1 for equal sample sizes.
+#' conservatively large sample size. Set R =1 for equal sample sizes. For
+#' unequal sample sizes, this function assumes approximately equal population
+#' variances.
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test
