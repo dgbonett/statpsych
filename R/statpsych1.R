@@ -100,6 +100,114 @@ ci.mean.fpc <- function(alpha, m, sd, n, N) {
 }
 
 
+#  ci.mean.gen  ===============================================================
+#' Confidence intervals for generalized means
+#'                    
+#'
+#' @description
+#' Computes confidence intervals for three population generalized means 
+#' (square-root, geometric, and harmonic) using a vector of response scores as
+#' input. The square-root mean requires non-negative scores. The geometric and
+#' harmonic means require positive scores. The standard errors are recovered 
+#' from the confidence intervals.
+#'
+#'  
+#' @param  alpha  alpha level for 1-alpha confidence
+#' @param  y	  vector of scores
+#'
+#'
+#' @return 
+#' Returns a 1-row matrix. The columns are:
+#' * Estimate - estimated mean
+#' * SE - recovered standard error
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
+#' 
+#' 
+#' @examples
+#' y <- c(32, 47, 28, 15, 20, 41, 87)
+#' ci.mean.gen(.05, y)
+#'
+#' # Should return:
+#' #             Estimate       SE       LL       UL
+#' # Square-root 35.79395 8.141122 18.64498 58.48619
+#' # Geometric   33.26410 7.633328 19.47124 56.82741
+#' # Harmonic    29.07073 7.978149 19.35236 58.39602
+#'  
+#' 
+#' @importFrom stats qt
+#' @importFrom stats na.omit
+#' @export
+ci.mean.gen <- function(alpha, y) {
+ y <- na.omit(y)
+ n <- length(y)
+ df <- n - 1
+ tcrit <- qt(1 - alpha/2, df)
+ # -------- Square-root Mean --------
+ if (min(y) < 0) {
+   m2 <- NA
+   se2 <- NA
+   ll2 <- NA
+   ul2 <- NA
+ } else {
+ y2 <- sqrt(y)
+ m2 <- mean(y2)
+ v2 <- var(y2)
+ ll0 <- m2 - tcrit*sqrt(v2/n)
+ if (ll0 < 0) {
+   ll2 = 0
+ } else {
+   ll2 <- (m2 - tcrit*sqrt(v2/n))^2
+ }
+ ul2 <- (m2 + tcrit*sqrt(v2/n))^2
+ m2 <- m2^2
+ se2 <- (ul2 - ll2)/(2*tcrit)
+ }
+ # -------- Geometric Mean ----------
+ if (min(y) <= 0) {
+   m3 <- NA
+   se3 <- NA
+   ll3 <- NA
+   ul3 <- NA
+ } else {
+ y3 <- log(y)
+ m3 <- mean(y3)
+ v3 <- var(y3)
+ ll3 <- exp(m3 - tcrit*sqrt(v3/n))
+ ul3 <- exp(m3 + tcrit*sqrt(v3/n))
+ m3 <- exp(m3)
+ se3 <- (ul3 - ll3)/(2*tcrit)
+ }
+ # -------- Harmonic Mean ----------
+ if (min(y) <= 0) {
+   m4 <- NA
+   se4 <- NA
+   ll4 <- NA
+   ul4 <- NA
+ } else {
+ y4 <- 1/y
+ m4 <- mean(y4)
+ v4 <- var(y4)
+ ul0 <- m4 - tcrit*sqrt(v4/n)
+ if (ul0 <= 0) {
+   ul4 <- NA
+ } else {
+   ul4 <- 1/(m4 - tcrit*sqrt(v4/n))
+ }
+ ll4 <- 1/(m4 + tcrit*sqrt(v4/n))
+ m4 <- 1/m4
+ se4 <- (ul4 - ll4)/(2*tcrit)
+ }
+ out2 <- t(c(m2, se2, ll2, ul2))
+ out3 <- t(c(m3, se3, ll3, ul3))
+ out4 <- t(c(m4, se4, ll4, ul4))
+ out <- rbind(out2, out3, out4)
+ colnames(out) <- c("Estimate", "SE",  "LL", "UL")
+ rownames(out) <- c("Square-root", "Geometric", "Harmonic")
+ return(out)
+}
+
+
 #  ci.stdmean  ==============================================================
 #' Confidence interval for a standardized mean
 #'
