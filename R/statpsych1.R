@@ -5409,6 +5409,53 @@ size.ci.lc.median.bs <- function(alpha, var, w, v, dist) {
 }
 
 
+#  size.ci.sd =================================================================
+#' Sample size for a standard deviation confidence interval
+#'
+#'
+#' @description
+#' Computes the sample size required to estimate a population standard
+#' deviation with desired confidence interval precision. This function
+#' assumes that the traditional confidence interval for a population
+#' standard deviation will be used. The traditional confidence interval
+#' assumes that the response variable has an approximate normal 
+#' distribution and can be highly innacurate when this assumption is not
+#' satisfied.
+#'
+#' @param  alpha  alpha level for 1-alpha confidence
+#' @param  r      desired upper to lower confidence interval endpoint ratio
+#'
+#'
+#' @return 
+#' Returns the required sample size
+#'
+#'
+#' @examples
+#' size.ci.sd(.05, 1.5)
+#'
+#' # Should return:
+#' # Sample size
+#' #          49
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export
+size.ci.sd <- function(alpha, r) {
+ z <- qnorm(1 - alpha/2)
+ n0 <- ceiling(2*(z/log(r))^2 + 1)
+ chi1 <- qchisq(alpha/2, (n0 - 1))
+ ul <- sqrt((n0 - 1)/chi1)
+ chi2 <- qchisq(1 - alpha/2, (n0 - 1))
+ ll <- sqrt((n0 - 1)/chi2)
+ r0 <- ul/ll
+ n <- ceiling(n0*(log(r0)/log(r))^2)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size"
+ rownames(out) <- ""
+ return(out)
+}
+
+
 # ======================== Sample Size for Desired Power ======================
 #  size.test.mean ============================================================
 #' Sample size for a test of a mean
