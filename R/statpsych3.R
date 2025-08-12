@@ -3994,6 +3994,87 @@ signal <- function(f1, f2, n1, n2) {
 }
 
 
+#  ci.diversity ===============================================================
+#' Confidence intervals for diversity indices 
+#'
+#'
+#' @description
+#' Computes estimates, standard errors, and approximate confidence intervals
+#' for the Berger-Parker, Simpson, and Shannon diversity indices. For the 
+#' Shannon index, the value 1/r is added to each frequency count where r is the
+#' number of categories. These indices have a range of 0 to 1 where 0 indicates
+#' no diversity and 1 indicates maximum diversity.
+#'
+#'  
+#' @param   alpha   alpha level for 1 - alpha confidence
+#' @param   f       vector of multinomial frequency counts
+#'
+#' 
+#' @return 
+#' Returns a 3-row matrix. The columns are:
+#' * Estimate - estimate of diversity index
+#' * SE - standard error of estimate
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
+#' 
+#' 
+#' @examples
+#' f = c(36, 274, 57, 320, 847)
+#' ci.diversity(.05, f)
+#'
+#' # Should return:
+#' #          Estimate         SE        LL        UL
+#' # Berger  0.5598110 0.01587055 0.5287052 0.5909167
+#' # Simpson 0.7722214 0.01229148 0.7481306 0.7963123
+#' # Shannon 0.7292111 0.01224019 0.7052207 0.7532014
+#'  
+#' 
+#' @export  
+ci.diversity <- function(alpha, f) {
+ z <- qnorm(1 - alpha/2)
+ n <- sum(f)
+ p <- f/n
+ r <- length(f)
+ a <- r/(r - 1)
+ n0 <- n + 1
+ p0 <- (f + 1/r)/n0
+ pmax <- max(p)
+ iqv1 <- a*(1 - pmax)
+ iqv2 <- a*(1 - sum(p^2))
+ iqv3 <- (-1)*sum(p0*log(p0))/log(r)
+ se1 <- a*sqrt(pmax*(1 - pmax)/n)
+ v1 <- sum(p^3)
+ v2 <- sum(p^2)^2
+ if (v1 - v2 < 0) {
+   se2 <- 0
+ }
+ else {
+   se2 <- a*sqrt(4*(sum(p^3) - (sum(p^2))^2)/n)
+ }
+ se3 <- sqrt((sum(p0*log(p0)^2) - sum(p0*log(p0))^2)/n0 + (r - 1)/(2*n0^2))/log(r)
+ ll1 <- a*(1 - pmax) - z*se1
+ ul1 <- a*(1 - pmax) + z*se1
+ ll2 <- iqv2 - z*se2
+ ul2 <- iqv2 + z*se2
+ ll3 <- iqv3 - z*se3
+ ul3 <- iqv3 + z*se3
+ if (ul1 > 1) {ul1 = 1}
+ if (ul2 > 1) {ul2 = 1}
+ if (ul3 > 1) {ul3 = 1}
+ if (ll1 < 0) {ll1 = 0}
+ if (ll2 < 0) {ll2 = 0}
+ if (ll3 < 0) {ll3 = 0}
+ out1 <- t(c(iqv1, se1, ll1, ul1))	
+ out2 <- t(c(iqv2, se2, ll2, ul2))
+ out3 <- t(c(iqv3, se3, ll3, ul3))
+ out <- rbind(out1, out2, out3)
+ colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- c("Berger", "Simpson", "Shannon")
+ return(out)
+}
+
+
+
 fix_imports <- function() {
   something <- Rdpack::append_to_Rd_list()
   res <- mathjaxr::preview_rd()
