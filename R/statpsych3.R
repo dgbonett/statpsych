@@ -1569,11 +1569,11 @@ ci.agree.3rater <- function(alpha, f) {
 #'
 #'
 #' @examples
-#' ci.popsize(.05, 794, 710, 741)
+#' ci.popsize(.05, 85, 196, 184)
 #'
 #' # Should return:
-#' # Estimate       SE   LL   UL
-#' #     2908 49.49071 2818 3012
+#' # Estimate       SE  LL   UL
+#' #      889 67.34818 777 1041
 #'
 #'
 #' @importFrom stats qnorm
@@ -4019,7 +4019,7 @@ signal <- function(f1, f2, n1, n2) {
 #' 
 #' 
 #' @examples
-#' f = c(36, 274, 57, 320, 847)
+#' f = c(847, 320, 57, 274, 36)
 #' ci.diversity(.05, f)
 #'
 #' # Should return:
