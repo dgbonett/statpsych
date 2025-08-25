@@ -1335,7 +1335,7 @@ ci.agree <- function(alpha, n, f, k) {
 #' @param  f1      number of objects rated in agreement in group 1
 #' @param  n2      sample size (objects) in group 2
 #' @param  f2      number of objects rated in agreement in group 2
-#' @param  r       number of rating categories
+#' @param  k       number of rating categories
 #'
 #'
 #' @return
@@ -1368,25 +1368,25 @@ ci.agree <- function(alpha, n, f, k) {
 #'
 #' @importFrom stats qnorm
 #' @export
-ci.agree2 <- function(alpha, n1, f1, n2, f2, r) {
+ci.agree2 <- function(alpha, n1, f1, n2, f2, k) {
  if (f1 > n1) {stop("f cannot be greater than n")}
  if (f2 > n2) {stop("f cannot be greater than n")}
  z <- qnorm(1 - alpha/2)
- a <- r/(r - 1)
+ a <- k/(k - 1)
  p1.ml <- f1/n1
  p1 <- (f1 + 2)/(n1 + 4)
- G1 <- a*p1.ml - 1/(r - 1)
+ G1 <- a*p1.ml - 1/(k - 1)
  se1 <- sqrt(p1*(1 - p1)/(n1 + 4))
  se1.ml <- sqrt(p1.ml*(1 - p1.ml)/n1)
- LL1 <- a*(p1 - z*se1) - 1/(r - 1)
- UL1 <- a*(p1 + z*se1) - 1/(r - 1) 
+ LL1 <- a*(p1 - z*se1) - 1/(k - 1)
+ UL1 <- a*(p1 + z*se1) - 1/(k - 1) 
  p2.ml <- f2/n2
  p2 <- (f2 + 2)/(n2 + 4)
- G2 <- a*p2.ml - 1/(r - 1)
+ G2 <- a*p2.ml - 1/(k - 1)
  se2 <- sqrt(p2*(1 - p2)/(n2 + 4))
  se2.ml <- sqrt(p2.ml*(1 - p2.ml)/n2)
- LL2 <- a*(p2 - z*se2) - 1/(r - 1)
- UL2 <- a*(p2 + z*se2) - 1/(r - 1) 
+ LL2 <- a*(p2 - z*se2) - 1/(k - 1)
+ UL2 <- a*(p2 + z*se2) - 1/(k - 1) 
  p1.d <- (f1 + 1)/(n1 + 2)
  p2.d <- (f2 + 1)/(n2 + 2)
  se.d <- sqrt(p1.d*(1 - p1.d)/(n1 + 2) + p2.d*(1 - p2.d)/(n2 + 2))
