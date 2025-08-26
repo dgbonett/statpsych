@@ -714,14 +714,14 @@ ci.pairs.prop.bs <-function(alpha, f, n) {
 #'
 #'
 #' @examples
-#' f <- c(14, 27, 38)
-#' n <- c(100, 100, 100)
-#' x <- c(10, 20, 40)
+#' f <- c(11, 15, 20, 27)
+#' n <- c(60, 60, 60, 60)
+#' x <- c(10, 20, 30, 40)
 #' ci.slope.prop.bs(.05, f, n, x)
 #'
 #' # Should return:
-#' #    Estimate          SE        z           p          LL         UL
-#' # 0.007542293 0.002016793 3.739746 0.000184206 0.003589452 0.01149513
+#' #    Estimate          SE       z            p          LL         UL
+#' # 0.008688525 0.002566409 3.38548 0.0007105401 0.003658456 0.01371859
 #'
 #'
 #' @importFrom stats qnorm
@@ -1181,11 +1181,11 @@ ci.phi <- function(alpha, f00, f01, f10, f11) {
 #'
 #'
 #' @examples
-#' ci.biphi(.05, 46, 15, 100, 100)
+#' ci.biphi(.05, 34, 22, 50, 50)
 #'
 #' # Should return:
-#' #  Estimate         SE        LL       UL
-#' # 0.4145733 0.07551281 0.2508866 0.546141
+#' #  Estimate        SE         LL        UL
+#' #   0.27539 0.1074594 0.04933962 0.4638156
 #'
 #'
 #' @importFrom stats qnorm
@@ -1250,11 +1250,11 @@ ci.biphi <- function(alpha, f1, f2, n1, n2) {
 #'
 #'
 #' @examples
-#' ci.tetra(.05, 46, 15, 54, 85)
+#' ci.tetra(.05, 86, 16, 7, 93)
 #'
 #' # Should return:
-#' #  Estimate         SE        LL        UL
-#' # 0.5135167 0.09301703 0.3102345 0.6748546
+#' # Estimate         SE        LL        UL
+#' # 0.938496 0.02678152 0.8677373 0.9727189
 #'
 #'
 #' @importFrom stats qnorm
@@ -1385,11 +1385,11 @@ ci.kappa <- function(alpha, f00, f01, f10, f11) {
 #'
 #'
 #' @examples
-#' ci.agree(.05, 100, 80, 4)
+#' ci.agree(.05, 250, 214, 3)
 #'
 #' # Should return:
-#' #  Estimate         SE        LL        UL
-#' # 0.7333333 0.05333333 0.6132949 0.8226025
+#' #  Estimate        SE        LL        UL
+#' #     0.784 0.0333073 0.7097933 0.8413878
 #'
 #'
 #' @importFrom stats qnorm
@@ -2538,11 +2538,11 @@ test.prop.bs <- function(f, n) {
 #'
 #'
 #' @examples
-#' test.prop.ps(156, 96, 68, 80)
+#' test.prop.ps(12, 4, 26, 6)
 #'
 #' # Should return:
-#' # Estimate        z          p
-#' #     0.07 2.108346 0.03500109
+#' #   Estimate        z            p
+#' # -0.4583333 3.834058 0.0001260465
 #'
 #'
 #' @importFrom stats pnorm
@@ -2843,11 +2843,11 @@ size.ci.lc.prop.bs <- function(alpha, p, w, v) {
 #'
 #'
 #' @examples
-#' size.ci.prop.ps(.05, .2, .3, .8, .1)
+#' size.ci.prop.ps(.05, .25, .35, .6, .1)
 #'
 #' # Should return:
 #' # Sample size
-#' #         118
+#' #         257
 #'
 #'
 #' @importFrom stats qnorm
@@ -3073,11 +3073,11 @@ size.ci.prop.prior <- function(alpha1, alpha2, p0, n0, w) {
 #'
 #'
 #' @examples
-#' size.ci.tetra(.05, .4, .3, .5, .3)
+#' size.ci.tetra(.05, .5, .3, .7, .25)
 #'
 #' # Should return:
 #' #  Sample size
-#' #          296
+#' #          304
 #'
 #'
 #' @importFrom stats qnorm
@@ -3634,11 +3634,11 @@ size.supinf.prop2 <- function(alpha, pow, p1, p2, h) {
 #'
 #'
 #' @examples
-#' size.test.prop.ps(.05, .80, .4, .3, .5, .1)
+#' size.test.prop.ps(.05, .90, .6, .7, .5, .1)
 #'
 #' # Should return:
 #' # Sample size
-#' #         177
+#' #         237
 #'
 #'
 #' @importFrom stats qnorm
