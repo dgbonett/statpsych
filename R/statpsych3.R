@@ -377,11 +377,11 @@ ci.prop.inv <- function(alpha, f, n) {
 #'
 #'
 #' @examples
-#' ci.prop2(.05, 35, 21, 150, 150)
+#' ci.prop2(.05, 57, 15, 100, 100)
 #'
 #' # Should return:
-#' #   Estimate         SE          LL        UL
-#' # 0.09210526 0.04476077 0.004375769 0.1798348
+#' #   Estimate         SE        LL        UL
+#' #  0.4117647 0.06083948 0.2925215 0.5310079
 #'
 #'
 #' @importFrom stats qnorm
@@ -516,11 +516,11 @@ ci.prop2.inv <- function(alpha, f1, f2, n1, n2) {
 #'
 #'
 #' @examples
-#' ci.ratio.prop2(.05, 35, 21, 150, 150)
+#' ci.ratio.prop2(.05, 62, 35, 100, 100)
 #'
 #' # Should return:
 #' # Estimate       LL       UL
-#' # 1.666667 1.017253 2.705025
+#' # 1.765957 1.297164 2.404172
 #'
 #'
 #' @importFrom stats qnorm
@@ -576,12 +576,19 @@ ci.ratio.prop2 <- function(alpha, f1, f2, n1, n2) {
 #' @examples
 #' f <- c(26, 24, 38)
 #' n <- c(60, 60, 60)
-#' v <- c(-.5, -.5, 1)
-#' ci.lc.prop.bs(.05, f, n, v)
+#' v1 <- c(-.5, -.5, 1)
+#' ci.lc.prop.bs(.05/2, f, n, v1)
 #'
 #' # Should return:
-#' #  Estimate         SE        z           p         LL        UL
-#' # 0.2119565 0.07602892 2.787841 0.005306059 0.06294259 0.3609705
+#' #  Estimate         SE        z           p        LL        UL
+#' # 0.2119565 0.07602892 2.787841 0.005306059 0.0415451 0.3823679
+#'
+#' v2 <- c(1, -1, 0)
+#' ci.lc.prop.bs(.05/2, f, n, v2)
+#'
+#' # Should return:
+#' #   Estimate         SE         z         p         LL        UL
+#' # 0.03225806 0.08857951 0.3641707 0.7157305 -0.1662843 0.2308004
 #'
 #'
 #' @importFrom stats qnorm
@@ -2421,11 +2428,11 @@ test.prop <- function(f, n, h) {
 #'
 #'
 #' @examples
-#' test.prop2(11, 26, 50, 50)
+' test.prop2(39, 24, 50, 50)
 #'
 #' # Should return:
 #' # Estimate        z           p
-#' #     -0.3 2.899726 0.003734895
+#' #      0.3 2.899726 0.003734895
 #'
 #'
 #' @importFrom stats pnorm
@@ -2690,11 +2697,11 @@ size.ci.prop <- function(alpha, p, w) {
 #'
 #'
 #' @examples
-#' size.ci.prop2(.05, .4, .2, .15, 1)
+#' size.ci.prop2(.05, .05, .15, .1, 1)
 #'
 #' # Should return:
 #' #   n1  n2
-#' #  274 274
+#' #  269 269
 #'
 #' size.ci.prop2(.05, .4, .2, .15, .5)
 #'
@@ -2740,17 +2747,17 @@ size.ci.prop2 <- function(alpha, p1, p2, w, R) {
 #'
 #'
 #' @examples
-#' size.ci.ratio.prop2(.05, .2, .1, 2, 1)
+#' size.ci.ratio.prop2(.05, .9, .7, 1.5, 1)
 #'
 #' # Should return:
 #' #   n1  n2
-#' #  416 416
+#' #   51  51
 #'
-#' size.ci.ratio.prop2(.05, .2, .1, 2, .5)
+#' size.ci.ratio.prop2(.05, .9, .7, 1.5, .5)
 #'
 #' # Should return:
 #' #   n1  n2
-#' #  704 352
+#' #   91  46
 #'
 #'
 #' @importFrom stats qnorm
@@ -2791,13 +2798,13 @@ size.ci.ratio.prop2 <- function(alpha, p1, p2, r, R) {
 #'
 #'
 #' @examples
-#' p <- c(.25, .30, .50, .50)
-#' v <- c(.5, .5, -.5, -.5)
+#' p <- c(.1, .2, .2, .3)
+#' v <- c(.5, -.5, .5, -.5)
 #' size.ci.lc.prop.bs(.05, p, .2, v)
 #'
 #' # Should return:
 #' # Sample size per group
-#' #                    87
+#' #                    60
 #'
 #'
 #' @importFrom stats qnorm
@@ -3414,16 +3421,16 @@ size.test.prop <- function(alpha, pow, p, h) {
 #'
 #'
 #' @examples
-#' size.test.prop2(.05, .8, .5, .5, .2)
+#' @examples
+#' size.test.prop2(.05, .8, .6, .4, .2)
+#' # Should return:
+#' # Sample size per group
+#' #                   106
 #'
+#' size.test.prop2(.05, .8, .5, .5, .2)
 #' # Should return:
 #' # Sample size per group
 #' #                   109
-#'
-#' size.test.prop2(.05, .8, .3, .1, .2)
-#' # Should return:
-#' # Sample size per group
-#' #                    71
 #'
 #'
 #' @importFrom stats qnorm
@@ -3472,13 +3479,13 @@ size.test.prop2 <- function(alpha, pow, p1, p2, es) {
 #'
 #'
 #' @examples
-#' p <- c(.25, .30, .50, .50)
-#' v <- c(.5, .5, -.5, -.5)
+#' p <- c(.35, .35, .20)
+#' v <- c(.5, .5, -1)
 #' size.test.lc.prop.bs(.05, .9, p, .15, v)
 #'
 #' # Should return:
 #' # Sample size per group
-#' #                   105
+#' #                   128
 #'
 #'
 #' @importFrom stats qnorm
@@ -3523,11 +3530,11 @@ size.test.lc.prop.bs <- function(alpha, pow, p, es, v) {
 #'
 #'
 #' @examples
-#' size.equiv.prop2(.1, .8, .30, .35, .15)
+#' size.equiv.prop2(.1, .9, .8, .8, .075)
 #'
 #' # Should return:
 #' # Sample size per group
-#' #                   288
+#' #                   488
 #'
 #'
 #' @importFrom stats qnorm
