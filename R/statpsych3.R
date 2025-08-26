@@ -2479,13 +2479,13 @@ test.prop2 <- function(f1, f2, n1, n2) {
 #'
 #'
 #' @examples
-#' f <- c(35, 30, 15)
-#' n <- c(50, 50, 50)
+#' f <- c(111, 161, 132)
+#' n <- c(200, 200, 200)
 #' test.prop.bs (f, n)
 #'
 #' # Should return:
-#' # Chi-square df            p
-#' #   17.41071  2 0.0001656958
+#' # Chi-square df           p
+#' #    28.6573  2 5.98612e-07
 #'
 #'
 #' @importFrom stats pchisq
