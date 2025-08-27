@@ -1290,6 +1290,54 @@ ci.ratio.mad2 <- function(alpha, y1, y2) {
 }
 
 
+#  ci.sd ====================================================================== 
+#' Confidence interval for a standard deviation 
+#'
+#'                     
+#' @description
+#' Computes the traditional confidence interval for a population standard 
+#' deviation using a sample estimate of the standard deviation. The traditional
+#' confidence interval assumes normality and is hypersensitive to minor 
+#' violations of this assumption. This function should be used only if the 
+#' data appear to come from an approximate normal or mildly platykurtic 
+#' distribution.
+#' 
+#'
+#'
+#' @param  alpha  alpha value for 1-alpha confidence 
+#' @param  sd     estimated standard deviation
+#' @param  n      sample size
+#'
+#'
+#' @return 
+#' Returns a 1-row matrix. The columns are:
+#' * Estimate - estimated standard deviation (from input)
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
+#'
+#'
+#' @examples
+#' ci.sd(.05, 4.65, 50)
+#'
+#' # Should return:
+#' #  Estimate       LL       UL
+#' #      4.65 3.884303  5.79452
+#'  
+#' 
+#' @importFrom stats qchisq
+#' @export
+ci.sd <- function(alpha, sd, n) {
+ c1 <- qchisq(1 - alpha/2, (n - 1))
+ c2 <- qchisq(alpha/2, (n - 1))
+ ll <- sqrt((n - 1)*sd^2/c1)
+ ul <- sqrt((n - 1)*sd^2/c2)
+ out <- t(c(sd, ll, ul))
+ colnames(out) <- c("Estimate", "LL", "UL")
+ rownames(out) <- ""
+ return(out)
+}
+
+
 #  ci.ratio.sd2 ================================================================
 #' Confidence interval for a 2-group ratio of standard deviations 
 #'
