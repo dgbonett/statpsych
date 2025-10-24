@@ -613,6 +613,77 @@ ci.lc.prop.bs <- function(alpha, f, n, v) {
 }
 
 
+#  ci.lc.prop.scheffe =========================================================
+#' Scheffe confidence interval for a linear contrast of proportions in a 
+#' between-subjects design
+#'
+#'
+#' @description
+#' Computes an adjusted Wald confidence interval for a linear contrast of 
+#' population proportions in a between-subjects design using a Scheffe
+#' critical value. A Scheffe p-value is computed for the test statistic.
+#' This function is useful in exploratory studies where the linear contrast
+#' of proportions was not planned but was suggested by the pattern of sample
+#' proportions. Use the ci.lc.prop.bs function with a Bonferroni adjusted 
+#' alpha value to compute simultaneous confidence intervals for two or more
+#' planned linear contrasts of proportions.
+#'
+#'
+#' @param   alpha   alpha level for 1-alpha confidence
+#' @param   f       vector of frequency counts of participants who have the attribute
+#' @param   n       vector of sample sizes
+#' @param   v       vector of between-subjects contrast coefficients
+#'
+#'
+#' @return
+#' Returns a 1-row matrix. The columns are:
+#' * Estimate - adjusted estimate of proportion linear contrast
+#' * SE - adjusted standard error
+#' * z - z test statistic
+#' * p - two-sided Scheffe p-value
+#' * LL - lower limit of the Scheffe confidence interval
+#' * UL - upper limit of the Scheffe confidence interval
+#'
+#'
+#' @references
+#' \insertRef{Price2004}{statpsych}
+#' \insertRef{Marascuilo1977}{statpsych}
+#'
+#'
+#' @examples
+#' f <- c(26, 24, 38)
+#' n <- c(60, 60, 60)
+#' v <- c(-.5, -.5, 1)
+#' ci.lc.prop.scheffe(.05, f, n, v)
+#'
+#' # Should return:
+#' #  Estimate         SE        z          p         LL        UL
+#' # 0.2119565 0.07602892 2.787841 0.02052671 0.02585698 0.3980561
+#'
+#'
+#' @importFrom stats qchisq
+#' @importFrom stats pchisq
+#' @export
+ci.lc.prop.scheffe <- function(alpha, f, n, v) {
+ s <- sum(as.integer(as.logical(n < f)))
+ if (s > 0) {stop("f cannot be greater than n")}
+ df <- length(f) - 1
+ z <- sqrt(qchisq(1 - alpha, df))
+ m <- length(v) - length(which(v==0))
+ p <- (f + 2/m)/(n + 4/m)
+ est <- t(v)%*%p
+ se <- sqrt(t(v)%*%diag(p*(1 - p))%*%solve(diag(n + 4/m))%*%v)
+ zval <- est/se
+ pval <- 1 - pchisq(zval^2, df)
+ ll <- est - z*se
+ ul <- est + z*se
+ out <- t(c(est, se, zval, pval, ll, ul))
+ colnames(out) <- c("Estimate", "SE", "z", "p", "LL", "UL")
+ rownames(out) <- ""
+ return(out)
+}
+
+
 #  ci.pairs.prop.bs ========================================================== 
 #' Bonferroni confidence intervals for all pairwise proportion differences
 #' in a between-subjects design
