@@ -1283,6 +1283,8 @@ ci.lc.stdmean.ws <- function(alpha, m, sd, cor, n, q) {
 #' from the median (MAD). The MAD is a robust alternative to the standard 
 #' deviation.
 #'
+#' For more details, see Section 1.26 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
 #' @param  y       vector of scores
@@ -1298,6 +1300,7 @@ ci.lc.stdmean.ws <- function(alpha, m, sd, cor, n, q) {
 #'
 #' @references
 #' \insertRef{Bonett2003b}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -1343,6 +1346,8 @@ ci.mad <- function(alpha, y) {
 #' Computes a confidence interval for a ratio of population MADs (mean absolute
 #' deviation from median) in a 2-group design.
 #'
+#' For more details, see Section 2.10 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
 #' @param  y1      vector of scores for group 1
@@ -1360,6 +1365,7 @@ ci.mad <- function(alpha, y) {
 #'
 #' @references
 #' \insertRef{Bonett2003b}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -1419,7 +1425,6 @@ ci.ratio.mad2 <- function(alpha, y1, y2) {
 #' data appear to come from an approximate normal or mildly platykurtic 
 #' distribution.
 #' 
-#'
 #'
 #' @param  alpha  alpha value for 1-alpha confidence 
 #' @param  sd     estimated standard deviation
@@ -1553,6 +1558,8 @@ ci.ratio.sd2 <- function(alpha, y1, y2) {
 #' Computes a confidence interval for a ratio of population MADs (mean absolute
 #' deviation from median) in a paired-samples design.
 #'
+#' For more details, see Section 4.24 of Bonett (2021, Volume 1)
+#'
 #' @param  alpha   alpha level for 1-alpha confidence
 #' @param  y1      vector of measurement 1 scores
 #' @param  y2      vector of measurement 2 scores (paired with y1)
@@ -1569,6 +1576,7 @@ ci.ratio.sd2 <- function(alpha, y1, y2) {
 #'
 #' @references
 #' \insertRef{Bonett2003a}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -1631,6 +1639,8 @@ ci.ratio.mad.ps <- function(alpha, y1, y2) {
 #' from the confidence interval. The coefficient of variation assumes 
 #' ratio-scale scores.
 #'
+#' For more details, see Section 1.27 of Bonett (2021, Volume 1)
+#'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  m	  estimated mean 
@@ -1646,6 +1656,10 @@ ci.ratio.mad.ps <- function(alpha, y1, y2) {
 #' * UL - upper limit of the confidence interval
 #' 
 #' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' ci.cv(.05, 24.5, 3.65, 40)
 #'
@@ -1762,6 +1776,8 @@ ci.ratio.cv2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' (see \link[statpsych]{ci.cv}). An approximate standard error is 
 #' recovered from the confidence interval.
 #'
+#' For more details, see Section 1.27 of Bonett (2021, Volume 1)
+#'
 #' @param  alpha   alpha level for 1-alpha confidence
 #' @param  y       vector of scores
 #'
@@ -1776,6 +1792,7 @@ ci.ratio.cv2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #'
 #' @references
 #' \insertRef{Bonett2006}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -1950,6 +1967,9 @@ ci.ratio.cod2 <-function(alpha, y1, y2) {
 #' coefficient of variation (see \link[statpsych]{ci.cv}). The 25th and 75th
 #' percentiles are computed using the type = 2 method (SAS default).
 #'
+#' For more details, see Section 1.27 of Bonett (2021, Volume 1)
+#'
+#'
 #' @param  alpha   alpha level for 1-alpha confidence
 #' @param  y       vector of scores
 #'
@@ -1963,7 +1983,8 @@ ci.ratio.cod2 <-function(alpha, y1, y2) {
 #'
 #'
 #' @references
-#' \insertRef{Bonett2006c}{statpsych}                    
+#' \insertRef{Bonett2006c}{statpsych}    
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -2032,6 +2053,8 @@ ci.cqv <- function(alpha, y) {
 #' Computes a distribution-free confidence interval for a population median.
 #' Tied scores are assumed to be rare.
 #'
+#' For more details, see Section 1.25 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
 #' @param  y       vector of scores
@@ -2047,6 +2070,7 @@ ci.cqv <- function(alpha, y) {
 #'
 #' @references
 #' \insertRef{Snedecor1980}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -2096,6 +2120,8 @@ ci.median <- function(alpha, y) {
 #' medians in a 2-group design. Tied scores within each group are assumed to be 
 #' rare.
 #'
+#' For more details, see Section 2.12 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
 #' @param  y1      vector of scores for group 1
@@ -2114,6 +2140,7 @@ ci.median <- function(alpha, y) {
 #'
 #' @references
 #' \insertRef{Bonett2002}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -2175,6 +2202,8 @@ ci.median2 <- function(alpha, y1, y2) {
 #' medians of ratio-scale measurements in a 2-group design. Tied scores 
 #' within each group are assumed to be rare.
 #' 
+#' For more details, see Section 2.12 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
 #' @param  y1      vector of scores for group 1
@@ -2192,6 +2221,7 @@ ci.median2 <- function(alpha, y1, y2) {
 #'
 #' @references
 #' \insertRef{Bonett2020b}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -2259,6 +2289,8 @@ ci.ratio.median2 <- function(alpha, y1, y2) {
 #' standard errors. The sample median and standard error for each group can be
 #' computed using the \link[statpsych]{ci.median} function. 
 #'
+#' For more details, see Section 3.21 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
 #' @param  m       vector of estimated group medians
@@ -2276,6 +2308,7 @@ ci.ratio.median2 <- function(alpha, y1, y2) {
 #'
 #' @references
 #' \insertRef{Bonett2002}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -2315,6 +2348,8 @@ ci.lc.median.bs <- function(alpha, m, se, v) {
 #' estimated medians. Tied scores within each measurement are assumed to be
 #' rare.
 #'
+#' For more details, see Section 4.23 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
 #' @param  y1      vector of scores for measurement 1
@@ -2335,6 +2370,7 @@ ci.lc.median.bs <- function(alpha, m, se, v) {
 #'
 #' @references
 #' \insertRef{Bonett2020}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -2406,6 +2442,8 @@ ci.median.ps <- function(alpha, y1, y2) {
 #' medians in a paired-samples design. Ratio-scale measurements are assumed.
 #' Tied scores within each measurement are assumed to be rare.
 #'
+#' For more details, see Section 4.23 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
 #' @param  y1      vector of scores for measurement 1
@@ -2423,6 +2461,7 @@ ci.median.ps <- function(alpha, y1, y2) {
 #'
 #' @references
 #' \insertRef{Bonett2020b}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -2499,6 +2538,8 @@ ci.ratio.median.ps <- function(alpha, y1, y2) {
 #' is a measure of effect size that can be reported along with the
 #' sign test.
 #'
+#' For more details, see Section 1.25 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
 #' @param   y       vector of y scores
@@ -2515,6 +2556,7 @@ ci.ratio.median.ps <- function(alpha, y1, y2) {
 #'
 #' @references
 #' \insertRef{Agresti1998}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -2564,6 +2606,8 @@ ci.sign <- function(alpha, y, h) {
 #' which a member from subpopulation 1 has a larger score than a member from 
 #' subpopulation 2.
 #'
+#' For more details, see Section 2.12 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
 #' @param  y1      vector of scores for group 1
@@ -2580,6 +2624,7 @@ ci.sign <- function(alpha, y, h) {
 #'
 #' @references
 #' \insertRef{Sen1967}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
