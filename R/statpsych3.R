@@ -2353,7 +2353,7 @@ ci.ratio.poisson2 <- function(alpha, f1, f2, t1, t2) {
 #' had a sample size of n0.
 #'
 #' Several confidence interval sample size functions in this package require
-#' a planning value of the estimated proportion that is expected in the
+#' a planning value of the expected sample value of a proportion in the
 #' planned study. A one-sided proportion prediction limit is useful as a 
 #' proportion planning value for the sample size required to obtain a 
 #' confidence interval with desired width. This strategy for specifying a 
@@ -2362,10 +2362,10 @@ ci.ratio.poisson2 <- function(alpha, f1, f2, t1, t2) {
 #' population proportion in the planned study. 
 #'
 #' For sample size planning, use an upper prediction limit if the population
-#' proportion is assumed to be less than .5. If the upper prediction limit is
-#' greater than .5, then set the proportion planning value to .5. Use a lower
+#' proportion is assumed to be less than .5, and if the upper prediction limit
+#' is greater than .5, set the proportion planning value to .5. Use a lower
 #' prediction limit if the population proportion is asumed to be greater than
-#' .5. If the lower prediction limit is less than .5, then set the proportion 
+#' .5, and if the lower prediction limit is less than .5, set the proportion 
 #' planning value to .5.
 #'
 #'
