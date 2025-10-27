@@ -8,6 +8,8 @@
 #' mean, estimated standard deviation, and sample size. Use the t.test function
 #' for raw data input.
 #'
+#' For more details, see Section 1.7 of Bonett (2021, Volume 1)
+#'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  m	  estimated mean 
@@ -25,6 +27,7 @@
 #' 
 #' @references
 #' \insertRef{Snedecor1980}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -60,6 +63,8 @@ ci.mean <- function(alpha, m, sd, n) {
 #' deviation, sample size, and population size. This function is useful when 
 #' the sample size is not a small fraction of the population size.
 #'
+#' For more details, see Section 1.33 of Bonett (2021, Volume 1)
+#'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  m	  estimated mean 
@@ -76,6 +81,10 @@ ci.mean <- function(alpha, m, sd, n) {
 #' * UL - upper limit of the confidence interval with fpc
 #' 
 #' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' ci.mean.fpc(.05, 24.5, 3.65, 40, 300)
 #'
@@ -276,6 +285,8 @@ ci.stdmean <- function(alpha, m, sd, n, h) {
 #' unequal variance independent-samples t-tests. Use the t.test function for
 #' raw data input.
 #'
+#' For more details, see Section 2.3 of Bonett (2021, Volume 1)
+#'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  m1     estimated mean for group 1
@@ -299,6 +310,7 @@ ci.stdmean <- function(alpha, m, sd, n, h) {
 #' 
 #' @references
 #' \insertRef{Snedecor1980}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -355,6 +367,8 @@ ci.mean2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' Satterthwaite adjustment to the degrees of freedom is used with the 
 #' unequal variance method. 
 #'
+#' For more details, see Section 3.3 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param     alpha  	alpha level for 1-alpha confidence
 #' @param     m     	vector of estimated group means
@@ -376,6 +390,7 @@ ci.mean2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' 
 #' @references
 #' \insertRef{Snedecor1980}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -524,6 +539,8 @@ ci.lc.mean.scheffe <- function(alpha, m, sd, n, v) {
 #' input. A Satterthwaite adjustment to the degrees of freedom is used to 
 #' improve the accuracy of the confidence intervals. 
 #'
+#' For more details, see Section 3.1 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha   alpha level for simultaneous 1-alpha confidence
 #' @param  m       vector of estimated group means
@@ -545,6 +562,7 @@ ci.lc.mean.scheffe <- function(alpha, m, sd, n, v) {
 #'
 #' @references
 #' \insertRef{Games1976}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -598,6 +616,8 @@ ci.tukey <-function(alpha, m, sd, n) {
 #' ratio-scale measurements in a 2-group design. Equality of variances 
 #' is not assumed.
 #'
+#' For more details, see Section 2.5 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  y1     vector of scores for group 1
@@ -615,6 +635,7 @@ ci.tukey <-function(alpha, m, sd, n) {
 #'
 #' @references
 #' \insertRef{Bonett2020b}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -674,6 +695,9 @@ ci.ratio.mean2 <- function(alpha, y1, y2){
 #' experimental or nonexperimental designs. Equality of variances is not 
 #' assumed.
 #'
+#' For more details, see Section 2.4 of Bonett (2021, Volume 1)
+#'
+#'
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  m1     estimated mean for group 1
 #' @param  m2     estimated mean for group 2
@@ -694,6 +718,7 @@ ci.ratio.mean2 <- function(alpha, y1, y2){
 #'
 #' @references
 #' \insertRef{Bonett2008}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -853,6 +878,8 @@ ci.stdmean.strat <- function(alpha, m1, m2, sd1, sd2, n1, n2, p1) {
 #' group 1 standardizer is useful in both experimental and nonexperimental
 #' designs. Equality of variances is not assumed.
 #'
+#' For more details, see Section 3.4 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  m      vector of estimated group means
@@ -872,6 +899,7 @@ ci.stdmean.strat <- function(alpha, m1, m2, sd1, sd2, n1, n2, p1) {
 #'
 #' @references
 #' \insertRef{Bonett2008}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -943,6 +971,8 @@ ci.lc.stdmean.bs <- function(alpha, m, sd, n, v) {
 #' estimated correlation, and sample size. Also computes a paired-samples
 #' t-test. Use the t.test function for raw data input.
 #'
+#' For more details, see Section 4.2 of Bonett (2021, Volume 1)
+#'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  m1     estimated mean for measurement 1
@@ -964,6 +994,11 @@ ci.lc.stdmean.bs <- function(alpha, m, sd, n, v) {
 #' * UL - upper limit of the confidence interval
 #' 
 #' 
+#' @references
+#' \insertRef{Snedecor1980}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' ci.mean.ps(.05, 58.2, 51.4, 7.43, 8.92, .537, 30)
 #'
@@ -1002,6 +1037,8 @@ ci.mean.ps <- function(alpha, m1, m2, sd1, sd2, cor, n) {
 #' ratio-scale measurements in a paired-samples design. Equality of 
 #' variances is not assumed.
 #'
+#' For more details, see Section 4.4 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  y1     vector of measurement 1 scores
@@ -1019,6 +1056,7 @@ ci.mean.ps <- function(alpha, m1, m2, sd1, sd2, cor, n) {
 #'
 #' @references
 #' \insertRef{Bonett2020b}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -1076,6 +1114,8 @@ ci.ratio.mean.ps <- function(alpha, y1, y2){
 #' and single measurement standard deviation standardizers are used. Equality 
 #' of variances is not assumed.
 #'
+#' For more details, see Section 4.3 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  m1     estimated mean for measurement 1
@@ -1097,6 +1137,7 @@ ci.ratio.mean.ps <- function(alpha, y1, y2){
 #'
 #' @references
 #' \insertRef{Bonett2008}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -1159,6 +1200,8 @@ ci.stdmean.ps <- function(alpha, m1, m2, sd1, sd2, cor, n) {
 #' correlations among the repeated measures are assumed to be approximately 
 #' equal.
 #'
+#' For more details, see Section 4.7 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  m      vector of estimated means for levels of within-subjects factor
@@ -1179,6 +1222,7 @@ ci.stdmean.ps <- function(alpha, m1, m2, sd1, sd2, cor, n) {
 #'
 #' @references
 #' \insertRef{Bonett2008}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
