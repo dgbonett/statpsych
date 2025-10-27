@@ -1402,18 +1402,19 @@ ci.bscor <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' prior study that had a sample size of n0. 
 #'
 #' Several confidence interval sample size functions in this package require
-#' a planning value of the estimated Pearson correlation that is expected 
+#' a planning value of the expected sample value of a Pearson correlation 
 #' in the planned study. A one-sided lower correlation prediction limit is 
-#' useful as a correlation planning value for the sample size required to 
-#' obtain a confidence interval with desired width. This strategy for 
-#' specifying a correlation planning value is useful in applications where 
-#' the population correlation in the prior study is assumed to be very similar
-#' to the population correlation in the planned study. 
+#' useful as a correlation planning value for a conservatively large sample
+#' size required to obtain a confidence interval with desired width. This 
+#' strategy for specifying a correlation planning value is useful in 
+#' applications where the population correlation in the prior study is
+#' assumed to be very similar to the population correlation in the planned
+#' study. 
 #'
 #'
 #' @param  alpha  alpha value for 1-alpha confidence 
 #' @param  cor    estimated Pearson correlation from prior study
-#' @param  n0     sample size used to estimate correlation in prior study
+#' @param  n0     sample size used to estimate the correlation in prior study
 #' @param  n      planned sample size of future study
 #' @param  type   
 #' * set to 1 for two-sided prediction interval 
