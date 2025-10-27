@@ -2343,11 +2343,11 @@ ci.ratio.poisson2 <- function(alpha, f1, f2, t1, t2) {
 
 
 #  pi.prop =================================================================== 
-#' Prediction interval for an estimated proportion 
+#' Prediction interval for a sample proportion in a future study
 #'
 #'                        
 #' @description
-#' Computes approximate one-sided or two-sided prediction interval for the 
+#' Computes an approximate one-sided or two-sided prediction interval for the 
 #' estimated proportion in a future study with a planned sample size of n. 
 #' The prediction interval uses a proportion estimate from a prior study that
 #' had a sample size of n0.
@@ -2355,17 +2355,17 @@ ci.ratio.poisson2 <- function(alpha, f1, f2, t1, t2) {
 #' Several confidence interval sample size functions in this package require
 #' a planning value of the expected sample value of a proportion in the
 #' planned study. A one-sided proportion prediction limit is useful as a 
-#' proportion planning value for the sample size required to obtain a 
-#' confidence interval with desired width. This strategy for specifying a 
-#' proportion planning value is useful in applications where the population 
-#' proportion in the prior study is assumed to be very similar to the 
-#' population proportion in the planned study. 
+#' proportion planning value for a conservativelky large sample size required
+#' to obtain a confidence interval with desired width. This strategy for 
+#' specifying a proportion planning value is useful in applications where the
+#' population proportion in the prior study is assumed to be very similar to
+#' the population proportion in the planned study. 
 #'
 #' For sample size planning, use an upper prediction limit if the population
-#' proportion is assumed to be less than .5, and if the upper prediction limit
+#' proportion is assumed to be less than .5; and if the upper prediction limit
 #' is greater than .5, set the proportion planning value to .5. Use a lower
 #' prediction limit if the population proportion is asumed to be greater than
-#' .5, and if the lower prediction limit is less than .5, set the proportion 
+#' .5; and if the lower prediction limit is less than .5, set the proportion 
 #' planning value to .5.
 #'
 #'
