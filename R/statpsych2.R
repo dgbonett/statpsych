@@ -1392,7 +1392,7 @@ ci.bscor <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 
 
 #  pi.cor ===================================================================== 
-#' Prediction limits for an estimated correlation
+#' Prediction limits for a sample correlation in a future study
 #'
 #'                                        
 #' @description
@@ -3663,8 +3663,6 @@ power.cor2 <- function(alpha, n1, n2, cor1, cor2, s) {
  rownames(out) <- ""
  return(out)
 }
-
-
 
 
 # ============================= Miscellaneous =================================
