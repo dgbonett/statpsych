@@ -6811,27 +6811,27 @@ random.y <- function(n, m, sd, min, max, dec) {
 
 
 #  pi.var =================================================================== 
-#' Prediction limits for an estimated variance
+#' Prediction limits for a sample variance in a future study
 #'
 #'                        
 #' @description
 #' Computes a two-sided or one-sided prediction limit for the estimated 
-#' variance in a future study for a planned sample size. The prediction limit
-#' uses a variance estimate from a prior study. 
+#' variance in a future study for a planned sample size of n. The prediction 
+#' limit uses a variance estimate from a prior study of size n0. 
 #'
 #' Several confidence interval sample size functions in this package require
-#' a planning value of the estimated variance that is expected in the planned
-#' study. A one-sided upper variance prediction limit is useful as a variance
-#' planning value for the sample size required to obtain a confidence interval
-#' with desired width. This strategy for specifying a variance planning value 
-#' is useful in applications where the population variance in the prior study
-#' is assumed to be very similar to the population variance in the planned
-#' study. 
+#' a planning value of the expected sample variance in the planned study.
+#' A one-sided upper variance prediction limit is useful as a variance
+#' planning value for a conservatively large sample size required to obtain
+#' a confidence interval with desired width. This strategy for specifying a 
+#' variance planning value is useful in applications where the population 
+#' variance in the prior study is assumed to be very similar to the population 
+#' variance in the planned study. 
 #'
 #'
 #' @param  alpha  alpha value for upper 1-alpha confidence 
 #' @param  var    estimated variance from prior study
-#' @param  n0     sample size used to estimate variance
+#' @param  n0     sample size used to estimate the variance
 #' @param  n      planned sample size of future study
 #' @param  type   
 #' * set to 1 for two-sided prediction interval 
