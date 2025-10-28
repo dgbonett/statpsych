@@ -2684,6 +2684,8 @@ ci.mann <- function(alpha, y1, y2){
 #' between-group variance component, and 4) the omega-squared coefficient. 
 #' This function assumes equal sample sizes.
 #'
+#' For more details, see Section 3.18 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param   alpha  1 - alpha confidence 
 #' @param   m      vector of estimated group means 
@@ -2772,6 +2774,8 @@ ci.random.anova <- function(alpha, m, sd, n) {
 #' tau-equivalent measurements and the confidence interval assumes parallel
 #' measurements. 
 #'
+#' For more details, see Section 4.19 of Bonett (2021, Volume 1)
+#'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  rel    estimated Cronbach reliability  
@@ -2829,6 +2833,8 @@ ci.cronbach <- function(alpha, rel, r, n) {
 #' Use \link[statpsych]{ci.cronbach} for Cronbach's alpha if parallel
 #' measurements can be assumed.
 #'
+#' For more details, see Section 2.8 of Bonett (2021, Volume 4)
+#'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  rel    estimated reliability  
@@ -2875,6 +2881,8 @@ ci.reliability <- function(alpha, rel, se, n) {
 #' eta-squared, or generalized eta-squared in a fixed-factor between-subjects 
 #' design. An approximate bias adjusted estimate is computed, and an
 #' approximate standard error is recovered from the confidence interval.
+#'
+#' For more details, see Section 3.7 of Bonett (2021, Volume 1)
 #'
 #'
 #' @param  alpha    alpha value for 1-alpha confidence
@@ -2943,6 +2951,8 @@ ci.etasqr <- function(alpha, etasqr, df1, df2) {
 #' variable where Factor A is a within-subjects factor and Factor B is a 
 #' between-subjects factor. A Satterthwaite adjustment to the degrees of 
 #' freedom is used and equality of population variances is not assumed.
+#'
+#' For more details, see Section 4.16 of Bonett (2021, Volume 1)
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
@@ -3085,6 +3095,8 @@ ci.2x2.mean.mixed <- function(alpha, y11, y12, y21, y22) {
 #' effects of B in a 2x2 within-subjects factorial design with a quantitative
 #' response variable. 
 #'
+#' For more details, see Section 4.14 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
 #' @param   y11     vector of scores at level 1 of A and level 1 of B
@@ -3207,6 +3219,8 @@ ci.2x2.mean.ws <- function(alpha, y11, y12, y21, y22) {
 #' effects of B in a 2x2 between-subjects factorial design with a quantitative 
 #' response variable. A Satterthwaite adjustment to the degrees of freedom is 
 #' used and equality of population variances is not assumed.
+#'
+#' For more details, see Sections 3.8 and 3.9 of Bonett (2021, Volume 1)
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
@@ -3523,6 +3537,8 @@ ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
 #' simple main effects of B in a 2x2 between-subjects factorial design with a 
 #' quantitative response variable. The effects are defined in terms of medians
 #' rather than means. Tied scores within each group are assumed to be rare.
+#' 
+#' For more details, see Section 3.21 of Bonett (2021, Volume 1)
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
@@ -4377,6 +4393,8 @@ ci.2x2.median.ws <- function(alpha, y11, y12, y21, y22) {
 #' median difference, linear contrast of medians, etc.) that has an approximate
 #' normal sampling distribution. The mean and standard deviation of the posterior
 #' normal distribution are also reported. 
+#'
+#' For more details, see Section 1.32 of Bonett (2021, Volume 1)
 #'
 #'
 #' @param   alpha        alpha level for 1-alpha credibility interval
