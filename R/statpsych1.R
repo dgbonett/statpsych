@@ -2707,6 +2707,10 @@ ci.mann <- function(alpha, y1, y2){
 #' * UL - upper limit of the confidence interval
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' m <- c(56.1, 51.2, 60.3, 68.2, 48.9, 70.5)
 #' sd <- c(9.45, 8.79, 9.71, 8.90, 8.31, 9.75)
@@ -2792,6 +2796,7 @@ ci.random.anova <- function(alpha, m, sd, n) {
 #' 
 #' @references
 #' \insertRef{Feldt1965}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -2849,6 +2854,10 @@ ci.cronbach <- function(alpha, rel, r, n) {
 #' * UL - upper limit of the confidence interval
 #' 
 #' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' ci.reliability(.05, .88, .0147, 100)
 #'
@@ -2898,6 +2907,10 @@ ci.reliability <- function(alpha, rel, se, n) {
 #' * SE - recovered standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -2971,6 +2984,10 @@ ci.etasqr <- function(alpha, etasqr, df1, df2) {
 #' * p - two-sided p-value 
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -3116,6 +3133,10 @@ ci.2x2.mean.mixed <- function(alpha, y11, y12, y21, y22) {
 #' * UL - upper limit of the confidence interval
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' y11 <- c(1,2,3,4,5,7,7)
 #' y12 <- c(1,0,2,4,3,8,7)
@@ -3239,6 +3260,10 @@ ci.2x2.mean.ws <- function(alpha, y11, y12, y21, y22) {
 #' * p - two-sided p-value 
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -3558,6 +3583,7 @@ ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
 #'
 #' @references
 #' \insertRef{Bonett2002}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -4413,7 +4439,8 @@ ci.2x2.median.ws <- function(alpha, y11, y12, y21, y22) {
 #'
 #'
 #' @references
-#' \insertRef{Gelman2004}{statpsych}                            
+#' \insertRef{Gelman2004}{statpsych}  
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
