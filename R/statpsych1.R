@@ -4477,6 +4477,8 @@ ci.bayes.normal <- function(alpha, prior_mean, prior_sd, est, se) {
 #' Use the t.test function for raw data input. A confidence interval for a 
 #' population mean is a recommended supplement to the t-test (see \link[statpsych]{ci.mean}).
 #'
+#' For more details, see Section 1.11 of Bonett (2021, Volume 1)
+#'
 #'  
 #' @param  m	  estimated mean 
 #' @param  sd	  estimated standard deviation
@@ -4529,6 +4531,8 @@ test.mean <- function(m, sd, n, h) {
 #' skewness. If the p-value is small (e.g., less than .05) and the skewness
 #' estimate is negative, then the normality assumption can be rejected due 
 #' to negative skewness.
+#'
+#' For more details, see Section 1.23 of Bonett (2021, Volume 1)
 #'
 #'
 #' @param   y      vector of quantitative scores
@@ -4593,6 +4597,8 @@ test.skew <- function(y) {
 #' p-value is small (e.g., less than .05) and excess kurtosis is negative,
 #' then the normality assumption can be rejected due to platykurtosis.
 #'
+#' For more details, see Section 1.23 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param   y      vector of quantitative scores
 #'  
@@ -4652,6 +4658,8 @@ test.kurtosis <- function(y) {
 #' Computes the F statistic, p-value, eta-squared, and adjusted eta-squared 
 #' for the main effect in a one-way between-subjects ANOVA using the estimated
 #' group means, estimated group standard deviations, and group sample sizes.  
+#'
+#' For more details, see Section 3.7 of Bonett (2021, Volume 1)
 #'
 #'
 #' @param   m       vector of estimated group means
@@ -4715,6 +4723,9 @@ test.anova.bs <- function(m, sd, n) {
 #' the largest value within a plausible range for a conservatively large  
 #' sample size. 
 #'
+#' For more details, see Section 1.28 of Bonett (2021, Volume 1)
+#'
+#'
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  var    planning value of response variable variance
 #' @param  w      desired confidence interval width
@@ -4755,6 +4766,8 @@ size.ci.mean <- function(alpha, var, w) {
 #' plausible range for a conservatively large sample size. Set R = 1 for 
 #' equal sample sizes. For unequal sample sizes, this function assumes 
 #' approximately equal population variances.
+#'
+#' For more details, see Section 2.13 of Bonett (2021, Volume 1)
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
@@ -4806,6 +4819,8 @@ size.ci.mean2 <- function(alpha, var, w, R) {
 #' value within a plausible range for a conservatively large sample size. Set
 #' R = 1 for equal sample sizes. For unequal sample sizes, this function assumes 
 #' approximately equal population variances.
+#'
+#' For more details, see Section 2.13 of Bonett (2021, Volume 1)
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -4869,6 +4884,8 @@ size.ci.stdmean2 <- function(alpha, d, w, R) {
 #' unequal sample sizes, this function assumes approximately equal population
 #' variances.
 #'
+#' For more details, see Section 2.13 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  var    planning value of average within-group variance
@@ -4920,6 +4937,8 @@ size.ci.ratio.mean2 <- function(alpha, var, m1, m2, r, R) {
 #' variance planning value to the largest value within a plausible range
 #' for a conservatively large sample size. 
 #'
+#' For more details, see Section 3.24 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
 #' @param  var    planning value of average within-group variance  
@@ -4966,6 +4985,8 @@ size.ci.lc.mean.bs <- function(alpha, var, w, v) {
 #' between-subjects design. Set the standardized linear contrast of
 #' means to the largest value within a plausible range for a conservatively
 #' large sample size. 
+#'
+#' For more details, see Section 3.24 of Bonett (2021, Volume 1)
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -5020,6 +5041,8 @@ size.ci.lc.stdmean.bs <- function(alpha, d, w, v) {
 #' variance planning value to the largest value within a plausible range for 
 #' a conservatively large sample size. 
 #'
+#' For more details, see Section 4.26 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  var    planning value of average variance of the two measurements
@@ -5064,6 +5087,8 @@ size.ci.mean.ps <- function(alpha, var, cor, w) {
 #' value within a plausible range, and set the Pearson correlation planning 
 #' value to the smallest value within a plausible range for a conservatively
 #' large sample size.
+#'
+#' For more details, see Section 4.26 of Bonett (2021, Volume 1)
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -5119,6 +5144,8 @@ size.ci.stdmean.ps <- function(alpha, d, cor, w) {
 #' the largest value within a plausible range for a conservatively large  
 #' sample size. 
 #'
+#' For more details, see Section 4.26 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  var    planning value of average variance of the two measurements
@@ -5165,6 +5192,8 @@ size.ci.ratio.mean.ps <- function(alpha, var, m1, m2, cor, r) {
 #' sample size. Set the Pearson correlation planning value to the 
 #' smallest value within a plausible range for a conservatively 
 #' large sample size. 
+#'
+#' For more details, see Section 4.26 of Bonett (2021, Volume 1)
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
@@ -5214,6 +5243,8 @@ size.ci.lc.mean.ws <- function(alpha, var, cor, w, q) {
 #' standardized linear contrast of means planning value to the largest value
 #' within a plausible range, and set the Pearson correlation planning value
 #' to the smallest value within a plausible range.
+#'
+#' For more details, see Section 4.26 of Bonett (2021, Volume 1)
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -5266,6 +5297,8 @@ size.ci.lc.stdmean.ws <- function(alpha, d, cor, w, q) {
 #' with desired confidence interval precision. Set the reliability planning 
 #' value to the smallest value within a plausible range for a 
 #' conservatively large sample size.
+#'
+#' For more details, see Section 4.26 of Bonett (2021, Volume 1)
 #'
 #'
 #' @param  alpha  alpha value for 1-alpha confidence 
@@ -5322,6 +5355,8 @@ size.ci.cronbach <- function(alpha, rel, r, w) {
 #' in a one-way ANOVA with desired confidence interval precision. Set the 
 #' planning value of eta-squared to about 1/3 for a conservatively large sample
 #' size. 
+#'
+#' For more details, see Section 3.24 of Bonett (2021, Volume 1)
 #'
 #'  
 #' @param  alpha    alpha level for 1-alpha confidence
@@ -5446,6 +5481,8 @@ size.ci.second <- function(n0, w0, w) {
 #' that is based on expert opinion regarding the likely value of the 
 #' variance estimate that will be observed in the planned study. 
 #'
+#' For more details, see Section 1.31 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha1  alpha level for 1-alpha1 confidence in the planned study
 #' @param  alpha2  alpha level for the 1-alpha2 prediction interval 
@@ -5548,6 +5585,9 @@ size.ci.cv <- function(alpha, CV, w) {
 #' in the planned study. Select the Normal distribution for a conservatively
 #' large sample size requirement.
 #'
+#' For more details, see Section 1.28 of Bonett (2021, Volume 1)
+#'
+#'
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  var    planning value of response variable variance
 #' @param  w      desired confidence interval width
@@ -5625,6 +5665,8 @@ size.ci.median <- function(alpha, var, w, dist) {
 #' approximates the most likely distribution shape in the planned study. 
 #' Select the Normal distribution for a conservatively large sample size 
 #' requirement. Set R = 1 for equal sample sizes.
+#'
+#' For more details, see Sections 1.28 and 2.13 of Bonett (2021, Volume 1)
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
@@ -5705,6 +5747,8 @@ size.ci.median2 <- function(alpha, var, w, R, dist) {
 #' options (Normal, Logistic, Laplace, Exponential) that approximates the most
 #' likely distribution shape in the planned study. Select the Normal 
 #' distribution for a conservatively large sample size requirement.
+#'
+#' For more details, see Sections 1.28 and 3.24 of Bonett (2021, Volume 1)
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
