@@ -4495,6 +4495,7 @@ ci.bayes.normal <- function(alpha, prior_mean, prior_sd, est, se) {
 #' 
 #' @references
 #' \insertRef{Snedecor1980}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -4542,6 +4543,10 @@ test.mean <- function(m, sd, n, h) {
 #' Returns a 1-row matrix. The columns are:
 #' * Skewness - estimate of skewness coefficient
 #' * p - Monte Carlo two-sided p-value
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -4608,6 +4613,10 @@ test.skew <- function(y) {
 #' * Kurtosis - estimate of kurtosis coefficient
 #' * Excess - estimate of excess kurtosis (kurtosis - 3)
 #' * p - Monte Carlo two-sided p-value
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -4677,6 +4686,10 @@ test.kurtosis <- function(y) {
 #' * adj Eta-squared - a bias adjusted estimate of eta-squared
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' m <- c(12.4, 8.6, 10.5)
 #' sd <- c(3.84, 3.12, 3.48)
@@ -4735,6 +4748,10 @@ test.anova.bs <- function(m, sd, n) {
 #' Returns the required sample size
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' size.ci.mean(.05, 6.0, 1.5)
 #'
@@ -4778,6 +4795,10 @@ size.ci.mean <- function(alpha, var, w) {
 #'
 #' @return 
 #' Returns the required sample size for each group
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -4831,6 +4852,7 @@ size.ci.mean2 <- function(alpha, var, w, R) {
 #'
 #' @references
 #' \insertRef{Bonett2009}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @return 
@@ -4899,6 +4921,10 @@ size.ci.stdmean2 <- function(alpha, d, w, R) {
 #' Returns the required sample size for each group
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' size.ci.ratio.mean2(.05, .4, 3.5, 3.1, 1.2, 1)
 #'
@@ -4950,6 +4976,10 @@ size.ci.ratio.mean2 <- function(alpha, var, m1, m2, r, R) {
 #' Returns the required sample size for each group
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' v <- c(.5, .5, -.5, -.5)
 #' size.ci.lc.mean.bs(.05, 8.0, 3.0, v)
@@ -4997,6 +5027,7 @@ size.ci.lc.mean.bs <- function(alpha, var, w, v) {
 #'
 #' @references
 #' \insertRef{Bonett2009}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @return 
@@ -5054,6 +5085,10 @@ size.ci.lc.stdmean.bs <- function(alpha, d, w, v) {
 #' Returns the required sample size
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' size.ci.mean.ps(.05, 5.0, .5, 2.0)
 #'
@@ -5099,6 +5134,7 @@ size.ci.mean.ps <- function(alpha, var, cor, w) {
 #'
 #' @references
 #' \insertRef{Bonett2009}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @return 
@@ -5159,6 +5195,10 @@ size.ci.stdmean.ps <- function(alpha, d, cor, w) {
 #' Returns the required sample size 
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' size.ci.ratio.mean.ps(.05, 400, 150, 100, .7, 1.2)
 #'
@@ -5205,6 +5245,10 @@ size.ci.ratio.mean.ps <- function(alpha, var, m1, m2, cor, r) {
 #'
 #' @return 
 #' Returns the required sample size 
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -5256,6 +5300,7 @@ size.ci.lc.mean.ws <- function(alpha, var, cor, w, q) {
 #'
 #' @references
 #' \insertRef{Bonett2009}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @return 
@@ -5309,6 +5354,7 @@ size.ci.lc.stdmean.ws <- function(alpha, d, cor, w, q) {
 #'
 #' @references
 #' \insertRef{Bonett2015}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @return 
@@ -5369,6 +5415,10 @@ size.ci.cronbach <- function(alpha, rel, r, w) {
 #' Returns the required sample size for each group
 #' 
 #' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' size.ci.etasqr(.05, .2, 3, .15)
 #'
@@ -5495,6 +5545,10 @@ size.ci.second <- function(n0, w0, w) {
 #' Returns the required sample size
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' size.ci.mean.prior(.05, .10, 0.71, 204, .4)
 #'
@@ -5605,6 +5659,7 @@ size.ci.cv <- function(alpha, CV, w) {
 #'
 #' @references
 #' \insertRef{Bonett2002}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -5687,6 +5742,7 @@ size.ci.median <- function(alpha, var, w, dist) {
 #'
 #' @references
 #' \insertRef{Bonett2002}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -5769,6 +5825,7 @@ size.ci.median2 <- function(alpha, var, w, R, dist) {
 #'
 #' @references
 #' \insertRef{Bonett2002}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
