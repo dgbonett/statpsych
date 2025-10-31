@@ -5475,6 +5475,8 @@ size.ci.etasqr <- function(alpha, etasqr, groups, w) {
 #' The second-stage sample is combined with the first-stage sample to obtain 
 #' the desired confidence interval width.
 #'
+#' For more details, see Section 1.30 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  n0     first-stage sample size 
 #' @param  w0     confidence interval width in first-stage sample
@@ -5931,6 +5933,8 @@ size.ci.sd <- function(alpha, r) {
 #' largest value within a plausible range for a conservatively large sample 
 #' size.
 #'
+#' For more details, see Section 1.29 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha  alpha level for hypothesis test 
 #' @param  pow    desired power
@@ -5975,6 +5979,8 @@ size.test.mean <- function(alpha, pow, var, es) {
 #' conservatively large sample size. Set R =1 for equal sample sizes. For
 #' unequal sample sizes, this function assumes approximately equal population
 #' variances.
+#'
+#' For more details, see Section 2.14 of Bonett (2021, Volume 1)
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test
@@ -6033,6 +6039,8 @@ size.test.mean2 <- function(alpha, pow, var, es, R) {
 #' power in a between-subjects design. Set the variance planning value
 #' to the largest value within a plausible range for a conservatively 
 #' large sample size.
+#'
+#' For more details, see Section 3.25 of Bonett (2021, Volume 1)
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test 
@@ -6093,6 +6101,8 @@ size.test.lc.mean.bs <- function(alpha, pow, var, es, v) {
 #' largest value within a plausible range for a conservatively large sample 
 #' size.
 #'
+#' For more details, see Section 2.14 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param   alpha  alpha level for hypothesis test 
 #' @param   pow    desired power
@@ -6142,6 +6152,8 @@ size.equiv.mean2 <- function(alpha, pow, var, es, h) {
 #' Set the variance planning value to the largest value within a plausible 
 #' range for a conservatively large sample size.
 #'
+#' For more details, see Section 2.14 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param   alpha  alpha level for hypothesis test 
 #' @param   pow    desired power
@@ -6185,6 +6197,8 @@ size.supinf.mean2 <- function(alpha, pow, var, es, h) {
 #' planning value to the smallest value within a plausible range, and set the
 #' variance planning value to the largest value within a plausible range for a
 #' conservatively large sample size.
+#'
+#' For more details, see Section 4.27 of Bonett (2021, Volume 1)
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test 
@@ -6232,6 +6246,8 @@ size.test.mean.ps <- function(alpha, pow, var, es, cor) {
 #' conservatively large sample size. Set the average correlation planning value to
 #' the smallest value within a plausible range for a conservatively large sample 
 #' size. 
+#'
+#' For more details, see Section 4.27 of Bonett (2021, Volume 1)
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test 
@@ -6286,6 +6302,8 @@ size.test.lc.mean.ws <- function(alpha, pow, var, es, cor, q) {
 #' planning value to the largest value within a plausible range for a
 #' conservatively large sample size.
 #'
+#' For more details, see Section 4.27 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param   alpha  alpha level for hypothesis test 
 #' @param   pow    desired power
@@ -6337,6 +6355,8 @@ size.equiv.mean.ps <- function(alpha, pow, var, es, cor, h) {
 #' within a plausible range, and set the variance planning value to the largest
 #' value within a plausible range for a conservatively large sample size.
 #'
+#' For more details, see Section 4.27 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param   alpha  alpha level for hypothesis test 
 #' @param   pow    desired power
@@ -6386,6 +6406,8 @@ size.supinf.mean.ps <- function(alpha, pow, var, es, cor, h) {
 #' sizes N1 and N2, the parameter is the proportion of all N1 x N2 pairs in
 #' which a member from subpopulation 1 has a larger score than a member from 
 #' subpopulation 2.
+#'
+#' For more details, see Section 2.14 of Bonett (2021, Volume 1)
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test 
@@ -6437,6 +6459,8 @@ size.test.mann <- function(alpha, pow, p) {
 #' the hypothesized population median value. Under the null hypothesis, the
 #' population proportion is equal to .5. This function requires a planning 
 #' value of the population proportion.
+#'
+#' For more details, see Section 1.29 of Bonett (2021, Volume 1)
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test 
