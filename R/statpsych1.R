@@ -5946,6 +5946,10 @@ size.ci.sd <- function(alpha, r) {
 #' Returns the required sample size 
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' size.test.mean(.05, .9, 8.2, 1.5)
 #'
@@ -5994,6 +5998,10 @@ size.test.mean <- function(alpha, pow, var, es) {
 #' Returns the required sample size for each group
 #'
 #'	
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' size.test.mean2(.05, .95, 100, 10, 1) 
 #'
@@ -6052,6 +6060,10 @@ size.test.mean2 <- function(alpha, pow, var, es, R) {
 #'
 #' @return 
 #' Returns the required sample size for each group
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -6115,6 +6127,10 @@ size.test.lc.mean.bs <- function(alpha, pow, var, es, v) {
 #' Returns the required sample size for each group
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' size.equiv.mean2(.10, .80, 15, 2, 4)
 #'
@@ -6166,6 +6182,10 @@ size.equiv.mean2 <- function(alpha, pow, var, es, h) {
 #' Returns the required sample size for each group
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' size.supinf.mean2(.05, .80, 225, 9, 4)
 #'
@@ -6210,6 +6230,10 @@ size.supinf.mean2 <- function(alpha, pow, var, es, h) {
 #'
 #' @return 
 #' Returns the required sample size 
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -6260,6 +6284,10 @@ size.test.mean.ps <- function(alpha, pow, var, es, cor) {
 #'
 #' @return 
 #' Returns the required sample size 
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -6317,6 +6345,10 @@ size.test.lc.mean.ws <- function(alpha, pow, var, es, cor, q) {
 #' Returns the required sample size
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' size.equiv.mean.ps(.10, .90, 25, .5, .75, 2)
 #'
@@ -6370,6 +6402,10 @@ size.equiv.mean.ps <- function(alpha, pow, var, es, cor, h) {
 #' Returns the required sample size
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' size.supinf.mean.ps(.05, .80, 225, 9, .75, 4)
 #'
@@ -6417,6 +6453,7 @@ size.supinf.mean.ps <- function(alpha, pow, var, es, cor, h) {
 #'
 #' @references
 #' \insertRef{Noether1987}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @return 
@@ -6470,6 +6507,10 @@ size.test.mann <- function(alpha, pow, p) {
 #'
 #' @return 
 #' Returns the required sample size 
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
