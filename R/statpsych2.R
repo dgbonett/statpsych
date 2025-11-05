@@ -487,8 +487,6 @@ ci.spear <- function(alpha, y, x) {
 #' 
 #' @references
 #' \insertRef{Bonett2000}{statpsych}
-#'
-#'
 #' \insertRef{Zou2007}{statpsych}
 #'
 #'
@@ -1037,8 +1035,10 @@ ci.lc.gen.bs <- function(alpha, est, se, v) {
 #' @param  s        number of predictor variables
 #' @param  n        sample size
 #'
+#'
 #' @references
 #' \insertRef{Helland1987}{statpsych}
+#'
 #'
 #' @return 
 #' Returns a 1-row matrix. The columns are:
