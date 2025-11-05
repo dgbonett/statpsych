@@ -6845,6 +6845,8 @@ power.mean.ps <- function(alpha, n, var1, var2, es, cor) {
 #' Computes a prediction interval for the response variable score of one 
 #' randomly selected member from the study population.
 #'
+#' For more details, see Section 1.9 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
 #' @param  m      estimated mean
@@ -6858,6 +6860,10 @@ power.mean.ps <- function(alpha, n, var1, var2, es, cor) {
 #' * df - degrees of freedom
 #' * LL - lower limit of the prediction interval
 #' * UL - upper limit of the prediction interval
+#'
+#'
+#' @references
+#' \insertRef{Bonett2015}{statpsych}
 #'
 #'
 #' @examples
@@ -6894,6 +6900,8 @@ pi.score <- function(alpha, m, sd, n) {
 #' conditions. Both equal variance and unequal variance prediction intervals 
 #' are computed.
 #'
+#' For more details, see Section 2.6 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
 #' @param  m1     estaimted mean for group 1
@@ -6914,6 +6922,9 @@ pi.score <- function(alpha, m, sd, n) {
 #'
 #' @references
 #' \insertRef{Hahn1977}{statpsych}
+#' \insertRef{Bonett2015}{statpsych}
+#'
+#'
 #'
 #'
 #' @examples
@@ -6962,6 +6973,8 @@ pi.score2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' selected person from the study population would differ under the two 
 #' treatment conditions. 
 #'
+#' For more details, see Section 4.5 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
 #' @param  m1     estimated mean for measurement 1
@@ -6978,6 +6991,10 @@ pi.score2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' * df - degrees of freedom
 #' * LL - lower limit of the prediction interval
 #' * UL - upper limit of the prediction interval
+#'
+#'
+#' @references
+#' \insertRef{Bonett2015}{statpsych}
 #'
 #'
 #' @examples
@@ -7128,6 +7145,8 @@ random.y <- function(n, m, sd, min, max, dec) {
 #' variance in the prior study is assumed to be very similar to the population 
 #' variance in the planned study. 
 #'
+#' For more details, see Section 1.31 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha  alpha value for upper 1-alpha confidence 
 #' @param  var    estimated variance from prior study
@@ -7146,6 +7165,9 @@ random.y <- function(n, m, sd, min, max, dec) {
 #'
 #' @references
 #' \insertRef{Hahn1972}{statpsych}
+#' \insertRef{Bonett2015}{statpsych}
+#'
+#'
 #'
 #'
 #' @examples
@@ -7276,6 +7298,8 @@ pi.cronbach <- function(alpha, rel, r, n0, n, type) {
 #' can be used as a variance planning value in sample size functions for 
 #' desired power that require a planning value of the population variance.
 #'
+#' For more details, see Section 1.31 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha  alpha value for 1-alpha confidence (one-sided)
 #' @param  var    estimated variance
@@ -7283,6 +7307,10 @@ pi.cronbach <- function(alpha, rel, r, n0, n, type) {
 
 #' @return 
 #' Returns an upper limit (UL) variance planning value
+#'
+#'
+#' @references
+#' \insertRef{Bonett2015}{statpsych}
 #'
 #'
 #' @examples
@@ -7314,6 +7342,8 @@ ci.var.upper <- function(alpha, var, n) {
 #' can be applied to eta-squared, partial-eta squared, and generalized
 #' eta-squared estimates.
 #'
+#' For more details, see Section 3.7 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param   etasqr    unadjusted eta-square estimate
 #' @param   dfeffect  degrees of freedom for the effect
@@ -7322,6 +7352,10 @@ ci.var.upper <- function(alpha, var, n) {
 #'
 #' @return 
 #' Returns a bias adjusted eta-squared estimate
+#'
+#'
+#' @references
+#' \insertRef{Bonett2015}{statpsych}
 #'
 #'
 #' @examples
@@ -7355,6 +7389,8 @@ etasqr.adj <- function(etasqr, dfeffect, dferror) {
 #' The eta-squared estimates from this function can be used in the 
 #' \link[statpsych]{etasqr.adj} function to obtain bias adjusted estimates.
 #'
+#' For more details, see Section 3.12 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  SSa    sum of squares for factor A
 #' @param  SSb    sum of squares for factor B
@@ -7367,6 +7403,10 @@ etasqr.adj <- function(etasqr, dfeffect, dferror) {
 #' * A - estimate of eta-squared for factor A
 #' * B - estimate of eta-squared for factor B
 #' * AB - estimate of eta-squared for A x B interaction
+#'
+#'
+#' @references
+#' \insertRef{Bonett2015}{statpsych}
 #'
 #'
 #' @examples
@@ -8377,6 +8417,8 @@ sim.ci.stdmean.ps <- function(alpha, n, sd2, cor, dist1, dist2, d, rep) {
 #' parallel measurements given the reliability of a scale that is the sum or
 #' average of r1 parallel measurements. The "measurements" can be items, 
 #' forms, raters, or occasions.
+#'
+#' For more details, see Section 4.19 of Bonett (2021, Volume 1)
 #'
 #'
 #' @param   rel     reliability of the sum or average of r1 measurements
