@@ -5221,64 +5221,6 @@ size.ci.lc.stdmean.ws <- function(alpha, d, cor, w, q) {
 }
 
 
-#  size.ci.cronbach ========================================================
-#' Sample size for a Cronbach reliability confidence interval
-#'
-#'
-#' Computes the sample size required to estimate a Cronbach reliability
-#' with desired confidence interval precision. Set the reliability planning 
-#' value to the smallest value within a plausible range for a 
-#' conservatively large sample size.
-#'
-#' For more details, see Section 4.26 of Bonett (2021, Volume 1)
-#'
-#'
-#' @param  alpha  alpha value for 1-alpha confidence 
-#' @param  rel    reliability planning value
-#' @param  r      number of measurements (items, raters, forms)
-#' @param  w      desired confidence interval width
-#'
-#'
-#' @references
-#' \insertRef{Bonett2015}{statpsych}
-#' \insertRef{Bonett2021}{statpsych}
-#'
-#'
-#' @return 
-#' Returns the required sample size
-#'
-#'
-#' @examples
-#' size.ci.cronbach(.05, .75, 5, .15)
-#'
-#' # Should return:
-#' # Sample size
-#' #         109
-#'  
-#' 
-#' @importFrom stats qf
-#' @importFrom stats qnorm
-#' @export
-size.ci.cronbach <- function(alpha, rel, r, w) {
- if (rel > .999 | rel < .001) {stop("reliability must be between .001 and .999")}
- z <- qnorm(1 - alpha/2)
- n0 <- ceiling((8*r/(r - 1))*(1 - rel)^2*(z/w)^2 + 2)
- df1 <- n0 - 1
- df2 <- n0*(r - 1)
- f1 <- qf(1 - alpha/2, df1, df2)
- f2 <- qf(1 - alpha/2, df2, df1)
- f0 <- 1/(1 - rel)
- ll <- 1 - f1/f0
- ul <- 1 - 1/(f0*f2)
- w0 <- ul - ll
- n <- ceiling((n0 - 2)*(w0/w)^2 + 2)
- out <- matrix(n, nrow = 1, ncol = 1)
- colnames(out) <- "Sample size"
- rownames(out) <- ""
- return(out)
-}
-
-
 #  size.ci.etasqr =============================================================
 #' Sample size for an eta-squared confidence interval 
 #'
