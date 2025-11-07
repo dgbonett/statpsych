@@ -3005,8 +3005,8 @@ size.ci.spear2 <- function(alpha, cor1, cor2, w) {
 
 
 #  size.ci.cor.prior ==========================================================
-#' Sample size for a Pearson correlation confidence interval using a 
-#' planning value from a prior study
+#' Sample size for a Pearson correlation confidence interval using an 
+#' estimated correlation from a prior study
 #'
 #'                
 #' @description
