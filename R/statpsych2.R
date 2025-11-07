@@ -1185,7 +1185,7 @@ ci.theil <- function(alpha, y, x) {
 #' @description
 #' Computes a confidence interval for a difference in population Cronbach 
 #' reliability coefficients in a 2-group design. The number of measurements
-#' (e.g., items or raters) used in each group need not be equal.
+#' (items, raters, forms) used in each group need not be equal.
 #'
 #'  
 #' @param  alpha    alpha level for 1-alpha confidence
@@ -2769,13 +2769,12 @@ size.ci.spear2 <- function(alpha, cor1, cor2, w) {
 #'
 #' This sample size approach assumes that the population Pearson correlation 
 #' that was estimated in the prior study is very similar to the population Pearson
-#' correlation that will be estimated in the planned study. However, this type of
-#' prior information is typically not available and the researcher must use expert
-#' opinion to guess the value of the Pearson correlation that will be observed in the 
-#' planned study. The \link[statpsych]{size.ci.cor} function uses a 
-#' correlation planning value that is based on expert opinion regarding the 
-#' likely value of the correlation estimate that will be observed in the 
-#' planned study.
+#' correlation that will be estimated in the planned study. However, if prior 
+#' information is not available the researcher must use expert opinion to guess 
+#' the value of the Pearson correlation that will be observed in the planned study. 
+#' The \link[statpsych]{size.ci.cor} function uses a correlation planning value 
+#' that is based on expert opinion regarding the likely value of the correlation 
+#' estimate that will be observed in the planned study.
 #'
 #'
 #' @param  alpha1  alpha level for 1-alpha1 confidence in the planned study
