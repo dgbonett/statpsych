@@ -3016,7 +3016,8 @@ size.ci.spear2 <- function(alpha, cor1, cor2, w) {
 #' interval width in the planned study will depend on the value of the
 #' estimated correlation in the planned study. An estimated correlation from
 #' a prior study can be used to compute a prediction interval for the value of
-#' the estimated correlation in the planned study. If the prediction interval
+#' the estimated correlation in the planned study, which is then used as a 
+#' planning value in the sample size analysis. If the prediction interval
 #' includes 0, then the correlation planning value is set to 0; otherwise, the
 #' correlation planning value is set to the lower prediction limit (if the prior
 #' correlation is positive) or the upper prediction limit (if the prior correlation
