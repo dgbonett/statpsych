@@ -1588,6 +1588,92 @@ pi.cor <- function(alpha, cor, n0, n, type) {
 }
 
 
+#  pi.cronbach ================================================================ 
+#' Prediction limits for sample value of Cronbach reliability in a future study
+#'
+#'                                        
+#' @description
+#' Computes approximate one-sided or two-sided prediction limits for the 
+#' estimated Cronbach reliability in a future study with a planned sample 
+#' size of n. The prediction interval uses a Cronbach reliability estimate
+#' from a prior study. 
+#'
+#' The size.ci.cronbach and size.ci.cronbach2 functions require a planning 
+#' value of the expected sample value of Cronbach's reliability in the 
+#' planned study. A one-sided lower prediction limit for the sample value 
+#' of Cronbach's reliability in the planned study can be used in the 
+#' size.ci.cronbach and size.ci.cronbach2 functions to obtain conservatively
+#' large sample size requirements. This strategy for specifying a reliability
+#' planning value is useful in applications where the population Cronbach 
+#' reliability in the prior study is assumed to be very similar to the 
+#' population Cronbach reliability in the planned study. 
+#'
+#'
+#' @param  alpha  alpha value for 1-alpha confidence 
+#' @param  rel    estimated Cronbach reliability from prior study
+#' @param  r      number of measurements (e.g., items, raters, etc.)
+#' @param  n0     sample size used to estimate reliability in prior study
+#' @param  n      planned sample size of future study
+#' @param  type   
+#' * set to 1 for two-sided prediction interval 
+#' * set to 2 for one-sided upper prediction limit 
+#' * set to 3 for one-sided lower prediction limit 
+#'
+#'
+#' @return 
+#' Returns one-sided or two-sided prediction limit(s) of an estimated 
+#' Cronbach reliability in a future study
+#'
+#'
+#' @examples
+#' pi.cronbach(.1, .852, 5, 100, 150, 1)
+#'
+#' # Should return:
+#' #          LL        UL
+#' #   0.7944136 0.8955762
+#'  
+#' pi.cronbach(.1, .852, 5, 100, 150, 3)
+#'
+#' # Should return:
+#' #         LL
+#' #  0.8092324
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export
+pi.cronbach <- function(alpha, rel, r, n0, n, type) {
+ rel.log <- log(1 - rel)
+ b <- log(n0/(n0 - 1))
+ v1 <- 2*r/((r - 1)*(n0 - 2))
+ v2 <- 2*r/((r - 1)*(n - 2))
+ if (type == 1) {
+  z <- qnorm(1 - alpha/2)
+  ul0 <- rel.log - b - z*sqrt(v1 + v2)
+  ll0 <- rel.log - b + z*sqrt(v1 + v2)
+  ll <- 1 - exp(ll0)
+  ul <- 1 - exp(ul0)
+  out <- t(c(ll, ul))
+  colnames(out) <- c("LL", "UL")
+ }
+ else if (type == 2) {
+  z <- qnorm(1 - alpha)
+  ul0 <- rel.log - b - z*sqrt(v1 + v2)
+  ul <- 1 - exp(ul0)
+  out <- matrix(ul, nrow = 1, ncol = 1)
+  colnames(out) <- "UL"
+ }
+ else {
+  z <- qnorm(1 - alpha)
+  ll0 <- rel.log - b + z*sqrt(v1 + v2)
+  ll <- 1 - exp(ll0)
+  out <- matrix(ll, nrow = 1, ncol = 1)
+  colnames(out) <- "LL"
+ }
+ rownames(out) <- ""
+ return(out)
+}
+
+
 # ci.bayes.cor ============================================================
 #' Bayesian credible interval for a Pearson or partial correlation with a
 #' skeptical prior
