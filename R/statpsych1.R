@@ -2783,7 +2783,7 @@ ci.random.anova <- function(alpha, m, sd, n) {
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  rel    estimated Cronbach reliability  
-#' @param  r      number of measurements (items, raters, etc.)
+#' @param  r      number of measurements (items, raters, forms)
 #' @param  n	  sample size
 #'
 #'
@@ -5526,12 +5526,12 @@ size.ci.second <- function(n0, w0, w) {
 #'
 #' This sample size approach assumes that the population variance in the 
 #' prior study is very similar to the population variance in the planned 
-#' study. However, this type of prior information is typically not
-#' available, and the researcher must use expert opinion to guess the value
-#' of the variance that will be observed in the planned study. The 
-#' \link[statpsych]{size.ci.mean} function uses a variance planning value 
-#' that is based on expert opinion regarding the likely value of the 
-#' variance estimate that will be observed in the planned study. 
+#' study. However, if prior information is not available the researcher
+#' must use expert opinion to guess the value of the variance that will be
+#' observed in the planned study. The \link[statpsych]{size.ci.mean} 
+#' function uses a variance planning value that is based on expert opinion
+#' regarding the likely value of the variance estimate that will be observed 
+#' in the planned study. 
 #'
 #' For more details, see Section 1.31 of Bonett (2021, Volume 1)
 #'
@@ -6596,7 +6596,7 @@ size.test.sign.ps <- function(alpha, pow, p) {
 #' @param  alpha  alpha level for hypothesis test 
 #' @param  pow    desired power
 #' @param  rel    reliability planning value
-#' @param  r      number of measurements
+#' @param  r      number of measurements (items, raters, forms)
 #' @param  h      null hypothesis value of reliability
 #'
 #'
