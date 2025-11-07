@@ -3036,8 +3036,8 @@ size.ci.agree <- function(alpha, G, w) {
 #' width in the planned study will depend on the value of the estimated 
 #' proportion in the planned study. An estimated proportion from a prior study
 #' is used to predict the value of the estimated proportion in the planned 
-#' study, and the predicted proportion estimate is then used in the sample size
-#' computation.
+#' study, and the predicted proportion estimate is then used as a planning
+#' value in the sample size computation.
 #'
 #' This sample size approach assumes that the population proportion in the 
 #' prior study is very similar to the population proportion in the planned 
