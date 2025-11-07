@@ -3041,12 +3041,12 @@ size.ci.agree <- function(alpha, G, w) {
 #'
 #' This sample size approach assumes that the population proportion in the 
 #' prior study is very similar to the population proportion in the planned 
-#' study. In a typical sample size analysis, this type of information is not
-#' available, and the researcher must use expert opinion to guess the value of
-#' the proportion that will be observed in the planned study. The 
-#' \link[statpsych]{size.ci.prop}) function uses a proportion planning value 
-#' that is based on expert opinion regarding the likely value of the proportion 
-#' estimate that will be observed in the planned study.
+#' study. If an estimated proportion from a prior study is not available the 
+#' researcher must use expert opinion to guess the value of the proportion
+#' that will be observed in the planned study. The \link[statpsych]{size.ci.prop}) 
+#' function uses a proportion planning value that is based on expert opinion 
+#' regarding the likely value of the proportion estimate that will be observed
+#' in the planned study.
 #'
 #'
 #' @param  alpha1  alpha level for 1-alpha1 confidence in the planned study
