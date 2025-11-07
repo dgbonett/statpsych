@@ -5336,7 +5336,7 @@ size.ci.second <- function(n0, w0, w) {
 
 
 #  size.ci.mean.prior =========================================================
-#' Sample size for a mean confidence interval using a planning value from
+#' Sample size for a mean confidence interval using an estimated variance from
 #' a prior study 
 #'
 #'                
