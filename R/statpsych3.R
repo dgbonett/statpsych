@@ -3025,8 +3025,8 @@ size.ci.agree <- function(alpha, G, w) {
 
 
 #  size.ci.prop.prior =========================================================
-#' Sample size for a proportion confidence interval using a planning value 
-#' from a prior study
+#' Sample size for a proportion confidence interval using an estimated 
+#' proportion from a prior study
 #'
 #'                
 #' @description
