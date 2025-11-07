@@ -6414,52 +6414,6 @@ size.test.sign.ps <- function(alpha, pow, p) {
 }
 
 
-#  size.test.cronbach ========================================================
-#' Sample size to test a Cronbach reliability
-#'
-#'
-#' Computes the sample size required to test a Cronbach reliability with
-#' desired power. 
-#'
-#'
-#' @param  alpha  alpha level for hypothesis test 
-#' @param  pow    desired power
-#' @param  rel    reliability planning value
-#' @param  r      number of measurements (items, raters, forms)
-#' @param  h      null hypothesis value of reliability
-#'
-#'
-#' @return 
-#' Returns the required sample size
-#'
-#'
-#' @references
-#' \insertRef{Bonett2015}{statpsych}
-#'
-#'
-#' @examples
-#' size.test.cronbach(.05, .85, .80, 5, .7)
-#'
-#' # Should return:
-#' # Sample size
-#' #         139
-#'  
-#' 
-#' @importFrom stats qnorm
-#' @export
-size.test.cronbach <- function(alpha, pow, rel, r, h) {
- if (rel > .999 | rel < .001) {stop("reliability must be between .001 and .999")}
- za <- qnorm(1 - alpha/2)
- zb <- qnorm(pow)
- e <- (1 - rel)/(1 - h)
- n <- ceiling((2*r/(r - 1))*(za + zb)^2/log(e)^2 + 2)
- out <- matrix(n, nrow = 1, ncol = 1)
- colnames(out) <- "Sample size"
- rownames(out) <- ""
- return(out)
-}
-
-
 # ======================= Power for Planned Sample Size =======================
 #  power.mean ================================================================
 #' Approximates the power of a one-sample t-test for a planned sample size
