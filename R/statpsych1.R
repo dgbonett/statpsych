@@ -5526,9 +5526,9 @@ size.ci.second <- function(n0, w0, w) {
 #'
 #' This sample size approach assumes that the population variance in the 
 #' prior study is very similar to the population variance in the planned 
-#' study. However, if prior information is not available the researcher
-#' must use expert opinion to guess the value of the variance that will be
-#' observed in the planned study. The \link[statpsych]{size.ci.mean} 
+#' study. If an estimated variance from a prior study is not available,
+#' the researcher must use expert opinion to guess the value of the variance
+#' that will be observed in the planned study. The \link[statpsych]{size.ci.mean} 
 #' function uses a variance planning value that is based on expert opinion
 #' regarding the likely value of the variance estimate that will be observed 
 #' in the planned study. 
