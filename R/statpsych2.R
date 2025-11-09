@@ -2047,6 +2047,8 @@ ci.slope.median.bs <- function(alpha, m, se, x) {
 #' accompanied with a confidence interval for the population Pearson or
 #' partial correlation value (see \link[statpsych]{ci.cor}).
 #'
+#' For more details, see Section 1.19 of Bonett (2021, Volume 2)
+#'
 #'
 #' @param  cor     estimated correlation 
 #' @param  n       sample size 
@@ -2302,6 +2304,8 @@ test.spear2 <- function(cor1, cor2, n1, n2) {
 #' hypothesis of a monotonic trend if any lower limit is greater than 0 and 
 #' any upper limit is less than 0. 
 #'
+#' For more details, see Section 1.21 of Bonett (2021, Volume 2)
+#'
 #'
 #' @param  alpha   alpha level for simultaneous 1-alpha confidence
 #' @param  m       vector of estimated group means
@@ -2372,6 +2376,8 @@ test.mono.mean.bs <-function(alpha, m, sd, n) {
 #' is less than 0. The sample median and standard error for each group
 #' can be computed using the \link[statpsych]{ci.median} function. 
 #'
+#' For more details, see Section 1.21 of Bonett (2021, Volume 2)
+#'
 #'
 #' @param  alpha   alpha level for simultaneous 1-alpha confidence
 #' @param  m       vector of estimated group medians
@@ -2434,6 +2440,8 @@ test.mono.median.bs <-function(alpha, m, se) {
 #' sizes. Set the error variance planning value to the largest value within 
 #' a plausible range for a conservatively large sample size.
 #'
+#' For more details, see Section 1.24 of Bonett (2021, Volume 2)
+#'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  evar   planning value of within-group (error) variance
@@ -2478,6 +2486,8 @@ size.ci.slope <- function(alpha, evar, x, w) {
 #' Set s = 0 for a Pearson correlation. Set the correlation planning value
 #' to the smallest absolute value within a plausible range for a conservatively 
 #' large sample size.
+#'
+#' For more details, see Section 1.24 of Bonett (2021, Volume 2)
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -2588,6 +2598,8 @@ size.ci.spear <- function(alpha, cor, w) {
 #' Set the correlation planning value to the smallest absolute value within a 
 #' plausible range for a conservatively large sample size.
 #'
+#' For more details, see Section 1.24 of Bonett (2021, Volume 2)
+#'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  cor    planning value of point-biserial correlation
@@ -2633,6 +2645,8 @@ size.ci.pbcor <- function(alpha, cor, w, p) {
 #' correlation in a random-x regression model with desired confidence interval
 #' precision. Set the planning value of the squared multiple correlation to 1/3
 #' for a conservatively large sample size. 
+#'
+#' For more details, see Section 2.28 of Bonett (2021, Volume 2)
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -2689,6 +2703,8 @@ size.ci.rsqr <- function(alpha, r2, s, w) {
 #' the fixed factor. Set the error variance planning value to the largest value 
 #' within a plausible range for a conservatively large sample size.
 #'
+#' For more details, see Section 1.24 of Bonett (2021, Volume 2)
+#'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  evar   planning value of within group (error) variance
@@ -2737,6 +2753,8 @@ size.ci.condmean <- function(alpha, evar, xvar, diff, w) {
 #' planning value to the largest value within a plausible range for a 
 #' conservatively large sample size.
 #'
+#' For more details, see Section 2.28 of Bonett (2021, Volume 2)
+#'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  evar   planning value of within group (error) variance
@@ -2781,6 +2799,8 @@ size.ci.lc.ancova <- function(alpha, evar, s, d, w, v) {
 #' standardized indirect effect in a simple mediation model. The direct effect
 #' of the independent (exogenous) variable on the response variable, controlling
 #' for the mediator variable, is assumed to be negligible. 
+#'
+#' For more details, see Section 1.19 of Bonett (2021, Volume 4)
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -2881,6 +2901,8 @@ size.ci.cronbach <- function(alpha, rel, r, w) {
 #' Computes the sample size per group (assuming equal sample sizes) required
 #' to estimate a difference in population Cronbach reliability coefficients
 #' with desired precision in a 2-group design. 
+#'
+#' For more details, see Section 2.19 of Bonett (2021, Volume 4)
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test 
@@ -3126,6 +3148,8 @@ size.ci.spear2 <- function(alpha, cor1, cor2, w) {
 #' likely value of the correlation estimate that will be observed in the planned 
 #' study.
 #'
+#' For more details, see Section 1.26 of Bonett (2021, Volume 2)
+#'
 #'
 #' @param  alpha1  alpha level for 1-alpha1 confidence in the planned study
 #' @param  alpha2  alpha level for the 1-alpha2 prediction interval 
@@ -3272,6 +3296,8 @@ size.ci.cronbach.prior <- function(alpha1, alpha2, rel0, n0, r, w) {
 #' the error variance planning value to the largest value within a 
 #' plausible range for a conservatively large sample size.
 #'
+#' For more details, see Section 2.28 of Bonett (2021, Volume 2)
+#'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  evar   planning value of within group (error) variance
@@ -3331,6 +3357,8 @@ size.ci.ancova2 <- function(alpha, evar, s, d, w, R) {
 #' standardized slopes. This function also can be used for both unstandardized 
 #' and standardized factor loadings in a confirmatory factor analysis model.
 #' This function will soon be replaced with size.ci.gen.
+#'
+#' For more details, see Section 2.28 of Bonett (2021, Volume 2)
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -3475,6 +3503,8 @@ size.ci.gen2 <- function(alpha, se, n0, w, R) {
 #' planning value to the largest value within a plausible range for a 
 #' conservatively large sample size.
 #'
+#' For more details, see Section 1.25 of Bonett (2021, Volume 2)
+#'
 #'  
 #' @param  alpha   alpha level for hypothesis test
 #' @param  pow     desired power
@@ -3520,6 +3550,8 @@ size.test.slope <- function(alpha, pow, evar, x, slope, h) {
 #' @description
 #' Computes the sample size required to test a population Pearson or a partial
 #' correlation with desired power. Set s = 0 for a Pearson correlation. 
+#'
+#' For more details, see Section 1.25 of Bonett (2021, Volume 2)
 #'
 #'  
 #' @param  alpha   alpha level for hypothesis test
@@ -3575,6 +3607,8 @@ size.test.cor <- function(alpha, pow, cor, s, h) {
 #' where the goal is to show that the population correlation is small. Set s = 0
 #' for a Pearson correlation. The correlation planning value must be a value 
 #' within the hypothesized interval. 
+#'
+#' For more details, see Section 1.25 of Bonett (2021, Volume 2)
 #'
 #'  
 #' @param  alpha   alpha level for hypothesis test
@@ -3685,6 +3719,8 @@ size.test.cor2 <- function(alpha, pow, cor1, cor2, s, R) {
 #' value to the largest value within a plausible range for a conservatively 
 #' large sample size.
 #'
+#' For more details, see Section 2.29 of Bonett (2021, Volume 2)
+#'
 #'  
 #' @param  alpha   alpha level for hypothesis test
 #' @param  pow     desired power
@@ -3717,6 +3753,72 @@ size.test.lc.ancova <- function(alpha, pow, evar, es, s, d, v) {
  n <- ceiling((evar*(1 + d^2/4)*t(v)%*%v)*(za + zb)^2/es^2 + s + za^2/(2*m))
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size per group"
+ rownames(out) <- ""
+ return(out)
+}
+
+
+#  size.test.ancova2 ==========================================================
+#' Sample size for a 2-group ANCOVA hypothesis test
+#'
+#'
+#' @description
+#' Computes the sample size for each group required to test a mean difference
+#' in an ANCOVA model with desired power in a 2-group design. In a 
+#' nonexperimental design, the sample size is affected by the magnitude of 
+#' covariate mean differences across groups. The covariate mean differences can
+#' be approximated by specifying the largest standardized covariate mean 
+#' difference across of all covariates. In an experiment, this standardized 
+#' mean difference is set to 0. Set the error variance planning value to the 
+#' largest value within a plausible range for a conservatively large sample 
+#' size.
+#'
+#' For more details, see Section 2.29 of Bonett (2021, Volume 2)
+#'
+#'  
+#' @param  alpha   alpha level for hypothesis test
+#' @param  pow     desired power
+#' @param  evar    planning value of within-group (error) variance
+#' @param  es      planning value of mean difference
+#' @param  s       number of covariates 
+#' @param  d       largest standardized mean difference of all covariates
+#' @param  R       n2/n1 rartio
+#'
+#' 
+#' @return 
+#' Returns the required sample size for each group
+#' 
+#' 
+#' @examples
+#' size.test.ancova2(.05, .9, 1.37, .7, 1, 0, 1)
+#'
+#' # Should return:
+#' #  n1 n2
+#' #  61 61
+#'
+#' size.test.ancova2(.05, .9, 1.37, .7, 1, 0, 2)
+#'
+#' # Should return:
+#' #  n1 n2
+#' #  47 94
+#'
+#' size.test.ancova2(.05, .9, 1.37, .7, 1, .5, 1)
+#'
+#' # Should return:
+#' #  n1 n2
+#' #  65 65
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export
+size.test.ancova2 <- function(alpha, pow, evar, es, s, d, R) {
+ if (es == 0) {stop("effect size cannot be zero")}
+ za <- qnorm(1 - alpha/2)
+ zb <- qnorm(pow)
+ n1 <- ceiling((evar*(1 + d^2/4)*(1 + 1/R))*(za + zb)^2/es^2 + s + za^2/4)
+ n2 <- ceiling(R*n1)
+ out <- t(c(n1, n2))
+ colnames(out) <- c("n1", "n2")
  rownames(out) <- ""
  return(out)
 }
@@ -3817,118 +3919,6 @@ size.test.cronbach2 <- function(alpha, pow, rel1, rel2, r) {
 }
 
 
-#  size.test.ancova2 ==========================================================
-#' Sample size for a 2-group ANCOVA hypothesis test
-#'
-#'
-#' @description
-#' Computes the sample size for each group required to test a mean difference
-#' in an ANCOVA model with desired power in a 2-group design. In a 
-#' nonexperimental design, the sample size is affected by the magnitude of 
-#' covariate mean differences across groups. The covariate mean differences can
-#' be approximated by specifying the largest standardized covariate mean 
-#' difference across of all covariates. In an experiment, this standardized 
-#' mean difference is set to 0. Set the error variance planning value to the 
-#' largest value within a plausible range for a conservatively large sample 
-#' size.
-#'
-#'  
-#' @param  alpha   alpha level for hypothesis test
-#' @param  pow     desired power
-#' @param  evar    planning value of within-group (error) variance
-#' @param  es      planning value of mean difference
-#' @param  s       number of covariates 
-#' @param  d       largest standardized mean difference of all covariates
-#' @param  R       n2/n1 rartio
-#'
-#' 
-#' @return 
-#' Returns the required sample size for each group
-#' 
-#' 
-#' @examples
-#' size.test.ancova2(.05, .9, 1.37, .7, 1, 0, 1)
-#'
-#' # Should return:
-#' #  n1 n2
-#' #  61 61
-#'
-#' size.test.ancova2(.05, .9, 1.37, .7, 1, 0, 2)
-#'
-#' # Should return:
-#' #  n1 n2
-#' #  47 94
-#'
-#' size.test.ancova2(.05, .9, 1.37, .7, 1, .5, 1)
-#'
-#' # Should return:
-#' #  n1 n2
-#' #  65 65
-#'  
-#' 
-#' @importFrom stats qnorm
-#' @export
-size.test.ancova2 <- function(alpha, pow, evar, es, s, d, R) {
- if (es == 0) {stop("effect size cannot be zero")}
- za <- qnorm(1 - alpha/2)
- zb <- qnorm(pow)
- n1 <- ceiling((evar*(1 + d^2/4)*(1 + 1/R))*(za + zb)^2/es^2 + s + za^2/4)
- n2 <- ceiling(R*n1)
- out <- t(c(n1, n2))
- colnames(out) <- c("n1", "n2")
- rownames(out) <- ""
- return(out)
-}
-
-
-#  size.test.slope.gen ========================================================
-#' Sample size for a slope hypothesis test in a general statistical model  
-#'
-#'
-#' @description
-#' Computes the sample size required to test a null hypothesis with desired
-#' power that a population slope coefficient in any general statistical model 
-#' is equal to zero. This function requires a standard error estimate for the 
-#' slope of interest from a prior or pilot study and the sample size that was
-#' used in the prior or pilot study. This function can be used for both 
-#' unstandardized and standardized slopes. This function also can be used for 
-#' both unstandardized and standardized factor loadings in a confirmatory
-#' factor analysis model. This function will soon be replaced with size.test.gen.
-#'
-#'  
-#' @param  alpha  alpha level for 1-alpha confidence
-#' @param  pow    desired power
-#' @param  se     standard error of slope from prior/pilot study
-#' @param  n0     sample size used in prior/pilot study 
-#' @param  b      planning value of population slope
-#'
-#' 
-#' @return 
-#' Returns the required sample size
-#' 
-#' 
-#' @examples
-#' size.test.slope.gen(.05, .8, 3.15, 50, 5)
-#'
-#' # Should return:
-#' #  Sample size
-#' #          156
-#'  
-#' 
-#' @importFrom stats qnorm
-#' @export  
-size.test.slope.gen <- function(alpha, pow, se, n0, b) {
- if (b == 0) {stop("slope planning value cannot be zero")}
- za <- qnorm(1 - alpha/2)
- zb <- qnorm(pow)
- n <- ceiling(n0*se^2*(za + zb)^2/b^2)
- out <- matrix(n, nrow = 1, ncol = 1)
- colnames(out) <- "Sample size"
- rownames(out) <- ""
- return(out)
-}
-
-
 #  size.test.gen ============================================================
 #' Sample size for a test of any type of parameter
 #'
@@ -3941,6 +3931,8 @@ size.test.slope.gen <- function(alpha, pow, se, n0, b) {
 #' sample size (most parameter estimates have this property). This function also 
 #' assumes that the sampling distribution of the parameter estimate is 
 #' approximately normal in large samples.
+#'
+#' For more details, see Section 2.29 of Bonett (2021, Volume 2)
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test 
@@ -4140,6 +4132,8 @@ power.cor2 <- function(alpha, n1, n2, cor1, cor2, s) {
 #' @description
 #' Computes the contrast coefficients that are needed to estimate the slope of
 #' a line in a one-factor design with a quantitative factor.
+#'
+#' For more details, see Section 1.11 of Bonett (2021, Volume 2)
 #'
 #'
 #' @param   x      vector of numeric factor levels
@@ -4497,6 +4491,8 @@ adj.se <- function(alpha, mse1, mse2, dfe1, se, b) {
 #' square error of approximation index (RMSEA). Of the first four indices, the
 #' adj NFI index is recommended because it has smaller sampling variability
 #' than CFI and TLI and less negative bias than NFI.
+#'
+#' For more details, see Section 2.14 of Bonett (2021, Volume 4)
 #'
 #'  
 #' @param  chi1   chi-square test statistic for full model
