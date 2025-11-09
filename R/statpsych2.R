@@ -10,6 +10,8 @@
 #' transformed correlation. This function uses an estimated correlation as 
 #' input. Use the cor.test function for raw data input.
 #'
+#' For more details, see Section 1.14 of Bonett (2021, Volume 2)
+#'
 #'  
 #' @param  alpha 	alpha level for 1-alpha confidence
 #' @param  cor	  	estimated Pearson or partial correlation 
@@ -75,6 +77,8 @@ ci.cor <- function(alpha, cor, s, n) {
 #' n - 3 rather than n in the standard error and also uses a Fisher 
 #' transformation of the semipartial correlation. 
 #'
+#' For more details, see Section 2.7 of Bonett (2021, Volume 2)
+#'
 #'  
 #' @param  alpha 	alpha level for 1-alpha confidence
 #' @param  cor	  	estimated semipartial correlation 
@@ -131,6 +135,8 @@ ci.spcor <- function(alpha, cor, r2, n) {
 #' Computes a confidence interval for a difference in population Pearson 
 #' correlations in a 2-group design. A bias adjustment is used to 
 #' reduce the bias of each Fisher transformed correlation.  
+#'
+#' For more details, see Section 2.17 of Bonett (2021, Volume 2)
 #'
 #'  
 #' @param  alpha	alpha level for 1-alpha confidence
@@ -199,6 +205,8 @@ ci.cor2 <- function(alpha, cor1, cor2, n1, n2) {
 #' variable in common. A bias adjustment is used to reduce the bias
 #' of each Fisher transformed correlation. An approximate standard error
 #' is recovered from the confidence interval.
+#'
+#' For more details, see Section 2.17 of Bonett (2021, Volume 2)
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -275,6 +283,8 @@ ci.cor.dep <- function(alpha, cor1, cor2, cor12, n) {
 #' interval for each correlation as input. The confidence intervals for 
 #' each correlation can be obtained using the ci.fisher function.
 #'
+#' For more details, see Section 2.17 of Bonett (2021, Volume 2)
+#'
 #'  
 #' @param  cor1  estimated correlation for group 1 
 #' @param  ll1   lower limit for group 1 correlation
@@ -329,6 +339,8 @@ ci.cor2.gen <- function(cor1, ll1, ul1, cor2, ll2, ul2) {
 #' (but not stratified random sampling). The other type uses an unweighted 
 #' average of the group variances and is appropriate for experimental designs.
 #' Equality of variances is not assumed for either type. 
+#'
+#' For more details, see Section 1.18 of Bonett (2021, Volume 2)
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -403,7 +415,13 @@ ci.pbcor <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #'
 #' @description
 #' Computes a Fisher confidence interval for a population Spearman correlation. 
-#' This function is not appropropriate for ordered categorical variables.
+#' Unlike the confidence interval for a Pearson correlation, this function does
+#' not assume bivariate normality. Unlike the Pearson correlation which
+#' describes a linear bivariate relation, the Spearman correlation describes a 
+#' monotonic bivariate relelation. This function is not appropropriate for 
+#' ordered categorical variables.
+#'
+#' For more details, see Section 1.32 of Bonett (2021, Volume 2)
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -539,6 +557,8 @@ ci.spear2 <- function(alpha, cor1, cor2, n1, n2) {
 #' interval does not assume zero excess kurtosis but does assume symmetry of
 #' the population prediction errors.
 #'
+#' For more details, see Section 1.16 of Bonett (2021, Volume 2)
+#'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  res    vector of residuals 
@@ -670,6 +690,8 @@ ci.ratio.mape2 <- function(alpha, res1, res2, s1, s2) {
 #' a product predictor variable (x1*x2). Conditional slopes are computed  
 #' at specified low and high values of the moderator variable. 
 #'
+#' For more details, see Section 2.13 of Bonett (2021, Volume 2)
+#'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  b1     estimated slope coefficient for predictor variable
@@ -740,6 +762,8 @@ ci.condslope <- function(alpha, b1, b2, se1, se2, cov, lo, hi, dfe) {
 #' of error variances across groups is not assumed. A Satterthwaite adjustment
 #' to the degrees of freedom is used to improve the accuracy of the confidence
 #' interval. 
+#'
+#' For more details, see Section 2.20 of Bonett (2021, Volume 2)
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -858,6 +882,8 @@ ci.fisher <- function(alpha, cor, se) {
 #' with no direct effects, distribution-free Theil-Sen slope estimates with
 #' recovered standard errors (see \link[statpsych]{ci.theil}) also could be used.
 #'
+#' For more details, see Section 1.18 of Bonett (2021, Volume 4)
+#'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence  
 #' @param  b1     slope estimate for first path
@@ -908,6 +934,8 @@ ci.indirect <- function(alpha, b1, b2, se1, se2) {
 #' Computes the estimate, standard error, and confidence interval for a linear
 #' contrast of parameters in a general linear model using coef(object) and
 #' vcov(object) where "object" is a fitted model object from the lm function.
+#'
+#' For more details, see Section 2.28 of Bonett (2021, Volume 2)
 #'
 #'
 #' @param   alpha  alpha for 1 - alpha confidence
@@ -1029,6 +1057,8 @@ ci.lc.gen.bs <- function(alpha, est, se, v) {
 #' This function uses the scaled central F approximation method. An
 #' approximate standard error is recovered from the confidence interval.
 #'
+#' For more details, see Section 2.4 of Bonett (2021, Volume 2)
+#'
 #'
 #' @param  alpha    alpha value for 1-alpha confidence
 #' @param  r2       estimated unadjusted squared multiple correlation
@@ -1111,6 +1141,8 @@ ci.rsqr <- function(alpha, r2, s, n) {
 #' Computes a Theil-Sen estimate and distribution-free confidence interval 
 #' for the population slope in a simple linear regression model. An approximate 
 #' standard error is recovered from the confidence interval.
+#'
+#' For more details, see Section 1.32 of Bonett (2021, Volume 2)
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
@@ -1300,6 +1332,8 @@ ci.reliability <- function(alpha, rel, se, n) {
 #' reliability coefficients in a 2-group design. The number of measurements
 #' (items, raters, forms) used in each group need not be equal.
 #'
+#' For more details, see Section 2.15 of Bonett (2021, Volume 4)
+#'
 #'  
 #' @param  alpha    alpha level for 1-alpha confidence
 #' @param  rel1     estimated Cronbach reliability for group 1
@@ -1369,6 +1403,8 @@ ci.cronbach2 <- function(alpha, rel1, rel2, r1, r2, n1, n2) {
 #' McDonald omega, intraclass reliability). The function requires a
 #' point estimate and a 100(1 - alpha)% confidence interval for each
 #' reliability as input. 
+#'
+#' For more details, see Section 2.15 of Bonett (2021, Volume 4)
 #'
 #'  
 #' @param  rel1  estimated reliability for group 1 
@@ -1523,6 +1559,8 @@ ci.bscor <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' applications where the population correlation in the prior study is
 #' assumed to be very similar to the population correlation in the planned
 #' study. 
+#'
+#' For more details, see Section 1.26 of Bonett (2021, Volume 2)
 #'
 #'
 #' @param  alpha  alpha value for 1-alpha confidence 
@@ -1692,6 +1730,8 @@ pi.cronbach <- function(alpha, rel, r, n0, n, type) {
 #' that is considered to be small will depend on the application. Set s = 0
 #' for a Pearson correlation. 
 #'
+#' For more details, see Section 1.33 of Bonett (2021, Volume 2)
+#'
 #'
 #' @param   alpha        alpha level for 1-alpha credibility interval
 #' @param   prior_sd     standard deviation of skeptical prior distribution 
@@ -1760,6 +1800,8 @@ ci.bayes.cor <- function(alpha, prior_sd, cor, s, n) {
 #' requires the standard error of the estimated semipartial correlation which
 #' can be obtained from the ci.spcor function. 
 #'
+#' For more details, see Section 2.36 of Bonett (2021, Volume 2)
+#'
 #'
 #' @param   alpha        alpha level for 1-alpha credibility interval
 #' @param   prior_sd     standard deviation of skeptical prior distribution 
@@ -1812,6 +1854,8 @@ ci.bayes.spcor <- function(alpha, prior_sd, cor, se) {
 #' factor. This function computes both the unequal variance and equal variance
 #' confidence intervals and test statistics. A Satterthwaite adjustment to the
 #' degrees of freedom is used with the unequal variance method. 
+#'
+#' For more details, see Section 1.11 of Bonett (2021, Volume 2)
 #'
 #'
 #' @param     alpha  	alpha level for 1-alpha confidence
