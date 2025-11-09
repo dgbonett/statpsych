@@ -21,6 +21,7 @@
 #'
 #' @references
 #' \insertRef{Snedecor1980}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @return 
@@ -96,6 +97,7 @@ ci.cor <- function(alpha, cor, s, n) {
 #' 
 #' @references
 #' \insertRef{Aloe2012}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -156,6 +158,7 @@ ci.spcor <- function(alpha, cor, r2, n) {
 #' 
 #' @references
 #' \insertRef{Zou2007}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -226,6 +229,7 @@ ci.cor2 <- function(alpha, cor1, cor2, n1, n2) {
 #' 
 #' @references
 #' \insertRef{Zou2007}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -303,6 +307,7 @@ ci.cor.dep <- function(alpha, cor1, cor2, cor12, n) {
 #' 
 #' @references
 #' \insertRef{Zou2007}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -354,6 +359,7 @@ ci.cor2.gen <- function(cor1, ll1, ul1, cor2, ll2, ul2) {
 #'
 #' @references
 #' \insertRef{Bonett2020a}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @return 
@@ -439,6 +445,7 @@ ci.pbcor <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' 
 #' @references
 #' \insertRef{Bonett2000}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -573,6 +580,10 @@ ci.spear2 <- function(alpha, cor1, cor2, n1, n2) {
 #' * UL - upper limit of the confidence interval
 #' 
 #' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' res <- c(-2.70, -2.69, -1.32, 1.02, 1.23, -1.46, 2.21, -2.10, 2.56,
 #'       -3.02, -1.55, 1.46, 4.02, 2.34)
@@ -713,6 +724,10 @@ ci.ratio.mape2 <- function(alpha, res1, res2, s1, s2) {
 #' * UL - upper limit of the confidence interval
 #' 
 #' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' ci.condslope(.05, .132, .154, .031, .021, .015, 5.2, 10.6, 122)
 #'
@@ -785,6 +800,10 @@ ci.condslope <- function(alpha, b1, b2, se1, se2, cov, lo, hi, dfe) {
 #' * UL - upper limit of the confidence interval
 #' 
 #' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' est <- c(1.74, 1.83, 0.482)
 #' se <- c(.483, .421, .395)
@@ -900,6 +919,10 @@ ci.fisher <- function(alpha, cor, se) {
 #' * UL - upper limit of the confidence interval
 #' 
 #' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' ci.indirect (.05, 2.48, 1.92, .586, .379)
 #'
@@ -954,6 +977,10 @@ ci.indirect <- function(alpha, b1, b2, se1, se2) {
 #' * p - two-sided p-value 
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval 
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -1068,6 +1095,7 @@ ci.lc.gen.bs <- function(alpha, est, se, v) {
 #'
 #' @references
 #' \insertRef{Helland1987}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @return 
@@ -1160,6 +1188,7 @@ ci.rsqr <- function(alpha, r2, s, n) {
 #'
 #' @references
 #' \insertRef{Hollander1999}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -1353,6 +1382,7 @@ ci.reliability <- function(alpha, rel, se, n) {
 #' 
 #' @references
 #' \insertRef{Bonett2015}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -1424,6 +1454,7 @@ ci.cronbach2 <- function(alpha, rel1, rel2, r1, r2, n1, n2) {
 #' 
 #' @references
 #' \insertRef{Bonett2015}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -1576,6 +1607,10 @@ ci.bscor <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' @return 
 #' Returns one-sided or two-sided prediction limit(s) of an estimated 
 #' Pearson correlation in a future study
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -1747,6 +1782,10 @@ pi.cronbach <- function(alpha, rel, r, n0, n, type) {
 #' * UL - upper limit of the credible interval
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' ci.bayes.cor(.05, .1, .536, 0, 50)
 #'
@@ -1816,6 +1855,10 @@ ci.bayes.cor <- function(alpha, prior_sd, cor, s, n) {
 #' * UL - upper limit of the credible interval
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' ci.bayes.spcor(.05, .1, .582, .137)
 #'
@@ -1876,6 +1919,10 @@ ci.bayes.spcor <- function(alpha, prior_sd, cor, se) {
 #' * UL - upper limit of the confidence interval
 #' 
 #' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' m <- c(33.5, 37.9, 38.0, 44.1)
 #' sd <- c(3.84, 3.84, 3.65, 4.98)
