@@ -2063,6 +2063,10 @@ ci.slope.median.bs <- function(alpha, m, se, x) {
 #' * p - two-sided p-value
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' test.cor(.484, 100, 0, .2)
 #'
@@ -2322,6 +2326,10 @@ test.spear2 <- function(cor1, cor2, n1, n2) {
 #' * UL - one-sided upper limit of the confidence interval
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' m <- c(12.86, 24.57, 36.29, 53.21)
 #' sd <- c(13.185, 12.995, 14.773, 15.145)
@@ -2393,6 +2401,10 @@ test.mono.mean.bs <-function(alpha, m, sd, n) {
 #' * UL - one-sided upper limit of the confidence interval
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' m <- c(12.86, 24.57, 36.29, 53.21)
 #' se <- c(2.85, 2.99, 3.73, 3.88)
@@ -2453,6 +2465,10 @@ test.mono.median.bs <-function(alpha, m, se) {
 #' Returns the required total sample size
 #' 
 #' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' x <- c(5, 7, 9)
 #' size.ci.slope(.05, 300, x, 5)
@@ -2496,14 +2512,15 @@ size.ci.slope <- function(alpha, evar, x, w) {
 #' @param  w      desired confidence interval width
 #'
 #' 
-#' @references
-#' \insertRef{Bonett2000}{statpsych}
-#'
-#'
 #' @return 
 #' Returns the required sample size
 #' 
 #' 
+#' @references
+#' \insertRef{Bonett2000}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' size.ci.cor(.05, .3, 0, .2)
 #'
@@ -2607,12 +2624,13 @@ size.ci.spear <- function(alpha, cor, w) {
 #' @param  p      proportion of members in one of the two subpopulations
 #'
 #' 
-#' @references
-#' \insertRef{Bonett2020a}{statpsych}
-#'
-#'
 #' @return 
 #' Returns the required sample size
+#'
+#'
+#' @references
+#' \insertRef{Bonett2020a}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #' 
 #' 
 #' @examples
@@ -2659,6 +2677,10 @@ size.ci.pbcor <- function(alpha, cor, w, p) {
 #' Returns the required sample size
 #' 
 #' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' size.ci.rsqr(.05, .3, 5, .2)
 #' 
@@ -2717,6 +2739,10 @@ size.ci.rsqr <- function(alpha, r2, s, w) {
 #' Returns the required total sample size
 #' 
 #' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#' 
+#' 
 #' @examples
 #' size.ci.condmean(.05, 120, 125, 15, 5)
 #'
@@ -2768,6 +2794,10 @@ size.ci.condmean <- function(alpha, evar, xvar, diff, w) {
 #' Returns the required sample size for each group
 #' 
 #' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#' 
+#' 
 #' @examples
 #' v <- c(.5, .5, -.5, -.5)
 #' size.ci.lc.ancova(.05, 6.4, 1, 0, 3.0, v)
@@ -2811,6 +2841,10 @@ size.ci.lc.ancova <- function(alpha, evar, s, d, w, v) {
 #' 
 #' @return 
 #' Returns the required sample size
+#' 
+#' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #' 
 #' 
 #' @examples
@@ -2918,6 +2952,7 @@ size.ci.cronbach <- function(alpha, rel, r, w) {
 #'
 #' @references
 #' \insertRef{Bonett2015}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -3160,6 +3195,10 @@ size.ci.spear2 <- function(alpha, cor1, cor2, w) {
 #'
 #' @return
 #' Returns the required sample size
+#' 
+#' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -3311,6 +3350,10 @@ size.ci.cronbach.prior <- function(alpha1, alpha2, rel0, n0, r, w) {
 #' Returns the required sample size for each group
 #' 
 #' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#' 
+#' 
 #' @examples
 #' size.ci.ancova2(.05, 1.37, 1, 0, 1.5, 1)
 #'
@@ -3369,6 +3412,10 @@ size.ci.ancova2 <- function(alpha, evar, s, d, w, R) {
 #' 
 #' @return 
 #' Returns the required sample size
+#' 
+#' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #' 
 #' 
 #' @examples
@@ -3518,6 +3565,10 @@ size.ci.gen2 <- function(alpha, se, n0, w, R) {
 #' Returns the required total sample size
 #' 
 #' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#' 
+#' 
 #' @examples
 #' x <- c(2, 5, 8)
 #' size.test.slope(.05, .9, 31.1, x, .75, 0)
@@ -3563,6 +3614,10 @@ size.test.slope <- function(alpha, pow, evar, x, slope, h) {
 #' 
 #' @return 
 #' Returns the required sample size
+#' 
+#' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #' 
 #' 
 #' @examples
@@ -3620,6 +3675,10 @@ size.test.cor <- function(alpha, pow, cor, s, h) {
 #' 
 #' @return 
 #' Returns the required sample size
+#' 
+#' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #' 
 #' 
 #' @examples
@@ -3735,6 +3794,10 @@ size.test.cor2 <- function(alpha, pow, cor1, cor2, s, R) {
 #' Returns the required sample size for each group
 #' 
 #' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#' 
+#' 
 #' @examples
 #' v <- c(.25, .25, .25, .25, -1)
 #' size.test.lc.ancova(.05, .9, 17.5, 4.0, 2, 0, v)
@@ -3787,6 +3850,10 @@ size.test.lc.ancova <- function(alpha, pow, evar, es, s, d, v) {
 #' 
 #' @return 
 #' Returns the required sample size for each group
+#' 
+#' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #' 
 #' 
 #' @examples
@@ -3944,6 +4011,10 @@ size.test.cronbach2 <- function(alpha, pow, rel1, rel2, r) {
 #'
 #' @return 
 #' Returns the required sample size 
+#' 
+#' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -4141,6 +4212,10 @@ power.cor2 <- function(alpha, n1, n2, cor1, cor2, s) {
 #'
 #' @return 
 #' Returns the vector of contrast coefficients
+#' 
+#' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -4437,6 +4512,8 @@ sim.ci.spear <- function(alpha, n, cor, dist1, dist2, rep) {
 #' adjusted standard errors. These adjusted results are less susceptible to
 #' the negative effects of an exploratory model selection. 
 #'
+#' For more details, see Section 2.25 of Bonett (2021, Volume 2)
+#'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  mse1   mean squared error in full model
@@ -4449,6 +4526,10 @@ sim.ci.spear <- function(alpha, n, cor, dist1, dist2, rep) {
 #' @return 
 #' Returns adjusted standard error, t-statistic, p-value, and confidence interval
 #' for each slope coefficient
+#' 
+#' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #' 
 #' 
 #' @examples
@@ -4504,6 +4585,10 @@ adj.se <- function(alpha, mse1, mse2, dfe1, se, b) {
 #' 
 #' @return 
 #' Returns NFI, adj NFI, CFI, TLI, and RMSEA
+#' 
+#' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #' 
 #' 
 #' @examples
