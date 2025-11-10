@@ -2535,6 +2535,8 @@ pi.prop <- function(alpha, prop, n0, n, type) {
 #' 1-group design. A confidence interval for a population proportion 
 #' is a recommended supplement to the z-test (see \link[statpsych]{ci.prop}).
 #'
+#' For more details, see Section 1.7 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param   f    number of participants who have the attribute
 #' @param   n    sample size
@@ -2584,6 +2586,8 @@ test.prop <- function(f, n, h) {
 #' proportions in a 2-group design. A confidence interval for a difference in 
 #' population proportions is a recommended supplement to the z-test (see
 #' \link[statpsych]{ci.prop2}).
+#'
+#' For more details, see Section 2.4 of Bonett (2021, Volume 3)
 #'
 #'
 #' @param  f1      number of group 1 participants who have the attribute
@@ -2637,6 +2641,8 @@ test.prop2 <- function(f1, f2, n1, n2) {
 #' @description
 #' Computes a Pearson chi-square test for equal population proportions for a 
 #' dichotomous response variable in a one-factor between-subjects design.
+#'
+#' For more details, see Section 2.13 of Bonett (2021, Volume 3)
 #'
 #'
 #' @param  f    vector of frequency counts of participants who have the attribute
@@ -2694,6 +2700,8 @@ test.prop.bs <- function(f, n) {
 #' A confidence interval for a difference in population proportions (see
 #' \link[statpsych]{ci.prop.ps}) is a recommended supplement to the McNemar
 #' test.
+#'
+#' For more details, see Section 3.2 of Bonett (2021, Volume 3)
 #'
 #'
 #' @param   f00    number participants with y = 0 and x = 0
@@ -2755,6 +2763,8 @@ test.prop.ps <- function(f00, f01, f10, f11) {
 #' the population proportions are monotonic increasing. Reject the hypothesis
 #' of a monotonic trend if any lower limit is greater than 0 and any upper 
 #' limit is less than 0. 
+#'
+#' For more details, see Section 2.12 of Bonett (2021, Volume 3)
 #'
 #'
 #' @param  alpha   alpha level for simultaneous 1-alpha confidence
@@ -2819,6 +2829,8 @@ test.mono.prop.bs <-function(alpha, f, n) {
 #' with desired confidence interval precision. Set the proportion planning
 #' value to .5 for a conservatively large sample size.
 #'
+#' For more details, see Section 1.14 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
 #' @param  p      planning value of proportion
@@ -2859,6 +2871,8 @@ size.ci.prop <- function(alpha, p, w) {
 #' of proportions with desired confidence interval precision in a 2-group 
 #' design. Set the proportion planning values to .5 for a conservatively 
 #' large sample size. Set R = 1 for equal sample sizes.
+#'
+#' For more details, see Section 2.22 of Bonett (2021, Volume 3)
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
@@ -2909,6 +2923,8 @@ size.ci.prop2 <- function(alpha, p1, p2, w, R) {
 #' Computes the sample size in each group required to estimate a ratio of 
 #' proportions with desired confidence interval precision in a 2-group design. 
 #' Set R = 1 for equal sample sizes.
+#'
+#' For more details, see Section 2.22 of Bonett (2021, Volume 3)
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
@@ -2962,6 +2978,8 @@ size.ci.ratio.prop2 <- function(alpha, p1, p2, r, R) {
 #' interval precision in a between-subjects design. Set the proportion planning 
 #' values to .5 for a conservatively large sample size.
 #'
+#' For more details, see Section 2.22 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
 #' @param  p      vector of proportion planning values
@@ -3005,6 +3023,8 @@ size.ci.lc.prop.bs <- function(alpha, p, w, v) {
 #' design. Set the proportion planning values to .5 for a conservatively large
 #' sample size. Set the phi correlation planning value to the smallest value 
 #' within a plausible range for a conservatively large sample size.
+#'
+#' For more details, see Section 3.12 of Bonett (2021, Volume 3)
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
@@ -3052,6 +3072,8 @@ size.ci.prop.ps <- function(alpha, p1, p2, phi, w) {
 #' design. Set the phi correlation planning value to the smallest value within 
 #' a plausible range for a conservatively large sample size. 
 #'
+#' For more details, see Section 3.12 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
 #' @param  p1     planning value of proportion for measurement 1
@@ -3097,6 +3119,8 @@ size.ci.ratio.prop.ps <- function(alpha, p1, p2, phi, r) {
 #' agreement for two dichotomous ratings with desired confidence interval 
 #' precision. Set the G-index planning value to the smallest value within a
 #' plausible range for a conservatively large sample size.
+#'
+#' For more details, see Section 3.12 of Bonett (2021, Volume 3)
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
@@ -3152,6 +3176,8 @@ size.ci.agree <- function(alpha, G, w) {
 #' function uses a proportion planning value that is based on expert opinion 
 #' regarding the likely value of the proportion estimate that will be observed
 #' in the planned study.
+#'
+#' For more details, see Section 1.16 of Bonett (2021, Volume 3)
 #'
 #'
 #' @param  alpha1  alpha level for 1-alpha1 confidence in the planned study
