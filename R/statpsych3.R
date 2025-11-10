@@ -8,6 +8,8 @@
 #' for a population proportion. The Wilson confidence interval uses a 
 #' continuity correction.
 #'
+#' For more details, see Section 1.5 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
 #' @param   f       number of participants who have the attribute
@@ -91,6 +93,8 @@ ci.prop <- function(alpha, f, n) {
 #' finite population correction (fpc). This confidence interval is useful 
 #' when the sample size is not a small fraction of the population size.
 #'
+#' For more details, see Section 1.20 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
 #' @param   f       number of participants who have the attribute
@@ -144,6 +148,8 @@ ci.prop.fpc <- function(alpha, f, n, N) {
 #' differences of a multinomial variable in a single sample. These adjusted
 #' Wald confidence intervals use the same method that is used to compare the
 #' two proportions in a paired-samples design.
+#'
+#' For more details, see Section 1.12 of Bonett (2021, Volume 3)
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
@@ -214,6 +220,8 @@ ci.pairs.mult <-function(alpha, f) {
 #' Shannon index, the value 1/r is added to each frequency count where r is the
 #' number of categories. These indices have a range of 0 to 1 where 0 indicates
 #' no diversity and 1 indicates maximum diversity.
+#'
+#' For more details, see Section 1.13 of Bonett (2021, Volume 3)
 #'
 #'  
 #' @param   alpha   alpha level for 1 - alpha confidence
@@ -296,6 +304,8 @@ ci.diversity <- function(alpha, f) {
 #' continues until f attains its prespecified value. With inverse sampling, 
 #' the sample size (n) will not be known in advance.
 #'
+#' For more details, see Section 1.19 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
 #' @param   f       number of participants who have the attribute (fixed)
@@ -355,6 +365,8 @@ ci.prop.inv <- function(alpha, f, n) {
 #' @description
 #' Computes an adjusted Wald confidence interval for a population proportion
 #' difference in a 2-group design.
+#'
+#' For more details, see Section 2.2 of Bonett (2021, Volume 3)
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
@@ -496,6 +508,8 @@ ci.prop2.inv <- function(alpha, f1, f2, n1, n2) {
 #' Computes an adjusted Wald confidence interval for a population proportion 
 #' ratio in a 2-group design.
 #'
+#' For more details, see Section 2.3 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
 #' @param   f1      number of participants in group 1 who have the attribute
@@ -551,6 +565,8 @@ ci.ratio.prop2 <- function(alpha, f1, f2, n1, n2) {
 #' @description
 #' Computes an adjusted Wald confidence interval for a linear contrast of 
 #' population proportions in a between-subjects design.
+#'
+#' For more details, see Section 2.8 of Bonett (2021, Volume 3)
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
@@ -628,6 +644,8 @@ ci.lc.prop.bs <- function(alpha, f, n, v) {
 #' alpha value to compute simultaneous confidence intervals for two or more
 #' planned linear contrasts of proportions.
 #'
+#' For more details, see Section 2.9 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
 #' @param   f       vector of frequency counts of participants who have the attribute
@@ -693,6 +711,8 @@ ci.lc.prop.scheffe <- function(alpha, f, n, v) {
 #' Computes adjusted Wald confidence intervals for all pairwise differences 
 #' of population proportions in a between-subjects design using a Bonferroni
 #' adjusted alpha level.
+#'
+#' For more details, see Section 2.7 of Bonett (2021, Volume 3)
 #'
 #'
 #' @param   alpha   alpha level for simultaneous 1-alpha confidence
@@ -761,7 +781,9 @@ ci.pairs.prop.bs <-function(alpha, f, n) {
 #' @description
 #' Computes a test statistic and an adjusted Wald confidence interval for the 
 #' population slope of proportions in a one-factor experimental design with a 
-#' quantitative between-subjects factor. 
+#' quantitative between-subjects factor.
+#'
+#' For more details, see Section 4.4 of Bonett (2021, Volume 3)
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
@@ -830,6 +852,8 @@ ci.slope.prop.bs <- function(alpha, f, n, x) {
 #' the frequency counts from a 2 x 2 contingency table for two repeated 
 #' dichotomous measurements.
 #'
+#' For more details, see Section 3.2 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param   alpha  alpha level for 1-alpha confidence
 #' @param   f00    number of participants with y = 0 and x = 0
@@ -884,6 +908,8 @@ ci.prop.ps <- function(alpha, f00, f01, f10, f11) {
 #' Computes a confidence interval for a ratio of population proportions in a 
 #' paired-samples design. This function requires the frequency counts from
 #' a 2 x 2 contingency table for two repeated dichotomous measurements.
+#'
+#' For more details, see Section 3.2 of Bonett (2021, Volume 3)
 #'
 #'
 #' @param   alpha  alpha level for 1-alpha confidence
@@ -953,6 +979,8 @@ ci.ratio.prop.ps <- function(alpha, f00, f01, f10, f11) {
 #' includes a predictor variable (x1), a moderator variable (x2),
 #' and a product predictor variable (x1*x2). Conditional slopes are 
 #' computed at low and high values of the moderator variable. 
+#'
+#' For more details, see Section 4.9 of Bonett (2021, Volume 3)
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -1024,6 +1052,8 @@ ci.condslope.log <- function(alpha, b1, b2, se1, se2, cov, lo, hi) {
 #' cell frequency. This function requires the frequency counts from a
 #' 2 x 2 contingency table for two dichotomous variables.
 #'
+#' For more details, see Section 3.4 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param   alpha  alpha level for 1-alpha confidence
 #' @param   f00    number of participants with y = 0 and x = 0
@@ -1082,6 +1112,8 @@ ci.oddsratio <- function(alpha, f00, f01, f10, f11) {
 #' equal to the phi coefficient only when all marginal frequencies are equal.
 #' Bonett-Price Y* is a better approximation to the phi coefficient when the
 #' marginal frequencies are not equal.
+#'
+#' For more details, see Section 3.4 of Bonett (2021, Volume 3)
 #'
 #'
 #' @param   alpha  alpha level for 1-alpha confidence
@@ -1166,6 +1198,8 @@ ci.yule <- function(alpha, f00, f01, f10, f11) {
 #' for two dichotomous variables. This measure of association is usually most 
 #' appropriate when both dichotomous variables are naturally dichotomous.
 #'
+#' For more details, see Section 3.4 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param   alpha  alpha level for 1-alpha confidence
 #' @param   f00    number of participants with y = 0 and x = 0
@@ -1230,6 +1264,8 @@ ci.phi <- function(alpha, f00, f01, f10, f11) {
 #' added to each cell frequency. This measure of association assumes the group
 #' variable is naturally dichotomous and the response variable is artificially
 #' dichotomous. 
+#'
+#' For more details, see Section 3.4 of Bonett (2021, Volume 3)
 #'
 #'
 #' @param   alpha  alpha level for 1-alpha confidence
@@ -1300,6 +1336,8 @@ ci.biphi <- function(alpha, f1, f2, n1, n2) {
 #' dichotomous. An approximate standard error is recovered from the
 #' confidence interval.
 #'
+#' For more details, see Section 3.4 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param   alpha  alpha level for 1-alpha confidence
 #' @param   f00    number of participants with y = 0 and x = 0
@@ -1361,7 +1399,10 @@ ci.tetra <- function(alpha, f00, f01, f10, f11) {
 #'
 #' @description
 #' Computes confidence intervals for the intraclass kappa coefficient and
-#' Cohen's kappa coefficient with two dichotomous ratings. 
+#' Cohen's kappa coefficient with two dichotomous ratings. The G-index of
+#' agreement (see ci.agree) is arguably a better measure of agreement.
+#'
+#' For more details, see Section 3.5 of Bonett (2021, Volume 3)
 #'
 #'
 #' @param   alpha  alpha level for 1-alpha confidence
@@ -1434,7 +1475,9 @@ ci.kappa <- function(alpha, f00, f01, f10, f11) {
 #' corrects for chance agreement. The G-index is a better measure of 
 #' agreement than Cohen's kappa, and the confidence interval for the G-index
 #' used here has better small-sample properties than the confidence interval
-#' for Cohen's kappa.  
+#' for Cohen's kappa. 
+#'
+#' For more details, see Section 3.5 of Bonett (2021, Volume 3)
 #'
 #'
 #' @param   alpha  alpha level for 1-alpha confidence
@@ -1489,6 +1532,8 @@ ci.agree <- function(alpha, n, f, k) {
 #' @description
 #' Computes adjusted Wald confidence intervals for the G-index of agreement 
 #' within each group and the difference of G-indices. 
+#'
+#' For more details, see Section 3.5 of Bonett (2021, Volume 3)
 #'
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
@@ -1714,6 +1759,8 @@ ci.agree.3rater <- function(alpha, f) {
 #' unobserved cell frequency. An approximate standard error is recovered
 #' from the confidence interval.
 #'
+#' For more details, see Section 3.7 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  f00    number of people observed in both samples
@@ -1764,6 +1811,8 @@ ci.popsize <- function(alpha, f00, f01, f10) {
 #' of nominal association for an r x s contingency table. The confidence interval 
 #' is based on a noncentral chi-square distribution, and an approximate standard 
 #' error is recovered from the confidence interval.
+#'
+#' For more details, see Section 3.10 of Bonett (2021, Volume 3)
 #'
 #'
 #' @param  alpha    alpha value for 1-alpha confidence
@@ -1835,6 +1884,8 @@ ci.cramer <- function(alpha, chisqr, r, c, n) {
 #' sample sizes is n = \[ n11, n12, n21, n22 \] where the first subscript 
 #' represents the levels of Factor A and the second subscript represents the 
 #' levels of Factor B.
+#'
+#' For more details, see Section 2.14 of Bonett (2021, Volume 3)
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
@@ -1958,6 +2009,8 @@ ci.2x2.prop.bs <- function(alpha, f, n) {
 #' counts for Factor A within each group is f00, f01, f10, f11 where fij is 
 #' the number of participants with a response of i = 0 or 1 at level 1 of 
 #' Factor A and a response of j = 0 or 1 at level 2 of Factor A. 
+#'
+#' For more details, see Section 2.2 of Bonett (2021, Volume 3)
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
@@ -2085,6 +2138,8 @@ ci.2x2.prop.mixed <- function(alpha, group1, group2) {
 #' corresponds to a Beta(1,1) distribution). The prior variance must be 
 #' less than m(1 - m) where m is the prior mean.
 #'
+#' For more details, see Section 1.18 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param   alpha        alpha level for 1-alpha credibility interval
 #' @param   prior_mean   mean of prior Beta distribution    
@@ -2152,6 +2207,8 @@ ci.bayes.prop <- function(alpha, prior_mean, prior_sd, f, n) {
 #' and the known population prevalence rate (the population proportion who 
 #' would "pass"). The confidence intervals for PPV and NPV are based on the 
 #' Price-Bonett adjusted Wald confidence interval for a proportion ratio.
+#'
+#' For more details, see Section 3.6 of Bonett (2021, Volume 3)
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
@@ -2367,6 +2424,8 @@ ci.ratio.poisson2 <- function(alpha, f1, f2, t1, t2) {
 #' prediction limit if the population proportion is asumed to be greater than
 #' .5; and if the lower prediction limit is less than .5, set the proportion 
 #' planning value to .5.
+#'
+#' For more details, see Section 1.16 of Bonett (2021, Volume 3)
 #'
 #'
 #' @param  alpha  alpha value for 1-alpha confidence 
