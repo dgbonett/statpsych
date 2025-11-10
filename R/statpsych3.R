@@ -40,6 +40,7 @@
 #'
 #' @references
 #' \insertRef{Agresti1998}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -110,6 +111,10 @@ ci.prop <- function(alpha, f, n) {
 #' * UL - upper limit of the confidence interval with fpc
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' ci.prop.fpc(.05, 61, 75, 415)
 #'
@@ -167,6 +172,7 @@ ci.prop.fpc <- function(alpha, f, n, N) {
 #'
 #' @references
 #' \insertRef{Bonett2012}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -236,6 +242,10 @@ ci.pairs.mult <-function(alpha, f) {
 #' * UL - upper limit of the confidence interval
 #' 
 #' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' f = c(847, 320, 57, 274, 36)
 #' ci.diversity(.05, f)
@@ -322,6 +332,7 @@ ci.diversity <- function(alpha, f) {
 #'
 #' @references
 #' \insertRef{Zou2010}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -386,6 +397,7 @@ ci.prop.inv <- function(alpha, f, n) {
 #'
 #' @references
 #' \insertRef{Agresti2000}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -527,6 +539,7 @@ ci.prop2.inv <- function(alpha, f1, f2, n1, n2) {
 #'
 #' @references
 #' \insertRef{Price2008}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -587,6 +600,7 @@ ci.ratio.prop2 <- function(alpha, f1, f2, n1, n2) {
 #'
 #' @references
 #' \insertRef{Price2004}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -666,6 +680,7 @@ ci.lc.prop.bs <- function(alpha, f, n, v) {
 #' @references
 #' \insertRef{Price2004}{statpsych}
 #' \insertRef{Marascuilo1977}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -733,6 +748,7 @@ ci.lc.prop.scheffe <- function(alpha, f, n, v) {
 #'
 #' @references
 #' \insertRef{Agresti2000}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -804,6 +820,7 @@ ci.pairs.prop.bs <-function(alpha, f, n) {
 #'
 #' @references
 #' \insertRef{Price2004}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -864,6 +881,7 @@ ci.slope.prop.bs <- function(alpha, f, n, x) {
 #'
 #' @references
 #' \insertRef{Bonett2012}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @return
@@ -921,6 +939,7 @@ ci.prop.ps <- function(alpha, f00, f01, f10, f11) {
 #'
 #' @references
 #' \insertRef{Bonett2006a}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @return
@@ -1003,6 +1022,10 @@ ci.ratio.prop.ps <- function(alpha, f00, f01, f10, f11) {
 #' * UL - upper limit of the exponentiated confidence interval
 #' 
 #' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' ci.condslope.log(.05, .132, .154, .031, .021, .015, 5.2, 10.6)
 #'
@@ -1072,6 +1095,7 @@ ci.condslope.log <- function(alpha, b1, b2, se1, se2, cov, lo, hi) {
 #'
 #' @references
 #' \insertRef{Fleiss2003}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -1124,7 +1148,8 @@ ci.oddsratio <- function(alpha, f00, f01, f10, f11) {
 #'
 #'
 #' @references
-#' \insertRef{Bonett2007}{statpsych}                   
+#' \insertRef{Bonett2007}{statpsych}  
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @return
@@ -1218,6 +1243,7 @@ ci.yule <- function(alpha, f00, f01, f10, f11) {
 #'
 #' @references
 #' \insertRef{Bishop1975}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -1285,6 +1311,7 @@ ci.phi <- function(alpha, f00, f01, f10, f11) {
 #'
 #' @references
 #' \insertRef{Ulrich2004}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -1348,6 +1375,7 @@ ci.biphi <- function(alpha, f1, f2, n1, n2) {
 #'
 #' @references
 #' \insertRef{Bonett2005}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @return
@@ -1423,6 +1451,7 @@ ci.tetra <- function(alpha, f00, f01, f10, f11) {
 #'
 #' @references
 #' \insertRef{Fleiss2003}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -1496,6 +1525,7 @@ ci.kappa <- function(alpha, f00, f01, f10, f11) {
 #'
 #' @references
 #' \insertRef{Bonett2022}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -1560,6 +1590,7 @@ ci.agree <- function(alpha, n, f, k) {
 #'
 #' @references
 #' \insertRef{Bonett2022}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -1776,6 +1807,10 @@ ci.agree.3rater <- function(alpha, f) {
 #' * UL - upper limit of the confidence interval
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' ci.popsize(.05, 85, 196, 184)
 #'
@@ -1832,6 +1867,7 @@ ci.popsize <- function(alpha, f00, f01, f10) {
 #'
 #' @references
 #' \insertRef{Smithson2003}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -1905,6 +1941,7 @@ ci.cramer <- function(alpha, chisqr, r, c, n) {
 #'
 #' @references
 #' \insertRef{Price2004}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -2026,6 +2063,10 @@ ci.2x2.prop.bs <- function(alpha, f, n) {
 #' * p - two-sided p-value
 #' * LL - lower limit of the adjusted Wald confidence interval
 #' * UL - upper limit of the adjusted Wald confidence interval
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -2157,7 +2198,8 @@ ci.2x2.prop.mixed <- function(alpha, group1, group2) {
 #'
 #'
 #' @references
-#' \insertRef{Gelman2004}{statpsych}                            
+#' \insertRef{Gelman2004}{statpsych}  
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -2228,6 +2270,7 @@ ci.bayes.prop <- function(alpha, prior_mean, prior_sd, f, n) {
 #'
 #' @references
 #' \insertRef{Price2008}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -2316,7 +2359,6 @@ ci.pv <- function(alpha, f1, f2, n1, n2, prev) {
 #' # Should return:
 #' # Estimate        SE       LL      UL
 #' # 4.380952 0.9684952 2.777148 6.57358
-
 #'  
 #' 
 #' @importFrom stats qchisq
@@ -2441,6 +2483,10 @@ ci.ratio.poisson2 <- function(alpha, f1, f2, t1, t2) {
 #' @return 
 #' Returns one-sided or two-sided prediction limit(s) for an estimated proportion in a future 
 #' study
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
