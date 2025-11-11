@@ -2552,6 +2552,7 @@ pi.prop <- function(alpha, prop, n0, n, type) {
 #'
 #' @references
 #' \insertRef{Snedecor1980}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -2605,10 +2606,11 @@ test.prop <- function(f, n, h) {
 #'
 #' @references
 #' \insertRef{Snedecor1980}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
-' test.prop2(39, 24, 50, 50)
+#' test.prop2(39, 24, 50, 50)
 #'
 #' # Should return:
 #' # Estimate        z           p
@@ -2658,6 +2660,7 @@ test.prop2 <- function(f1, f2, n1, n2) {
 #'
 #' @references
 #' \insertRef{Fleiss2003}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -2712,6 +2715,7 @@ test.prop.bs <- function(f, n) {
 #'
 #' @references
 #' \insertRef{Snedecor1980}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @return
@@ -2781,6 +2785,10 @@ test.prop.ps <- function(f00, f01, f10, f11) {
 #' * UL - one-sided upper limit of the confidence interval
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' f <- c(67, 49, 30, 10)
 #' n <- c(100, 100, 100, 100)
@@ -2841,6 +2849,10 @@ test.mono.prop.bs <-function(alpha, f, n) {
 #' Returns the required sample size
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' size.ci.prop(.05, .5, .1)
 #'
@@ -2884,6 +2896,10 @@ size.ci.prop <- function(alpha, p, w) {
 #'
 #' @return
 #' Returns the required sample size for each group
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -2936,6 +2952,10 @@ size.ci.prop2 <- function(alpha, p1, p2, w, R) {
 #'
 #' @return
 #' Returns the required sample size for each group
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -2991,6 +3011,10 @@ size.ci.ratio.prop2 <- function(alpha, p1, p2, r, R) {
 #' Returns the required sample size for each group
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' p <- c(.1, .2, .2, .3)
 #' v <- c(.5, -.5, .5, -.5)
@@ -3036,6 +3060,10 @@ size.ci.lc.prop.bs <- function(alpha, p, w, v) {
 #'
 #' @return
 #' Returns the required sample size
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -3086,6 +3114,10 @@ size.ci.prop.ps <- function(alpha, p1, p2, phi, w) {
 #' Returns the required sample size
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' size.ci.ratio.prop.ps(.05, .4, .2, .7, 2)
 #'
@@ -3130,6 +3162,10 @@ size.ci.ratio.prop.ps <- function(alpha, p1, p2, phi, r) {
 #'
 #' @return
 #' Returns the required sample size
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -3190,6 +3226,10 @@ size.ci.agree <- function(alpha, G, w) {
 #'
 #' @return
 #' Returns the required sample size
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
