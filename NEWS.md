@@ -1,15 +1,20 @@
-statpsych version 1.9.0 (Release date: 2026/xx/xx)
+statpsych version 1.9.0 (Release date: 2026/12/xx)
 ===========
 
 Changes:
 
 * New functions:
-    * size.ci.sd -- Computes sample size for a standard deviation confidence interval
+    * size.ci.sd -- Computes sample size for a traditional standard deviation confidence interval
+    * size.ci.cronbach -- Computes sample size for a Cronbach reliablity using a planning value from a prior study
     * ci.diversity -- Computes estimates and confidence intervals for three types of diversity indices 
     * ci.mean.gen -- Computes confidence intervals for three types of generalized means
-* Depricated function
-    * the iqv function will deleted in the next version, use ci.diversity  
-
+    * ci.sd -- Computes the traditional confidence interval for a population standard deviation
+    * ci.lc.prop.scheffe -- Computes a Scheffe confidence interval and p-value for a linear contrast of population proportions
+    * ci.lc.mean.scheffe -- Computes a Scheffe confidence interval and p-value for a linear contrast of population means
+    * pi.cronbach -- Computes a prediction interval for a Cronbach reliability in a future sample
+* References Manual
+    * Most function descriptions now refer to a specific section in the Bonett (2021) text for additional details
+    
 
 statpsych version 1.8.0 (Release date: 2025/06/06)
 ===========
@@ -277,4 +282,5 @@ statpsych 1.0.0 (Release date: 2021/09/09)
 ==============
 
 * Initial release
+
 
