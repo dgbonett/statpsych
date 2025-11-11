@@ -3597,6 +3597,8 @@ size.ci.biphi <- function(alpha, p1, p2, cor, w) {
 #' Computes the sample size required to test a population proportion with
 #' desired power (using a correction for continuity) in a 1-group design. 
 #'
+#' For more details, see Section 1.15 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param  alpha  alpha level for hypothesis test 
 #' @param  pow    desired power
@@ -3606,6 +3608,7 @@ size.ci.biphi <- function(alpha, p1, p2, cor, w) {
 #'
 #' @references
 #' \insertRef{Fleiss2003}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @return
@@ -3650,6 +3653,8 @@ size.test.prop <- function(alpha, pow, p, h) {
 #' proportion planning values; for example, the planning value of the proportion 
 #' difference could be set equal to a minimally interesting effect size.
 #'
+#' For more details, see Section 2.23 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param  alpha  alpha level for hypothesis test 
 #' @param  pow    desired power
@@ -3662,7 +3667,10 @@ size.test.prop <- function(alpha, pow, p, h) {
 #' Returns the required sample size for each group
 #'
 #'
-#' @examples
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' size.test.prop2(.05, .8, .6, .4, .2)
 #' # Should return:
@@ -3708,6 +3716,8 @@ size.test.prop2 <- function(alpha, pow, p1, p2, es) {
 #' effect size. For a conservatively large sample size, set the proportion planning
 #' values to .5 and set the effect size to a minimally interesting value. 
 #'
+#' For more details, see Section 2.23 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param  alpha  alpha level for hypothesis test 
 #' @param  pow    desired power
@@ -3718,6 +3728,10 @@ size.test.prop2 <- function(alpha, pow, p1, p2, es) {
 #'
 #' @return
 #' Returns the required sample size for each group
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -3759,6 +3773,8 @@ size.test.lc.prop.bs <- function(alpha, pow, p, es, v) {
 #' alpha = .05). This function sets the effect size equal to the difference in
 #' proportion planning values.
 #'
+#' For more details, see Section 2.23 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param  alpha  alpha level for hypothesis test 
 #' @param  pow    desired power
@@ -3769,6 +3785,10 @@ size.test.lc.prop.bs <- function(alpha, pow, p, es, v) {
 #'
 #' @return
 #' Returns the required sample size for each group
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -3810,6 +3830,8 @@ size.equiv.prop2 <- function(alpha, pow, p1, p2, h) {
 #' of p1 and p2 such that p1 - p2 > -h. This function sets the effect size equal
 #' to p1 - p2.
 #'
+#' For more details, see Section 2.23 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param  alpha  alpha level for hypothesis test 
 #' @param  pow    desired power
@@ -3820,6 +3842,10 @@ size.equiv.prop2 <- function(alpha, pow, p1, p2, h) {
 #'
 #' @return
 #' Returns the required sample size for each group
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -3862,6 +3888,8 @@ size.supinf.prop2 <- function(alpha, pow, p1, p2, h) {
 #' phi correlation planning value to the smallest absolute value within a
 #' plausible range for a conservatively large sample size.
 #'
+#' For more details, see Section 3.13 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param  alpha  alpha level for hypothesis test 
 #' @param  pow    desired power
@@ -3873,6 +3901,10 @@ size.supinf.prop2 <- function(alpha, pow, p1, p2, h) {
 #'
 #' @return
 #' Returns the required sample size
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -3915,6 +3947,8 @@ size.test.prop.ps <- function(alpha, pow, p1, p2, phi, es) {
 #' Set the phi correlation planning value to the smallest absolute value within 
 #' a plausible range for a conservatively large sample size.
 #'
+#' For more details, see Section 3.13 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param  alpha  alpha level for hypothesis test 
 #' @param  pow    desired power
@@ -3926,6 +3960,10 @@ size.test.prop.ps <- function(alpha, pow, p1, p2, phi, es) {
 #'
 #' @return
 #' Returns the required sample size
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -3971,6 +4009,8 @@ size.equiv.prop.ps <- function(alpha, pow, p1, p2, phi, h) {
 #' Set the phi correlation planning value to the smallest absolute value within
 #' a plausible range for a conservatively large sample size.
 #'
+#' For more details, see Section 3.13 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param  alpha  alpha level for hypothesis test 
 #' @param  pow    desired power
@@ -3982,6 +4022,10 @@ size.equiv.prop.ps <- function(alpha, pow, p1, p2, phi, h) {
 #'
 #' @return
 #' Returns the required sample size
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -4223,6 +4267,8 @@ iqv <- function(f) {
 #' logit, or log-Poisson model. This function is useful with software that 
 #' does not have an option to compute exp(B) and exp(B) - 1.
 #'
+#' For more details, see Section 4.1 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  b      estimated slope coefficient
@@ -4235,6 +4281,10 @@ iqv <- function(f) {
 #' * Estimate - estimate of exp(B) or exp(B) - 1
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -4282,6 +4332,8 @@ expon.slope <- function(alpha, b, se) {
 #' and is later presented with another set of words or images where some
 #' items are from the first list (old items) and some items are new items.
 #'
+#' For more details, see Section 3.8 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param   f1    number of "Yes" responses in the stimulus (old item) trials 
 #' @param   f2    number of "Yes" responses in the noise (new item) trials
@@ -4299,7 +4351,8 @@ expon.slope <- function(alpha, b, se) {
 #'
 #'
 #' @references
-#' \insertRef{Wickens2002}{statpsych}        
+#' \insertRef{Wickens2002}{statpsych}  
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
