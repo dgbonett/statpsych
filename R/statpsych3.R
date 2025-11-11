@@ -4178,6 +4178,7 @@ power.prop.ps <- function(alpha, n, p1, p2, phi, es) {
 #'
 #' @description
 #' Computes the Shannon, Berger, and Simpson indices of qualitative variation.
+#' Will be replaced soon with ci.diversity.
 #'
 #'  
 #' @param   f   vector of multinomial frequency counts
