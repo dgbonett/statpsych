@@ -2846,7 +2846,7 @@ ci.etasqr <- function(alpha, etasqr, df1, df2) {
 #'
 #' @description
 #' Computes confidence intervals and tests for the AB interaction effect, 
-#' main effect of A, main efect of B, simple main effects of A, and simple main
+#' main effect of A, main effect of B, simple main effects of A, and simple main
 #' effects of B in a 2x2 mixed factorial design with a quantitative response
 #' variable where Factor A is a within-subjects factor and Factor B is a 
 #' between-subjects factor. A Satterthwaite adjustment to the degrees of 
@@ -3610,7 +3610,7 @@ ci.2x2.median.bs <- function(alpha, y11, y12, y21, y22) {
 #' Computes confidence intervals for standardized AB interaction effect, main 
 #' effect of A, main effect of B, simple main effects of A, and simple main
 #' effects of B in a 2x2 within-subjects factorial design. Equality of 
-#' population variances is not assumed. A square root unweigthed average
+#' population variances is not assumed. A square root unweighted average
 #' variance standardizer is used.
 #'
 #'
@@ -3784,10 +3784,10 @@ ci.2x2.stdmean.ws <- function(alpha, y11, y12, y21, y22) {
 #'                          
 #' @description
 #' Computes confidence intervals for the standardized AB interaction effect, 
-#' main effect of A, main efect of B, simple main effects of A, and simple main
+#' main effect of A, main effect of B, simple main effects of A, and simple main
 #' effects of B in a 2x2 mixed factorial design where Factor A is a 
 #' within-subjects factor, and Factor B is a between-subjects factor. Equality 
-#' of population variances is not assumed. A square root unweigthed average 
+#' of population variances is not assumed. A square root unweighted average 
 #' variance standardizer is used.
 #'
 #'
@@ -3930,7 +3930,7 @@ ci.2x2.stdmean.mixed <- function(alpha, y11, y12, y21, y22) {
 #'
 #' @description
 #' Computes distribution-free confidence intervals for the AB 
-#' interaction effect, main effect of A, main efect of B, simple main effects 
+#' interaction effect, main effect of A, main effect of B, simple main effects 
 #' of A, and simple main effects of B in a 2x2 mixed factorial design where 
 #' Factor A is the within-subjects factor and Factor B is the between subjects
 #' factor. Tied scores within each group and within each within-subjects level
@@ -6687,7 +6687,7 @@ pi.score <- function(alpha, m, sd, n) {
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
-#' @param  m1     estaimted mean for group 1
+#' @param  m1     estamated mean for group 1
 #' @param  m2     estimated mean for group 1
 #' @param  sd1    estimated standard deviation for group 1
 #' @param  sd2    estimated standard deviation for group 2
