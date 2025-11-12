@@ -2325,12 +2325,12 @@ ci.pv <- function(alpha, f1, f2, n1, n2, prev) {
 #'                        
 #' @description
 #' Computes a confidence interval for a population Poisson rate. This function
-#' requires the number of occurences (f) of a specific event that were 
+#' requires the number of occurrences (f) of a specific event that were 
 #' observed over a specific period of time (t).
 #'
 #'
 #' @param  alpha  alpha value for 1-alpha confidence 
-#' @param  f      number of event occurences
+#' @param  f      number of event occurrences
 #' @param  t      time period 
 #'
 #'
@@ -2385,13 +2385,13 @@ ci.poisson <- function(alpha, f, t) {
 #' Computes a confidence interval for a ratio of population Poisson rates in a
 #' 2-group design. The confidence interval is based on the binomial method 
 #' with an Agresti-Coull confidence interval. This function requires the number 
-#' of occurences of a specific event (f) that were observed over a specific
+#' of occurrences of a specific event (f) that were observed over a specific
 #' period of time (t) within each group.
 #'
 #'
 #' @param  alpha  alpha value for 1-alpha confidence 
-#' @param  f1     number of event occurences for group 1
-#' @param  f2     number of event occurences for group 2
+#' @param  f1     number of event occurrences for group 1
+#' @param  f2     number of event occurrences for group 2
 #' @param  t1     time period for group 1
 #' @param  t2     time period for group 2
 #'
@@ -2399,7 +2399,7 @@ ci.poisson <- function(alpha, f, t) {
 #' @details
 #' The time periods do not need to be integers and can be expressed in any unit
 #' of time such as seconds, hours, or months. The occurances are assumed to be
-#' independent of one another and the unknown occurance rate is assumed to be
+#' independent of one another and the unknown occurrence rate is assumed to be
 #' constant over time within each group condition.
 #'
 #'
@@ -2454,7 +2454,7 @@ ci.ratio.poisson2 <- function(alpha, f1, f2, t1, t2) {
 #' Several confidence interval sample size functions in this package require
 #' a planning value of the expected sample value of a proportion in the
 #' planned study. A one-sided proportion prediction limit is useful as a 
-#' proportion planning value for a conservativelky large sample size required
+#' proportion planning value for a conservatively large sample size required
 #' to obtain a confidence interval with desired width. This strategy for 
 #' specifying a proportion planning value is useful in applications where the
 #' population proportion in the prior study is assumed to be very similar to
@@ -4324,8 +4324,8 @@ expon.slope <- function(alpha, b, se) {
 #' @description
 #' Computes the hit rate, false alarm rate, d-prime, threshold, and bias 
 #' for one participant (observer) in a Yes/No signal detection study. 
-#' An equal-variance Gausian model is assumed. The parameter estimates are 
-#' computed after adding .5 to the number of "Yes" responses in each condtion
+#' An equal-variance Gaussian model is assumed. The parameter estimates are 
+#' computed after adding .5 to the number of "Yes" responses in each condition
 #' (the signal and noise conditions) and adding 1 to the number of signal 
 #' trials and to the number of noise trails. In memory recognition studies,
 #' the observer is first presented with set of words or images to study, 
