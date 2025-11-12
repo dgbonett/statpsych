@@ -424,7 +424,7 @@ ci.pbcor <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' Unlike the confidence interval for a Pearson correlation, this function does
 #' not assume bivariate normality. Unlike the Pearson correlation which
 #' describes a linear bivariate relation, the Spearman correlation describes a 
-#' monotonic bivariate relelation. This function is not appropropriate for 
+#' monotonic bivariate relation. This function is not appropriate for 
 #' ordered categorical variables.
 #'
 #' For more details, see Section 1.32 of Bonett (2021, Volume 2)
@@ -491,7 +491,7 @@ ci.spear <- function(alpha, y, x) {
 #'
 #' @description
 #' Computes a confidence interval for a difference of population Spearman 
-#' correlations in a 2-group design. This function is not appropropriate 
+#' correlations in a 2-group design. This function is not appropriate 
 #' for ordered categorical variables.
 #'
 #'  
@@ -1979,7 +1979,7 @@ ci.slope.mean.bs <- function(alpha, m, sd, n, x) {
 #' 
 #' 
 #' @description
-#' Computes a distrbution-free test and confidence interval for the slope 
+#' Computes a distribution-free test and confidence interval for the slope 
 #' of medians in a one-factor experimental design with a quantitative 
 #' between-subjects factor using sample group medians and standard errors
 #' as input. The sample median and standard error for each group can be 
@@ -3845,7 +3845,7 @@ size.test.lc.ancova <- function(alpha, pow, evar, es, s, d, v) {
 #' @param  es      planning value of mean difference
 #' @param  s       number of covariates 
 #' @param  d       largest standardized mean difference of all covariates
-#' @param  R       n2/n1 rartio
+#' @param  R       n2/n1 ratio
 #'
 #' 
 #' @return 
@@ -4047,7 +4047,7 @@ size.test.gen <- function(alpha, pow, se, n0, es) {
 #'
 #' @description
 #' Computes the sample size per group required to test a difference in two
-#' populatation parameters with desired power using a standard error for a 
+#' population parameters with desired power using a standard error for a 
 #' single parameter estimate from a prior or pilot study. This function can be
 #' used with any type of parameter where the standard error of the parameter 
 #' estimate is a function of the square root of the sample size (most parameter 
