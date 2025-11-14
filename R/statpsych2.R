@@ -1716,13 +1716,12 @@ pi.cor <- function(alpha, cor, n0, n, type) {
 #' @export
 pi.cronbach <- function(alpha, rel, r, n0, n, type) {
  rel.log <- log(1 - rel)
- b <- log(n0/(n0 - 1))
  v1 <- 2*r/((r - 1)*(n0 - 2))
  v2 <- 2*r/((r - 1)*(n - 2))
  if (type == 1) {
   z <- qnorm(1 - alpha/2)
-  ul0 <- rel.log - b - z*sqrt(v1 + v2)
-  ll0 <- rel.log - b + z*sqrt(v1 + v2)
+  ul0 <- rel.log - z*sqrt(v1 + v2)
+  ll0 <- rel.log + z*sqrt(v1 + v2)
   ll <- 1 - exp(ll0)
   ul <- 1 - exp(ul0)
   out <- t(c(ll, ul))
@@ -1730,14 +1729,14 @@ pi.cronbach <- function(alpha, rel, r, n0, n, type) {
  }
  else if (type == 2) {
   z <- qnorm(1 - alpha)
-  ul0 <- rel.log - b - z*sqrt(v1 + v2)
+  ul0 <- rel.log - z*sqrt(v1 + v2)
   ul <- 1 - exp(ul0)
   out <- matrix(ul, nrow = 1, ncol = 1)
   colnames(out) <- "UL"
  }
  else {
   z <- qnorm(1 - alpha)
-  ll0 <- rel.log - b + z*sqrt(v1 + v2)
+  ll0 <- rel.log + z*sqrt(v1 + v2)
   ll <- 1 - exp(ll0)
   out <- matrix(ll, nrow = 1, ncol = 1)
   colnames(out) <- "LL"
@@ -3294,7 +3293,7 @@ size.ci.cor.prior <- function(alpha1, alpha2, cor0, n0, w) {
 #'
 #' # Should return:
 #' # Sample size
-#' #          71
+#' #          73
 #'
 #'
 #' @importFrom stats qnorm
