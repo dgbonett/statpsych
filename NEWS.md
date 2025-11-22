@@ -11,6 +11,7 @@ Changes:
     * ci.sd -- Computes the traditional confidence interval for a population standard deviation
     * ci.lc.prop.scheffe -- Computes a Scheffe confidence interval and p-value for a linear contrast of population proportions
     * ci.lc.mean.scheffe -- Computes a Scheffe confidence interval and p-value for a linear contrast of population means
+    * ci.icc -- Computes intraclass reliability coefficients using mean square estimates as input
     * pi.cronbach -- Computes a prediction interval for a Cronbach reliability in a future sample
 * References Manual
     * Most function descriptions now refer to a specific section in the Bonett (2021) text for additional details
@@ -282,5 +283,6 @@ statpsych 1.0.0 (Release date: 2021/09/09)
 ==============
 
 * Initial release
+
 
 
