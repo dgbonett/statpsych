@@ -2988,7 +2988,7 @@ size.ci.cronbach <- function(alpha, rel, r, w) {
  z <- qnorm(1 - alpha/2)
  n0 <- ceiling((8*r/(r - 1))*(1 - rel)^2*(z/w)^2 + 2)
  df1 <- n0 - 1
- df2 <- n0*(r - 1)
+ df2 <- (n0 - 1)*(r - 1)
  f1 <- qf(1 - alpha/2, df1, df2)
  f2 <- qf(1 - alpha/2, df2, df1)
  f0 <- 1/(1 - rel)
