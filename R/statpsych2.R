@@ -1274,7 +1274,7 @@ ci.theil <- function(alpha, y, x) {
 #'
 #' # Should return:
 #' # Estimate          SE        LL        UL
-#' #     0.85  0.02456518 0.7971254 0.8931436   
+#' #     0.85  0.02456518 0.7970649 0.8931666
 #'  
 #' 
 #' @importFrom stats qf
@@ -1283,7 +1283,7 @@ ci.cronbach <- function(alpha, rel, r, n) {
  if (rel > .999 | rel < .001) {stop("reliability must be between .001 and .999")}
  se <- sqrt((2*r*(1 - rel)^2)/((r - 1)*(n - 2)))
  df1 <- n - 1
- df2 <- n*(r - 1)
+ df2 <- (n - 1)*(r - 1)
  f1 <- qf(1 - alpha/2, df1, df2)
  f2 <- qf(1 - alpha/2, df2, df1)
  f0 <- 1/(1 - rel)
@@ -1390,7 +1390,7 @@ ci.reliability <- function(alpha, rel, se, n) {
 #'
 #' # Should return:
 #' # Estimate         LL       UL
-#' #     0.12 0.06973411 0.173236
+#' #     0.12 0.06972131 0.1732518
 #'  
 #' 
 #' @importFrom stats qf
@@ -1399,14 +1399,14 @@ ci.cronbach2 <- function(alpha, rel1, rel2, r1, r2, n1, n2) {
  if (rel1 > .999 || rel1 < .001) {stop("rel1 must be between .001 and .999")}
  if (rel2 > .999 || rel2 < .001) {stop("rel2 must be between .001 and .999")}
  df11 <- n1 - 1
- df21 <- n1*(r1 - 1)
+ df21 <- (n1 - 1)*(r1 - 1)
  f11 <- qf(1 - alpha/2, df11, df21)
  f21 <- qf(1 - alpha/2, df21, df11)
  f01 <- 1/(1 - rel1)
  LL1 <- 1 - f11/f01
  UL1 <- 1 - 1/(f01*f21)
  df12 <- n2 - 1
- df22 <- n2*(r2 - 1)
+ df22 <- (n2 - 1)*(r2 - 1)
  f12 <- qf(1 - alpha/2, df12, df22)
  f22 <- qf(1 - alpha/2, df22, df12)
  f02 <- 1/(1 - rel2)
@@ -1567,6 +1567,83 @@ ci.bscor <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
  out <- t(c(bscor, se.bscor, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  rownames(out) <- ""
+ return(out)
+}
+
+
+#  ci.icc =====================================================================
+#' Confidence interval for an intraclass reliablity coefficient
+#'
+#'
+#' @description
+#' Computes a confidence interval for a population intraclass reliability
+#' coefficient using mean squared estimates from a two-way ANOVA. This
+#' function will compute point and interval estimates of the ICC(C, 1) and
+#' ICC(C, r) reliability coefficients where ICC(C, 1) is the reliability of
+#' a single measurements (e.g., a single rater or a single form of a test)
+#' and ICC(C, r) is the reliability of a sum or average of r measurements.
+#' ICC(C, r) is the same as Cronbach's reliability coefficient. The
+#' ci.cronbach function uses a point estimate of Cronbach's reliability
+#' as input. The confidence intervals used in this function assume parallel
+#' measurements which implies a compound symmetric covariance matrix of 
+#' the r measurements.
+#'
+#'
+#'  
+#' @param  alpha  alpha level for 1-alpha confidence
+#' @param  MSr    mean square for rows
+#' @param  MSe    error mean square  
+#' @param  r      number of measurements (items, raters, forms)
+#' @param  n	  sample size
+#'
+#'
+#' @return 
+#' Returns a 2-row matrix. The first row results are for ICC(C, 1) and
+#' the second row results are for ICC(C, r). The columns are:
+#' * Estimate - estimated reliability 
+#' * SE - standard error 
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
+#' 
+#' 
+#' @references
+#' \insertRef{McGraw1996}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
+#' @examples
+#' ci.icc(.05, 48.2, 11.3, 5, 30)
+#'
+#' # Should return:
+#' #            Estimate        SE        LL        UL
+#' # ICC(C, 1) 0.3950749 0.8566579 0.2311230 0.5852772
+#' # ICC(C, r) 0.7655602 0.0700523 0.6004779 0.8758727
+
+#'  
+#' 
+#' @importFrom stats qf
+#' @export
+ci.icc <- function(alpha, MSr, MSe, r, n) {
+ icc1 <- (MSr - MSe)/(MSr + (r - 1)*MSe)
+ iccr <- (MSr - MSe)/MSr
+ f <- MSr/MSe
+ se1 <- sqrt((2*(1 - icc1)^2)*(1 + (r - 1)*icc1)^2/(r*(r - 1)*(n - 1)))
+ ser <- sqrt((2*r*(1 - iccr)^2)/((r - 1)*(n - 2)))
+ df1 <- n - 1
+ df2 <- (n - 1)*(r - 1)
+ f1 <- qf(1 - alpha/2, df1, df2)
+ f2 <- qf(1 - alpha/2, df2, df1)
+ fL <- f/f1
+ fU <- f*f2
+ ll.1 <- (fL - 1)/(fL + r - 1) 
+ ul.1 <- (fU - 1)/(fU + r - 1)
+ ll.r <- 1 - 1/fL
+ ul.r <- 1 - 1/fU
+ out1 <- t(c(icc1, se1, ll.1, ul.1))
+ out2 <- t(c(iccr, ser, ll.r, ul.r))
+ out <- rbind(out1, out2)
+ colnames(out) = c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- c("ICC(C, 1)", "ICC(C, r)")
  return(out)
 }
 
