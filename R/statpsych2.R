@@ -3062,6 +3062,71 @@ size.ci.cronbach2 <- function(alpha, rel1, rel2, r, w) {
 }
 
 
+#  size.ci.icc ================================================================
+#' Sample size for a intraclass correlation confidence interval
+#'
+#'
+#' Computes the sample size required to estimate an intraclass correlation
+#' with desired confidence interval precision. This type of intraclass 
+#' correlation can be used to describe the reliability of a single measurement
+#' (e.g., a single rater or a single form of a test). This intraclass 
+#' correlation assumes a two-factor (subject x measurement) model. Set the
+#' correlation planning value to the smallest value within a plausible range 
+#' for a conservatively large sample size.
+#'
+#' In comparison, Cronbach's coefficient describes the reliability of a sum 
+#' or average of multiple measurements. Use the size.ci.cronbach function to 
+#' determine the required sample size for Cronbach's reliability. 
+#'
+#'
+#' @param  alpha  alpha value for 1-alpha confidence 
+#' @param  icc    intraclass correlation planning value
+#' @param  r      number of measurements (raters, forms, occasions)
+#' @param  w      desired confidence interval width
+#'
+#'
+#' @references
+#' \insertRef{Bonett2002}{statpsych}
+#'
+#'
+#' @return 
+#' Returns the required sample size
+#'
+#'
+#' @examples
+#' size.ci.icc(.05, .70, 3, .2)
+#'
+#' # Should return:
+#' # Sample size
+#' #          68
+#'  
+#' 
+#' @importFrom stats qf
+#' @importFrom stats qnorm
+#' @export
+size.ci.icc <- function(alpha, icc, r, w) {
+ if (icc > .999 | icc < .001) {stop("correlation must be between .001 and .999")}
+ z <- qnorm(1 - alpha/2)
+ n0 <- ceiling(8*z^2*((1 - icc)^2*(1 + (r - 1)*icc)^2)/(r*(r - 1)*w^2)) + 1
+ cronbach <- r*icc/(1 + (r - 1)*icc)
+ f <- 1/(1 - cronbach)
+ df1 <- n0 - 1
+ df2 <- (n0 - 1)*(r - 1)
+ f1 <- qf(1 - alpha/2, df1, df2)
+ f2 <- qf(1 - alpha/2, df2, df1)
+ fL <- f/f1
+ fU <- f*f2
+ ll <- (fL - 1)/(fL + r - 1) 
+ ul <- (fU - 1)/(fU + r - 1)
+ w0 <- ul - ll
+ n <- ceiling((n0 - 1)*(w0/w)^2 + 1)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size"
+ rownames(out) <- ""
+ return(out)
+}
+
+
 #  size.ci.mape ==============================================================
 #' Sample size for a mean absolute prediction error confidence interval
 #'
