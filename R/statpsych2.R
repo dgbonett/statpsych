@@ -3086,7 +3086,7 @@ size.ci.cronbach2 <- function(alpha, rel1, rel2, r, w) {
 #'
 #'
 #' @references
-#' \insertRef{Bonett2002}{statpsych}
+#' \insertRef{Bonett2002b}{statpsych}
 #'
 #'
 #' @return 
