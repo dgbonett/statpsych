@@ -3461,6 +3461,83 @@ size.ci.cronbach.prior <- function(alpha1, alpha2, rel0, n0, r, w) {
 }
 
 
+#  size.ci.icc.prior =====================================================
+#' Sample size for an intraclass correlation confidence interval using a 
+#' planning value from a prior study
+#'
+#'                
+#' @description
+#' Computes the sample size required to estimate an intraclass correlation
+#' with desired confidence interval precision in applications where an 
+#' estimated intraclass correlation from a prior study is available. The 
+#' actual confidence interval width in the planned study will depend on the
+#' value of the estimated intraclas correlation in the planned study. An 
+#' estimated intraclass correlation from a prior study can be used to compute
+#' a lower prediction limit for the estimated intraclass correlation in the 
+#' planned study, which is then used as a planning value in the sample size 
+#' analysis. Using a larger confidence level (1 - alpha2) for the prediction 
+#' interval will increase the probability that the width of the confidence 
+#' interval in the planned study will be less than or equal to the desired 
+#' width.
+#'
+#' This sample size approach assumes that the population intraclass correlation 
+#' that was estimated in the prior study is very similar to the population 
+#' intraclass correlation that will be estimated in the planned study. If
+#' an estimated intraclas correlation from a prior study is not available, the 
+#' researcher must use expert opinion to guess the value of the intraclass
+#' correlation that will be observed in the planned study. The 
+#' \link[statpsych]{size.ci.icc} function uses an intraclass correlation 
+#' planning value that is based on expert opinion regarding the likely value 
+#' of the correlation estimate that will be observed in the planned study.
+#'
+#'
+#' @param  alpha1  alpha level for 1-alpha1 confidence in the planned study
+#' @param  alpha2  alpha level for the 1-alpha2 prediction interval 
+#' @param  cor0    estimated correlation in prior study
+#' @param  n0      sample size in prior study
+#' @param  r       number of measurements (raters, forms)
+#' @param  w       desired confidence interval width
+#'
+#'
+#' @return
+#' Returns the required sample size
+#'
+#'
+#' @examples
+#' size.ci.icc.prior(.05, .10, .674, 50, 3, .2)
+#'
+#' # Should return:
+#' # Sample size
+#' #         114
+#'
+#'
+#' @importFrom stats qnorm
+#' @export                 
+size.ci.icc.prior <- function(alpha1, alpha2, cor0, n0, r, w) {
+ if (cor0 > .999 | cor0 < 0) {stop("correlation must be between 0 and .999")}
+ z1 <- qnorm(1 - alpha1/2)
+ z2 <- qnorm(1 - alpha2)
+ var1 <- 2*(1 - cor0)^2*(1 + (r - 1)*cor0)^2/(r*(r - 1)*(n0 - 1))
+ ll <- cor0 - z2*sqrt(var1) 
+ if (ll < 0) {ll = 0} 
+ n1 <- ceiling(8*z1^2*(1 - ll)^2*(1 + (r - 1)*ll)^2/(r*(r - 1)*w^2) + 1)
+ v <- 2*(1 - ll)^2*(1 + (r - 1)*ll)^2/(r*(r - 1))
+ var2 <- v/(n0 - 1) + v/(n1 - 1)
+ ll <- cor0 - z2*sqrt(var2)  
+ if (ll < 0) {ll = 0}
+ n2 <- ceiling(8*z1^2*(1 - ll)^2*(1 + (r - 1)*ll)^2/(r*(r - 1)*w^2) + 1)
+ v <- 2*(1 - ll)^2*(1 + (r - 1)*ll)^2/(r*(r - 1))
+ var2 <- v/(n0 - 1) + v/(n2 - 1)
+ ll <- cor0 - z2*sqrt(var2)  
+ if (ll < 0) {ll = 0}
+ n <- ceiling(8*z1^2*(1 - ll)^2*(1 + (r - 1)*ll)^2/(r*(r - 1)*w^2) + 1)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size"
+ rownames(out) <- ""
+ return(out)
+}
+
+
 #  size.ci.ancova2 =========================================================
 #' Sample size for a 2-group ANCOVA confidence interval
 #'
