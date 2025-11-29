@@ -6,6 +6,7 @@ Changes:
 * New functions:
     * size.ci.sd -- Computes sample size for a traditional standard deviation confidence interval
     * size.ci.cronbach.prior -- Computes sample size for a Cronbach reliablity confidence interval using a planning value from a prior study
+    * size.ci.icc.prior -- Computes sample size for an intraclass correlation confidence interval using a planning value from a prior study
     * size.ci.icc -- Computes sample size for an intraclass correlation confidence interval 
     * ci.diversity -- Computes estimates and confidence intervals for three types of diversity indices 
     * ci.mean.gen -- Computes confidence intervals for three types of generalized means
@@ -284,6 +285,7 @@ statpsych 1.0.0 (Release date: 2021/09/09)
 ==============
 
 * Initial release
+
 
 
 
