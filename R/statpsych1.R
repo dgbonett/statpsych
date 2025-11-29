@@ -5348,10 +5348,9 @@ size.ci.second <- function(n0, w0, w) {
 #' variance in the planned study. An estimated variance from a prior study 
 #' can be used to compute an upper prediction limit for the estimated variance 
 #' in the planned study. The upper prediction limit is then used as the variance
-#' planning value.  Using a larger confidence level (1 - alpha2) for the 
-#' upper prediction limit will increase the probability that the width of 
-#' of the confidence interval for the population mean in the planned study
-#' will be less than or equal to the desired width.
+#' planning value.  The probability that the prediction interval in the planned
+#' study will have a width that is less than the desired width is approximately
+#' 1 - alpha2.
 #'
 #' This sample size approach assumes that the population variance in the 
 #' prior study is very similar to the population variance in the planned 
