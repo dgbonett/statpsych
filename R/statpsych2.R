@@ -2986,7 +2986,7 @@ size.ci.indirect <- function(alpha, cor1, cor2, w) {
 size.ci.cronbach <- function(alpha, rel, r, w) {
  if (rel > .999 | rel < .001) {stop("reliability must be between .001 and .999")}
  z <- qnorm(1 - alpha/2)
- n0 <- ceiling((8*r/(r - 1))*(1 - rel)^2*(z/w)^2 + 2)
+ n0 <- ceiling((8*r/(r - 1))*((1 - rel)^2*(z/w)^2 + 2))
  df1 <- n0 - 1
  df2 <- (n0 - 1)*(r - 1)
  f1 <- qf(1 - alpha/2, df1, df2)
@@ -3070,11 +3070,17 @@ size.ci.cronbach2 <- function(alpha, rel1, rel2, r, w) {
 #' with desired confidence interval precision. This type of intraclass 
 #' correlation can be used to describe the reliability of a single measurement
 #' (e.g., a single rater or a single form of a test). This intraclass 
-#' correlation assumes a two-factor (subject x measurement) model. 
+#' correlation assumes a two-factor (subject x measurement) model. Use the
+#' size.ci.cronbach function to determine the sample size required to 
+#' estimate the reliability of a sum or average of r measurements (e.g., items)
+#' with desired confidence interval precision.
 #'
-#' In comparison, Cronbach's coefficient describes the reliability of a sum 
-#' or average of multiple measurements. Use the size.ci.cronbach function to 
-#' determine the required sample size for Cronbach's reliability. 
+#' Specifying an intraclass correlation planning value for a conservatively
+#' large sample size requirement is not straightforward with an intraclass 
+#' correlation. For r = 2, the sample size requirement is largest for an
+#' intraclass correlation of zero. But for r = 3, 4, 5, 10, 20, and 40 an 
+#' intraclass correlation planning value of about .26, .33, .38, .43, .44,
+#' and .45, respectively, maximizes the sample size requirement.
 #'
 #'
 #' @param  alpha  alpha value for 1-alpha confidence 
