@@ -3246,7 +3246,7 @@ size.ci.agree <- function(alpha, G, w) {
 #' @export
 size.ci.prop.prior <- function(alpha1, alpha2, p0, n0, w) {
  if (p0 > .9999 | p0 < .0001) {stop("proportion must be between .0001 and .9999")}
- if (alpha2 > .4999) {stop("alpha2 cannot be greater than .5")}
+ if (alpha2 > .5) {stop("alpha2 cannot be greater than .5")}
  z1 <- qnorm(1 - alpha1/2)
  z2 <- qnorm(1 - alpha2)
  se <- sqrt(p0*(1 - p0)/n0)
