@@ -3442,7 +3442,7 @@ size.ci.cor.prior <- function(alpha1, alpha2, cor0, n0, w) {
 #'
 #' # Should return:
 #' # Sample size
-#' #          73
+#' #          71
 #'
 #'
 #' @importFrom stats qnorm
