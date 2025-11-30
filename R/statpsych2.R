@@ -3350,41 +3350,40 @@ size.ci.spear2 <- function(alpha, cor1, cor2, w) {
 #'
 #' # Should return:
 #' # Sample size
-#' #         263
+#' #         246
 #'
 #'
 #' @importFrom stats qnorm
-#' @export                 
+#' @export     
 size.ci.cor.prior <- function(alpha1, alpha2, cor0, n0, w) {
  if (cor0 > .999 | cor0 < -.999) {stop("correlation must be between -.999 and .999")}
- ci <- ci.cor(alpha2, cor0, 0, n0)
+ if (alpha2 > .5) {stop("alpha2 cannot be greater than .5")}
+ ci <- ci.cor(2*alpha2, cor0, 0, n0)
  ll0 <- ci[1,3]                                  
  ul0 <- ci[1,4]  
  if (ll0 < 0 & ul0 > 0) {
-   cor = 0
-   n <- size.ci.cor(alpha1, cor, 0, w)
- } else {
-   if (abs(ll0) < abs(ul0)) {cor = ll0}
-   if (abs(ll0) > abs(ul0)) {cor = ul0}
-   n <- size.ci.cor(alpha1, cor, 0, w)
-   pi <- pi.cor(alpha2, cor0, n0, n, type = 1)
-   ll <- pi[1,1]                                  
-   ul <- pi[1,2]
-   if (ll < 0 & ul > 0) {
-     cor = 0
-     n <- size.ci.cor(alpha1, cor, 0, w)
-   } else {
-     if (abs(ll) < abs(ul)) {cor = ll}
-     if (abs(ll) > abs(ul)) {cor = ul}
-     n <- size.ci.cor(alpha1, cor, 0, w)
-	 pi <- pi.cor(alpha2, cor0, n0, n, type = 1)
-     ll <- pi[1,1]                                  
-     ul <- pi[1,2]
-	 if (abs(ll) < abs(ul)) {cor = ll}
-     if (abs(ll) > abs(ul)) {cor = ul}
-     n <- size.ci.cor(alpha1, cor, 0, w)
-   }
- }	 
+  cor = 0
+  n <- size.ci.cor(alpha1, cor, 0, w)
+ }
+ if (abs(ll0) < abs(ul0)) {cor = ll0}
+ if (abs(ll0) > abs(ul0)) {cor = ul0}
+ n1 <- size.ci.cor(alpha1, cor, 0, w)
+ pi <- pi.cor(2*alpha2, cor0, n0, n1, type = 1)
+ ll0 <- pi[1,1]                                  
+ ul0 <- pi[1,2]
+ if (ll0 < 0 & ul0 > 0) {
+  cor = 0
+  n <- size.ci.cor(alpha1, cor, 0, w)
+ }
+ if (abs(ll0) < abs(ul0)) {cor = ll0}
+ if (abs(ll0) > abs(ul0)) {cor = ul0}
+ n2 <- size.ci.cor(alpha1, cor, 0, w)
+ pi <- pi.cor(2*alpha2, cor0, n0, n2, type = 1)
+ ll0 <- pi[1,1]                                  
+ ul0 <- pi[1,2]
+ if (abs(ll0) < abs(ul0)) {cor = ll0}
+ if (abs(ll0) > abs(ul0)) {cor = ul0}
+ n <- size.ci.cor(alpha1, cor, 0, w)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
  rownames(out) <- ""
