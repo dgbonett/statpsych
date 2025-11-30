@@ -3239,50 +3239,38 @@ size.ci.agree <- function(alpha, G, w) {
 #'
 #' # Should return:
 #' # Sample size
-#' #         374
+#' #         384
 #'
 #'
 #' @importFrom stats qnorm
-#' @export                 
+#' @export
 size.ci.prop.prior <- function(alpha1, alpha2, p0, n0, w) {
  if (p0 > .9999 | p0 < .0001) {stop("proportion must be between .0001 and .9999")}
  z1 <- qnorm(1 - alpha1/2)
- z2 <- qnorm(1 - alpha2/2)
- p.adj <- (n0*p0 + 2)/(n0 + 4)
- se <- sqrt(p.adj*(1 - p.adj)/(n0 + 4))
- ll0 <- p.adj - z2*se
- ul0 <- p.adj + z2*se
+ z2 <- qnorm(1 - alpha2)
+ se <- sqrt(p0*(1 - p0)/n0)
+ ll0 <- p0 - z2*se
+ ul0 <- p0 + z2*se
  if (ll0 < .0001) {ll0 = .0001}
  if (ul0 > .9999) {ul0 = .9999}
- if (ll0 < .5 & ul0 > .5) {
-   p = .5
-   n <- ceiling(4*p*(1 - p)*(z1/w)^2)
- } else {
-   if (abs(ll0 - .5) < abs(ul0 - .5)) (p = ll0)
-   if (abs(ll0 - .5) > abs(ul0 - .5)) (p = ul0)
-   n <- ceiling(4*p*(1 - p)*(z1/w)^2)
-   pi <- pi.prop(alpha2, p, n0, n, type = 1)
-   ll <- pi[1,1]                                  
-   ul <- pi[1,2]
-   if (ll < .0001) {ll = .0001}
-   if (ul > .9999) {ul = .9999}
-   if (ll < .5 & ul > .5) {
-     p = .5
-     n <- ceiling(4*p*(1 - p)*(z1/w)^2)
-   } else {
-     if (abs(ll - .5) < abs(ul - .5)) (p = ll)
-     if (abs(ll - .5) > abs(ul - .5)) (p = ul)
-     n <- ceiling(4*p*(1 - p)*(z1/w)^2)
- 	 pi <- pi.prop(alpha2, p, n0, n, type = 1)
-     ll <- pi[1,1]                                  
-     ul <- pi[1,2]
-	 if (ll < .0001) {ll = .0001}
-     if (ul > .9999) {ul = .9999}
-	 if (abs(ll - .5) < abs(ul - .5)) (p = ll)
-     if (abs(ll - .5) > abs(ul - .5)) (p = ul)
-     n <- ceiling(4*p*(1 - p)*(z1/w)^2)
-   }
- }	 
+ if (ul0 < .5) {p = ul0}
+ else if (ll0 > .5) {p = ll0}
+ else {p = .5}
+ n1 <- ceiling(4*p*(1 - p)*(z1/w)^2)
+ ll0 <- p - z2*sqrt(p*(1 - p)/n0 + p*(1 - p)/n1)
+ ul0 <- p + z2*sqrt(p*(1 - p)/n0 + p*(1 - p)/n1)
+ if (ll0 < .0001) {ll0 = .0001}
+ if (ul0 > .9999) {ul0 = .9999}
+ if (ul0 < .5) {p = ul0}
+ else if (ll0 > .5) {p = ll0}
+ else {p = .5}
+ n2 <- ceiling(4*p*(1 - p)*(z1/w)^2)
+ ll0 <- p - z2*sqrt(p*(1 - p)/n0 + p*(1 - p)/n2)
+ ul0 <- p + z2*sqrt(p*(1 - p)/n0 + p*(1 - p)/n2)
+ if (ul0 < .5) {p = ul0}
+ else if (ll0 > .5) {p = ll0}
+ else {p = .5}
+ n <- ceiling(4*p*(1 - p)*(z1/w)^2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
  rownames(out) <- ""
