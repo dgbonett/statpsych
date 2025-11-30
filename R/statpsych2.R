@@ -1707,6 +1707,7 @@ ci.icc <- function(alpha, MSr, MSe, r, n) {
 #' @importFrom stats qnorm
 #' @export
 pi.cor <- function(alpha, cor, n0, n, type) {
+ if (cor > .999 | cor < -.999) {stop("correlaton must be between -.999 and .999")}
  if (type == 1) {
   z <- qnorm(1 - alpha/2)
   cor.z <- log((1 + cor)/(1 - cor))/2
@@ -1792,6 +1793,7 @@ pi.cor <- function(alpha, cor, n0, n, type) {
 #' @importFrom stats qnorm
 #' @export
 pi.cronbach <- function(alpha, rel, r, n0, n, type) {
+ if (rel > .999 | rel < 0) {stop("reliability must be between 0 and .999")}
  rel.log <- log(1 - rel)
  v1 <- 2*r/((r - 1)*(n0 - 2))
  v2 <- 2*r/((r - 1)*(n - 2))
@@ -1879,6 +1881,7 @@ pi.cronbach <- function(alpha, rel, r, n0, n, type) {
 #' @importFrom stats qnorm
 #' @export
 ci.bayes.cor <- function(alpha, prior_sd, cor, s, n) {
+ if (cor > .999 | cor < -.999) {stop("correlaton must be between -.999 and .999")}
  z <- qnorm(1 - alpha/2)
  se <- 1/sqrt(n - s - 3)
  zr <- log((1 + cor)/(1 - cor))/2 - cor/(2*(n - 1))
@@ -1946,6 +1949,7 @@ ci.bayes.cor <- function(alpha, prior_sd, cor, s, n) {
 #' @importFrom stats qnorm
 #' @export
 ci.bayes.spcor <- function(alpha, prior_sd, cor, se) {
+ if (cor > .999 | cor < -.999) {stop("correlaton must be between -.999 and .999")}
  z <- qnorm(1 - alpha/2)
  zr <- log((1 + cor)/(1 - cor))/2 
  post_sd <- sqrt(1/(1/prior_sd^2 + 1/se^2))
