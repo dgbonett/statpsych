@@ -5389,7 +5389,7 @@ size.ci.second <- function(n0, w0, w) {
 #' @export                 
 size.ci.mean.prior <- function(alpha1, alpha2, var0, n0, w) {
  if (var0 < 0) {stop("variance must be positive")}
- if (alpha2 > .4999) {stop("alpha2 cannot be greater than .5")}
+ if (alpha2 > .5) {stop("alpha2 cannot be greater than .5")}
  ci <- ci.var.upper(alpha2, var0, n0)
  ul <- ci[1,1]
  n1 <- size.ci.mean(alpha1, ul, w)
