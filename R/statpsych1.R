@@ -4389,8 +4389,8 @@ ci.bayes.normal <- function(alpha, prior_mean, prior_sd, est, se) {
 #' test.mean(7.9, 3.05, 100, 7)
 #'
 #' # Should return:
-#' #         t df           p
-#' #   2.95082 99 0.003956349
+#' #         t df       p
+#' #   2.95082 99 0.00396
 #'  
 #' 
 #' @importFrom stats pt
@@ -4400,6 +4400,7 @@ test.mean <- function(m, sd, n, h) {
  se <- sd/sqrt(n)
  t <- (m - h)/se
  p <- 2*(1 - pt(abs(t), df))
+ p <- round(p, 5)
  out <- t(c(t, df, p))
  colnames(out) <- c("t", "df", "p")
  rownames(out) <- ""
