@@ -4441,8 +4441,8 @@ test.mean <- function(m, sd, n, h) {
 #' test.skew(y)
 #'
 #' # Should return:
-#' # Skewness      p
-#' #   1.5201 0.0067
+#' # Skewness     p
+#' #   1.5201 0.007
 #'
 #'
 #' @importFrom stats rnorm
@@ -4470,7 +4470,7 @@ test.skew <- function(y) {
  e1 <- sum(c1)/rep
  e2 <- sum(c2)/rep
  p <- e1 + e2
- out <- round(t(c(skew, p)), 4)
+ out <- round(t(c(skew, p)), 3)
  colnames(out) <- c("Skewness", "p")
  rownames(out) <- ""
  return(out)
@@ -4511,8 +4511,8 @@ test.skew <- function(y) {
 #' test.kurtosis(y)
 #'
 #' # Should return:
-#' # Kurtosis  Excess      p
-#' #   4.8149  1.8149 0.0385 
+#' # Kurtosis  Excess     p
+#' #   4.8149  1.8149 0.038 
 #'
 #'
 #' @importFrom stats rnorm
@@ -4539,7 +4539,7 @@ test.kurtosis <- function(y) {
  if (kur < 3) {c <- as.integer(kur0 < kur)}
  p <- 2*sum(c)/rep
  if (p > .9999) {p = .9999}
- out <- round(t(c(kur, kur - 3, p)), 4)
+ out <- round(t(c(kur, kur - 3, p)), 3)
  colnames(out) <- c("Kurtosis", "Excess", "p")
  rownames(out) <- ""
  return(out)
