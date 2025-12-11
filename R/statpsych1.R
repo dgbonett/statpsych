@@ -4584,8 +4584,8 @@ test.kurtosis <- function(y) {
 #' test.anova.bs(m, sd, n)
 #'
 #' #  Should return:
-#' #        F dfA  dfE           p Eta-squared  adj Eta-squared
-#' # 5.919585   2   57 0.004614428   0.1719831        0.1429298
+#' #        F dfA  dfE       p Eta-squared  adj Eta-squared
+#' # 5.919585   2   57 0.00461   0.1719831        0.1429298
 #'  
 #' 
 #' @importFrom stats pf
@@ -4603,6 +4603,7 @@ test.anova.bs <- function(m, sd, n) {
  MSa <- SSa/dfa
  F <- MSa/MSe
  p <- 1 - pf(F, dfa, dfe)
+ p <- round(p, 5)
  etasqr <- SSa/(SSa + SSe)
  adjetasqr <- 1 - (dfa + dfe)*(1 - etasqr)/dfe
  out <- t(c(F, dfa, dfe, p, etasqr, adjetasqr))
