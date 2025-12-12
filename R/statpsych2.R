@@ -2151,15 +2151,15 @@ ci.slope.median.bs <- function(alpha, m, se, x) {
 #' test.cor(.484, 100, 0, .2)
 #'
 #' # Should return:
-#' # Estimate        z           p
-#' #    0.484 3.205432 0.001348601
+#' # Estimate        z       p
+#' #    0.484 3.205432 0.00135
 #'
 #'
 #' test.cor(.372, 100, 0, 0)
 #'
 #' # Should return:
-#' #  Estimate        t df           p
-#' #     0.372 3.967337 98 0.000138436
+#' #  Estimate        t df       p
+#' #     0.372 3.967337 98 0.00014
 #'
 #'
 #' @importFrom stats pnorm
@@ -2172,7 +2172,8 @@ test.cor <- function(cor, n, s, h) {
   se <- sqrt((1 - cor^2)/df)
   t <- cor/se
   pval <- 2*(1 - pt(abs(t), df))
-  out <- t(c(cor, t, df, pval))
+  p <- round(pval, 5) 
+  out <- t(c(cor, t, df, p))
   colnames(out) <- c("Estimate", "t", "df", "p")
  }
  else {
@@ -2181,7 +2182,8 @@ test.cor <- function(cor, n, s, h) {
    se.z <- sqrt(1/(n - 3 - s))
    z <- (r.z - h.z)/se.z
    pval <- 2*(1 - pnorm(abs(z)))
-   out <- t(c(cor, z, pval))
+   p <- round(pval, 5) 
+   out <- t(c(cor, z, p))
    colnames(out) <- c("Estimate", "z", "p")
  }
  rownames(out) <- ""
@@ -2218,15 +2220,15 @@ test.cor <- function(cor, n, s, h) {
 #' test.spear(.471, .2, 100)
 #'
 #' # Should return:
-#' # Estimate        z           p
-#' #     0.471 3.009628 0.00261568
+#' # Estimate        z        p
+#' #     0.471 3.009628 0.00262
 #'
 #'
-#' test.spear(.342, 0, 100)
+#' test.spear(.341, 0, 100)
 #'
 #' # Should return:
-#' #  Estimate        t df            p
-#' #     0.342 3.602881 98 0.0004965008
+#' #  Estimate        t df       p
+#' #     0.341 3.590958 98 0.00052
 #'
 #'
 #' @importFrom stats pnorm
@@ -2239,7 +2241,8 @@ test.spear <- function(cor, h, n) {
   se <- sqrt((1 - cor^2)/df)
   t <- cor/se
   pval <- 2*(1 - pt(abs(t), df))
-  out <- t(c(cor, t, df, pval))
+  p <- round(pval, 5) 
+  out <- t(c(cor, t, df, p))
   colnames(out) <- c("Estimate", "t", "df", "p")
  }
  else {
@@ -2248,7 +2251,8 @@ test.spear <- function(cor, h, n) {
    se.z <- sqrt((1 + h^2/2)/(n - 3))
    z <- (r.z - h.z)/se.z
    pval <- 2*(1 - pnorm(abs(z)))
-   out <- t(c(cor, z, pval))
+   p <- round(pval, 5) 
+   out <- t(c(cor, z, p))
    colnames(out) <- c("Estimate", "z", "p")
  }
  rownames(out) <- ""
@@ -2286,8 +2290,8 @@ test.spear <- function(cor, h, n) {
 #' test.cor2(.684, .437, 100, 125, 0)
 #'
 #' # Should return:
-#' # Estimate        z           p
-#' #    0.247 2.705709 0.006815877
+#' # Estimate        z       p
+#' #    0.247 2.705709 0.00682
 #'
 #'
 #' @importFrom stats pnorm
@@ -2305,7 +2309,8 @@ test.cor2 <- function(cor1, cor2, n1, n2, s) {
  diff <- cor1 - cor2
  z <- (z1 - z2)/se
  pval <- 2*(1 - pnorm(abs(z)))
- out <- t(c(diff, z, pval))
+ p <- round(pval, 5) 
+ out <- t(c(diff, z, p))
  colnames(out) <- c("Estimate", "z", "p")
  rownames(out) <- ""
  return(out)
@@ -2345,8 +2350,8 @@ test.cor2 <- function(cor1, cor2, n1, n2, s) {
 #' test.spear2(.684, .437, 100, 125)
 #'
 #' # Should return:
-#' # Estimate        z          p
-#' #    0.247 2.498645 0.01246691
+#' # Estimate        z       p
+#' #    0.247 2.498645 0.01247
 #'
 #'
 #' @importFrom stats pnorm
@@ -2364,7 +2369,8 @@ test.spear2 <- function(cor1, cor2, n1, n2) {
  diff <- cor1 - cor2
  z <- (z1 - z2)/se
  pval <- 2*(1 - pnorm(abs(z)))
- out <- t(c(diff, z, pval))
+ p <- round(pval, 5) 
+ out <- t(c(diff, z, p))
  colnames(out) <- c("Estimate", "z", "p")
  rownames(out) <- ""
  return(out)
