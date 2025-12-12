@@ -2559,8 +2559,8 @@ pi.prop <- function(alpha, prop, n0, n, type) {
 #' test.prop(76, 100, .6)
 #'
 #' # Should return:
-#' # Estimate        z           p
-#' #     0.76 3.163924 0.001556573
+#' # Estimate        z       p
+#' #     0.76 3.163924 0.00156
 #'
 #'
 #' @importFrom stats pnorm
@@ -2571,7 +2571,8 @@ test.prop <- function(f, n, h) {
  se <- sqrt(h*(1 - h)/n)
  z <- (abs(p - h) - 1/(2*n))/se
  pval <- 2*(1 - pnorm(abs(z)))
- out <- t(c(p, z, pval))
+ p <- round(pval, 5) 
+ out <- t(c(p, z, p))
  colnames(out) <- c("Estimate", "z", "p")
  rownames(out) <- ""
  return(out)
@@ -2613,8 +2614,8 @@ test.prop <- function(f, n, h) {
 #' test.prop2(39, 24, 50, 50)
 #'
 #' # Should return:
-#' # Estimate        z           p
-#' #      0.3 2.899726 0.003734895
+#' # Estimate        z       p
+#' #      0.3 2.899726 0.00373
 #'
 #'
 #' @importFrom stats pnorm
@@ -2629,7 +2630,8 @@ test.prop2 <- function(f1, f2, n1, n2) {
  se <- sqrt(p0*(1 - p0)/n1 + p0*(1 - p0)/n2)
  z <- (abs(p1 - p2) - 1/(2*n1) - 1/(2*n2))/se
  pval <- 2*(1 - pnorm(abs(z)))
- out <- t(c(diff, z, pval))
+ p <- round(pval, 5) 
+ out <- t(c(diff, z, p))
  colnames(out) <- c("Estimate", "z", "p")
  rownames(out) <- ""
  return(out)
@@ -2664,13 +2666,13 @@ test.prop2 <- function(f1, f2, n1, n2) {
 #'
 #'
 #' @examples
-#' f <- c(111, 161, 132)
+#' f <- c(111, 118, 132)
 #' n <- c(200, 200, 200)
 #' test.prop.bs (f, n)
 #'
 #' # Should return:
-#' # Chi-square df           p
-#' #    28.6573  2 5.98612e-07
+#' # Chi-square df       p
+#' #    4.77057  2 0.09206
 #'
 #'
 #' @importFrom stats pchisq
@@ -2685,7 +2687,8 @@ test.prop.bs <- function(f, n) {
  r <- (p - p0)^2
  chi <- a*sum(n*r)
  pval <- 1 - pchisq(chi, df)
- out <- t(c(chi, df, pval))
+ p <- round(pval, 5) 
+ out <- t(c(chi, df, p))
  colnames(out) <- c("Chi-square", "df", "p")
  rownames(out) <- ""
  return(out)
@@ -2729,8 +2732,8 @@ test.prop.bs <- function(f, n) {
 #' test.prop.ps(12, 4, 26, 6)
 #'
 #' # Should return:
-#' #   Estimate        z            p
-#' # -0.4583333 3.834058 0.0001260465
+#' #   Estimate        z       p
+#' # -0.4583333 3.834058 0.00013
 #'
 #'
 #' @importFrom stats pnorm
@@ -2745,7 +2748,8 @@ test.prop.ps <- function(f00, f01, f10, f11) {
  se <- sqrt((p10 + p01)/n)
  z <- (abs(p10 - p01) - 1/n)/se
  pval <- 2*(1 - pnorm(abs(z)))
- out <- t(c(diff, z, pval))
+ p <- round(pval, 5) 
+ out <- t(c(diff, z, p))
  colnames(out) <- c("Estimate", "z", "p")
  rownames(out) <- ""
  return(out)
