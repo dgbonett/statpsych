@@ -335,14 +335,16 @@ ci.mean2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
  vp <- ((n1 - 1)*v1 + (n2 - 1)*v2)/df1
  se1 <- sqrt(vp/n1 + vp/n2)
  t1 <- est/se1
- p1 <- 2*(1 - pt(abs(t1),df1))
+ pval1 <- 2*(1 - pt(abs(t1), df1))
+ p1 <- round(pval1, 5)
  tcrit1 <- qt(1 - alpha/2, df1)
  ll1 <- est - tcrit1*se1
  ul1 <- est + tcrit1*se1
  se2 <- sqrt(v1/n1 + v2/n2)
  t2 <- est/se2
  df2 <- (se2^4)/(v1^2/(n1^3 - n1^2) + v2^2/(n2^3 - n2^2))
- p2 <- 2*(1 - pt(abs(t2),df2))
+ pval2 <- 2*(1 - pt(abs(t2), df2))
+ p2 <- round(pval2, 5)
  tcrit2 <- qt(1 - alpha/2, df2)
  ll2 <- est - tcrit2*se2
  ul2 <- est + tcrit2*se2
@@ -404,9 +406,9 @@ ci.mean2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' #                              Estimate       SE        t       df
 #' # Equal Variances Assumed:          7.6 1.108703 6.854854 87.00000
 #' # Equal Variances Not Assumed:      7.6 1.111135 6.839851 57.58812
-#' #                                         p       LL       UL
-#' # Equal Variances Assumed:     9.804579e-10 5.396332 9.803668
-#' # Equal Variances Not Assumed: 5.617069e-09 5.375482 9.824518
+#' #                                  p       LL       UL
+#' # Equal Variances Assumed:     9e-10 5.396332 9.803668
+#' # Equal Variances Not Assumed: 5e-09 5.375482 9.824518
 #'
 #' m <- c(33.5, 37.9, 38.0, 44.1)
 #' sd <- c(3.84, 3.84, 3.65, 4.98)
@@ -418,9 +420,9 @@ ci.mean2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' #                              Estimate       SE         t       df 
 #' # Equal Variances Assumed:        -5.35 1.300136 -4.114955 36.00000 
 #' # Equal Variances Not Assumed:    -5.35 1.300136 -4.114955 33.52169 
-#' #                                         p         LL        UL
-#' # Equal Variances Assumed:     0.0002152581  -7.986797 -2.713203
-#' # Equal Variances Not Assumed: 0.0002372436  -7.993583 -2.706417
+#' #                                    p         LL        UL
+#' # Equal Variances Assumed:     0.00022  -7.986797 -2.713203
+#' # Equal Variances Not Assumed: 0.00024  -7.993583 -2.706417
 #'
 #'
 #' @importFrom stats qt
@@ -433,7 +435,8 @@ ci.lc.mean.bs <- function(alpha, m, sd, n, v) {
  v1 <- sum((n - 1)*sd^2)/df1
  se1 <- sqrt(v1*t(v)%*%solve(diag(n))%*%v)
  t1 <- est/se1
- p1 <- 2*(1 - pt(abs(t1),df1))
+ pval1 <- 2*(1 - pt(abs(t1), df1))
+ p1 <- round(pval1, 5)
  tcrit1 <- qt(1 - alpha/2, df1)
  ll1 <- est - tcrit1*se1
  ul1 <- est + tcrit1*se1
@@ -441,7 +444,8 @@ ci.lc.mean.bs <- function(alpha, m, sd, n, v) {
  se2 <- sqrt(t(v)%*%v2%*%v)
  t2 <- est/se2
  df2 <- (se2^4)/sum(((v^4)*(sd^4)/(n^2*(n - 1))))
- p2 <- 2*(1 - pt(abs(t2),df2))
+ pval2 <- 2*(1 - pt(abs(t2), df2))
+ p2 <- round(pval2, 5)
  tcrit2 <- qt(1 - alpha/2, df2)
  ll2 <- est - tcrit2*se2
  ul2 <- est + tcrit2*se2
@@ -501,8 +505,8 @@ ci.lc.mean.bs <- function(alpha, m, sd, n, v) {
 #' ci.lc.mean.scheffe(.05, m, sd, n, v)
 #'
 #' # Should return:
-#' #  Estimate       SE         t           p        LL        UL
-#' #     -5.35 1.275231 -4.195317 0.002276683 -9.089451 -1.610549
+#' #  Estimate       SE         t       p        LL        UL
+#' #     -5.35 1.275231 -4.195317 0.00228 -9.089451 -1.610549
 #'
 #'
 #' @importFrom stats qt
@@ -516,7 +520,8 @@ ci.lc.mean.scheffe <- function(alpha, m, sd, n, v) {
  v1 <- sum((n - 1)*sd^2)/df2
  se <- sqrt(v1*t(v)%*%solve(diag(n))%*%v)
  t <- est/se
- p <- 1 - pf(t^2/df1, df1, df2)
+ pval <- 1 - pf(t^2/df1, df1, df2)
+ p <- round(pval, 5)
  crit <- sqrt(df1*qf(1 - alpha, df1, df2))
  ll <- est - crit*se
  ul <- est + crit*se
@@ -1003,8 +1008,8 @@ ci.lc.stdmean.bs <- function(alpha, m, sd, n, v) {
 #' ci.mean.ps(.05, 58.2, 51.4, 7.43, 8.92, .537, 30)
 #'
 #' # Should return:
-#' # Estimate       SE        t df            p       LL       UL
-#' #      6.8 1.455922 4.670578 29  6.33208e-05 3.822304 9.777696
+#' # Estimate       SE        t df      p       LL       UL
+#' #      6.8 1.455922 4.670578 29  6e-05 3.822304 9.777696
 #'
 #'
 #' @importFrom stats qt
@@ -1018,7 +1023,8 @@ ci.mean.ps <- function(alpha, m1, m2, sd1, sd2, cor, n) {
  est <- m1 - m2
  se <- sqrt(vd/n)
  t <- est/se
- p <- 2*(1 - pt(abs(t), df))
+ pval <- 2*(1 - pt(abs(t), df))
+ p <- round(pval, 5)
  ll <- est - tcrit*se
  ul <- est + tcrit*se
  out <- t(c(est, se, t, df, p, ll, ul))
