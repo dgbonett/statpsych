@@ -403,12 +403,9 @@ ci.mean2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' ci.lc.mean.bs(.05, m, sd, n, v)
 #'
 #' # Should return:
-#' #                              Estimate       SE        t       df
-#' # Equal Variances Assumed:          7.6 1.108703 6.854854 87.00000
-#' # Equal Variances Not Assumed:      7.6 1.111135 6.839851 57.58812
-#' #                                  p       LL       UL
-#' # Equal Variances Assumed:     9e-10 5.396332 9.803668
-#' # Equal Variances Not Assumed: 5e-09 5.375482 9.824518
+#' #                              Estimate       SE      t    df p       LL       UL
+#' # Equal Variances Assumed:          7.6 1.108703 6.8549 87.00 0 5.396332 9.803668
+#' # Equal Variances Not Assumed:      7.6 1.111135 6.8399 57.59 0 5.375484 9.824516
 #'
 #' m <- c(33.5, 37.9, 38.0, 44.1)
 #' sd <- c(3.84, 3.84, 3.65, 4.98)
@@ -417,12 +414,9 @@ ci.mean2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' ci.lc.mean.bs(.05, m, sd, n, v)
 #'
 #' # Should return:
-#' #                              Estimate       SE         t       df 
-#' # Equal Variances Assumed:        -5.35 1.300136 -4.114955 36.00000 
-#' # Equal Variances Not Assumed:    -5.35 1.300136 -4.114955 33.52169 
-#' #                                    p         LL        UL
-#' # Equal Variances Assumed:     0.00022  -7.986797 -2.713203
-#' # Equal Variances Not Assumed: 0.00024  -7.993583 -2.706417
+#' #                              Estimate       SE      t    df       p        LL        UL
+#' # Equal Variances Assumed:        -5.35 1.300136 -4.115 36.00 0.00022 -7.986797 -2.713203
+#' # Equal Variances Not Assumed:    -5.35 1.300136 -4.115 33.52 0.00024 -7.993588 -2.706412
 #'
 #'
 #' @importFrom stats qt
@@ -431,21 +425,22 @@ ci.mean2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 ci.lc.mean.bs <- function(alpha, m, sd, n, v) {
  est <- t(v)%*%m 
  k <- length(m)
- df1 <- sum(n) - k
+ df1 <- round(sum(n) - k, 2)
  v1 <- sum((n - 1)*sd^2)/df1
  se1 <- sqrt(v1*t(v)%*%solve(diag(n))%*%v)
- t1 <- est/se1
- pval1 <- 2*(1 - pt(abs(t1), df1))
- p1 <- round(pval1, 5)
+ t1 <- round(est/se1, 4)
+ p1 <- 2*(1 - pt(abs(t1),df1))
+ p1 <- round(p1, 5)
  tcrit1 <- qt(1 - alpha/2, df1)
  ll1 <- est - tcrit1*se1
  ul1 <- est + tcrit1*se1
  v2 <- diag(sd^2)%*%(solve(diag(n)))
  se2 <- sqrt(t(v)%*%v2%*%v)
- t2 <- est/se2
+ t2 <- round(est/se2, 4)
  df2 <- (se2^4)/sum(((v^4)*(sd^4)/(n^2*(n - 1))))
- pval2 <- 2*(1 - pt(abs(t2), df2))
- p2 <- round(pval2, 5)
+ df2 <- round(df2, 2)
+ p2 <- 2*(1 - pt(abs(t2),df2))
+ p2 <- round(p2, 5)
  tcrit2 <- qt(1 - alpha/2, df2)
  ll2 <- est - tcrit2*se2
  ul2 <- est + tcrit2*se2
