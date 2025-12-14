@@ -1954,14 +1954,14 @@ ci.cramer <- function(alpha, chisqr, r, c, n) {
 #' ci.2x2.prop.bs(.05, f, n)
 #'
 #' # Should return:
-#' #             Estimate         SE          z           p          LL          UL
-#' # AB:      -0.27450980 0.13692496 -2.0048193 0.044982370 -0.54287780 -0.00614181
-#' # A:       -0.11764706 0.06846248 -1.7184165 0.085720668 -0.25183106  0.01653694
-#' # B:       -0.03921569 0.06846248 -0.5728055 0.566776388 -0.17339968  0.09496831
-#' # A at b1: -0.25000000 0.09402223 -2.6589456 0.007838561 -0.43428019 -0.06571981
-#' # A at b2:  0.01923077 0.09787658  0.1964798 0.844234654 -0.17260380  0.21106534
-#' # B at a1: -0.17307692 0.09432431 -1.8349132 0.066518551 -0.35794917  0.01179533
-#' # B at a2:  0.09615385 0.09758550  0.9853293 0.324462356 -0.09511021  0.28741790
+#' #             Estimate         SE          z       p          LL          UL
+#' # AB:      -0.27450980 0.13692496 -2.0048193 0.04498 -0.54287780 -0.00614181
+#' # A:       -0.11764706 0.06846248 -1.7184165 0.08572 -0.25183106  0.01653694
+#' # B:       -0.03921569 0.06846248 -0.5728055 0.56678 -0.17339968  0.09496831
+#' # A at b1: -0.25000000 0.09402223 -2.6589456 0.00784 -0.43428019 -0.06571981
+#' # A at b2:  0.01923077 0.09787658  0.1964798 0.84423 -0.17260380  0.21106534
+#' # B at a1: -0.17307692 0.09432431 -1.8349132 0.06652 -0.35794917  0.01179533
+#' # B at a2:  0.09615385 0.09758550  0.9853293 0.32446 -0.09511021  0.28741790
 #'
 #'
 #' @importFrom stats qnorm
@@ -1983,49 +1983,49 @@ ci.2x2.prop.bs <- function(alpha, f, n) {
  est1 <- t(v1)%*%p.4
  se1 <- sqrt(t(v1)%*%diag(p.4*(1 - p.4))%*%solve(diag(n + 1))%*%v1)
  z1 <- est1/se1
- p1 <- 2*(1 - pnorm(abs(z1)))
+ p1 <- round(2*(1 - pnorm(abs(z1))), 5)
  LL1 <- est1 - zcrit*se1
  UL1 <- est1 + zcrit*se1
  row1 <- c(est1, se1, z1, p1, LL1, UL1)
  est2 <- t(v2)%*%p.4
  se2 <- sqrt(t(v2)%*%diag(p.4*(1 - p.4))%*%solve(diag(n + 1))%*%v2)
  z2 <- est2/se2
- p2 <- 2*(1 - pnorm(abs(z2)))
+ p2 <- round(2*(1 - pnorm(abs(z2))), 5)
  LL2 <- est2 - zcrit*se2
  UL2 <- est2 + zcrit*se2
  row2 <- c(est2, se2, z2, p2, LL2, UL2)
  est3 <- t(v3)%*%p.4
  se3 <- sqrt(t(v3)%*%diag(p.4*(1 - p.4))%*%solve(diag(n + 1))%*%v3)
  z3 <- est3/se3
- p3 <- 2*(1 - pnorm(abs(z3)))
+ p3 <- round(2*(1 - pnorm(abs(z3))), 5)
  LL3 <- est3 - zcrit*se3
  UL3 <- est3 + zcrit*se3
  row3 <- c(est3, se3, z3, p3, LL3, UL3)
  est4 <- t(v4)%*%p.2
  se4 <- sqrt(t(v4)%*%diag(p.2*(1 - p.2))%*%solve(diag(n + 2))%*%v4)
  z4 <- est4/se4
- p4 <- 2*(1 - pnorm(abs(z4)))
+ p4 <- round(2*(1 - pnorm(abs(z4))), 5)
  LL4 <- est4 - zcrit*se4
  UL4 <- est4 + zcrit*se4
  row4 <- c(est4, se4, z4, p4, LL4, UL4)
  est5 <- t(v5)%*%p.2
  se5 <- sqrt(t(v5)%*%diag(p.2*(1 - p.2))%*%solve(diag(n + 2))%*%v5)
  z5 <- est5/se5
- p5 <- 2*(1 - pnorm(abs(z5)))
+ p5 <- round(2*(1 - pnorm(abs(z5))), 5)
  LL5 <- est5 - zcrit*se5
  UL5 <- est5 + zcrit*se5
  row5 <- c(est5, se5, z5, p5, LL5, UL5)
  est6 <- t(v6)%*%p.2
  se6 <- sqrt(t(v6)%*%diag(p.2*(1 - p.2))%*%solve(diag(n + 2))%*%v6)
  z6 <- est6/se6
- p6 <- 2*(1 - pnorm(abs(z6)))
+ p6 <- round(2*(1 - pnorm(abs(z6))), 5)
  LL6 <- est6 - zcrit*se6
  UL6 <- est6 + zcrit*se6
  row6 <- c(est6, se6, z6, p6, LL6, UL6)
  est7 <- t(v7)%*%p.2
  se7 <- sqrt(t(v7)%*%diag(p.2*(1 - p.2))%*%solve(diag(n + 2))%*%v7)
  z7 <- est7/se7
- p7 <- 2*(1 - pnorm(abs(z7)))
+ p7 <- round(2*(1 - pnorm(abs(z7))), 5)
  LL7 <- est7 - zcrit*se7
  UL7 <- est7 + zcrit*se7
  row7 <- c(est7, se7, z7, p7, LL7, UL7)
@@ -2079,14 +2079,14 @@ ci.2x2.prop.bs <- function(alpha, f, n) {
 #' ci.2x2.prop.mixed (.05, group1, group2)
 #'
 #' # Should return:
-#' #              Estimate          SE          z          p          LL           UL
-#' # AB:       0.007555369 0.017716073  0.4264697 0.66976559 -0.02716750  0.042278234
-#' # A:       -0.013678675 0.008858036 -1.5442107 0.12253730 -0.03104011  0.003682758
-#' # B:       -0.058393219 0.023032656 -2.5352360 0.01123716 -0.10353640 -0.013250043
-#' # A at b1: -0.009876543 0.012580603 -0.7850612 0.43241768 -0.03453407  0.014780985
-#' # A at b2: -0.017412935 0.012896543 -1.3502018 0.17695126 -0.04268969  0.007863824
-#' # B at a1: -0.054634236 0.032737738 -1.6688458 0.09514794 -0.11879902  0.009530550
-#' # B at a2: -0.062170628 0.032328556 -1.9230871 0.05446912 -0.12553343  0.001192177
+#' #              Estimate          SE          z       p          LL           UL
+#' # AB:       0.007555369 0.017716073  0.4264697 0.66976 -0.02716750  0.042278234
+#' # A:       -0.013678675 0.008858036 -1.5442107 0.12254 -0.03104011  0.003682758
+#' # B:       -0.058393219 0.023032656 -2.5352360 0.01124 -0.10353640 -0.013250043
+#' # A at b1: -0.009876543 0.012580603 -0.7850612 0.43242 -0.03453407  0.014780985
+#' # A at b2: -0.017412935 0.012896543 -1.3502018 0.17695 -0.04268969  0.007863824
+#' # B at a1: -0.054634236 0.032737738 -1.6688458 0.09515 -0.11879902  0.009530550
+#' # B at a2: -0.062170628 0.032328556 -1.9230871 0.05447 -0.12553343  0.001192177
 #'
 #'
 #' @importFrom stats qnorm
@@ -2107,14 +2107,14 @@ ci.2x2.prop.mixed <- function(alpha, group1, group2) {
  v2 <- (p3 + p4 - (p3 - p4)^2)/(n2 + 1)
  se1 <- sqrt(v1 + v2)
  z1 <- est1/se1
- pval1 <- 2*(1 - pnorm(abs(z1)))
+ pval1 <- round(2*(1 - pnorm(abs(z1))), 5)
  LL1 <- est1 - zcrit*se1
  UL1 <- est1 + zcrit*se1
  row1 <- c(est1, se1, z1, pval1, LL1, UL1)
  est2 <- ((p2 - p1) + (p4 - p3))/2
  se2 <- se1/2
  z2 <- est2/se2
- pval2 <- 2*(1 - pnorm(abs(z2)))
+ pval2 <- round(2*(1 - pnorm(abs(z2))), 5)
  LL2 <- est2 - zcrit*se2
  UL2 <- est2 + zcrit*se2
  row2 <- c(est2, se2, z2, pval2, LL2, UL2)
@@ -2123,7 +2123,7 @@ ci.2x2.prop.mixed <- function(alpha, group1, group2) {
  est3 <- p1 - p2
  se3 <- sqrt(p1*(1 - p1)/(2*(n1 + 2)) + p2*(1 - p2)/(2*(n2 + 2)))
  z3 <- est3/se3
- pval3 <- 2*(1 - pnorm(abs(z3)))
+ pval3 <- round(2*(1 - pnorm(abs(z3))), 5)
  LL3 <- est3 - zcrit*se3
  UL3 <- est3 + zcrit*se3
  row3 <- c(est3, se3, z3, pval3, LL3, UL3)
@@ -2132,7 +2132,7 @@ ci.2x2.prop.mixed <- function(alpha, group1, group2) {
  est4 <- p2 - p1
  se4 <- sqrt((p1 + p2 - (p1 - p2)^2)/(n1 + 2))
  z4 <- est4/se4
- pval4 <- 2*(1 - pnorm(abs(z4)))
+ pval4 <- round(2*(1 - pnorm(abs(z4))), 5)
  LL4 <- est4 - zcrit*se4
  UL4 <- est4 + zcrit*se4
  row4 <- c(est4, se4, z4, pval4, LL4, UL4)
@@ -2141,7 +2141,7 @@ ci.2x2.prop.mixed <- function(alpha, group1, group2) {
  est5 <- p2 - p1
  se5 <- sqrt((p1 + p2 - (p1 - p2)^2)/(n2 + 2))
  z5 <- est5/se5
- pval5 <- 2*(1 - pnorm(abs(z5)))
+ pval5 <- round(2*(1 - pnorm(abs(z5))), 5)
  LL5 <- est5 - zcrit*se5
  UL5 <- est5 + zcrit*se5
  row5 <- c(est5, se5, z5, pval5, LL5, UL5)
@@ -2150,7 +2150,7 @@ ci.2x2.prop.mixed <- function(alpha, group1, group2) {
  est6 <- p1 - p2
  se6 <- sqrt(p1*(1 - p1)/(n1 + 2) + p2*(1 - p2)/(n2 + 2))
  z6 <- est6/se6
- pval6 <- 2*(1 - pnorm(abs(z6)))
+ pval6 <- round(2*(1 - pnorm(abs(z6))), 5)
  LL6 <- est6 - zcrit*se6
  UL6 <- est6 + zcrit*se6
  row6 <- c(est6, se6, z6, pval6, LL6, UL6)
@@ -2159,7 +2159,7 @@ ci.2x2.prop.mixed <- function(alpha, group1, group2) {
  est7 <- p1 - p2
  se7 <- sqrt(p1*(1 - p1)/(n1 + 2) + p2*(1 - p2)/(n2 + 2))
  z7 <- est7/se7
- pval7 <- 2*(1 - pnorm(abs(z7)))
+ pval7 <- round(2*(1 - pnorm(abs(z7))), 5)
  LL7 <- est7 - zcrit*se7
  UL7 <- est7 + zcrit*se7
  row7 <- c(est7, se7, z7, pval7, LL7, UL7)
