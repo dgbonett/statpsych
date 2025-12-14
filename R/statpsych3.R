@@ -1536,8 +1536,8 @@ ci.kappa <- function(alpha, f00, f01, f10, f11) {
 #' ci.agree(.05, 250, 214, 3)
 #'
 #' # Should return:
-#' #  Estimate        SE        LL        UL
-#' #     0.784 0.0333073 0.7097933 0.8413878
+#' #  Estimate        SE     LL     UL
+#' #     0.784 0.0333073 0.7098 0.8414
 #'
 #'
 #' @importFrom stats qnorm
@@ -1550,9 +1550,11 @@ ci.agree <- function(alpha, n, f, k) {
  p.mle <- f/n
  p.adj <- (f + 2)/(n + 4)
  se.g <- a*sqrt(p.mle*(1 - p.mle)/n)
- LL.g <- a*(p.adj - z*sqrt(p.adj*(1 - p.adj)/(n + 4))) - 1/(k - 1) 
- UL.g <- a*(p.adj + z*sqrt(p.adj*(1 - p.adj)/(n + 4))) - 1/(k - 1) 
- out <- t(c(g.mle, se.g, LL.g, UL.g))
+ ll <- a*(p.adj - z*sqrt(p.adj*(1 - p.adj)/(n + 4))) - 1/(k - 1) 
+ ul <- a*(p.adj + z*sqrt(p.adj*(1 - p.adj)/(n + 4))) - 1/(k - 1) 
+ ll <- round(ll, 4)
+ ul <- round(ul, 4)
+ out <- t(c(g.mle, se.g, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  rownames(out) <- ""
  return(out)
