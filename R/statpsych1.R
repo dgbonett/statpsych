@@ -2889,14 +2889,14 @@ ci.etasqr <- function(alpha, etasqr, df1, df2) {
 #' ci.2x2.mean.mixed(.05, y11, y12, y21, y22)
 #'
 #' # Should return:
-#' #            Estimate        SE         t       df            p         LL        UL
-#' # AB:      -3.8333333 0.9803627 -3.910117 8.346534 0.0041247610 -6.0778198 -1.588847
-#' # A:        2.0833333 0.4901814  4.250128 8.346534 0.0025414549  0.9610901  3.205577
-#' # B:        3.7500000 1.0226599  3.666908 7.601289 0.0069250119  1.3700362  6.129964
-#' # A at b1:  0.1666667 0.8333333  0.200000 5.000000 0.8493605140 -1.9754849  2.308818
-#' # A at b2:  4.0000000 0.5163978  7.745967 5.000000 0.0005732451  2.6725572  5.327443
-#' # B at a1:  1.8333333 0.9803627  1.870056 9.943850 0.0911668588 -0.3527241  4.019391
-#' # B at a2:  5.6666667 1.2692955  4.464419 7.666363 0.0023323966  2.7173445  8.615989
+#' #            Estimate        SE         t   df            p         LL        UL
+#' # AB:      -3.8333333 0.9803627 -3.910117 8.35 0.0041247610 -6.0778198 -1.588847
+#' # A:        2.0833333 0.4901814  4.250128 8.35 0.0025414549  0.9610901  3.205577
+#' # B:        3.7500000 1.0226599  3.666908 7.60 0.0069250119  1.3700362  6.129964
+#' # A at b1:  0.1666667 0.8333333  0.200000 5.00 0.8493605140 -1.9754849  2.308818
+#' # A at b2:  4.0000000 0.5163978  7.745967 5.00 0.0005732451  2.6725572  5.327443
+#' # B at a1:  1.8333333 0.9803627  1.870056 9.94 0.0911668588 -0.3527241  4.019391
+#' # B at a2:  5.6666667 1.2692955  4.464419 7.67 0.0023323966  2.7173445  8.615989
 #'
 #'
 #' @importFrom stats qt
@@ -2919,6 +2919,7 @@ ci.2x2.mean.mixed <- function(alpha, y11, y12, y21, y22) {
  est1 <- mean(diff1) - mean(diff2)
  se1 <- sqrt(vd1/n1 + vd2/n2)
  df1 <- (se1^4)/(vd1^2/(n1^3 - n1^2) + vd2^2/(n2^3 - n2^2))
+ df1 <- round(df1, 2)
  tcrit1 <- qt(1 - alpha/2, df1)
  t1 <- est1/se1
  p1 <- 2*(1 - pt(abs(t1), df1))
@@ -2929,6 +2930,7 @@ ci.2x2.mean.mixed <- function(alpha, y11, y12, y21, y22) {
  est2 <- (mean(diff1) + mean(diff2))/2
  se2 <- sqrt(vd1/n1 + vd2/n2)/2
  df2 <- (se2^4)/(vd1^2/((n1^3 - n1^2)*16) + vd2^2/((n2^3 - n2^2)*16))
+ df2 <- round(df2, 2)
  tcrit2 <- qt(1 - alpha/2, df2)
  t2 <- est2/se2
  p2 <- 2*(1 - pt(abs(t2), df2))
@@ -2939,6 +2941,7 @@ ci.2x2.mean.mixed <- function(alpha, y11, y12, y21, y22) {
  est3 <- mean(ave1) - mean(ave2)
  se3 <- sqrt(va1/n1 + va2/n2)
  df3 <- (se3^4)/(va1^2/(n1^3 - n1^2) + va2^2/(n2^3 - n2^2))
+ df3 <- round(df3, 2)
  tcrit3 <- qt(1 - alpha/2, df3)
  t3 <- est3/se3
  p3 <- 2*(1 - pt(abs(t3), df3))
@@ -2969,6 +2972,7 @@ ci.2x2.mean.mixed <- function(alpha, y11, y12, y21, y22) {
  est6 <- mean(y11) - mean(y12)
  se6 <- sqrt(var(y11)/n1 + var(y12)/n2)
  df6 <- (se6^4)/(var(y11)^2/(n1^3 - n1^2) + var(y12)^2/(n2^3 - n2^2))
+ df6 <- round(df6, 2)
  tcrit6 <- qt(1 - alpha/2, df6)
  t6 <- est6/se6
  p6 <- 2*(1 - pt(abs(t6), df6))
@@ -2979,6 +2983,7 @@ ci.2x2.mean.mixed <- function(alpha, y11, y12, y21, y22) {
  est7 <- mean(y21) - mean(y22)
  se7 <- sqrt(var(y21)/n1 + var(y22)/n2)
  df7 <- (se7^4)/(var(y21)^2/(n1^3 - n1^2) + var(y22)^2/(n2^3 - n2^2))
+ df7 <- round(df7, 2)
  tcrit7 <- qt(1 - alpha/2, df7)
  t7 <- est7/se7
  p7 <- 2*(1 - pt(abs(t7), df7))
@@ -3165,14 +3170,14 @@ ci.2x2.mean.ws <- function(alpha, y11, y12, y21, y22) {
 #' ci.2x2.mean.bs(.05, y11, y12, y21, y22)
 #'
 #' # Should return:
-#' #          Estimate       SE           t       df           p         LL         UL
-#' # AB:         -5.10 2.224860 -2.29227953 35.47894 0.027931810 -9.6145264 -0.5854736
-#' # A:           1.65 1.112430  1.48323970 35.47894 0.146840430 -0.6072632  3.9072632
-#' # B:          -2.65 1.112430 -2.38217285 35.47894 0.022698654 -4.9072632 -0.3927368
-#' # A at b1:    -0.90 1.545244 -0.58243244 17.56296 0.567678242 -4.1522367  2.3522367
-#' # A at b2:     4.20 1.600694  2.62386142 17.93761 0.017246053  0.8362274  7.5637726
-#' # B at a1:    -5.20 1.536952 -3.38331916 17.61093 0.003393857 -8.4341379 -1.9658621
-#' # B at a2:    -0.10 1.608657 -0.06216365 17.91650 0.951120753 -3.4807927  3.2807927
+#' #          Estimate       SE           t    df           p         LL         UL
+#' # AB:         -5.10 2.224860 -2.29227953 35.48 0.027931810 -9.6145264 -0.5854736
+#' # A:           1.65 1.112430  1.48323970 35.48 0.146840430 -0.6072632  3.9072632
+#' # B:          -2.65 1.112430 -2.38217285 35.48 0.022698654 -4.9072632 -0.3927368
+#' # A at b1:    -0.90 1.545244 -0.58243244 17.56 0.567678242 -4.1522367  2.3522367
+#' # A at b2:     4.20 1.600694  2.62386142 17.94 0.017246053  0.8362274  7.5637726
+#' # B at a1:    -5.20 1.536952 -3.38331916 17.61 0.003393857 -8.4341379 -1.9658621
+#' # B at a2:    -0.10 1.608657 -0.06216365 17.92 0.951120753 -3.4807927  3.2807927
 #'
 #'
 #' @importFrom stats qt
@@ -3211,6 +3216,7 @@ ci.2x2.mean.bs <- function(alpha, y11, y12, y21, y22) {
  se1 <- sqrt(t(v1)%*%var%*%v1)
  t1 <- est1/se1
  df1 <- (se1^4)/sum(((v1^4)*(sd^4)/(n^2*(n - 1))))
+ df1 <- round(df1, 2)
  tcrit1 <- qt(1 - alpha/2, df1)
  p1 <- 2*(1 - pt(abs(t1), df1))
  LL1 <- est1 - tcrit1*se1
@@ -3220,6 +3226,7 @@ ci.2x2.mean.bs <- function(alpha, y11, y12, y21, y22) {
  se2 <- sqrt(t(v2)%*%var%*%v2)
  t2 <- est2/se2
  df2 <- (se2^4)/sum(((v2^4)*(sd^4)/(n^2*(n - 1))))
+ df2 <- round(df2, 2)
  tcrit2 <- qt(1 - alpha/2, df2)
  p2 <- 2*(1 - pt(abs(t2), df2))
  LL2 <- est2 - tcrit2*se2
@@ -3229,6 +3236,7 @@ ci.2x2.mean.bs <- function(alpha, y11, y12, y21, y22) {
  se3 <- sqrt(t(v3)%*%var%*%v3)
  t3 <- est3/se3
  df3 <- (se3^4)/sum(((v3^4)*(sd^4)/(n^2*(n - 1))))
+ df3 <- round(df3, 2)
  tcrit3 <- qt(1 - alpha/2, df3)
  p3 <- 2*(1 - pt(abs(t3), df3))
  LL3 <- est3 - tcrit3*se3
@@ -3238,6 +3246,7 @@ ci.2x2.mean.bs <- function(alpha, y11, y12, y21, y22) {
  se4 <- sqrt(t(v4)%*%var%*%v4)
  t4 <- est4/se4
  df4 <- (se4^4)/sum(((v4^4)*(sd^4)/(n^2*(n - 1))))
+ df4 <- round(df4, 2)
  tcrit4 <- qt(1 - alpha/2, df4)
  p4 <- 2*(1 - pt(abs(t4), df4))
  LL4 <- est4 - tcrit4*se4
@@ -3247,6 +3256,7 @@ ci.2x2.mean.bs <- function(alpha, y11, y12, y21, y22) {
  se5 <- sqrt(t(v5)%*%var%*%v5)
  t5 <- est5/se5
  df5 <- (se5^4)/sum(((v5^4)*(sd^4)/(n^2*(n - 1))))
+ df5 <- round(df5, 2)
  tcrit5 <- qt(1 - alpha/2, df5)
  p5 <- 2*(1 - pt(abs(t5), df5))
  LL5 <- est5 - tcrit5*se5
@@ -3256,6 +3266,7 @@ ci.2x2.mean.bs <- function(alpha, y11, y12, y21, y22) {
  se6 <- sqrt(t(v6)%*%var%*%v6)
  t6 <- est6/se6
  df6 <- (se6^4)/sum(((v6^4)*(sd^4)/(n^2*(n - 1))))
+ df6 <- round(df6, 2)
  tcrit6 <- qt(1 - alpha/2, df6)
  p6 <- 2*(1 - pt(abs(t6), df6))
  LL6 <- est6 - tcrit6*se6
@@ -3265,6 +3276,7 @@ ci.2x2.mean.bs <- function(alpha, y11, y12, y21, y22) {
  se7 <- sqrt(t(v7)%*%var%*%v7)
  t7 <- est7/se7
  df7 <- (se7^4)/sum(((v7^4)*(sd^4)/(n^2*(n - 1))))
+ df7 <- round(df7, 2)
  tcrit7 <- qt(1 - alpha/2, df7)
  p7 <- 2*(1 - pt(abs(t7), df7))
  LL7 <- est7 - tcrit7*se7
@@ -6720,9 +6732,9 @@ pi.score <- function(alpha, m, sd, n) {
 #' pi.score2(.05, 19.4, 11.3, 2.70, 2.10, 40, 40)
 #'
 #' # Should return:
-#' #                              Predicted       df       LL       UL
-#' # Equal Variances Assumed:           8.1 78.00000 1.205659 14.99434
-#' # Equal Variances Not Assumed:       8.1 73.54385 1.199073 15.00093
+#' #                              Predicted    df       LL       UL
+#' # Equal Variances Assumed:           8.1 78.00 1.205659 14.99434
+#' # Equal Variances Not Assumed:       8.1 73.54 1.199073 15.00093
 #'  
 #' 
 #' @importFrom stats qt
@@ -6739,6 +6751,7 @@ pi.score2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
  c1 <- sd1^2 + sd1^2/n1
  c2 <- sd2^2 + sd2^2/n2
  df2 <- 1/((1/(n1 - 1))*(c1/(c1 + c2))^2 + (1/(n2 - 1))*(c2/(c1 + c2))^2)
+ df2 <- round(df2, 2)
  tcrit2 <- qt(1 - alpha/2, df2)
  ll2 <- est - tcrit2*se2
  ul2 <- est + tcrit2*se2
@@ -7066,13 +7079,14 @@ ci.var.upper <- function(alpha, var, n) {
 #'
 #' # Should return:
 #' # adj Eta-squared
-#' #        0.282381
+#' #          0.2824
 #'  
 #' 
 #' @export
 etasqr.adj <- function(etasqr, dfeffect, dferror) {
  if (etasqr > .999 | etasqr < .001) {stop("etasqr must be between .001 and .999")}
  adj <- 1 - (dferror + dfeffect)*(1 - etasqr)/dferror
+ adj <- round(adj, 4)
  if (adj < 0) {adj = 0}
  out <- matrix(adj, nrow = 1, ncol = 1)
  colnames(out) <- "adj Eta-squared"
