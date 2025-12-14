@@ -1125,8 +1125,8 @@ ci.lc.gen.bs <- function(alpha, est, se, v) {
 #' ci.rsqr(.05, .247, 4, 150)
 #'
 #' # Should return:
-#' # R-squared adj R-squared         SE         LL        UL  
-#' #     0.247     0.2262276 0.06023682  0.1152485 0.3513725
+#' # R-squared adj R-squared         SE      LL     UL  
+#' #     0.247        0.2262 0.06023682  0.1152 0.3514
 #'  
 #' 
 #' @importFrom stats qf
@@ -1138,6 +1138,7 @@ ci.rsqr <- function(alpha, r2, s, n) {
  z0 <- qnorm(1 - alpha1)
  dfe <- n - s - 1
  adj <- 1 - (n - 1)*(1 - r2)/dfe
+ adj <- round(adj, 4)
  if (adj < 0) {adj = 0}
  b1 <- r2/(1 - r2)
  b2 <- adj/(1 - adj)
@@ -1168,6 +1169,8 @@ ci.rsqr <- function(alpha, r2, s, n) {
    if (ul < 0) {ul = 0}
  }
  se <- (ul - ll)/(2*z0)
+ ll <- round(ll, 4)
+ ul <- round(ul, 4)
  out <- t(c(r2, adj, se, ll, ul))
  colnames(out) <- c("R-squared", "adj R-squared", "SE", "LL", "UL")
  rownames(out) <- ""
@@ -1287,8 +1290,8 @@ ci.theil <- function(alpha, y, x) {
 #' ci.cronbach(.05, .85, 7, 89)
 #'
 #' # Should return:
-#' # Estimate          SE        LL        UL
-#' #     0.85  0.02456518 0.7970649 0.8931666
+#' # Estimate          SE     LL     UL
+#' #     0.85  0.02456518 0.7971 0.8932
 #'  
 #' 
 #' @importFrom stats qf
@@ -1303,6 +1306,8 @@ ci.cronbach <- function(alpha, rel, r, n) {
  f0 <- 1/(1 - rel)
  ll <- 1 - f1/f0
  ul <- 1 - 1/(f0*f2)
+ ll <- round(ll, 4)
+ ul <- round(ul, 4)
  out <- t(c(rel, se, ll, ul))
  colnames(out) = c("Estimate", "SE", "LL", "UL")
  rownames(out) <- ""
@@ -1346,8 +1351,8 @@ ci.cronbach <- function(alpha, rel, r, n) {
 #' ci.reliability(.05, .88, .0147, 100)
 #'
 #' # Should return:
-#' # Estimate         LL        UL
-#' #     0.88  0.8489612 0.9065575
+#' # Estimate     LL     UL
+#' #     0.88  0.849 0.9066
 #'  
 #' 
 #' @importFrom stats qf
@@ -1358,6 +1363,8 @@ ci.reliability <- function(alpha, rel, se, n) {
  b <- log(n/(n - 1))
  ll <- 1 - exp(log(1 - rel) - b + z*sqrt(se^2/(1 - rel)^2))
  ul <- 1 - exp(log(1 - rel) - b - z*sqrt(se^2/(1 - rel)^2))
+ ll <- round(ll, 4)
+ ul <- round(ul, 4)
  out <- t(c(rel, ll, ul))
  colnames(out) = c("Estimate", "LL", "UL")
  rownames(out) <- ""
@@ -1403,8 +1410,8 @@ ci.reliability <- function(alpha, rel, se, n) {
 #' ci.cronbach2(.05, .88, .76, 8, 8, 200, 250)
 #'
 #' # Should return:
-#' # Estimate         LL       UL
-#' #     0.12 0.06972131 0.1732518
+#' # Estimate     LL     UL
+#' #     0.12 0.0697 0.1733
 #'  
 #' 
 #' @importFrom stats qf
@@ -1429,6 +1436,8 @@ ci.cronbach2 <- function(alpha, rel1, rel2, r1, r2, n1, n2) {
  d <- rel1 - rel2
  ll <- d - sqrt((rel1 - LL1)^2 + (UL2 - rel2)^2)
  ul <- d + sqrt((UL1 - rel1)^2 + (rel2 - LL2)^2)
+ ll <- round(ll, 4)
+ ul <- round(ul, 4)
  out <- t(c(d, ll, ul))
  colnames(out) <- c("Estimate", "LL", "UL")
  rownames(out) <- ""
@@ -1475,8 +1484,8 @@ ci.cronbach2 <- function(alpha, rel1, rel2, r1, r2, n1, n2) {
 #' ci.rel2(.4, .35, .47, .2, .1, .32)
 #'
 #' # Should return:
-#' # Estimate   LL        UL
-#' #      0.2 0.07 0.3220656
+#' # Estimate   LL     UL
+#' #      0.2 0.07 0.3221
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -1487,6 +1496,8 @@ ci.rel2 <- function(rel1, ll1, ul1, rel2, ll2, ul2) {
  diff <- rel1 - rel2
  ll <- diff - sqrt((rel1 - ll1)^2 + (ul2 - rel2)^2)
  ul <- diff + sqrt((ul1 - rel1)^2 + (rel2 - ll2)^2)
+ ll <- round(ll, 4)
+ ul <- round(ul, 4)
  out <- t(c(diff, ll, ul))
  colnames(out) <- c("Estimate", "LL", "UL")
  rownames(out) <- ""
@@ -1549,8 +1560,8 @@ ci.rel2 <- function(rel1, ll1, ul1, rel2, ll2, ul2) {
 #' ci.bscor(.05, 28.32, 21.48, 3.81, 3.09, 40, 40)
 #'
 #' # Should return:
-#' #   Estimate         SE        LL        UL
-#' #  0.8855666 0.06129908  0.7376327 0.984412
+#' # Estimate         SE      LL     UL
+#' #   0.8856 0.06129908  0.7376 0.9844
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -1576,6 +1587,9 @@ ci.bscor <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
  uld <- d + z*se.d
  ll <- a*lld/sqrt(lld^2 + c)
  ul <- a*uld/sqrt(uld^2 + c)
+ bscor <- round(pbcor*a, 4)
+ ll <- round(ll, 4)
+ ul <- round(ul, 4)
  if (ul > 1) {ul = 1}
  if (ll < -1) {ll = -1}
  out <- t(c(bscor, se.bscor, ll, ul))
@@ -1629,9 +1643,9 @@ ci.bscor <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' ci.icc(.05, 48.2, 11.3, 5, 30)
 #'
 #' # Should return:
-#' #            Estimate        SE        LL        UL
-#' # ICC(C, 1) 0.3950749 0.8566579 0.2311230 0.5852772
-#' # ICC(C, r) 0.7655602 0.0700523 0.6004779 0.8758727
+#' #           Estimate        SE     LL     UL
+#' # ICC(C, 1)   0.3951 0.8566579 0.2311 0.5853
+#' # ICC(C, r)   0.7656 0.0700523 0.6005 0.8759
 
 #'  
 #' 
@@ -1649,10 +1663,12 @@ ci.icc <- function(alpha, MSr, MSe, r, n) {
  f2 <- qf(1 - alpha/2, df2, df1)
  fL <- f/f1
  fU <- f*f2
- ll.1 <- (fL - 1)/(fL + r - 1) 
- ul.1 <- (fU - 1)/(fU + r - 1)
- ll.r <- 1 - 1/fL
- ul.r <- 1 - 1/fU
+ ll.1 <- round((fL - 1)/(fL + r - 1), 4)
+ ul.1 <- round((fU - 1)/(fU + r - 1), 4)
+ ll.r <- round(1 - 1/fL, 4)
+ ul.r <- round(1 - 1/fU, 4)
+ icc1 <- round(icc1, 4)
+ iccr <- round(iccr, 4)
  out1 <- t(c(icc1, se1, ll.1, ul.1))
  out2 <- t(c(iccr, ser, ll.r, ul.r))
  out <- rbind(out1, out2)
@@ -1708,14 +1724,14 @@ ci.icc <- function(alpha, MSr, MSe, r, n) {
 #' pi.cor(.1, .761, 50, 100, 1)
 #'
 #' # Should return:
-#' #         LL        UL
-#' #  0.6034092 0.8573224
+#' #      LL     UL
+#' #  0.6034 0.8573
 #'  
 #' pi.cor(.1, .761, 50, 100, 3)
 #'
 #' # Should return:
-#' #         LL
-#' #  0.6428751
+#' #      LL
+#' #  0.6429
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -1729,6 +1745,8 @@ pi.cor <- function(alpha, cor, n0, n, type) {
   ul0 <- cor.z - cor/(2*(n0 - 1)) + z*sqrt(1/(n0 - 3) + 1/(n - 3))
   ll <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
   ul <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
+  ll <- round(ll, 4)
+  ul <- round(ul, 4)
   out <- t(c(ll, ul))
   colnames(out) <- c("LL", "UL")
  }
@@ -1737,6 +1755,7 @@ pi.cor <- function(alpha, cor, n0, n, type) {
   cor.z <- log((1 + cor)/(1 - cor))/2
   ul0 <- cor.z - cor/(2*(n0 - 1)) + z*sqrt(1/(n0 - 3) + 1/(n - 3))
   ul <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
+  ul <- round(ul, 4)
   out <- matrix(ul, nrow = 1, ncol = 1)
   colnames(out) <- "UL"
  }
@@ -1745,6 +1764,7 @@ pi.cor <- function(alpha, cor, n0, n, type) {
   cor.z <- log((1 + cor)/(1 - cor))/2
   ll0 <- cor.z - cor/(2*(n0 - 1)) - z*sqrt(1/(n0 - 3) + 1/(n - 3))
   ll <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
+  ll <- round(ll, 4)
   out <- matrix(ll, nrow = 1, ncol = 1)
   colnames(out) <- "LL"
  }
@@ -1794,14 +1814,14 @@ pi.cor <- function(alpha, cor, n0, n, type) {
 #' pi.cronbach(.1, .852, 5, 100, 150, 1)
 #'
 #' # Should return:
-#' #          LL        UL
-#' #   0.7944136 0.8955762
+#' #       LL     UL
+#' #   0.7944 0.8956
 #'  
 #' pi.cronbach(.1, .852, 5, 100, 150, 3)
 #'
 #' # Should return:
-#' #         LL
-#' #  0.8092324
+#' #      LL
+#' #  0.8092
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -1817,6 +1837,8 @@ pi.cronbach <- function(alpha, rel, r, n0, n, type) {
   ll0 <- rel.log + z*sqrt(v1 + v2)
   ll <- 1 - exp(ll0)
   ul <- 1 - exp(ul0)
+  ll <- round(ll, 4)
+  ul <- round(ul, 4)
   out <- t(c(ll, ul))
   colnames(out) <- c("LL", "UL")
  }
@@ -1824,6 +1846,7 @@ pi.cronbach <- function(alpha, rel, r, n0, n, type) {
   z <- qnorm(1 - alpha)
   ul0 <- rel.log - z*sqrt(v1 + v2)
   ul <- 1 - exp(ul0)
+  ul <- round(ul, 4)
   out <- matrix(ul, nrow = 1, ncol = 1)
   colnames(out) <- "UL"
  }
@@ -1831,6 +1854,7 @@ pi.cronbach <- function(alpha, rel, r, n0, n, type) {
   z <- qnorm(1 - alpha)
   ll0 <- rel.log + z*sqrt(v1 + v2)
   ll <- 1 - exp(ll0)
+  ll <- round(ll, 4)
   out <- matrix(ll, nrow = 1, ncol = 1)
   colnames(out) <- "LL"
  }
@@ -1882,14 +1906,14 @@ pi.cronbach <- function(alpha, rel, r, n0, n, type) {
 #' ci.bayes.cor(.05, .1, .536, 0, 50)
 #'
 #' # Should return:
-#' # Posterior mean         LL        UL
-#' #      0.1873765 0.02795441 0.3375031
+#' # Posterior mean     LL     UL
+#' #         0.1874  0.028 0.3375
 #'
 #' ci.bayes.cor(.05, .1, .536, 0, 300)
 #'
 #' # Should return:
-#' #  Posterior mean        LL        UL
-#' #       0.4195068 0.3352449 0.4971107
+#' # Posterior mean     LL     UL
+#' #         0.4195 0.3352 0.4971
 #'
 #'
 #' @importFrom stats qnorm
@@ -1906,6 +1930,9 @@ ci.bayes.cor <- function(alpha, prior_sd, cor, s, n) {
  mean <- (exp(2*post_mean) - 1)/(exp(2*post_mean) + 1)
  ll <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
  ul <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
+ ll <- round(ll, 4)
+ ul <- round(ul, 4)
+ mean <- round(mean, 4)
  out <- t(c(mean, ll, ul))
  colnames(out) <- c("Posterior mean", "LL", "UL")
  rownames(out) <- ""
@@ -1956,8 +1983,8 @@ ci.bayes.cor <- function(alpha, prior_sd, cor, s, n) {
 #' ci.bayes.spcor(.05, .1, .582, .137)
 #'
 #' # Should return:
-#' #  Posterior mean        LL        UL
-#' #       0.2272797 0.07288039 0.3710398
+#' # Posterior mean     LL    UL
+#' #         0.2273 0.0729 0.371
 #'
 #'
 #' @importFrom stats qnorm
@@ -1973,6 +2000,9 @@ ci.bayes.spcor <- function(alpha, prior_sd, cor, se) {
  mean <- (exp(2*post_mean) - 1)/(exp(2*post_mean) + 1)
  ll <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
  ul <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
+ ll <- round(ll, 4)
+ ul <- round(ul, 4)
+ mean <- round(mean, 4)
  out <- t(c(mean, ll, ul))
  colnames(out) <- c("Posterior mean", "LL", "UL")
  rownames(out) <- ""
