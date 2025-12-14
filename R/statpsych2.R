@@ -2011,12 +2011,12 @@ ci.bayes.spcor <- function(alpha, prior_sd, cor, se) {
 #' ci.slope.mean.bs(.05, m, sd, n, x)
 #'
 #' # Should return:
-#' #                               Estimate         SE        t       df
-#' # Equal Variances Assumed:     0.3664407 0.06770529 5.412290 36.00000
-#' # Equal Variances Not Assumed: 0.3664407 0.07336289 4.994905 18.65826
-#' #                                         p        LL        UL
-#' # Equal Variances Assumed:     4.242080e-06 0.2291280 0.5037534
-#' # Equal Variances Not Assumed: 8.468223e-05 0.2126998 0.5201815
+#' #                               Estimate         SE        t    df
+#' # Equal Variances Assumed:     0.3664407 0.06770529 5.412290 36.00
+#' # Equal Variances Not Assumed: 0.3664407 0.07336289 4.994905 18.66
+#' #                                  p        LL        UL
+#' # Equal Variances Assumed:     4e-06 0.2291280 0.5037534
+#' # Equal Variances Not Assumed: 8e-05 0.2126998 0.5201815
 #'
 #'
 #' @importFrom stats qt
@@ -2033,6 +2033,7 @@ ci.slope.mean.bs <- function(alpha, m, sd, n, x) {
  se1 <- sqrt(v1*t(v)%*%solve(diag(n))%*%v)
  t1 <- est/se1
  p1 <- 2*(1 - pt(abs(t1),df1))
+ p1 <- round(p1, 5)
  tcrit1 <- qt(1 - alpha/2, df1)
  ll1 <- est - tcrit1*se1
  ul1 <- est + tcrit1*se1
@@ -2040,7 +2041,9 @@ ci.slope.mean.bs <- function(alpha, m, sd, n, x) {
  se2 <- sqrt(t(v)%*%v2%*%v)
  t2 <- est/se2
  df2 <- (se2^4)/sum(((v^4)*(sd^4)/(n^2*(n - 1))))
+ df2 <- (round(df2, 2)
  p2 <- 2*(1 - pt(abs(t2),df2))
+ p2 <- round(p2, 5)
  tcrit2 <- qt(1 - alpha/2, df2)
  ll2 <- est - tcrit2*se2
  ul2 <- est + tcrit2*se2
@@ -4781,10 +4784,10 @@ sim.ci.spear <- function(alpha, n, cor, dist1, dist2, rep) {
 #' adj.se(.05, 10.26, 8.37, 114, se, b)
 #'
 #' # Should return:
-#' #      Estimate   adj SE        t  df           p        LL        UL
-#' # [1,]     3.78 1.738243 2.174609 114 0.031725582 0.3365531  7.223447
-#' # [2,]     8.21 3.487559 2.354082 114 0.020279958 1.3011734 15.118827
-#' # [3,]     2.99 1.087233 2.750102 114 0.006930554 0.8362007  5.143799
+#' #      Estimate   adj SE        t  df       p        LL        UL
+#' # [1,]     3.78 1.738243 2.174609 114 0.03173 0.3365531  7.223447
+#' # [2,]     8.21 3.487559 2.354082 114 0.02028 1.3011734 15.118827
+#' # [3,]     2.99 1.087233 2.750102 114 0.00693 0.8362007  5.143799
 #'  
 #' 
 #' @importFrom stats qt
@@ -4796,7 +4799,8 @@ adj.se <- function(alpha, mse1, mse2, dfe1, se, b) {
  tcrit <- qt(1 - alpha/2, dfe1)
  adjse <- se*sqrt(mse1/mse2)
  t <- b/adjse
- p <- 2*(1 - pt(abs(t),dfe1))
+ p <- 2*(1 - pt(abs(t), dfe1))
+ p <- round(p, 5)
  ll <- b - tcrit*adjse
  ul <- b + tcrit*adjse
  out <- matrix(c(t(b), t(adjse), t(t), t(df), t(p), t(ll), t(ul)), s, 7)
@@ -4838,20 +4842,20 @@ adj.se <- function(alpha, mse1, mse2, dfe1, se, b) {
 #' fitindices(14.21, 10, 258.43, 20, 300)
 #'
 #' # Should return:
-#' #        NFI   adj NFI       CFI       TLI      RMSEA
-#' #  0.9450141 0.9837093 0.9823428 0.9646857 0.03746109
+#' #    NFI   adj NFI   CFI    TLI  RMSEA
+#' #  0.945    0.9837  0.98 0.9647 0.0375
 #'  
 #' 
 #' @export  
 fitindices <- function(chi1, df1, chi2, df2, n) {
  if (chi2 == 0) {stop("chi2 must be a positive value")}
- nfi <- 1 - chi1/chi2
+ nfi <- round(1 - chi1/chi2, 4)
  d1 <- chi1 - df1
  if (d1 < 0) {d1 = 0}
- adjnfi <- 1 - d1/chi2
- rmsea <- sqrt(d1/(n*df1))
+ adjnfi <- round(1 - d1/chi2, 4)
+ rmsea <- round(sqrt(d1/(n*df1)), 4)
  if (chi2 - df2 > 0) 
-  {cfi <- 1 - d1/(chi2 - df2)}
+  {cfi <- round(1 - d1/(chi2 - df2), 2)}
  else
   {cfi <- 0}
  d2 <- chi2/df2 - chi1/df1
@@ -4859,7 +4863,7 @@ fitindices <- function(chi1, df1, chi2, df2, n) {
  if (d2 < 0) {d2 = 0}
  if (d3 < 0) {d3 = 0}
  if (d3 > 0)
-  {tli <- d2/d3}
+  {tli <- round(d2/d3, 4)}
  else
   {tli <- 0}
  out <- t(c(nfi, adjnfi, cfi, tli, rmsea))
