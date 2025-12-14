@@ -316,9 +316,9 @@ ci.stdmean <- function(alpha, m, sd, n, h) {
 #' @examples
 #' ci.mean2(.05, 19.4, 11.3, 2.70, 2.10, 40, 40)
 #' # Should return:
-#' #                              Estimate        SE        t       df p
-#' # Equal Variances Assumed:          8.1 0.5408327 14.97691 78.00000 0
-#' # Equal Variances Not Assumed:      8.1 0.5408327 14.97691 73.54385 0
+#' #                              Estimate        SE        t    df p
+#' # Equal Variances Assumed:          8.1 0.5408327 14.97691 78.00 0
+#' # Equal Variances Not Assumed:      8.1 0.5408327 14.97691 73.54 0
 #' #                                    LL       UL
 #' # Equal Variances Assumed:     7.023285 9.176715
 #' # Equal Variances Not Assumed: 7.022256 9.177744
@@ -343,6 +343,7 @@ ci.mean2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
  se2 <- sqrt(v1/n1 + v2/n2)
  t2 <- est/se2
  df2 <- (se2^4)/(v1^2/(n1^3 - n1^2) + v2^2/(n2^3 - n2^2))
+ df2 <- round(df2, 2)
  pval2 <- 2*(1 - pt(abs(t2), df2))
  p2 <- round(pval2, 5)
  tcrit2 <- qt(1 - alpha/2, df2)
@@ -425,7 +426,7 @@ ci.mean2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 ci.lc.mean.bs <- function(alpha, m, sd, n, v) {
  est <- t(v)%*%m 
  k <- length(m)
- df1 <- round(sum(n) - k, 2)
+ df1 <- sum(n) - k
  v1 <- sum((n - 1)*sd^2)/df1
  se1 <- sqrt(v1*t(v)%*%solve(diag(n))%*%v)
  t1 <- round(est/se1, 4)
@@ -572,13 +573,13 @@ ci.lc.mean.scheffe <- function(alpha, m, sd, n, v) {
 #' ci.tukey(.05, m, sd, n)
 #'
 #' # Should return:
-#' #     Estimate       SE          t       df       p        LL         UL
-#' # 1 2    -4.71 4.139530 -1.1378102 37.99200 0.66881 -15.83085  6.4108517
-#' # 1 3   -13.43 4.427673 -3.0331960 37.51894 0.02177 -25.33172 -1.5282764
-#' # 1 4   -17.35 4.490074 -3.8640790 37.29278 0.00233 -29.42281 -5.2771918
-#' # 2 3    -8.72 4.399497 -1.9820446 37.39179 0.21291 -20.54783  3.1078269
-#' # 2 4   -12.64 4.462292 -2.8326248 37.14275 0.03572 -24.64034 -0.6396589
-#' # 3 4    -3.92 4.730817 -0.8286096 37.97652 0.84055 -16.62958  8.7895768
+#' #     Estimate       SE          t    df       p        LL         UL
+#' # 1 2    -4.71 4.139530 -1.1378102 37.99 0.66881 -15.83085  6.4108517
+#' # 1 3   -13.43 4.427673 -3.0331960 37.52 0.02177 -25.33172 -1.5282764
+#' # 1 4   -17.35 4.490074 -3.8640790 37.29 0.00233 -29.42281 -5.2771918
+#' # 2 3    -8.72 4.399497 -1.9820446 37.39 0.21291 -20.54783  3.1078269
+#' # 2 4   -12.64 4.462292 -2.8326248 37.14 0.03572 -24.64034 -0.6396589
+#' # 3 4    -3.92 4.730817 -0.8286096 37.98 0.84055 -16.62958  8.7895768
 #'
 #'
 #' @importFrom stats qtukey
@@ -595,6 +596,7 @@ ci.tukey <-function(alpha, m, sd, n) {
  v2 <- outer(v2, v2, "+")
  df <- v1^2/v2
  df <- df[lower.tri(df)]
+ df <- round(df, 2)
  SE <- sqrt(v1[lower.tri(v1)])
  t <- Estimate/SE
  q <- qtukey(p = 1 - alpha, nmeans = a, df = df)/sqrt(2)
