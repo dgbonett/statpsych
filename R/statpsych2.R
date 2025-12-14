@@ -36,14 +36,14 @@
 #' ci.cor(.05, .60, 0, 150)
 #'
 #' # Should return:
-#' # Estimate         SE        LL        UL
-#' #      0.6 0.05243084 0.4849825 0.6925236
+#' # Estimate         SE    LL     UL
+#' #      0.6 0.05243084 0.485 0.6925
 #'
 #' ci.cor(.05, .70, 1, 135)
 #'
 #' # Should return:
-#' # Estimate         SE       LL        UL
-#' #      0.7 0.04405729 0.600191 0.7762763
+#' # Estimate         SE     LL     UL
+#' #      0.7 0.04405729 0.6002 0.7763
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -58,6 +58,8 @@ ci.cor <- function(alpha, cor, s, n) {
  ul0 <- zr + z*se.z
  ll <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
  ul <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
+ ll <- round(ll, 4)
+ ul <- round(ul, 4)
  out <- t(c(cor, se, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  rownames(out) <- ""
@@ -104,8 +106,8 @@ ci.cor <- function(alpha, cor, s, n) {
 #' ci.spcor(.05, -.355, .230, 236)
 #'
 #' # Should return:
-#' # Estimate         SE         LL         UL
-#' #   -0.355 0.05426308 -0.4564698 -0.2444144
+#' # Estimate         SE      LL      UL
+#' #   -0.355 0.05426308 -0.4565 -0.2444
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -122,6 +124,8 @@ ci.spcor <- function(alpha, cor, r2, n) {
  ul0 <- zr + z*se.z
  ll <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
  ul <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
+ ll <- round(ll, 4)
+ ul <- round(ul, 4)
  out <- t(c(cor, se, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  rownames(out) <- ""
@@ -165,8 +169,8 @@ ci.spcor <- function(alpha, cor, r2, n) {
 #' ci.cor2(.05, .64, .31, 200, 200)
 #'
 #' # Should return:
-#' # Estimate         SE         LL        UL
-#' #     0.33 0.07692066  0.1797046 0.4813704
+#' # Estimate         SE      LL     UL
+#' #     0.33 0.07692066  0.1797 0.4814
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -190,6 +194,8 @@ ci.cor2 <- function(alpha, cor1, cor2, n1, n2) {
  ul2 <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
  ll <- diff - sqrt((cor1 - ll1)^2 + (ul2 - cor2)^2)
  ul <- diff + sqrt((ul1 - cor1)^2 + (cor2 - ll2)^2)
+ ll <- round(ll, 4)
+ ul <- round(ul, 4)
  se <- sqrt((1 - cor1^2)^2/(n1 - 3) + (1 - cor2^2)^2/((n2 - 3)))
  out <- t(c(diff, se, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
@@ -236,8 +242,8 @@ ci.cor2 <- function(alpha, cor1, cor2, n1, n2) {
 #' ci.cor.dep(.05, .396, .179, .088, 166)
 #'
 #' # Should return:
-#' # Estimate        SE         LL       UL
-#' #    0.217 0.1026986 0.01323072 0.415802
+#' # Estimate        SE     LL     UL
+#' #    0.217 0.1026986 0.0132 0.4158
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -266,6 +272,8 @@ ci.cor.dep <- function(alpha, cor1, cor2, cor12, n) {
  d2 <- 2*c*(cor1 - ul1)*(cor2 - ll2)
  ll <- diff - sqrt((cor1 - ll1)^2 + (ul2 - cor2)^2 - d1)
  ul <- diff + sqrt((ul1 - cor1)^2 + (cor2 - ll2)^2 - d2)
+ ll <- round(ll, 4)
+ ul <- round(ul, 4)
  se <- (ul - ll)/(2*z)
  out <- t(c(diff, se, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
@@ -314,8 +322,8 @@ ci.cor.dep <- function(alpha, cor1, cor2, cor12, n) {
 #' ci.cor2.gen(.64, .55, .71, .31, .18, .43)
 #'
 #' # Should return:
-#' # Estimate    LL        UL
-#' #      0.33 0.18 0.4776482
+#' # Estimate    LL     UL
+#' #      0.33 0.18 0.4776
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -326,6 +334,8 @@ ci.cor2.gen <- function(cor1, ll1, ul1, cor2, ll2, ul2) {
  diff <- cor1 - cor2
  ll <- diff - sqrt((cor1 - ll1)^2 + (ul2 - cor2)^2)
  ul <- diff + sqrt((ul1 - cor1)^2 + (cor2 - ll2)^2)
+ ll <- round(ll, 4)
+ ul <- round(ul, 4)
  out <- t(c(diff, ll, ul))
  colnames(out) <- c("Estimate", "LL", "UL")
  rownames(out) <- ""
@@ -454,8 +464,8 @@ ci.pbcor <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' ci.spear(.05, y, x)
 #'
 #' # Should return:
-#' #  Estimate         SE        LL        UL
-#' # 0.8699639 0.08241326 0.5840951 0.9638297
+#' #  Estimate         SE     LL     UL
+#' # 0.8699639 0.08241326 0.5841 0.9638
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -478,6 +488,8 @@ ci.spear <- function(alpha, y, x) {
  ul0 <- z.cor + z*se/(1 - cor^2)
  ll <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
  ul <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
+ ll <- round(ll, 4)
+ ul <- round(ul, 4)
  out <- cbind(cor, se, ll, ul)
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  rownames(out) <- ""
@@ -519,8 +531,8 @@ ci.spear <- function(alpha, y, x) {
 #' ci.spear2(.05, .54, .48, 180, 200)
 #'
 #' # Should return:
-#' # Estimate         SE         LL        UL
-#' #     0.06 0.08124926 -0.1003977 0.2185085     
+#' # Estimate         SE      LL     UL
+#' #     0.06 0.08124926 -0.1004 0.2185     
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -544,6 +556,8 @@ ci.spear2 <- function(alpha, cor1, cor2, n1, n2) {
  cor.dif <- cor1 - cor2
  ll.dif <- cor.dif - sqrt((cor1 - ll1)^2 + (ul2 - cor2)^2)
  ul.dif <- cor.dif + sqrt((ul1 - cor1)^2 + (cor2 - ll2)^2)
+ ll.dif <- round(ll.dif, 4)
+ ul.dif <- round(ul.dif, 4)
  se <- sqrt(se1^2 + se2^2)
  out <- cbind(cor.dif, se, ll.dif, ul.dif)
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
