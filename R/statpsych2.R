@@ -2032,8 +2032,7 @@ ci.slope.mean.bs <- function(alpha, m, sd, n, x) {
  v1 <- sum((n - 1)*sd^2)/df1
  se1 <- sqrt(v1*t(v)%*%solve(diag(n))%*%v)
  t1 <- est/se1
- p1 <- 2*(1 - pt(abs(t1),df1))
- p1 <- round(p1, 5)
+ p1 <- round(2*(1 - pt(abs(t1), df1)), 5)
  tcrit1 <- qt(1 - alpha/2, df1)
  ll1 <- est - tcrit1*se1
  ul1 <- est + tcrit1*se1
@@ -2042,8 +2041,7 @@ ci.slope.mean.bs <- function(alpha, m, sd, n, x) {
  t2 <- est/se2
  df2 <- (se2^4)/sum(((v^4)*(sd^4)/(n^2*(n - 1))))
  df2 <- (round(df2, 2)
- p2 <- 2*(1 - pt(abs(t2),df2))
- p2 <- round(p2, 5)
+ p2 <- round(2*(1 - pt(abs(t2), df2)), 5)
  tcrit2 <- qt(1 - alpha/2, df2)
  ll2 <- est - tcrit2*se2
  ul2 <- est + tcrit2*se2
@@ -2092,8 +2090,8 @@ ci.slope.mean.bs <- function(alpha, m, sd, n, x) {
 #' ci.slope.median.bs(.05, m, se, x)
 #'
 #' # Should return:
-#' #   Estimate        SE        z           p        LL        UL
-#' #  0.3664407 0.1163593 3.149216 0.001637091 0.1383806 0.5945008
+#' #   Estimate        SE        z       p        LL        UL
+#' #  0.3664407 0.1163593 3.149216 0.00164 0.1383806 0.5945008
 #'
 #'
 #' @importFrom stats qnorm
@@ -2107,7 +2105,7 @@ ci.slope.median.bs <- function(alpha, m, se, x) {
  est <- t(v)%*%m 
  se <- sqrt(t(v)%*%diag(se^2)%*%v)
  z <- est/se
- p <- 2*(1 - pnorm(abs(z)))
+ p <- round(2*(1 - pnorm(abs(z))), 5)
  ll <- est - zcrit*se
  ul <- est + zcrit*se
  out <- t(c(est, se, z, p, ll, ul))
@@ -2174,8 +2172,7 @@ test.cor <- function(cor, n, s, h) {
   df <- n - 2 - s
   se <- sqrt((1 - cor^2)/df)
   t <- cor/se
-  pval <- 2*(1 - pt(abs(t), df))
-  p <- round(pval, 5) 
+  p <- round(2*(1 - pt(abs(t), df)), 5)
   out <- t(c(cor, t, df, p))
   colnames(out) <- c("Estimate", "t", "df", "p")
  }
@@ -2184,8 +2181,7 @@ test.cor <- function(cor, n, s, h) {
    h.z <- log((1 + h)/(1 - h))/2
    se.z <- sqrt(1/(n - 3 - s))
    z <- (r.z - h.z)/se.z
-   pval <- 2*(1 - pnorm(abs(z)))
-   p <- round(pval, 5) 
+   p <- round(2*(1 - pnorm(abs(z))), 2)
    out <- t(c(cor, z, p))
    colnames(out) <- c("Estimate", "z", "p")
  }
@@ -2243,8 +2239,7 @@ test.spear <- function(cor, h, n) {
   df <- n - 2
   se <- sqrt((1 - cor^2)/df)
   t <- cor/se
-  pval <- 2*(1 - pt(abs(t), df))
-  p <- round(pval, 5) 
+  p <- round(2*(1 - pt(abs(t), df)), 5)
   out <- t(c(cor, t, df, p))
   colnames(out) <- c("Estimate", "t", "df", "p")
  }
@@ -2253,8 +2248,7 @@ test.spear <- function(cor, h, n) {
    h.z <- log((1 + h)/(1 - h))/2
    se.z <- sqrt((1 + h^2/2)/(n - 3))
    z <- (r.z - h.z)/se.z
-   pval <- 2*(1 - pnorm(abs(z)))
-   p <- round(pval, 5) 
+   p <- round(2*(1 - pnorm(abs(z))))
    out <- t(c(cor, z, p))
    colnames(out) <- c("Estimate", "z", "p")
  }
@@ -2311,8 +2305,7 @@ test.cor2 <- function(cor1, cor2, n1, n2, s) {
  se <- sqrt(v1 + v2)
  diff <- cor1 - cor2
  z <- (z1 - z2)/se
- pval <- 2*(1 - pnorm(abs(z)))
- p <- round(pval, 5) 
+ p <- round(2*(1 - pnorm(abs(z))), 5)
  out <- t(c(diff, z, p))
  colnames(out) <- c("Estimate", "z", "p")
  rownames(out) <- ""
@@ -2371,8 +2364,7 @@ test.spear2 <- function(cor1, cor2, n1, n2) {
  se <- sqrt(v1 + v2)
  diff <- cor1 - cor2
  z <- (z1 - z2)/se
- pval <- 2*(1 - pnorm(abs(z)))
- p <- round(pval, 5) 
+ p <- round(2*(1 - pnorm(abs(z))), 5)
  out <- t(c(diff, z, p))
  colnames(out) <- c("Estimate", "z", "p")
  rownames(out) <- ""
