@@ -1254,8 +1254,8 @@ ci.yule <- function(alpha, f00, f01, f10, f11) {
 #' ci.phi(.05, 229, 28, 96, 24)
 #'
 #' # Should return:
-#' #  Estimate         SE         LL        UL
-#' #  0.1229976 0.05477117 0.01462398 0.2285149
+#' #  Estimate         SE     LL    UL
+#' #  0.1229976 0.05477117 0.015 0.229
 #'
 #'
 #' @importFrom stats qnorm
@@ -1277,6 +1277,8 @@ ci.phi <- function(alpha, f00, f01, f10, f11) {
  ul0 <- zr + z*se/(1 - phi^2)
  ll <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
  ul <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
+ ll <- round(ll, 3)
+ ul <- round(ul, 3)
  out <- t(c(phi, se, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  rownames(out) <- ""
@@ -1322,8 +1324,8 @@ ci.phi <- function(alpha, f00, f01, f10, f11) {
 #' ci.biphi(.05, 34, 22, 50, 50)
 #'
 #' # Should return:
-#' #  Estimate        SE         LL        UL
-#' #   0.27539 0.1074594 0.04933962 0.4638156
+#' #  Estimate        SE    LL    UL
+#' #   0.27539 0.1074594 0.049 0.464
 #'
 #'
 #' @importFrom stats qnorm
@@ -1348,6 +1350,8 @@ ci.biphi <- function(alpha, f1, f2, n1, n2) {
  se.biphi <- sqrt(c^2/(lor^2 + c)^3)*se.lor
  ll <- LL1/sqrt(LL1^2 + 2.89/(p1*p2))
  ul <- UL1/sqrt(UL1^2 + 2.89/(p1*p2))
+ ll <- round(ll, 3)
+ ul <- round(ul, 3)
  out <- t(c(biphi, se.biphi, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  rownames(out) <- ""
@@ -1394,8 +1398,8 @@ ci.biphi <- function(alpha, f1, f2, n1, n2) {
 #' ci.tetra(.05, 86, 16, 7, 93)
 #'
 #' # Should return:
-#' # Estimate         SE        LL        UL
-#' # 0.938496 0.02678152 0.8677373 0.9727189
+#' # Estimate     SE    LL    UL
+#' #    0.938 0.0268 0.868 0.973
 #'
 #'
 #' @importFrom stats qnorm
@@ -1417,7 +1421,10 @@ ci.tetra <- function(alpha, f00, f01, f10, f11) {
  tetra <- cos(3.14159/(1 + or^c))
  ll <- cos(3.14159/(1 + LL1^c))
  ul <- cos(3.14159/(1 + UL1^c))
- se <- (ul - ll)/(2*z)
+ ll <- round(ll, 3)
+ ul <- round(ul, 3)
+ tetra <- round(tetra, 3)
+ se <- round((ul - ll)/(2*z), 4)
  out <- t(c(tetra, se, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  rownames(out) <- ""
