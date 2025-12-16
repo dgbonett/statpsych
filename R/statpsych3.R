@@ -1254,8 +1254,8 @@ ci.yule <- function(alpha, f00, f01, f10, f11) {
 #' ci.phi(.05, 229, 28, 96, 24)
 #'
 #' # Should return:
-#' #  Estimate         SE     LL    UL
-#' #  0.1229976 0.05477117 0.015 0.229
+#' #  Estimate     SE    LL    UL
+#' #     0.123 0.0548 0.015 0.229
 #'
 #'
 #' @importFrom stats qnorm
@@ -1279,6 +1279,8 @@ ci.phi <- function(alpha, f00, f01, f10, f11) {
  ul <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
  ll <- round(ll, 3)
  ul <- round(ul, 3)
+ phi <- round(phi, 3)
+ se <- round(se, 4)
  out <- t(c(phi, se, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  rownames(out) <- ""
@@ -1324,8 +1326,8 @@ ci.phi <- function(alpha, f00, f01, f10, f11) {
 #' ci.biphi(.05, 34, 22, 50, 50)
 #'
 #' # Should return:
-#' #  Estimate        SE    LL    UL
-#' #   0.27539 0.1074594 0.049 0.464
+#' #  Estimate     SE    LL    UL
+#' #     0.275 0.1075 0.049 0.464
 #'
 #'
 #' @importFrom stats qnorm
@@ -1352,6 +1354,8 @@ ci.biphi <- function(alpha, f1, f2, n1, n2) {
  ul <- UL1/sqrt(UL1^2 + 2.89/(p1*p2))
  ll <- round(ll, 3)
  ul <- round(ul, 3)
+ biphi <- round(biphi, 3)
+ se.biphi <- round(se.biphi, 4)
  out <- t(c(biphi, se.biphi, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  rownames(out) <- ""
@@ -1469,9 +1473,9 @@ ci.tetra <- function(alpha, f00, f01, f10, f11) {
 #' ci.kappa(.05, 31, 12, 4, 58)
 #'
 #' # Should return:
-#' #               Estimate         SE        LL        UL
-#' # IC kappa:    0.6736597 0.07479965 0.5270551 0.8202643
-#' # Cohen kappa: 0.6756757 0.07344761 0.5317210 0.8196303
+#' #              Estimate     SE    LL    UL
+#' # IC kappa:       0.674 0.0748 0.527 0.821
+#' # Cohen kappa:    0.676 0.0734 0.532 0.820
 #'
 #'
 #' @importFrom stats qnorm
@@ -1483,20 +1487,27 @@ ci.kappa <- function(alpha, f00, f01, f10, f11) {
  p1 <- (2*f00 + f01 + f10)/(2*n)
  k1 <- 4*(p00*p11 - p01*p10) - (p01 - p10)^2
  k2 <- (2*p00 + p01 + p10)*(2*p11 + p01 + p10)
- k <- k1/k2 
+ k <- round(k1/k2, 3)
  se.k <- sqrt(((1 - k)/n)*((1 - k)*(1 - 2*k) + k*(2 - k)/(2*p1*(1 - p1))))
- LL.k <- k - z*se.k
- UL.k <- k + z*se.k 
+ se.k <- round(se.k, 4)
+ ll.k <- k - z*se.k
+ ul.k <- k + z*se.k 
+ ll.k <- round(ll.k, 3)
+ ul.k <- round(ul.k, 3)
  pr <- (p00 + p01)*(p00 + p10) + (p10 + p11)*(p01 + p11)
  c <- ((p00 + p11) - pr)/(1 - pr)
+ c <- round(c, 3)
  a1 <- p11*(1 - (p10 + p01 + 2*p11)*(1 - c))^2 + p00*(1 - (p10 + p01 + 2*p00)*(1 - c))^2
  a2 <- p10*(p11 + p00 + 2*p01)^2*(1 - c)^2 + p01*(p11 + p00 + 2*p10)^2*(1 - c)^2
  a3 <- (c - pr*(1 - c))^2
  se.c <- sqrt(a1 + a2 - a3)/((1 - pr)*sqrt(n))
- LL.c <- c - z*se.c
- UL.c <- c + z*se.c 
- out1 <- c(k, se.k, LL.k, UL.k)
- out2 <- c(c, se.c, LL.c, UL.c)
+ se.c <- round(se.c, 4)
+ ll.c <- c - z*se.c
+ ul.c <- c + z*se.c 
+ ll.c <- round(ll.c, 3)
+ ul.c <- round(ul.c, 3)
+ out1 <- c(k, se.k, ll.k, ul.k)
+ out2 <- c(c, se.c, ll.c, ul.c)
  out <- rbind(out1, out2)
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  rownames(out) <- c("IC kappa:", "Cohen kappa:")
@@ -1887,8 +1898,8 @@ ci.popsize <- function(alpha, f00, f01, f10) {
 #' ci.cramer(.05, 19.21, 2, 3, 200)
 #'
 #' # Should return:
-#' # Estimate     SE     LL     UL
-#' #   0.3099 0.0718 0.1601 0.4417
+#' # Estimate     SE   LL    UL
+#' #     0.31 0.0718 0.16 0.442
 #'  
 #' 
 #' @importFrom stats pchisq
@@ -1912,6 +1923,10 @@ ci.cramer <- function(alpha, chisqr, r, c, n) {
  dU <- nc[k2]
  ul <- sqrt(dU/(n*k))
  se <- (ul - ll)/(2*z)
+ ll <- round(ll, 3)
+ ul <- round(ul, 3)
+ v <- round(v, 3)
+ se <- round(se, 4)
  out <- round(t(c(v, se, ll, ul)), 4)
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  rownames(out) <- ""
