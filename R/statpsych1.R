@@ -316,9 +316,9 @@ ci.stdmean <- function(alpha, m, sd, n, h) {
 #' @examples
 #' ci.mean2(.05, 19.4, 11.3, 2.70, 2.10, 40, 40)
 #' # Should return:
-#' #                              Estimate        SE        t    df p
-#' # Equal Variances Assumed:          8.1 0.5408327 14.97691 78.00 0
-#' # Equal Variances Not Assumed:      8.1 0.5408327 14.97691 73.54 0
+#' #                              Estimate        SE       t    df p
+#' # Equal Variances Assumed:          8.1 0.5408327 14.9769 78.00 0
+#' # Equal Variances Not Assumed:      8.1 0.5408327 14.9769 73.54 0
 #' #                                    LL       UL
 #' # Equal Variances Assumed:     7.023285 9.176715
 #' # Equal Variances Not Assumed: 7.022256 9.177744
@@ -334,14 +334,14 @@ ci.mean2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
  v2 <- sd2^2
  vp <- ((n1 - 1)*v1 + (n2 - 1)*v2)/df1
  se1 <- sqrt(vp/n1 + vp/n2)
- t1 <- est/se1
+ t1 <- round(est/se1, 4)
  pval1 <- 2*(1 - pt(abs(t1), df1))
  p1 <- round(pval1, 5)
  tcrit1 <- qt(1 - alpha/2, df1)
  ll1 <- est - tcrit1*se1
  ul1 <- est + tcrit1*se1
  se2 <- sqrt(v1/n1 + v2/n2)
- t2 <- est/se2
+ t2 <- round(est/se2, 4)
  df2 <- (se2^4)/(v1^2/(n1^3 - n1^2) + v2^2/(n2^3 - n2^2))
  df2 <- round(df2, 2)
  pval2 <- 2*(1 - pt(abs(t2), df2))
@@ -501,8 +501,8 @@ ci.lc.mean.bs <- function(alpha, m, sd, n, v) {
 #' ci.lc.mean.scheffe(.05, m, sd, n, v)
 #'
 #' # Should return:
-#' #  Estimate       SE         t       p        LL        UL
-#' #     -5.35 1.275231 -4.195317 0.00228 -9.089451 -1.610549
+#' #  Estimate       SE       t       p        LL        UL
+#' #     -5.35 1.275231 -4.1953 0.00228 -9.089451 -1.610549
 #'
 #'
 #' @importFrom stats qt
@@ -515,7 +515,7 @@ ci.lc.mean.scheffe <- function(alpha, m, sd, n, v) {
  df2 <- sum(n) - a
  v1 <- sum((n - 1)*sd^2)/df2
  se <- sqrt(v1*t(v)%*%solve(diag(n))%*%v)
- t <- est/se
+ t <- round(est/se, 4)
  pval <- 1 - pf(t^2/df1, df1, df2)
  p <- round(pval, 5)
  crit <- sqrt(df1*qf(1 - alpha, df1, df2))
@@ -4405,8 +4405,8 @@ ci.bayes.normal <- function(alpha, prior_mean, prior_sd, est, se) {
 #' test.mean(7.9, 3.05, 100, 7)
 #'
 #' # Should return:
-#' #         t df       p
-#' #   2.95082 99 0.00396
+#' #        t df       p
+#' #   2.9508 99 0.00396
 #'  
 #' 
 #' @importFrom stats pt
@@ -4417,6 +4417,7 @@ test.mean <- function(m, sd, n, h) {
  t <- (m - h)/se
  p <- 2*(1 - pt(abs(t), df))
  p <- round(p, 5)
+ t <- round(t, 4)
  out <- t(c(t, df, p))
  colnames(out) <- c("t", "df", "p")
  rownames(out) <- ""
@@ -4601,8 +4602,8 @@ test.kurtosis <- function(y) {
 #' test.anova.bs(m, sd, n)
 #'
 #' #  Should return:
-#' #        F dfA  dfE       p Eta-squared  adj Eta-squared
-#' # 5.919585   2   57 0.00461   0.1719831        0.1429298
+#' #      F dfA  dfE       p Eta-squared  adj Eta-squared
+#' # 5.9196   2   57 0.00461   0.1719831        0.1429298
 #'  
 #' 
 #' @importFrom stats pf
@@ -4618,7 +4619,7 @@ test.anova.bs <- function(m, sd, n) {
  MSe <- SSe/dfe
  SSa <- sum(n*(m - grandmean)^2)
  MSa <- SSa/dfa
- F <- MSa/MSe
+ F <- round(MSa/MSe, 4)
  p <- 1 - pf(F, dfa, dfe)
  p <- round(p, 5)
  etasqr <- SSa/(SSa + SSe)
