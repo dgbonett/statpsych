@@ -826,8 +826,8 @@ ci.condslope <- function(alpha, b1, b2, se1, se2, cov, lo, hi, dfe) {
 #' ci.lc.reg(.05, est, se, n, 4, v)
 #'
 #' # Should return:
-#' # Estimate        SE        t      df          p        LL       UL
-#' #    1.303 0.5085838 2.562016 78.8197 0.01231256 0.2906532 2.315347
+#' # Estimate        SE      t      df       p        LL       UL
+#' #    1.303 0.5085838 2.5620 78.8197 0.01231 0.2906532 2.315347
 #'  
 #' 
 #' @importFrom stats qt
@@ -835,9 +835,9 @@ ci.condslope <- function(alpha, b1, b2, se1, se2, cov, lo, hi, dfe) {
 ci.lc.reg <- function(alpha, est, se, n, s, v) {
  con <- t(v)%*%est 
  se.con <- sqrt(sum(v^2*se^2))
- t <- con/se.con
+ t <- round(con/se.con, 4)
  df <- (sum(v^2*se^2)^2)/sum((v^4*se^4)/(n - s - 1))
- p <- 2*(1 - pt(abs(t), df))
+ p <- round(2*(1 - pt(abs(t), df)), 5)
  tcrit <- qt(1 - alpha/2, df)
  ll <- con - tcrit*se.con
  ul <- con + tcrit*se.con
@@ -1013,8 +1013,8 @@ ci.indirect <- function(alpha, b1, b2, se1, se2) {
 #' # (Intercept)          x1          x2 
 #' #   26.891111    3.648889    2.213333 
 #' #
-#' # Estimate        SE       t df           p       LL       UL
-#' # 2.931111 0.4462518 6.56829  7 0.000313428 1.875893 3.986329
+#' # Estimate        SE      t df       p       LL       UL
+#' # 2.931111 0.4462518 6.5683  7 0.00031 1.875893 3.986329
 #'
 #'
 #' @importFrom stats qt
@@ -1025,8 +1025,8 @@ ci.lc.glm <-function(alpha, n, b, V, q) {
  tcrit <- qt(1 - alpha/2, df)
  est <- t(q)%*%b
  se <- sqrt(t(q)%*%V%*%q)
- t <- est/se
- p <- 2*(1 - pt(abs(t), df))
+ t <- round(est/se, 4)
+ p <- round(2*(1 - pt(abs(t), df)), 5)
  ll <- est - tcrit*se
  ul <- est + tcrit*se
  out <- t(c(est, se, t, df, p, ll, ul))
@@ -2055,9 +2055,9 @@ ci.bayes.spcor <- function(alpha, prior_sd, cor, se) {
 #' ci.slope.mean.bs(.05, m, sd, n, x)
 #'
 #' # Should return:
-#' #                               Estimate         SE        t    df
-#' # Equal Variances Assumed:     0.3664407 0.06770529 5.412290 36.00
-#' # Equal Variances Not Assumed: 0.3664407 0.07336289 4.994905 18.66
+#' #                               Estimate         SE      t    df
+#' # Equal Variances Assumed:     0.3664407 0.06770529 5.4123 36.00
+#' # Equal Variances Not Assumed: 0.3664407 0.07336289 4.9949 18.66
 #' #                                  p        LL        UL
 #' # Equal Variances Assumed:     4e-06 0.2291280 0.5037534
 #' # Equal Variances Not Assumed: 8e-05 0.2126998 0.5201815
@@ -2075,14 +2075,14 @@ ci.slope.mean.bs <- function(alpha, m, sd, n, x) {
  df1 <- sum(n) - k
  v1 <- sum((n - 1)*sd^2)/df1
  se1 <- sqrt(v1*t(v)%*%solve(diag(n))%*%v)
- t1 <- est/se1
+ t1 <- round(est/se1, 4)
  p1 <- round(2*(1 - pt(abs(t1), df1)), 5)
  tcrit1 <- qt(1 - alpha/2, df1)
  ll1 <- est - tcrit1*se1
  ul1 <- est + tcrit1*se1
  v2 <- diag(sd^2)%*%(solve(diag(n)))
  se2 <- sqrt(t(v)%*%v2%*%v)
- t2 <- est/se2
+ t2 <- round(est/se2, 4)
  df2 <- (se2^4)/sum(((v^4)*(sd^4)/(n^2*(n - 1))))
  df2 <- (round(df2, 2)
  p2 <- round(2*(1 - pt(abs(t2), df2)), 5)
@@ -2134,8 +2134,8 @@ ci.slope.mean.bs <- function(alpha, m, sd, n, x) {
 #' ci.slope.median.bs(.05, m, se, x)
 #'
 #' # Should return:
-#' #   Estimate        SE        z       p        LL        UL
-#' #  0.3664407 0.1163593 3.149216 0.00164 0.1383806 0.5945008
+#' #   Estimate        SE      z       p        LL        UL
+#' #  0.3664407 0.1163593 3.1492 0.00164 0.1383806 0.5945008
 #'
 #'
 #' @importFrom stats qnorm
@@ -2148,7 +2148,7 @@ ci.slope.median.bs <- function(alpha, m, se, x) {
  v <- (x - mx)/ssx
  est <- t(v)%*%m 
  se <- sqrt(t(v)%*%diag(se^2)%*%v)
- z <- est/se
+ z <- round(est/se, 4)
  p <- round(2*(1 - pnorm(abs(z))), 5)
  ll <- est - zcrit*se
  ul <- est + zcrit*se
