@@ -415,9 +415,12 @@ ci.mean2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' ci.lc.mean.bs(.05, m, sd, n, v)
 #'
 #' # Should return:
-#' #                              Estimate       SE      t    df       p        LL        UL
-#' # Equal Variances Assumed:        -5.35 1.300136 -4.115 36.00 0.00022 -7.986797 -2.713203
-#' # Equal Variances Not Assumed:    -5.35 1.300136 -4.115 33.52 0.00024 -7.993588 -2.706412
+#' #                              Estimate       SE      t    df       p 
+#' # Equal Variances Assumed:        -5.35 1.300136 -4.115 36.00 0.00022 
+#' # Equal Variances Not Assumed:    -5.35 1.300136 -4.115 33.52 0.00024 
+#' #                                     LL        UL
+#' # Equal Variances Assumed:     -7.986797 -2.713203
+#' # Equal Variances Not Assumed: -7.993583 -2.706417
 #'
 #'
 #' @importFrom stats qt
@@ -2808,8 +2811,8 @@ ci.random.anova <- function(alpha, m, sd, n) {
 #' ci.etasqr(.05, .15, 2, 57)
 #'
 #' # Should return:
-#' # Eta-squared  adj Eta-squared         SE         LL        UL
-#' #        0.15        0.1201754 0.07413871 0.01019499 0.3008134
+#' # Eta-squared  adj Eta-squared       SE      LL      UL
+#' #        0.15           0.1202  0.07414  0.0102  0.3008
 #'  
 #' 
 #' @importFrom stats pf
@@ -2823,6 +2826,7 @@ ci.etasqr <- function(alpha, etasqr, df1, df2) {
  z <- qnorm(alpha2)
  F <- (etasqr/(1 - etasqr))*(df2/df1)
  adj <- 1 - (df2 + df1)*(1 - etasqr)/df2
+ adj <- round(adj, 4)
  if (adj < 0) {adj = 0}
  ul0 <- 1 - exp(log(1 - etasqr) - z*sqrt(4*etasqr/(df2 - 1)))
  du <- ul0*(df1 + df2 + 1)/(1 - ul0)
@@ -2836,6 +2840,9 @@ ci.etasqr <- function(alpha, etasqr, df1, df2) {
  ul <- du/(du + df1 + df2 + 1)
  if (ul == 0) {ul = ul0}
  se <- (ul - ll)/(2*z0)
+ se <- round(se, 5)
+ ll <- round(ll, 4)
+ ul <- round(ul, 4)
  out <- t(c(etasqr, adj, se, ll, ul))
  colnames(out) <- c("Eta-squared", "adj Eta-squared", "SE", "LL", "UL")
  rownames(out) <- ""
@@ -4603,7 +4610,7 @@ test.kurtosis <- function(y) {
 #'
 #' #  Should return:
 #' #      F dfA  dfE       p Eta-squared  adj Eta-squared
-#' # 5.9196   2   57 0.00461   0.1719831        0.1429298
+#' # 5.9196   2   57 0.00461       0.172           0.1429
 #'  
 #' 
 #' @importFrom stats pf
@@ -4623,8 +4630,10 @@ test.anova.bs <- function(m, sd, n) {
  p <- 1 - pf(F, dfa, dfe)
  p <- round(p, 5)
  etasqr <- SSa/(SSa + SSe)
- adjetasqr <- 1 - (dfa + dfe)*(1 - etasqr)/dfe
- out <- t(c(F, dfa, dfe, p, etasqr, adjetasqr))
+ adj <- 1 - (dfa + dfe)*(1 - etasqr)/dfe
+ etasqr <- round(etasqr, 4)
+ adj <- round(adj, 4)
+ out <- t(c(F, dfa, dfe, p, etasqr, adj))
  colnames(out) <- c("F", "dfA",  "dfE", "p", "Eta-squared", "adj Eta-squared")
  rownames(out) <- ""
  return(out)
