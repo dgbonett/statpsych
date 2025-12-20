@@ -67,6 +67,69 @@ ci.cor <- function(alpha, cor, s, n) {
 }
 
 
+#  ci.slope  ==================================================================
+#' Confidence interval for a slope in a simple linear regression model
+#'
+#'
+#' @description
+#' Computes a confidence interval for a population slope coefficient in a 
+#' simple linear regression model using the sample correlation, sample standard 
+#' deviation of the y scores (response variable), sample standard deviation
+#' of the x scores (predictor variable), and sample size as input. 
+#'
+#' For more details, see Section 1.11 of Bonett (2021, Volume 2)
+#'
+#'  
+#' @param  alpha 	alpha level for 1-alpha confidence
+#' @param  cor	  	estimated Pearson correlation 
+#' @param  sdy	  	estimated standard deviation of response variable
+#' @param  sdx	  	estimated standard deviation of predictor variable
+#' @param  n	  	sample size
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
+#' @return 
+#' Returns a 1-row matrix. The columns are:
+#' * Estimate - estimated slope
+#' * SE - standard error
+#' * t - t test statistic
+#' * df - degrees of freedom
+#' * p - two-sided p-value
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
+#' 
+#' 
+#' @examples
+#' ci.slope(.05, .362, 25.1, 6.25, 85)
+#'
+#' # Should return:
+#' #  Estimate        SE      t df       p        LL       UL
+#' #  1.453792 0.4109165 3.5379 83 0.00066 0.6364957 2.271088
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export
+ci.slope <- function(alpha, cor, sdy, sdx, n) {
+ if (cor > .999 | cor < -.999) {stop("correlation must be between -.999 and .999")}
+ df <- n - 2
+ slope <- cor*sdy/sdx
+ tcrit <- qt(1 - alpha/2, df)
+ var <- (n - 1)*sdy^2*(1 - cor^2)/df
+ se <- sqrt(var/(sdx^2*(n - 1)))
+ t <- round(slope/se, 4)
+ p <- round(2*(1 - pt(abs(t), df)), 5)
+ ll <- slope - tcrit*se
+ ul <- slope + tcrit*se
+ out <- t(c(slope, se, t, df, p, ll, ul))
+ colnames(out) <- c("Estimate", "SE", "t", "df", "p", "LL", "UL")
+ rownames(out) <- ""
+ return(out)
+}
+
+
 #  ci.spcor  =================================================================
 #' Confidence interval for a semipartial correlation
 #'
