@@ -610,15 +610,15 @@ ci.ratio.prop2 <- function(alpha, f1, f2, n1, n2) {
 #' ci.lc.prop.bs(.05/2, f, n, v1)
 #'
 #' # Should return:
-#' #  Estimate         SE        z       p        LL        UL
-#' # 0.2119565 0.07602892 2.787841 0.00531 0.0415451 0.3823679
+#' #  Estimate         SE      z       p        LL        UL
+#' # 0.2119565 0.07602892 2.7878 0.00531 0.0415451 0.3823679
 #'
 #' v2 <- c(1, -1, 0)
 #' ci.lc.prop.bs(.05/2, f, n, v2)
 #'
 #' # Should return:
-#' #   Estimate         SE         z       p         LL        UL
-#' # 0.03225806 0.08857951 0.3641707 0.71573 -0.1662843 0.2308004
+#' #   Estimate         SE       z       p         LL        UL
+#' # 0.03225806 0.08857951 0.36417 0.71573 -0.1662843 0.2308004
 #'
 #'
 #' @importFrom stats qnorm
@@ -632,7 +632,7 @@ ci.lc.prop.bs <- function(alpha, f, n, v) {
  p <- (f + 2/m)/(n + 4/m)
  est <- t(v)%*%p
  se <- sqrt(t(v)%*%diag(p*(1 - p))%*%solve(diag(n + 4/m))%*%v)
- zval <- est/se
+ zval <- round(est/se, 4)
  pval <- 2*(1 - pnorm(abs(zval)))
  pval <- round(pval, 5)
  ll <- est - z*se
@@ -691,8 +691,8 @@ ci.lc.prop.bs <- function(alpha, f, n, v) {
 #' ci.lc.prop.scheffe(.05, f, n, v)
 #'
 #' # Should return:
-#' #  Estimate         SE        z       p         LL        UL
-#' # 0.2119565 0.07602892 2.787841 0.02053 0.02585698 0.3980561
+#' #  Estimate         SE      z       p         LL        UL
+#' # 0.2119565 0.07602892 2.7878 0.02053 0.02585698 0.3980561
 #'
 #'
 #' @importFrom stats qchisq
@@ -707,7 +707,7 @@ ci.lc.prop.scheffe <- function(alpha, f, n, v) {
  p <- (f + 2/m)/(n + 4/m)
  est <- t(v)%*%p
  se <- sqrt(t(v)%*%diag(p*(1 - p))%*%solve(diag(n + 4/m))%*%v)
- zval <- est/se
+ zval <- round(est/se, 4)
  pval <- 1 - pchisq(zval^2, df)
  pval <- round(pval(, 5)
  ll <- est - z*se
@@ -759,10 +759,10 @@ ci.lc.prop.scheffe <- function(alpha, f, n, v) {
 #' ci.pairs.prop.bs(.05, f, n)
 #'
 #' # Should return:
-#' #        Estimate         SE         z       p          LL          UL
-#' # 1 2  -0.2475248 0.04482323 -5.522243 0.00000 -0.35483065 -0.14021885
-#' # 1 3  -0.1039604 0.04833562 -2.150803 0.03149 -0.21967489  0.01175409
-#' # 2 3   0.1435644 0.04358401  3.293968 0.00099  0.03922511  0.24790360
+#' #        Estimate         SE       z       p          LL          UL
+#' # 1 2  -0.2475248 0.04482323 -5.5222 0.00000 -0.35483065 -0.14021885
+#' # 1 3  -0.1039604 0.04833562 -2.1508 0.03149 -0.21967489  0.01175409
+#' # 2 3   0.1435644 0.04358401  3.2940 0.00099  0.03922511  0.24790360
 #'
 #'
 #' @importFrom stats qnorm
@@ -780,7 +780,7 @@ ci.pairs.prop.bs <-function(alpha, f, n) {
  Estimate <- p.adj[upper.tri(p.adj)]
  v <- outer(v, v, "+")
  SE <- sqrt(v[upper.tri(v)])
- z <- Estimate/SE
+ z <- round(Estimate/SE, 4)
  pval <- 2*(1 - pnorm(abs(z)))
  p <- round(pval, 5)
  LL <- Estimate - zcrit*SE
@@ -833,8 +833,8 @@ ci.pairs.prop.bs <-function(alpha, f, n) {
 #' ci.slope.prop.bs(.05, f, n, x)
 #'
 #' # Should return:
-#' #    Estimate          SE       z       p          LL         UL
-#' # 0.008688525 0.002566409 3.38548 0.00071 0.003658456 0.01371859
+#' #    Estimate          SE      z       p          LL         UL
+#' # 0.008688525 0.002566409 3.3855 0.00071 0.003658456 0.01371859
 #'
 #'
 #' @importFrom stats qnorm
@@ -851,7 +851,7 @@ ci.slope.prop.bs <- function(alpha, f, n, x) {
  p <- (f + 2/m)/(n + 4/m)
  slope <- t(c)%*%p
  se <- sqrt(t(c)%*%diag(p*(1 - p))%*%solve(diag(n + 4/m))%*%c)
- t <- slope/se
+ t <- round(slope/se, 4)
  pval <- 2*(1 - pnorm(abs(t)))
  pval <- round(pval, 5)
  ll <- slope - z*se
@@ -1034,9 +1034,9 @@ ci.ratio.prop.ps <- function(alpha, f00, f01, f10, f11) {
 #' ci.condslope.log(.05, .132, .154, .031, .021, .015, 5.2, 10.6)
 #'
 #' # Should return:
-#' #                   Estimate exp(Estimate)        z       p 
-#' # At low moderator    0.9328      2.541616 2.269824 0.02322 
-#' # At high moderator   1.7644      5.838068 2.906507 0.00365 
+#' #                   Estimate exp(Estimate)      z       p 
+#' # At low moderator    0.9328      2.541616 2.2698 0.02322 
+#' # At high moderator   1.7644      5.838068 2.9065 0.00365 
 #' #                          LL        UL
 #' # At low moderator   1.135802  5.687444
 #' # At high moderator  1.776421 19.186357
@@ -1053,8 +1053,8 @@ ci.condslope.log <- function(alpha, b1, b2, se1, se2, cov, lo, hi) {
  exp.slope.hi <- exp(slope.hi)
  se.lo <- sqrt(se1^2 + se2^2*lo^2 + 2*lo*cov)
  se.hi <- sqrt(se1^2 + se2^2*hi^2 + 2*hi*cov)
- z.lo <- slope.lo/se.lo
- z.hi <- slope.hi/se.hi
+ z.lo <- round(slope.lo/se.lo, 4)
+ z.hi <- roiund(slope.hi/se.hi, 4)
  p.lo <- round(2*(1 - pnorm(abs(z.lo))), 5)
  p.hi <- round(2*(1 - pnorm(abs(z.hi))), 5)
  LL.lo <- exp(slope.lo - z*se.lo)
