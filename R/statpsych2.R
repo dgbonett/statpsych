@@ -68,12 +68,12 @@ ci.cor <- function(alpha, cor, s, n) {
 
 
 #  ci.slope  ==================================================================
-#' Confidence interval for a slope in a simple linear regression model
+#' Confidence interval for a slope in a simple linear model
 #'
 #'
 #' @description
 #' Computes a confidence interval for a population slope coefficient in a 
-#' simple linear regression model using the sample correlation, sample standard 
+#' simple linear model using the sample correlation, sample standard 
 #' deviation of the y scores (response variable), sample standard deviation
 #' of the x scores (predictor variable), and sample size as input. 
 #'
