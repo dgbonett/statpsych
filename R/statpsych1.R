@@ -573,13 +573,13 @@ ci.lc.mean.scheffe <- function(alpha, m, sd, n, v) {
 #' ci.tukey(.05, m, sd, n)
 #'
 #' # Should return:
-#' #     Estimate       SE          t    df       p        LL         UL
-#' # 1 2    -4.71 4.139530 -1.1378102 37.99 0.66881 -15.83085  6.4108517
-#' # 1 3   -13.43 4.427673 -3.0331960 37.52 0.02177 -25.33172 -1.5282764
-#' # 1 4   -17.35 4.490074 -3.8640790 37.29 0.00233 -29.42281 -5.2771918
-#' # 2 3    -8.72 4.399497 -1.9820446 37.39 0.21291 -20.54783  3.1078269
-#' # 2 4   -12.64 4.462292 -2.8326248 37.14 0.03572 -24.64034 -0.6396589
-#' # 3 4    -3.92 4.730817 -0.8286096 37.98 0.84055 -16.62958  8.7895768
+#' #     Estimate       SE       t    df       p        LL         UL
+#' # 1 2    -4.71 4.139530 -1.1378 37.99 0.66881 -15.83085  6.4108517
+#' # 1 3   -13.43 4.427673 -3.0332 37.52 0.02177 -25.33172 -1.5282764
+#' # 1 4   -17.35 4.490074 -3.8641 37.29 0.00233 -29.42281 -5.2771918
+#' # 2 3    -8.72 4.399497 -1.9820 37.39 0.21291 -20.54783  3.1078269
+#' # 2 4   -12.64 4.462292 -2.8326 37.14 0.03572 -24.64034 -0.6396589
+#' # 3 4    -3.92 4.730817 -0.8286 37.98 0.84055 -16.62958  8.7895768
 #'
 #'
 #' @importFrom stats qtukey
@@ -598,7 +598,7 @@ ci.tukey <-function(alpha, m, sd, n) {
  df <- df[lower.tri(df)]
  df <- round(df, 2)
  SE <- sqrt(v1[lower.tri(v1)])
- t <- Estimate/SE
+ t <- round(Estimate/SE, 4)
  q <- qtukey(p = 1 - alpha, nmeans = a, df = df)/sqrt(2)
  pval <- 1 - ptukey(sqrt(2)*abs(t), nmeans = a, df = df)
  p <- round(pval, 5)
@@ -1006,8 +1006,8 @@ ci.lc.stdmean.bs <- function(alpha, m, sd, n, v) {
 #' ci.mean.ps(.05, 58.2, 51.4, 7.43, 8.92, .537, 30)
 #'
 #' # Should return:
-#' # Estimate       SE        t df      p       LL       UL
-#' #      6.8 1.455922 4.670578 29  6e-05 3.822304 9.777696
+#' # Estimate       SE      t df      p       LL       UL
+#' #      6.8 1.455922 4.6706 29  6e-05 3.822304 9.777696
 #'
 #'
 #' @importFrom stats qt
@@ -1020,7 +1020,7 @@ ci.mean.ps <- function(alpha, m1, m2, sd1, sd2, cor, n) {
  vd <- sd1^2 + sd2^2 - 2*cor*sd1*sd2
  est <- m1 - m2
  se <- sqrt(vd/n)
- t <- est/se
+ t <- round(est/se, 4)
  pval <- 2*(1 - pt(abs(t), df))
  p <- round(pval, 5)
  ll <- est - tcrit*se
@@ -2889,14 +2889,14 @@ ci.etasqr <- function(alpha, etasqr, df1, df2) {
 #' ci.2x2.mean.mixed(.05, y11, y12, y21, y22)
 #'
 #' # Should return:
-#' #            Estimate        SE         t   df       p         LL        UL
-#' # AB:      -3.8333333 0.9803627 -3.910117 8.35 0.00412 -6.0778198 -1.588847
-#' # A:        2.0833333 0.4901814  4.250128 8.35 0.00254  0.9610901  3.205577
-#' # B:        3.7500000 1.0226599  3.666908 7.60 0.00693  1.3700362  6.129964
-#' # A at b1:  0.1666667 0.8333333  0.200000 5.00 0.84936 -1.9754849  2.308818
-#' # A at b2:  4.0000000 0.5163978  7.745967 5.00 0.00057  2.6725572  5.327443
-#' # B at a1:  1.8333333 0.9803627  1.870056 9.94 0.09117 -0.3527241  4.019391
-#' # B at a2:  5.6666667 1.2692955  4.464419 7.67 0.00233  2.7173445  8.615989
+#' #            Estimate        SE       t   df       p         LL        UL
+#' # AB:      -3.8333333 0.9803627 -3.9101 8.35 0.00412 -6.0778198 -1.588847
+#' # A:        2.0833333 0.4901814  4.2501 8.35 0.00254  0.9610901  3.205577
+#' # B:        3.7500000 1.0226599  3.6669 7.60 0.00693  1.3700362  6.129964
+#' # A at b1:  0.1666667 0.8333333  0.2000 5.00 0.84936 -1.9754849  2.308818
+#' # A at b2:  4.0000000 0.5163978  7.7460 5.00 0.00057  2.6725572  5.327443
+#' # B at a1:  1.8333333 0.9803627  1.8701 9.94 0.09117 -0.3527241  4.019391
+#' # B at a2:  5.6666667 1.2692955  4.4644 7.67 0.00233  2.7173445  8.615989
 #'
 #'
 #' @importFrom stats qt
@@ -2921,7 +2921,7 @@ ci.2x2.mean.mixed <- function(alpha, y11, y12, y21, y22) {
  df1 <- (se1^4)/(vd1^2/(n1^3 - n1^2) + vd2^2/(n2^3 - n2^2))
  df1 <- round(df1, 2)
  tcrit1 <- qt(1 - alpha/2, df1)
- t1 <- est1/se1
+ t1 <- round(est1/se1, 4)
  p1 <- round(2*(1 - pt(abs(t1), df1)), 5)
  LL1 <- est1 - tcrit1*se1
  UL1 <- est1 + tcrit1*se1
@@ -2932,7 +2932,7 @@ ci.2x2.mean.mixed <- function(alpha, y11, y12, y21, y22) {
  df2 <- (se2^4)/(vd1^2/((n1^3 - n1^2)*16) + vd2^2/((n2^3 - n2^2)*16))
  df2 <- round(df2, 2)
  tcrit2 <- qt(1 - alpha/2, df2)
- t2 <- est2/se2
+ t2 <- round(est2/se2, 4)
  p2 <- round(2*(1 - pt(abs(t2), df2)), 5)
  LL2 <- est2 - tcrit2*se2
  UL2 <- est2 + tcrit2*se2
@@ -2943,7 +2943,7 @@ ci.2x2.mean.mixed <- function(alpha, y11, y12, y21, y22) {
  df3 <- (se3^4)/(va1^2/(n1^3 - n1^2) + va2^2/(n2^3 - n2^2))
  df3 <- round(df3, 2)
  tcrit3 <- qt(1 - alpha/2, df3)
- t3 <- est3/se3
+ t3 <- round(est3/se3, 4)
  p3 <- round(2*(1 - pt(abs(t3), df3)), 5)
  LL3 <- est3 - tcrit3*se3
  UL3 <- est3 + tcrit3*se3
@@ -2953,7 +2953,7 @@ ci.2x2.mean.mixed <- function(alpha, y11, y12, y21, y22) {
  se4 <- sqrt(vd1/n1)
  df4 <- n1 - 1
  tcrit4 <- qt(1 - alpha/2, df4)
- t4 <- est4/se4
+ t4 <- round(est4/se4, 4)
  p4 <- round(2*(1 - pt(abs(t4), df4)), 5)
  LL4 <- est4 - tcrit4*se4
  UL4 <- est4 + tcrit4*se4
@@ -2963,7 +2963,7 @@ ci.2x2.mean.mixed <- function(alpha, y11, y12, y21, y22) {
  se5 <- sqrt(vd2/n2)
  df5 <- n2 - 1
  tcrit5 <- qt(1 - alpha/2, df5)
- t5 <- est5/se5
+ t5 <- round(est5/se5, 4)
  p5 <- round(2*(1 - pt(abs(t5), df5)), 5)
  LL5 <- est5 - tcrit5*se5
  UL5 <- est5 + tcrit5*se5
@@ -2974,7 +2974,7 @@ ci.2x2.mean.mixed <- function(alpha, y11, y12, y21, y22) {
  df6 <- (se6^4)/(var(y11)^2/(n1^3 - n1^2) + var(y12)^2/(n2^3 - n2^2))
  df6 <- round(df6, 2)
  tcrit6 <- qt(1 - alpha/2, df6)
- t6 <- est6/se6
+ t6 <- round(est6/se6, 4)
  p6 <- round(2*(1 - pt(abs(t6), df6)), 5)
  LL6 <- est6 - tcrit6*se6
  UL6 <- est6 + tcrit6*se6
@@ -2985,7 +2985,7 @@ ci.2x2.mean.mixed <- function(alpha, y11, y12, y21, y22) {
  df7 <- (se7^4)/(var(y21)^2/(n1^3 - n1^2) + var(y22)^2/(n2^3 - n2^2))
  df7 <- round(df7, 2)
  tcrit7 <- qt(1 - alpha/2, df7)
- t7 <- est7/se7
+ t7 <- round(est7/se7, 4)
  p7 <- round(2*(1 - pt(abs(t7), df7)), 5)
  LL7 <- est7 - tcrit7*se7
  UL7 <- est7 + tcrit7*se7
@@ -3041,14 +3041,14 @@ ci.2x2.mean.mixed <- function(alpha, y11, y12, y21, y22) {
 #' ci.2x2.mean.ws(.05, y11, y12, y21, y22)
 #'
 #' # Should return:
-#' #             Estimate        SE          t df       p          LL          UL
-#' # AB:       1.28571429 0.5654449  2.2738102  6 0.06334 -0.09787945  2.66930802
-#' # A:       -3.21428571 0.4862042 -6.6109784  6 0.00058 -4.40398462 -2.02458681
-#' # B:       -0.07142857 0.2296107 -0.3110855  6 0.76626 -0.63326579  0.49040865
-#' # A at b1: -2.57142857 0.2973809 -8.6469203  6 0.00013 -3.29909331 -1.84376383
-#' # A at b2: -3.85714286 0.7377111 -5.2285275  6 0.00196 -5.66225692 -2.05202879
-#' # B at a1:  0.57142857 0.4285714  1.3333333  6 0.23081 -0.47724794  1.62010508
-#' # B at a2: -0.71428571 0.2857143 -2.5000000  6 0.04653 -1.41340339 -0.01516804
+#' #             Estimate        SE       t df       p          LL          UL
+#' # AB:       1.28571429 0.5654449  2.2738  6 0.06334 -0.09787945  2.66930802
+#' # A:       -3.21428571 0.4862042 -6.6110  6 0.00058 -4.40398462 -2.02458681
+#' # B:       -0.07142857 0.2296107 -0.3111  6 0.76626 -0.63326579  0.49040865
+#' # A at b1: -2.57142857 0.2973809 -8.6469  6 0.00013 -3.29909331 -1.84376383
+#' # A at b2: -3.85714286 0.7377111 -5.2285  6 0.00196 -5.66225692 -2.05202879
+#' # B at a1:  0.57142857 0.4285714  1.3333  6 0.23081 -0.47724794  1.62010508
+#' # B at a2: -0.71428571 0.2857143 -2.5000  6 0.04653 -1.41340339 -0.01516804
 #'
 #'
 #' @importFrom stats qt
@@ -3071,49 +3071,49 @@ ci.2x2.mean.ws <- function(alpha, y11, y12, y21, y22) {
  y <- cbind(y11, y12, y21, y22)
  est1 <- mean(q1%*%t(y))
  se1 <- sqrt(var(matrix(q1%*%t(y)))/n)
- t1 <- est1/se1
+ t1 <- round(est1/se1, 4)
  p1 <- round(2*(1 - pt(abs(t1), df)), 5)
  LL1 <- est1 - t*se1
  UL1 <- est1 + t*se1
  row1 <- c(est1, se1, t1, df, p1, LL1, UL1)
  est2 <- mean(q2%*%t(y))
  se2 <- sqrt(var(matrix(q2%*%t(y)))/n)
- t2 <- est2/se2
+ t2 <- round(est2/se2, 4)
  p2 <- round(2*(1 - pt(abs(t2), df)), 5)
  LL2 <- est2 - t*se2
  UL2 <- est2 + t*se2
  row2 <- c(est2, se2, t2, df, p2, LL2, UL2)
  est3 <- mean(q3%*%t(y))
  se3 <- sqrt(var(matrix(q3%*%t(y)))/n)
- t3 <- est3/se3
+ t3 <- round(est3/se3, 4)
  p3 <- round(2*(1 - pt(abs(t3), df)), 5)
  LL3 <- est3 - t*se3
  UL3 <- est3 + t*se3
  row3 <- c(est3, se3, t3, df, p3, LL3, UL3)
  est4 <- mean(q4%*%t(y))
  se4 <- sqrt(var(matrix(q4%*%t(y)))/n)
- t4 <- est4/se4
+ t4 <- round(est4/se4, 4)
  p4 <- round(2*(1 - pt(abs(t4), df)), 5)
  LL4 <- est4 - t*se4
  UL4 <- est4 + t*se4
  row4 <- c(est4, se4, t4, df, p4, LL4, UL4)
  est5 <- mean(q5%*%t(y))
  se5 <- sqrt(var(matrix(q5%*%t(y)))/n)
- t5 <- est5/se5
+ t5 <- round(est5/se5, 4)
  p5 <- round(2*(1 - pt(abs(t5), df)), 5)
  LL5 <- est5 - t*se5
  UL5 <- est5 + t*se5
  row5 <- c(est5, se5, t5, df, p5, LL5, UL5)
  est6 <- mean(q6%*%t(y))
  se6 <- sqrt(var(matrix(q6%*%t(y)))/n)
- t6 <- est6/se6
+ t6 <- round(est6/se6, 4)
  p6 <- round(2*(1 - pt(abs(t6), df)), 5)
  LL6 <- est6 - t*se6
  UL6 <- est6 + t*se6
  row6 <- c(est6, se6, t6, df, p6, LL6, UL6)
  est7 <- mean(q7%*%t(y))
  se7 <- sqrt(var(matrix(q7%*%t(y)))/n)
- t7 <- est7/se7
+ t7 <- round(est7/se7, 4)
  p7 <- round(2*(1 - pt(abs(t7), df)), 5)
  LL7 <- est7 - t*se7
  UL7 <- est7 + t*se7
@@ -3170,14 +3170,14 @@ ci.2x2.mean.ws <- function(alpha, y11, y12, y21, y22) {
 #' ci.2x2.mean.bs(.05, y11, y12, y21, y22)
 #'
 #' # Should return:
-#' #          Estimate       SE           t    df       p         LL         UL
-#' # AB:         -5.10 2.224860 -2.29227953 35.48 0.02793 -9.6145264 -0.5854736
-#' # A:           1.65 1.112430  1.48323970 35.48 0.14684 -0.6072632  3.9072632
-#' # B:          -2.65 1.112430 -2.38217285 35.48 0.02270 -4.9072632 -0.3927368
-#' # A at b1:    -0.90 1.545244 -0.58243244 17.56 0.56768 -4.1522367  2.3522367
-#' # A at b2:     4.20 1.600694  2.62386142 17.94 0.01725  0.8362274  7.5637726
-#' # B at a1:    -5.20 1.536952 -3.38331916 17.61 0.00339 -8.4341379 -1.9658621
-#' # B at a2:    -0.10 1.608657 -0.06216365 17.92 0.95112 -3.4807927  3.2807927
+#' #          Estimate       SE       t    df       p         LL         UL
+#' # AB:         -5.10 2.224860 -2.2923 35.48 0.02793 -9.6145264 -0.5854736
+#' # A:           1.65 1.112430  1.4832 35.48 0.14684 -0.6072632  3.9072632
+#' # B:          -2.65 1.112430 -2.3822 35.48 0.02270 -4.9072632 -0.3927368
+#' # A at b1:    -0.90 1.545244 -0.5824 17.56 0.56768 -4.1522367  2.3522367
+#' # A at b2:     4.20 1.600694  2.6239 17.94 0.01725  0.8362274  7.5637726
+#' # B at a1:    -5.20 1.536952 -3.3833 17.61 0.00339 -8.4341379 -1.9658621
+#' # B at a2:    -0.10 1.608657 -0.0622 17.92 0.95112 -3.4807927  3.2807927
 #'
 #'
 #' @importFrom stats qt
@@ -3214,7 +3214,7 @@ ci.2x2.mean.bs <- function(alpha, y11, y12, y21, y22) {
  var <- diag(sd^2)%*%(solve(diag(n)))
  est1 <- t(v1)%*%m 
  se1 <- sqrt(t(v1)%*%var%*%v1)
- t1 <- est1/se1
+ t1 <- round(est1/se1, 4)
  df1 <- (se1^4)/sum(((v1^4)*(sd^4)/(n^2*(n - 1))))
  df1 <- round(df1, 2)
  tcrit1 <- qt(1 - alpha/2, df1)
@@ -3224,7 +3224,7 @@ ci.2x2.mean.bs <- function(alpha, y11, y12, y21, y22) {
  row1 <- c(est1, se1, t1, df1, p1, LL1, UL1)
  est2 <- t(v2)%*%m 
  se2 <- sqrt(t(v2)%*%var%*%v2)
- t2 <- est2/se2
+ t2 <- round(est2/se2, 4)
  df2 <- (se2^4)/sum(((v2^4)*(sd^4)/(n^2*(n - 1))))
  df2 <- round(df2, 2)
  tcrit2 <- qt(1 - alpha/2, df2)
@@ -3234,7 +3234,7 @@ ci.2x2.mean.bs <- function(alpha, y11, y12, y21, y22) {
  row2 <- c(est2, se2, t2, df2, p2, LL2, UL2)
  est3 <- t(v3)%*%m 
  se3 <- sqrt(t(v3)%*%var%*%v3)
- t3 <- est3/se3
+ t3 <- round(est3/se3, 4)
  df3 <- (se3^4)/sum(((v3^4)*(sd^4)/(n^2*(n - 1))))
  df3 <- round(df3, 2)
  tcrit3 <- qt(1 - alpha/2, df3)
@@ -3244,7 +3244,7 @@ ci.2x2.mean.bs <- function(alpha, y11, y12, y21, y22) {
  row3 <- c(est3, se3, t3, df3, p3, LL3, UL3)
  est4 <- t(v4)%*%m 
  se4 <- sqrt(t(v4)%*%var%*%v4)
- t4 <- est4/se4
+ t4 <- round(est4/se4, 4)
  df4 <- (se4^4)/sum(((v4^4)*(sd^4)/(n^2*(n - 1))))
  df4 <- round(df4, 2)
  tcrit4 <- qt(1 - alpha/2, df4)
@@ -3254,7 +3254,7 @@ ci.2x2.mean.bs <- function(alpha, y11, y12, y21, y22) {
  row4 <- c(est4, se4, t4, df4, p4, LL4, UL4)
  est5 <- t(v5)%*%m 
  se5 <- sqrt(t(v5)%*%var%*%v5)
- t5 <- est5/se5
+ t5 <- round(est5/se5, 4)
  df5 <- (se5^4)/sum(((v5^4)*(sd^4)/(n^2*(n - 1))))
  df5 <- round(df5, 2)
  tcrit5 <- qt(1 - alpha/2, df5)
@@ -3264,7 +3264,7 @@ ci.2x2.mean.bs <- function(alpha, y11, y12, y21, y22) {
  row5 <- c(est5, se5, t5, df5, p5, LL5, UL5)
  est6 <- t(v6)%*%m 
  se6 <- sqrt(t(v6)%*%var%*%v6)
- t6 <- est6/se6
+ t6 <- round(est6/se6, 4)
  df6 <- (se6^4)/sum(((v6^4)*(sd^4)/(n^2*(n - 1))))
  df6 <- round(df6, 2)
  tcrit6 <- qt(1 - alpha/2, df6)
@@ -3274,7 +3274,7 @@ ci.2x2.mean.bs <- function(alpha, y11, y12, y21, y22) {
  row6 <- c(est6, se6, t6, df6, p6, LL6, UL6)
  est7 <- t(v7)%*%m 
  se7 <- sqrt(t(v7)%*%var%*%v7)
- t7 <- est7/se7
+ t7 <- round(est7/se7, 4)
  df7 <- (se7^4)/sum(((v7^4)*(sd^4)/(n^2*(n - 1))))
  df7 <- round(df7, 2)
  tcrit7 <- qt(1 - alpha/2, df7)
