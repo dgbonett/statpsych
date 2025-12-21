@@ -1621,10 +1621,10 @@ ci.agree <- function(alpha, n, f, k) {
 #' ci.agree2(.05, 75, 70, 60, 45, 2)
 #'
 #' # Should return:
-#' #          Estimate         SE        LL        UL
-#' # G1      0.8666667 0.02880329 0.6974555 0.9481141
-#' # G2      0.5000000 0.05590170 0.2523379 0.6851621
-#' # G1 - G2 0.3666667 0.06288585 0.1117076 0.6088621
+#' #         Estimate      SE     LL     UL
+#' # G1        0.8667 0.02880 0.6975 0.9481
+#' # G2        0.5000 0.05590 0.2523 0.6852
+#' # G1 - G2   0.3667 0.06289 0.1117 0.6089               
 #'
 #'
 #' @importFrom stats qnorm
@@ -1654,9 +1654,21 @@ ci.agree2 <- function(alpha, n1, f1, n2, f2, k) {
  se.d.ml <- sqrt(se1.ml^2 + se2.ml^2)
  LL3 <- a*(p1.d - p2.d - z*se.d)
  UL3 <- a*(p1.d - p2.d + z*se.d) 
+ diff <- round(G1 - G2, 4)
+ G1 <- round(G1, 4)
+ se1.ml <- round(se1.ml, 5)
+ LL1 <- round(LL1, 4)
+ UL1 <- round(UL1, 4)
+ G2 <- round(G2, 4)
+ se2.ml <- round(se2.ml, 5)
+ LL2 <- round(LL2, 4)
+ UL2 <- round(UL2, 4)
+ se.d.ml <- round(se.d.ml, 5)
+ LL3 <- round(LL3, 4)
+ UL3 <- round(UL3, 4)
  out1 <- t(c(G1, se1.ml, LL1, UL1))
  out2 <- t(c(G2, se2.ml, LL2, UL2))
- out3 <- t(c(G1 - G2, se.d.ml, LL3, UL3))
+ out3 <- t(c(diff, se.d.ml, LL3, UL3))
  out <- rbind(out1, out2, out3)
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  rownames(out) <- c("G1", "G2", "G1 - G2")
