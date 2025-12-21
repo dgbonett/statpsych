@@ -1725,14 +1725,14 @@ ci.agree2 <- function(alpha, n1, f1, n2, f2, k) {
 #' ci.agree.3rater(.05, f)
 #'
 #' # Should return:
-#' #                  Estimate          LL         UL
-#' # G(1,2)         0.56666667  0.46601839  0.6524027
-#' # G(1,3)         0.50000000  0.39564646  0.5911956
-#' # G(2,3)         0.86666667  0.79701213  0.9135142
-#' # G(1,2)-G(1,3)  0.06666667  0.00580397  0.1266464
-#' # G(1,2)-G(2,3) -0.30000000 -0.40683919 -0.1891873
-#' # G(2,3)-G(1,3) -0.36666667 -0.46222023 -0.2662566
-#' # G(3)           0.64444444  0.57382971  0.7068720
+#' #               Estimate      LL      UL
+#' # G(1,2)          0.5667  0.4660  0.6524 
+#' # G(1,3)          0.5000  0.3956  0.5912
+#' # G(2,3)          0.8667  0.7970  0.9135
+#' # G(1,2)-G(1,3)   0.0667  0.0058  0.1266
+#' # G(1,2)-G(2,3)  -0.3000 -0.4068 -0.1892
+#' # G(2,3)-G(1,3)  -0.3667 -0.4622 -0.2663
+#' # G(3)            0.6444  0.5738  0.7069
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -1797,13 +1797,13 @@ ci.agree.3rater <- function(alpha, f) {
  UL.G13_23 <- 2*(p2 - p3 + z*se.G13_23)
  LL.G3 <- (4/3)*(p123 - z*se.G3) - 1/3
  UL.G3 <- (4/3)*(p123 + z*se.G3) - 1/3
- out1 <- t(c(G12.ml, LL.G12, UL.G12))
- out2 <- t(c(G13.ml, LL.G13, UL.G13))
- out3 <- t(c(G23.ml, LL.G23, UL.G23))
- out4 <- t(c(G12_13.ml, LL.G12_13, UL.G12_13))
- out5 <- t(c(G12_23.ml, LL.G12_23, UL.G12_23))
- out6 <- t(c(G13_23.ml, LL.G13_23, UL.G13_23))
- out7 <- t(c(G3.ml, LL.G3, UL.G3))
+ out1 <- t(c(round(G12.ml, 4), round(LL.G12, 4), round(UL.G12, 4)))
+ out2 <- t(c(round(G13.ml, 4), round(LL.G13, 4), round(UL.G13, 4)))
+ out3 <- t(c(round(G23.ml, 4), round(LL.G23, 4), round(UL.G23, 4)))
+ out4 <- t(c(round(G12_13.ml, 4), round(LL.G12_13, 4), round(UL.G12_13, 4)))
+ out5 <- t(c(round(G12_23.ml, 4), round(LL.G12_23, 4), round(UL.G12_23, 4)))
+ out6 <- t(c(round(G13_23.ml, 4), round(LL.G13_23, 4), round(UL.G13_23, 4)))
+ out7 <- t(c(round(G3.ml, 4), round(LL.G3, 4), round(UL.G3, 4)))
  out <- rbind(out1, out2, out3, out4, out5, out6, out7)
  colnames(out) <- c("Estimate", "LL", "UL")
  rownames(out) <-  c("G(1,2)", "G(1,3)", "G(2,3)", "G(1,2)-G(1,3)", "G(1,2)-G(2,3)",
