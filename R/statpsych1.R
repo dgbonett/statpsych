@@ -1152,10 +1152,10 @@ ci.ratio.mean.ps <- function(alpha, y1, y2){
 #' ci.stdmean.ps(.05, 602.4, 705.6, 33.17, 51.08, .769, 8)
 #'
 #' # Should return:
-#' #                              Estimate adj Estimate        SE        LL         UL
-#' # Unweighted standardizer:    -2.396304    -2.218547 0.6520927 -3.674383 -1.1182260
-#' # Measurement 1 standardizer: -3.111245    -2.765551 0.9136207 -4.901909 -1.3205815
-#' # Measurement 2 standardizer: -2.020360    -1.795876 0.5932811 -3.183170 -0.8575506
+#' #                             Estimate adj Estimate      SE      LL      UL
+#' # Unweighted standardizer:     -2.3963      -2.2185 0.65209 -3.6744 -1.1182
+#' # Measurement 1 standardizer:  -3.1112      -2.7656 0.91362 -4.9019 -1.3206
+#' # Measurement 2 standardizer:  -2.0204      -1.7959 0.59328 -3.1832 -0.8576
 #'
 #'
 #' @importFrom stats qnorm
@@ -1184,9 +1184,9 @@ ci.stdmean.ps <- function(alpha, m1, m2, sd1, sd2, cor, n) {
  se4 <- sqrt(est4^2/(2*df) + vd/(df*v2))
  ll4 <- est4 - z*se4
  ul4 <- est4 + z*se4
- out1 <- t(c(est1, est1u, se1, ll1, ul1))
- out3 <- t(c(est3, est3u, se3, ll3, ul3))
- out4 <- t(c(est4, est4u, se4, ll4, ul4))
+ out1 <- t(c(round(est1, 4), round(est1u, 4), round(se1, 5), round(ll1, 4), round(ul1, 4)))
+ out3 <- t(c(round(est3, 4), round(est3u, 4), round(se3, 5), round(ll3, 4), round(ul3, 4)))
+ out4 <- t(c(round(est4, 4), round(est4u, 4), round(se4, 5), round(ll4, 4), round(ul4, 4)))
  out <- rbind(out1, out3, out4)
  colnames(out) <- c("Estimate", "adj Estimate", "SE", "LL", "UL")
  rownames1 <- c("Unweighted standardizer:")
@@ -1240,9 +1240,9 @@ ci.stdmean.ps <- function(alpha, m1, m2, sd1, sd2, cor, n) {
 #' ci.lc.stdmean.ws(.05, m, sd, .672, 20, q)
 #'
 #' # Should return:
-#' #                           Estimate  adj Estimate        SE        LL         UL
-#' # Unweighted standardizer: -1.301263     -1.266557 0.3147937 -1.918248 -0.6842788
-#' # Level 1 standardizer:    -1.393229     -1.337500 0.3661824 -2.110934 -0.6755248
+#' #                          Estimate adj Estimate      SE      LL      UL
+#' # Unweighted standardizer:  -1.3013      -1.2666 0.31479 -1.9182 -0.6843
+#' # Level 1 standardizer:     -1.3932      -1.3375 0.36618 -2.1109 -0.6755
 #'
 #'
 #' @importFrom stats qnorm
@@ -1273,8 +1273,8 @@ ci.lc.stdmean.ws <- function(alpha, m, sd, cor, n, q) {
  se2 <- sqrt(v1 + (v4 + 2*v5)/(df*s1^2))
  ll2 <- est2 - z*se2
  ul2 <- est2 + z*se2
- out1 <- t(c(est1, est1u, se1, ll1, ul1))
- out2 <- t(c(est2, est2u, se2, ll2, ul2))
+ out1 <- t(c(round(est1, 4), round(est1u, 4), round(se1, 5), round(ll1, 4), round(ul1, 4)))
+ out2 <- t(c(round(est2, 4), round(est2u, 4), round(se2, 5), round(ll2, 4), round(ul2, 4)))
  out <- rbind(out1, out2)
  colnames(out) <- c("Estimate", "adj Estimate", "SE", "LL", "UL")
  rownames(out) <- c("Unweighted standardizer:", "Level 1 standardizer:")
