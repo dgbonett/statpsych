@@ -252,8 +252,8 @@ ci.mean.gen <- function(alpha, y) {
 #' ci.stdmean(.05, 24.5, 3.65, 40, 20)
 #'
 #' # Should return:
-#' # Estimate  adj Estimate        SE        LL       UL
-#' # 1.232877      1.209015 0.2124335 0.8165146 1.649239
+#' # Estimate adj Estimate      SE     LL    UL
+#' #   1.2329        1.209 0.21244 0.8165 1.6493
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -262,17 +262,18 @@ ci.stdmean <- function(alpha, m, sd, n, h) {
  z <- qnorm(1 - alpha/2)
  df <- n - 1
  adj <- 1 - 3/(4*df - 1)
- est <- (m - h)/sd
- estu <- adj*est
+ est <- round((m - h)/sd, 4)
+ estu <- round(adj*est, 4)
  se <- sqrt(est^2/(2*df) + 1/df)
- ll <- est - z*se
- ul <- est + z*se
+ ll <- round(est - z*se, 4)
+ ul <- round(est + z*se, 4)
+ se <- round(se, 5)
  out <- t(c(est, estu, se, ll, ul))
  colnames(out) <- c("Estimate", "adj Estimate", "SE", "LL", "UL")
  rownames(out) <- ""
  return(out)
 }
-	
+
 
 #  ci.mean2 ==================================================================
 #' Confidence interval for a 2-group mean difference
