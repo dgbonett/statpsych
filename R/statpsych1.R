@@ -732,11 +732,11 @@ ci.ratio.mean2 <- function(alpha, y1, y2){
 #' ci.stdmean2(.05, 20.9, 19.1, 3.85, 3.19, 50, 50)
 #' 
 #' # Should return:
-#' #                           Estimate adj Estimate        SE         LL        UL
-#' # Unweighted standardizer: 0.5091311    0.5052248 0.2053887 0.10657659 0.9116857
-#' # Weighted standardizer:   0.5091311    0.5052248 0.2032794 0.11071079 0.9075515
-#' # Group 1 standardizer:    0.4675325    0.4603397 0.1914405 0.09231597 0.8427490
-#' # Group 2 standardizer:    0.5642633    0.5555823 0.2310489 0.11141582 1.0171108
+#' #                          Estimate adj Estimate      SE     LL     UL
+#' # Unweighted standardizer:   0.5091       0.5052 0.20539 0.1066 0.9117
+#' # Weighted standardizer:     0.5091       0.5052 0.20328 0.1107 0.9076
+#' # Group 1 standardizer:      0.4675       0.4603 0.19144 0.0923 0.8427
+#' # Group 2 standardizer:      0.5643       0.5556 0.23105 0.1114 1.0171
 #'
 #'
 #' @importFrom stats qnorm
@@ -773,10 +773,10 @@ ci.stdmean2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
  se4 <- sqrt(est4^2/(2*df2) + 1/df2 + v1/(df1*v2))
  ll4 <- est4 - z*se4
  ul4 <- est4 + z*se4
- out1 <- t(c(est1, est1u, se1, ll1, ul1))
- out2 <- t(c(est2, est2u, se2, ll2, ul2))
- out3 <- t(c(est3, est3u, se3, ll3, ul3))
- out4 <- t(c(est4, est4u, se4, ll4, ul4))
+ out1 <- t(c(round(est1, 4), round(est1u, 4), round(se1, 5), round(ll1, 4), round(ul1, 4)))
+ out2 <- t(c(round(est2, 4), round(est2u, 4), round(se2, 5), round(ll2, 4), round(ul2, 4)))
+ out3 <- t(c(round(est3, 4), round(est3u, 4), round(se3, 5), round(ll3, 4), round(ul3, 4)))
+ out4 <- t(c(round(est4, 4), round(est4u, 4), round(se4, 5), round(ll4, 4), round(ul4, 4)))
  out <- rbind(out1, out2, out3, out4)
  colnames(out) <- c("Estimate", "adj Estimate", "SE", "LL", "UL")
  rownames1 <- c("Unweighted standardizer:", "Weighted standardizer:")
@@ -826,10 +826,10 @@ ci.stdmean2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' ci.stdmean.strat(.05, 33.2, 30.8, 10.5, 11.2, 200, 200, .533)
 #'
 #' # Should return:
-#' #                         Estimate  adj Estimate         SE         LL        UL
-#' # Weighted standardizer: 0.2215549     0.2211371 0.10052057 0.02453817 0.4185716
-#' # Group 1 standardizer:  0.2285714     0.2277089 0.10427785 0.02419059 0.4329523
-#' # Group 2 standardizer:  0.2142857     0.2277089 0.09776049 0.02267868 0.4058927
+#' #                        Estimate adj Estimate      SE     LL     UL
+#' # Weighted standardizer:   0.2216       0.2211 0.10052 0.0245 0.4186
+#' # Group 1 standardizer:    0.2286       0.2277 0.10428 0.0242 0.4330
+#' # Group 2 standardizer:    0.2143       0.2277 0.09776 0.0227 0.4059
 #'
 #'
 #' @importFrom stats qnorm
@@ -860,9 +860,9 @@ ci.stdmean.strat <- function(alpha, m1, m2, sd1, sd2, n1, n2, p1) {
  se4 <- sqrt(est4^2/(2*df2) + 1/df2 + v1/(df1*v2))
  ll4 <- est4 - z*se4
  ul4 <- est4 + z*se4
- out1 <- t(c(est1, est1u, se1, ll1, ul1))
- out3 <- t(c(est3, est3u, se3, ll3, ul3))
- out4 <- t(c(est4, est4u, se4, ll4, ul4))
+ out1 <- t(c(round(est1, 4), round(est1u, 4), round(se1, 5), round(ll1, 4), round(ul1, 4)))
+ out3 <- t(c(round(est3, 4), round(est3u, 4), round(se3, 5), round(ll3, 4), round(ul3, 4)))
+ out4 <- t(c(round(est4, 4), round(est4u, 4), round(se4, 5), round(ll4, 4), round(ul4, 4)))
  out <- rbind(out1, out3, out4)
  colnames(out) <- c("Estimate", "adj Estimate", "SE", "LL", "UL")
  rownames1 <- c("Weighted standardizer:")
@@ -917,10 +917,10 @@ ci.stdmean.strat <- function(alpha, m1, m2, sd1, sd2, n1, n2, p1) {
 #' ci.lc.stdmean.bs(.05, m, sd, n, v)
 #'
 #' # Should return:
-#' #                          Estimate adj Estimate        SE        LL       UL
-#' # Unweighted standardizer: 1.245878     1.239878 0.1762080 0.9005164 1.591239
-#' # Weighted standardizer:   1.245878     1.239878 0.1731330 0.9065434 1.585212
-#' # Group 1 standardizer:    1.314480     1.289038 0.2251544 0.8731850 1.755774
+#' #                          Estimate adj Estimate      SE     LL     UL
+#' # Unweighted standardizer:   1.2459       1.2399 0.17621 0.9005 1.5912 
+#' # Weighted standardizer:     1.2459       1.2399 0.17313 0.9065 1.5852
+#' # Group 1 standardizer:      1.3145       1.2890 0.22515 0.8732 1.7558
 #'
 #'
 #' @importFrom stats qnorm
@@ -959,9 +959,9 @@ ci.lc.stdmean.bs <- function(alpha, m, sd, n, v) {
  se3 <- sqrt(a1 + a2)
  ll3 <- est3 - z*se3
  ul3 <- est3 + z*se3
- out1 <- t(c(est1, est1u, se1, ll1, ul1))
- out2 <- t(c(est2, est2u, se2, ll2, ul2))
- out3 <- t(c(est3, est3u, se3, ll3, ul3))
+ out1 <- t(c(round(est1, 4), round(est1u, 4), round(se1, 5), round(ll1, 4), round(ul1, 4)))
+ out2 <- t(c(round(est2, 4), round(est2u, 4), round(se2, 5), round(ll2, 4), round(ul2, 4)))
+ out3 <- t(c(round(est3, 4), round(est3u, 4), round(se3, 5), round(ll3, 4), round(ul3, 4)))
  out <- rbind(out1, out2, out3)
  colnames(out) <- c("Estimate", "adj Estimate", "SE", "LL", "UL")
  rownames(out) <- c("Unweighted standardizer:", "Weighted standardizer:", "Group 1 standardizer:")
