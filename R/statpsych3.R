@@ -251,10 +251,10 @@ ci.pairs.mult <-function(alpha, f) {
 #' ci.diversity(.05, f)
 #'
 #' # Should return:
-#' #          Estimate         SE        LL        UL
-#' # Berger  0.5598110 0.01587055 0.5287052 0.5909167
-#' # Simpson 0.7722214 0.01229148 0.7481306 0.7963123
-#' # Shannon 0.7292111 0.01224019 0.7052207 0.7532014
+#' #        Estimate      SE     LL     UL
+#' # Berger    0.5598 0.01587 0.5287 0.5909
+#' # Simpson   0.7722 0.01229 0.7481 0.7963
+#' # Shannon   0.7292 0.01224 0.7052 0.7532
 #'  
 #' 
 #' @export  
@@ -292,9 +292,9 @@ ci.diversity <- function(alpha, f) {
  if (ll1 < 0) {ll1 = 0}
  if (ll2 < 0) {ll2 = 0}
  if (ll3 < 0) {ll3 = 0}
- out1 <- t(c(iqv1, se1, ll1, ul1))	
- out2 <- t(c(iqv2, se2, ll2, ul2))
- out3 <- t(c(iqv3, se3, ll3, ul3))
+ out1 <- t(c(round(iqv1, 4), round(se1, 5), round(ll1, 4), round(ul1, 4)))
+ out2 <- t(c(round(iqv2, 4), round(se2, 5), round(ll2, 4), round(ul2, 4)))
+ out3 <- t(c(round(iqv3, 4), round(se3, 5), round(ll3, 4), round(ul3, 4))) 
  out <- rbind(out1, out2, out3)
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  rownames(out) <- c("Berger", "Simpson", "Shannon")
@@ -1554,8 +1554,8 @@ ci.kappa <- function(alpha, f00, f01, f10, f11) {
 #' ci.agree(.05, 250, 214, 3)
 #'
 #' # Should return:
-#' #  Estimate        SE     LL     UL
-#' #     0.784 0.0333073 0.7098 0.8414
+#' #  Estimate      SE     LL     UL
+#' #     0.784 0.03331 0.7098 0.8414
 #'
 #'
 #' @importFrom stats qnorm
@@ -1570,9 +1570,7 @@ ci.agree <- function(alpha, n, f, k) {
  se.g <- a*sqrt(p.mle*(1 - p.mle)/n)
  ll <- a*(p.adj - z*sqrt(p.adj*(1 - p.adj)/(n + 4))) - 1/(k - 1) 
  ul <- a*(p.adj + z*sqrt(p.adj*(1 - p.adj)/(n + 4))) - 1/(k - 1) 
- ll <- round(ll, 4)
- ul <- round(ul, 4)
- out <- t(c(g.mle, se.g, ll, ul))
+ out <- t(c(round(g.mle, 4), round(se.g, 5), round(ll, 4), round(ul, 4)))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  rownames(out) <- ""
  return(out)
