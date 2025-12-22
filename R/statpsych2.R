@@ -58,10 +58,7 @@ ci.cor <- function(alpha, cor, s, n) {
  ul0 <- zr + z*se.z
  ll <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
  ul <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
- ll <- round(ll, 4)
- ul <- round(ul, 4)
- se <- round(se, 5)
- out <- t(c(cor, se, ll, ul))
+ out <- cbind(round(cor, 4), round(se, 5), round(ll, 4), round(ul, 4))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  rownames(out) <- ""
  return(out)
@@ -188,10 +185,7 @@ ci.spcor <- function(alpha, cor, r2, n) {
  ul0 <- zr + z*se.z
  ll <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
  ul <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
- ll <- round(ll, 4)
- ul <- round(ul, 4)
- se <- round(se, 5)
- out <- t(c(cor, se, ll, ul))
+ out <- cbind(round(cor, 4), round(se, 5), round(ll, 4), round(ul, 4))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  rownames(out) <- ""
  return(out)
@@ -259,11 +253,8 @@ ci.cor2 <- function(alpha, cor1, cor2, n1, n2) {
  ul2 <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
  ll <- diff - sqrt((cor1 - ll1)^2 + (ul2 - cor2)^2)
  ul <- diff + sqrt((ul1 - cor1)^2 + (cor2 - ll2)^2)
- ll <- round(ll, 4)
- ul <- round(ul, 4)
  se <- sqrt((1 - cor1^2)^2/(n1 - 3) + (1 - cor2^2)^2/((n2 - 3)))
- se <- round(se, 5)
- out <- t(c(diff, se, ll, ul))
+ out <- cbind(round(diff, 4), round(se, 5), round(ll, 4), round(ul, 4))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  rownames(out) <- ""
  return(out)
@@ -338,11 +329,8 @@ ci.cor.dep <- function(alpha, cor1, cor2, cor12, n) {
  d2 <- 2*c*(cor1 - ul1)*(cor2 - ll2)
  ll <- diff - sqrt((cor1 - ll1)^2 + (ul2 - cor2)^2 - d1)
  ul <- diff + sqrt((ul1 - cor1)^2 + (cor2 - ll2)^2 - d2)
- ll <- round(ll, 4)
- ul <- round(ul, 4)
  se <- (ul - ll)/(2*z)
- se <- round(se, 5)
- out <- t(c(diff, se, ll, ul))
+ out <- cbind(round(diff, 4), round(se, 5), round(ll, 4), round(ul, 4))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  rownames(out) <- ""
  return(out)
@@ -401,9 +389,7 @@ ci.cor2.gen <- function(cor1, ll1, ul1, cor2, ll2, ul2) {
  diff <- cor1 - cor2
  ll <- diff - sqrt((cor1 - ll1)^2 + (ul2 - cor2)^2)
  ul <- diff + sqrt((ul1 - cor1)^2 + (cor2 - ll2)^2)
- ll <- round(ll, 4)
- ul <- round(ul, 4)
- out <- t(c(diff, ll, ul))
+ out <- cbind(round(diff, 4), round(ll, 4), round(ul, 4))
  colnames(out) <- c("Estimate", "LL", "UL")
  rownames(out) <- ""
  return(out)
@@ -483,16 +469,8 @@ ci.pbcor <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
  ulc1 <- uld1/sqrt(uld1^2 + k)
  llc2 <- lld2/sqrt(lld2^2 + 4)
  ulc2 <- uld2/sqrt(uld2^2 + 4)
- cor1 <- round(cor1, 4)
- se.cor1 <- round(se.cor1, 5)
- llc1 <- round(llc1, 4)
- ulc1 <- round(ulc1, 4)
- cor2 <- round(cor2, 4)
- se.cor2 <- round(se.cor2, 5)
- llc2 <- round(llc2, 4)
- ulc2 <- round(ulc2, 4)
- out1 <- t(c(cor1, se.cor1, llc1, ulc1))
- out2 <- t(c(cor2, se.cor2, llc2, ulc2))
+ out1 <- t(c(round(cor1, 4), round(se.cor1, 5), round(llc1, 4), round(ulc1, 4)))
+ out2 <- t(c(round(cor2, 4), round(se.cor2, 5), round(llc2, 4), round(ulc2, 4)))
  out <- rbind(out1, out2)
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  rownames(out) <- c("Weighted:", "Unweighted:")
@@ -563,11 +541,7 @@ ci.spear <- function(alpha, y, x) {
  ul0 <- z.cor + z*se/(1 - cor^2)
  ll <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
  ul <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
- ll <- round(ll, 4)
- ul <- round(ul, 4)
- cor <- round(cor, 4)
- se <- round(se, 5)
- out <- cbind(cor, se, ll, ul)
+ out <- cbind(round(cor, 4), round(se, 5), round(ll, 4), round(ul, 4))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  rownames(out) <- ""
  return (out)
@@ -633,11 +607,8 @@ ci.spear2 <- function(alpha, cor1, cor2, n1, n2) {
  cor.dif <- cor1 - cor2
  ll.dif <- cor.dif - sqrt((cor1 - ll1)^2 + (ul2 - cor2)^2)
  ul.dif <- cor.dif + sqrt((ul1 - cor1)^2 + (cor2 - ll2)^2)
- ll.dif <- round(ll.dif, 4)
- ul.dif <- round(ul.dif, 4)
  se <- sqrt(se1^2 + se2^2)
- se <- round(se, 5)
- out <- cbind(cor.dif, se, ll.dif, ul.dif)
+ out <- cbind(round(cor.dif, 4), round(se, 5), round(ll.dif, 4), round(ul.dif, 4))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  rownames(out) <- ""
  return (out)
@@ -971,9 +942,7 @@ ci.fisher <- function(alpha, cor, se) {
  ul0 <- zr + z*se/(1 - cor^2)
  ll <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
  ul <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
- ll <- round(ll, 4)
- ul <- round(ul, 4)
- out <- t(c(cor, ll, ul))
+ out <- t(c(cor, round(ll, 4), round(ul, 4)))
  colnames(out) <- c("Estimate", "LL", "UL")
  return(out)
 }
@@ -1218,7 +1187,6 @@ ci.rsqr <- function(alpha, r2, s, n) {
  z0 <- qnorm(1 - alpha1)
  dfe <- n - s - 1
  adj <- 1 - (n - 1)*(1 - r2)/dfe
- adj <- round(adj, 4)
  if (adj < 0) {adj = 0}
  b1 <- r2/(1 - r2)
  b2 <- adj/(1 - adj)
@@ -1249,10 +1217,7 @@ ci.rsqr <- function(alpha, r2, s, n) {
    if (ul < 0) {ul = 0}
  }
  se <- (ul - ll)/(2*z0)
- se <- round(se, 5)
- ll <- round(ll, 4)
- ul <- round(ul, 4)
- out <- t(c(r2, adj, se, ll, ul))
+ out <- t(c(r2, round(adj, 4), round(se, 5), round(ll, 4), round(ul, 4)))
  colnames(out) <- c("R-squared", "adj R-squared", "SE", "LL", "UL")
  rownames(out) <- ""
  return(out)
@@ -1387,10 +1352,7 @@ ci.cronbach <- function(alpha, rel, r, n) {
  f0 <- 1/(1 - rel)
  ll <- 1 - f1/f0
  ul <- 1 - 1/(f0*f2)
- ll <- round(ll, 4)
- ul <- round(ul, 4)
- se <- round(se, 5)
- out <- t(c(rel, se, ll, ul))
+ out <- cbind(rel, round(se, 5), round(ll, 4), round(ul, 4))
  colnames(out) = c("Estimate", "SE", "LL", "UL")
  rownames(out) <- ""
  return(out)
@@ -1445,9 +1407,7 @@ ci.reliability <- function(alpha, rel, se, n) {
  b <- log(n/(n - 1))
  ll <- 1 - exp(log(1 - rel) - b + z*sqrt(se^2/(1 - rel)^2))
  ul <- 1 - exp(log(1 - rel) - b - z*sqrt(se^2/(1 - rel)^2))
- ll <- round(ll, 4)
- ul <- round(ul, 4)
- out <- t(c(rel, ll, ul))
+ out <- cbind(rel, round(ll, 4), round(ul, 4))
  colnames(out) = c("Estimate", "LL", "UL")
  rownames(out) <- ""
  return(out)
@@ -1518,9 +1478,7 @@ ci.cronbach2 <- function(alpha, rel1, rel2, r1, r2, n1, n2) {
  d <- rel1 - rel2
  ll <- d - sqrt((rel1 - LL1)^2 + (UL2 - rel2)^2)
  ul <- d + sqrt((UL1 - rel1)^2 + (rel2 - LL2)^2)
- ll <- round(ll, 4)
- ul <- round(ul, 4)
- out <- t(c(d, ll, ul))
+ out <- cbind(round(d, 4), round(ll, 4), round(ul, 4))
  colnames(out) <- c("Estimate", "LL", "UL")
  rownames(out) <- ""
  return(out)
@@ -1575,12 +1533,10 @@ ci.cronbach2 <- function(alpha, rel1, rel2, r1, r2, n1, n2) {
 ci.rel2 <- function(rel1, ll1, ul1, rel2, ll2, ul2) {
  if (rel1 > .999 | rel1 < .001) {stop("reliability must be between .001 and .999")}
  if (rel2 > .999 | rel2 < .001) {stop("reliability must be between .001 and .999")}
- diff <- rel1 - rel2
- ll <- diff - sqrt((rel1 - ll1)^2 + (ul2 - rel2)^2)
- ul <- diff + sqrt((ul1 - rel1)^2 + (rel2 - ll2)^2)
- ll <- round(ll, 4)
- ul <- round(ul, 4)
- out <- t(c(diff, ll, ul))
+ d <- rel1 - rel2
+ ll <- d - sqrt((rel1 - ll1)^2 + (ul2 - rel2)^2)
+ ul <- d + sqrt((ul1 - rel1)^2 + (rel2 - ll2)^2)
+ out <- cbind(round(d, 4), round(ll, 4), round(ul, 4))
  colnames(out) <- c("Estimate", "LL", "UL")
  rownames(out) <- ""
  return(out)
@@ -1670,12 +1626,10 @@ ci.bscor <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
  ll <- a*lld/sqrt(lld^2 + c)
  ul <- a*uld/sqrt(uld^2 + c)
  bscor <- round(pbcor*a, 4)
- ll <- round(ll, 4)
- ul <- round(ul, 4)
  se.bscor <- round(se.bscor, 5)
  if (ul > 1) {ul = 1}
  if (ll < -1) {ll = -1}
- out <- t(c(bscor, se.bscor, ll, ul))
+ out <- t(c(bscor, se.bscor, round(ll, 4), round(ul, 4)))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  rownames(out) <- ""
  return(out)
