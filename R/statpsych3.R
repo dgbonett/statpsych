@@ -251,7 +251,7 @@ ci.pairs.mult <-function(alpha, f) {
 #' ci.diversity(.05, f)
 #'
 #' # Should return:
-#' #        Estimate      SE     LL     UL
+#' #         Estimate      SE     LL     UL
 #' # Berger    0.5598 0.01587 0.5287 0.5909
 #' # Simpson   0.7722 0.01229 0.7481 0.7963
 #' # Shannon   0.7292 0.01224 0.7052 0.7532
