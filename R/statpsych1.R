@@ -267,8 +267,7 @@ ci.stdmean <- function(alpha, m, sd, n, h) {
  se <- sqrt(est^2/(2*df) + 1/df)
  ll <- round(est - z*se, 4)
  ul <- round(est + z*se, 4)
- se <- round(se, 5)
- out <- t(c(est, estu, se, ll, ul))
+ out <- t(c(est, estu, round(se, 5), ll, ul))
  colnames(out) <- c("Estimate", "adj Estimate", "SE", "LL", "UL")
  rownames(out) <- ""
  return(out)
