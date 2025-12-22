@@ -1168,11 +1168,11 @@ ci.oddsratio <- function(alpha, f00, f01, f10, f11) {
 #' ci.yule(.05, 229, 28, 96, 24)
 #'
 #' # Should return:
-#' #      Estimate         SE         LL        UL
-#' # Q:  0.3430670 0.13280379 0.06247099 0.5734020
-#' # Y:  0.1769015 0.07290438 0.03126603 0.3151817
-#' # H:  0.2619244 0.10514465 0.04687994 0.4537659
-#' # Y*: 0.1311480 0.05457236 0.02307188 0.2361941
+#' #    Estimate     SE    LL    UL
+#' # Q:    0.343 0.1328 0.062 0.573
+#' # Y:    0.177 0.0729 0.031 0.315
+#' # H:    0.262 0.1051 0.047 0.454
+#' # Y*:   0.131 0.0546 0.023 0.236
 #'
 #'
 #' @importFrom stats qnorm
@@ -1206,10 +1206,10 @@ ci.yule <- function(alpha, f00, f01, f10, f11) {
  se.Y2 <- (c/2)*(1 - Y2^2)*se.lor
  ll.Y2 <- (ll.or^c - 1)/(ll.or^c + 1)
  ul.Y2 <- (ul.or^c - 1)/(ul.or^c + 1)
- out1 <- t(c(Q, se.Q, ll.Q, ul.Q))
- out2 <- t(c(Y, se.Y, ll.Y, ul.Y))
- out3 <- t(c(H, se.H, ll.H, ul.H))
- out4 <- t(c(Y2, se.Y2, ll.Y2, ul.Y2))
+ out1 <- t(c(round(Q, 3), round(se.Q, 4), round(ll.Q, 3), round(ul.Q, 3)))
+ out2 <- t(c(round(Y, 3), round(se.Y, 4), round(ll.Y, 3), round(ul.Y, 3)))
+ out3 <- t(c(round(H, 3), round(se.H, 4), round(ll.H, 3), round(ul.H, 3)))
+ out4 <- t(c(round(Y2, 3), round(se.Y2, 4), round(ll.Y2, 3), round(ul.Y2, 3)))
  out <- rbind(out1, out2, out3, out4)
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  rownames(out) <- c("Q:", "Y:", "H:", "Y*:")
@@ -1277,11 +1277,7 @@ ci.phi <- function(alpha, f00, f01, f10, f11) {
  ul0 <- zr + z*se/(1 - phi^2)
  ll <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
  ul <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
- ll <- round(ll, 3)
- ul <- round(ul, 3)
- phi <- round(phi, 3)
- se <- round(se, 4)
- out <- t(c(phi, se, ll, ul))
+ out <- t(c(round(phi, 3), round(se, 4), round(ll, 3), round(ul, 3)))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  rownames(out) <- ""
  return(out)
@@ -1352,11 +1348,7 @@ ci.biphi <- function(alpha, f1, f2, n1, n2) {
  se.biphi <- sqrt(c^2/(lor^2 + c)^3)*se.lor
  ll <- LL1/sqrt(LL1^2 + 2.89/(p1*p2))
  ul <- UL1/sqrt(UL1^2 + 2.89/(p1*p2))
- ll <- round(ll, 3)
- ul <- round(ul, 3)
- biphi <- round(biphi, 3)
- se.biphi <- round(se.biphi, 4)
- out <- t(c(biphi, se.biphi, ll, ul))
+ out <- t(c(round(biphi, 3), round(se.biphi, 4), round(ll, 3), round(ul, 3)))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  rownames(out) <- ""
  return(out)
@@ -1425,11 +1417,8 @@ ci.tetra <- function(alpha, f00, f01, f10, f11) {
  tetra <- cos(3.14159/(1 + or^c))
  ll <- cos(3.14159/(1 + LL1^c))
  ul <- cos(3.14159/(1 + UL1^c))
- ll <- round(ll, 3)
- ul <- round(ul, 3)
- tetra <- round(tetra, 3)
  se <- round((ul - ll)/(2*z), 4)
- out <- t(c(tetra, se, ll, ul))
+ out <- t(c(round(tetra, 3), se, round(ll, 3), round(ul, 3)))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  rownames(out) <- ""
  return(out)
@@ -1849,8 +1838,8 @@ ci.agree.3rater <- function(alpha, f) {
 #' ci.popsize(.05, 85, 196, 184)
 #'
 #' # Should return:
-#' # Estimate       SE  LL   UL
-#' #      889 67.34818 777 1041
+#' # Estimate    SE  LL   UL
+#' #      889 67.35 777 1041
 #'
 #'
 #' @importFrom stats qnorm
@@ -1864,7 +1853,7 @@ ci.popsize <- function(alpha, f00, f01, f10) {
  ll <- round(n0 + exp(log(f11) - z*se))
  ul <- round(n0 + exp(log(f11) + z*se))
  se <- (ul - ll)/(2*z)
- out <- t(c(N, se, ll, ul))
+ out <- t(c(N, round(se, 2), ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  rownames(out) <- ""
  return(out)
