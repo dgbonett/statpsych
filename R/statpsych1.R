@@ -3339,14 +3339,14 @@ ci.2x2.mean.bs <- function(alpha, y11, y12, y21, y22) {
 #' ci.2x2.stdmean.bs(.05, y11, y12, y21, y22)
 #'
 #' # Should return:
-#' #             Estimate  adj Estimate        SE         LL         UL
-#' # AB:      -1.44976487    -1.4193502 0.6885238 -2.7992468 -0.1002829
-#' # A:        0.46904158     0.4592015 0.3379520 -0.1933321  1.1314153
-#' # B:       -0.75330920    -0.7375055 0.3451209 -1.4297338 -0.0768846
-#' # A at b1: -0.25584086    -0.2504736 0.4640186 -1.1653006  0.6536189
-#' # A at b2:  1.19392401     1.1688767 0.5001423  0.2136630  2.1741850
-#' # B at a1: -1.47819163    -1.4471806 0.4928386 -2.4441376 -0.5122457
-#' # B at a2: -0.02842676    -0.0278304 0.4820369 -0.9732017  0.9163482
+#' #          Estimate adj Estimate      SE      LL      UL
+#' # AB:       -1.4498      -1.4194 0.68852 -2.7992 -0.1003
+#' # A:         0.4690       0.4592 0.33795 -0.1933  1.1314
+#' # B:        -0.7533      -0.7375 0.34512 -1.4297 -0.0769
+#' # A at b1:  -0.2558      -0.2505 0.46402 -1.1653  0.6536
+#' # A at b2:   1.1939       1.1689 0.50014  0.2137  2.1742
+#' # B at a1:  -1.4782      -1.4472 0.49284 -2.4441 -0.5122
+#' # B at a2:  -0.0284      -0.0278 0.48204 -0.9732  0.9163
 #'
 #'
 #' @importFrom stats qnorm
@@ -3394,7 +3394,7 @@ ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
  se1 <- sqrt(a2 + a3)
  LL1 <- est1 - z*se1
  UL1 <- est1 + z*se1
- row1 <- c(est1, est1u, se1, LL1, UL1)
+ row1 <- c(round(est1, 4), round(est1u, 4), round(se1, 5), round(LL1, 4), round(UL1, 4))
 # A 
  est2 <- (t(v2)%*%m)/s
  est2u <- adj*est2
@@ -3404,7 +3404,7 @@ ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
  se2 <- sqrt(a2 + a3)
  LL2 <- est2 - z*se2
  UL2 <- est2 + z*se2
- row2 <- c(est2, est2u, se2, LL2, UL2)
+ row2 <- c(round(est2, 4), round(est2u, 4), round(se2, 5), round(LL2, 4), round(UL2, 4))
 # B 
  est3 <- (t(v3)%*%m)/s
  est3u <- adj*est3
@@ -3414,7 +3414,7 @@ ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
  se3 <- sqrt(a2 + a3)
  LL3 <- est3 - z*se3
  UL3 <- est3 + z*se3
- row3 <- c(est3, est3u, se3, LL3, UL3)
+ row3 <- c(round(est3, 4), round(est3u, 4), round(se3, 5), round(LL3, 4), round(UL3, 4))
 # A at b1 
  est4 <- (t(v4)%*%m)/s
  est4u <- adj*est4
@@ -3424,7 +3424,7 @@ ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
  se4 <- sqrt(a2 + a3)
  LL4 <- est4 - z*se4
  UL4 <- est4 + z*se4
- row4 <- c(est4, est4u, se4, LL4, UL4)
+ row4 <- c(round(est4, 4), round(est4u, 4), round(se4, 5), round(LL4, 4), round(UL4, 4))
 # A at b2 
  est5 <- (t(v5)%*%m)/s
  est5u <- adj*est5
@@ -3434,7 +3434,7 @@ ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
  se5 <- sqrt(a2 + a3)
  LL5 <- est5 - z*se5
  UL5 <- est5 + z*se5
- row5 <- c(est5, est5u, se5, LL5, UL5)
+ row5 <- c(round(est5, 4), round(est5u, 4), round(se5, 5), round(LL5, 4), round(UL5, 4))
 # B at a1 
  est6 <- (t(v6)%*%m)/s
  est6u <- adj*est6
@@ -3444,7 +3444,7 @@ ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
  se6 <- sqrt(a2 + a3)
  LL6 <- est6 - z*se6
  UL6 <- est6 + z*se6
- row6 <- c(est6, est6u, se6, LL6, UL6)
+ row6 <- c(round(est6, 4), round(est6u, 4), round(se6, 5), round(LL6, 4), round(UL6, 4))
 # B at a2 
  est7 <- (t(v7)%*%m)/s
  est7u <- adj*est7
@@ -3454,7 +3454,7 @@ ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
  se7 <- sqrt(a2 + a3)
  LL7 <- est7 - z*se7
  UL7 <- est7 + z*se7
- row7 <- c(est7, est7u, se7, LL7, UL7)
+ row7 <- c(round(est7, 4), round(est7u, 4), round(se7, 5), round(LL7, 4), round(UL7, 4))
  out <- rbind(row1, row2, row3, row4, row5, row6, row7)
  rownames(out) <- c("AB:", "A:", "B:", "A at b1:", "A at b2:", "B at a1:", "B at a2:")
  colnames(out) = c("Estimate", "adj Estimate", "SE", "LL", "UL")
@@ -3666,14 +3666,14 @@ ci.2x2.median.bs <- function(alpha, y11, y12, y21, y22) {
 #' ci.2x2.stdmean.ws(.05, y11, y12, y21, y22)
 #'
 #' # Should return:
-#' #             Estimate  adj Estimate         SE           LL        UL
-#' # AB:       0.17248839    0.16446123 0.13654635 -0.095137544 0.4401143
-#' # A:        0.10924265    0.10415878 0.05752822 -0.003510596 0.2219959
-#' # B:        0.07474497    0.07126653 0.05920554 -0.041295751 0.1907857
-#' # A at b1:  0.19548684    0.18638939 0.08460680  0.029660560 0.3613131
-#' # A at b2:  0.02299845    0.02192816 0.09371838 -0.160686202 0.2066831
-#' # B at a1:  0.16098916    0.15349715 0.09457347 -0.024371434 0.3463498
-#' # B at a2: -0.01149923   -0.01096408 0.08595873 -0.179975237 0.1569768
+#' #          Estimate adj Estimate      SE      LL     UL
+#' # AB:        0.1725       0.1645 0.13655 -0.0951 0.4401
+#' # A:         0.1092       0.1042 0.05753 -0.0035 0.2220
+#' # B:         0.0747       0.0713 0.05921 -0.0413 0.1908
+#' # A at b1:   0.1955       0.1864 0.08461  0.0297 0.3613
+#' # A at b2:   0.0230       0.0219 0.09372 -0.1607 0.2067
+#' # B at a1:   0.1610       0.1535 0.09457 -0.0244 0.3463
+#' # B at a2:  -0.0115      -0.0110 0.08596 -0.1800 0.1570
 #'
 #'
 #' @importFrom stats qnorm
@@ -3721,7 +3721,7 @@ ci.2x2.stdmean.ws <- function(alpha, y11, y12, y21, y22) {
  se1 <- sqrt(v1*(v2 + 2*v3) + (v4 + 2*v5)/(df*s^2))
  LL1 <- est1 - z*se1
  UL1 <- est1 + z*se1
- row1 <- c(est1, est1u, se1, LL1, UL1)
+ row1 <- c(round(est1, 4), round(est1u, 4), round(se1, 5), round(LL1, 4), round(UL1, 4))
  # A 
  est2 <- (t(q2)%*%m)/s
  est2u <- adj*est2
@@ -3733,7 +3733,7 @@ ci.2x2.stdmean.ws <- function(alpha, y11, y12, y21, y22) {
  se2 <- sqrt(v1*(v2 + 2*v3) + (v4 + 2*v5)/(df*s^2))
  LL2 <- est2 - z*se2
  UL2 <- est2 + z*se2
- row2 <- c(est2, est2u, se2, LL2, UL2)
+ row2 <- c(round(est2, 4), round(est2u, 4), round(se2, 5), round(LL2, 4), round(UL2, 4))
  # B 
  est3 <- (t(q3)%*%m)/s
  est3u <- adj*est3
@@ -3745,7 +3745,7 @@ ci.2x2.stdmean.ws <- function(alpha, y11, y12, y21, y22) {
  se3 <- sqrt(v1*(v2 + 2*v3) + (v4 + 2*v5)/(df*s^2))
  LL3 <- est3 - z*se3
  UL3 <- est3 + z*se3
- row3 <- c(est3, est3u, se3, LL3, UL3)
+ row3 <- c(round(est3, 4), round(est3u, 4), round(se3, 5), round(LL3, 4), round(UL3, 4))
  # A at b1 
  est4 <- (t(q4)%*%m)/s
  est4u <- adj*est4
@@ -3757,7 +3757,7 @@ ci.2x2.stdmean.ws <- function(alpha, y11, y12, y21, y22) {
  se4 <- sqrt(v1*(v2 + 2*v3) + (v4 + 2*v5)/(df*s^2))
  LL4 <- est4 - z*se4
  UL4 <- est4 + z*se4
- row4 <- c(est4, est4u, se4, LL4, UL4)
+ row4 <- c(round(est4, 4), round(est4u, 4), round(se4, 5), round(LL4, 4), round(UL4, 4))
  # A at b2 
  est5 <- (t(q5)%*%m)/s
  est5u <- adj*est5
@@ -3769,7 +3769,7 @@ ci.2x2.stdmean.ws <- function(alpha, y11, y12, y21, y22) {
  se5 <- sqrt(v1*(v2 + 2*v3) + (v4 + 2*v5)/(df*s^2))
  LL5 <- est5 - z*se5
  UL5 <- est5 + z*se5
- row5 <- c(est5, est5u, se5, LL5, UL5)
+ row5 <- c(round(est5, 4), round(est5u, 4), round(se5, 5), round(LL5, 4), round(UL5, 4))
  # B at a1 
  est6 <- (t(q6)%*%m)/s
  est6u <- adj*est6
@@ -3781,7 +3781,7 @@ ci.2x2.stdmean.ws <- function(alpha, y11, y12, y21, y22) {
  se6 <- sqrt(v1*(v2 + 2*v3) + (v4 + 2*v5)/(df*s^2))
  LL6 <- est6 - z*se6
  UL6 <- est6 + z*se6
- row6 <- c(est6, est6u, se6, LL6, UL6)
+ row6 <- c(round(est6, 4), round(est6u, 4), round(se6, 5), round(LL6, 4), round(UL6, 4))
  # B at a2 
  est7 <- (t(q7)%*%m)/s
  est7u <- adj*est7
@@ -3793,7 +3793,7 @@ ci.2x2.stdmean.ws <- function(alpha, y11, y12, y21, y22) {
  se7 <- sqrt(v1*(v2 + 2*v3) + (v4 + 2*v5)/(df*s^2))
  LL7 <- est7 - z*se7
  UL7 <- est7 + z*se7
- row7 <- c(est7, est7u, se7, LL7, UL7)
+ row7 <- c(round(est7, 4), round(est7u, 4), round(se7, 5), round(LL7, 4), round(UL7, 4))
  out <- rbind(row1, row2, row3, row4, row5, row6, row7)
  rownames(out) <- c("AB:", "A:", "B:", "A at b1:", "A at b2:", "B at a1:", "B at a2:")
  colnames(out) = c("Estimate", "adj Estimate", "SE", "LL", "UL")
@@ -3843,14 +3843,14 @@ ci.2x2.stdmean.ws <- function(alpha, y11, y12, y21, y22) {
 #' ci.2x2.stdmean.mixed(.05, y11, y12, y21, y22)
 #'
 #' # Should return:
-#' #             Estimate adj Estimate        SE          LL         UL
-#' # AB:      -1.95153666  -1.80141845 0.5407442 -3.01137589 -0.8916974
-#' # A:        1.06061775   1.01125934 0.2797699  0.51227884  1.6089567
-#' # B:        1.90911195   1.76225718 0.5758855  0.78039715  3.0378267
-#' # A at b1:  0.08484942   0.07589163 0.4650441 -0.82662027  0.9963191
-#' # A at b2:  2.03638608   1.82139908 0.2995604  1.44925855  2.6235136
-#' # B at a1:  0.93334362   0.86154796 0.5036429 -0.05377836  1.9204656
-#' # B at a2:  2.88488027   2.66296641 0.7477246  1.41936706  4.3503935
+#' #          Estimate adj Estimate      SE      LL      UL
+#' # AB:       -1.9515      -1.8014 0.54074 -3.0114 -0.8917
+#' # A:         1.0606       1.0113 0.27977  0.5123  1.6090
+#' # B:         1.9091       1.7623 0.57589  0.7804  3.0378
+#' # A at b1:   0.0848       0.0759 0.46504 -0.8266  0.9963
+#' # A at b2:   2.0364       1.8214 0.29956  1.4493  2.6235
+#' # B at a1:   0.9333       0.8615 0.50364 -0.0538  1.9205
+#' # B at a2:   2.8849       2.6630 0.74772  1.4194  4.3504
 #'
 #'
 #' @importFrom stats qnorm
@@ -3892,7 +3892,7 @@ ci.2x2.stdmean.mixed <- function(alpha, y11, y12, y21, y22) {
  se1 <- sqrt(est1*v0/s^4 + v1)
  LL1 <- est1 - z*se1
  UL1 <- est1 + z*se1
- row1 <- c(est1, est1u, se1, LL1, UL1)
+ row1 <- c(round(est1, 4), round(est1u, 4), round(se1, 5), round(LL1, 4), round(UL1, 4))
  # A 
  est2 <- (mean(diff1) + mean(diff2))/(2*s)
  est2u <- adj4*est2
@@ -3900,7 +3900,7 @@ ci.2x2.stdmean.mixed <- function(alpha, y11, y12, y21, y22) {
  se2 <- sqrt(est2*v0/s^4 + v2)
  LL2 <- est2 - z*se2
  UL2 <- est2 + z*se2
- row2 <- c(est2, est2u, se2, LL2, UL2)
+ row2 <- c(round(est2, 4), round(est2u, 4), round(se2, 5), round(LL2, 4), round(UL2, 4))
  # B
  est3 <- (mean(ave1) - mean(ave2))/s
  est3u <- adj1*est3
@@ -3908,7 +3908,7 @@ ci.2x2.stdmean.mixed <- function(alpha, y11, y12, y21, y22) {
  se3 <- sqrt(est3*v0/s^4 + v3)
  LL3 <- est3 - z*se3
  UL3 <- est3 + z*se3
- row3 <- c(est3, est3u, se3, LL3, UL3)
+ row3 <- c(round(est3, 4), round(est3u, 4), round(se3, 5), round(LL3, 4), round(UL3, 4))
  # A at b1
  est4 <- mean(diff1)/s
  est4u <- adj2*est4
@@ -3916,7 +3916,7 @@ ci.2x2.stdmean.mixed <- function(alpha, y11, y12, y21, y22) {
  se4 <- sqrt(est4*v0/s^4 + v4/s^2)
  LL4 <- est4 - z*se4
  UL4 <- est4 + z*se4
- row4 <- c(est4, est4u, se4, LL4, UL4)
+ row4 <- c(round(est4, 4), round(est4u, 4), round(se4, 5), round(LL4, 4), round(UL4, 4))
  # A at b2
  est5 <- mean(diff2)/s
  est5u <- adj3*est5
@@ -3924,7 +3924,7 @@ ci.2x2.stdmean.mixed <- function(alpha, y11, y12, y21, y22) {
  se5 <- sqrt(est5*v0/s^4 + v5/s^2)
  LL5 <- est5 - z*se5
  UL5 <- est5 + z*se5
- row5 <- c(est5, est5u, se5, LL5, UL5)
+ row5 <- c(round(est5, 4), round(est5u, 4), round(se5, 5), round(LL5, 4), round(UL5, 4))
  # B at a1
  est6 <- (mean(y11) - mean(y12))/s
  est6u <- adj1*est6
@@ -3932,7 +3932,7 @@ ci.2x2.stdmean.mixed <- function(alpha, y11, y12, y21, y22) {
  se6 <- sqrt(est6*v0/s^4 + v6/s^2)
  LL6 <- est6 - z*se6
  UL6 <- est6 + z*se6
- row6 <- c(est6, est6u, se6, LL6, UL6)
+ row6 <- c(round(est6, 4), round(est6u, 4), round(se6, 5), round(LL6, 4), round(UL6, 4))
  # B at a2
  est7 <- (mean(y21) - mean(y22))/s
  est7u <- adj1*est7
@@ -3940,7 +3940,7 @@ ci.2x2.stdmean.mixed <- function(alpha, y11, y12, y21, y22) {
  se7 <- sqrt(est7*v0/s^4 + v7/s^2)
  LL7 <- est7 - z*se7
  UL7 <- est7 + z*se7
- row7 <- c(est7, est7u, se7, LL7, UL7)
+ row7 <- c(round(est7, 4), round(est7u, 4), round(se7, 5), round(LL7, 4), round(UL7, 4))
  out <- rbind(row1, row2, row3, row4, row5, row6, row7)
  rownames(out) <- c("AB:", "A:", "B:", "A at b1:", "A at b2:", "B at a1:", "B at a2:")
  colnames(out) = c("Estimate", "adj Estimate", "SE", "LL", "UL")
