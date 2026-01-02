@@ -17,7 +17,7 @@ Changes:
     * ci.slope -- Computes confidence interval for slope in a simple linear model using summary statistics as input
     * pi.cronbach -- Computes a prediction interval for a Cronbach reliability in a future sample
 * References Manual
-    * Most function descriptions now refer to a specific section in the Bonett (2021) text for additional details
+    * Most function descriptions now refer to a specific section in the Bonett (2021) online text for additional details
 * Error Corrections:
     * size.ci.prop.prior -- corrected a error in the sample size computation
     
@@ -289,6 +289,7 @@ statpsych 1.0.0 (Release date: 2021/09/09)
 ==============
 
 * Initial release
+
 
 
 
