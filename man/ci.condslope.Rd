@@ -41,6 +41,8 @@ conditional slopes (simple slopes) in a general linear model that
 includes a predictor variable (x1), a moderator variable (x2), and
 a product predictor variable (x1*x2). Conditional slopes are computed
 at specified low and high values of the moderator variable.
+
+For more details, see Section 2.13 of Bonett (2021, Volume 2)
 }
 \examples{
 ci.condslope(.05, .132, .154, .031, .021, .015, 5.2, 10.6, 122)
@@ -54,4 +56,7 @@ ci.condslope(.05, .132, .154, .031, .021, .015, 5.2, 10.6, 122)
 # At high moderator  0.5626805 2.966119
  
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

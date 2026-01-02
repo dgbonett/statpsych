@@ -7,7 +7,8 @@ function computes the total sample size required in the second-stage sample.
 If a single group first-stage sample size is given, then the function
 computes the single-group sample size required in the second-stage sample.
 The second-stage sample is combined with the first-stage sample to obtain
-the desired confidence interval width."><meta property="og:description" content="Computes the second-stage sample size required to obtain desired confidence
+the desired confidence interval width.
+For more details, see Section 1.30 of Bonett (2021, Volume 1)"><meta property="og:description" content="Computes the second-stage sample size required to obtain desired confidence
 interval precision. This function can use either the total sample size for
 all groups in the first stage sample or a single group sample size in the
 first stage sample. If the total first-stage sample size is given, then the
@@ -15,7 +16,8 @@ function computes the total sample size required in the second-stage sample.
 If a single group first-stage sample size is given, then the function
 computes the single-group sample size required in the second-stage sample.
 The second-stage sample is combined with the first-stage sample to obtain
-the desired confidence interval width."></head><body>
+the desired confidence interval width.
+For more details, see Section 1.30 of Bonett (2021, Volume 1)"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -59,6 +61,7 @@ If a single group first-stage sample size is given, then the function
 computes the single-group sample size required in the second-stage sample.
 The second-stage sample is combined with the first-stage sample to obtain
 the desired confidence interval width.</p>
+<p>For more details, see Section 1.30 of Bonett (2021, Volume 1)</p>
     </div>
 
     <div class="section level2">
@@ -89,13 +92,13 @@ the desired confidence interval width.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">size.ci.second</span><span class="op">(</span><span class="fl">20</span>, <span class="fl">5.3</span>, <span class="fl">2.5</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">size.ci.second</span><span class="op">(</span><span class="fl">25</span>, <span class="fl">4.38</span>, <span class="fl">2.0</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Second-stage sample size</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                        70</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                        95</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Should return:</span></span></span>
 <span class="r-in"><span><span class="co"># Second-stage sample size</span></span></span>
-<span class="r-in"><span><span class="co">#                       70</span></span></span>
+<span class="r-in"><span><span class="co">#                       95</span></span></span>
 <span class="r-in"><span> </span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
@@ -109,7 +112,7 @@ the desired confidence interval width.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

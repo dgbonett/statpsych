@@ -3,11 +3,13 @@
 conditional slopes (simple slopes) in a logistic model that
 includes a predictor variable (x1), a moderator variable (x2),
 and a product predictor variable (x1*x2). Conditional slopes are
-computed at low and high values of the moderator variable."><meta property="og:description" content="Computes confidence intervals and test statistics for population
+computed at low and high values of the moderator variable.
+For more details, see Section 4.9 of Bonett (2021, Volume 3)"><meta property="og:description" content="Computes confidence intervals and test statistics for population
 conditional slopes (simple slopes) in a logistic model that
 includes a predictor variable (x1), a moderator variable (x2),
 and a product predictor variable (x1*x2). Conditional slopes are
-computed at low and high values of the moderator variable."></head><body>
+computed at low and high values of the moderator variable.
+For more details, see Section 4.9 of Bonett (2021, Volume 3)"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -47,6 +49,7 @@ conditional slopes (simple slopes) in a logistic model that
 includes a predictor variable (x1), a moderator variable (x2),
 and a product predictor variable (x1*x2). Conditional slopes are
 computed at low and high values of the moderator variable.</p>
+<p>For more details, see Section 4.9 of Bonett (2021, Volume 3)</p>
     </div>
 
     <div class="section level2">
@@ -99,21 +102,23 @@ computed at low and high values of the moderator variable.</p>
 <li><p>LL - lower limit of the exponentiated confidence interval</p></li>
 <li><p>UL - upper limit of the exponentiated confidence interval</p></li>
 </ul></div>
+    <div class="section level2">
+    <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
+    <p>Bonett DG (2021url).
+<em>Statistical Methods for Psychologists</em>.</p>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">ci.condslope.log</span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">.132</span>, <span class="fl">.154</span>, <span class="fl">.031</span>, <span class="fl">.021</span>, <span class="fl">.015</span>, <span class="fl">5.2</span>, <span class="fl">10.6</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                   Estimate exp(Estimate)        z           p       LL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At low moderator    0.9328      2.541616 2.269824 0.023218266 1.135802</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At high moderator   1.7644      5.838068 2.906507 0.003654887 1.776421</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                          UL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At low moderator   5.687444</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At high moderator 19.186357</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                   Estimate exp(Estimate)      z       p       LL        UL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At low moderator    0.9328      2.541616 2.2698 0.02322 1.135802  5.687444</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At high moderator   1.7644      5.838068 2.9065 0.00365 1.776421 19.186357</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Should return:</span></span></span>
-<span class="r-in"><span><span class="co">#                   Estimate exp(Estimate)        z           p </span></span></span>
-<span class="r-in"><span><span class="co"># At low moderator    0.9328      2.541616 2.269824 0.023218266 </span></span></span>
-<span class="r-in"><span><span class="co"># At high moderator   1.7644      5.838068 2.906507 0.003654887 </span></span></span>
+<span class="r-in"><span><span class="co">#                   Estimate exp(Estimate)      z       p </span></span></span>
+<span class="r-in"><span><span class="co"># At low moderator    0.9328      2.541616 2.2698 0.02322 </span></span></span>
+<span class="r-in"><span><span class="co"># At high moderator   1.7644      5.838068 2.9065 0.00365 </span></span></span>
 <span class="r-in"><span><span class="co">#                          LL        UL</span></span></span>
 <span class="r-in"><span><span class="co"># At low moderator   1.135802  5.687444</span></span></span>
 <span class="r-in"><span><span class="co"># At high moderator  1.776421 19.186357</span></span></span>
@@ -130,7 +135,7 @@ computed at low and high values of the moderator variable.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

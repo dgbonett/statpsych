@@ -23,6 +23,8 @@ Computes the approximate sample size required to estimate a population
 standardized indirect effect in a simple mediation model. The direct effect
 of the independent (exogenous) variable on the response variable, controlling
 for the mediator variable, is assumed to be negligible.
+
+For more details, see Section 1.19 of Bonett (2021, Volume 4)
 }
 \examples{
 size.ci.indirect(.05, .4, .5, .2)
@@ -32,4 +34,7 @@ size.ci.indirect(.05, .4, .5, .2)
 #         106
  
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

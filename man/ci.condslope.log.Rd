@@ -40,17 +40,22 @@ conditional slopes (simple slopes) in a logistic model that
 includes a predictor variable (x1), a moderator variable (x2),
 and a product predictor variable (x1*x2). Conditional slopes are
 computed at low and high values of the moderator variable.
+
+For more details, see Section 4.9 of Bonett (2021, Volume 3)
 }
 \examples{
 ci.condslope.log(.05, .132, .154, .031, .021, .015, 5.2, 10.6)
 
 # Should return:
-#                   Estimate exp(Estimate)        z           p 
-# At low moderator    0.9328      2.541616 2.269824 0.023218266 
-# At high moderator   1.7644      5.838068 2.906507 0.003654887 
+#                   Estimate exp(Estimate)      z       p 
+# At low moderator    0.9328      2.541616 2.2698 0.02322 
+# At high moderator   1.7644      5.838068 2.9065 0.00365 
 #                          LL        UL
 # At low moderator   1.135802  5.687444
 # At high moderator  1.776421 19.186357
 
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

@@ -3,65 +3,65 @@
     Code
       res
     Output
-       Estimate        SE        LL        UL
-          0.536 0.1018149 0.2978573 0.7058914
+       Estimate      SE     LL     UL
+          0.536 0.10181 0.2979 0.7059
 
 # ci.spcor returns valid matrix
 
     Code
       res
     Output
-       Estimate        SE        LL        UL
-          0.582 0.1374298 0.2525662 0.7905182
+       Estimate      SE     LL     UL
+          0.582 0.13743 0.2526 0.7905
 
 # ci.cor2 returns valid matrix
 
     Code
       res
     Output
-       Estimate         SE         LL        UL
-          0.084 0.02967934 0.02803246 0.1463609
+       Estimate      SE    LL     UL
+          0.084 0.02968 0.028 0.1464
 
 # ci.cor.dep returns valid matrix
 
     Code
       res
     Output
-       Estimate        SE         LL       UL
-          0.217 0.1026986 0.01323072 0.415802
+       Estimate     SE     LL     UL
+          0.217 0.1027 0.0132 0.4158
 
 # ci.cor2.gen returns valid matrix
 
     Code
       res
     Output
-       Estimate   LL        UL
-            0.2 0.07 0.3220656
+       Estimate   LL     UL
+            0.2 0.07 0.3221
 
 # ci.pbcor returns valid matrix
 
     Code
       res
     Output
-                   Estimate         SE        LL        UL
-      Weighted:   0.7065799 0.04890959 0.5885458 0.7854471
-      Unweighted: 0.7020871 0.05018596 0.5808366 0.7828948
+                  Estimate      SE     LL     UL
+      Weighted:     0.7066 0.04891 0.5885 0.7854
+      Unweighted:   0.7021 0.05019 0.5808 0.7829
 
 # ci.spear returns valid matrix
 
     Code
       res
     Output
-        Estimate         SE        LL        UL
-       0.8699639 0.08241326 0.5840951 0.9638297
+       Estimate      SE     LL     UL
+           0.87 0.08241 0.5841 0.9638
 
 # ci.spear2 returns valid matrix
 
     Code
       res
     Output
-       Estimate         SE         LL        UL
-           0.06 0.08124926 -0.1003977 0.2185085
+       Estimate      SE      LL     UL
+           0.06 0.08125 -0.1004 0.2185
 
 # ci.mape returns valid matrix
 
@@ -88,16 +88,16 @@
     Code
       res
     Output
-       Estimate        SE        t      df          p        LL       UL
-          1.303 0.5085838 2.562016 78.8197 0.01231256 0.2906532 2.315347
+       Estimate        SE     t      df       p        LL       UL
+          1.303 0.5085838 2.562 78.8197 0.01231 0.2906532 2.315347
 
 # ci.fisher returns valid matrix
 
     Code
       res
     Output
-           Estimate        LL        UL
-      [1,]    0.641 0.5276396 0.7319293
+           Estimate     LL     UL
+      [1,]    0.641 0.5276 0.7319
 
 # size.ci.slope returns valid numeric
 
@@ -200,8 +200,8 @@
     Code
       res
     Output
-       R-squared adj R-squared         SE         LL        UL
-           0.241     0.2206696 0.06752263 0.09819599 0.3628798
+       R-squared adj R-squared      SE     LL     UL
+           0.241        0.2207 0.06752 0.0982 0.3629
 
 # ci.lc.gen.bs returns valid matrix
 
@@ -216,8 +216,8 @@
     Code
       res
     Output
-       Estimate        SE       t df           p       LL       UL
-       2.931111 0.4462518 6.56829  7 0.000313428 1.875893 3.986329
+       Estimate        SE      t df       p       LL       UL
+       2.931111 0.4462518 6.5683  7 0.00031 1.875893 3.986329
 
 # ci.theil returns valid matrix
 
@@ -296,64 +296,64 @@
     Code
       res
     Output
-       Estimate   LL        UL
-            0.2 0.07 0.3220656
+       Estimate   LL     UL
+            0.2 0.07 0.3221
 
 # ci.cronbach2 returns valid matrix
 
     Code
       res
     Output
-       Estimate         LL       UL
-           0.12 0.06973411 0.173236
+       Estimate     LL     UL
+           0.12 0.0697 0.1733
 
 # ci.bscor returns valid matrix
 
     Code
       res
     Output
-        Estimate         SE        LL       UL
-       0.8855666 0.06129908 0.7376327 0.984412
+       Estimate     SE     LL     UL
+         0.8856 0.0613 0.7376 0.9844
 
 # pi.cor returns valid matrix
 
     Code
       res
     Output
-              LL        UL
-       0.6034092 0.8573224
+           LL     UL
+       0.6034 0.8573
 
 # test.cor returns valid matrix
 
     Code
       res
     Output
-       Estimate        z           p
-          0.484 3.205432 0.001348601
+       Estimate      z p
+          0.484 3.2054 0
 
 # test.spear returns valid matrix
 
     Code
       res
     Output
-       Estimate        z          p
-          0.471 3.009628 0.00261568
+       Estimate      z p
+          0.471 3.0096 0
 
 # test.cor2 returns valid matrix
 
     Code
       res
     Output
-       Estimate        z           p
-          0.247 2.705709 0.006815877
+       Estimate      z       p
+          0.247 2.7057 0.00682
 
 # test.spear2 returns valid matrix
 
     Code
       res
     Output
-       Estimate        z          p
-          0.247 2.498645 0.01246691
+       Estimate      z       p
+          0.247 2.4986 0.01247
 
 # size.ci.cor2 returns valid matrix
 
@@ -377,25 +377,25 @@
       res
     Output
        Sample size
-               331
+               246
 
 # adj.se returns valid matrix
 
     Code
       res
     Output
-           Estimate   adj SE        t  df           p        LL        UL
-      [1,]     3.78 1.738243 2.174609 114 0.031725582 0.3365531  7.223447
-      [2,]     8.21 3.487559 2.354082 114 0.020279958 1.3011734 15.118827
-      [3,]     2.99 1.087233 2.750102 114 0.006930554 0.8362007  5.143799
+           Estimate   adj SE        t  df       p        LL        UL
+      [1,]     3.78 1.738243 2.174609 114 0.03173 0.3365531  7.223447
+      [2,]     8.21 3.487559 2.354082 114 0.02028 1.3011734 15.118827
+      [3,]     2.99 1.087233 2.750102 114 0.00693 0.8362007  5.143799
 
 # fitindices returns valid matrix
 
     Code
       res
     Output
-             NFI   adj NFI       CFI       TLI      RMSEA
-       0.9450141 0.9837093 0.9823428 0.9646857 0.03746109
+         NFI adj NFI  CFI    TLI  RMSEA
+       0.945  0.9837 0.98 0.9647 0.0375
 
 # size.ci.biphi example
 
@@ -429,14 +429,6 @@
        n1 n2
        47 94
 
-# size.test.slope.gen example
-
-    Code
-      res
-    Output
-       Sample size
-               156
-
 # signal example
 
     Code
@@ -459,16 +451,16 @@
     Code
       res
     Output
-       Posterior mean         LL        UL
-            0.1873765 0.02795441 0.3375031
+       Posterior mean    LL     UL
+               0.1874 0.028 0.3375
 
 # ci.bayes.spcor example
 
     Code
       res
     Output
-       Posterior mean         LL        UL
-            0.2272797 0.07288039 0.3710398
+       Posterior mean     LL    UL
+               0.2273 0.0729 0.371
 
 # test.mono.median.bs example
 
@@ -485,8 +477,8 @@
     Code
       res
     Output
-        Estimate        SE        z           p        LL        UL
-       0.3664407 0.1163593 3.149216 0.001637091 0.1383806 0.5945008
+        Estimate        SE      z       p        LL        UL
+       0.3664407 0.1163593 3.1492 0.00164 0.1383806 0.5945008
 
 # size.ci.gen example
 
@@ -519,4 +511,61 @@
     Output
        n1 n2
        66 66
+
+# size.ci.cronbach.prior(.05, .10, .86, 50, 5, .15) example
+
+    Code
+      res
+    Output
+       Sample size
+                74
+
+# size.ci.icc.prior(.05, .10, .674, 50, 3, .2) example
+
+    Code
+      res
+    Output
+       Sample size
+               114
+
+# size.ci.icc(.05, .70, 3, .2) example
+
+    Code
+      res
+    Output
+       Sample size
+                68
+
+# ci.icc(.05, 48.2, 11.3, 5, 30) example
+
+    Code
+      res
+    Output
+                Estimate      SE     LL     UL
+      ICC(C, 1)   0.3951 0.09166 0.2311 0.5853
+      ICC(C, r)   0.7656 0.07005 0.6005 0.8759
+
+# ci.slope(.05, .362, 25.1, 6.25, 85) example
+
+    Code
+      res
+    Output
+       Estimate        SE      t df       p        LL       UL
+       1.453792 0.4109165 3.5379 83 0.00066 0.6364957 2.271088
+
+# pi.cronbach examples
+
+    Code
+      res
+    Output
+           LL     UL
+       0.7923 0.8945
+
+---
+
+    Code
+      res2
+    Output
+           LL
+       0.8073
 

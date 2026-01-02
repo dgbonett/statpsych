@@ -26,14 +26,19 @@ would be allocated to the levels of the quantitative factor and it might
 be necessary to increase the total sample size to achieve equal sample
 sizes. Set the error variance planning value to the largest value within
 a plausible range for a conservatively large sample size.
+
+For more details, see Section 1.24 of Bonett (2021, Volume 2)
 }
 \examples{
-x <- c(2, 5, 8)
-size.ci.slope(.05, 31.1, x, 1)
+x <- c(5, 7, 9)
+size.ci.slope(.05, 300, x, 5)
 
 # Should return:
 # Total sample size
-#                83
+#                73
  
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

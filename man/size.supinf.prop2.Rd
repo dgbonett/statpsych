@@ -29,6 +29,8 @@ values of p1 and p2 such that p1 - p2 > h. For an inferiority test, specify the
 lower limit (-h) for the range of practical equivalence and specify values
 of p1 and p2 such that p1 - p2 > -h. This function sets the effect size equal
 to p1 - p2.
+
+For more details, see Section 2.23 of Bonett (2021, Volume 3)
 }
 \examples{
 size.supinf.prop2(.05, .9, .35, .20, .05)
@@ -38,4 +40,7 @@ size.supinf.prop2(.05, .9, .35, .20, .05)
 #                   408
 
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

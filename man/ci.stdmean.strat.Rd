@@ -45,10 +45,10 @@ standardizer.  Equality of variances is not assumed.
 ci.stdmean.strat(.05, 33.2, 30.8, 10.5, 11.2, 200, 200, .533)
 
 # Should return:
-#                         Estimate  adj Estimate         SE         LL        UL
-# Weighted standardizer: 0.2215549     0.2211371 0.10052057 0.02453817 0.4185716
-# Group 1 standardizer:  0.2285714     0.2277089 0.10427785 0.02419059 0.4329523
-# Group 2 standardizer:  0.2142857     0.2277089 0.09776049 0.02267868 0.4058927
+#                        Estimate adj Estimate      SE     LL     UL
+# Weighted standardizer:   0.2216       0.2211 0.10052 0.0245 0.4186
+# Group 1 standardizer:    0.2286       0.2277 0.10428 0.0242 0.4330
+# Group 2 standardizer:    0.2143       0.2277 0.09776 0.0227 0.4059
 
 
 }

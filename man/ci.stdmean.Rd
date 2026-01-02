@@ -37,8 +37,8 @@ confidence interval for the coefficient of variation (see \link[statpsych]{ci.cv
 ci.stdmean(.05, 24.5, 3.65, 40, 20)
 
 # Should return:
-# Estimate  adj Estimate        SE        LL       UL
-# 1.232877      1.209015 0.2124335 0.8165146 1.649239
+# Estimate adj Estimate      SE     LL    UL
+#   1.2329        1.209 0.21244 0.8165 1.6493
  
 
 }

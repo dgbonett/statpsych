@@ -30,6 +30,8 @@ noninferiority test, specify the lower limit (-h) for the range of
 practical equivalence and specify an effect size such that es > -h.
 Set the variance planning value to the largest value within a plausible
 range for a conservatively large sample size.
+
+For more details, see Section 2.14 of Bonett (2021, Volume 1)
 }
 \examples{
 size.supinf.mean2(.05, .80, 225, 9, 4)
@@ -39,4 +41,7 @@ size.supinf.mean2(.05, .80, 225, 9, 4)
 #                   143
  
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

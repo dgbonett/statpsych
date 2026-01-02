@@ -9,7 +9,7 @@ ci.poisson(alpha, f, t)
 \arguments{
 \item{alpha}{alpha value for 1-alpha confidence}
 
-\item{f}{number of event occurences}
+\item{f}{number of event occurrences}
 
 \item{t}{time period}
 }
@@ -24,7 +24,7 @@ Returns a 1-row matrix. The columns are:
 }
 \description{
 Computes a confidence interval for a population Poisson rate. This function
-requires the number of occurences (f) of a specific event that were
+requires the number of occurrences (f) of a specific event that were
 observed over a specific period of time (t).
 }
 \details{

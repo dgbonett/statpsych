@@ -37,6 +37,8 @@ one-way random effects ANOVA: 1) the superpopulation grand mean, 2) the
 square-root within-group variance component, 3) the square-root
 between-group variance component, and 4) the omega-squared coefficient.
 This function assumes equal sample sizes.
+
+For more details, see Section 3.18 of Bonett (2021, Volume 1)
 }
 \examples{
 m <- c(56.1, 51.2, 60.3, 68.2, 48.9, 70.5)
@@ -51,4 +53,7 @@ ci.random.anova(.05, m, sd, 20)
 # Omega-squared:  0.467317  0.2284142  0.8480383
 
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

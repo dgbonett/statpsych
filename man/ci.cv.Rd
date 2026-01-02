@@ -31,6 +31,8 @@ reciprocal of a confidence interval for a standardized mean (see
 \link[statpsych]{ci.stdmean}). An approximate standard error is recovered
 from the confidence interval. The coefficient of variation assumes
 ratio-scale scores.
+
+For more details, see Section 1.27 of Bonett (2021, Volume 1)
 }
 \examples{
 ci.cv(.05, 24.5, 3.65, 40)
@@ -40,4 +42,7 @@ ci.cv(.05, 24.5, 3.65, 40)
 # 0.1489796 0.01817373 0.1214381 0.1926778
  
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

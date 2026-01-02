@@ -9,9 +9,9 @@ ci.ratio.poisson2(alpha, f1, f2, t1, t2)
 \arguments{
 \item{alpha}{alpha value for 1-alpha confidence}
 
-\item{f1}{number of event occurences for group 1}
+\item{f1}{number of event occurrences for group 1}
 
-\item{f2}{number of event occurences for group 2}
+\item{f2}{number of event occurrences for group 2}
 
 \item{t1}{time period for group 1}
 
@@ -29,13 +29,13 @@ Returns a 1-row matrix. The columns are:
 Computes a confidence interval for a ratio of population Poisson rates in a
 2-group design. The confidence interval is based on the binomial method
 with an Agresti-Coull confidence interval. This function requires the number
-of occurences of a specific event (f) that were observed over a specific
+of occurrences of a specific event (f) that were observed over a specific
 period of time (t) within each group.
 }
 \details{
 The time periods do not need to be integers and can be expressed in any unit
 of time such as seconds, hours, or months. The occurances are assumed to be
-independent of one another and the unknown occurance rate is assumed to be
+independent of one another and the unknown occurrence rate is assumed to be
 constant over time within each group condition.
 }
 \examples{

@@ -19,7 +19,7 @@ size.test.ancova2(alpha, pow, evar, es, s, d, R)
 
 \item{d}{largest standardized mean difference of all covariates}
 
-\item{R}{n2/n1 rartio}
+\item{R}{n2/n1 ratio}
 }
 \value{
 Returns the required sample size for each group
@@ -34,6 +34,8 @@ difference across of all covariates. In an experiment, this standardized
 mean difference is set to 0. Set the error variance planning value to the
 largest value within a plausible range for a conservatively large sample
 size.
+
+For more details, see Section 2.29 of Bonett (2021, Volume 2)
 }
 \examples{
 size.test.ancova2(.05, .9, 1.37, .7, 1, 0, 1)
@@ -55,4 +57,7 @@ size.test.ancova2(.05, .9, 1.37, .7, 1, .5, 1)
 #  65 65
  
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

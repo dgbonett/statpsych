@@ -709,7 +709,7 @@ ci.lc.prop.scheffe <- function(alpha, f, n, v) {
  se <- sqrt(t(v)%*%diag(p*(1 - p))%*%solve(diag(n + 4/m))%*%v)
  zval <- round(est/se, 4)
  pval <- 1 - pchisq(zval^2, df)
- pval <- round(pval(, 5)
+ pval <- round(pval, 5)
  ll <- est - z*se
  ul <- est + z*se
  out <- t(c(est, se, zval, pval, ll, ul))
@@ -1054,7 +1054,7 @@ ci.condslope.log <- function(alpha, b1, b2, se1, se2, cov, lo, hi) {
  se.lo <- sqrt(se1^2 + se2^2*lo^2 + 2*lo*cov)
  se.hi <- sqrt(se1^2 + se2^2*hi^2 + 2*hi*cov)
  z.lo <- round(slope.lo/se.lo, 4)
- z.hi <- roiund(slope.hi/se.hi, 4)
+ z.hi <- round(slope.hi/se.hi, 4)
  p.lo <- round(2*(1 - pnorm(abs(z.lo))), 5)
  p.hi <- round(2*(1 - pnorm(abs(z.hi))), 5)
  LL.lo <- exp(slope.lo - z*se.lo)
@@ -2040,7 +2040,7 @@ ci.2x2.prop.bs <- function(alpha, f, n) {
  row5 <- c(est5, se5, z5, p5, LL5, UL5)
  est6 <- t(v6)%*%p.2
  se6 <- sqrt(t(v6)%*%diag(p.2*(1 - p.2))%*%solve(diag(n + 2))%*%v6)
- z6 <- rouond(est6/se6, 4)
+ z6 <- round(est6/se6, 4)
  p6 <- round(2*(1 - pnorm(abs(z6))), 5)
  LL6 <- est6 - zcrit*se6
  UL6 <- est6 + zcrit*se6

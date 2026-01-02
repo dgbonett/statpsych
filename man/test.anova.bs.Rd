@@ -28,6 +28,8 @@ Returns a 1-row matrix. The columns are:
 Computes the F statistic, p-value, eta-squared, and adjusted eta-squared
 for the main effect in a one-way between-subjects ANOVA using the estimated
 group means, estimated group standard deviations, and group sample sizes.
+
+For more details, see Section 3.7 of Bonett (2021, Volume 1)
 }
 \examples{
 m <- c(12.4, 8.6, 10.5)
@@ -36,8 +38,11 @@ n <- c(20, 20, 20)
 test.anova.bs(m, sd, n)
 
 #  Should return:
-#        F dfA  dfE           p Eta-squared  adj Eta-squared
-# 5.919585   2   57 0.004614428   0.1719831        0.1429298
+#      F dfA  dfE       p Eta-squared  adj Eta-squared
+# 5.9196   2   57 0.00461       0.172           0.1429
  
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

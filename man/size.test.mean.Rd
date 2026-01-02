@@ -23,13 +23,18 @@ Computes the sample size required to test a single population mean with
 desired power in a 1-group design. Set the variance planning value to the
 largest value within a plausible range for a conservatively large sample
 size.
+
+For more details, see Section 1.29 of Bonett (2021, Volume 1)
 }
 \examples{
-size.test.mean(.05, .9, 80.5, 7)
+size.test.mean(.05, .9, 8.2, 1.5)
 
 # Should return:
 # Sample size
-#          20
+#          41
  
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

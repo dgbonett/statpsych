@@ -21,13 +21,18 @@ Computes the sample size required to estimate a population mean with
 desired confidence interval precision. Set the variance planning value to
 the largest value within a plausible range for a conservatively large
 sample size.
+
+For more details, see Section 1.28 of Bonett (2021, Volume 1)
 }
 \examples{
-size.ci.mean(.05, 264.4, 10)
+size.ci.mean(.05, 6.0, 1.5)
 
 # Should return:
 # Sample size
 #          43
  
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

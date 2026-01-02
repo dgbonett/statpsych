@@ -38,19 +38,24 @@ absolute value is typically considered to be "small", and the prior
 standard deviation could then be set to .2/1.96. A correlation value
 that is considered to be small will depend on the application. Set s = 0
 for a Pearson correlation.
+
+For more details, see Section 1.33 of Bonett (2021, Volume 2)
 }
 \examples{
 ci.bayes.cor(.05, .1, .536, 0, 50)
 
 # Should return:
-# Posterior mean         LL        UL
-#      0.1873765 0.02795441 0.3375031
+# Posterior mean     LL     UL
+#         0.1874  0.028 0.3375
 
 ci.bayes.cor(.05, .1, .536, 0, 300)
 
 # Should return:
-#  Posterior mean        LL        UL
-#       0.4195068 0.3352449 0.4971107
+# Posterior mean     LL     UL
+#         0.4195 0.3352 0.4971
 
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

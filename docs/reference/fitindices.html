@@ -3,11 +3,13 @@
 comparative fit index (CFI), Tucker-Lewis fit index (TLI), and root mean
 square error of approximation index (RMSEA). Of the first four indices, the
 adj NFI index is recommended because it has smaller sampling variability
-than CFI and TLI and less negative bias than NFI."><meta property="og:description" content="Computes the normed fit index (NFI), adjusted normed fit index (adj NFI),
+than CFI and TLI and less negative bias than NFI.
+For more details, see Section 2.14 of Bonett (2021, Volume 4)"><meta property="og:description" content="Computes the normed fit index (NFI), adjusted normed fit index (adj NFI),
 comparative fit index (CFI), Tucker-Lewis fit index (TLI), and root mean
 square error of approximation index (RMSEA). Of the first four indices, the
 adj NFI index is recommended because it has smaller sampling variability
-than CFI and TLI and less negative bias than NFI."></head><body>
+than CFI and TLI and less negative bias than NFI.
+For more details, see Section 2.14 of Bonett (2021, Volume 4)"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -47,6 +49,7 @@ comparative fit index (CFI), Tucker-Lewis fit index (TLI), and root mean
 square error of approximation index (RMSEA). Of the first four indices, the
 adj NFI index is recommended because it has smaller sampling variability
 than CFI and TLI and less negative bias than NFI.</p>
+<p>For more details, see Section 2.14 of Bonett (2021, Volume 4)</p>
     </div>
 
     <div class="section level2">
@@ -82,16 +85,21 @@ than CFI and TLI and less negative bias than NFI.</p>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>Returns NFI, adj NFI, CFI, TLI, and RMSEA</p>
     </div>
+    <div class="section level2">
+    <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
+    <p>Bonett DG (2021url).
+<em>Statistical Methods for Psychologists</em>.</p>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">fitindices</span><span class="op">(</span><span class="fl">14.21</span>, <span class="fl">10</span>, <span class="fl">258.43</span>, <span class="fl">20</span>, <span class="fl">300</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        NFI   adj NFI       CFI       TLI      RMSEA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.9450141 0.9837093 0.9823428 0.9646857 0.03746109</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    NFI adj NFI  CFI    TLI  RMSEA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.945  0.9837 0.98 0.9647 0.0375</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Should return:</span></span></span>
-<span class="r-in"><span><span class="co">#        NFI   adj NFI       CFI       TLI      RMSEA</span></span></span>
-<span class="r-in"><span><span class="co">#  0.9450141 0.9837093 0.9823428 0.9646857 0.03746109</span></span></span>
+<span class="r-in"><span><span class="co">#    NFI   adj NFI   CFI    TLI  RMSEA</span></span></span>
+<span class="r-in"><span><span class="co">#  0.945    0.9837  0.98 0.9647 0.0375</span></span></span>
 <span class="r-in"><span> </span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
@@ -105,7 +113,7 @@ than CFI and TLI and less negative bias than NFI.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

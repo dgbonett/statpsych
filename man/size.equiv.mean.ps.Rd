@@ -33,13 +33,18 @@ alpha (e.g., use alpha = .10 rather alpha = .05). Set the Pearson correlation
 value to the smallest value within a plausible range, and set the variance
 planning value to the largest value within a plausible range for a
 conservatively large sample size.
+
+For more details, see Section 4.27 of Bonett (2021, Volume 1)
 }
 \examples{
-size.equiv.mean.ps(.10, .85, 15, .5, .7, 1.5)
+size.equiv.mean.ps(.10, .90, 25, .5, .75, 2)
 
 # Should return:
 # Sample size
-#          68
+#          49
  
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

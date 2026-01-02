@@ -24,7 +24,7 @@ Returns the required sample size for each group
 }
 \description{
 Computes the sample size per group required to test a difference in two
-populatation parameters with desired power using a standard error for a
+population parameters with desired power using a standard error for a
 single parameter estimate from a prior or pilot study. This function can be
 used with any type of parameter where the standard error of the parameter
 estimate is a function of the square root of the sample size (most parameter

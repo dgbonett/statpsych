@@ -31,6 +31,8 @@ t-values, p-values, and confidence intervals. The mean square error and
 error degrees of freedom from the full model are used to compute the
 adjusted standard errors. These adjusted results are less susceptible to
 the negative effects of an exploratory model selection.
+
+For more details, see Section 2.25 of Bonett (2021, Volume 2)
 }
 \examples{
 se <- c(1.57, 3.15, 0.982)
@@ -38,10 +40,13 @@ b <- c(3.78, 8.21, 2.99)
 adj.se(.05, 10.26, 8.37, 114, se, b)
 
 # Should return:
-#      Estimate   adj SE        t  df           p        LL        UL
-# [1,]     3.78 1.738243 2.174609 114 0.031725582 0.3365531  7.223447
-# [2,]     8.21 3.487559 2.354082 114 0.020279958 1.3011734 15.118827
-# [3,]     2.99 1.087233 2.750102 114 0.006930554 0.8362007  5.143799
+#      Estimate   adj SE        t  df       p        LL        UL
+# [1,]     3.78 1.738243 2.174609 114 0.03173 0.3365531  7.223447
+# [2,]     8.21 3.487559 2.354082 114 0.02028 1.3011734 15.118827
+# [3,]     2.99 1.087233 2.750102 114 0.00693 0.8362007  5.143799
  
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

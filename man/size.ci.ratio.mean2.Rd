@@ -28,7 +28,11 @@ population means with desired confidence interval precision in a 2-group
 design. This function requires planning values for each mean and the sample
 size requirement is very sensitive to these planning values. Set the
 variance planning value to the largest value within a plausible range for a
-conservatively large sample size. Set R = 1 for equal sample sizes.
+conservatively large sample size. Set R = 1 for equal sample sizes. For
+unequal sample sizes, this function assumes approximately equal population
+variances.
+
+For more details, see Section 2.13 of Bonett (2021, Volume 1)
 }
 \examples{
 size.ci.ratio.mean2(.05, .4, 3.5, 3.1, 1.2, 1)
@@ -44,4 +48,7 @@ size.ci.ratio.mean2(.05, .4, 3.5, 3.1, 1.2, 2)
 # 53  106
  
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

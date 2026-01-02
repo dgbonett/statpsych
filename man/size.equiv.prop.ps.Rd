@@ -33,6 +33,8 @@ rather than alpha (e.g., use alpha = .10 rather alpha = .05). This function
 sets the effect size equal to the difference in proportion planning values.
 Set the phi correlation planning value to the smallest absolute value within
 a plausible range for a conservatively large sample size.
+
+For more details, see Section 3.13 of Bonett (2021, Volume 3)
 }
 \examples{
 size.equiv.prop.ps(.1, .8, .30, .35, .40, .15)
@@ -42,4 +44,7 @@ size.equiv.prop.ps(.1, .8, .30, .35, .40, .15)
 #         173
 
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

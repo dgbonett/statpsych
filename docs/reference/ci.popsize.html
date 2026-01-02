@@ -6,14 +6,16 @@ samples. This function requires the frequency counts from an incomplete
 of people who were not observed in either sample). This method sets the
 estimated odds ratio (with .5 added to each cell) to 1 and solves for
 unobserved cell frequency. An approximate standard error is recovered
-from the confidence interval."><meta property="og:description" content="Computes a Wald confidence interval for an unknown population size using
+from the confidence interval.
+For more details, see Section 3.7 of Bonett (2021, Volume 3)"><meta property="og:description" content="Computes a Wald confidence interval for an unknown population size using
 mark-recapture sampling. This method assumes independence of the two
 samples. This function requires the frequency counts from an incomplete
 2 x 2 contingency table for the two samples (f11 is the unknown number
 of people who were not observed in either sample). This method sets the
 estimated odds ratio (with .5 added to each cell) to 1 and solves for
 unobserved cell frequency. An approximate standard error is recovered
-from the confidence interval."></head><body>
+from the confidence interval.
+For more details, see Section 3.7 of Bonett (2021, Volume 3)"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -56,6 +58,7 @@ of people who were not observed in either sample). This method sets the
 estimated odds ratio (with .5 added to each cell) to 1 and solves for
 unobserved cell frequency. An approximate standard error is recovered
 from the confidence interval.</p>
+<p>For more details, see Section 3.7 of Bonett (2021, Volume 3)</p>
     </div>
 
     <div class="section level2">
@@ -90,16 +93,21 @@ from the confidence interval.</p>
 <li><p>LL - lower limit of the confidence interval</p></li>
 <li><p>UL - upper limit of the confidence interval</p></li>
 </ul></div>
+    <div class="section level2">
+    <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
+    <p>Bonett DG (2021url).
+<em>Statistical Methods for Psychologists</em>.</p>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">ci.popsize</span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">794</span>, <span class="fl">710</span>, <span class="fl">741</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Estimate       SE   LL   UL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      2908 49.49071 2818 3012</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">ci.popsize</span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">85</span>, <span class="fl">196</span>, <span class="fl">184</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Estimate    SE  LL   UL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       889 67.35 777 1041</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Should return:</span></span></span>
-<span class="r-in"><span><span class="co"># Estimate       SE   LL   UL</span></span></span>
-<span class="r-in"><span><span class="co">#     2908 49.49071 2818 3012</span></span></span>
+<span class="r-in"><span><span class="co"># Estimate    SE  LL   UL</span></span></span>
+<span class="r-in"><span><span class="co">#      889 67.35 777 1041</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
@@ -113,7 +121,7 @@ from the confidence interval.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

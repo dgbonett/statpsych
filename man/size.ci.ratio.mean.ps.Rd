@@ -31,6 +31,8 @@ planning values for each mean and the sample size requirement is very
 sensitive to these planning values. Set the variance planning value to
 the largest value within a plausible range for a conservatively large
 sample size.
+
+For more details, see Section 4.26 of Bonett (2021, Volume 1)
 }
 \examples{
 size.ci.ratio.mean.ps(.05, 400, 150, 100, .7, 1.2)
@@ -40,4 +42,7 @@ size.ci.ratio.mean.ps(.05, 400, 150, 100, .7, 1.2)
 #          21
  
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

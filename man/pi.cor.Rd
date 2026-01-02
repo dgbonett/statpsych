@@ -2,7 +2,7 @@
 % Please edit documentation in R/statpsych2.R
 \name{pi.cor}
 \alias{pi.cor}
-\title{Prediction limits for an estimated correlation}
+\title{Prediction limits for a sample correlation in a future study}
 \usage{
 pi.cor(alpha, cor, n0, n, type)
 }
@@ -11,7 +11,7 @@ pi.cor(alpha, cor, n0, n, type)
 
 \item{cor}{estimated Pearson correlation from prior study}
 
-\item{n0}{sample size used to estimate correlation in prior study}
+\item{n0}{sample size used to estimate the correlation in prior study}
 
 \item{n}{planned sample size of future study}
 
@@ -32,26 +32,32 @@ size of n. The prediction interval uses a correlation estimate from a
 prior study that had a sample size of n0.
 
 Several confidence interval sample size functions in this package require
-a planning value of the estimated Pearson correlation that is expected
+a planning value of the expected sample value of a Pearson correlation
 in the planned study. A one-sided lower correlation prediction limit is
-useful as a correlation planning value for the sample size required to
-obtain a confidence interval with desired width. This strategy for
-specifying a correlation planning value is useful in applications where
-the population correlation in the prior study is assumed to be very similar
-to the population correlation in the planned study.
+useful as a correlation planning value for a conservatively large sample
+size required to obtain a confidence interval with desired width. This
+strategy for specifying a correlation planning value is useful in
+applications where the population correlation in the prior study is
+assumed to be very similar to the population correlation in the planned
+study.
+
+For more details, see Section 1.26 of Bonett (2021, Volume 2)
 }
 \examples{
 pi.cor(.1, .761, 50, 100, 1)
 
 # Should return:
-#         LL        UL
-#  0.6034092 0.8573224
+#      LL     UL
+#  0.6034 0.8573
  
 pi.cor(.1, .761, 50, 100, 3)
 
 # Should return:
-#         LL
-#  0.6428751
+#      LL
+#  0.6429
  
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

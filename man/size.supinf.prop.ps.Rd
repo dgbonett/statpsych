@@ -33,6 +33,8 @@ the range of practical equivalence and specify values of p1 and p2 such
 that p1 - p2 > -h. This function sets the effect size equal to p1 - p2.
 Set the phi correlation planning value to the smallest absolute value within
 a plausible range for a conservatively large sample size.
+
+For more details, see Section 3.13 of Bonett (2021, Volume 3)
 }
 \examples{
 size.supinf.prop.ps(.05, .9, .35, .20, .45, .05)
@@ -42,4 +44,7 @@ size.supinf.prop.ps(.05, .9, .35, .20, .45, .05)
 #         227
 
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

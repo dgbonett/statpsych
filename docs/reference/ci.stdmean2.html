@@ -6,14 +6,16 @@ nonexperimental designs with simple random sampling. The square root
 unweighted variance standardizer is recommended in 2-group experimental
 designs. The single group standard deviation standardizer can be used with
 experimental or nonexperimental designs. Equality of variances is not
-assumed."><meta property="og:description" content="Computes confidence intervals for a population standardized mean difference.
+assumed.
+For more details, see Section 2.4 of Bonett (2021, Volume 1)"><meta property="og:description" content="Computes confidence intervals for a population standardized mean difference.
 Unweighted, weighted, and single group variance standardizers are used. The
 square root weighted variance standardizer is recommended in 2-group
 nonexperimental designs with simple random sampling. The square root
 unweighted variance standardizer is recommended in 2-group experimental
 designs. The single group standard deviation standardizer can be used with
 experimental or nonexperimental designs. Equality of variances is not
-assumed."></head><body>
+assumed.
+For more details, see Section 2.4 of Bonett (2021, Volume 1)"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -56,6 +58,7 @@ unweighted variance standardizer is recommended in 2-group experimental
 designs. The single group standard deviation standardizer can be used with
 experimental or nonexperimental designs. Equality of variances is not
 assumed.</p>
+<p>For more details, see Section 2.4 of Bonett (2021, Volume 1)</p>
     </div>
 
     <div class="section level2">
@@ -109,24 +112,27 @@ assumed.</p>
 “Confidence intervals for standardized linear contrasts of means.”
 <em>Psychological Methods</em>, <b>13</b>(2), 99–109.
 ISSN 1939-1463, <a href="https://doi.org/10.1037/1082-989X.13.2.99" class="external-link">doi:10.1037/1082-989X.13.2.99</a>
-.</p>
+.
+
+Bonett DG (2021url).
+<em>Statistical Methods for Psychologists</em>.</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">ci.stdmean2</span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">35.1</span>, <span class="fl">26.7</span>, <span class="fl">7.32</span>, <span class="fl">6.98</span>, <span class="fl">30</span>, <span class="fl">30</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                          Estimate adj Estimate        SE        LL       UL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Unweighted standardizer: 1.174493     1.159240 0.2844012 0.6170771 1.731909</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Weighted standardizer:   1.174493     1.159240 0.2802826 0.6251494 1.723837</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Group 1 standardizer:    1.147541     1.117605 0.2975582 0.5643375 1.730744</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Group 2 standardizer:    1.203438     1.172044 0.3120525 0.5918268 1.815050</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">ci.stdmean2</span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">20.9</span>, <span class="fl">19.1</span>, <span class="fl">3.85</span>, <span class="fl">3.19</span>, <span class="fl">50</span>, <span class="fl">50</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                          Estimate adj Estimate      SE     LL     UL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Unweighted standardizer:   0.5091       0.5052 0.20539 0.1066 0.9117</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Weighted standardizer:     0.5091       0.5052 0.20328 0.1107 0.9076</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Group 1 standardizer:      0.4675       0.4603 0.19144 0.0923 0.8427</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Group 2 standardizer:      0.5643       0.5556 0.23105 0.1114 1.0171</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Should return:</span></span></span>
-<span class="r-in"><span><span class="co">#                          Estimate  adj Estimate        SE        LL       UL</span></span></span>
-<span class="r-in"><span><span class="co"># Unweighted standardizer: 1.174493      1.159240 0.2844012 0.6170771 1.731909</span></span></span>
-<span class="r-in"><span><span class="co"># Weighted standardizer:   1.174493      1.159240 0.2802826 0.6251494 1.723837</span></span></span>
-<span class="r-in"><span><span class="co"># Group 1 standardizer:    1.147541      1.117605 0.2975582 0.5643375 1.730744</span></span></span>
-<span class="r-in"><span><span class="co"># Group 2 standardizer:    1.203438      1.172044 0.3120525 0.5918268 1.815050</span></span></span>
+<span class="r-in"><span><span class="co">#                          Estimate adj Estimate      SE     LL     UL</span></span></span>
+<span class="r-in"><span><span class="co"># Unweighted standardizer:   0.5091       0.5052 0.20539 0.1066 0.9117</span></span></span>
+<span class="r-in"><span><span class="co"># Weighted standardizer:     0.5091       0.5052 0.20328 0.1107 0.9076</span></span></span>
+<span class="r-in"><span><span class="co"># Group 1 standardizer:      0.4675       0.4603 0.19144 0.0923 0.8427</span></span></span>
+<span class="r-in"><span><span class="co"># Group 2 standardizer:      0.5643       0.5556 0.23105 0.1114 1.0171</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
@@ -140,7 +146,7 @@ ISSN 1939-1463, <a href="https://doi.org/10.1037/1082-989X.13.2.99" class="exter
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

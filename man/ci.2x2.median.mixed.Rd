@@ -28,7 +28,7 @@ Returns a 7-row matrix (one row per effect). The columns are:
 }
 \description{
 Computes distribution-free confidence intervals for the AB
-interaction effect, main effect of A, main efect of B, simple main effects
+interaction effect, main effect of A, main effect of B, simple main effects
 of A, and simple main effects of B in a 2x2 mixed factorial design where
 Factor A is the within-subjects factor and Factor B is the between subjects
 factor. Tied scores within each group and within each within-subjects level

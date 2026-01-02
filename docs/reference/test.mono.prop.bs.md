@@ -1,0 +1,69 @@
+# Test of monotonic trend in proportions for an ordered between-subjects factor
+
+Computes simultaneous confidence intervals for all adjacent pairwise
+comparisons of population proportions using group frequency counts and
+samples sizes as input. If one or more lower limits are greater than 0
+and no upper limit is less than 0, then conclude that the population
+proportions are monotonic decreasing. If one or more upper limits are
+less than 0 and no lower limits are greater than 0, then conclude that
+the population proportions are monotonic increasing. Reject the
+hypothesis of a monotonic trend if any lower limit is greater than 0 and
+any upper limit is less than 0.
+
+For more details, see Section 2.12 of Bonett (2021, Volume 3)
+
+## Usage
+
+``` r
+test.mono.prop.bs(alpha, f, n)
+```
+
+## Arguments
+
+- alpha:
+
+  alpha level for simultaneous 1-alpha confidence
+
+- f:
+
+  vector of frequency counts of participants who have the attribute
+
+- n:
+
+  vector of sample sizes
+
+## Value
+
+Returns a matrix with the number of rows equal to the number of adjacent
+pairwise comparisons. The columns are:
+
+- Estimate - estimated proportion difference
+
+- SE - standard error
+
+- LL - one-sided lower limit of the confidence interval
+
+- UL - one-sided upper limit of the confidence interval
+
+## References
+
+Bonett DG (2021url). *Statistical Methods for Psychologists*.
+
+## Examples
+
+``` r
+f <- c(67, 49, 30, 10)
+n <- c(100, 100, 100, 100)
+test.mono.prop.bs(.05, f, n)
+#>       Estimate         SE         LL        UL
+#>  1 2 0.1764706 0.06803446 0.01359747 0.3393437
+#>  2 3 0.1862745 0.06726135 0.02525219 0.3472968
+#>  3 4 0.1960784 0.05493010 0.06457688 0.3275800
+
+# Should return:
+#      Estimate         SE         LL        UL
+# 1 2 0.1764706 0.06803446 0.01359747 0.3393437
+# 2 3 0.1862745 0.06726135 0.02525219 0.3472968
+# 3 4 0.1960784 0.05493010 0.06457688 0.3275800
+
+```

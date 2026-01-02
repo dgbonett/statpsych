@@ -25,13 +25,15 @@ Computes the sample size in each group required to estimate a difference
 of proportions with desired confidence interval precision in a 2-group
 design. Set the proportion planning values to .5 for a conservatively
 large sample size. Set R = 1 for equal sample sizes.
+
+For more details, see Section 2.22 of Bonett (2021, Volume 3)
 }
 \examples{
-size.ci.prop2(.05, .4, .2, .15, 1)
+size.ci.prop2(.05, .05, .15, .1, 1)
 
 # Should return:
 #   n1  n2
-#  274 274
+#  269 269
 
 size.ci.prop2(.05, .4, .2, .15, .5)
 
@@ -40,4 +42,7 @@ size.ci.prop2(.05, .4, .2, .15, .5)
 #  383 192
 
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

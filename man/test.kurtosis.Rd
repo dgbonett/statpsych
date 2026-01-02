@@ -24,14 +24,19 @@ p-value is small (e.g., less than .05) and excess kurtosis is positive,
 then the normality assumption can be rejected due to leptokurtosis. If the
 p-value is small (e.g., less than .05) and excess kurtosis is negative,
 then the normality assumption can be rejected due to platykurtosis.
+
+For more details, see Section 1.23 of Bonett (2021, Volume 1)
 }
 \examples{
 y <- c(30, 20, 15, 10, 10, 60, 20, 25, 20, 30, 10, 5, 50, 40, 95)
 test.kurtosis(y)
 
 # Should return:
-# Kurtosis  Excess      p
-#   4.8149  1.8149 0.0385 
+# Kurtosis  Excess     p
+#   4.8149  1.8149 0.038 
 
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

@@ -30,13 +30,18 @@ Computes a confidence interval for a population eta-squared, partial
 eta-squared, or generalized eta-squared in a fixed-factor between-subjects
 design. An approximate bias adjusted estimate is computed, and an
 approximate standard error is recovered from the confidence interval.
+
+For more details, see Section 3.7 of Bonett (2021, Volume 1)
 }
 \examples{
-ci.etasqr(.05, .241, 3, 116)
+ci.etasqr(.05, .15, 2, 57)
 
 # Should return:
-# Eta-squared  adj Eta-squared         SE        LL        UL
-#       0.241        0.2213707 0.06258283 0.1040229 0.3493431
+# Eta-squared  adj Eta-squared       SE      LL      UL
+#        0.15           0.1202  0.07414  0.0102  0.3008
  
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

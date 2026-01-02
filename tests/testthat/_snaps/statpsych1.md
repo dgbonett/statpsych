@@ -11,42 +11,42 @@
     Code
       res
     Output
-       Estimate adj Estimate        SE        LL       UL
-       1.232877     1.209015 0.2124335 0.8165146 1.649239
+       Estimate adj Estimate      SE     LL     UL
+         1.2329        1.209 0.21244 0.8165 1.6493
 
 # ci.mean2 returns valid matrix
 
     Code
       res
     Output
-                                   Estimate        SE        t       df            p
-      Equal Variances Assumed:          5.1 0.7151214 7.131656 48.00000 4.621279e-09
-      Equal Variances Not Assumed:      5.1 0.6846568 7.448987 46.17476 1.898214e-09
-                                         LL       UL
-      Equal Variances Assumed:     3.662152 6.537848
-      Equal Variances Not Assumed: 3.721998 6.478002
+                                   Estimate        SE      t    df p       LL
+      Equal Variances Assumed:          5.1 0.7151214 7.1317 48.00 0 3.662152
+      Equal Variances Not Assumed:      5.1 0.6846568 7.4490 46.17 0 3.721994
+                                         UL
+      Equal Variances Assumed:     6.537848
+      Equal Variances Not Assumed: 6.478006
 
 # ci.lc.mean.bs returns valid matrix
 
     Code
       res
     Output
-                                   Estimate       SE         t       df            p
-      Equal Variances Assumed:        -5.35 1.300136 -4.114955 36.00000 0.0002152581
-      Equal Variances Not Assumed:    -5.35 1.300136 -4.114955 33.52169 0.0002372436
-                                          LL        UL
-      Equal Variances Assumed:     -7.986797 -2.713203
-      Equal Variances Not Assumed: -7.993583 -2.706417
+                                   Estimate       SE      t    df       p        LL
+      Equal Variances Assumed:        -5.35 1.300136 -4.115 36.00 0.00022 -7.986797
+      Equal Variances Not Assumed:    -5.35 1.300136 -4.115 33.52 0.00024 -7.993588
+                                          UL
+      Equal Variances Assumed:     -2.713203
+      Equal Variances Not Assumed: -2.706412
 
 # ci.tukey returns valid matrix
 
     Code
       res
     Output
-           Estimate       SE          t       df            p         LL         UL
-       1 2    -4.71 1.142459  -4.122686 36.20303 5.989090e-04  -7.501842  -1.918158
-       1 3   -13.43 1.104078 -12.163998 36.95915 0.000000e+00 -16.125713 -10.734287
-       2 3    -8.72 1.228730  -7.096758 37.87646 5.510492e-08 -11.717053  -5.722947
+           Estimate       SE        t    df     p         LL         UL
+       1 2    -4.71 1.142459  -4.1227 36.20 6e-04  -7.501852  -1.918148
+       1 3   -13.43 1.104078 -12.1640 36.96 0e+00 -16.125710 -10.734290
+       2 3    -8.72 1.228730  -7.0968 37.88 0e+00 -11.717042  -5.722958
 
 # ci.ratio.mean2  returns valid matrix
 
@@ -61,39 +61,39 @@
     Code
       res
     Output
-                               Estimate adj Estimate        SE        LL       UL
-      Unweighted standardizer: 1.174493     1.159240 0.2844012 0.6170771 1.731909
-      Weighted standardizer:   1.174493     1.159240 0.2802826 0.6251494 1.723837
-      Group 1 standardizer:    1.147541     1.117605 0.2975582 0.5643375 1.730744
-      Group 2 standardizer:    1.203438     1.172044 0.3120525 0.5918268 1.815050
+                               Estimate adj Estimate      SE     LL     UL
+      Unweighted standardizer:   1.1745       1.1592 0.28440 0.6171 1.7319
+      Weighted standardizer:     1.1745       1.1592 0.28028 0.6251 1.7238
+      Group 1 standardizer:      1.1475       1.1176 0.29756 0.5643 1.7307
+      Group 2 standardizer:      1.2034       1.1720 0.31205 0.5918 1.8151
 
 # ci.stdmean.strat returns valid matrix
 
     Code
       res
     Output
-                                Estimate adj Estimate         SE         LL        UL
-      Weighted standardizer: -0.05538872  -0.05528428 0.10023259 -0.2518410 0.1410636
-      Group 1 standardizer:  -0.05714286  -0.05692722 0.10368609 -0.2603639 0.1460782
-      Group 2 standardizer:  -0.05357143  -0.05692722 0.09720571 -0.2440911 0.1369483
+                             Estimate adj Estimate      SE      LL     UL
+      Weighted standardizer:  -0.0554      -0.0553 0.10023 -0.2518 0.1411
+      Group 1 standardizer:   -0.0571      -0.0569 0.10369 -0.2604 0.1461
+      Group 2 standardizer:   -0.0536      -0.0569 0.09721 -0.2441 0.1369
 
 # ci.lc.stdmean.bs returns valid matrix
 
     Code
       res
     Output
-                                Estimate adj Estimate        SE        LL         UL
-      Unweighted standardizer: -1.301263    -1.273964 0.3692800 -2.025039 -0.5774878
-      Weighted standardizer:   -1.301263    -1.273964 0.3514511 -1.990095 -0.6124317
-      Group 1 standardizer:    -1.393229    -1.273810 0.4849842 -2.343781 -0.4426775
+                               Estimate adj Estimate      SE      LL      UL
+      Unweighted standardizer:  -1.3013      -1.2740 0.36928 -2.0250 -0.5775
+      Weighted standardizer:    -1.3013      -1.2740 0.35145 -1.9901 -0.6124
+      Group 1 standardizer:     -1.3932      -1.2738 0.48498 -2.3438 -0.4427
 
 # ci.mean.ps returns valid matrix
 
     Code
       res
     Output
-       Estimate       SE        t df           p       LL       UL
-            6.8 1.455922 4.670578 29 6.33208e-05 3.822304 9.777696
+       Estimate       SE      t df     p       LL       UL
+            6.8 1.455922 4.6706 29 6e-05 3.822304 9.777696
 
 # ci.ratio.mean.ps returns valid matrix
 
@@ -108,23 +108,19 @@
     Code
       res
     Output
-                                   Estimate adj Estimate        SE        LL
-      Unweighted standardizer:    0.5550319    0.5433457 0.1609934 0.2394905
-      Measurement 1 standardizer: 0.5424837    0.5253526 0.1615500 0.2258515
-      Measurement 2 standardizer: 0.5684932    0.5505407 0.1692955 0.2366800
-                                         UL
-      Unweighted standardizer:    0.8705732
-      Measurement 1 standardizer: 0.8591158
-      Measurement 2 standardizer: 0.9003063
+                                  Estimate adj Estimate      SE     LL     UL
+      Unweighted standardizer:      0.5550       0.5433 0.16099 0.2395 0.8706
+      Measurement 1 standardizer:   0.5425       0.5254 0.16155 0.2259 0.8591
+      Measurement 2 standardizer:   0.5685       0.5505 0.16930 0.2367 0.9003
 
 # ci.lc.stdmean.ws returns valid matrix
 
     Code
       res
     Output
-                                Estimate adj Estimate        SE        LL         UL
-      Unweighted standardizer: -1.301263    -1.266557 0.3147937 -1.918248 -0.6842788
-      Level 1 standardizer:    -1.393229    -1.337500 0.3661824 -2.110934 -0.6755248
+                               Estimate adj Estimate      SE      LL      UL
+      Unweighted standardizer:  -1.3013      -1.2666 0.31479 -1.9182 -0.6843
+      Level 1 standardizer:     -1.3932      -1.3375 0.36618 -2.1109 -0.6755
 
 # ci.mad returns valid matrix
 
@@ -248,8 +244,8 @@
     Code
       res
     Output
-       Estimate         SE        LL        UL
-           0.85 0.02456518 0.7971254 0.8931436
+       Estimate      SE     LL     UL
+           0.85 0.02457 0.7971 0.8932
 
 # size.ci.mean returns valid number
 
@@ -467,9 +463,9 @@
     Code
       res
     Output
-                                   Predicted       df       LL       UL
-      Equal Variances Assumed:         11.22 83.00000 4.650454 17.78955
-      Equal Variances Not Assumed:     11.22 72.34319 4.603642 17.83636
+                                   Predicted    df       LL       UL
+      Equal Variances Assumed:         11.22 83.00 4.650454 17.78955
+      Equal Variances Not Assumed:     11.22 72.34 4.569926 17.87007
 
 # ci.var.upper returns valid number
 
@@ -485,15 +481,15 @@
       res
     Output
        adj Eta-squared
-              0.282381
+                0.2824
 
 # test.anova.bs returns valid matrix
 
     Code
       res
     Output
-              F dfA dfE           p Eta-squared adj Eta-squared
-       5.919585   2  57 0.004614428   0.1719831       0.1429298
+            F dfA dfE       p Eta-squared adj Eta-squared
+       5.9196   2  57 0.00461       0.172          0.1429
 
 # etasqr.gen.2way returns valid matrix
 
@@ -518,16 +514,16 @@
     Code
       res
     Output
-       Eta-squared adj Eta-squared         SE        LL        UL
-             0.241       0.2213707 0.06258283 0.1040229 0.3493431
+       Eta-squared adj Eta-squared      SE    LL     UL
+             0.241          0.2214 0.06258 0.104 0.3493
 
 # ci.reliability returns valid vector
 
     Code
       res
     Output
-       Estimate        LL        UL
-           0.88 0.8489612 0.9065575
+       Estimate    LL     UL
+           0.88 0.849 0.9066
 
 # ci.sign returns valid matrix
 
@@ -542,12 +538,12 @@
     Code
       res
     Output
-                                    Estimate         SE        t       df
-      Equal Variances Assumed:     0.3664407 0.06770529 5.412290 36.00000
-      Equal Variances Not Assumed: 0.3664407 0.07336289 4.994905 18.65826
-                                              p        LL        UL
-      Equal Variances Assumed:     4.242080e-06 0.2291280 0.5037534
-      Equal Variances Not Assumed: 8.468223e-05 0.2126998 0.5201815
+                                    Estimate         SE      t    df     p        LL
+      Equal Variances Assumed:     0.3664407 0.06770529 5.4123 36.00 0e+00 0.2291280
+      Equal Variances Not Assumed: 0.3664407 0.07336289 4.9949 18.66 8e-05 0.2127008
+                                          UL
+      Equal Variances Assumed:     0.5037534
+      Equal Variances Not Assumed: 0.5201806
 
 # test.mono.mean.bs returns valid matrix
 
@@ -620,14 +616,14 @@
     Code
       res
     Output
-                  Estimate adj Estimate        SE         LL         UL
-      AB:      -1.44976487   -1.4193502 0.6885238 -2.7992468 -0.1002829
-      A:        0.46904158    0.4592015 0.3379520 -0.1933321  1.1314153
-      B:       -0.75330920   -0.7375055 0.3451209 -1.4297338 -0.0768846
-      A at b1: -0.25584086   -0.2504736 0.4640186 -1.1653006  0.6536189
-      A at b2:  1.19392401    1.1688767 0.5001423  0.2136630  2.1741850
-      B at a1: -1.47819163   -1.4471806 0.4928386 -2.4441376 -0.5122457
-      B at a2: -0.02842676   -0.0278304 0.4820369 -0.9732017  0.9163482
+               Estimate adj Estimate      SE      LL      UL
+      AB:       -1.4498      -1.4194 0.68852 -2.7992 -0.1003
+      A:         0.4690       0.4592 0.33795 -0.1933  1.1314
+      B:        -0.7533      -0.7375 0.34512 -1.4297 -0.0769
+      A at b1:  -0.2558      -0.2505 0.46402 -1.1653  0.6536
+      A at b2:   1.1939       1.1689 0.50014  0.2137  2.1742
+      B at a1:  -1.4782      -1.4472 0.49284 -2.4441 -0.5122
+      B at a2:  -0.0284      -0.0278 0.48204 -0.9732  0.9163
 
 # ci.2x2.median.bs returns valid matrix
 
@@ -648,28 +644,28 @@
     Code
       res
     Output
-                  Estimate adj Estimate         SE           LL        UL
-      AB:       0.17248839   0.16446123 0.13654635 -0.095137544 0.4401143
-      A:        0.10924265   0.10415878 0.05752822 -0.003510596 0.2219959
-      B:        0.07474497   0.07126653 0.05920554 -0.041295751 0.1907857
-      A at b1:  0.19548684   0.18638939 0.08460680  0.029660560 0.3613131
-      A at b2:  0.02299845   0.02192816 0.09371838 -0.160686202 0.2066831
-      B at a1:  0.16098916   0.15349715 0.09457347 -0.024371434 0.3463498
-      B at a2: -0.01149923  -0.01096408 0.08595873 -0.179975237 0.1569768
+               Estimate adj Estimate      SE      LL     UL
+      AB:        0.1725       0.1645 0.13655 -0.0951 0.4401
+      A:         0.1092       0.1042 0.05753 -0.0035 0.2220
+      B:         0.0747       0.0713 0.05921 -0.0413 0.1908
+      A at b1:   0.1955       0.1864 0.08461  0.0297 0.3613
+      A at b2:   0.0230       0.0219 0.09372 -0.1607 0.2067
+      B at a1:   0.1610       0.1535 0.09457 -0.0244 0.3463
+      B at a2:  -0.0115      -0.0110 0.08596 -0.1800 0.1570
 
 # ci.2x2.stdmean.mixed returns valid matrix
 
     Code
       res
     Output
-                  Estimate adj Estimate        SE         LL         UL
-      AB:      -1.95153666  -1.80141845 1.0268728 -3.9641704 0.06109706
-      A:        1.90911195   1.82026682 0.5190413  0.8918096 2.92641425
-      B:        1.06061775   0.97903177 0.3711681  0.3331416 1.78809392
-      A at b1:  0.93334362   0.83480791 0.6028071 -0.2481367 2.11482389
-      A at b2:  2.88488027   2.58031536 0.8396553  1.2391862 4.53057438
-      B at a1:  0.08484942   0.07832254 0.5469232 -0.9871003 1.15679910
-      B at a2:  2.03638608   1.87974099 0.7113341  0.6421968 3.43057538
+               Estimate adj Estimate      SE      LL     UL
+      AB:       -1.9515      -1.8014 1.02687 -3.9642 0.0611
+      A:         1.9091       1.8203 0.51904  0.8918 2.9264
+      B:         1.0606       0.9790 0.37117  0.3331 1.7881
+      A at b1:   0.9333       0.8348 0.60281 -0.2481 2.1148
+      A at b2:   2.8849       2.5803 0.83966  1.2392 4.5306
+      B at a1:   0.0848       0.0783 0.54692 -0.9871 1.1568
+      B at a2:   2.0364       1.8797 0.71133  0.6422 3.4306
 
 # ci.2x2.median.mixed returns valid matrix
 
@@ -736,8 +732,8 @@
     Code
       res
     Output
-              t df          p
-       2.599132 39 0.01312665
+            t df       p
+       2.5991 39 0.01313
 
 # size.ci.mean.prior returns valid matrix
 
@@ -778,4 +774,38 @@
     Output
        Sample size per group
                           51
+
+# size.ci.sd example
+
+    Code
+      res
+    Output
+       Sample size
+                49
+
+# ci.mean.gen(.05, y) example
+
+    Code
+      res
+    Output
+                  Estimate       SE       LL       UL
+      Square-root 35.79395 8.141122 18.64498 58.48619
+      Geometric   33.26410 7.633328 19.47124 56.82741
+      Harmonic    29.07073 7.978149 19.35236 58.39602
+
+# ci.sd(.05, 4.65, 50) example
+
+    Code
+      res
+    Output
+       Estimate       LL      UL
+           4.65 3.884303 5.79452
+
+# ci.lc.mean.scheffe example
+
+    Code
+      res
+    Output
+       Estimate       SE       t       p        LL        UL
+          -5.35 1.275231 -4.1953 0.00228 -9.089451 -1.610549
 

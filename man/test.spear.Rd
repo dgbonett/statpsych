@@ -33,15 +33,15 @@ correlation value (see \link[statpsych]{ci.spear}).
 test.spear(.471, .2, 100)
 
 # Should return:
-# Estimate        z           p
-#     0.471 3.009628 0.00261568
+# Estimate       z       p
+#     0.471 3.0096 0.00262
 
 
-test.spear(.342, 0, 100)
+test.spear(.341, 0, 100)
 
 # Should return:
-#  Estimate        t df            p
-#     0.342 3.602881 98 0.0004965008
+#  Estimate     t df       p
+#     0.341 3.591 98 0.00052
 
 
 }

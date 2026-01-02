@@ -33,14 +33,19 @@ pairwise group differences and for all covariates. In an experiment, this
 standardized mean difference should be set to 0. Set the error variance
 planning value to the largest value within a plausible range for a
 conservatively large sample size.
+
+For more details, see Section 2.28 of Bonett (2021, Volume 2)
 }
 \examples{
-v <- c(1, -1)
-size.ci.lc.ancova(.05, 1.37, 1, 0, 1.5, v)
+v <- c(.5, .5, -.5, -.5)
+size.ci.lc.ancova(.05, 6.4, 1, 0, 3.0, v)
 
 # Should return:
 # Sample size per group
-#                    21
+#                    13
  
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

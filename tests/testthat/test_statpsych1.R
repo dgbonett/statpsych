@@ -778,7 +778,7 @@ test_that("etasqr.adj returns valid number", {
   res <- etasqr.adj(.315, 2, 42)
   
   testthat::expect_equal(class(res), c("matrix", "array"))
-  testthat::expect_equal(res[[1,1]], 0.28238095)
+  testthat::expect_equal(res[[1,1]], 0.282400)
   
   testthat::expect_snapshot(res)
 })
@@ -1324,5 +1324,32 @@ test_that("size.ci.median2 example", {
 test_that("size.ci.lc.median.bs example", {
   v <- c(.5, .5, -1)
   res <- size.ci.lc.median.bs(.05, 5.62, 2.0, v, 1)
+  testthat::expect_snapshot(res)
+})
+
+test_that("size.ci.sd example", {
+  res <- size.ci.sd(.05, 1.5)
+  testthat::expect_snapshot(res)
+})
+
+test_that("ci.mean.gen(.05, y) example", {
+  y <- c(32, 47, 28, 15, 20, 41, 87)
+  res <- ci.mean.gen(.05, y)
+  testthat::expect_snapshot(res)
+})
+
+
+test_that("ci.sd(.05, 4.65, 50) example", {
+  res <- ci.sd(.05, 4.65, 50)
+  testthat::expect_snapshot(res)
+})
+
+
+test_that("ci.lc.mean.scheffe example", {
+  m <- c(33.5, 37.9, 38.0, 44.1)
+  sd <- c(3.49, 3.84, 3.65, 4.98)
+  n <- c(10, 10, 10, 10)
+  v <- c(.5, .5, -.5, -.5)
+  res <- ci.lc.mean.scheffe(.05, m, sd, n, v)
   testthat::expect_snapshot(res)
 })

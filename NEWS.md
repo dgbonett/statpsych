@@ -1,4 +1,4 @@
-statpsych version 1.9.0 (Release date: 2026/12/xx)
+statpsych version 1.9.0 (Release date: 2026/01/01)
 ===========
 
 Changes:
@@ -112,7 +112,8 @@ Changes:
     * one-group function names that end with a "1" have been renamed and now exclude the "1" (for naming consistency and to avoid confusion with lower case L).
     * ci.mape2 has been renamed ci.ratio.mape2, and ci.cod2 has been renamed ci.ratio.cod2
     * The ci.phi function now uses a Fisher transformation for improved coverage probability performance
-
+* Deletions:
+    * size.test.slope.gen removed
 
 statpsych version 1.5.0 (Release date: 2023/12/11)
 ===========

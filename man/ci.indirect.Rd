@@ -37,6 +37,8 @@ estimates and their standard errors, OLS slope estimates and
 heteroscedastic-consistent standard errors also could be used. In models
 with no direct effects, distribution-free Theil-Sen slope estimates with
 recovered standard errors (see \link[statpsych]{ci.theil}) also could be used.
+
+For more details, see Section 1.18 of Bonett (2021, Volume 4)
 }
 \examples{
 ci.indirect (.05, 2.48, 1.92, .586, .379)
@@ -46,4 +48,7 @@ ci.indirect (.05, 2.48, 1.92, .586, .379)
 #   4.7616 1.625282 2.178812 7.972262
  
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

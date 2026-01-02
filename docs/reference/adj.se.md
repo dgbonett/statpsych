@@ -1,0 +1,71 @@
+# Adjusted standard errors for slope coefficients in an exploratory analysis
+
+Computes adjusted standard errors in a general linear model after one or
+more predictor variables with nonsignificant slopes have been dropped
+from the model. The adjusted standard errors are then used to compute
+adjusted t-values, p-values, and confidence intervals. The mean square
+error and error degrees of freedom from the full model are used to
+compute the adjusted standard errors. These adjusted results are less
+susceptible to the negative effects of an exploratory model selection.
+
+For more details, see Section 2.25 of Bonett (2021, Volume 2)
+
+## Usage
+
+``` r
+adj.se(alpha, mse1, mse2, dfe1, se, b)
+```
+
+## Arguments
+
+- alpha:
+
+  alpha level for 1-alpha confidence
+
+- mse1:
+
+  mean squared error in full model
+
+- mse2:
+
+  mean squared error in selected model
+
+- dfe1:
+
+  error df in full model
+
+- se:
+
+  vector of slope standard errors in selected model
+
+- b:
+
+  vector of estimated slopes in selected model
+
+## Value
+
+Returns adjusted standard error, t-statistic, p-value, and confidence
+interval for each slope coefficient
+
+## References
+
+Bonett DG (2021url). *Statistical Methods for Psychologists*.
+
+## Examples
+
+``` r
+se <- c(1.57, 3.15, 0.982)
+b <- c(3.78, 8.21, 2.99)
+adj.se(.05, 10.26, 8.37, 114, se, b)
+#>      Estimate   adj SE        t  df       p        LL        UL
+#> [1,]     3.78 1.738243 2.174609 114 0.03173 0.3365531  7.223447
+#> [2,]     8.21 3.487559 2.354082 114 0.02028 1.3011734 15.118827
+#> [3,]     2.99 1.087233 2.750102 114 0.00693 0.8362007  5.143799
+
+# Should return:
+#      Estimate   adj SE        t  df       p        LL        UL
+# [1,]     3.78 1.738243 2.174609 114 0.03173 0.3365531  7.223447
+# [2,]     8.21 3.487559 2.354082 114 0.02028 1.3011734 15.118827
+# [3,]     2.99 1.087233 2.750102 114 0.00693 0.8362007  5.143799
+ 
+```

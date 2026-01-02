@@ -36,8 +36,8 @@ interval for the difference in population correlation values
 test.cor2(.684, .437, 100, 125, 0)
 
 # Should return:
-# Estimate        z           p
-#    0.247 2.705709 0.006815877
+# Estimate      z       p
+#    0.247 2.7057 0.00682
 
 
 }

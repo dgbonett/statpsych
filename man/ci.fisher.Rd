@@ -32,11 +32,11 @@ traditional standard error, a bootstrap standard error, or a robust
 standard error from a SEM analysis.
 }
 \examples{
-ci.fisher(.05, .641, .052)
+ci.fisher(.05, .692, .049)
 
 # Should return:
-# Estimate        LL        UL
-#    0.641 0.5276396 0.7319293
+# Estimate     LL     UL
+#    0.692 0.5833 0.7763
 
 
 }

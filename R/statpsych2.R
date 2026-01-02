@@ -2122,7 +2122,7 @@ ci.slope.mean.bs <- function(alpha, m, sd, n, x) {
  se2 <- sqrt(t(v)%*%v2%*%v)
  t2 <- round(est/se2, 4)
  df2 <- (se2^4)/sum(((v^4)*(sd^4)/(n^2*(n - 1))))
- df2 <- (round(df2, 2)
+ df2 <- round(df2, 2)
  p2 <- round(2*(1 - pt(abs(t2), df2)), 5)
  tcrit2 <- qt(1 - alpha/2, df2)
  ll2 <- est - tcrit2*se2

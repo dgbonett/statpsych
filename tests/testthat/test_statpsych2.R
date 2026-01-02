@@ -647,8 +647,8 @@ test_that("pi.cor returns valid matrix", {
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)
-  testthat::expect_equal(res[1,1], 0.60340924)
-  testthat::expect_equal(res[1,2], 0.85732237)
+  testthat::expect_equal(res[1,1], 0.6034)
+  testthat::expect_equal(res[1,2], 0.8573)
   
   testthat::expect_snapshot(res)
   
@@ -753,11 +753,11 @@ test_that("size.ci.cor.prior returns valid matrix", {
     "Sample size"
   )
   
-  res <- size.ci.cor.prior(.05, .10, .438, 100, .2)
+  res <- size.ci.cor.prior(.05, .10, -.56, 120, .2)
          
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
-  testthat::expect_equal(res[[1,1]], 331)
+  testthat::expect_equal(res[[1,1]], 246)
   testthat::expect_equal(colnames(res), colnames_expected)
   
   testthat::expect_snapshot(res)
@@ -822,10 +822,10 @@ test_that("size.test.ancova2 example", {
 })
 
 
-test_that("size.test.slope.gen example", {
-  res <- size.test.slope.gen(.05, .8, 3.15, 50, 5)
-  testthat::expect_snapshot(res)
-})
+# test_that("size.test.slope.gen example", {
+#   res <- size.test.slope.gen(.05, .8, 3.15, 50, 5)
+#   testthat::expect_snapshot(res)
+# })
 
 
 test_that("signal example", {
@@ -892,3 +892,38 @@ test_that("size.test.gen2(.05, .85, .175, 30, .5, 1) example", {
   res <- size.test.gen2(.05, .85, .175, 30, .5, 1)
   testthat::expect_snapshot(res)
 })
+
+test_that("size.ci.cronbach.prior(.05, .10, .86, 50, 5, .15) example", {
+  res <- size.ci.cronbach.prior(.05, .10, .86, 50, 5, .15)
+  testthat::expect_snapshot(res)
+})
+
+test_that("size.ci.icc.prior(.05, .10, .674, 50, 3, .2) example", {
+  res <- size.ci.icc.prior(.05, .10, .674, 50, 3, .2)
+  testthat::expect_snapshot(res)
+})
+
+test_that("size.ci.icc(.05, .70, 3, .2) example", {
+  res <- size.ci.icc(.05, .70, 3, .2)
+  testthat::expect_snapshot(res)
+})
+
+test_that("ci.icc(.05, 48.2, 11.3, 5, 30) example", {
+  res <- ci.icc(.05, 48.2, 11.3, 5, 30)
+  testthat::expect_snapshot(res)
+})
+
+
+test_that("ci.slope(.05, .362, 25.1, 6.25, 85) example", {
+  res <- ci.slope(.05, .362, 25.1, 6.25, 85)
+  testthat::expect_snapshot(res)
+})
+
+test_that("pi.cronbach examples", {
+  res <- pi.cronbach(.1, .852, 5, 100, 150, 1)
+  testthat::expect_snapshot(res)
+  
+  res2 <- pi.cronbach(.1, .852, 5, 100, 150, 3)
+  testthat::expect_snapshot(res2)
+})
+

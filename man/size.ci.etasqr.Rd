@@ -23,13 +23,18 @@ Computes the sample size required to estimate an eta-squared coefficient
 in a one-way ANOVA with desired confidence interval precision. Set the
 planning value of eta-squared to about 1/3 for a conservatively large sample
 size.
+
+For more details, see Section 3.24 of Bonett (2021, Volume 1)
 }
 \examples{
-size.ci.etasqr(.05, .333, 3, .2)
+size.ci.etasqr(.05, .2, 3, .15)
 
 # Should return:
 # Sample size per group 
-#                    63
+#                   103
  
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

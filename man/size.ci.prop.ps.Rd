@@ -26,13 +26,18 @@ difference with desired confidence interval precision in a paired-samples
 design. Set the proportion planning values to .5 for a conservatively large
 sample size. Set the phi correlation planning value to the smallest value
 within a plausible range for a conservatively large sample size.
+
+For more details, see Section 3.12 of Bonett (2021, Volume 3)
 }
 \examples{
-size.ci.prop.ps(.05, .2, .3, .8, .1)
+size.ci.prop.ps(.05, .25, .35, .6, .1)
 
 # Should return:
 # Sample size
-#         118
+#         257
 
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

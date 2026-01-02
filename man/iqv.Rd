@@ -14,6 +14,7 @@ Returns estimates of the Shannon, Berger, and Simpson indices
 }
 \description{
 Computes the Shannon, Berger, and Simpson indices of qualitative variation.
+Will be replaced soon with ci.diversity.
 }
 \examples{
 f <- c(10, 46, 15, 3)

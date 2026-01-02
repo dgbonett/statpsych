@@ -34,6 +34,8 @@ population medians are monotonic increasing. Reject the hypothesis of a
 monotonic trend if any lower limit is greater than 0 and any upper limit
 is less than 0. The sample median and standard error for each group
 can be computed using the \link[statpsych]{ci.median} function.
+
+For more details, see Section 1.21 of Bonett (2021, Volume 2)
 }
 \examples{
 m <- c(12.86, 24.57, 36.29, 53.21)
@@ -47,4 +49,7 @@ test.mono.median.bs(.05, m, se)
 #  3 4   -16.92 5.382128 -29.80471 -4.0352947
 
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

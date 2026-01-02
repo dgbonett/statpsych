@@ -37,13 +37,18 @@ deviation could then be set to .2/1.96. A semipartial correlation value
 that is considered to be small will depend on the application. This function
 requires the standard error of the estimated semipartial correlation which
 can be obtained from the ci.spcor function.
+
+For more details, see Section 2.36 of Bonett (2021, Volume 2)
 }
 \examples{
 ci.bayes.spcor(.05, .1, .582, .137)
 
 # Should return:
-#  Posterior mean        LL        UL
-#       0.2272797 0.07288039 0.3710398
+# Posterior mean     LL    UL
+#         0.2273 0.0729 0.371
 
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

@@ -26,6 +26,8 @@ with desired power in a paired-samples design. Set the Pearson correlation
 planning value to the smallest value within a plausible range, and set the
 variance planning value to the largest value within a plausible range for a
 conservatively large sample size.
+
+For more details, see Section 4.27 of Bonett (2021, Volume 1)
 }
 \examples{
 size.test.mean.ps(.05, .80, 1.25, .5, .75) 
@@ -35,4 +37,7 @@ size.test.mean.ps(.05, .80, 1.25, .5, .75)
 #          22
  
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

@@ -58,8 +58,8 @@ assumption is made in the computation of the standard error.
 ci.bscor(.05, 28.32, 21.48, 3.81, 3.09, 40, 40)
 
 # Should return:
-#   Estimate         SE        LL        UL
-#  0.8855666 0.06129908  0.7376327 0.984412
+# Estimate     SE      LL     UL
+#   0.8856 0.0613  0.7376 0.9844
  
 
 }

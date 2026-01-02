@@ -28,6 +28,8 @@ the levels of the quantitative factor, and it might be necessary to increase
 the total sample size to give the desired sample size at each level of
 the fixed factor. Set the error variance planning value to the largest value
 within a plausible range for a conservatively large sample size.
+
+For more details, see Section 1.24 of Bonett (2021, Volume 2)
 }
 \examples{
 size.ci.condmean(.05, 120, 125, 15, 5)
@@ -37,4 +39,7 @@ size.ci.condmean(.05, 120, 125, 15, 5)
 #               210
  
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

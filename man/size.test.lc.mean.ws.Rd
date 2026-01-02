@@ -29,14 +29,19 @@ planning value to the largest value within a plausible range for a
 conservatively large sample size. Set the average correlation planning value to
 the smallest value within a plausible range for a conservatively large sample
 size.
+
+For more details, see Section 4.27 of Bonett (2021, Volume 1)
 }
 \examples{
-q <- c(.5, .5, -.5, -.5)
-size.test.lc.mean.ws(.05, .90, 50.7, 2, .8, q)
+q <- c(1, -1, -1, 1)
+size.test.lc.mean.ws(.05, .95, 15.0, 3, .8, q)
 
 # Should return:
 # Sample size
-#          29
+#          20
  
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

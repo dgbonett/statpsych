@@ -1,0 +1,63 @@
+# Confidence interval for a paired-samples MAD ratio
+
+Computes a confidence interval for a ratio of population MADs (mean
+absolute deviation from median) in a paired-samples design.
+
+For more details, see Section 4.24 of Bonett (2021, Volume 1)
+
+## Usage
+
+``` r
+ci.ratio.mad.ps(alpha, y1, y2)
+```
+
+## Arguments
+
+- alpha:
+
+  alpha level for 1-alpha confidence
+
+- y1:
+
+  vector of measurement 1 scores
+
+- y2:
+
+  vector of measurement 2 scores (paired with y1)
+
+## Value
+
+Returns a 1-row matrix. The columns are:
+
+- MAD1 - estimated MAD for measurement 1
+
+- MAD2 - estimated MAD for measurement 2
+
+- MAD1/MAD2 - estimate of MAD ratio
+
+- LL - lower limit of the confidence interval
+
+- UL - upper limit of the confidence interval
+
+## References
+
+Bonett DG, Seier E (2003). “Statistical inference for a ratio of
+dispersions using paired samples.” *Journal of Educational and
+Behavioral Statistics*, **28**(1), 21–30. ISSN 1076-9986,
+[doi:10.3102/10769986028001021](https://doi.org/10.3102/10769986028001021)
+. Bonett DG (2021url). *Statistical Methods for Psychologists*.
+
+## Examples
+
+``` r
+y2 <- c(21, 4, 9, 12, 35, 18, 10, 22, 24, 1, 6, 8, 13, 16, 19)
+y1 <- c(67, 28, 30, 28, 52, 40, 25, 37, 44, 10, 14, 20, 28, 40, 51)
+ci.ratio.mad.ps(.05, y1, y2)
+#>      MAD1 MAD2 MAD1/MAD2       LL       UL
+#>  12.71429  7.5  1.695238 1.109176 2.590961
+
+# Should return:
+#     MAD1  MAD2  MAD1/MAD2       LL       UL
+# 12.71429   7.5   1.695238 1.109176 2.590961
+
+```

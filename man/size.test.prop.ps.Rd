@@ -33,13 +33,18 @@ could be set equal to the difference of the two proportion planning values
 or it could be set equal to a minimally interesting effect size. Set the
 phi correlation planning value to the smallest absolute value within a
 plausible range for a conservatively large sample size.
+
+For more details, see Section 3.13 of Bonett (2021, Volume 3)
 }
 \examples{
-size.test.prop.ps(.05, .80, .4, .3, .5, .1)
+size.test.prop.ps(.05, .90, .6, .7, .5, .1)
 
 # Should return:
 # Sample size
-#         177
+#         237
 
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

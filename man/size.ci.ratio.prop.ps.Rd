@@ -25,6 +25,8 @@ Computes the sample size required to estimate a ratio of population
 proportions with desired confidence interval precision in a paired-samples
 design. Set the phi correlation planning value to the smallest value within
 a plausible range for a conservatively large sample size.
+
+For more details, see Section 3.12 of Bonett (2021, Volume 3)
 }
 \examples{
 size.ci.ratio.prop.ps(.05, .4, .2, .7, 2)
@@ -34,4 +36,7 @@ size.ci.ratio.prop.ps(.05, .4, .2, .7, 2)
 #          67
 
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

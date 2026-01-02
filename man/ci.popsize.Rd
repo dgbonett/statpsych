@@ -33,13 +33,18 @@ of people who were not observed in either sample). This method sets the
 estimated odds ratio (with .5 added to each cell) to 1 and solves for
 unobserved cell frequency. An approximate standard error is recovered
 from the confidence interval.
+
+For more details, see Section 3.7 of Bonett (2021, Volume 3)
 }
 \examples{
-ci.popsize(.05, 794, 710, 741)
+ci.popsize(.05, 85, 196, 184)
 
 # Should return:
-# Estimate       SE   LL   UL
-#     2908 49.49071 2818 3012
+# Estimate    SE  LL   UL
+#      889 67.35 777 1041
 
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }
