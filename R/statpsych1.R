@@ -27,6 +27,7 @@
 #' 
 #' @references
 #' \insertRef{Snedecor1980}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -310,6 +311,7 @@ ci.stdmean <- function(alpha, m, sd, n, h) {
 #' 
 #' @references
 #' \insertRef{Snedecor1980}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -393,6 +395,7 @@ ci.mean2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' 
 #' @references
 #' \insertRef{Snedecor1980}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
