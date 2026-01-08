@@ -159,8 +159,8 @@ ci.slope <- function(alpha, cor, sdy, sdx, n) {
 #' 
 #' 
 #' @references
-#' \insertRef{Aloe2012}{statpsych}
 #' \insertRef{Bonett2021}{statpsych}
+#' \insertRef{Aloe2012}{statpsych}
 #'
 #'
 #' @examples
@@ -1444,8 +1444,8 @@ ci.reliability <- function(alpha, rel, se, n) {
 #' 
 #' 
 #' @references
-#' \insertRef{Bonett2015}{statpsych}
 #' \insertRef{Bonett2021}{statpsych}
+#' \insertRef{Bonett2015}{statpsych}
 #'
 #'
 #' @examples
@@ -1516,8 +1516,8 @@ ci.cronbach2 <- function(alpha, rel1, rel2, r1, r2, n1, n2) {
 #' 
 #' 
 #' @references
-#' \insertRef{Bonett2015}{statpsych}
 #' \insertRef{Bonett2021}{statpsych}
+#' \insertRef{Bonett2015}{statpsych}
 #'
 #'
 #' @examples
