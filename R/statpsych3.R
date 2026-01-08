@@ -1960,15 +1960,15 @@ ci.cramer <- function(alpha, chisqr, r, c, n) {
 #' Returns a 7-row matrix (one row per effect). The columns are:
 #' * Estimate - adjusted estimate of effect
 #' * SE - standard error 
-#' * z - z test statistic for test of null hypothesis
+#' * z - z test statistic
 #' * p - two-sided p-value 
 #' * LL - lower limit of the adjusted Wald confidence interval
 #' * UL - upper limit of the adjusted Wald confidence interval
 #'
 #'
 #' @references
-#' \insertRef{Price2004}{statpsych}
 #' \insertRef{Bonett2021}{statpsych}
+#' \insertRef{Price2004}{statpsych}
 #'
 #'
 #' @examples
