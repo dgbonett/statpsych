@@ -39,8 +39,8 @@
 #'
 #'
 #' @references
-#' \insertRef{Agresti1998}{statpsych}
 #' \insertRef{Bonett2021}{statpsych}
+#' \insertRef{Agresti1998}{statpsych}
 #'
 #'
 #' @examples
@@ -1152,8 +1152,8 @@ ci.oddsratio <- function(alpha, f00, f01, f10, f11) {
 #'
 #'
 #' @references
-#' \insertRef{Bonett2007}{statpsych}  
 #' \insertRef{Bonett2021}{statpsych}
+#' \insertRef{Bonett2007}{statpsych}  
 #'
 #'
 #' @return
@@ -1378,8 +1378,8 @@ ci.biphi <- function(alpha, f1, f2, n1, n2) {
 #'
 #'
 #' @references
-#' \insertRef{Bonett2005}{statpsych}
 #' \insertRef{Bonett2021}{statpsych}
+#' \insertRef{Bonett2005}{statpsych}
 #'
 #'
 #' @return
