@@ -21,6 +21,7 @@
 #'
 #' @references
 #' \insertRef{Snedecor1980}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -160,6 +161,7 @@ ci.slope <- function(alpha, cor, sdy, sdx, n) {
 #' 
 #' @references
 #' \insertRef{Bonett2021}{statpsych}
+#'
 #' \insertRef{Aloe2012}{statpsych}
 #'
 #'
@@ -221,6 +223,7 @@ ci.spcor <- function(alpha, cor, r2, n) {
 #' 
 #' @references
 #' \insertRef{Zou2007}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -292,6 +295,7 @@ ci.cor2 <- function(alpha, cor1, cor2, n1, n2) {
 #' 
 #' @references
 #' \insertRef{Zou2007}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -370,6 +374,7 @@ ci.cor.dep <- function(alpha, cor1, cor2, cor12, n) {
 #' 
 #' @references
 #' \insertRef{Zou2007}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -422,6 +427,7 @@ ci.cor2.gen <- function(cor1, ll1, ul1, cor2, ll2, ul2) {
 #'
 #' @references
 #' \insertRef{Bonett2020a}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -508,6 +514,7 @@ ci.pbcor <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' 
 #' @references
 #' \insertRef{Bonett2000}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -575,6 +582,7 @@ ci.spear <- function(alpha, y, x) {
 #' 
 #' @references
 #' \insertRef{Bonett2000}{statpsych}
+#'
 #' \insertRef{Zou2007}{statpsych}
 #'
 #'
@@ -1158,6 +1166,7 @@ ci.lc.gen.bs <- function(alpha, est, se, v) {
 #'
 #' @references
 #' \insertRef{Helland1987}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -1251,6 +1260,7 @@ ci.rsqr <- function(alpha, r2, s, n) {
 #'
 #' @references
 #' \insertRef{Hollander1999}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -1329,6 +1339,7 @@ ci.theil <- function(alpha, y, x) {
 #' 
 #' @references
 #' \insertRef{Feldt1965}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -1445,6 +1456,7 @@ ci.reliability <- function(alpha, rel, se, n) {
 #' 
 #' @references
 #' \insertRef{Bonett2021}{statpsych}
+#'
 #' \insertRef{Bonett2015}{statpsych}
 #'
 #'
@@ -1517,6 +1529,7 @@ ci.cronbach2 <- function(alpha, rel1, rel2, r1, r2, n1, n2) {
 #' 
 #' @references
 #' \insertRef{Bonett2021}{statpsych}
+#'
 #' \insertRef{Bonett2015}{statpsych}
 #'
 #'
@@ -1673,6 +1686,7 @@ ci.bscor <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' 
 #' @references
 #' \insertRef{McGraw1996}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -2687,6 +2701,7 @@ size.ci.slope <- function(alpha, evar, x, w) {
 #' 
 #' @references
 #' \insertRef{Bonett2000}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -2799,6 +2814,7 @@ size.ci.spear <- function(alpha, cor, w) {
 #'
 #' @references
 #' \insertRef{Bonett2020a}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #' 
 #' 
@@ -3058,6 +3074,7 @@ size.ci.indirect <- function(alpha, cor1, cor2, w) {
 #'
 #' @references
 #' \insertRef{Bonett2015}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -3121,6 +3138,7 @@ size.ci.cronbach <- function(alpha, rel, r, w) {
 #'
 #' @references
 #' \insertRef{Bonett2015}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
