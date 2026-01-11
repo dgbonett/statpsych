@@ -40,6 +40,7 @@
 #'
 #' @references
 #' \insertRef{Bonett2021}{statpsych}
+#'
 #' \insertRef{Agresti1998}{statpsych}
 #'
 #'
@@ -172,6 +173,7 @@ ci.prop.fpc <- function(alpha, f, n, N) {
 #'
 #' @references
 #' \insertRef{Bonett2012}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -332,6 +334,7 @@ ci.diversity <- function(alpha, f) {
 #'
 #' @references
 #' \insertRef{Zou2010}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -397,6 +400,7 @@ ci.prop.inv <- function(alpha, f, n) {
 #'
 #' @references
 #' \insertRef{Agresti2000}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -539,6 +543,7 @@ ci.prop2.inv <- function(alpha, f1, f2, n1, n2) {
 #'
 #' @references
 #' \insertRef{Price2008}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -600,6 +605,7 @@ ci.ratio.prop2 <- function(alpha, f1, f2, n1, n2) {
 #'
 #' @references
 #' \insertRef{Price2004}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -680,7 +686,9 @@ ci.lc.prop.bs <- function(alpha, f, n, v) {
 #'
 #' @references
 #' \insertRef{Price2004}{statpsych}
+#'
 #' \insertRef{Marascuilo1977}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -750,6 +758,7 @@ ci.lc.prop.scheffe <- function(alpha, f, n, v) {
 #'
 #' @references
 #' \insertRef{Agresti2000}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -823,6 +832,7 @@ ci.pairs.prop.bs <-function(alpha, f, n) {
 #'
 #' @references
 #' \insertRef{Price2004}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -885,6 +895,7 @@ ci.slope.prop.bs <- function(alpha, f, n, x) {
 #'
 #' @references
 #' \insertRef{Bonett2012}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -943,6 +954,7 @@ ci.prop.ps <- function(alpha, f00, f01, f10, f11) {
 #'
 #' @references
 #' \insertRef{Bonett2006a}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -1099,6 +1111,7 @@ ci.condslope.log <- function(alpha, b1, b2, se1, se2, cov, lo, hi) {
 #'
 #' @references
 #' \insertRef{Fleiss2003}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -1247,6 +1260,7 @@ ci.yule <- function(alpha, f00, f01, f10, f11) {
 #'
 #' @references
 #' \insertRef{Bishop1975}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -1315,6 +1329,7 @@ ci.phi <- function(alpha, f00, f01, f10, f11) {
 #'
 #' @references
 #' \insertRef{Ulrich2004}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -1379,6 +1394,7 @@ ci.biphi <- function(alpha, f1, f2, n1, n2) {
 #'
 #' @references
 #' \insertRef{Bonett2021}{statpsych}
+#'
 #' \insertRef{Bonett2005}{statpsych}
 #'
 #'
@@ -1455,6 +1471,7 @@ ci.tetra <- function(alpha, f00, f01, f10, f11) {
 #'
 #' @references
 #' \insertRef{Fleiss2003}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -1536,6 +1553,7 @@ ci.kappa <- function(alpha, f00, f01, f10, f11) {
 #'
 #' @references
 #' \insertRef{Bonett2022}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -1601,6 +1619,7 @@ ci.agree <- function(alpha, n, f, k) {
 #'
 #' @references
 #' \insertRef{Bonett2022}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -1890,6 +1909,7 @@ ci.popsize <- function(alpha, f00, f01, f10) {
 #'
 #' @references
 #' \insertRef{Smithson2003}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -1968,6 +1988,7 @@ ci.cramer <- function(alpha, chisqr, r, c, n) {
 #'
 #' @references
 #' \insertRef{Bonett2021}{statpsych}
+#'
 #' \insertRef{Price2004}{statpsych}
 #'
 #'
@@ -2226,6 +2247,7 @@ ci.2x2.prop.mixed <- function(alpha, group1, group2) {
 #'
 #' @references
 #' \insertRef{Gelman2004}{statpsych}  
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -2297,6 +2319,7 @@ ci.bayes.prop <- function(alpha, prior_mean, prior_sd, f, n) {
 #'
 #' @references
 #' \insertRef{Price2008}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -2579,6 +2602,7 @@ pi.prop <- function(alpha, prop, n0, n, type) {
 #'
 #' @references
 #' \insertRef{Snedecor1980}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -2635,6 +2659,7 @@ test.prop <- function(f, n, h) {
 #'
 #' @references
 #' \insertRef{Snedecor1980}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -2691,6 +2716,7 @@ test.prop2 <- function(f1, f2, n1, n2) {
 #'
 #' @references
 #' \insertRef{Fleiss2003}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -2748,6 +2774,7 @@ test.prop.bs <- function(f, n) {
 #'
 #' @references
 #' \insertRef{Snedecor1980}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -3634,6 +3661,7 @@ size.ci.biphi <- function(alpha, p1, p2, cor, w) {
 #'
 #' @references
 #' \insertRef{Fleiss2003}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -4378,6 +4406,7 @@ expon.slope <- function(alpha, b, se) {
 #'
 #' @references
 #' \insertRef{Wickens2002}{statpsych}  
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
