@@ -569,6 +569,7 @@ ci.lc.mean.scheffe <- function(alpha, m, sd, n, v) {
 #'
 #' @references
 #' \insertRef{Games1976}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -644,6 +645,7 @@ ci.tukey <-function(alpha, m, sd, n) {
 #'
 #' @references
 #' \insertRef{Bonett2020b}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -727,6 +729,7 @@ ci.ratio.mean2 <- function(alpha, y1, y2){
 #'
 #' @references
 #' \insertRef{Bonett2008}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -908,6 +911,7 @@ ci.stdmean.strat <- function(alpha, m1, m2, sd1, sd2, n1, n2, p1) {
 #'
 #' @references
 #' \insertRef{Bonett2008}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -1005,6 +1009,7 @@ ci.lc.stdmean.bs <- function(alpha, m, sd, n, v) {
 #' 
 #' @references
 #' \insertRef{Snedecor1980}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -1066,6 +1071,7 @@ ci.mean.ps <- function(alpha, m1, m2, sd1, sd2, cor, n) {
 #'
 #' @references
 #' \insertRef{Bonett2020b}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -1147,6 +1153,7 @@ ci.ratio.mean.ps <- function(alpha, y1, y2){
 #'
 #' @references
 #' \insertRef{Bonett2008}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -1232,6 +1239,7 @@ ci.stdmean.ps <- function(alpha, m1, m2, sd1, sd2, cor, n) {
 #'
 #' @references
 #' \insertRef{Bonett2008}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -1310,6 +1318,7 @@ ci.lc.stdmean.ws <- function(alpha, m, sd, cor, n, q) {
 #'
 #' @references
 #' \insertRef{Bonett2003b}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -1375,6 +1384,7 @@ ci.mad <- function(alpha, y) {
 #'
 #' @references
 #' \insertRef{Bonett2003b}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -1586,6 +1596,7 @@ ci.ratio.sd2 <- function(alpha, y1, y2) {
 #'
 #' @references
 #' \insertRef{Bonett2003a}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -1802,6 +1813,7 @@ ci.ratio.cv2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #'
 #' @references
 #' \insertRef{Bonett2006}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -1993,7 +2005,8 @@ ci.ratio.cod2 <-function(alpha, y1, y2) {
 #'
 #'
 #' @references
-#' \insertRef{Bonett2006c}{statpsych}    
+#' \insertRef{Bonett2006c}{statpsych}  
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -2080,6 +2093,7 @@ ci.cqv <- function(alpha, y) {
 #'
 #' @references
 #' \insertRef{Snedecor1980}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -2150,6 +2164,7 @@ ci.median <- function(alpha, y) {
 #'
 #' @references
 #' \insertRef{Bonett2002}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -2233,6 +2248,7 @@ ci.median2 <- function(alpha, y1, y2) {
 #'
 #' @references
 #' \insertRef{Bonett2020b}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -2320,6 +2336,7 @@ ci.ratio.median2 <- function(alpha, y1, y2) {
 #'
 #' @references
 #' \insertRef{Bonett2002}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -2382,6 +2399,7 @@ ci.lc.median.bs <- function(alpha, m, se, v) {
 #'
 #' @references
 #' \insertRef{Bonett2020}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -2473,6 +2491,7 @@ ci.median.ps <- function(alpha, y1, y2) {
 #'
 #' @references
 #' \insertRef{Bonett2020b}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -2568,6 +2587,7 @@ ci.ratio.median.ps <- function(alpha, y1, y2) {
 #'
 #' @references
 #' \insertRef{Agresti1998}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -2636,6 +2656,7 @@ ci.sign <- function(alpha, y, h) {
 #'
 #' @references
 #' \insertRef{Sen1967}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -3498,6 +3519,7 @@ ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
 #'
 #' @references
 #' \insertRef{Bonett2002}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -4355,6 +4377,7 @@ ci.2x2.median.ws <- function(alpha, y11, y12, y21, y22) {
 #'
 #' @references
 #' \insertRef{Gelman2004}{statpsych}  
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -4410,6 +4433,7 @@ ci.bayes.normal <- function(alpha, prior_mean, prior_sd, est, se) {
 #' 
 #' @references
 #' \insertRef{Snedecor1980}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -4772,6 +4796,7 @@ size.ci.mean2 <- function(alpha, var, w, R) {
 #'
 #' @references
 #' \insertRef{Bonett2009}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -4947,6 +4972,7 @@ size.ci.lc.mean.bs <- function(alpha, var, w, v) {
 #'
 #' @references
 #' \insertRef{Bonett2009}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -5054,6 +5080,7 @@ size.ci.mean.ps <- function(alpha, var, cor, w) {
 #'
 #' @references
 #' \insertRef{Bonett2009}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -5220,6 +5247,7 @@ size.ci.lc.mean.ws <- function(alpha, var, cor, w, q) {
 #'
 #' @references
 #' \insertRef{Bonett2009}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -5347,6 +5375,10 @@ size.ci.etasqr <- function(alpha, etasqr, groups, w) {
 #'
 #' @return 
 #' Returns the required sample size for the second-stage sample
+#' 
+#' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -5523,6 +5555,7 @@ size.ci.cv <- function(alpha, CV, w) {
 #'
 #' @references
 #' \insertRef{Bonett2002}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -5606,6 +5639,7 @@ size.ci.median <- function(alpha, var, w, dist) {
 #'
 #' @references
 #' \insertRef{Bonett2002}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -5689,6 +5723,7 @@ size.ci.median2 <- function(alpha, var, w, R, dist) {
 #'
 #' @references
 #' \insertRef{Bonett2002}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -6315,6 +6350,7 @@ size.supinf.mean.ps <- function(alpha, pow, var, es, cor, h) {
 #'
 #' @references
 #' \insertRef{Noether1987}{statpsych}
+#'
 #' \insertRef{Bonett2021}{statpsych}
 #'
 #'
@@ -6679,7 +6715,7 @@ power.mean.ps <- function(alpha, n, var1, var2, es, cor) {
 #'
 #'
 #' @references
-#' \insertRef{Bonett2015}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -6738,7 +6774,8 @@ pi.score <- function(alpha, m, sd, n) {
 #'
 #' @references
 #' \insertRef{Hahn1977}{statpsych}
-#' \insertRef{Bonett2015}{statpsych}
+#'
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #'
@@ -6811,7 +6848,7 @@ pi.score2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #'
 #'
 #' @references
-#' \insertRef{Bonett2015}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -6982,7 +7019,8 @@ random.y <- function(n, m, sd, min, max, dec) {
 #'
 #' @references
 #' \insertRef{Hahn1972}{statpsych}
-#' \insertRef{Bonett2015}{statpsych}
+#'
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #'
@@ -7041,7 +7079,7 @@ pi.var <- function(alpha, var, n0, n, type) {
 #'
 #'
 #' @references
-#' \insertRef{Bonett2015}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -7086,7 +7124,7 @@ ci.var.upper <- function(alpha, var, n) {
 #'
 #'
 #' @references
-#' \insertRef{Bonett2015}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -7138,7 +7176,7 @@ etasqr.adj <- function(etasqr, dfeffect, dferror) {
 #'
 #'
 #' @references
-#' \insertRef{Bonett2015}{statpsych}
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -8160,6 +8198,10 @@ sim.ci.stdmean.ps <- function(alpha, n, sd2, cor, dist1, dist2, d, rep) {
 #'
 #' @return
 #' Returns the reliability of the sum or average of r2 measurements
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
