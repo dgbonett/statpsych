@@ -351,8 +351,8 @@ ci.cor.dep <- function(alpha, cor1, cor2, cor12, n) {
 #' Pearson, Spearman, partial, semipartial, or point-biserial correlations. 
 #' The correlations could also be correlations between two latent factors.
 #' The function requires a point estimate and a 100(1 - alpha)% confidence
-#' interval for each correlation as input. The confidence intervals for 
-#' each correlation can be obtained using the ci.fisher function.
+#' interval for each correlation as input. The confidence intervals for each
+#' correlation can be obtained using \link[statpsych]{ci.fisher}.
 #'
 #' For more details, see Section 2.17 of Bonett (2021, Volume 2)
 #'
