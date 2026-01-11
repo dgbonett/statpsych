@@ -7920,9 +7920,9 @@ sim.ci.median.ps <- function(alpha, n, sd2, cor, dist1, dist2, rep) {
 #' @description
 #' Performs a computer simulation of confidence interval performance for  
 #' two types of standardized mean differences in a 2-group design (see
-#' ci.stdmean2). Sample data for each group can be generated from five 
-#' different population distributions. All distributions are scaled to have
-#' a standard deviation of 1.0 for group 1.
+#' \link[statpsych]{ci.stdmean2}). Sample data for each group can be 
+#' generated from five different population distributions. All distributions 
+#' are scaled to have a standard deviation of 1.0 for group 1.
 #'
 #' @param   alpha     alpha level for 1-alpha confidence
 #' @param   n1        sample size for group 1
@@ -8051,11 +8051,11 @@ sim.ci.stdmean2 <- function(alpha, n1, n2, sd2, dist1, dist2, d, rep) {
 #' @description
 #' Performs a computer simulation of confidence interval performance for  
 #' two types of standardized mean differences in a paired-samples design (see
-#' ci.stdmean.ps). Sample data for the two levels of the within-subjects factor
-#' can be generated from five different population distributions. All 
-#' distributions are scaled to have a standard deviation of 1.0 at level 1.
-#' Bivariate random data with specified marginal skewness and kurtosis are 
-#' generated using the unonr function in the mnonr package. 
+#' \link[statpsych]{ci.stdmean.ps}). Sample data for the two levels of the 
+#' within-subjects factor can be generated from five different population 
+#' distributions. All distributions are scaled to have a standard deviation
+#' of 1.0 at level 1. Bivariate random data with specified marginal skewness
+#' and kurtosis are generated using the unonr function in the mnonr package. 
 #'
 #' @param   alpha     alpha level for 1-alpha confidence
 #' @param   n         sample size 
