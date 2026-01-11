@@ -471,9 +471,9 @@ ci.lc.mean.bs <- function(alpha, m, sd, n, v) {
 #' test statistic. The Scheffe method assumes equal population variances. This
 #' function is useful in exploratory studies where the linear contrast of 
 #' means was not planned but was suggested by the pattern of sample means. Use 
-#' the ci.lc.mean.bs function with a Bonferroni adjusted alpha value to compute
-#' simultaneous confidence intervals for two or more planned linear contrasts
-#' of means.
+#' the \link[statpsych]{ci.lc.mean.bs} function with a Bonferroni adjusted alpha
+#' value to compute simultaneous confidence intervals for two or more planned 
+#' linear contrasts of means.
 #'
 #'
 #' @param     alpha  	alpha level for 1-alpha confidence
@@ -5877,7 +5877,7 @@ size.test.mean <- function(alpha, pow, var, es) {
 #' Computes the sample size in each group required  to test a difference in 
 #' population means with desired power in a 2-group design. Set the variance 
 #' planning value to the largest value within a plausible range for a 
-#' conservatively large sample size. Set R =1 for equal sample sizes. For
+#' conservatively large sample size. Set R = 1 for equal sample sizes. For
 #' unequal sample sizes, this function assumes approximately equal population
 #' variances.
 #'
