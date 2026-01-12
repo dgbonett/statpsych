@@ -51,8 +51,10 @@ Agresti A, Caffo B (2000). “Simple and effective confidence intervals
 for proportions and differences of proportions result from adding two
 successes and two failures.” *The American Statistician*, **54**(4),
 280-288. ISSN 00031305,
-[doi:10.2307/2685779](https://doi.org/10.2307/2685779) . Bonett DG
-(2021url). *Statistical Methods for Psychologists*.
+[doi:10.2307/2685779](https://doi.org/10.2307/2685779) .
+
+Bonett DG (2021). *Statistical Methods for Psychologists
+https://dgbonett.sites.ucsc.edu/*.
 
 ## Examples
 

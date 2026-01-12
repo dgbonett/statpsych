@@ -52,6 +52,6 @@ ci.yule(.05, 229, 28, 96, 24)
 
 }
 \references{
-\insertRef{Bonett2007}{statpsych}
 \insertRef{Bonett2021}{statpsych}
+\insertRef{Bonett2007}{statpsych}
 }

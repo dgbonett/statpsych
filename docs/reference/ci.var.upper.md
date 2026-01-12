@@ -34,10 +34,8 @@ Returns an upper limit (UL) variance planning value
 
 ## References
 
-Bonett DG, Wright TA (2015). “Cronbach's alpha reliability: Interval
-estimation, hypothesis testing, and sample size planning.” *Journal of
-Organizational Behavior*, **36**(1), 3–15. ISSN 08943796,
-[doi:10.1002/job.1960](https://doi.org/10.1002/job.1960) .
+Bonett DG (2021). *Statistical Methods for Psychologists
+https://dgbonett.sites.ucsc.edu/*.
 
 ## Examples
 

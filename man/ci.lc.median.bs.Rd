@@ -47,5 +47,6 @@ ci.lc.median.bs(.05, m, se, v)
 }
 \references{
 \insertRef{Bonett2002}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }

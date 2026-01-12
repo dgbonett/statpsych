@@ -36,9 +36,9 @@ means in a between-subjects design. A Scheffe p-value is computed for the
 test statistic. The Scheffe method assumes equal population variances. This
 function is useful in exploratory studies where the linear contrast of
 means was not planned but was suggested by the pattern of sample means. Use
-the ci.lc.mean.bs function with a Bonferroni adjusted alpha value to compute
-simultaneous confidence intervals for two or more planned linear contrasts
-of means.
+the \link[statpsych]{ci.lc.mean.bs} function with a Bonferroni adjusted alpha
+value to compute simultaneous confidence intervals for two or more planned
+linear contrasts of means.
 }
 \examples{
 

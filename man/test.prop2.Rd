@@ -42,5 +42,6 @@ test.prop2(39, 24, 50, 50)
 }
 \references{
 \insertRef{Snedecor1980}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }

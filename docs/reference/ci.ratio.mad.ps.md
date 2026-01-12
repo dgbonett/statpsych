@@ -45,7 +45,10 @@ Bonett DG, Seier E (2003). “Statistical inference for a ratio of
 dispersions using paired samples.” *Journal of Educational and
 Behavioral Statistics*, **28**(1), 21–30. ISSN 1076-9986,
 [doi:10.3102/10769986028001021](https://doi.org/10.3102/10769986028001021)
-. Bonett DG (2021url). *Statistical Methods for Psychologists*.
+.
+
+Bonett DG (2021). *Statistical Methods for Psychologists
+https://dgbonett.sites.ucsc.edu/*.
 
 ## Examples
 

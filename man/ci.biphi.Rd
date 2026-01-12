@@ -46,5 +46,6 @@ ci.biphi(.05, 34, 22, 50, 50)
 }
 \references{
 \insertRef{Ulrich2004}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }

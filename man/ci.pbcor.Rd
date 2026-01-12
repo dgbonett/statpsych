@@ -52,5 +52,6 @@ ci.pbcor(.05, 28.32, 21.48, 3.81, 3.09, 40, 40)
 }
 \references{
 \insertRef{Bonett2020a}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }

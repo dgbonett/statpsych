@@ -48,11 +48,14 @@ Returns a 1-row matrix. The columns are:
 
 ## References
 
+Bonett DG (2021). *Statistical Methods for Psychologists
+https://dgbonett.sites.ucsc.edu/*.
+
 Aloe AM, Becker BJ (2012). “An effect size for regression predictors in
 meta-analysis.” *Journal of Educational and Behavioral Statistics*,
 **37**(2), 278–297. ISSN 1076-9986,
 [doi:10.3102/1076998610396901](https://doi.org/10.3102/1076998610396901)
-. Bonett DG (2021url). *Statistical Methods for Psychologists*.
+.
 
 ## Examples
 

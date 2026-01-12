@@ -38,3 +38,6 @@ size.ci.second(25, 4.38, 2.0)
  
 
 }
+\references{
+\insertRef{Bonett2021}{statpsych}
+}

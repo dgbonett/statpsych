@@ -54,7 +54,10 @@ Zou GY (2007). “Toward using confidence intervals to compare
 correlations.” *Psychological Methods*, **12**(4), 399–413. ISSN
 1939-1463,
 [doi:10.1037/1082-989X.12.4.399](https://doi.org/10.1037/1082-989X.12.4.399)
-. Bonett DG (2021url). *Statistical Methods for Psychologists*.
+.
+
+Bonett DG (2021). *Statistical Methods for Psychologists
+https://dgbonett.sites.ucsc.edu/*.
 
 ## Examples
 

@@ -57,5 +57,6 @@ ci.2x2.median.bs(.05, y11, y12, y21, y22)
 }
 \references{
 \insertRef{Bonett2002}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }

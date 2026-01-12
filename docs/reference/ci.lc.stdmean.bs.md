@@ -57,7 +57,10 @@ Bonett DG (2008). “Confidence intervals for standardized linear
 contrasts of means.” *Psychological Methods*, **13**(2), 99–109. ISSN
 1939-1463,
 [doi:10.1037/1082-989X.13.2.99](https://doi.org/10.1037/1082-989X.13.2.99)
-. Bonett DG (2021url). *Statistical Methods for Psychologists*.
+.
+
+Bonett DG (2021). *Statistical Methods for Psychologists
+https://dgbonett.sites.ucsc.edu/*.
 
 ## Examples
 

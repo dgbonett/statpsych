@@ -60,7 +60,10 @@ of medians: Confidence intervals, hypothesis testing, and sample size
 requirements.” *Psychological Methods*, **7**(3), 370–383. ISSN
 1939-1463,
 [doi:10.1037/1082-989X.7.3.370](https://doi.org/10.1037/1082-989X.7.3.370)
-. Bonett DG (2021url). *Statistical Methods for Psychologists*.
+.
+
+Bonett DG (2021). *Statistical Methods for Psychologists
+https://dgbonett.sites.ucsc.edu/*.
 
 ## Examples
 

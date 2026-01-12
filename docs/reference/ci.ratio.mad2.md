@@ -45,7 +45,9 @@ Bonett DG, Seier E (2003). “Confidence intervals for mean absolute
 deviations.” *The American Statistician*, **57**(4), 233–236. ISSN
 0003-1305,
 [doi:10.1198/0003130032323](https://doi.org/10.1198/0003130032323) .
-Bonett DG (2021url). *Statistical Methods for Psychologists*.
+
+Bonett DG (2021). *Statistical Methods for Psychologists
+https://dgbonett.sites.ucsc.edu/*.
 
 ## Examples
 

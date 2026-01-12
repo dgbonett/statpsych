@@ -57,5 +57,6 @@ ci.tukey(.05, m, sd, n)
 }
 \references{
 \insertRef{Games1976}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }

@@ -82,16 +82,17 @@ rare.</p>
 “Statistical inference for a linear function of medians: Confidence intervals, hypothesis testing, and sample size requirements.”
 <em>Psychological Methods</em>, <b>7</b>(3), 370–383.
 ISSN 1939-1463, <a href="https://doi.org/10.1037/1082-989X.7.3.370" class="external-link">doi:10.1037/1082-989X.7.3.370</a>
-.
-
-Bonett DG (2021url).
-<em>Statistical Methods for Psychologists</em>.</p>
+.</p>
+<p>Bonett DG (2021).
+<em>Statistical Methods for Psychologists https://dgbonett.sites.ucsc.edu/</em>.</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">y1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">70</span>, <span class="fl">394</span>, <span class="fl">43</span>, <span class="fl">95</span>, <span class="fl">62</span>, <span class="fl">128</span>, <span class="fl">2</span>, <span class="fl">203</span>, <span class="fl">81</span>, <span class="fl">436</span>, <span class="fl">85</span>, <span class="fl">35</span>, <span class="fl">156</span>, <span class="fl">1</span>, <span class="fl">3</span>, <span class="fl">27</span>, <span class="fl">63</span>, <span class="fl">181</span>, <span class="fl">184</span>, <span class="fl">18</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">y2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">102</span>, <span class="fl">120</span>, <span class="fl">78</span>, <span class="fl">78</span>, <span class="fl">417</span>, <span class="fl">124</span>, <span class="fl">86</span>, <span class="fl">171</span>, <span class="fl">176</span>, <span class="fl">129</span>, <span class="fl">230</span>,<span class="fl">194</span>, <span class="fl">100</span>, <span class="fl">157</span>, <span class="fl">306</span>, <span class="fl">411</span>, <span class="fl">164</span>, <span class="fl">103</span>, <span class="fl">193</span>, <span class="fl">312</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">y1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">70</span>, <span class="fl">394</span>, <span class="fl">43</span>, <span class="fl">95</span>, <span class="fl">62</span>, <span class="fl">128</span>, <span class="fl">2</span>, <span class="fl">203</span>, <span class="fl">81</span>, <span class="fl">436</span>, <span class="fl">85</span>, <span class="fl">35</span>, </span></span>
+<span class="r-in"><span>        <span class="fl">156</span>, <span class="fl">1</span>, <span class="fl">3</span>, <span class="fl">27</span>, <span class="fl">63</span>, <span class="fl">181</span>, <span class="fl">184</span>, <span class="fl">18</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">y2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">102</span>, <span class="fl">120</span>, <span class="fl">78</span>, <span class="fl">78</span>, <span class="fl">417</span>, <span class="fl">124</span>, <span class="fl">86</span>, <span class="fl">171</span>, <span class="fl">176</span>, <span class="fl">129</span>, <span class="fl">230</span>, </span></span>
+<span class="r-in"><span>       <span class="fl">194</span>, <span class="fl">100</span>, <span class="fl">157</span>, <span class="fl">306</span>, <span class="fl">411</span>, <span class="fl">164</span>, <span class="fl">103</span>, <span class="fl">193</span>, <span class="fl">312</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">ci.median2</span><span class="op">(</span><span class="fl">.05</span>, <span class="va">y1</span>, <span class="va">y2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Median1 Median2 Median1-Median2       SE        LL        UL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     75.5   160.5             -85 37.11502 -157.7441 -12.25589</span>

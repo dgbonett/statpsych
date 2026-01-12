@@ -54,5 +54,6 @@ ci.lc.prop.bs(.05/2, f, n, v2)
 }
 \references{
 \insertRef{Price2004}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }

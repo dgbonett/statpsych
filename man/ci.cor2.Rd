@@ -44,5 +44,6 @@ ci.cor2(.05, .64, .31, 200, 200)
 }
 \references{
 \insertRef{Zou2007}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }

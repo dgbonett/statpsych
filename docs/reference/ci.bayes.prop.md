@@ -53,8 +53,10 @@ Returns a 1-row matrix. The columns are:
 ## References
 
 Gelman A, Carlin JB, Stern HS, Rubin DB (2004). *Bayesian Data
-Analysis*, 2nd edition. Chapman & Hall. Bonett DG (2021url).
-*Statistical Methods for Psychologists*.
+Analysis*, 2nd edition. Chapman & Hall.
+
+Bonett DG (2021). *Statistical Methods for Psychologists
+https://dgbonett.sites.ucsc.edu/*.
 
 ## Examples
 

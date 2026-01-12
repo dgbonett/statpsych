@@ -42,5 +42,6 @@ ci.theil(.05, y, x)
 }
 \references{
 \insertRef{Hollander1999}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }

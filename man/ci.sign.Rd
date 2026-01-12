@@ -44,5 +44,6 @@ ci.sign(.05, y, 9)
 }
 \references{
 \insertRef{Agresti1998}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }

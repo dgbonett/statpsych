@@ -35,5 +35,6 @@ size.test.prop(.05, .9, .5, .3)
 }
 \references{
 \insertRef{Fleiss2003}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }

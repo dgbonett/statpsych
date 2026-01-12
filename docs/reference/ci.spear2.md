@@ -49,9 +49,11 @@ Returns a 1-row matrix. The columns are:
 Bonett DG, Wright TA (2000). “Sample size requirements for estimating
 Pearson, Kendall and Spearman correlations.” *Psychometrika*, **65**(1),
 23–28. ISSN 0033-3123,
-[doi:10.1007/BF02294183](https://doi.org/10.1007/BF02294183) . Zou GY
-(2007). “Toward using confidence intervals to compare correlations.”
-*Psychological Methods*, **12**(4), 399–413. ISSN 1939-1463,
+[doi:10.1007/BF02294183](https://doi.org/10.1007/BF02294183) .
+
+Zou GY (2007). “Toward using confidence intervals to compare
+correlations.” *Psychological Methods*, **12**(4), 399–413. ISSN
+1939-1463,
 [doi:10.1037/1082-989X.12.4.399](https://doi.org/10.1037/1082-989X.12.4.399)
 .
 

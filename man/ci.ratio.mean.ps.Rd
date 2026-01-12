@@ -43,5 +43,6 @@ ci.ratio.mean.ps(.05, y1, y2)
 }
 \references{
 \insertRef{Bonett2020b}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }

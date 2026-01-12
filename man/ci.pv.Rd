@@ -55,5 +55,6 @@ ci.pv(.05, 89, 5, 100, 100, .16)
 }
 \references{
 \insertRef{Price2008}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }

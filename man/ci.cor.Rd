@@ -50,5 +50,6 @@ ci.cor(.05, .70, 1, 135)
 }
 \references{
 \insertRef{Snedecor1980}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }

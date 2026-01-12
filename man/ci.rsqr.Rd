@@ -44,5 +44,6 @@ ci.rsqr(.05, .247, 4, 150)
 }
 \references{
 \insertRef{Helland1987}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }

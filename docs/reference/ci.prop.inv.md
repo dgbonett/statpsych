@@ -47,7 +47,10 @@ Zou GY (2010). “Confidence interval estimation under inverse sampling.”
 *Computational Statistics & Data Analysis*, **54**(1), 55–64. ISSN
 0167-9473,
 [doi:10.1016/j.csda.2005.05.007](https://doi.org/10.1016/j.csda.2005.05.007)
-. Bonett DG (2021url). *Statistical Methods for Psychologists*.
+.
+
+Bonett DG (2021). *Statistical Methods for Psychologists
+https://dgbonett.sites.ucsc.edu/*.
 
 ## Examples
 

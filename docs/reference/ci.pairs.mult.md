@@ -43,7 +43,10 @@ difference of binomial proportions based on paired data.” *Journal of
 Educational and Behavioral Statistics*, **37**(4), 479–488. ISSN
 1076-9986,
 [doi:10.3102/1076998611411915](https://doi.org/10.3102/1076998611411915)
-. Bonett DG (2021url). *Statistical Methods for Psychologists*.
+.
+
+Bonett DG (2021). *Statistical Methods for Psychologists
+https://dgbonett.sites.ucsc.edu/*.
 
 ## Examples
 

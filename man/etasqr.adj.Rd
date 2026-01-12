@@ -33,5 +33,5 @@ etasqr.adj(.315, 2, 42)
 
 }
 \references{
-\insertRef{Bonett2015}{statpsych}
+\insertRef{Bonett2021}{statpsych}
 }

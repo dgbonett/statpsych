@@ -43,5 +43,6 @@ ci.prop.inv(.05, 10, 87)
 }
 \references{
 \insertRef{Zou2010}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }

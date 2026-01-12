@@ -42,5 +42,6 @@ ci.spear2(.05, .54, .48, 180, 200)
 }
 \references{
 \insertRef{Bonett2000}{statpsych}
+
 \insertRef{Zou2007}{statpsych}
 }

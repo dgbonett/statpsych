@@ -31,6 +31,11 @@ spearmanbrown(rel, r1, r2)
 
 Returns the reliability of the sum or average of r2 measurements
 
+## References
+
+Bonett DG (2021). *Statistical Methods for Psychologists
+https://dgbonett.sites.ucsc.edu/*.
+
 ## Examples
 
 ``` r

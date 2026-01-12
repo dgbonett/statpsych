@@ -38,5 +38,6 @@ ci.median(.05, y)
 }
 \references{
 \insertRef{Snedecor1980}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }

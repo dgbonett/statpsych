@@ -47,8 +47,10 @@ Returns a 1-row matrix. The columns are:
 
 Sen PK (1967). “A note on asymptotically distribution-free confidence
 bounds for P(X \< Y), based on two independent samples.” *The Indian
-Journal of Statistics, Series A*, **29**(1), 95–102. Bonett DG
-(2021url). *Statistical Methods for Psychologists*.
+Journal of Statistics, Series A*, **29**(1), 95–102.
+
+Bonett DG (2021). *Statistical Methods for Psychologists
+https://dgbonett.sites.ucsc.edu/*.
 
 ## Examples
 

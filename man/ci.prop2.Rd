@@ -43,5 +43,6 @@ ci.prop2(.05, 57, 15, 100, 100)
 }
 \references{
 \insertRef{Agresti2000}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }

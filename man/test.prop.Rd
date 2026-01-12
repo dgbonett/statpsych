@@ -39,5 +39,6 @@ test.prop(76, 100, .6)
 }
 \references{
 \insertRef{Snedecor1980}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }

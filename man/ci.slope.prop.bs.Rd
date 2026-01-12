@@ -48,5 +48,6 @@ ci.slope.prop.bs(.05, f, n, x)
 }
 \references{
 \insertRef{Price2004}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }

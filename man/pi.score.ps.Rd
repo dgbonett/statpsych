@@ -49,5 +49,5 @@ pi.score.ps(.05, 265.1, 208.6, 23.51, 19.94, .814, 30)
 
 }
 \references{
-\insertRef{Bonett2015}{statpsych}
+\insertRef{Bonett2021}{statpsych}
 }

@@ -53,8 +53,10 @@ Returns a 1-row matrix. The columns are:
 
 ## References
 
-Wickens TD (2002). *Elementary Signal Detection Theory*. Oxford. Bonett
-DG (2021url). *Statistical Methods for Psychologists*.
+Wickens TD (2002). *Elementary Signal Detection Theory*. Oxford.
+
+Bonett DG (2021). *Statistical Methods for Psychologists
+https://dgbonett.sites.ucsc.edu/*.
 
 ## Examples
 

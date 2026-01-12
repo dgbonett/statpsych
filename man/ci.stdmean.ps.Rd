@@ -52,5 +52,6 @@ ci.stdmean.ps(.05, 602.4, 705.6, 33.17, 51.08, .769, 8)
 }
 \references{
 \insertRef{Bonett2008}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }

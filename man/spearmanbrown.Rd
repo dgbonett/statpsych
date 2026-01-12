@@ -34,3 +34,6 @@ spearmanbrown(.6, 10, 20)
 
 
 }
+\references{
+\insertRef{Bonett2021}{statpsych}
+}

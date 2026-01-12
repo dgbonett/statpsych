@@ -19,7 +19,7 @@ Returns a 7-row matrix (one row per effect). The columns are:
 \itemize{
 \item Estimate - adjusted estimate of effect
 \item SE - standard error
-\item z - z test statistic for test of null hypothesis
+\item z - z test statistic
 \item p - two-sided p-value
 \item LL - lower limit of the adjusted Wald confidence interval
 \item UL - upper limit of the adjusted Wald confidence interval
@@ -55,6 +55,7 @@ ci.2x2.prop.bs(.05, f, n)
 
 }
 \references{
-\insertRef{Price2004}{statpsych}
 \insertRef{Bonett2021}{statpsych}
+
+\insertRef{Price2004}{statpsych}
 }

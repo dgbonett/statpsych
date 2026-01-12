@@ -46,7 +46,10 @@ Bonett DG, Price RM (2020). “Confidence intervals for ratios of means
 and medians.” *Journal of Educational and Behavioral Statistics*,
 **45**(6), 750–770.
 [doi:10.3102/1076998620934125](https://doi.org/10.3102/1076998620934125)
-. Bonett DG (2021url). *Statistical Methods for Psychologists*.
+.
+
+Bonett DG (2021). *Statistical Methods for Psychologists
+https://dgbonett.sites.ucsc.edu/*.
 
 ## Examples
 

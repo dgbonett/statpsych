@@ -38,5 +38,6 @@ test.prop.bs (f, n)
 }
 \references{
 \insertRef{Fleiss2003}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }

@@ -42,5 +42,6 @@ ci.mean(.05, 38.3, 8.14, 10)
 }
 \references{
 \insertRef{Snedecor1980}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }

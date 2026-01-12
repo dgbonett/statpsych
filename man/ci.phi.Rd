@@ -45,5 +45,6 @@ ci.phi(.05, 229, 28, 96, 24)
 }
 \references{
 \insertRef{Bishop1975}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }

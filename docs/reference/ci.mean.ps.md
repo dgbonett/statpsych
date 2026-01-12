@@ -64,8 +64,10 @@ Returns a 1-row matrix. The columns are:
 ## References
 
 Snedecor GW, Cochran WG (1989). *Statistical Methods*, 8th edition. ISU
-University Pres, Ames, Iowa. Bonett DG (2021url). *Statistical Methods
-for Psychologists*.
+University Pres, Ames, Iowa.
+
+Bonett DG (2021). *Statistical Methods for Psychologists
+https://dgbonett.sites.ucsc.edu/*.
 
 ## Examples
 

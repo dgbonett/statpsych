@@ -37,7 +37,7 @@ This sample size approach assumes that the population proportion in the
 prior study is very similar to the population proportion in the planned
 study. If an estimated proportion from a prior study is not available the
 researcher must use expert opinion to guess the value of the proportion
-that will be observed in the planned study. The \link[statpsych]{size.ci.prop})
+that will be observed in the planned study. The \link[statpsych]{size.ci.prop}
 function uses a proportion planning value that is based on expert opinion
 regarding the likely value of the proportion estimate that will be observed
 in the planned study.

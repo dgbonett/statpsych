@@ -47,7 +47,9 @@ Returns the required sample size for each standardizer
 Bonett DG (2009). “Estimating standardized linear contrasts of means
 with desired precision.” *Psychological Methods*, **14**(1), 1–5. ISSN
 1939-1463, [doi:10.1037/a0014270](https://doi.org/10.1037/a0014270) .
-Bonett DG (2021url). *Statistical Methods for Psychologists*.
+
+Bonett DG (2021). *Statistical Methods for Psychologists
+https://dgbonett.sites.ucsc.edu/*.
 
 ## Examples
 

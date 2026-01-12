@@ -50,5 +50,6 @@ ci.median.ps(.05, y1, y2)
 }
 \references{
 \insertRef{Bonett2020}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }

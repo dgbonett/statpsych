@@ -51,7 +51,10 @@ Returns a 1-row matrix. The columns are:
 Bonett DG (2022). “Statistical inference for G-indices of agreement.”
 *Journal of Educational and Behavioral Statistics*, **47**(4), 438–458.
 [doi:10.3102/10769986221088561](https://doi.org/10.3102/10769986221088561)
-. Bonett DG (2021url). *Statistical Methods for Psychologists*.
+.
+
+Bonett DG (2021). *Statistical Methods for Psychologists
+https://dgbonett.sites.ucsc.edu/*.
 
 ## Examples
 

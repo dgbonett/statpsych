@@ -55,5 +55,6 @@ ci.lc.stdmean.bs(.05, m, sd, n, v)
 }
 \references{
 \insertRef{Bonett2008}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }

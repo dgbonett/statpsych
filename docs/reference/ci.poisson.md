@@ -47,8 +47,7 @@ rate is assumed to be constant over time.
 
 Hahn GJ, Meeker WQ (1991). *Statistical Intervals: A Guide for
 Practitioners*. Wiley. ISBN 9780470316771,
-[doi:10.1002/9780470316771](https://doi.org/10.1002/9780470316771) ,
-<http://dx.doi.org/10.1002/9780470316771>.
+[doi:10.1002/9780470316771](https://doi.org/10.1002/9780470316771) .
 
 ## Examples
 

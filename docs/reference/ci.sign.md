@@ -45,7 +45,10 @@ Agresti A, Coull BA (1998). “Approximate is better than 'exact' for
 interval estimation of binomial proportions.” *The American
 Statistician*, **52**(2), 119–126. ISSN 0003-1305,
 [doi:10.1080/00031305.1998.10480550](https://doi.org/10.1080/00031305.1998.10480550)
-. Bonett DG (2021url). *Statistical Methods for Psychologists*.
+.
+
+Bonett DG (2021). *Statistical Methods for Psychologists
+https://dgbonett.sites.ucsc.edu/*.
 
 ## Examples
 

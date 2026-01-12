@@ -51,5 +51,6 @@ pi.score2(.05, 19.4, 11.3, 2.70, 2.10, 40, 40)
 }
 \references{
 \insertRef{Hahn1977}{statpsych}
-\insertRef{Bonett2015}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

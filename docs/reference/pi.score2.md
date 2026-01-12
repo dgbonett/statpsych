@@ -62,10 +62,10 @@ Hahn GJ (1977). “A prediction interval on the difference between two
 future sample means and its application to a claim of product
 superiority.” *Technometrics*, **19**(2), 131–134. ISSN 0040-1706,
 [doi:10.1080/00401706.1977.10489520](https://doi.org/10.1080/00401706.1977.10489520)
-. Bonett DG, Wright TA (2015). “Cronbach's alpha reliability: Interval
-estimation, hypothesis testing, and sample size planning.” *Journal of
-Organizational Behavior*, **36**(1), 3–15. ISSN 08943796,
-[doi:10.1002/job.1960](https://doi.org/10.1002/job.1960) .
+.
+
+Bonett DG (2021). *Statistical Methods for Psychologists
+https://dgbonett.sites.ucsc.edu/*.
 
 ## Examples
 

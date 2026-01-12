@@ -2,9 +2,10 @@
 
 Performs a computer simulation of confidence interval performance for
 two types of standardized mean differences in a 2-group design (see
-ci.stdmean2). Sample data for each group can be generated from five
-different population distributions. All distributions are scaled to have
-a standard deviation of 1.0 for group 1.
+[ci.stdmean2](https://dgbonett.github.io/statpsych/reference/ci.stdmean2.md)).
+Sample data for each group can be generated from five different
+population distributions. All distributions are scaled to have a
+standard deviation of 1.0 for group 1.
 
 ## Usage
 

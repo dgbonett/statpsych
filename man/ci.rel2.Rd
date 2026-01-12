@@ -47,6 +47,7 @@ ci.rel2(.4, .35, .47, .2, .1, .32)
 
 }
 \references{
-\insertRef{Bonett2015}{statpsych}
 \insertRef{Bonett2021}{statpsych}
+
+\insertRef{Bonett2015}{statpsych}
 }

@@ -55,5 +55,6 @@ size.ci.median2(.05, 37.1, 5, 2, 4)
 }
 \references{
 \insertRef{Bonett2002}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }

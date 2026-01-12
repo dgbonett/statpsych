@@ -45,7 +45,10 @@ Bonett DG (2006). “Confidence interval for a coefficient of quartile
 variation.” *Computational Statistics and Data Analysis*, **50**(11),
 2953–2957.
 [doi:10.1016/j.csda.2005.05.007](https://doi.org/10.1016/j.csda.2005.05.007)
-. Bonett DG (2021url). *Statistical Methods for Psychologists*.
+.
+
+Bonett DG (2021). *Statistical Methods for Psychologists
+https://dgbonett.sites.ucsc.edu/*.
 
 ## Examples
 

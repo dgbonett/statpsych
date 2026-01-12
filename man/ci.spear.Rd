@@ -45,5 +45,6 @@ ci.spear(.05, y, x)
 }
 \references{
 \insertRef{Bonett2000}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }

@@ -62,8 +62,10 @@ Returns a 2-row matrix. The columns are:
 Price RM, Bonett DG (2008). “Confidence intervals for a ratio of two
 independent binomial proportions.” *Statistics in Medicine*, **27**(26),
 5497–5508. ISSN 02776715,
-[doi:10.1002/sim.3376](https://doi.org/10.1002/sim.3376) . Bonett DG
-(2021url). *Statistical Methods for Psychologists*.
+[doi:10.1002/sim.3376](https://doi.org/10.1002/sim.3376) .
+
+Bonett DG (2021). *Statistical Methods for Psychologists
+https://dgbonett.sites.ucsc.edu/*.
 
 ## Examples
 

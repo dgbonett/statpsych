@@ -42,5 +42,6 @@ ci.ratio.mad.ps(.05, y1, y2)
 }
 \references{
 \insertRef{Bonett2003a}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }

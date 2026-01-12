@@ -44,5 +44,6 @@ ci.oddsratio(.05, 229, 28, 96, 24)
 }
 \references{
 \insertRef{Fleiss2003}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }

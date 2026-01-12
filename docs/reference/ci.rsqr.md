@@ -49,8 +49,10 @@ Returns a 1-row matrix. The columns are:
 
 Helland IS (1987). “On the interpretation and use of R2 in regression
 analysis.” *Biometrics*, **43**(1), 61–69.
-[doi:10.2307/2531949](https://doi.org/10.2307/2531949) . Bonett DG
-(2021url). *Statistical Methods for Psychologists*.
+[doi:10.2307/2531949](https://doi.org/10.2307/2531949) .
+
+Bonett DG (2021). *Statistical Methods for Psychologists
+https://dgbonett.sites.ucsc.edu/*.
 
 ## Examples
 

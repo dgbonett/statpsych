@@ -42,5 +42,6 @@ test.mean(7.9, 3.05, 100, 7)
 }
 \references{
 \insertRef{Snedecor1980}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }

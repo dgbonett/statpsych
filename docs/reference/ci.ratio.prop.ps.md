@@ -50,8 +50,10 @@ Returns a 1-row matrix. The columns are:
 Bonett DG, Price RM (2006). “Confidence intervals for a ratio of
 binomial proportions based on paired data.” *Statistics in Medicine*,
 **25**(17), 3039–3047. ISSN 0277-6715,
-[doi:10.1002/sim.2440](https://doi.org/10.1002/sim.2440) . Bonett DG
-(2021url). *Statistical Methods for Psychologists*.
+[doi:10.1002/sim.2440](https://doi.org/10.1002/sim.2440) .
+
+Bonett DG (2021). *Statistical Methods for Psychologists
+https://dgbonett.sites.ucsc.edu/*.
 
 ## Examples
 

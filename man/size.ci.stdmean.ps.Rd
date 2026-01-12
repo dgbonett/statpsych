@@ -42,5 +42,6 @@ size.ci.stdmean.ps(.05, 1, .65, .6)
 }
 \references{
 \insertRef{Bonett2009}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }

@@ -56,8 +56,10 @@ comparisons. The columns are:
 Games PA, Howell JF (1976). “Pairwise multiple comparison procedures
 with unequal N's and/or variances: A Monte Carlo study.” *Journal of
 Educational Statistics*, **1**(2), 113. ISSN 03629791,
-[doi:10.2307/1164979](https://doi.org/10.2307/1164979) . Bonett DG
-(2021url). *Statistical Methods for Psychologists*.
+[doi:10.2307/1164979](https://doi.org/10.2307/1164979) .
+
+Bonett DG (2021). *Statistical Methods for Psychologists
+https://dgbonett.sites.ucsc.edu/*.
 
 ## Examples
 

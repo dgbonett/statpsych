@@ -46,8 +46,10 @@ Returns a 1-row matrix. The columns are:
 Feldt LS (1965). “The approximate sampling distribution of
 Kuder-Richardson reliability coefficient twenty.” *Psychometrika*,
 **30**(3), 357–370. ISSN 0033-3123,
-[doi:10.1007/BF02289499](https://doi.org/10.1007/BF02289499) . Bonett DG
-(2021url). *Statistical Methods for Psychologists*.
+[doi:10.1007/BF02289499](https://doi.org/10.1007/BF02289499) .
+
+Bonett DG (2021). *Statistical Methods for Psychologists
+https://dgbonett.sites.ucsc.edu/*.
 
 ## Examples
 

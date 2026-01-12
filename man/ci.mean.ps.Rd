@@ -52,5 +52,6 @@ ci.mean.ps(.05, 58.2, 51.4, 7.43, 8.92, .537, 30)
 }
 \references{
 \insertRef{Snedecor1980}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }

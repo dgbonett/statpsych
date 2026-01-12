@@ -46,6 +46,7 @@ ci.tetra(.05, 86, 16, 7, 93)
 
 }
 \references{
-\insertRef{Bonett2005}{statpsych}
 \insertRef{Bonett2021}{statpsych}
+
+\insertRef{Bonett2005}{statpsych}
 }

@@ -34,8 +34,10 @@ Returns a 1-row matrix. The columns are:
 ## References
 
 Fleiss JL, Paik MC (2003). *Statistical Methods for Rates and
-Proportions*, 3rd edition. Wiley. Bonett DG (2021url). *Statistical
-Methods for Psychologists*.
+Proportions*, 3rd edition. Wiley.
+
+Bonett DG (2021). *Statistical Methods for Psychologists
+https://dgbonett.sites.ucsc.edu/*.
 
 ## Examples
 

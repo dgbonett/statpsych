@@ -43,7 +43,9 @@ Bonett DG, Seier E (2006). “Confidence interval for a coefficient of
 dispersion in nonnormal distributions.” *Biometrical Journal*,
 **48**(1), 144–148. ISSN 0323-3847,
 [doi:10.1002/bimj.200410148](https://doi.org/10.1002/bimj.200410148) .
-Bonett DG (2021url). *Statistical Methods for Psychologists*.
+
+Bonett DG (2021). *Statistical Methods for Psychologists
+https://dgbonett.sites.ucsc.edu/*.
 
 ## Examples
 

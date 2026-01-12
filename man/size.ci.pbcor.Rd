@@ -41,5 +41,6 @@ size.ci.pbcor(.05, .40, .25, .73)
 }
 \references{
 \insertRef{Bonett2020a}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }

@@ -41,7 +41,9 @@ Returns a 1-row matrix. The columns are:
 ## References
 
 Hollander M, Wolf DA (1999). *Nonparametric Statistical Methods*. Wiley.
-Bonett DG (2021url). *Statistical Methods for Psychologists*.
+
+Bonett DG (2021). *Statistical Methods for Psychologists
+https://dgbonett.sites.ucsc.edu/*.
 
 ## Examples
 

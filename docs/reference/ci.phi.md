@@ -51,8 +51,10 @@ Returns a 1-row matrix. The columns are:
 ## References
 
 Bishop YMM, Fienberg SE, Holland PW (1975). *Discrete Multivariate
-Analysis*. MIT Press. Bonett DG (2021url). *Statistical Methods for
-Psychologists*.
+Analysis*. MIT Press.
+
+Bonett DG (2021). *Statistical Methods for Psychologists
+https://dgbonett.sites.ucsc.edu/*.
 
 ## Examples
 

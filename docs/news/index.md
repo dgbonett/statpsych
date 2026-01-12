@@ -33,7 +33,7 @@ Changes:
     reliability in a future sample
 - References Manual
   - Most function descriptions now refer to a specific section in the
-    Bonett (2021) text for additional details
+    Bonett (2021) online text for additional details
 - Error Corrections:
   - size.ci.prop.prior – corrected a error in the sample size
     computation

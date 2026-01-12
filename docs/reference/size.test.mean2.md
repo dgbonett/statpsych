@@ -3,9 +3,9 @@
 Computes the sample size in each group required to test a difference in
 population means with desired power in a 2-group design. Set the
 variance planning value to the largest value within a plausible range
-for a conservatively large sample size. Set R =1 for equal sample sizes.
-For unequal sample sizes, this function assumes approximately equal
-population variances.
+for a conservatively large sample size. Set R = 1 for equal sample
+sizes. For unequal sample sizes, this function assumes approximately
+equal population variances.
 
 For more details, see Section 2.14 of Bonett (2021, Volume 1)
 
@@ -43,7 +43,8 @@ Returns the required sample size for each group
 
 ## References
 
-Bonett DG (2021url). *Statistical Methods for Psychologists*.
+Bonett DG (2021). *Statistical Methods for Psychologists
+https://dgbonett.sites.ucsc.edu/*.
 
 ## Examples
 

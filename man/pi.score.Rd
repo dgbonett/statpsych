@@ -40,5 +40,5 @@ pi.score(.05, 24.5, 3.65, 40)
 
 }
 \references{
-\insertRef{Bonett2015}{statpsych}
+\insertRef{Bonett2021}{statpsych}
 }

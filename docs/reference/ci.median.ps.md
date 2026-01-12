@@ -54,7 +54,10 @@ Bonett DG, Price RM (2020). “Interval estimation for linear functions of
 medians in within-subjects and mixed designs.” *British Journal of
 Mathematical and Statistical Psychology*, **73**(2), 333–346. ISSN
 0007-1102, [doi:10.1111/bmsp.12171](https://doi.org/10.1111/bmsp.12171)
-. Bonett DG (2021url). *Statistical Methods for Psychologists*.
+.
+
+Bonett DG (2021). *Statistical Methods for Psychologists
+https://dgbonett.sites.ucsc.edu/*.
 
 ## Examples
 

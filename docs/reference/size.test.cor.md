@@ -40,7 +40,8 @@ Returns the required sample size
 
 ## References
 
-Bonett DG (2021url). *Statistical Methods for Psychologists*.
+Bonett DG (2021). *Statistical Methods for Psychologists
+https://dgbonett.sites.ucsc.edu/*.
 
 ## Examples
 

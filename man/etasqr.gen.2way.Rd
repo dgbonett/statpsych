@@ -44,5 +44,5 @@ etasqr.gen.2way(12.3, 15.6, 5.2, 7.9)
 
 }
 \references{
-\insertRef{Bonett2015}{statpsych}
+\insertRef{Bonett2021}{statpsych}
 }

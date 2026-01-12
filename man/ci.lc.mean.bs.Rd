@@ -69,5 +69,6 @@ ci.lc.mean.bs(.05, m, sd, n, v)
 }
 \references{
 \insertRef{Snedecor1980}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }

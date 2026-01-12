@@ -17,7 +17,7 @@ prior study is very similar to the population proportion in the planned
 study. If an estimated proportion from a prior study is not available
 the researcher must use expert opinion to guess the value of the
 proportion that will be observed in the planned study. The
-[size.ci.prop](https://dgbonett.github.io/statpsych/reference/size.ci.prop.md))
+[size.ci.prop](https://dgbonett.github.io/statpsych/reference/size.ci.prop.md)
 function uses a proportion planning value that is based on expert
 opinion regarding the likely value of the proportion estimate that will
 be observed in the planned study.
@@ -58,7 +58,8 @@ Returns the required sample size
 
 ## References
 
-Bonett DG (2021url). *Statistical Methods for Psychologists*.
+Bonett DG (2021). *Statistical Methods for Psychologists
+https://dgbonett.sites.ucsc.edu/*.
 
 ## Examples
 

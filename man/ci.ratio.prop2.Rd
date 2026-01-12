@@ -42,5 +42,6 @@ ci.ratio.prop2(.05, 62, 35, 100, 100)
 }
 \references{
 \insertRef{Price2008}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }

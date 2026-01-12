@@ -42,5 +42,6 @@ ci.cronbach(.05, .85, 7, 89)
 }
 \references{
 \insertRef{Feldt1965}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }

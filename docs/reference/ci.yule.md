@@ -54,11 +54,13 @@ Returns a 1-row matrix. The columns are:
 
 ## References
 
-Bonett DG, Price RM (2007). “Statistical inference for generalized Yule
-coefficients in 2x2 contingency tables.” *Sociological Methods &
-Research*, **35**(3), 429–446. ISSN 0049-1241,
+Bonett DG (2021). *Statistical Methods for Psychologists
+https://dgbonett.sites.ucsc.edu/*. Bonett DG, Price RM (2007).
+“Statistical inference for generalized Yule coefficients in 2x2
+contingency tables.” *Sociological Methods & Research*, **35**(3),
+429–446. ISSN 0049-1241,
 [doi:10.1177/0049124106292358](https://doi.org/10.1177/0049124106292358)
-. Bonett DG (2021url). *Statistical Methods for Psychologists*.
+.
 
 ## Examples
 

@@ -43,5 +43,6 @@ ci.cod(.05, y)
 }
 \references{
 \insertRef{Bonett2006}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }

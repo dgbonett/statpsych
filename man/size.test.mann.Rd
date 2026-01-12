@@ -40,5 +40,6 @@ size.test.mann(.05, .90, .3)
 }
 \references{
 \insertRef{Noether1987}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }

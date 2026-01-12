@@ -38,5 +38,6 @@ size.ci.cor(.05, .3, 0, .2)
 }
 \references{
 \insertRef{Bonett2000}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }

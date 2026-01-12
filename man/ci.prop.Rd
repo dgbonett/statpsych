@@ -57,6 +57,7 @@ ci.prop(.05, 120, 300)
 
 }
 \references{
-\insertRef{Agresti1998}{statpsych}
 \insertRef{Bonett2021}{statpsych}
+
+\insertRef{Agresti1998}{statpsych}
 }

@@ -48,5 +48,6 @@ ci.bayes.normal(.05, 50, 5, 38.3, 2.57)
 }
 \references{
 \insertRef{Gelman2004}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }

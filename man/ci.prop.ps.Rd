@@ -45,5 +45,6 @@ ci.prop.ps(.05, 12, 4, 26, 6)
 }
 \references{
 \insertRef{Bonett2012}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }

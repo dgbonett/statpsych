@@ -45,5 +45,6 @@ ci.cramer(.05, 19.21, 2, 3, 200)
 }
 \references{
 \insertRef{Smithson2003}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }

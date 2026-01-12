@@ -48,5 +48,6 @@ ci.pairs.prop.bs(.05, f, n)
 }
 \references{
 \insertRef{Agresti2000}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }

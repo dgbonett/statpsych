@@ -54,7 +54,10 @@ Ulrich R, Wirtz M (2004). “On the correlation of a naturally and an
 artificially dichotomized variable.” *British Journal of Mathematical
 and Statistical Psychology*, **57**(2), 235–251. ISSN 00071102,
 [doi:10.1348/0007110042307203](https://doi.org/10.1348/0007110042307203)
-. Bonett DG (2021url). *Statistical Methods for Psychologists*.
+.
+
+Bonett DG (2021). *Statistical Methods for Psychologists
+https://dgbonett.sites.ucsc.edu/*.
 
 ## Examples
 

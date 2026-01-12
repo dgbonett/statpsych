@@ -46,8 +46,10 @@ Bonett DG (2020). “Point-biserial correlation: Interval estimation,
 hypothesis testing, meta-analysis, and sample size determination.”
 *British Journal of Mathematical and Statistical Psychology*,
 **73**(S1), 113–144. ISSN 0007-1102,
-[doi:10.1111/bmsp.12189](https://doi.org/10.1111/bmsp.12189) . Bonett DG
-(2021url). *Statistical Methods for Psychologists*.
+[doi:10.1111/bmsp.12189](https://doi.org/10.1111/bmsp.12189) .
+
+Bonett DG (2021). *Statistical Methods for Psychologists
+https://dgbonett.sites.ucsc.edu/*.
 
 ## Examples
 

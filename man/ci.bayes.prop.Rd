@@ -48,5 +48,6 @@ ci.bayes.prop(.05, .25, .1, 120, 300)
 }
 \references{
 \insertRef{Gelman2004}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }

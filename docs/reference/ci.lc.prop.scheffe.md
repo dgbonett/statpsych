@@ -5,9 +5,11 @@ population proportions in a between-subjects design using a Scheffe
 critical value. A Scheffe p-value is computed for the test statistic.
 This function is useful in exploratory studies where the linear contrast
 of proportions was not planned but was suggested by the pattern of
-sample proportions. Use the ci.lc.prop.bs function with a Bonferroni
-adjusted alpha value to compute simultaneous confidence intervals for
-two or more planned linear contrasts of proportions.
+sample proportions. Use the
+[ci.lc.prop.bs](https://dgbonett.github.io/statpsych/reference/ci.lc.prop.bs.md)
+function with a Bonferroni adjusted alpha value to compute simultaneous
+confidence intervals for two or more planned linear contrasts of
+proportions.
 
 For more details, see Section 2.9 of Bonett (2021, Volume 3)
 
@@ -57,9 +59,13 @@ Price RM, Bonett DG (2004). “An improved confidence interval for a
 linear function of binomial proportions.” *Computational Statistics &
 Data Analysis*, **45**(3), 449–456. ISSN 01679473,
 [doi:10.1016/S0167-9473(03)00007-0](https://doi.org/10.1016/S0167-9473%2803%2900007-0)
-. Marascuilo LA, McSweeney M (1977). *Nonparametric and
-Distribution-Free Methods for the Social Sciences*. Brooks/Cole. Bonett
-DG (2021url). *Statistical Methods for Psychologists*.
+.
+
+Marascuilo LA, McSweeney M (1977). *Nonparametric and Distribution-Free
+Methods for the Social Sciences*. Brooks/Cole.
+
+Bonett DG (2021). *Statistical Methods for Psychologists
+https://dgbonett.sites.ucsc.edu/*.
 
 ## Examples
 

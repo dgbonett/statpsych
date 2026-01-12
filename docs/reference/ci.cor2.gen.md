@@ -6,7 +6,8 @@ Pearson, Spearman, partial, semipartial, or point-biserial correlations.
 The correlations could also be correlations between two latent factors.
 The function requires a point estimate and a 100(1 - alpha)% confidence
 interval for each correlation as input. The confidence intervals for
-each correlation can be obtained using the ci.fisher function.
+each correlation can be obtained using
+[ci.fisher](https://dgbonett.github.io/statpsych/reference/ci.fisher.md).
 
 For more details, see Section 2.17 of Bonett (2021, Volume 2)
 
@@ -58,7 +59,10 @@ Zou GY (2007). “Toward using confidence intervals to compare
 correlations.” *Psychological Methods*, **12**(4), 399–413. ISSN
 1939-1463,
 [doi:10.1037/1082-989X.12.4.399](https://doi.org/10.1037/1082-989X.12.4.399)
-. Bonett DG (2021url). *Statistical Methods for Psychologists*.
+.
+
+Bonett DG (2021). *Statistical Methods for Psychologists
+https://dgbonett.sites.ucsc.edu/*.
 
 ## Examples
 

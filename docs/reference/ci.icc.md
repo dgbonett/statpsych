@@ -58,7 +58,10 @@ second row results are for ICC(C, r). The columns are:
 McGraw KO, Wong SP (1996). “Forming inferences about some intraclass
 correlation coefficients.” *Psychological Methods*, **1**(1), 30–46.
 [doi:10.1037/1082-989X.1.1.30](https://doi.org/10.1037/1082-989X.1.1.30)
-. Bonett DG (2021url). *Statistical Methods for Psychologists*.
+.
+
+Bonett DG (2021). *Statistical Methods for Psychologists
+https://dgbonett.sites.ucsc.edu/*.
 
 ## Examples
 

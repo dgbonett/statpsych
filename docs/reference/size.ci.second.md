@@ -36,6 +36,11 @@ size.ci.second(n0, w0, w)
 
 Returns the required sample size for the second-stage sample
 
+## References
+
+Bonett DG (2021). *Statistical Methods for Psychologists
+https://dgbonett.sites.ucsc.edu/*.
+
 ## Examples
 
 ``` r

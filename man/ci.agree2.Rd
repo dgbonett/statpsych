@@ -54,5 +54,6 @@ ci.agree2(.05, 75, 70, 60, 45, 2)
 }
 \references{
 \insertRef{Bonett2022}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }

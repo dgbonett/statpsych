@@ -45,6 +45,7 @@ ci.spcor(.05, -.355, .230, 236)
 
 }
 \references{
-\insertRef{Aloe2012}{statpsych}
 \insertRef{Bonett2021}{statpsych}
+
+\insertRef{Aloe2012}{statpsych}
 }

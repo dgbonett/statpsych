@@ -47,5 +47,6 @@ ci.mann(.05, y1, y2)
 }
 \references{
 \insertRef{Sen1967}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }

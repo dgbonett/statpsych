@@ -46,5 +46,6 @@ ci.cor.dep(.05, .396, .179, .088, 166)
 }
 \references{
 \insertRef{Zou2007}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }

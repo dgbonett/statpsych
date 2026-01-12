@@ -39,7 +39,7 @@ Returns a 7-row matrix (one row per effect). The columns are:
 
 - SE - standard error
 
-- z - z test statistic for test of null hypothesis
+- z - z test statistic
 
 - p - two-sided p-value
 
@@ -49,11 +49,14 @@ Returns a 7-row matrix (one row per effect). The columns are:
 
 ## References
 
+Bonett DG (2021). *Statistical Methods for Psychologists
+https://dgbonett.sites.ucsc.edu/*.
+
 Price RM, Bonett DG (2004). “An improved confidence interval for a
 linear function of binomial proportions.” *Computational Statistics &
 Data Analysis*, **45**(3), 449–456. ISSN 01679473,
 [doi:10.1016/S0167-9473(03)00007-0](https://doi.org/10.1016/S0167-9473%2803%2900007-0)
-. Bonett DG (2021url). *Statistical Methods for Psychologists*.
+.
 
 ## Examples
 

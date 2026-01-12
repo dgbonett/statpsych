@@ -42,7 +42,10 @@ Noether GE (1987). “Sample size determination for some common
 nonparametric tests.” *Journal of the American Statistical Association*,
 **82**(398), 645–647. ISSN 0162-1459,
 [doi:10.1080/01621459.1987.10478478](https://doi.org/10.1080/01621459.1987.10478478)
-. Bonett DG (2021url). *Statistical Methods for Psychologists*.
+.
+
+Bonett DG (2021). *Statistical Methods for Psychologists
+https://dgbonett.sites.ucsc.edu/*.
 
 ## Examples
 

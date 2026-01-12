@@ -52,5 +52,6 @@ ci.icc(.05, 48.2, 11.3, 5, 30)
 }
 \references{
 \insertRef{McGraw1996}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }

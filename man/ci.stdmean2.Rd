@@ -57,5 +57,6 @@ ci.stdmean2(.05, 20.9, 19.1, 3.85, 3.19, 50, 50)
 }
 \references{
 \insertRef{Bonett2008}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }

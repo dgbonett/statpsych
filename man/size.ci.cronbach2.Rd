@@ -40,5 +40,6 @@ size.ci.cronbach2(.05, .85, .70, 8, .15)
 }
 \references{
 \insertRef{Bonett2015}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }

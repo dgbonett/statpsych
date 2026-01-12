@@ -52,5 +52,6 @@ pi.var(.05, 15, 40, 100, 2)
 }
 \references{
 \insertRef{Hahn1972}{statpsych}
-\insertRef{Bonett2015}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

@@ -43,5 +43,6 @@ ci.ratio.prop.ps(.05, 12, 4, 26, 6)
 }
 \references{
 \insertRef{Bonett2006a}{statpsych}
+
 \insertRef{Bonett2021}{statpsych}
 }
