@@ -27,6 +27,8 @@ girls in a school district). This function requires a planning value for the
 proportion of population members who belong to one of the two subpopulations.
 Set the correlation planning value to the smallest absolute value within a
 plausible range for a conservatively large sample size.
+
+For more details, see Section 1.24 of Bonett (2021, Volume 2)
 }
 \examples{
 size.ci.pbcor(.05, .40, .25, .73)
@@ -39,4 +41,6 @@ size.ci.pbcor(.05, .40, .25, .73)
 }
 \references{
 \insertRef{Bonett2020a}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

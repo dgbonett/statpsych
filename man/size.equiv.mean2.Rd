@@ -31,6 +31,8 @@ Equivalence tests usually use 2 x alpha rather than alpha (e.g., use
 alpha = .10 rather alpha = .05). Set the variance planning value to the
 largest value within a plausible range for a conservatively large sample
 size.
+
+For more details, see Section 2.14 of Bonett (2021, Volume 1)
 }
 \examples{
 size.equiv.mean2(.10, .80, 15, 2, 4)
@@ -40,4 +42,7 @@ size.equiv.mean2(.10, .80, 15, 2, 4)
 #                    50
  
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

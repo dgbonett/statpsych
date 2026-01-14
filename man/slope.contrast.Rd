@@ -15,6 +15,8 @@ Returns the vector of contrast coefficients
 \description{
 Computes the contrast coefficients that are needed to estimate the slope of
 a line in a one-factor design with a quantitative factor.
+
+For more details, see Section 1.11 of Bonett (2021, Volume 2)
 }
 \examples{
 x <- c(25, 50, 75, 100)
@@ -28,4 +30,7 @@ slope.contrast(x)
 # [4,]       0.012
  
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

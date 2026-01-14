@@ -27,6 +27,8 @@ design. Set the standardized mean difference planning value to the largest
 value within a plausible range, and set the Pearson correlation planning
 value to the smallest value within a plausible range for a conservatively
 large sample size.
+
+For more details, see Section 4.26 of Bonett (2021, Volume 1)
 }
 \examples{
 size.ci.stdmean.ps(.05, 1, .65, .6)
@@ -40,4 +42,6 @@ size.ci.stdmean.ps(.05, 1, .65, .6)
 }
 \references{
 \insertRef{Bonett2009}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

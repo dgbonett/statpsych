@@ -1,0 +1,87 @@
+# Computes confidence intervals for a 3-rater design with dichotomous ratings
+
+Computes adjusted Wald confidence intervals for a G-index of agreement
+for all pairs of raters in a 3-rater design with a dichotomous rating,
+and computes adjusted Wald confidence intervals for differences of all
+pairs of G agreement. An adjusted Wald confidence interval for unanimous
+G agreement among the three raters is also computed. In the three-rater
+design, unanimous G agreement is equal to the average of all pairs of G
+agreement. The G-index corrects for chance agreement.
+
+## Usage
+
+``` r
+ci.agree.3rater(alpha, f)
+```
+
+## Arguments
+
+- alpha:
+
+  alpha level for 1-alpha confidence
+
+- f:
+
+  vector of frequency counts from 2x2x2 table where f = \[ f111, f112,
+  f121, f122, f211, f212, f221, f222 \], first subscript represents the
+  rating of rater 1, second subscript represents the rating of rater 2,
+  and third subscript represents the rating of rater 3
+
+## Value
+
+Returns a 7-row matrix. The rows are:
+
+- G(1,2): G-index for raters 1 and 2
+
+- G(1,3): G-index for raters 1 and 3
+
+- G(2,3): G-index for raters 2 and 3
+
+- G(1,2)-G(1,3): difference in G(1,2) and G(1,3)
+
+- G(1,2)-G(2,3): difference in G(1,2) and G(2,3)
+
+- G(2,3)-G(1,3): difference in G(2,3) and G(1,3)
+
+- G(3): G-index of unanimous agreement for all three raters
+
+The columns are:
+
+- Estimate - estimate of G-index (two-rater, difference, or unanimous)
+
+- LL - lower limit of adjusted Wald confidence interval
+
+- UL - upper limit of adjusted Wald confidence interval
+
+## References
+
+Bonett DG (2022). “Statistical inference for G-indices of agreement.”
+*Journal of Educational and Behavioral Statistics*, **47**(4), 438–458.
+[doi:10.3102/10769986221088561](https://doi.org/10.3102/10769986221088561)
+.
+
+## Examples
+
+``` r
+f <- c(100, 6, 4, 40, 20, 1, 9, 120)
+ci.agree.3rater(.05, f)
+#>               Estimate      LL      UL
+#> G(1,2)          0.5667  0.4660  0.6524
+#> G(1,3)          0.5000  0.3956  0.5912
+#> G(2,3)          0.8667  0.7970  0.9135
+#> G(1,2)-G(1,3)   0.0667  0.0058  0.1266
+#> G(1,2)-G(2,3)  -0.3000 -0.4068 -0.1892
+#> G(2,3)-G(1,3)  -0.3667 -0.4622 -0.2663
+#> G(3)            0.6444  0.5738  0.7069
+
+# Should return:
+#               Estimate      LL      UL
+# G(1,2)          0.5667  0.4660  0.6524 
+# G(1,3)          0.5000  0.3956  0.5912
+# G(2,3)          0.8667  0.7970  0.9135
+# G(1,2)-G(1,3)   0.0667  0.0058  0.1266
+# G(1,2)-G(2,3)  -0.3000 -0.4068 -0.1892
+# G(2,3)-G(1,3)  -0.3667 -0.4622 -0.2663
+# G(3)            0.6444  0.5738  0.7069
+ 
+```

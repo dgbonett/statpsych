@@ -8,6 +8,8 @@
 #' for a population proportion. The Wilson confidence interval uses a 
 #' continuity correction.
 #'
+#' For more details, see Section 1.5 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
 #' @param   f       number of participants who have the attribute
@@ -37,17 +39,19 @@
 #'
 #'
 #' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
 #' \insertRef{Agresti1998}{statpsych}
 #'
 #'
 #' @examples
-#' ci.prop(.05, 12, 100)
+#' ci.prop(.05, 120, 300)
 #'
 #' # Should return:
-#' #                  Estimate         SE         LL        UL
-#' # Adjusted Wald   0.1346154 0.03346842 0.06901848 0.2002123
-#' # Wilson with cc  0.1200000 0.03249615 0.06625153 0.2039772
-#' # Exact           0.1200000 0.03249615 0.06356890 0.2002357
+#' #                 Estimate         SE        LL        UL
+#' # Adjusted Wald  0.4013158 0.02811287 0.3462156 0.4564160
+#' # Wilson with cc 0.4000000 0.02828427 0.3445577 0.4580464
+#' # Exact          0.4000000 0.02828427 0.3441290 0.4578664
 #'
 #'
 #' @importFrom stats qnorm
@@ -91,6 +95,8 @@ ci.prop <- function(alpha, f, n) {
 #' finite population correction (fpc). This confidence interval is useful 
 #' when the sample size is not a small fraction of the population size.
 #'
+#' For more details, see Section 1.20 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
 #' @param   f       number of participants who have the attribute
@@ -106,12 +112,16 @@ ci.prop <- function(alpha, f, n) {
 #' * UL - upper limit of the confidence interval with fpc
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
-#' ci.prop.fpc(.05, 12, 100, 400)
+#' ci.prop.fpc(.05, 61, 75, 415)
 #'
 #' # Should return:
-#' #   Estimate         SE         LL        UL
-#' #  0.1346154  0.0290208 0.07773565 0.1914951
+#' #   Estimate         SE       LL        UL
+#' #  0.7974684 0.04097594 0.717157 0.8777797
 #'
 #'
 #' @importFrom stats qnorm
@@ -145,6 +155,8 @@ ci.prop.fpc <- function(alpha, f, n, N) {
 #' Wald confidence intervals use the same method that is used to compare the
 #' two proportions in a paired-samples design.
 #'
+#' For more details, see Section 1.12 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
 #' @param   f       vector of multinomial frequency counts 
@@ -162,16 +174,21 @@ ci.prop.fpc <- function(alpha, f, n, N) {
 #' @references
 #' \insertRef{Bonett2012}{statpsych}
 #'
+#' \insertRef{Bonett2021}{statpsych}
+#'
 #'
 #' @examples
-#' f <- c(125, 82, 92)
+#' f <- c(87, 49, 31, 133)
 #' ci.pairs.mult(.05, f)
 #'
 #' # Should return:
-#' #        Estimate         SE          LL         UL
-#' # 1 2  0.14285714 0.04731825  0.05011508 0.23559920
-#' # 1 3  0.10963455 0.04875715  0.01407230 0.20519680
-#' # 2 3 -0.03322259 0.04403313 -0.11952594 0.05308076
+#' #         Estimate         SE           LL          UL
+#' #  1 2  0.12582781 0.03821865  0.050920628  0.20073500
+#' #  1 3  0.18543046 0.03466808  0.117482270  0.25337866
+#' #  1 4 -0.15231788 0.04855183 -0.247477718 -0.05715804
+#' #  2 3  0.05960265 0.02978792  0.001219398  0.11798590
+#' #  2 4 -0.27814570 0.04196760 -0.360400688 -0.19589070
+#' #  3 4 -0.33774834 0.03797851 -0.412184859 -0.26331183
 #'
 #'
 #' @importFrom stats qnorm
@@ -201,6 +218,92 @@ ci.pairs.mult <-function(alpha, f) {
 }
 
 
+#  ci.diversity ===============================================================
+#' Confidence intervals for diversity indices 
+#'
+#'
+#' @description
+#' Computes estimates, standard errors, and approximate confidence intervals
+#' for the Berger-Parker, Simpson, and Shannon diversity indices. For the 
+#' Shannon index, the value 1/r is added to each frequency count where r is the
+#' number of categories. These indices have a range of 0 to 1 where 0 indicates
+#' no diversity and 1 indicates maximum diversity.
+#'
+#' For more details, see Section 1.13 of Bonett (2021, Volume 3)
+#'
+#'  
+#' @param   alpha   alpha level for 1 - alpha confidence
+#' @param   f       vector of multinomial frequency counts
+#'
+#' 
+#' @return 
+#' Returns a 3-row matrix. The columns are:
+#' * Estimate - estimate of diversity index
+#' * SE - standard error of estimate
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
+#' 
+#' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
+#' @examples
+#' f = c(847, 320, 57, 274, 36)
+#' ci.diversity(.05, f)
+#'
+#' # Should return:
+#' #         Estimate      SE     LL     UL
+#' # Berger    0.5598 0.01587 0.5287 0.5909
+#' # Simpson   0.7722 0.01229 0.7481 0.7963
+#' # Shannon   0.7292 0.01224 0.7052 0.7532
+#'  
+#' 
+#' @export  
+ci.diversity <- function(alpha, f) {
+ z <- qnorm(1 - alpha/2)
+ n <- sum(f)
+ p <- f/n
+ r <- length(f)
+ a <- r/(r - 1)
+ n0 <- n + 1
+ p0 <- (f + 1/r)/n0
+ pmax <- max(p)
+ iqv1 <- a*(1 - pmax)
+ iqv2 <- a*(1 - sum(p^2))
+ iqv3 <- (-1)*sum(p0*log(p0))/log(r)
+ se1 <- a*sqrt(pmax*(1 - pmax)/n)
+ v1 <- sum(p^3)
+ v2 <- sum(p^2)^2
+ if (v1 - v2 < 0) {
+   se2 <- 0
+ }
+ else {
+   se2 <- a*sqrt(4*(sum(p^3) - (sum(p^2))^2)/n)
+ }
+ se3 <- sqrt((sum(p0*log(p0)^2) - sum(p0*log(p0))^2)/n0 + (r - 1)/(2*n0^2))/log(r)
+ ll1 <- a*(1 - pmax) - z*se1
+ ul1 <- a*(1 - pmax) + z*se1
+ ll2 <- iqv2 - z*se2
+ ul2 <- iqv2 + z*se2
+ ll3 <- iqv3 - z*se3
+ ul3 <- iqv3 + z*se3
+ if (ul1 > 1) {ul1 = 1}
+ if (ul2 > 1) {ul2 = 1}
+ if (ul3 > 1) {ul3 = 1}
+ if (ll1 < 0) {ll1 = 0}
+ if (ll2 < 0) {ll2 = 0}
+ if (ll3 < 0) {ll3 = 0}
+ out1 <- t(c(round(iqv1, 4), round(se1, 5), round(ll1, 4), round(ul1, 4)))
+ out2 <- t(c(round(iqv2, 4), round(se2, 5), round(ll2, 4), round(ul2, 4)))
+ out3 <- t(c(round(iqv3, 4), round(se3, 5), round(ll3, 4), round(ul3, 4))) 
+ out <- rbind(out1, out2, out3)
+ colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- c("Berger", "Simpson", "Shannon")
+ return(out)
+}
+
+
 #  ci.prop.inv =============================================================== 
 #' Confidence interval for a proportion using inverse sampling
 #'
@@ -212,6 +315,8 @@ ci.pairs.mult <-function(alpha, f) {
 #' of participants who have the attribute (f) is predetermined and sampling 
 #' continues until f attains its prespecified value. With inverse sampling, 
 #' the sample size (n) will not be known in advance.
+#'
+#' For more details, see Section 1.19 of Bonett (2021, Volume 3)
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
@@ -230,13 +335,15 @@ ci.pairs.mult <-function(alpha, f) {
 #' @references
 #' \insertRef{Zou2010}{statpsych}
 #'
+#' \insertRef{Bonett2021}{statpsych}
+#'
 #'
 #' @examples
-#' ci.prop.inv(.05, 5, 67)
+#' ci.prop.inv(.05, 10, 87)
 #'
 #' # Should return:
-#' #   Estimate         SE         LL        UL
-#' # 0.07462687 0.03145284 0.02467471 0.1479676
+#' #  Estimate         SE         LL        UL
+#' # 0.1149425 0.03389574 0.05651668 0.1893855
 #'
 #'
 #' @importFrom stats qnorm
@@ -273,6 +380,8 @@ ci.prop.inv <- function(alpha, f, n) {
 #' Computes an adjusted Wald confidence interval for a population proportion
 #' difference in a 2-group design.
 #'
+#' For more details, see Section 2.2 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
 #' @param   f1      number of participants in group 1 who have the attribute
@@ -292,13 +401,15 @@ ci.prop.inv <- function(alpha, f, n) {
 #' @references
 #' \insertRef{Agresti2000}{statpsych}
 #'
+#' \insertRef{Bonett2021}{statpsych}
+#'
 #'
 #' @examples
-#' ci.prop2(.05, 35, 21, 150, 150)
+#' ci.prop2(.05, 57, 15, 100, 100)
 #'
 #' # Should return:
-#' #   Estimate         SE          LL        UL
-#' # 0.09210526 0.04476077 0.004375769 0.1798348
+#' #   Estimate         SE        LL        UL
+#' #  0.4117647 0.06083948 0.2925215 0.5310079
 #'
 #'
 #' @importFrom stats qnorm
@@ -413,6 +524,8 @@ ci.prop2.inv <- function(alpha, f1, f2, n1, n2) {
 #' Computes an adjusted Wald confidence interval for a population proportion 
 #' ratio in a 2-group design.
 #'
+#' For more details, see Section 2.3 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
 #' @param   f1      number of participants in group 1 who have the attribute
@@ -431,13 +544,15 @@ ci.prop2.inv <- function(alpha, f1, f2, n1, n2) {
 #' @references
 #' \insertRef{Price2008}{statpsych}
 #'
+#' \insertRef{Bonett2021}{statpsych}
+#'
 #'
 #' @examples
-#' ci.ratio.prop2(.05, 35, 21, 150, 150)
+#' ci.ratio.prop2(.05, 62, 35, 100, 100)
 #'
 #' # Should return:
 #' # Estimate       LL       UL
-#' # 1.666667 1.017253 2.705025
+#' # 1.765957 1.297164 2.404172
 #'
 #'
 #' @importFrom stats qnorm
@@ -469,6 +584,8 @@ ci.ratio.prop2 <- function(alpha, f1, f2, n1, n2) {
 #' Computes an adjusted Wald confidence interval for a linear contrast of 
 #' population proportions in a between-subjects design.
 #'
+#' For more details, see Section 2.8 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
 #' @param   f       vector of frequency counts of participants who have the attribute
@@ -489,16 +606,25 @@ ci.ratio.prop2 <- function(alpha, f1, f2, n1, n2) {
 #' @references
 #' \insertRef{Price2004}{statpsych}
 #'
+#' \insertRef{Bonett2021}{statpsych}
+#'
 #'
 #' @examples
 #' f <- c(26, 24, 38)
 #' n <- c(60, 60, 60)
-#' v <- c(-.5, -.5, 1)
-#' ci.lc.prop.bs(.05, f, n, v)
+#' v1 <- c(-.5, -.5, 1)
+#' ci.lc.prop.bs(.05/2, f, n, v1)
 #'
 #' # Should return:
-#' #  Estimate         SE        z           p         LL        UL
-#' # 0.2119565 0.07602892 2.787841 0.005306059 0.06294259 0.3609705
+#' #  Estimate         SE      z       p        LL        UL
+#' # 0.2119565 0.07602892 2.7878 0.00531 0.0415451 0.3823679
+#'
+#' v2 <- c(1, -1, 0)
+#' ci.lc.prop.bs(.05/2, f, n, v2)
+#'
+#' # Should return:
+#' #   Estimate         SE       z       p         LL        UL
+#' # 0.03225806 0.08857951 0.36417 0.71573 -0.1662843 0.2308004
 #'
 #'
 #' @importFrom stats qnorm
@@ -512,8 +638,86 @@ ci.lc.prop.bs <- function(alpha, f, n, v) {
  p <- (f + 2/m)/(n + 4/m)
  est <- t(v)%*%p
  se <- sqrt(t(v)%*%diag(p*(1 - p))%*%solve(diag(n + 4/m))%*%v)
- zval <- est/se
+ zval <- round(est/se, 4)
  pval <- 2*(1 - pnorm(abs(zval)))
+ pval <- round(pval, 5)
+ ll <- est - z*se
+ ul <- est + z*se
+ out <- t(c(est, se, zval, pval, ll, ul))
+ colnames(out) <- c("Estimate", "SE", "z", "p", "LL", "UL")
+ rownames(out) <- ""
+ return(out)
+}
+
+
+#  ci.lc.prop.scheffe =========================================================
+#' Scheffe confidence interval for a linear contrast of proportions in a 
+#' between-subjects design
+#'
+#'
+#' @description
+#' Computes an adjusted Wald confidence interval for a linear contrast of 
+#' population proportions in a between-subjects design using a Scheffe
+#' critical value. A Scheffe p-value is computed for the test statistic.
+#' This function is useful in exploratory studies where the linear contrast
+#' of proportions was not planned but was suggested by the pattern of sample
+#' proportions. Use the \link[statpsych]{ci.lc.prop.bs} function with a 
+#' Bonferroni adjusted alpha value to compute simultaneous confidence 
+#' intervals for two or more planned linear contrasts of proportions.
+#'
+#' For more details, see Section 2.9 of Bonett (2021, Volume 3)
+#'
+#'
+#' @param   alpha   alpha level for 1-alpha confidence
+#' @param   f       vector of frequency counts of participants who have the attribute
+#' @param   n       vector of sample sizes
+#' @param   v       vector of between-subjects contrast coefficients
+#'
+#'
+#' @return
+#' Returns a 1-row matrix. The columns are:
+#' * Estimate - adjusted estimate of proportion linear contrast
+#' * SE - adjusted standard error
+#' * z - z test statistic
+#' * p - two-sided Scheffe p-value
+#' * LL - lower limit of the Scheffe confidence interval
+#' * UL - upper limit of the Scheffe confidence interval
+#'
+#'
+#' @references
+#' \insertRef{Price2004}{statpsych}
+#'
+#' \insertRef{Marascuilo1977}{statpsych}
+#'
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
+#' @examples
+#' f <- c(26, 24, 38)
+#' n <- c(60, 60, 60)
+#' v <- c(-.5, -.5, 1)
+#' ci.lc.prop.scheffe(.05, f, n, v)
+#'
+#' # Should return:
+#' #  Estimate         SE      z       p         LL        UL
+#' # 0.2119565 0.07602892 2.7878 0.02053 0.02585698 0.3980561
+#'
+#'
+#' @importFrom stats qchisq
+#' @importFrom stats pchisq
+#' @export
+ci.lc.prop.scheffe <- function(alpha, f, n, v) {
+ s <- sum(as.integer(as.logical(n < f)))
+ if (s > 0) {stop("f cannot be greater than n")}
+ df <- length(f) - 1
+ z <- sqrt(qchisq(1 - alpha, df))
+ m <- length(v) - length(which(v==0))
+ p <- (f + 2/m)/(n + 4/m)
+ est <- t(v)%*%p
+ se <- sqrt(t(v)%*%diag(p*(1 - p))%*%solve(diag(n + 4/m))%*%v)
+ zval <- round(est/se, 4)
+ pval <- 1 - pchisq(zval^2, df)
+ pval <- round(pval, 5)
  ll <- est - z*se
  ul <- est + z*se
  out <- t(c(est, se, zval, pval, ll, ul))
@@ -532,6 +736,8 @@ ci.lc.prop.bs <- function(alpha, f, n, v) {
 #' Computes adjusted Wald confidence intervals for all pairwise differences 
 #' of population proportions in a between-subjects design using a Bonferroni
 #' adjusted alpha level.
+#'
+#' For more details, see Section 2.7 of Bonett (2021, Volume 3)
 #'
 #'
 #' @param   alpha   alpha level for simultaneous 1-alpha confidence
@@ -553,6 +759,8 @@ ci.lc.prop.bs <- function(alpha, f, n, v) {
 #' @references
 #' \insertRef{Agresti2000}{statpsych}
 #'
+#' \insertRef{Bonett2021}{statpsych}
+#'
 #'
 #' @examples
 #' f <- c(111, 161, 132)
@@ -560,10 +768,10 @@ ci.lc.prop.bs <- function(alpha, f, n, v) {
 #' ci.pairs.prop.bs(.05, f, n)
 #'
 #' # Should return:
-#' #        Estimate         SE         z            p          LL          UL
-#' # 1 2  -0.2475248 0.04482323 -5.522243 3.346989e-08 -0.35483065 -0.14021885
-#' # 1 3  -0.1039604 0.04833562 -2.150803 3.149174e-02 -0.21967489  0.01175409
-#' # 2 3   0.1435644 0.04358401  3.293968 9.878366e-04  0.03922511  0.24790360
+#' #        Estimate         SE       z       p          LL          UL
+#' # 1 2  -0.2475248 0.04482323 -5.5222 0.00000 -0.35483065 -0.14021885
+#' # 1 3  -0.1039604 0.04833562 -2.1508 0.03149 -0.21967489  0.01175409
+#' # 2 3   0.1435644 0.04358401  3.2940 0.00099  0.03922511  0.24790360
 #'
 #'
 #' @importFrom stats qnorm
@@ -581,8 +789,9 @@ ci.pairs.prop.bs <-function(alpha, f, n) {
  Estimate <- p.adj[upper.tri(p.adj)]
  v <- outer(v, v, "+")
  SE <- sqrt(v[upper.tri(v)])
- z <- Estimate/SE
- p <- 2*(1 - pnorm(abs(z)))
+ z <- round(Estimate/SE, 4)
+ pval <- 2*(1 - pnorm(abs(z)))
+ p <- round(pval, 5)
  LL <- Estimate - zcrit*SE
  UL <- Estimate + zcrit*SE
  pair <- t(combn(seq(1:a), 2))
@@ -600,7 +809,9 @@ ci.pairs.prop.bs <-function(alpha, f, n) {
 #' @description
 #' Computes a test statistic and an adjusted Wald confidence interval for the 
 #' population slope of proportions in a one-factor experimental design with a 
-#' quantitative between-subjects factor. 
+#' quantitative between-subjects factor.
+#'
+#' For more details, see Section 4.4 of Bonett (2021, Volume 3)
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
@@ -622,16 +833,18 @@ ci.pairs.prop.bs <-function(alpha, f, n) {
 #' @references
 #' \insertRef{Price2004}{statpsych}
 #'
+#' \insertRef{Bonett2021}{statpsych}
+#'
 #'
 #' @examples
-#' f <- c(14, 27, 38)
-#' n <- c(100, 100, 100)
-#' x <- c(10, 20, 40)
+#' f <- c(11, 15, 20, 27)
+#' n <- c(60, 60, 60, 60)
+#' x <- c(10, 20, 30, 40)
 #' ci.slope.prop.bs(.05, f, n, x)
 #'
 #' # Should return:
-#' #    Estimate          SE        z           p          LL         UL
-#' # 0.007542293 0.002016793 3.739746 0.000184206 0.003589452 0.01149513
+#' #    Estimate          SE      z       p          LL         UL
+#' # 0.008688525 0.002566409 3.3855 0.00071 0.003658456 0.01371859
 #'
 #'
 #' @importFrom stats qnorm
@@ -648,8 +861,9 @@ ci.slope.prop.bs <- function(alpha, f, n, x) {
  p <- (f + 2/m)/(n + 4/m)
  slope <- t(c)%*%p
  se <- sqrt(t(c)%*%diag(p*(1 - p))%*%solve(diag(n + 4/m))%*%c)
- t <- slope/se
+ t <- round(slope/se, 4)
  pval <- 2*(1 - pnorm(abs(t)))
+ pval <- round(pval, 5)
  ll <- slope - z*se
  ul <- slope + z*se
  out <- t(c(slope, se, t, pval, ll, ul))
@@ -669,6 +883,8 @@ ci.slope.prop.bs <- function(alpha, f, n, x) {
 #' the frequency counts from a 2 x 2 contingency table for two repeated 
 #' dichotomous measurements.
 #'
+#' For more details, see Section 3.2 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param   alpha  alpha level for 1-alpha confidence
 #' @param   f00    number of participants with y = 0 and x = 0
@@ -679,6 +895,8 @@ ci.slope.prop.bs <- function(alpha, f, n, x) {
 #'
 #' @references
 #' \insertRef{Bonett2012}{statpsych}
+#'
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @return
@@ -724,6 +942,8 @@ ci.prop.ps <- function(alpha, f00, f01, f10, f11) {
 #' paired-samples design. This function requires the frequency counts from
 #' a 2 x 2 contingency table for two repeated dichotomous measurements.
 #'
+#' For more details, see Section 3.2 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param   alpha  alpha level for 1-alpha confidence
 #' @param   f00    number of participants with y = 0 and x = 0
@@ -734,6 +954,8 @@ ci.prop.ps <- function(alpha, f00, f01, f10, f11) {
 #'
 #' @references
 #' \insertRef{Bonett2006a}{statpsych}
+#'
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @return
@@ -793,6 +1015,8 @@ ci.ratio.prop.ps <- function(alpha, f00, f01, f10, f11) {
 #' and a product predictor variable (x1*x2). Conditional slopes are 
 #' computed at low and high values of the moderator variable. 
 #'
+#' For more details, see Section 4.9 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  b1     estimated slope coefficient for predictor variable
@@ -814,13 +1038,17 @@ ci.ratio.prop.ps <- function(alpha, f00, f01, f10, f11) {
 #' * UL - upper limit of the exponentiated confidence interval
 #' 
 #' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' ci.condslope.log(.05, .132, .154, .031, .021, .015, 5.2, 10.6)
 #'
 #' # Should return:
-#' #                   Estimate exp(Estimate)        z           p 
-#' # At low moderator    0.9328      2.541616 2.269824 0.023218266 
-#' # At high moderator   1.7644      5.838068 2.906507 0.003654887 
+#' #                   Estimate exp(Estimate)      z       p 
+#' # At low moderator    0.9328      2.541616 2.2698 0.02322 
+#' # At high moderator   1.7644      5.838068 2.9065 0.00365 
 #' #                          LL        UL
 #' # At low moderator   1.135802  5.687444
 #' # At high moderator  1.776421 19.186357
@@ -837,10 +1065,10 @@ ci.condslope.log <- function(alpha, b1, b2, se1, se2, cov, lo, hi) {
  exp.slope.hi <- exp(slope.hi)
  se.lo <- sqrt(se1^2 + se2^2*lo^2 + 2*lo*cov)
  se.hi <- sqrt(se1^2 + se2^2*hi^2 + 2*hi*cov)
- z.lo <- slope.lo/se.lo
- z.hi <- slope.hi/se.hi
- p.lo <- 2*(1 - pnorm(abs(z.lo)))
- p.hi <- 2*(1 - pnorm(abs(z.hi)))
+ z.lo <- round(slope.lo/se.lo, 4)
+ z.hi <- round(slope.hi/se.hi, 4)
+ p.lo <- round(2*(1 - pnorm(abs(z.lo))), 5)
+ p.hi <- round(2*(1 - pnorm(abs(z.hi))), 5)
  LL.lo <- exp(slope.lo - z*se.lo)
  UL.lo <- exp(slope.lo + z*se.lo)
  LL.hi <- exp(slope.hi - z*se.hi)
@@ -863,6 +1091,8 @@ ci.condslope.log <- function(alpha, b1, b2, se1, se2, cov, lo, hi) {
 #' cell frequency. This function requires the frequency counts from a
 #' 2 x 2 contingency table for two dichotomous variables.
 #'
+#' For more details, see Section 3.4 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param   alpha  alpha level for 1-alpha confidence
 #' @param   f00    number of participants with y = 0 and x = 0
@@ -881,6 +1111,8 @@ ci.condslope.log <- function(alpha, b1, b2, se1, se2, cov, lo, hi) {
 #'
 #' @references
 #' \insertRef{Fleiss2003}{statpsych}
+#'
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -922,6 +1154,8 @@ ci.oddsratio <- function(alpha, f00, f01, f10, f11) {
 #' Bonett-Price Y* is a better approximation to the phi coefficient when the
 #' marginal frequencies are not equal.
 #'
+#' For more details, see Section 3.4 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param   alpha  alpha level for 1-alpha confidence
 #' @param   f00    number of participants with y = 0 and x = 0
@@ -931,7 +1165,8 @@ ci.oddsratio <- function(alpha, f00, f01, f10, f11) {
 #'
 #'
 #' @references
-#' \insertRef{Bonett2007}{statpsych}                   
+#' \insertRef{Bonett2021}{statpsych}
+#' \insertRef{Bonett2007}{statpsych}  
 #'
 #'
 #' @return
@@ -946,11 +1181,11 @@ ci.oddsratio <- function(alpha, f00, f01, f10, f11) {
 #' ci.yule(.05, 229, 28, 96, 24)
 #'
 #' # Should return:
-#' #      Estimate         SE         LL        UL
-#' # Q:  0.3430670 0.13280379 0.06247099 0.5734020
-#' # Y:  0.1769015 0.07290438 0.03126603 0.3151817
-#' # H:  0.2619244 0.10514465 0.04687994 0.4537659
-#' # Y*: 0.1311480 0.05457236 0.02307188 0.2361941
+#' #    Estimate     SE    LL    UL
+#' # Q:    0.343 0.1328 0.062 0.573
+#' # Y:    0.177 0.0729 0.031 0.315
+#' # H:    0.262 0.1051 0.047 0.454
+#' # Y*:   0.131 0.0546 0.023 0.236
 #'
 #'
 #' @importFrom stats qnorm
@@ -984,10 +1219,10 @@ ci.yule <- function(alpha, f00, f01, f10, f11) {
  se.Y2 <- (c/2)*(1 - Y2^2)*se.lor
  ll.Y2 <- (ll.or^c - 1)/(ll.or^c + 1)
  ul.Y2 <- (ul.or^c - 1)/(ul.or^c + 1)
- out1 <- t(c(Q, se.Q, ll.Q, ul.Q))
- out2 <- t(c(Y, se.Y, ll.Y, ul.Y))
- out3 <- t(c(H, se.H, ll.H, ul.H))
- out4 <- t(c(Y2, se.Y2, ll.Y2, ul.Y2))
+ out1 <- t(c(round(Q, 3), round(se.Q, 4), round(ll.Q, 3), round(ul.Q, 3)))
+ out2 <- t(c(round(Y, 3), round(se.Y, 4), round(ll.Y, 3), round(ul.Y, 3)))
+ out3 <- t(c(round(H, 3), round(se.H, 4), round(ll.H, 3), round(ul.H, 3)))
+ out4 <- t(c(round(Y2, 3), round(se.Y2, 4), round(ll.Y2, 3), round(ul.Y2, 3)))
  out <- rbind(out1, out2, out3, out4)
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  rownames(out) <- c("Q:", "Y:", "H:", "Y*:")
@@ -1004,6 +1239,8 @@ ci.yule <- function(alpha, f00, f01, f10, f11) {
 #' This function requires the frequency counts from a 2 x 2 contingency table 
 #' for two dichotomous variables. This measure of association is usually most 
 #' appropriate when both dichotomous variables are naturally dichotomous.
+#'
+#' For more details, see Section 3.4 of Bonett (2021, Volume 3)
 #'
 #'
 #' @param   alpha  alpha level for 1-alpha confidence
@@ -1024,13 +1261,15 @@ ci.yule <- function(alpha, f00, f01, f10, f11) {
 #' @references
 #' \insertRef{Bishop1975}{statpsych}
 #'
+#' \insertRef{Bonett2021}{statpsych}
+#'
 #'
 #' @examples
 #' ci.phi(.05, 229, 28, 96, 24)
 #'
 #' # Should return:
-#' #  Estimate         SE         LL        UL
-#' #  0.1229976 0.05477117 0.01462398 0.2285149
+#' #  Estimate     SE    LL    UL
+#' #     0.123 0.0548 0.015 0.229
 #'
 #'
 #' @importFrom stats qnorm
@@ -1052,7 +1291,7 @@ ci.phi <- function(alpha, f00, f01, f10, f11) {
  ul0 <- zr + z*se/(1 - phi^2)
  ll <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
  ul <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
- out <- t(c(phi, se, ll, ul))
+ out <- t(c(round(phi, 3), round(se, 4), round(ll, 3), round(ul, 3)))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  rownames(out) <- ""
  return(out)
@@ -1069,6 +1308,8 @@ ci.phi <- function(alpha, f00, f01, f10, f11) {
 #' added to each cell frequency. This measure of association assumes the group
 #' variable is naturally dichotomous and the response variable is artificially
 #' dichotomous. 
+#'
+#' For more details, see Section 3.4 of Bonett (2021, Volume 3)
 #'
 #'
 #' @param   alpha  alpha level for 1-alpha confidence
@@ -1089,13 +1330,15 @@ ci.phi <- function(alpha, f00, f01, f10, f11) {
 #' @references
 #' \insertRef{Ulrich2004}{statpsych}
 #'
+#' \insertRef{Bonett2021}{statpsych}
+#'
 #'
 #' @examples
-#' ci.biphi(.05, 46, 15, 100, 100)
+#' ci.biphi(.05, 34, 22, 50, 50)
 #'
 #' # Should return:
-#' #  Estimate         SE        LL       UL
-#' # 0.4145733 0.07551281 0.2508866 0.546141
+#' #  Estimate     SE    LL    UL
+#' #     0.275 0.1075 0.049 0.464
 #'
 #'
 #' @importFrom stats qnorm
@@ -1120,7 +1363,7 @@ ci.biphi <- function(alpha, f1, f2, n1, n2) {
  se.biphi <- sqrt(c^2/(lor^2 + c)^3)*se.lor
  ll <- LL1/sqrt(LL1^2 + 2.89/(p1*p2))
  ul <- UL1/sqrt(UL1^2 + 2.89/(p1*p2))
- out <- t(c(biphi, se.biphi, ll, ul))
+ out <- t(c(round(biphi, 3), round(se.biphi, 4), round(ll, 3), round(ul, 3)))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  rownames(out) <- ""
  return(out)
@@ -1139,6 +1382,8 @@ ci.biphi <- function(alpha, f1, f2, n1, n2) {
 #' dichotomous. An approximate standard error is recovered from the
 #' confidence interval.
 #'
+#' For more details, see Section 3.4 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param   alpha  alpha level for 1-alpha confidence
 #' @param   f00    number of participants with y = 0 and x = 0
@@ -1148,6 +1393,8 @@ ci.biphi <- function(alpha, f1, f2, n1, n2) {
 #'
 #'
 #' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
 #' \insertRef{Bonett2005}{statpsych}
 #'
 #'
@@ -1160,11 +1407,11 @@ ci.biphi <- function(alpha, f1, f2, n1, n2) {
 #'
 #'
 #' @examples
-#' ci.tetra(.05, 46, 15, 54, 85)
+#' ci.tetra(.05, 86, 16, 7, 93)
 #'
 #' # Should return:
-#' #  Estimate         SE        LL        UL
-#' # 0.5135167 0.09301703 0.3102345 0.6748546
+#' # Estimate     SE    LL    UL
+#' #    0.938 0.0268 0.868 0.973
 #'
 #'
 #' @importFrom stats qnorm
@@ -1186,8 +1433,8 @@ ci.tetra <- function(alpha, f00, f01, f10, f11) {
  tetra <- cos(3.14159/(1 + or^c))
  ll <- cos(3.14159/(1 + LL1^c))
  ul <- cos(3.14159/(1 + UL1^c))
- se <- (ul - ll)/(2*z)
- out <- t(c(tetra, se, ll, ul))
+ se <- round((ul - ll)/(2*z), 4)
+ out <- t(c(round(tetra, 3), se, round(ll, 3), round(ul, 3)))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  rownames(out) <- ""
  return(out)
@@ -1200,7 +1447,10 @@ ci.tetra <- function(alpha, f00, f01, f10, f11) {
 #'
 #' @description
 #' Computes confidence intervals for the intraclass kappa coefficient and
-#' Cohen's kappa coefficient with two dichotomous ratings. 
+#' Cohen's kappa coefficient with two dichotomous ratings. The G-index of
+#' agreement (see ci.agree) is arguably a better measure of agreement.
+#'
+#' For more details, see Section 3.5 of Bonett (2021, Volume 3)
 #'
 #'
 #' @param   alpha  alpha level for 1-alpha confidence
@@ -1222,14 +1472,16 @@ ci.tetra <- function(alpha, f00, f01, f10, f11) {
 #' @references
 #' \insertRef{Fleiss2003}{statpsych}
 #'
+#' \insertRef{Bonett2021}{statpsych}
+#'
 #'
 #' @examples
 #' ci.kappa(.05, 31, 12, 4, 58)
 #'
 #' # Should return:
-#' #               Estimate         SE        LL        UL
-#' # IC kappa:    0.6736597 0.07479965 0.5270551 0.8202643
-#' # Cohen kappa: 0.6756757 0.07344761 0.5317210 0.8196303
+#' #              Estimate     SE    LL    UL
+#' # IC kappa:       0.674 0.0748 0.527 0.821
+#' # Cohen kappa:    0.676 0.0734 0.532 0.820
 #'
 #'
 #' @importFrom stats qnorm
@@ -1241,20 +1493,27 @@ ci.kappa <- function(alpha, f00, f01, f10, f11) {
  p1 <- (2*f00 + f01 + f10)/(2*n)
  k1 <- 4*(p00*p11 - p01*p10) - (p01 - p10)^2
  k2 <- (2*p00 + p01 + p10)*(2*p11 + p01 + p10)
- k <- k1/k2 
+ k <- round(k1/k2, 3)
  se.k <- sqrt(((1 - k)/n)*((1 - k)*(1 - 2*k) + k*(2 - k)/(2*p1*(1 - p1))))
- LL.k <- k - z*se.k
- UL.k <- k + z*se.k 
+ se.k <- round(se.k, 4)
+ ll.k <- k - z*se.k
+ ul.k <- k + z*se.k 
+ ll.k <- round(ll.k, 3)
+ ul.k <- round(ul.k, 3)
  pr <- (p00 + p01)*(p00 + p10) + (p10 + p11)*(p01 + p11)
  c <- ((p00 + p11) - pr)/(1 - pr)
+ c <- round(c, 3)
  a1 <- p11*(1 - (p10 + p01 + 2*p11)*(1 - c))^2 + p00*(1 - (p10 + p01 + 2*p00)*(1 - c))^2
  a2 <- p10*(p11 + p00 + 2*p01)^2*(1 - c)^2 + p01*(p11 + p00 + 2*p10)^2*(1 - c)^2
  a3 <- (c - pr*(1 - c))^2
  se.c <- sqrt(a1 + a2 - a3)/((1 - pr)*sqrt(n))
- LL.c <- c - z*se.c
- UL.c <- c + z*se.c 
- out1 <- c(k, se.k, LL.k, UL.k)
- out2 <- c(c, se.c, LL.c, UL.c)
+ se.c <- round(se.c, 4)
+ ll.c <- c - z*se.c
+ ul.c <- c + z*se.c 
+ ll.c <- round(ll.c, 3)
+ ul.c <- round(ul.c, 3)
+ out1 <- c(k, se.k, ll.k, ul.k)
+ out2 <- c(c, se.c, ll.c, ul.c)
  out <- rbind(out1, out2)
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  rownames(out) <- c("IC kappa:", "Cohen kappa:")
@@ -1273,7 +1532,9 @@ ci.kappa <- function(alpha, f00, f01, f10, f11) {
 #' corrects for chance agreement. The G-index is a better measure of 
 #' agreement than Cohen's kappa, and the confidence interval for the G-index
 #' used here has better small-sample properties than the confidence interval
-#' for Cohen's kappa.  
+#' for Cohen's kappa. 
+#'
+#' For more details, see Section 3.5 of Bonett (2021, Volume 3)
 #'
 #'
 #' @param   alpha  alpha level for 1-alpha confidence
@@ -1293,13 +1554,15 @@ ci.kappa <- function(alpha, f00, f01, f10, f11) {
 #' @references
 #' \insertRef{Bonett2022}{statpsych}
 #'
+#' \insertRef{Bonett2021}{statpsych}
+#'
 #'
 #' @examples
-#' ci.agree(.05, 100, 80, 4)
+#' ci.agree(.05, 250, 214, 3)
 #'
 #' # Should return:
-#' #  Estimate         SE        LL        UL
-#' # 0.7333333 0.05333333 0.6132949 0.8226025
+#' #  Estimate      SE     LL     UL
+#' #     0.784 0.03331 0.7098 0.8414
 #'
 #'
 #' @importFrom stats qnorm
@@ -1312,9 +1575,9 @@ ci.agree <- function(alpha, n, f, k) {
  p.mle <- f/n
  p.adj <- (f + 2)/(n + 4)
  se.g <- a*sqrt(p.mle*(1 - p.mle)/n)
- LL.g <- a*(p.adj - z*sqrt(p.adj*(1 - p.adj)/(n + 4))) - 1/(k - 1) 
- UL.g <- a*(p.adj + z*sqrt(p.adj*(1 - p.adj)/(n + 4))) - 1/(k - 1) 
- out <- t(c(g.mle, se.g, LL.g, UL.g))
+ ll <- a*(p.adj - z*sqrt(p.adj*(1 - p.adj)/(n + 4))) - 1/(k - 1) 
+ ul <- a*(p.adj + z*sqrt(p.adj*(1 - p.adj)/(n + 4))) - 1/(k - 1) 
+ out <- t(c(round(g.mle, 4), round(se.g, 5), round(ll, 4), round(ul, 4)))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  rownames(out) <- ""
  return(out)
@@ -1329,13 +1592,15 @@ ci.agree <- function(alpha, n, f, k) {
 #' Computes adjusted Wald confidence intervals for the G-index of agreement 
 #' within each group and the difference of G-indices. 
 #'
+#' For more details, see Section 3.5 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
 #' @param  n1      sample size (objects) in group 1
 #' @param  f1      number of objects rated in agreement in group 1
 #' @param  n2      sample size (objects) in group 2
 #' @param  f2      number of objects rated in agreement in group 2
-#' @param  r       number of rating categories
+#' @param  k       number of rating categories
 #'
 #'
 #' @return
@@ -1355,47 +1620,61 @@ ci.agree <- function(alpha, n, f, k) {
 #' @references
 #' \insertRef{Bonett2022}{statpsych}
 #'
+#' \insertRef{Bonett2021}{statpsych}
+#'
 #'
 #' @examples
 #' ci.agree2(.05, 75, 70, 60, 45, 2)
 #'
 #' # Should return:
-#' #          Estimate         SE        LL        UL
-#' # G1      0.8666667 0.02880329 0.6974555 0.9481141
-#' # G2      0.5000000 0.05590170 0.2523379 0.6851621
-#' # G1 - G2 0.3666667 0.06288585 0.1117076 0.6088621
+#' #         Estimate      SE     LL     UL
+#' # G1        0.8667 0.02880 0.6975 0.9481
+#' # G2        0.5000 0.05590 0.2523 0.6852
+#' # G1 - G2   0.3667 0.06289 0.1117 0.6089               
 #'
 #'
 #' @importFrom stats qnorm
 #' @export
-ci.agree2 <- function(alpha, n1, f1, n2, f2, r) {
+ci.agree2 <- function(alpha, n1, f1, n2, f2, k) {
  if (f1 > n1) {stop("f cannot be greater than n")}
  if (f2 > n2) {stop("f cannot be greater than n")}
  z <- qnorm(1 - alpha/2)
- a <- r/(r - 1)
+ a <- k/(k - 1)
  p1.ml <- f1/n1
  p1 <- (f1 + 2)/(n1 + 4)
- G1 <- a*p1.ml - 1/(r - 1)
+ G1 <- a*p1.ml - 1/(k - 1)
  se1 <- sqrt(p1*(1 - p1)/(n1 + 4))
  se1.ml <- sqrt(p1.ml*(1 - p1.ml)/n1)
- LL1 <- a*(p1 - z*se1) - 1/(r - 1)
- UL1 <- a*(p1 + z*se1) - 1/(r - 1) 
+ LL1 <- a*(p1 - z*se1) - 1/(k - 1)
+ UL1 <- a*(p1 + z*se1) - 1/(k - 1) 
  p2.ml <- f2/n2
  p2 <- (f2 + 2)/(n2 + 4)
- G2 <- a*p2.ml - 1/(r - 1)
+ G2 <- a*p2.ml - 1/(k - 1)
  se2 <- sqrt(p2*(1 - p2)/(n2 + 4))
  se2.ml <- sqrt(p2.ml*(1 - p2.ml)/n2)
- LL2 <- a*(p2 - z*se2) - 1/(r - 1)
- UL2 <- a*(p2 + z*se2) - 1/(r - 1) 
+ LL2 <- a*(p2 - z*se2) - 1/(k - 1)
+ UL2 <- a*(p2 + z*se2) - 1/(k - 1) 
  p1.d <- (f1 + 1)/(n1 + 2)
  p2.d <- (f2 + 1)/(n2 + 2)
  se.d <- sqrt(p1.d*(1 - p1.d)/(n1 + 2) + p2.d*(1 - p2.d)/(n2 + 2))
  se.d.ml <- sqrt(se1.ml^2 + se2.ml^2)
  LL3 <- a*(p1.d - p2.d - z*se.d)
  UL3 <- a*(p1.d - p2.d + z*se.d) 
+ diff <- round(G1 - G2, 4)
+ G1 <- round(G1, 4)
+ se1.ml <- round(se1.ml, 5)
+ LL1 <- round(LL1, 4)
+ UL1 <- round(UL1, 4)
+ G2 <- round(G2, 4)
+ se2.ml <- round(se2.ml, 5)
+ LL2 <- round(LL2, 4)
+ UL2 <- round(UL2, 4)
+ se.d.ml <- round(se.d.ml, 5)
+ LL3 <- round(LL3, 4)
+ UL3 <- round(UL3, 4)
  out1 <- t(c(G1, se1.ml, LL1, UL1))
  out2 <- t(c(G2, se2.ml, LL2, UL2))
- out3 <- t(c(G1 - G2, se.d.ml, LL3, UL3))
+ out3 <- t(c(diff, se.d.ml, LL3, UL3))
  out <- rbind(out1, out2, out3)
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  rownames(out) <- c("G1", "G2", "G1 - G2")
@@ -1452,14 +1731,14 @@ ci.agree2 <- function(alpha, n1, f1, n2, f2, r) {
 #' ci.agree.3rater(.05, f)
 #'
 #' # Should return:
-#' #                  Estimate          LL         UL
-#' # G(1,2)         0.56666667  0.46601839  0.6524027
-#' # G(1,3)         0.50000000  0.39564646  0.5911956
-#' # G(2,3)         0.86666667  0.79701213  0.9135142
-#' # G(1,2)-G(1,3)  0.06666667  0.00580397  0.1266464
-#' # G(1,2)-G(2,3) -0.30000000 -0.40683919 -0.1891873
-#' # G(2,3)-G(1,3) -0.36666667 -0.46222023 -0.2662566
-#' # G(3)           0.64444444  0.57382971  0.7068720
+#' #               Estimate      LL      UL
+#' # G(1,2)          0.5667  0.4660  0.6524 
+#' # G(1,3)          0.5000  0.3956  0.5912
+#' # G(2,3)          0.8667  0.7970  0.9135
+#' # G(1,2)-G(1,3)   0.0667  0.0058  0.1266
+#' # G(1,2)-G(2,3)  -0.3000 -0.4068 -0.1892
+#' # G(2,3)-G(1,3)  -0.3667 -0.4622 -0.2663
+#' # G(3)            0.6444  0.5738  0.7069
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -1524,13 +1803,13 @@ ci.agree.3rater <- function(alpha, f) {
  UL.G13_23 <- 2*(p2 - p3 + z*se.G13_23)
  LL.G3 <- (4/3)*(p123 - z*se.G3) - 1/3
  UL.G3 <- (4/3)*(p123 + z*se.G3) - 1/3
- out1 <- t(c(G12.ml, LL.G12, UL.G12))
- out2 <- t(c(G13.ml, LL.G13, UL.G13))
- out3 <- t(c(G23.ml, LL.G23, UL.G23))
- out4 <- t(c(G12_13.ml, LL.G12_13, UL.G12_13))
- out5 <- t(c(G12_23.ml, LL.G12_23, UL.G12_23))
- out6 <- t(c(G13_23.ml, LL.G13_23, UL.G13_23))
- out7 <- t(c(G3.ml, LL.G3, UL.G3))
+ out1 <- t(c(round(G12.ml, 4), round(LL.G12, 4), round(UL.G12, 4)))
+ out2 <- t(c(round(G13.ml, 4), round(LL.G13, 4), round(UL.G13, 4)))
+ out3 <- t(c(round(G23.ml, 4), round(LL.G23, 4), round(UL.G23, 4)))
+ out4 <- t(c(round(G12_13.ml, 4), round(LL.G12_13, 4), round(UL.G12_13, 4)))
+ out5 <- t(c(round(G12_23.ml, 4), round(LL.G12_23, 4), round(UL.G12_23, 4)))
+ out6 <- t(c(round(G13_23.ml, 4), round(LL.G13_23, 4), round(UL.G13_23, 4)))
+ out7 <- t(c(round(G3.ml, 4), round(LL.G3, 4), round(UL.G3, 4)))
  out <- rbind(out1, out2, out3, out4, out5, out6, out7)
  colnames(out) <- c("Estimate", "LL", "UL")
  rownames(out) <-  c("G(1,2)", "G(1,3)", "G(2,3)", "G(1,2)-G(1,3)", "G(1,2)-G(2,3)",
@@ -1553,6 +1832,8 @@ ci.agree.3rater <- function(alpha, f) {
 #' unobserved cell frequency. An approximate standard error is recovered
 #' from the confidence interval.
 #'
+#' For more details, see Section 3.7 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  f00    number of people observed in both samples
@@ -1568,12 +1849,16 @@ ci.agree.3rater <- function(alpha, f) {
 #' * UL - upper limit of the confidence interval
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
-#' ci.popsize(.05, 794, 710, 741)
+#' ci.popsize(.05, 85, 196, 184)
 #'
 #' # Should return:
-#' # Estimate       SE   LL   UL
-#' #     2908 49.49071 2818 3012
+#' # Estimate    SE  LL   UL
+#' #      889 67.35 777 1041
 #'
 #'
 #' @importFrom stats qnorm
@@ -1587,7 +1872,7 @@ ci.popsize <- function(alpha, f00, f01, f10) {
  ll <- round(n0 + exp(log(f11) - z*se))
  ul <- round(n0 + exp(log(f11) + z*se))
  se <- (ul - ll)/(2*z)
- out <- t(c(N, se, ll, ul))
+ out <- t(c(N, round(se, 2), ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  rownames(out) <- ""
  return(out)
@@ -1603,6 +1888,8 @@ ci.popsize <- function(alpha, f00, f01, f10) {
 #' of nominal association for an r x s contingency table. The confidence interval 
 #' is based on a noncentral chi-square distribution, and an approximate standard 
 #' error is recovered from the confidence interval.
+#'
+#' For more details, see Section 3.10 of Bonett (2021, Volume 3)
 #'
 #'
 #' @param  alpha    alpha value for 1-alpha confidence
@@ -1623,13 +1910,15 @@ ci.popsize <- function(alpha, f00, f01, f10) {
 #' @references
 #' \insertRef{Smithson2003}{statpsych}
 #'
+#' \insertRef{Bonett2021}{statpsych}
+#'
 #'
 #' @examples
 #' ci.cramer(.05, 19.21, 2, 3, 200)
 #'
 #' # Should return:
-#' # Estimate     SE     LL     UL
-#' #   0.3099 0.0718 0.1601 0.4417
+#' # Estimate     SE   LL    UL
+#' #     0.31 0.0718 0.16 0.442
 #'  
 #' 
 #' @importFrom stats pchisq
@@ -1653,6 +1942,10 @@ ci.cramer <- function(alpha, chisqr, r, c, n) {
  dU <- nc[k2]
  ul <- sqrt(dU/(n*k))
  se <- (ul - ll)/(2*z)
+ ll <- round(ll, 3)
+ ul <- round(ul, 3)
+ v <- round(v, 3)
+ se <- round(se, 4)
  out <- round(t(c(v, se, ll, ul)), 4)
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  rownames(out) <- ""
@@ -1675,6 +1968,8 @@ ci.cramer <- function(alpha, chisqr, r, c, n) {
 #' represents the levels of Factor A and the second subscript represents the 
 #' levels of Factor B.
 #'
+#' For more details, see Section 2.14 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
 #' @param   f       vector of frequency counts of participants who have the attribute
@@ -1685,13 +1980,15 @@ ci.cramer <- function(alpha, chisqr, r, c, n) {
 #' Returns a 7-row matrix (one row per effect). The columns are:
 #' * Estimate - adjusted estimate of effect
 #' * SE - standard error 
-#' * z - z test statistic for test of null hypothesis
+#' * z - z test statistic
 #' * p - two-sided p-value 
 #' * LL - lower limit of the adjusted Wald confidence interval
 #' * UL - upper limit of the adjusted Wald confidence interval
 #'
 #'
 #' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
 #' \insertRef{Price2004}{statpsych}
 #'
 #'
@@ -1701,14 +1998,14 @@ ci.cramer <- function(alpha, chisqr, r, c, n) {
 #' ci.2x2.prop.bs(.05, f, n)
 #'
 #' # Should return:
-#' #             Estimate         SE          z           p          LL          UL
-#' # AB:      -0.27450980 0.13692496 -2.0048193 0.044982370 -0.54287780 -0.00614181
-#' # A:       -0.11764706 0.06846248 -1.7184165 0.085720668 -0.25183106  0.01653694
-#' # B:       -0.03921569 0.06846248 -0.5728055 0.566776388 -0.17339968  0.09496831
-#' # A at b1: -0.25000000 0.09402223 -2.6589456 0.007838561 -0.43428019 -0.06571981
-#' # A at b2:  0.01923077 0.09787658  0.1964798 0.844234654 -0.17260380  0.21106534
-#' # B at a1: -0.17307692 0.09432431 -1.8349132 0.066518551 -0.35794917  0.01179533
-#' # B at a2:  0.09615385 0.09758550  0.9853293 0.324462356 -0.09511021  0.28741790
+#' #             Estimate         SE       z       p          LL          UL
+#' # AB:      -0.27450980 0.13692496 -2.0048 0.04498 -0.54287780 -0.00614181
+#' # A:       -0.11764706 0.06846248 -1.7184 0.08572 -0.25183106  0.01653694
+#' # B:       -0.03921569 0.06846248 -0.5728 0.56678 -0.17339968  0.09496831
+#' # A at b1: -0.25000000 0.09402223 -2.6589 0.00784 -0.43428019 -0.06571981
+#' # A at b2:  0.01923077 0.09787658  0.1965 0.84423 -0.17260380  0.21106534
+#' # B at a1: -0.17307692 0.09432431 -1.8349 0.06652 -0.35794917  0.01179533
+#' # B at a2:  0.09615385 0.09758550  0.9853 0.32446 -0.09511021  0.28741790
 #'
 #'
 #' @importFrom stats qnorm
@@ -1729,50 +2026,50 @@ ci.2x2.prop.bs <- function(alpha, f, n) {
  p.2 <- (f + 1)/(n + 2)
  est1 <- t(v1)%*%p.4
  se1 <- sqrt(t(v1)%*%diag(p.4*(1 - p.4))%*%solve(diag(n + 1))%*%v1)
- z1 <- est1/se1
- p1 <- 2*(1 - pnorm(abs(z1)))
+ z1 <- round(est1/se1, 4)
+ p1 <- round(2*(1 - pnorm(abs(z1))), 5)
  LL1 <- est1 - zcrit*se1
  UL1 <- est1 + zcrit*se1
  row1 <- c(est1, se1, z1, p1, LL1, UL1)
  est2 <- t(v2)%*%p.4
  se2 <- sqrt(t(v2)%*%diag(p.4*(1 - p.4))%*%solve(diag(n + 1))%*%v2)
- z2 <- est2/se2
- p2 <- 2*(1 - pnorm(abs(z2)))
+ z2 <- round(est2/se2, 4)
+ p2 <- round(2*(1 - pnorm(abs(z2))), 5)
  LL2 <- est2 - zcrit*se2
  UL2 <- est2 + zcrit*se2
  row2 <- c(est2, se2, z2, p2, LL2, UL2)
  est3 <- t(v3)%*%p.4
  se3 <- sqrt(t(v3)%*%diag(p.4*(1 - p.4))%*%solve(diag(n + 1))%*%v3)
- z3 <- est3/se3
- p3 <- 2*(1 - pnorm(abs(z3)))
+ z3 <- round(est3/se3, 4)
+ p3 <- round(2*(1 - pnorm(abs(z3))), 5)
  LL3 <- est3 - zcrit*se3
  UL3 <- est3 + zcrit*se3
  row3 <- c(est3, se3, z3, p3, LL3, UL3)
  est4 <- t(v4)%*%p.2
  se4 <- sqrt(t(v4)%*%diag(p.2*(1 - p.2))%*%solve(diag(n + 2))%*%v4)
- z4 <- est4/se4
- p4 <- 2*(1 - pnorm(abs(z4)))
+ z4 <- round(est4/se4, 4)
+ p4 <- round(2*(1 - pnorm(abs(z4))), 5)
  LL4 <- est4 - zcrit*se4
  UL4 <- est4 + zcrit*se4
  row4 <- c(est4, se4, z4, p4, LL4, UL4)
  est5 <- t(v5)%*%p.2
  se5 <- sqrt(t(v5)%*%diag(p.2*(1 - p.2))%*%solve(diag(n + 2))%*%v5)
- z5 <- est5/se5
- p5 <- 2*(1 - pnorm(abs(z5)))
+ z5 <- round(est5/se5, 4)
+ p5 <- round(2*(1 - pnorm(abs(z5))), 5)
  LL5 <- est5 - zcrit*se5
  UL5 <- est5 + zcrit*se5
  row5 <- c(est5, se5, z5, p5, LL5, UL5)
  est6 <- t(v6)%*%p.2
  se6 <- sqrt(t(v6)%*%diag(p.2*(1 - p.2))%*%solve(diag(n + 2))%*%v6)
- z6 <- est6/se6
- p6 <- 2*(1 - pnorm(abs(z6)))
+ z6 <- round(est6/se6, 4)
+ p6 <- round(2*(1 - pnorm(abs(z6))), 5)
  LL6 <- est6 - zcrit*se6
  UL6 <- est6 + zcrit*se6
  row6 <- c(est6, se6, z6, p6, LL6, UL6)
  est7 <- t(v7)%*%p.2
  se7 <- sqrt(t(v7)%*%diag(p.2*(1 - p.2))%*%solve(diag(n + 2))%*%v7)
- z7 <- est7/se7
- p7 <- 2*(1 - pnorm(abs(z7)))
+ z7 <- round(est7/se7, 4)
+ p7 <- round(2*(1 - pnorm(abs(z7))), 5)
  LL7 <- est7 - zcrit*se7
  UL7 <- est7 + zcrit*se7
  row7 <- c(est7, se7, z7, p7, LL7, UL7)
@@ -1798,6 +2095,8 @@ ci.2x2.prop.bs <- function(alpha, f, n) {
 #' the number of participants with a response of i = 0 or 1 at level 1 of 
 #' Factor A and a response of j = 0 or 1 at level 2 of Factor A. 
 #'
+#' For more details, see Section 2.2 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
 #' @param   group1  vector of frequency counts from 2x2 contingency table in group 1
@@ -1814,20 +2113,24 @@ ci.2x2.prop.bs <- function(alpha, f, n) {
 #' * UL - upper limit of the adjusted Wald confidence interval
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' group1 <- c(125, 14, 10, 254)
 #' group2 <- c(100, 16, 9, 275)
 #' ci.2x2.prop.mixed (.05, group1, group2)
 #'
 #' # Should return:
-#' #              Estimate          SE          z          p          LL           UL
-#' # AB:       0.007555369 0.017716073  0.4264697 0.66976559 -0.02716750  0.042278234
-#' # A:       -0.013678675 0.008858036 -1.5442107 0.12253730 -0.03104011  0.003682758
-#' # B:       -0.058393219 0.023032656 -2.5352360 0.01123716 -0.10353640 -0.013250043
-#' # A at b1: -0.009876543 0.012580603 -0.7850612 0.43241768 -0.03453407  0.014780985
-#' # A at b2: -0.017412935 0.012896543 -1.3502018 0.17695126 -0.04268969  0.007863824
-#' # B at a1: -0.054634236 0.032737738 -1.6688458 0.09514794 -0.11879902  0.009530550
-#' # B at a2: -0.062170628 0.032328556 -1.9230871 0.05446912 -0.12553343  0.001192177
+#' #              Estimate          SE       z       p          LL           UL
+#' # AB:       0.007555369 0.017716073  0.4265 0.66976 -0.02716750  0.042278234
+#' # A:       -0.013678675 0.008858036 -1.5442 0.12254 -0.03104011  0.003682758
+#' # B:       -0.058393219 0.023032656 -2.5352 0.01124 -0.10353640 -0.013250043
+#' # A at b1: -0.009876543 0.012580603 -0.7851 0.43242 -0.03453407  0.014780985
+#' # A at b2: -0.017412935 0.012896543 -1.3502 0.17695 -0.04268969  0.007863824
+#' # B at a1: -0.054634236 0.032737738 -1.6688 0.09515 -0.11879902  0.009530550
+#' # B at a2: -0.062170628 0.032328556 -1.9231 0.05447 -0.12553343  0.001192177
 #'
 #'
 #' @importFrom stats qnorm
@@ -1847,15 +2150,15 @@ ci.2x2.prop.mixed <- function(alpha, group1, group2) {
  v1 <- (p1 + p2 - (p1 - p2)^2)/(n1 + 1)
  v2 <- (p3 + p4 - (p3 - p4)^2)/(n2 + 1)
  se1 <- sqrt(v1 + v2)
- z1 <- est1/se1
- pval1 <- 2*(1 - pnorm(abs(z1)))
+ z1 <- round(est1/se1, 4)
+ pval1 <- round(2*(1 - pnorm(abs(z1))), 5)
  LL1 <- est1 - zcrit*se1
  UL1 <- est1 + zcrit*se1
  row1 <- c(est1, se1, z1, pval1, LL1, UL1)
  est2 <- ((p2 - p1) + (p4 - p3))/2
  se2 <- se1/2
- z2 <- est2/se2
- pval2 <- 2*(1 - pnorm(abs(z2)))
+ z2 <- round(est2/se2, 4)
+ pval2 <- round(2*(1 - pnorm(abs(z2))), 5)
  LL2 <- est2 - zcrit*se2
  UL2 <- est2 + zcrit*se2
  row2 <- c(est2, se2, z2, pval2, LL2, UL2)
@@ -1863,8 +2166,8 @@ ci.2x2.prop.mixed <- function(alpha, group1, group2) {
  p2 <- (2*f24 + f22 + f23 + 1)/(2*(n2 + 2))
  est3 <- p1 - p2
  se3 <- sqrt(p1*(1 - p1)/(2*(n1 + 2)) + p2*(1 - p2)/(2*(n2 + 2)))
- z3 <- est3/se3
- pval3 <- 2*(1 - pnorm(abs(z3)))
+ z3 <- round(est3/se3, 4)
+ pval3 <- round(2*(1 - pnorm(abs(z3))), 5)
  LL3 <- est3 - zcrit*se3
  UL3 <- est3 + zcrit*se3
  row3 <- c(est3, se3, z3, pval3, LL3, UL3)
@@ -1872,8 +2175,8 @@ ci.2x2.prop.mixed <- function(alpha, group1, group2) {
  p2 <- (f13 + 1)/(n1 + 2)
  est4 <- p2 - p1
  se4 <- sqrt((p1 + p2 - (p1 - p2)^2)/(n1 + 2))
- z4 <- est4/se4
- pval4 <- 2*(1 - pnorm(abs(z4)))
+ z4 <- round(est4/se4, 4)
+ pval4 <- round(2*(1 - pnorm(abs(z4))), 5)
  LL4 <- est4 - zcrit*se4
  UL4 <- est4 + zcrit*se4
  row4 <- c(est4, se4, z4, pval4, LL4, UL4)
@@ -1881,8 +2184,8 @@ ci.2x2.prop.mixed <- function(alpha, group1, group2) {
  p2 <- (f23 + 1)/(n2 + 2)
  est5 <- p2 - p1
  se5 <- sqrt((p1 + p2 - (p1 - p2)^2)/(n2 + 2))
- z5 <- est5/se5
- pval5 <- 2*(1 - pnorm(abs(z5)))
+ z5 <- round(est5/se5, 4)
+ pval5 <- round(2*(1 - pnorm(abs(z5))), 5)
  LL5 <- est5 - zcrit*se5
  UL5 <- est5 + zcrit*se5
  row5 <- c(est5, se5, z5, pval5, LL5, UL5)
@@ -1890,8 +2193,8 @@ ci.2x2.prop.mixed <- function(alpha, group1, group2) {
  p2 <- (f24 + f23 + 1)/(n2 + 2)
  est6 <- p1 - p2
  se6 <- sqrt(p1*(1 - p1)/(n1 + 2) + p2*(1 - p2)/(n2 + 2))
- z6 <- est6/se6
- pval6 <- 2*(1 - pnorm(abs(z6)))
+ z6 <- round(est6/se6, 4)
+ pval6 <- round(2*(1 - pnorm(abs(z6))), 5)
  LL6 <- est6 - zcrit*se6
  UL6 <- est6 + zcrit*se6
  row6 <- c(est6, se6, z6, pval6, LL6, UL6)
@@ -1899,8 +2202,8 @@ ci.2x2.prop.mixed <- function(alpha, group1, group2) {
  p2 <- (f24 + f22 + 1)/(n2 + 2)
  est7 <- p1 - p2
  se7 <- sqrt(p1*(1 - p1)/(n1 + 2) + p2*(1 - p2)/(n2 + 2))
- z7 <- est7/se7
- pval7 <- 2*(1 - pnorm(abs(z7)))
+ z7 <- round(est7/se7, 4)
+ pval7 <- round(2*(1 - pnorm(abs(z7))), 5)
  LL7 <- est7 - zcrit*se7
  UL7 <- est7 + zcrit*se7
  row7 <- c(est7, se7, z7, pval7, LL7, UL7)
@@ -1924,6 +2227,8 @@ ci.2x2.prop.mixed <- function(alpha, group1, group2) {
 #' corresponds to a Beta(1,1) distribution). The prior variance must be 
 #' less than m(1 - m) where m is the prior mean.
 #'
+#' For more details, see Section 1.18 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param   alpha        alpha level for 1-alpha credibility interval
 #' @param   prior_mean   mean of prior Beta distribution    
@@ -1941,15 +2246,17 @@ ci.2x2.prop.mixed <- function(alpha, group1, group2) {
 #'
 #'
 #' @references
-#' \insertRef{Gelman2004}{statpsych}                            
+#' \insertRef{Gelman2004}{statpsych}  
+#'
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
-#' ci.bayes.prop(.05, .4, .1, 12, 100)
+#' ci.bayes.prop(.05, .25, .1, 120, 300)
 #'
 #' # Should return:
-#' # Posterior mean Posterior SD       LL        UL
-#' #      0.1723577   0.03419454 0.1111747 0.2436185
+#' # Posterior mean Posterior SD        LL        UL
+#' #      0.3916208   0.02742595 0.3387206 0.4458133
 #'
 #'
 #' @importFrom stats qnorm
@@ -1992,6 +2299,8 @@ ci.bayes.prop <- function(alpha, prior_mean, prior_sd, f, n) {
 #' would "pass"). The confidence intervals for PPV and NPV are based on the 
 #' Price-Bonett adjusted Wald confidence interval for a proportion ratio.
 #'
+#' For more details, see Section 3.6 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
 #' @param   f1      number of participants with a positive outcome who pass the test
@@ -2010,6 +2319,8 @@ ci.bayes.prop <- function(alpha, prior_mean, prior_sd, f, n) {
 #'
 #' @references
 #' \insertRef{Price2008}{statpsych}
+#'
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -2064,12 +2375,12 @@ ci.pv <- function(alpha, f1, f2, n1, n2, prev) {
 #'                        
 #' @description
 #' Computes a confidence interval for a population Poisson rate. This function
-#' requires the number of occurences (f) of a specific event that were 
+#' requires the number of occurrences (f) of a specific event that were 
 #' observed over a specific period of time (t).
 #'
 #'
 #' @param  alpha  alpha value for 1-alpha confidence 
-#' @param  f      number of event occurences
+#' @param  f      number of event occurrences
 #' @param  t      time period 
 #'
 #'
@@ -2098,7 +2409,6 @@ ci.pv <- function(alpha, f1, f2, n1, n2, prev) {
 #' # Should return:
 #' # Estimate        SE       LL      UL
 #' # 4.380952 0.9684952 2.777148 6.57358
-
 #'  
 #' 
 #' @importFrom stats qchisq
@@ -2125,13 +2435,13 @@ ci.poisson <- function(alpha, f, t) {
 #' Computes a confidence interval for a ratio of population Poisson rates in a
 #' 2-group design. The confidence interval is based on the binomial method 
 #' with an Agresti-Coull confidence interval. This function requires the number 
-#' of occurences of a specific event (f) that were observed over a specific
+#' of occurrences of a specific event (f) that were observed over a specific
 #' period of time (t) within each group.
 #'
 #'
 #' @param  alpha  alpha value for 1-alpha confidence 
-#' @param  f1     number of event occurences for group 1
-#' @param  f2     number of event occurences for group 2
+#' @param  f1     number of event occurrences for group 1
+#' @param  f2     number of event occurrences for group 2
 #' @param  t1     time period for group 1
 #' @param  t2     time period for group 2
 #'
@@ -2139,7 +2449,7 @@ ci.poisson <- function(alpha, f, t) {
 #' @details
 #' The time periods do not need to be integers and can be expressed in any unit
 #' of time such as seconds, hours, or months. The occurances are assumed to be
-#' independent of one another and the unknown occurance rate is assumed to be
+#' independent of one another and the unknown occurrence rate is assumed to be
 #' constant over time within each group condition.
 #'
 #'
@@ -2182,30 +2492,32 @@ ci.ratio.poisson2 <- function(alpha, f1, f2, t1, t2) {
 
 
 #  pi.prop =================================================================== 
-#' Prediction interval for an estimated proportion 
+#' Prediction interval for a sample proportion in a future study
 #'
 #'                        
 #' @description
-#' Computes approximate one-sided or two-sided prediction interval for the 
+#' Computes an approximate one-sided or two-sided prediction interval for the 
 #' estimated proportion in a future study with a planned sample size of n. 
 #' The prediction interval uses a proportion estimate from a prior study that
 #' had a sample size of n0.
 #'
 #' Several confidence interval sample size functions in this package require
-#' a planning value of the estimated proportion that is expected in the
+#' a planning value of the expected sample value of a proportion in the
 #' planned study. A one-sided proportion prediction limit is useful as a 
-#' proportion planning value for the sample size required to obtain a 
-#' confidence interval with desired width. This strategy for specifying a 
-#' proportion planning value is useful in applications where the population 
-#' proportion in the prior study is assumed to be very similar to the 
-#' population proportion in the planned study. 
+#' proportion planning value for a conservatively large sample size required
+#' to obtain a confidence interval with desired width. This strategy for 
+#' specifying a proportion planning value is useful in applications where the
+#' population proportion in the prior study is assumed to be very similar to
+#' the population proportion in the planned study. 
 #'
 #' For sample size planning, use an upper prediction limit if the population
-#' proportion is assumed to be less than .5. If the upper prediction limit is
-#' greater than .5, then set the proportion planning value to .5. Use a lower
+#' proportion is assumed to be less than .5; and if the upper prediction limit
+#' is greater than .5, set the proportion planning value to .5. Use a lower
 #' prediction limit if the population proportion is asumed to be greater than
-#' .5. If the lower prediction limit is less than .5, then set the proportion 
+#' .5; and if the lower prediction limit is less than .5, set the proportion 
 #' planning value to .5.
+#'
+#' For more details, see Section 1.16 of Bonett (2021, Volume 3)
 #'
 #'
 #' @param  alpha  alpha value for 1-alpha confidence 
@@ -2221,6 +2533,10 @@ ci.ratio.poisson2 <- function(alpha, f1, f2, t1, t2) {
 #' @return 
 #' Returns one-sided or two-sided prediction limit(s) for an estimated proportion in a future 
 #' study
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -2269,6 +2585,8 @@ pi.prop <- function(alpha, prop, n0, n, type) {
 #' 1-group design. A confidence interval for a population proportion 
 #' is a recommended supplement to the z-test (see \link[statpsych]{ci.prop}).
 #'
+#' For more details, see Section 1.7 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param   f    number of participants who have the attribute
 #' @param   n    sample size
@@ -2285,13 +2603,15 @@ pi.prop <- function(alpha, prop, n0, n, type) {
 #' @references
 #' \insertRef{Snedecor1980}{statpsych}
 #'
+#' \insertRef{Bonett2021}{statpsych}
+#'
 #'
 #' @examples
-#' test.prop(9, 20, .2)
+#' test.prop(76, 100, .6)
 #'
 #' # Should return:
-#' # Estimate        z          p
-#' #     0.45 2.515576 0.01188379
+#' # Estimate      z       p
+#' #     0.76 3.1639 0.00156
 #'
 #'
 #' @importFrom stats pnorm
@@ -2302,7 +2622,9 @@ test.prop <- function(f, n, h) {
  se <- sqrt(h*(1 - h)/n)
  z <- (abs(p - h) - 1/(2*n))/se
  pval <- 2*(1 - pnorm(abs(z)))
- out <- t(c(p, z, pval))
+ p <- round(pval, 5) 
+ z <- round(z, 4)
+ out <- t(c(p, z, p))
  colnames(out) <- c("Estimate", "z", "p")
  rownames(out) <- ""
  return(out)
@@ -2318,6 +2640,8 @@ test.prop <- function(f, n, h) {
 #' proportions in a 2-group design. A confidence interval for a difference in 
 #' population proportions is a recommended supplement to the z-test (see
 #' \link[statpsych]{ci.prop2}).
+#'
+#' For more details, see Section 2.4 of Bonett (2021, Volume 3)
 #'
 #'
 #' @param  f1      number of group 1 participants who have the attribute
@@ -2336,13 +2660,15 @@ test.prop <- function(f, n, h) {
 #' @references
 #' \insertRef{Snedecor1980}{statpsych}
 #'
+#' \insertRef{Bonett2021}{statpsych}
+#'
 #'
 #' @examples
-#' test.prop2(11, 26, 50, 50)
+#' test.prop2(39, 24, 50, 50)
 #'
 #' # Should return:
-#' # Estimate        z           p
-#' #     -0.3 2.899726 0.003734895
+#' # Estimate      z       p
+#' #      0.3 2.8997 0.00373
 #'
 #'
 #' @importFrom stats pnorm
@@ -2357,7 +2683,9 @@ test.prop2 <- function(f1, f2, n1, n2) {
  se <- sqrt(p0*(1 - p0)/n1 + p0*(1 - p0)/n2)
  z <- (abs(p1 - p2) - 1/(2*n1) - 1/(2*n2))/se
  pval <- 2*(1 - pnorm(abs(z)))
- out <- t(c(diff, z, pval))
+ p <- round(pval, 5) 
+ z <- round(z, 4)
+ out <- t(c(diff, z, p))
  colnames(out) <- c("Estimate", "z", "p")
  rownames(out) <- ""
  return(out)
@@ -2371,6 +2699,8 @@ test.prop2 <- function(f1, f2, n1, n2) {
 #' @description
 #' Computes a Pearson chi-square test for equal population proportions for a 
 #' dichotomous response variable in a one-factor between-subjects design.
+#'
+#' For more details, see Section 2.13 of Bonett (2021, Volume 3)
 #'
 #'
 #' @param  f    vector of frequency counts of participants who have the attribute
@@ -2387,15 +2717,17 @@ test.prop2 <- function(f1, f2, n1, n2) {
 #' @references
 #' \insertRef{Fleiss2003}{statpsych}
 #'
+#' \insertRef{Bonett2021}{statpsych}
+#'
 #'
 #' @examples
-#' f <- c(35, 30, 15)
-#' n <- c(50, 50, 50)
+#' f <- c(111, 118, 132)
+#' n <- c(200, 200, 200)
 #' test.prop.bs (f, n)
 #'
 #' # Should return:
-#' # Chi-square df            p
-#' #   17.41071  2 0.0001656958
+#' # Chi-square df       p
+#' #     4.7706  2 0.09206
 #'
 #'
 #' @importFrom stats pchisq
@@ -2410,7 +2742,9 @@ test.prop.bs <- function(f, n) {
  r <- (p - p0)^2
  chi <- a*sum(n*r)
  pval <- 1 - pchisq(chi, df)
- out <- t(c(chi, df, pval))
+ p <- round(pval, 5) 
+ chi <- round(chi, 4)
+ out <- t(c(chi, df, p))
  colnames(out) <- c("Chi-square", "df", "p")
  rownames(out) <- ""
  return(out)
@@ -2429,6 +2763,8 @@ test.prop.bs <- function(f, n) {
 #' \link[statpsych]{ci.prop.ps}) is a recommended supplement to the McNemar
 #' test.
 #'
+#' For more details, see Section 3.2 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param   f00    number participants with y = 0 and x = 0
 #' @param   f01    number participants with y = 0 and x = 1
@@ -2439,6 +2775,8 @@ test.prop.bs <- function(f, n) {
 #' @references
 #' \insertRef{Snedecor1980}{statpsych}
 #'
+#' \insertRef{Bonett2021}{statpsych}
+#'
 #'
 #' @return
 #' Returns a 1-row matrix. The columns are:
@@ -2448,11 +2786,11 @@ test.prop.bs <- function(f, n) {
 #'
 #'
 #' @examples
-#' test.prop.ps(156, 96, 68, 80)
+#' test.prop.ps(12, 4, 26, 6)
 #'
 #' # Should return:
-#' # Estimate        z          p
-#' #     0.07 2.108346 0.03500109
+#' #   Estimate      z       p
+#' # -0.4583333 3.8341 0.00013
 #'
 #'
 #' @importFrom stats pnorm
@@ -2467,7 +2805,9 @@ test.prop.ps <- function(f00, f01, f10, f11) {
  se <- sqrt((p10 + p01)/n)
  z <- (abs(p10 - p01) - 1/n)/se
  pval <- 2*(1 - pnorm(abs(z)))
- out <- t(c(diff, z, pval))
+ p <- round(pval, 5) 
+ z <- round(z, 4)
+ out <- t(c(diff, z, p))
  colnames(out) <- c("Estimate", "z", "p")
  rownames(out) <- ""
  return(out)
@@ -2490,6 +2830,8 @@ test.prop.ps <- function(f00, f01, f10, f11) {
 #' of a monotonic trend if any lower limit is greater than 0 and any upper 
 #' limit is less than 0. 
 #'
+#' For more details, see Section 2.12 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param  alpha   alpha level for simultaneous 1-alpha confidence
 #' @param  f       vector of frequency counts of participants who have the attribute
@@ -2503,6 +2845,10 @@ test.prop.ps <- function(f00, f01, f10, f11) {
 #' * SE - standard error
 #' * LL - one-sided lower limit of the confidence interval
 #' * UL - one-sided upper limit of the confidence interval
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -2553,6 +2899,8 @@ test.mono.prop.bs <-function(alpha, f, n) {
 #' with desired confidence interval precision. Set the proportion planning
 #' value to .5 for a conservatively large sample size.
 #'
+#' For more details, see Section 1.14 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
 #' @param  p      planning value of proportion
@@ -2563,12 +2911,16 @@ test.mono.prop.bs <-function(alpha, f, n) {
 #' Returns the required sample size
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
-#' size.ci.prop(.05, .4, .2)
+#' size.ci.prop(.05, .5, .1)
 #'
 #' # Should return:
 #' # Sample size
-#' #          93
+#' #         385
 #'
 #'
 #' @importFrom stats qnorm
@@ -2594,6 +2946,8 @@ size.ci.prop <- function(alpha, p, w) {
 #' design. Set the proportion planning values to .5 for a conservatively 
 #' large sample size. Set R = 1 for equal sample sizes.
 #'
+#' For more details, see Section 2.22 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
 #' @param  p1     planning value of proportion for group 1
@@ -2606,12 +2960,16 @@ size.ci.prop <- function(alpha, p, w) {
 #' Returns the required sample size for each group
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
-#' size.ci.prop2(.05, .4, .2, .15, 1)
+#' size.ci.prop2(.05, .05, .15, .1, 1)
 #'
 #' # Should return:
 #' #   n1  n2
-#' #  274 274
+#' #  269 269
 #'
 #' size.ci.prop2(.05, .4, .2, .15, .5)
 #'
@@ -2644,6 +3002,8 @@ size.ci.prop2 <- function(alpha, p1, p2, w, R) {
 #' proportions with desired confidence interval precision in a 2-group design. 
 #' Set R = 1 for equal sample sizes.
 #'
+#' For more details, see Section 2.22 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
 #' @param  p1     planning value of proportion for group 1
@@ -2656,18 +3016,22 @@ size.ci.prop2 <- function(alpha, p1, p2, w, R) {
 #' Returns the required sample size for each group
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
-#' size.ci.ratio.prop2(.05, .2, .1, 2, 1)
+#' size.ci.ratio.prop2(.05, .9, .7, 1.5, 1)
 #'
 #' # Should return:
 #' #   n1  n2
-#' #  416 416
+#' #   51  51
 #'
-#' size.ci.ratio.prop2(.05, .2, .1, 2, .5)
+#' size.ci.ratio.prop2(.05, .9, .7, 1.5, .5)
 #'
 #' # Should return:
 #' #   n1  n2
-#' #  704 352
+#' #   91  46
 #'
 #'
 #' @importFrom stats qnorm
@@ -2696,6 +3060,8 @@ size.ci.ratio.prop2 <- function(alpha, p1, p2, r, R) {
 #' interval precision in a between-subjects design. Set the proportion planning 
 #' values to .5 for a conservatively large sample size.
 #'
+#' For more details, see Section 2.22 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
 #' @param  p      vector of proportion planning values
@@ -2707,14 +3073,18 @@ size.ci.ratio.prop2 <- function(alpha, p1, p2, r, R) {
 #' Returns the required sample size for each group
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
-#' p <- c(.25, .30, .50, .50)
-#' v <- c(.5, .5, -.5, -.5)
+#' p <- c(.1, .2, .2, .3)
+#' v <- c(.5, -.5, .5, -.5)
 #' size.ci.lc.prop.bs(.05, p, .2, v)
 #'
 #' # Should return:
 #' # Sample size per group
-#' #                    87
+#' #                    60
 #'
 #'
 #' @importFrom stats qnorm
@@ -2740,6 +3110,8 @@ size.ci.lc.prop.bs <- function(alpha, p, w, v) {
 #' sample size. Set the phi correlation planning value to the smallest value 
 #' within a plausible range for a conservatively large sample size.
 #'
+#' For more details, see Section 3.12 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
 #' @param  p1     planning value of proportion for measurement 1
@@ -2752,12 +3124,16 @@ size.ci.lc.prop.bs <- function(alpha, p, w, v) {
 #' Returns the required sample size
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
-#' size.ci.prop.ps(.05, .2, .3, .8, .1)
+#' size.ci.prop.ps(.05, .25, .35, .6, .1)
 #'
 #' # Should return:
 #' # Sample size
-#' #         118
+#' #         257
 #'
 #'
 #' @importFrom stats qnorm
@@ -2786,6 +3162,8 @@ size.ci.prop.ps <- function(alpha, p1, p2, phi, w) {
 #' design. Set the phi correlation planning value to the smallest value within 
 #' a plausible range for a conservatively large sample size. 
 #'
+#' For more details, see Section 3.12 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
 #' @param  p1     planning value of proportion for measurement 1
@@ -2796,6 +3174,10 @@ size.ci.prop.ps <- function(alpha, p1, p2, phi, w) {
 #'
 #' @return
 #' Returns the required sample size
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -2832,6 +3214,8 @@ size.ci.ratio.prop.ps <- function(alpha, p1, p2, phi, r) {
 #' precision. Set the G-index planning value to the smallest value within a
 #' plausible range for a conservatively large sample size.
 #'
+#' For more details, see Section 3.12 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
 #' @param  G      planning value of G-index
@@ -2840,6 +3224,10 @@ size.ci.ratio.prop.ps <- function(alpha, p1, p2, phi, r) {
 #'
 #' @return
 #' Returns the required sample size
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -2864,8 +3252,8 @@ size.ci.agree <- function(alpha, G, w) {
 
 
 #  size.ci.prop.prior =========================================================
-#' Sample size for a proportion confidence interval using a planning value 
-#' from a prior study
+#' Sample size for a proportion confidence interval using an estimated 
+#' proportion from a prior study
 #'
 #'                
 #' @description
@@ -2875,17 +3263,21 @@ size.ci.agree <- function(alpha, G, w) {
 #' width in the planned study will depend on the value of the estimated 
 #' proportion in the planned study. An estimated proportion from a prior study
 #' is used to predict the value of the estimated proportion in the planned 
-#' study, and the predicted proportion estimate is then used in the sample size
-#' computation.
+#' study, and the predicted proportion estimate is then used as a planning
+#' value in the sample size computation. The probability that the prediction 
+#' interval in the planned study will have a width that is less than the desired
+#' width is approximately 1 - alpha2.
 #'
 #' This sample size approach assumes that the population proportion in the 
 #' prior study is very similar to the population proportion in the planned 
-#' study. In a typical sample size analysis, this type of information is not
-#' available, and the researcher must use expert opinion to guess the value of
-#' the proportion that will be observed in the planned study. The 
-#' \link[statpsych]{size.ci.prop}) function uses a proportion planning value 
-#' that is based on expert opinion regarding the likely value of the proportion 
-#' estimate that will be observed in the planned study.
+#' study. If an estimated proportion from a prior study is not available the 
+#' researcher must use expert opinion to guess the value of the proportion
+#' that will be observed in the planned study. The \link[statpsych]{size.ci.prop} 
+#' function uses a proportion planning value that is based on expert opinion 
+#' regarding the likely value of the proportion estimate that will be observed
+#' in the planned study.
+#'
+#' For more details, see Section 1.16 of Bonett (2021, Volume 3)
 #'
 #'
 #' @param  alpha1  alpha level for 1-alpha1 confidence in the planned study
@@ -2900,55 +3292,48 @@ size.ci.agree <- function(alpha, G, w) {
 #' Returns the required sample size
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
-#' size.ci.prop.prior(.05, .20, .1425, 200, .1)
+#' size.ci.prop.prior(.05, .10, .78, 50, .1)
 #'
 #' # Should return:
 #' # Sample size
-#' #         318
+#' #         384
 #'
 #'
 #' @importFrom stats qnorm
-#' @export                 
+#' @export
 size.ci.prop.prior <- function(alpha1, alpha2, p0, n0, w) {
  if (p0 > .9999 | p0 < .0001) {stop("proportion must be between .0001 and .9999")}
+ if (alpha2 > .5) {stop("alpha2 cannot be greater than .5")}
  z1 <- qnorm(1 - alpha1/2)
- z2 <- qnorm(1 - alpha2/2)
- p.adj <- (n0*p0 + 2)/(n0 + 4)
- se <- sqrt(p.adj*(1 - p.adj)/(n0 + 4))
- ll0 <- p.adj - z2*se
- ul0 <- p.adj + z2*se
+ z2 <- qnorm(1 - alpha2)
+ se <- sqrt(p0*(1 - p0)/n0)
+ ll0 <- p0 - z2*se
+ ul0 <- p0 + z2*se
  if (ll0 < .0001) {ll0 = .0001}
  if (ul0 > .9999) {ul0 = .9999}
- if (ll0 < .5 & ul0 > .5) {
-   p = .5
-   n <- ceiling(4*p*(1 - p)*(z1/w)^2)
- } else {
-   if (abs(ll0 - .5) < abs(ul0 - .5)) (p = ll0)
-   if (abs(ll0 - .5) > abs(ul0 - .5)) (p = ul0)
-   n <- ceiling(4*p*(1 - p)*(z1/w)^2)
-   pi <- pi.prop(alpha2, p, n0, n, type = 1)
-   ll <- pi[1,1]                                  
-   ul <- pi[1,2]
-   if (ll < .0001) {ll = .0001}
-   if (ul > .9999) {ul = .9999}
-   if (ll < .5 & ul > .5) {
-     p = .5
-     n <- ceiling(4*p*(1 - p)*(z1/w)^2)
-   } else {
-     if (abs(ll - .5) < abs(ul - .5)) (p = ll)
-     if (abs(ll - .5) > abs(ul - .5)) (p = ul)
-     n <- ceiling(4*p*(1 - p)*(z1/w)^2)
- 	 pi <- pi.prop(alpha2, p, n0, n, type = 1)
-     ll <- pi[1,1]                                  
-     ul <- pi[1,2]
-	 if (ll < .0001) {ll = .0001}
-     if (ul > .9999) {ul = .9999}
-	 if (abs(ll - .5) < abs(ul - .5)) (p = ll)
-     if (abs(ll - .5) > abs(ul - .5)) (p = ul)
-     n <- ceiling(4*p*(1 - p)*(z1/w)^2)
-   }
- }	 
+ if (ul0 < .5) {p = ul0}
+ else if (ll0 > .5) {p = ll0}
+ else {p = .5}
+ n1 <- ceiling(4*p*(1 - p)*(z1/w)^2)
+ ll0 <- p - z2*sqrt(p*(1 - p)/n0 + p*(1 - p)/n1)
+ ul0 <- p + z2*sqrt(p*(1 - p)/n0 + p*(1 - p)/n1)
+ if (ll0 < .0001) {ll0 = .0001}
+ if (ul0 > .9999) {ul0 = .9999}
+ if (ul0 < .5) {p = ul0}
+ else if (ll0 > .5) {p = ll0}
+ else {p = .5}
+ n2 <- ceiling(4*p*(1 - p)*(z1/w)^2)
+ ll0 <- p - z2*sqrt(p*(1 - p)/n0 + p*(1 - p)/n2)
+ ul0 <- p + z2*sqrt(p*(1 - p)/n0 + p*(1 - p)/n2)
+ if (ul0 < .5) {p = ul0}
+ else if (ll0 > .5) {p = ll0}
+ else {p = .5}
+ n <- ceiling(4*p*(1 - p)*(z1/w)^2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
  rownames(out) <- ""
@@ -2983,11 +3368,11 @@ size.ci.prop.prior <- function(alpha1, alpha2, p0, n0, w) {
 #'
 #'
 #' @examples
-#' size.ci.tetra(.05, .4, .3, .5, .3)
+#' size.ci.tetra(.05, .5, .3, .7, .25)
 #'
 #' # Should return:
 #' #  Sample size
-#' #          296
+#' #          304
 #'
 #'
 #' @importFrom stats qnorm
@@ -3265,6 +3650,8 @@ size.ci.biphi <- function(alpha, p1, p2, cor, w) {
 #' Computes the sample size required to test a population proportion with
 #' desired power (using a correction for continuity) in a 1-group design. 
 #'
+#' For more details, see Section 1.15 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param  alpha  alpha level for hypothesis test 
 #' @param  pow    desired power
@@ -3274,6 +3661,8 @@ size.ci.biphi <- function(alpha, p1, p2, cor, w) {
 #'
 #' @references
 #' \insertRef{Fleiss2003}{statpsych}
+#'
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @return
@@ -3318,6 +3707,8 @@ size.test.prop <- function(alpha, pow, p, h) {
 #' proportion planning values; for example, the planning value of the proportion 
 #' difference could be set equal to a minimally interesting effect size.
 #'
+#' For more details, see Section 2.23 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param  alpha  alpha level for hypothesis test 
 #' @param  pow    desired power
@@ -3330,17 +3721,20 @@ size.test.prop <- function(alpha, pow, p, h) {
 #' Returns the required sample size for each group
 #'
 #'
-#' @examples
-#' size.test.prop2(.05, .8, .5, .5, .2)
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
+#'
+#' @examples
+#' size.test.prop2(.05, .8, .6, .4, .2)
+#' # Should return:
+#' # Sample size per group
+#' #                   106
+#'
+#' size.test.prop2(.05, .8, .5, .5, .2)
 #' # Should return:
 #' # Sample size per group
 #' #                   109
-#'
-#' size.test.prop2(.05, .8, .3, .1, .2)
-#' # Should return:
-#' # Sample size per group
-#' #                    71
 #'
 #'
 #' @importFrom stats qnorm
@@ -3376,6 +3770,8 @@ size.test.prop2 <- function(alpha, pow, p1, p2, es) {
 #' effect size. For a conservatively large sample size, set the proportion planning
 #' values to .5 and set the effect size to a minimally interesting value. 
 #'
+#' For more details, see Section 2.23 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param  alpha  alpha level for hypothesis test 
 #' @param  pow    desired power
@@ -3388,14 +3784,18 @@ size.test.prop2 <- function(alpha, pow, p1, p2, es) {
 #' Returns the required sample size for each group
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
-#' p <- c(.25, .30, .50, .50)
-#' v <- c(.5, .5, -.5, -.5)
+#' p <- c(.35, .35, .20)
+#' v <- c(.5, .5, -1)
 #' size.test.lc.prop.bs(.05, .9, p, .15, v)
 #'
 #' # Should return:
 #' # Sample size per group
-#' #                   105
+#' #                   128
 #'
 #'
 #' @importFrom stats qnorm
@@ -3427,6 +3827,8 @@ size.test.lc.prop.bs <- function(alpha, pow, p, es, v) {
 #' alpha = .05). This function sets the effect size equal to the difference in
 #' proportion planning values.
 #'
+#' For more details, see Section 2.23 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param  alpha  alpha level for hypothesis test 
 #' @param  pow    desired power
@@ -3439,12 +3841,16 @@ size.test.lc.prop.bs <- function(alpha, pow, p, es, v) {
 #' Returns the required sample size for each group
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
-#' size.equiv.prop2(.1, .8, .30, .35, .15)
+#' size.equiv.prop2(.1, .9, .8, .8, .075)
 #'
 #' # Should return:
 #' # Sample size per group
-#' #                   288
+#' #                   488
 #'
 #'
 #' @importFrom stats qnorm
@@ -3478,6 +3884,8 @@ size.equiv.prop2 <- function(alpha, pow, p1, p2, h) {
 #' of p1 and p2 such that p1 - p2 > -h. This function sets the effect size equal
 #' to p1 - p2.
 #'
+#' For more details, see Section 2.23 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param  alpha  alpha level for hypothesis test 
 #' @param  pow    desired power
@@ -3488,6 +3896,10 @@ size.equiv.prop2 <- function(alpha, pow, p1, p2, h) {
 #'
 #' @return
 #' Returns the required sample size for each group
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -3530,6 +3942,8 @@ size.supinf.prop2 <- function(alpha, pow, p1, p2, h) {
 #' phi correlation planning value to the smallest absolute value within a
 #' plausible range for a conservatively large sample size.
 #'
+#' For more details, see Section 3.13 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param  alpha  alpha level for hypothesis test 
 #' @param  pow    desired power
@@ -3543,12 +3957,16 @@ size.supinf.prop2 <- function(alpha, pow, p1, p2, h) {
 #' Returns the required sample size
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
-#' size.test.prop.ps(.05, .80, .4, .3, .5, .1)
+#' size.test.prop.ps(.05, .90, .6, .7, .5, .1)
 #'
 #' # Should return:
 #' # Sample size
-#' #         177
+#' #         237
 #'
 #'
 #' @importFrom stats qnorm
@@ -3583,6 +4001,8 @@ size.test.prop.ps <- function(alpha, pow, p1, p2, phi, es) {
 #' Set the phi correlation planning value to the smallest absolute value within 
 #' a plausible range for a conservatively large sample size.
 #'
+#' For more details, see Section 3.13 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param  alpha  alpha level for hypothesis test 
 #' @param  pow    desired power
@@ -3594,6 +4014,10 @@ size.test.prop.ps <- function(alpha, pow, p1, p2, phi, es) {
 #'
 #' @return
 #' Returns the required sample size
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -3639,6 +4063,8 @@ size.equiv.prop.ps <- function(alpha, pow, p1, p2, phi, h) {
 #' Set the phi correlation planning value to the smallest absolute value within
 #' a plausible range for a conservatively large sample size.
 #'
+#' For more details, see Section 3.13 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param  alpha  alpha level for hypothesis test 
 #' @param  pow    desired power
@@ -3650,6 +4076,10 @@ size.equiv.prop.ps <- function(alpha, pow, p1, p2, phi, h) {
 #'
 #' @return
 #' Returns the required sample size
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -3846,6 +4276,7 @@ power.prop.ps <- function(alpha, n, p1, p2, phi, es) {
 #'
 #' @description
 #' Computes the Shannon, Berger, and Simpson indices of qualitative variation.
+#' Will be replaced soon with ci.diversity.
 #'
 #'  
 #' @param   f   vector of multinomial frequency counts
@@ -3890,6 +4321,8 @@ iqv <- function(f) {
 #' logit, or log-Poisson model. This function is useful with software that 
 #' does not have an option to compute exp(B) and exp(B) - 1.
 #'
+#' For more details, see Section 4.1 of Bonett (2021, Volume 3)
+#'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  b      estimated slope coefficient
@@ -3902,6 +4335,10 @@ iqv <- function(f) {
 #' * Estimate - estimate of exp(B) or exp(B) - 1
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -3941,13 +4378,15 @@ expon.slope <- function(alpha, b, se) {
 #' @description
 #' Computes the hit rate, false alarm rate, d-prime, threshold, and bias 
 #' for one participant (observer) in a Yes/No signal detection study. 
-#' An equal-variance Gausian model is assumed. The parameter estimates are 
-#' computed after adding .5 to the number of "Yes" responses in each condtion
+#' An equal-variance Gaussian model is assumed. The parameter estimates are 
+#' computed after adding .5 to the number of "Yes" responses in each condition
 #' (the signal and noise conditions) and adding 1 to the number of signal 
 #' trials and to the number of noise trails. In memory recognition studies,
 #' the observer is first presented with set of words or images to study, 
 #' and is later presented with another set of words or images where some
 #' items are from the first list (old items) and some items are new items.
+#'
+#' For more details, see Section 3.8 of Bonett (2021, Volume 3)
 #'
 #'
 #' @param   f1    number of "Yes" responses in the stimulus (old item) trials 
@@ -3966,7 +4405,9 @@ expon.slope <- function(alpha, b, se) {
 #'
 #'
 #' @references
-#' \insertRef{Wickens2002}{statpsych}        
+#' \insertRef{Wickens2002}{statpsych}  
+#'
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples

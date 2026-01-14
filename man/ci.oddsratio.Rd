@@ -30,6 +30,8 @@ Returns a 1-row matrix. The columns are:
 Computes a confidence interval for an odds ratio with .5 added to each
 cell frequency. This function requires the frequency counts from a
 2 x 2 contingency table for two dichotomous variables.
+
+For more details, see Section 3.4 of Bonett (2021, Volume 3)
 }
 \examples{
 ci.oddsratio(.05, 229, 28, 96, 24)
@@ -42,4 +44,6 @@ ci.oddsratio(.05, 229, 28, 96, 24)
 }
 \references{
 \insertRef{Fleiss2003}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

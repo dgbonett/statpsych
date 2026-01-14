@@ -4,12 +4,14 @@ of means in a between-subjects design. The unweighted standardizer is
 recommended in experimental designs. The weighted standardizer is
 recommended in nonexperimental designs with simple random sampling. The
 group 1 standardizer is useful in both experimental and nonexperimental
-designs. Equality of variances is not assumed."><meta property="og:description" content="Computes confidence intervals for a population standardized linear contrast
+designs. Equality of variances is not assumed.
+For more details, see Section 3.4 of Bonett (2021, Volume 1)"><meta property="og:description" content="Computes confidence intervals for a population standardized linear contrast
 of means in a between-subjects design. The unweighted standardizer is
 recommended in experimental designs. The weighted standardizer is
 recommended in nonexperimental designs with simple random sampling. The
 group 1 standardizer is useful in both experimental and nonexperimental
-designs. Equality of variances is not assumed."></head><body>
+designs. Equality of variances is not assumed.
+For more details, see Section 3.4 of Bonett (2021, Volume 1)"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -17,7 +19,7 @@ designs. Equality of variances is not assumed."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">statpsych</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.8.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,6 +52,7 @@ recommended in experimental designs. The weighted standardizer is
 recommended in nonexperimental designs with simple random sampling. The
 group 1 standardizer is useful in both experimental and nonexperimental
 designs. Equality of variances is not assumed.</p>
+<p>For more details, see Section 3.4 of Bonett (2021, Volume 1)</p>
     </div>
 
     <div class="section level2">
@@ -96,25 +99,27 @@ designs. Equality of variances is not assumed.</p>
 <em>Psychological Methods</em>, <b>13</b>(2), 99–109.
 ISSN 1939-1463, <a href="https://doi.org/10.1037/1082-989X.13.2.99" class="external-link">doi:10.1037/1082-989X.13.2.99</a>
 .</p>
+<p>Bonett DG (2021).
+<em>Statistical Methods for Psychologists https://dgbonett.sites.ucsc.edu/</em>.</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">33.5</span>, <span class="fl">37.9</span>, <span class="fl">38.0</span>, <span class="fl">44.1</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">sd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3.84</span>, <span class="fl">3.84</span>, <span class="fl">3.65</span>, <span class="fl">4.98</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">10</span>,<span class="fl">10</span>,<span class="fl">10</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">6.94</span>, <span class="fl">7.15</span>, <span class="fl">4.60</span>, <span class="fl">3.68</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">sd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2.21</span>, <span class="fl">2.83</span>, <span class="fl">2.29</span>, <span class="fl">1.90</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">40</span>, <span class="fl">40</span>, <span class="fl">40</span>, <span class="fl">40</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">v</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.5</span>, <span class="fl">.5</span>, <span class="op">-</span><span class="fl">.5</span>, <span class="op">-</span><span class="fl">.5</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">ci.lc.stdmean.bs</span><span class="op">(</span><span class="fl">.05</span>, <span class="va">m</span>, <span class="va">sd</span>, <span class="va">n</span>, <span class="va">v</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                           Estimate adj Estimate        SE        LL         UL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Unweighted standardizer: -1.301263    -1.273964 0.3692800 -2.025039 -0.5774878</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Weighted standardizer:   -1.301263    -1.273964 0.3514511 -1.990095 -0.6124317</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Group 1 standardizer:    -1.393229    -1.273810 0.4849842 -2.343781 -0.4426775</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                          Estimate adj Estimate      SE     LL     UL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Unweighted standardizer:   1.2459       1.2399 0.17621 0.9005 1.5912</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Weighted standardizer:     1.2459       1.2399 0.17313 0.9065 1.5852</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Group 1 standardizer:      1.3145       1.2890 0.22515 0.8732 1.7558</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Should return:</span></span></span>
-<span class="r-in"><span><span class="co">#                           Estimate  adj Estimate        SE        LL         UL</span></span></span>
-<span class="r-in"><span><span class="co"># Unweighted standardizer: -1.301263     -1.273964 0.3692800 -2.025039 -0.5774878</span></span></span>
-<span class="r-in"><span><span class="co"># Weighted standardizer:   -1.301263     -1.273964 0.3514511 -1.990095 -0.6124317</span></span></span>
-<span class="r-in"><span><span class="co"># Group 1 standardizer:    -1.393229     -1.273810 0.4849842 -2.343781 -0.4426775</span></span></span>
+<span class="r-in"><span><span class="co">#                          Estimate adj Estimate      SE     LL     UL</span></span></span>
+<span class="r-in"><span><span class="co"># Unweighted standardizer:   1.2459       1.2399 0.17621 0.9005 1.5912 </span></span></span>
+<span class="r-in"><span><span class="co"># Weighted standardizer:     1.2459       1.2399 0.17313 0.9065 1.5852</span></span></span>
+<span class="r-in"><span><span class="co"># Group 1 standardizer:      1.3145       1.2890 0.22515 0.8732 1.7558</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
@@ -128,7 +133,7 @@ ISSN 1939-1463, <a href="https://doi.org/10.1037/1082-989X.13.2.99" class="exter
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

@@ -22,18 +22,22 @@ Returns a 1-row matrix. The columns are:
 \description{
 Computes a Pearson chi-square test for equal population proportions for a
 dichotomous response variable in a one-factor between-subjects design.
+
+For more details, see Section 2.13 of Bonett (2021, Volume 3)
 }
 \examples{
-f <- c(35, 30, 15)
-n <- c(50, 50, 50)
+f <- c(111, 118, 132)
+n <- c(200, 200, 200)
 test.prop.bs (f, n)
 
 # Should return:
-# Chi-square df            p
-#   17.41071  2 0.0001656958
+# Chi-square df       p
+#     4.7706  2 0.09206
 
 
 }
 \references{
 \insertRef{Fleiss2003}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

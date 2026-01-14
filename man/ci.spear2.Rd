@@ -28,15 +28,15 @@ Returns a 1-row matrix. The columns are:
 }
 \description{
 Computes a confidence interval for a difference of population Spearman
-correlations in a 2-group design. This function is not appropropriate
+correlations in a 2-group design. This function is not appropriate
 for ordered categorical variables.
 }
 \examples{
 ci.spear2(.05, .54, .48, 180, 200)
 
 # Should return:
-# Estimate         SE         LL        UL
-#     0.06 0.08124926 -0.1003977 0.2185085     
+# Estimate      SE      LL     UL
+#     0.06 0.08125 -0.1004 0.2185     
  
 
 }

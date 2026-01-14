@@ -4,12 +4,14 @@ when inverse sampling has been used. An approximate standard error is
 recovered from the confidence interval. With inverse sampling, the number
 of participants who have the attribute (f) is predetermined and sampling
 continues until f attains its prespecified value. With inverse sampling,
-the sample size (n) will not be known in advance."><meta property="og:description" content="Computes an exact confidence interval for a population proportion
+the sample size (n) will not be known in advance.
+For more details, see Section 1.19 of Bonett (2021, Volume 3)"><meta property="og:description" content="Computes an exact confidence interval for a population proportion
 when inverse sampling has been used. An approximate standard error is
 recovered from the confidence interval. With inverse sampling, the number
 of participants who have the attribute (f) is predetermined and sampling
 continues until f attains its prespecified value. With inverse sampling,
-the sample size (n) will not be known in advance."></head><body>
+the sample size (n) will not be known in advance.
+For more details, see Section 1.19 of Bonett (2021, Volume 3)"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -17,7 +19,7 @@ the sample size (n) will not be known in advance."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">statpsych</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.8.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,6 +52,7 @@ recovered from the confidence interval. With inverse sampling, the number
 of participants who have the attribute (f) is predetermined and sampling
 continues until f attains its prespecified value. With inverse sampling,
 the sample size (n) will not be known in advance.</p>
+<p>For more details, see Section 1.19 of Bonett (2021, Volume 3)</p>
     </div>
 
     <div class="section level2">
@@ -87,17 +90,19 @@ the sample size (n) will not be known in advance.</p>
 <em>Computational Statistics &amp; Data Analysis</em>, <b>54</b>(1), 55–64.
 ISSN 0167-9473, <a href="https://doi.org/10.1016/j.csda.2005.05.007" class="external-link">doi:10.1016/j.csda.2005.05.007</a>
 .</p>
+<p>Bonett DG (2021).
+<em>Statistical Methods for Psychologists https://dgbonett.sites.ucsc.edu/</em>.</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">ci.prop.inv</span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">5</span>, <span class="fl">67</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    Estimate         SE         LL        UL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.07462687 0.03145284 0.02467471 0.1479676</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">ci.prop.inv</span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">10</span>, <span class="fl">87</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Estimate         SE         LL        UL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.1149425 0.03389574 0.05651668 0.1893855</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Should return:</span></span></span>
-<span class="r-in"><span><span class="co">#   Estimate         SE         LL        UL</span></span></span>
-<span class="r-in"><span><span class="co"># 0.07462687 0.03145284 0.02467471 0.1479676</span></span></span>
+<span class="r-in"><span><span class="co">#  Estimate         SE         LL        UL</span></span></span>
+<span class="r-in"><span><span class="co"># 0.1149425 0.03389574 0.05651668 0.1893855</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
@@ -111,7 +116,7 @@ ISSN 0167-9473, <a href="https://doi.org/10.1016/j.csda.2005.05.007" class="exte
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

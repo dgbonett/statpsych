@@ -32,6 +32,8 @@ standardized covariate mean difference of all covariates. In an
 experiment, this standardized mean difference should be set to 0. Set
 the error variance planning value to the largest value within a
 plausible range for a conservatively large sample size.
+
+For more details, see Section 2.28 of Bonett (2021, Volume 2)
 }
 \examples{
 size.ci.ancova2(.05, 1.37, 1, 0, 1.5, 1)
@@ -53,4 +55,7 @@ size.ci.ancova2(.05, 1.37, 1, .75, 1.5, 1)
 #  24 24
  
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

@@ -33,6 +33,8 @@ effect, main effect of A, main effect of B, simple main effects of A, and
 simple main effects of B in a 2x2 between-subjects factorial design with a
 quantitative response variable. The effects are defined in terms of medians
 rather than means. Tied scores within each group are assumed to be rare.
+
+For more details, see Section 3.21 of Bonett (2021, Volume 1)
 }
 \examples{
 y11 <- c(19.2, 21.1, 14.4, 13.3, 19.8, 15.9, 18.0, 19.1, 16.2, 14.6)
@@ -55,4 +57,6 @@ ci.2x2.median.bs(.05, y11, y12, y21, y22)
 }
 \references{
 \insertRef{Bonett2002}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

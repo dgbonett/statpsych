@@ -5,13 +5,15 @@ the model. The adjusted standard errors are then used to compute adjusted
 t-values, p-values, and confidence intervals. The mean square error and
 error degrees of freedom from the full model are used to compute the
 adjusted standard errors. These adjusted results are less susceptible to
-the negative effects of an exploratory model selection."><meta property="og:description" content="Computes adjusted standard errors in a general linear model after one or
+the negative effects of an exploratory model selection.
+For more details, see Section 2.25 of Bonett (2021, Volume 2)"><meta property="og:description" content="Computes adjusted standard errors in a general linear model after one or
 more predictor variables with nonsignificant slopes have been dropped from
 the model. The adjusted standard errors are then used to compute adjusted
 t-values, p-values, and confidence intervals. The mean square error and
 error degrees of freedom from the full model are used to compute the
 adjusted standard errors. These adjusted results are less susceptible to
-the negative effects of an exploratory model selection."></head><body>
+the negative effects of an exploratory model selection.
+For more details, see Section 2.25 of Bonett (2021, Volume 2)"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -19,7 +21,7 @@ the negative effects of an exploratory model selection."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">statpsych</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.8.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,6 +55,7 @@ t-values, p-values, and confidence intervals. The mean square error and
 error degrees of freedom from the full model are used to compute the
 adjusted standard errors. These adjusted results are less susceptible to
 the negative effects of an exploratory model selection.</p>
+<p>For more details, see Section 2.25 of Bonett (2021, Volume 2)</p>
     </div>
 
     <div class="section level2">
@@ -93,22 +96,27 @@ the negative effects of an exploratory model selection.</p>
     <p>Returns adjusted standard error, t-statistic, p-value, and confidence interval
 for each slope coefficient</p>
     </div>
+    <div class="section level2">
+    <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
+    <p>Bonett DG (2021).
+<em>Statistical Methods for Psychologists https://dgbonett.sites.ucsc.edu/</em>.</p>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">se</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1.57</span>, <span class="fl">3.15</span>, <span class="fl">0.982</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3.78</span>, <span class="fl">8.21</span>, <span class="fl">2.99</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">adj.se</span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">10.26</span>, <span class="fl">8.37</span>, <span class="fl">114</span>, <span class="va">se</span>, <span class="va">b</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      Estimate   adj SE        t  df           p        LL        UL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]     3.78 1.738243 2.174609 114 0.031725582 0.3365531  7.223447</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]     8.21 3.487559 2.354082 114 0.020279958 1.3011734 15.118827</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]     2.99 1.087233 2.750102 114 0.006930554 0.8362007  5.143799</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      Estimate   adj SE        t  df       p        LL        UL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]     3.78 1.738243 2.174609 114 0.03173 0.3365531  7.223447</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]     8.21 3.487559 2.354082 114 0.02028 1.3011734 15.118827</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]     2.99 1.087233 2.750102 114 0.00693 0.8362007  5.143799</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Should return:</span></span></span>
-<span class="r-in"><span><span class="co">#      Estimate   adj SE        t  df           p        LL        UL</span></span></span>
-<span class="r-in"><span><span class="co"># [1,]     3.78 1.738243 2.174609 114 0.031725582 0.3365531  7.223447</span></span></span>
-<span class="r-in"><span><span class="co"># [2,]     8.21 3.487559 2.354082 114 0.020279958 1.3011734 15.118827</span></span></span>
-<span class="r-in"><span><span class="co"># [3,]     2.99 1.087233 2.750102 114 0.006930554 0.8362007  5.143799</span></span></span>
+<span class="r-in"><span><span class="co">#      Estimate   adj SE        t  df       p        LL        UL</span></span></span>
+<span class="r-in"><span><span class="co"># [1,]     3.78 1.738243 2.174609 114 0.03173 0.3365531  7.223447</span></span></span>
+<span class="r-in"><span><span class="co"># [2,]     8.21 3.487559 2.354082 114 0.02028 1.3011734 15.118827</span></span></span>
+<span class="r-in"><span><span class="co"># [3,]     2.99 1.087233 2.750102 114 0.00693 0.8362007  5.143799</span></span></span>
 <span class="r-in"><span> </span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
@@ -122,7 +130,7 @@ for each slope coefficient</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

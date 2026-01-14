@@ -31,16 +31,20 @@ Computes a confidence interval for a population Cramer's V coefficient
 of nominal association for an r x s contingency table. The confidence interval
 is based on a noncentral chi-square distribution, and an approximate standard
 error is recovered from the confidence interval.
+
+For more details, see Section 3.10 of Bonett (2021, Volume 3)
 }
 \examples{
 ci.cramer(.05, 19.21, 2, 3, 200)
 
 # Should return:
-# Estimate     SE     LL     UL
-#   0.3099 0.0718 0.1601 0.4417
+# Estimate     SE   LL    UL
+#     0.31 0.0718 0.16 0.442
  
 
 }
 \references{
 \insertRef{Smithson2003}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

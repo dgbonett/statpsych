@@ -4,12 +4,14 @@ proportions in a paired-samples design. This function requires the frequency
 counts from a 2 x 2 contingency table for two paired dichotomous measurements.
 A confidence interval for a difference in population proportions (see
 ci.prop.ps) is a recommended supplement to the McNemar
-test."><meta property="og:description" content="Computes a continuity-corrected McNemar test for equality of population
+test.
+For more details, see Section 3.2 of Bonett (2021, Volume 3)"><meta property="og:description" content="Computes a continuity-corrected McNemar test for equality of population
 proportions in a paired-samples design. This function requires the frequency
 counts from a 2 x 2 contingency table for two paired dichotomous measurements.
 A confidence interval for a difference in population proportions (see
 ci.prop.ps) is a recommended supplement to the McNemar
-test."></head><body>
+test.
+For more details, see Section 3.2 of Bonett (2021, Volume 3)"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -17,7 +19,7 @@ test."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">statpsych</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.8.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,6 +52,7 @@ counts from a 2 x 2 contingency table for two paired dichotomous measurements.
 A confidence interval for a difference in population proportions (see
 <a href="ci.prop.ps.html">ci.prop.ps</a>) is a recommended supplement to the McNemar
 test.</p>
+<p>For more details, see Section 3.2 of Bonett (2021, Volume 3)</p>
     </div>
 
     <div class="section level2">
@@ -88,17 +91,19 @@ test.</p>
     <p>Snedecor GW, Cochran WG (1989).
 <em>Statistical Methods</em>, 8th edition.
 ISU University Pres, Ames, Iowa.</p>
+<p>Bonett DG (2021).
+<em>Statistical Methods for Psychologists https://dgbonett.sites.ucsc.edu/</em>.</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">test.prop.ps</span><span class="op">(</span><span class="fl">156</span>, <span class="fl">96</span>, <span class="fl">68</span>, <span class="fl">80</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Estimate        z          p</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      0.07 2.108346 0.03500109</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">test.prop.ps</span><span class="op">(</span><span class="fl">12</span>, <span class="fl">4</span>, <span class="fl">26</span>, <span class="fl">6</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    Estimate      z       p</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.4583333 3.8341 0.00013</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Should return:</span></span></span>
-<span class="r-in"><span><span class="co"># Estimate        z          p</span></span></span>
-<span class="r-in"><span><span class="co">#     0.07 2.108346 0.03500109</span></span></span>
+<span class="r-in"><span><span class="co">#   Estimate      z       p</span></span></span>
+<span class="r-in"><span><span class="co"># -0.4583333 3.8341 0.00013</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
@@ -112,7 +117,7 @@ ISU University Pres, Ames, Iowa.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

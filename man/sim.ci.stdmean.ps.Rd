@@ -43,11 +43,11 @@ Returns a 1-row matrix. The columns are:
 \description{
 Performs a computer simulation of confidence interval performance for
 two types of standardized mean differences in a paired-samples design (see
-ci.stdmean.ps). Sample data for the two levels of the within-subjects factor
-can be generated from five different population distributions. All
-distributions are scaled to have a standard deviation of 1.0 at level 1.
-Bivariate random data with specified marginal skewness and kurtosis are
-generated using the unonr function in the mnonr package.
+\link[statpsych]{ci.stdmean.ps}). Sample data for the two levels of the
+within-subjects factor can be generated from five different population
+distributions. All distributions are scaled to have a standard deviation
+of 1.0 at level 1. Bivariate random data with specified marginal skewness
+and kurtosis are generated using the unonr function in the mnonr package.
 }
 \examples{
 sim.ci.stdmean.ps(.05, 20, 1.5, .8, 4, 4, .5, 2000)

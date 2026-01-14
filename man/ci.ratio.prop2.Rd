@@ -28,16 +28,20 @@ Returns a 1-row matrix. The columns are:
 \description{
 Computes an adjusted Wald confidence interval for a population proportion
 ratio in a 2-group design.
+
+For more details, see Section 2.3 of Bonett (2021, Volume 3)
 }
 \examples{
-ci.ratio.prop2(.05, 35, 21, 150, 150)
+ci.ratio.prop2(.05, 62, 35, 100, 100)
 
 # Should return:
 # Estimate       LL       UL
-# 1.666667 1.017253 2.705025
+# 1.765957 1.297164 2.404172
 
 
 }
 \references{
 \insertRef{Price2008}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

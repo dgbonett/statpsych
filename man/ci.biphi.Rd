@@ -32,16 +32,20 @@ using a transformation of a confidence interval for an odds ratio with .5
 added to each cell frequency. This measure of association assumes the group
 variable is naturally dichotomous and the response variable is artificially
 dichotomous.
+
+For more details, see Section 3.4 of Bonett (2021, Volume 3)
 }
 \examples{
-ci.biphi(.05, 46, 15, 100, 100)
+ci.biphi(.05, 34, 22, 50, 50)
 
 # Should return:
-#  Estimate         SE        LL       UL
-# 0.4145733 0.07551281 0.2508866 0.546141
+#  Estimate     SE    LL    UL
+#     0.275 0.1075 0.049 0.464
 
 
 }
 \references{
 \insertRef{Ulrich2004}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

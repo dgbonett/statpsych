@@ -5,13 +5,15 @@ information. The mean and standard deviation of the posterior Beta
 distribution are also reported. For a noninformative prior, set the prior
 mean to .5 and the prior standard deviation to 1/sqrt(12) (which
 corresponds to a Beta(1,1) distribution). The prior variance must be
-less than m(1 - m) where m is the prior mean."><meta property="og:description" content="Computes a Bayesian credible interval for a population proportion using the
+less than m(1 - m) where m is the prior mean.
+For more details, see Section 1.18 of Bonett (2021, Volume 3)"><meta property="og:description" content="Computes a Bayesian credible interval for a population proportion using the
 mean and standard deviation of a prior Beta distribution along with sample
 information. The mean and standard deviation of the posterior Beta
 distribution are also reported. For a noninformative prior, set the prior
 mean to .5 and the prior standard deviation to 1/sqrt(12) (which
 corresponds to a Beta(1,1) distribution). The prior variance must be
-less than m(1 - m) where m is the prior mean."></head><body>
+less than m(1 - m) where m is the prior mean.
+For more details, see Section 1.18 of Bonett (2021, Volume 3)"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -19,7 +21,7 @@ less than m(1 - m) where m is the prior mean."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">statpsych</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.8.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,6 +55,7 @@ distribution are also reported. For a noninformative prior, set the prior
 mean to .5 and the prior standard deviation to 1/sqrt(12) (which
 corresponds to a Beta(1,1) distribution). The prior variance must be
 less than m(1 - m) where m is the prior mean.</p>
+<p>For more details, see Section 1.18 of Bonett (2021, Volume 3)</p>
     </div>
 
     <div class="section level2">
@@ -96,17 +99,19 @@ less than m(1 - m) where m is the prior mean.</p>
     <p>Gelman A, Carlin JB, Stern HS, Rubin DB (2004).
 <em>Bayesian Data Analysis</em>, 2nd edition.
 Chapman &amp; Hall.</p>
+<p>Bonett DG (2021).
+<em>Statistical Methods for Psychologists https://dgbonett.sites.ucsc.edu/</em>.</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">ci.bayes.prop</span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">.4</span>, <span class="fl">.1</span>, <span class="fl">12</span>, <span class="fl">100</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">ci.bayes.prop</span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">.25</span>, <span class="fl">.1</span>, <span class="fl">120</span>, <span class="fl">300</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Posterior mean Posterior SD        LL        UL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       0.1723577   0.03419454 0.1111747 0.2436185</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       0.3916208   0.02742595 0.3387206 0.4458133</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Should return:</span></span></span>
-<span class="r-in"><span><span class="co"># Posterior mean Posterior SD       LL        UL</span></span></span>
-<span class="r-in"><span><span class="co">#      0.1723577   0.03419454 0.1111747 0.2436185</span></span></span>
+<span class="r-in"><span><span class="co"># Posterior mean Posterior SD        LL        UL</span></span></span>
+<span class="r-in"><span><span class="co">#      0.3916208   0.02742595 0.3387206 0.4458133</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
@@ -120,7 +125,7 @@ Chapman &amp; Hall.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

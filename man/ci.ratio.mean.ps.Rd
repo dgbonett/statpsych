@@ -27,18 +27,22 @@ Returns a 1-row matrix. The columns are:
 Compute a confidence interval for a ratio of population means of
 ratio-scale measurements in a paired-samples design. Equality of
 variances is not assumed.
+
+For more details, see Section 4.4 of Bonett (2021, Volume 1)
 }
 \examples{
-y1 <- c(3.3, 3.6, 3.0, 3.1, 3.9, 4.2, 3.5, 3.3)
-y2 <- c(3.0, 3.1, 2.7, 2.6, 3.2, 3.8, 3.2, 3.0)
+y1 = c(76.41, 66.91, 81.06, 74.78, 83.76, 89.31, 78.78, 87.06, 82.61, 76.74, 88.33, 86.18)
+y2 = c(59.85, 60.64, 84.86, 68.16, 71.53, 86.18, 67.30, 65.46, 83.50, 66.76, 88.37, 65.02)
 ci.ratio.mean.ps(.05, y1, y2)
 
 # Should return:
-#  Mean1 Mean2 Mean1/Mean2      LL       UL
-# 3.4875 3.075    1.134146 1.09417 1.175583
+#    Mean1   Mean2 Mean1/Mean2       LL       UL
+# 80.99417 72.3025    1.120213 1.040747 1.205745
 
 
 }
 \references{
 \insertRef{Bonett2020b}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

@@ -28,7 +28,7 @@ Returns a 1-row matrix. The columns are:
 }
 }
 \description{
-Computes a distrbution-free test and confidence interval for the slope
+Computes a distribution-free test and confidence interval for the slope
 of medians in a one-factor experimental design with a quantitative
 between-subjects factor using sample group medians and standard errors
 as input. The sample median and standard error for each group can be
@@ -41,8 +41,8 @@ x <- c(5, 10, 20, 30)
 ci.slope.median.bs(.05, m, se, x)
 
 # Should return:
-#   Estimate        SE        z           p        LL        UL
-#  0.3664407 0.1163593 3.149216 0.001637091 0.1383806 0.5945008
+#   Estimate        SE      z       p        LL        UL
+#  0.3664407 0.1163593 3.1492 0.00164 0.1383806 0.5945008
 
 
 }

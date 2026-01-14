@@ -3,11 +3,13 @@
 difference with desired confidence interval precision in a paired-samples
 design. Set the proportion planning values to .5 for a conservatively large
 sample size. Set the phi correlation planning value to the smallest value
-within a plausible range for a conservatively large sample size."><meta property="og:description" content="Computes the sample size required to estimate a population proportion
+within a plausible range for a conservatively large sample size.
+For more details, see Section 3.12 of Bonett (2021, Volume 3)"><meta property="og:description" content="Computes the sample size required to estimate a population proportion
 difference with desired confidence interval precision in a paired-samples
 design. Set the proportion planning values to .5 for a conservatively large
 sample size. Set the phi correlation planning value to the smallest value
-within a plausible range for a conservatively large sample size."></head><body>
+within a plausible range for a conservatively large sample size.
+For more details, see Section 3.12 of Bonett (2021, Volume 3)"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -15,7 +17,7 @@ within a plausible range for a conservatively large sample size."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">statpsych</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.8.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,6 +49,7 @@ difference with desired confidence interval precision in a paired-samples
 design. Set the proportion planning values to .5 for a conservatively large
 sample size. Set the phi correlation planning value to the smallest value
 within a plausible range for a conservatively large sample size.</p>
+<p>For more details, see Section 3.12 of Bonett (2021, Volume 3)</p>
     </div>
 
     <div class="section level2">
@@ -82,16 +85,21 @@ within a plausible range for a conservatively large sample size.</p>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>Returns the required sample size</p>
     </div>
+    <div class="section level2">
+    <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
+    <p>Bonett DG (2021).
+<em>Statistical Methods for Psychologists https://dgbonett.sites.ucsc.edu/</em>.</p>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">size.ci.prop.ps</span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">.2</span>, <span class="fl">.3</span>, <span class="fl">.8</span>, <span class="fl">.1</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">size.ci.prop.ps</span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">.25</span>, <span class="fl">.35</span>, <span class="fl">.6</span>, <span class="fl">.1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Sample size</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          118</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          257</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Should return:</span></span></span>
 <span class="r-in"><span><span class="co"># Sample size</span></span></span>
-<span class="r-in"><span><span class="co">#         118</span></span></span>
+<span class="r-in"><span><span class="co">#         257</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
@@ -105,7 +113,7 @@ within a plausible range for a conservatively large sample size.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

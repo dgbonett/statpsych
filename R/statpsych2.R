@@ -10,6 +10,8 @@
 #' transformed correlation. This function uses an estimated correlation as 
 #' input. Use the cor.test function for raw data input.
 #'
+#' For more details, see Section 1.14 of Bonett (2021, Volume 2)
+#'
 #'  
 #' @param  alpha 	alpha level for 1-alpha confidence
 #' @param  cor	  	estimated Pearson or partial correlation 
@@ -19,6 +21,8 @@
 #'
 #' @references
 #' \insertRef{Snedecor1980}{statpsych}
+#'
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @return 
@@ -30,17 +34,23 @@
 #' 
 #' 
 #' @examples
-#' ci.cor(.05, .536, 0, 50)
+#' ci.cor(.05, .60, 0, 150)
 #'
 #' # Should return:
-#' # Estimate        SE        LL        UL
-#' #    0.536 0.1018149 0.2978573 0.7058914
+#' # Estimate      SE    LL     UL
+#' #      0.6 0.05243 0.485 0.6925
+#'
+#' ci.cor(.05, .70, 1, 135)
+#'
+#' # Should return:
+#' # Estimate      SE     LL     UL
+#' #      0.7 0.04406 0.6002 0.7763
 #'  
 #' 
 #' @importFrom stats qnorm
 #' @export
 ci.cor <- function(alpha, cor, s, n) {
- if (cor > .999 || cor < -.999) {stop("correlation must be between -.999 and .999")}
+ if (cor > .999 | cor < -.999) {stop("correlation must be between -.999 and .999")}
  z <- qnorm(1 - alpha/2)
  se <- sqrt((1 - cor^2)^2/(n - 1))
  se.z <- sqrt(1/((n - s - 3)))
@@ -49,8 +59,71 @@ ci.cor <- function(alpha, cor, s, n) {
  ul0 <- zr + z*se.z
  ll <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
  ul <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
- out <- t(c(cor, se, ll, ul))
+ out <- cbind(round(cor, 4), round(se, 5), round(ll, 4), round(ul, 4))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
+ return(out)
+}
+
+
+#  ci.slope  ==================================================================
+#' Confidence interval for a slope in a simple linear model
+#'
+#'
+#' @description
+#' Computes a confidence interval for a population slope coefficient in a 
+#' simple linear model using the sample correlation, sample standard 
+#' deviation of the y scores (response variable), sample standard deviation
+#' of the x scores (predictor variable), and sample size as input. 
+#'
+#' For more details, see Section 1.11 of Bonett (2021, Volume 2)
+#'
+#'  
+#' @param  alpha 	alpha level for 1-alpha confidence
+#' @param  cor	  	estimated Pearson correlation 
+#' @param  sdy	  	estimated standard deviation of response variable
+#' @param  sdx	  	estimated standard deviation of predictor variable
+#' @param  n	  	sample size
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
+#' @return 
+#' Returns a 1-row matrix. The columns are:
+#' * Estimate - estimated slope
+#' * SE - standard error
+#' * t - t test statistic
+#' * df - degrees of freedom
+#' * p - two-sided p-value
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
+#' 
+#' 
+#' @examples
+#' ci.slope(.05, .362, 25.1, 6.25, 85)
+#'
+#' # Should return:
+#' #  Estimate        SE      t df       p        LL       UL
+#' #  1.453792 0.4109165 3.5379 83 0.00066 0.6364957 2.271088
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export
+ci.slope <- function(alpha, cor, sdy, sdx, n) {
+ if (cor > .999 | cor < -.999) {stop("correlation must be between -.999 and .999")}
+ df <- n - 2
+ slope <- cor*sdy/sdx
+ tcrit <- qt(1 - alpha/2, df)
+ var <- (n - 1)*sdy^2*(1 - cor^2)/df
+ se <- sqrt(var/(sdx^2*(n - 1)))
+ t <- round(slope/se, 4)
+ p <- round(2*(1 - pt(abs(t), df)), 5)
+ ll <- slope - tcrit*se
+ ul <- slope + tcrit*se
+ out <- t(c(slope, se, t, df, p, ll, ul))
+ colnames(out) <- c("Estimate", "SE", "t", "df", "p", "LL", "UL")
  rownames(out) <- ""
  return(out)
 }
@@ -69,6 +142,8 @@ ci.cor <- function(alpha, cor, s, n) {
 #' n - 3 rather than n in the standard error and also uses a Fisher 
 #' transformation of the semipartial correlation. 
 #'
+#' For more details, see Section 2.7 of Bonett (2021, Volume 2)
+#'
 #'  
 #' @param  alpha 	alpha level for 1-alpha confidence
 #' @param  cor	  	estimated semipartial correlation 
@@ -85,21 +160,23 @@ ci.cor <- function(alpha, cor, s, n) {
 #' 
 #' 
 #' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
 #' \insertRef{Aloe2012}{statpsych}
 #'
 #'
 #' @examples
-#' ci.spcor(.05, .582, .699, 20)
+#' ci.spcor(.05, -.355, .230, 236)
 #'
 #' # Should return:
-#' # Estimate        SE        LL        UL
-#' #    0.582 0.1374298 0.2525662 0.7905182
+#' # Estimate      SE      LL      UL
+#' #   -0.355 0.05426 -0.4565 -0.2444
 #'  
 #' 
 #' @importFrom stats qnorm
 #' @export
 ci.spcor <- function(alpha, cor, r2, n) {
- if (cor > .999 || cor < -.999) {stop("correlation must be between -.999 and .999")}
+ if (cor > .999 | cor < -.999) {stop("correlation must be between -.999 and .999")}
  z <- qnorm(1 - alpha/2)
  r0 <- r2 - cor^2
  zr <- log((1 + cor)/(1 - cor))/2
@@ -110,7 +187,7 @@ ci.spcor <- function(alpha, cor, r2, n) {
  ul0 <- zr + z*se.z
  ll <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
  ul <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
- out <- t(c(cor, se, ll, ul))
+ out <- cbind(round(cor, 4), round(se, 5), round(ll, 4), round(ul, 4))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  rownames(out) <- ""
  return(out)
@@ -125,6 +202,8 @@ ci.spcor <- function(alpha, cor, r2, n) {
 #' Computes a confidence interval for a difference in population Pearson 
 #' correlations in a 2-group design. A bias adjustment is used to 
 #' reduce the bias of each Fisher transformed correlation.  
+#'
+#' For more details, see Section 2.17 of Bonett (2021, Volume 2)
 #'
 #'  
 #' @param  alpha	alpha level for 1-alpha confidence
@@ -145,20 +224,22 @@ ci.spcor <- function(alpha, cor, r2, n) {
 #' @references
 #' \insertRef{Zou2007}{statpsych}
 #'
+#' \insertRef{Bonett2021}{statpsych}
+#'
 #'
 #' @examples
-#' ci.cor2(.05, .886, .802, 200, 200)
+#' ci.cor2(.05, .64, .31, 200, 200)
 #'
 #' # Should return:
-#' # Estimate         SE         LL        UL
-#' #    0.084 0.02967934 0.02803246 0.1463609
+#' # Estimate      SE      LL     UL
+#' #     0.33 0.07692  0.1797 0.4814
 #'  
 #' 
 #' @importFrom stats qnorm
 #' @export
 ci.cor2 <- function(alpha, cor1, cor2, n1, n2) {
- if (cor1 > .999 || cor1 < -.999) {stop("correlation must be between -.999 and .999")}
- if (cor2 > .999 || cor2 < -.999) {stop("correlation must be between -.999 and .999")}
+ if (cor1 > .999 | cor1 < -.999) {stop("correlation must be between -.999 and .999")}
+ if (cor2 > .999 | cor2 < -.999) {stop("correlation must be between -.999 and .999")}
  z <- qnorm(1 - alpha/2)
  diff <- cor1 - cor2
  se1 <- sqrt(1/(n1 - 3))
@@ -176,7 +257,7 @@ ci.cor2 <- function(alpha, cor1, cor2, n1, n2) {
  ll <- diff - sqrt((cor1 - ll1)^2 + (ul2 - cor2)^2)
  ul <- diff + sqrt((ul1 - cor1)^2 + (cor2 - ll2)^2)
  se <- sqrt((1 - cor1^2)^2/(n1 - 3) + (1 - cor2^2)^2/((n2 - 3)))
- out <- t(c(diff, se, ll, ul))
+ out <- cbind(round(diff, 4), round(se, 5), round(ll, 4), round(ul, 4))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  rownames(out) <- ""
  return(out)
@@ -193,6 +274,8 @@ ci.cor2 <- function(alpha, cor1, cor2, n1, n2) {
 #' variable in common. A bias adjustment is used to reduce the bias
 #' of each Fisher transformed correlation. An approximate standard error
 #' is recovered from the confidence interval.
+#'
+#' For more details, see Section 2.17 of Bonett (2021, Volume 2)
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -213,21 +296,23 @@ ci.cor2 <- function(alpha, cor1, cor2, n1, n2) {
 #' @references
 #' \insertRef{Zou2007}{statpsych}
 #'
+#' \insertRef{Bonett2021}{statpsych}
+#'
 #'
 #' @examples
 #' ci.cor.dep(.05, .396, .179, .088, 166)
 #'
 #' # Should return:
-#' # Estimate        SE         LL       UL
-#' #    0.217 0.1026986 0.01323072 0.415802
+#' # Estimate     SE     LL     UL
+#' #    0.217 0.1027 0.0132 0.4158
 #'  
 #' 
 #' @importFrom stats qnorm
 #' @export 
 ci.cor.dep <- function(alpha, cor1, cor2, cor12, n) {
- if (cor1 > .999 || cor1 < -.999) {stop("cor1 must be between -.999 and .999")}
- if (cor2 > .999 || cor2 < -.999) {stop("cor2 must be between -.999 and .999")}
- if (cor12 > .999 || cor12 < -.999) {stop("cor12 must be between -.999 and .999")}
+ if (cor1 > .999 | cor1 < -.999) {stop("cor1 must be between -.999 and .999")}
+ if (cor2 > .999 | cor2 < -.999) {stop("cor2 must be between -.999 and .999")}
+ if (cor12 > .999 | cor12 < -.999) {stop("cor12 must be between -.999 and .999")}
  z <- qnorm(1 - alpha/2)
  diff <- cor1 - cor2
  se1 <- sqrt(1/((n - 3)))
@@ -249,7 +334,7 @@ ci.cor.dep <- function(alpha, cor1, cor2, cor12, n) {
  ll <- diff - sqrt((cor1 - ll1)^2 + (ul2 - cor2)^2 - d1)
  ul <- diff + sqrt((ul1 - cor1)^2 + (cor2 - ll2)^2 - d2)
  se <- (ul - ll)/(2*z)
- out <- t(c(diff, se, ll, ul))
+ out <- cbind(round(diff, 4), round(se, 5), round(ll, 4), round(ul, 4))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  rownames(out) <- ""
  return(out)
@@ -266,8 +351,10 @@ ci.cor.dep <- function(alpha, cor1, cor2, cor12, n) {
 #' Pearson, Spearman, partial, semipartial, or point-biserial correlations. 
 #' The correlations could also be correlations between two latent factors.
 #' The function requires a point estimate and a 100(1 - alpha)% confidence
-#' interval for each correlation as input. The confidence intervals for 
-#' each correlation can be obtained using the ci.fisher function.
+#' interval for each correlation as input. The confidence intervals for each
+#' correlation can be obtained using \link[statpsych]{ci.fisher}.
+#'
+#' For more details, see Section 2.17 of Bonett (2021, Volume 2)
 #'
 #'  
 #' @param  cor1  estimated correlation for group 1 
@@ -288,24 +375,26 @@ ci.cor.dep <- function(alpha, cor1, cor2, cor12, n) {
 #' @references
 #' \insertRef{Zou2007}{statpsych}
 #'
+#' \insertRef{Bonett2021}{statpsych}
+#'
 #'
 #' @examples
-#' ci.cor2.gen(.4, .35, .47, .2, .1, .32)
+#' ci.cor2.gen(.64, .55, .71, .31, .18, .43)
 #'
 #' # Should return:
-#' # Estimate   LL        UL
-#' #      0.2 0.07 0.3220656
+#' # Estimate    LL     UL
+#' #      0.33 0.18 0.4776
 #'  
 #' 
 #' @importFrom stats qnorm
 #' @export 
 ci.cor2.gen <- function(cor1, ll1, ul1, cor2, ll2, ul2) {
- if (cor1 > .999 || cor1 < -.999) {stop("cor1 must be between -.999 and .999")}
- if (cor2 > .999 || cor2 < -.999) {stop("cor2 must be between -.999 and .999")}
+ if (cor1 > .999 | cor1 < -.999) {stop("cor1 must be between -.999 and .999")}
+ if (cor2 > .999 | cor2 < -.999) {stop("cor2 must be between -.999 and .999")}
  diff <- cor1 - cor2
  ll <- diff - sqrt((cor1 - ll1)^2 + (ul2 - cor2)^2)
  ul <- diff + sqrt((ul1 - cor1)^2 + (cor2 - ll2)^2)
- out <- t(c(diff, ll, ul))
+ out <- cbind(round(diff, 4), round(ll, 4), round(ul, 4))
  colnames(out) <- c("Estimate", "LL", "UL")
  rownames(out) <- ""
  return(out)
@@ -324,6 +413,8 @@ ci.cor2.gen <- function(cor1, ll1, ul1, cor2, ll2, ul2) {
 #' average of the group variances and is appropriate for experimental designs.
 #' Equality of variances is not assumed for either type. 
 #'
+#' For more details, see Section 1.18 of Bonett (2021, Volume 2)
+#'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  m1     estimated mean for group 1
@@ -336,6 +427,8 @@ ci.cor2.gen <- function(cor1, ll1, ul1, cor2, ll2, ul2) {
 #'
 #' @references
 #' \insertRef{Bonett2020a}{statpsych}
+#'
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @return 
@@ -350,9 +443,9 @@ ci.cor2.gen <- function(cor1, ll1, ul1, cor2, ll2, ul2) {
 #' ci.pbcor(.05, 28.32, 21.48, 3.81, 3.09, 40, 40)
 #'
 #' # Should return:
-#' #              Estimate         SE        LL        UL
-#' # Weighted:   0.7065799 0.04890959 0.5885458 0.7854471
-#' # Unweighted: 0.7020871 0.05018596 0.5808366 0.7828948
+#' #             Estimate      SE     LL     UL
+#' # Weighted:     0.7066 0.04891 0.5885 0.7854
+#' # Unweighted:   0.7021 0.05019 0.5808 0.7829
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -382,8 +475,8 @@ ci.pbcor <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
  ulc1 <- uld1/sqrt(uld1^2 + k)
  llc2 <- lld2/sqrt(lld2^2 + 4)
  ulc2 <- uld2/sqrt(uld2^2 + 4)
- out1 <- t(c(cor1, se.cor1, llc1, ulc1))
- out2 <- t(c(cor2, se.cor2, llc2, ulc2))
+ out1 <- t(c(round(cor1, 4), round(se.cor1, 5), round(llc1, 4), round(ulc1, 4)))
+ out2 <- t(c(round(cor2, 4), round(se.cor2, 5), round(llc2, 4), round(ulc2, 4)))
  out <- rbind(out1, out2)
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  rownames(out) <- c("Weighted:", "Unweighted:")
@@ -397,7 +490,13 @@ ci.pbcor <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #'
 #' @description
 #' Computes a Fisher confidence interval for a population Spearman correlation. 
-#' This function is not appropropriate for ordered categorical variables.
+#' Unlike the confidence interval for a Pearson correlation, this function does
+#' not assume bivariate normality. Unlike the Pearson correlation which
+#' describes a linear bivariate relation, the Spearman correlation describes a 
+#' monotonic bivariate relation. This function is not appropriate for 
+#' ordered categorical variables.
+#'
+#' For more details, see Section 1.32 of Bonett (2021, Volume 2)
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -416,6 +515,8 @@ ci.pbcor <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' @references
 #' \insertRef{Bonett2000}{statpsych}
 #'
+#' \insertRef{Bonett2021}{statpsych}
+#'
 #'
 #' @examples
 #' y <- c(21, 4, 9, 12, 35, 18, 10, 22, 24, 1, 6, 8, 13, 16, 19)
@@ -423,8 +524,8 @@ ci.pbcor <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' ci.spear(.05, y, x)
 #'
 #' # Should return:
-#' #  Estimate         SE        LL        UL
-#' # 0.8699639 0.08241326 0.5840951 0.9638297
+#' # Estimate      SE     LL     UL
+#' #     0.87 0.08241 0.5841 0.9638
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -447,7 +548,7 @@ ci.spear <- function(alpha, y, x) {
  ul0 <- z.cor + z*se/(1 - cor^2)
  ll <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
  ul <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
- out <- cbind(cor, se, ll, ul)
+ out <- cbind(round(cor, 4), round(se, 5), round(ll, 4), round(ul, 4))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  rownames(out) <- ""
  return (out)
@@ -460,7 +561,7 @@ ci.spear <- function(alpha, y, x) {
 #'
 #' @description
 #' Computes a confidence interval for a difference of population Spearman 
-#' correlations in a 2-group design. This function is not appropropriate 
+#' correlations in a 2-group design. This function is not appropriate 
 #' for ordered categorical variables.
 #'
 #'  
@@ -482,7 +583,6 @@ ci.spear <- function(alpha, y, x) {
 #' @references
 #' \insertRef{Bonett2000}{statpsych}
 #'
-#'
 #' \insertRef{Zou2007}{statpsych}
 #'
 #'
@@ -490,15 +590,15 @@ ci.spear <- function(alpha, y, x) {
 #' ci.spear2(.05, .54, .48, 180, 200)
 #'
 #' # Should return:
-#' # Estimate         SE         LL        UL
-#' #     0.06 0.08124926 -0.1003977 0.2185085     
+#' # Estimate      SE      LL     UL
+#' #     0.06 0.08125 -0.1004 0.2185     
 #'  
 #' 
 #' @importFrom stats qnorm
 #' @export
 ci.spear2 <- function(alpha, cor1, cor2, n1, n2) {
- if (cor1 > .999 || cor1 < -.999) {stop("cor1 must be between -.999 and .999")}
- if (cor2 > .999 || cor2 < -.999) {stop("cor2 must be between -.999 and .999")}
+ if (cor1 > .999 | cor1 < -.999) {stop("cor1 must be between -.999 and .999")}
+ if (cor2 > .999 | cor2 < -.999) {stop("cor2 must be between -.999 and .999")}
  z <- qnorm(1 - alpha/2)
  se1 <- sqrt((1 + cor1^2/2)*(1 - cor1^2)^2/(n1 - 3))
  se2 <- sqrt((1 + cor2^2/2)*(1 - cor2^2)^2/(n2 - 3))
@@ -516,7 +616,7 @@ ci.spear2 <- function(alpha, cor1, cor2, n1, n2) {
  ll.dif <- cor.dif - sqrt((cor1 - ll1)^2 + (ul2 - cor2)^2)
  ul.dif <- cor.dif + sqrt((ul1 - cor1)^2 + (cor2 - ll2)^2)
  se <- sqrt(se1^2 + se2^2)
- out <- cbind(cor.dif, se, ll.dif, ul.dif)
+ out <- cbind(round(cor.dif, 4), round(se, 5), round(ll.dif, 4), round(ul.dif, 4))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  rownames(out) <- ""
  return (out)
@@ -535,6 +635,8 @@ ci.spear2 <- function(alpha, cor1, cor2, n1, n2) {
 #' interval does not assume zero excess kurtosis but does assume symmetry of
 #' the population prediction errors.
 #'
+#' For more details, see Section 1.16 of Bonett (2021, Volume 2)
+#'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  res    vector of residuals 
@@ -549,6 +651,10 @@ ci.spear2 <- function(alpha, cor1, cor2, n1, n2) {
 #' * UL - upper limit of the confidence interval
 #' 
 #' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' res <- c(-2.70, -2.69, -1.32, 1.02, 1.23, -1.46, 2.21, -2.10, 2.56,
 #'       -3.02, -1.55, 1.46, 4.02, 2.34)
@@ -666,6 +772,8 @@ ci.ratio.mape2 <- function(alpha, res1, res2, s1, s2) {
 #' a product predictor variable (x1*x2). Conditional slopes are computed  
 #' at specified low and high values of the moderator variable. 
 #'
+#' For more details, see Section 2.13 of Bonett (2021, Volume 2)
+#'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  b1     estimated slope coefficient for predictor variable
@@ -687,6 +795,10 @@ ci.ratio.mape2 <- function(alpha, res1, res2, s1, s2) {
 #' * UL - upper limit of the confidence interval
 #' 
 #' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' ci.condslope(.05, .132, .154, .031, .021, .015, 5.2, 10.6, 122)
 #'
@@ -737,6 +849,8 @@ ci.condslope <- function(alpha, b1, b2, se1, se2, cov, lo, hi, dfe) {
 #' to the degrees of freedom is used to improve the accuracy of the confidence
 #' interval. 
 #'
+#' For more details, see Section 2.20 of Bonett (2021, Volume 2)
+#'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  est    vector of parameter estimates
@@ -757,6 +871,10 @@ ci.condslope <- function(alpha, b1, b2, se1, se2, cov, lo, hi, dfe) {
 #' * UL - upper limit of the confidence interval
 #' 
 #' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' est <- c(1.74, 1.83, 0.482)
 #' se <- c(.483, .421, .395)
@@ -765,8 +883,8 @@ ci.condslope <- function(alpha, b1, b2, se1, se2, cov, lo, hi, dfe) {
 #' ci.lc.reg(.05, est, se, n, 4, v)
 #'
 #' # Should return:
-#' # Estimate        SE        t      df          p        LL       UL
-#' #    1.303 0.5085838 2.562016 78.8197 0.01231256 0.2906532 2.315347
+#' # Estimate        SE      t      df       p        LL       UL
+#' #    1.303 0.5085838 2.5620 78.8197 0.01231 0.2906532 2.315347
 #'  
 #' 
 #' @importFrom stats qt
@@ -774,9 +892,9 @@ ci.condslope <- function(alpha, b1, b2, se1, se2, cov, lo, hi, dfe) {
 ci.lc.reg <- function(alpha, est, se, n, s, v) {
  con <- t(v)%*%est 
  se.con <- sqrt(sum(v^2*se^2))
- t <- con/se.con
+ t <- round(con/se.con, 4)
  df <- (sum(v^2*se^2)^2)/sum((v^4*se^4)/(n - s - 1))
- p <- 2*(1 - pt(abs(t), df))
+ p <- round(2*(1 - pt(abs(t), df)), 5)
  tcrit <- qt(1 - alpha/2, df)
  ll <- con - tcrit*se.con
  ul <- con + tcrit*se.con
@@ -815,24 +933,24 @@ ci.lc.reg <- function(alpha, est, se, n, s, v) {
 #'
 #'
 #' @examples
-#' ci.fisher(.05, .641, .052)
+#' ci.fisher(.05, .692, .049)
 #'
 #' # Should return:
-#' # Estimate        LL        UL
-#' #    0.641 0.5276396 0.7319293
+#' # Estimate     LL     UL
+#' #    0.692 0.5833 0.7763
 #'
 #'
 #' @importFrom stats qnorm
 #' @export
 ci.fisher <- function(alpha, cor, se) {
- if (cor > .999 || cor < -.999) {stop("correlation must be between -.999 and .999")}
+ if (cor > .999 | cor < -.999) {stop("correlation must be between -.999 and .999")}
  z <- qnorm(1 - alpha/2)
  zr <- log((1 + cor)/(1 - cor))/2
  ll0 <- zr - z*se/(1 - cor^2)
  ul0 <- zr + z*se/(1 - cor^2)
  ll <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
  ul <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
- out <- t(c(cor, ll, ul))
+ out <- t(c(cor, round(ll, 4), round(ul, 4)))
  colnames(out) <- c("Estimate", "LL", "UL")
  return(out)
 }
@@ -854,6 +972,8 @@ ci.fisher <- function(alpha, cor, se) {
 #' with no direct effects, distribution-free Theil-Sen slope estimates with
 #' recovered standard errors (see \link[statpsych]{ci.theil}) also could be used.
 #'
+#' For more details, see Section 1.18 of Bonett (2021, Volume 4)
+#'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence  
 #' @param  b1     slope estimate for first path
@@ -870,6 +990,10 @@ ci.fisher <- function(alpha, cor, se) {
 #' * UL - upper limit of the confidence interval
 #' 
 #' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' ci.indirect (.05, 2.48, 1.92, .586, .379)
 #'
@@ -905,6 +1029,8 @@ ci.indirect <- function(alpha, b1, b2, se1, se2) {
 #' contrast of parameters in a general linear model using coef(object) and
 #' vcov(object) where "object" is a fitted model object from the lm function.
 #'
+#' For more details, see Section 2.28 of Bonett (2021, Volume 2)
+#'
 #'
 #' @param   alpha  alpha for 1 - alpha confidence
 #' @param   n      sample size
@@ -924,6 +1050,10 @@ ci.indirect <- function(alpha, b1, b2, se1, se2) {
 #' * UL - upper limit of the confidence interval 
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' y <- c(43, 62, 49, 60, 36, 79, 55, 42, 67, 50)
 #' x1 <- c(3, 6, 4, 6, 2, 7, 4, 2, 7, 5)
@@ -940,8 +1070,8 @@ ci.indirect <- function(alpha, b1, b2, se1, se2) {
 #' # (Intercept)          x1          x2 
 #' #   26.891111    3.648889    2.213333 
 #' #
-#' # Estimate        SE       t df           p       LL       UL
-#' # 2.931111 0.4462518 6.56829  7 0.000313428 1.875893 3.986329
+#' # Estimate        SE      t df       p       LL       UL
+#' # 2.931111 0.4462518 6.5683  7 0.00031 1.875893 3.986329
 #'
 #'
 #' @importFrom stats qt
@@ -952,8 +1082,8 @@ ci.lc.glm <-function(alpha, n, b, V, q) {
  tcrit <- qt(1 - alpha/2, df)
  est <- t(q)%*%b
  se <- sqrt(t(q)%*%V%*%q)
- t <- est/se
- p <- 2*(1 - pt(abs(t), df))
+ t <- round(est/se, 4)
+ p <- round(2*(1 - pt(abs(t), df)), 5)
  ll <- est - tcrit*se
  ul <- est + tcrit*se
  out <- t(c(est, se, t, df, p, ll, ul))
@@ -1025,14 +1155,20 @@ ci.lc.gen.bs <- function(alpha, est, se, v) {
 #' This function uses the scaled central F approximation method. An
 #' approximate standard error is recovered from the confidence interval.
 #'
+#' For more details, see Section 2.4 of Bonett (2021, Volume 2)
+#'
 #'
 #' @param  alpha    alpha value for 1-alpha confidence
 #' @param  r2       estimated unadjusted squared multiple correlation
 #' @param  s        number of predictor variables
 #' @param  n        sample size
 #'
+#'
 #' @references
 #' \insertRef{Helland1987}{statpsych}
+#'
+#' \insertRef{Bonett2021}{statpsych}
+#'
 #'
 #' @return 
 #' Returns a 1-row matrix. The columns are:
@@ -1044,17 +1180,17 @@ ci.lc.gen.bs <- function(alpha, est, se, v) {
 #'
 #'
 #' @examples
-#' ci.rsqr(.05, .241, 3, 116)
+#' ci.rsqr(.05, .247, 4, 150)
 #'
 #' # Should return:
-#' # R-squared adj R-squared         SE         LL        UL  
-#' #     0.241     0.2206696 0.06752263 0.09819599 0.3628798
+#' # R-squared adj R-squared      SE      LL     UL  
+#' #     0.247        0.2262 0.06024  0.1152 0.3514
 #'  
 #' 
 #' @importFrom stats qf
 #' @export
 ci.rsqr <- function(alpha, r2, s, n) {
- if (r2 > .999 || r2 < .001) {stop("squared multiple correlation must be between .001 and .999")}
+ if (r2 > .999 | r2 < .001) {stop("squared multiple correlation must be between .001 and .999")}
  alpha1 <- alpha/2
  alpha2 <- 1 - alpha1
  z0 <- qnorm(1 - alpha1)
@@ -1090,7 +1226,7 @@ ci.rsqr <- function(alpha, r2, s, n) {
    if (ul < 0) {ul = 0}
  }
  se <- (ul - ll)/(2*z0)
- out <- t(c(r2, adj, se, ll, ul))
+ out <- t(c(r2, round(adj, 4), round(se, 5), round(ll, 4), round(ul, 4)))
  colnames(out) <- c("R-squared", "adj R-squared", "SE", "LL", "UL")
  rownames(out) <- ""
  return(out)
@@ -1105,6 +1241,8 @@ ci.rsqr <- function(alpha, r2, s, n) {
 #' Computes a Theil-Sen estimate and distribution-free confidence interval 
 #' for the population slope in a simple linear regression model. An approximate 
 #' standard error is recovered from the confidence interval.
+#'
+#' For more details, see Section 1.32 of Bonett (2021, Volume 2)
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
@@ -1122,6 +1260,8 @@ ci.rsqr <- function(alpha, r2, s, n) {
 #'
 #' @references
 #' \insertRef{Hollander1999}{statpsych}
+#'
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -1171,6 +1311,120 @@ ci.theil <- function(alpha, y, x) {
 }
 
 
+#  ci.cronbach ===============================================================
+#' Confidence interval for a Cronbach reliability
+#'
+#'
+#' @description
+#' Computes a confidence interval for a population Cronbach reliability. 
+#' The point estimate of Cronbach reliability assumes essentially 
+#' tau-equivalent measurements and the confidence interval assumes parallel
+#' measurements. 
+#'
+#' For more details, see Section 4.19 of Bonett (2021, Volume 1)
+#'
+#'  
+#' @param  alpha  alpha level for 1-alpha confidence
+#' @param  rel    estimated Cronbach reliability  
+#' @param  r      number of measurements (items, raters, forms)
+#' @param  n	  sample size
+#'
+#'
+#' @return 
+#' Returns a 1-row matrix. The columns are:
+#' * Estimate - estimated Cronbach reliability (from input)
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
+#' 
+#' 
+#' @references
+#' \insertRef{Feldt1965}{statpsych}
+#'
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
+#' @examples
+#' ci.cronbach(.05, .85, 7, 89)
+#'
+#' # Should return:
+#' # Estimate       SE     LL     UL
+#' #     0.85  0.02457 0.7971 0.8932
+#'  
+#' 
+#' @importFrom stats qf
+#' @export
+ci.cronbach <- function(alpha, rel, r, n) {
+ if (rel > .999 | rel < .001) {stop("reliability must be between .001 and .999")}
+ se <- sqrt((2*r*(1 - rel)^2)/((r - 1)*(n - 2)))
+ df1 <- n - 1
+ df2 <- (n - 1)*(r - 1)
+ f1 <- qf(1 - alpha/2, df1, df2)
+ f2 <- qf(1 - alpha/2, df2, df1)
+ f0 <- 1/(1 - rel)
+ ll <- 1 - f1/f0
+ ul <- 1 - 1/(f0*f2)
+ out <- cbind(rel, round(se, 5), round(ll, 4), round(ul, 4))
+ colnames(out) = c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
+ return(out)
+}
+
+
+#  ci.reliablity =============================================================
+#' Confidence interval for a reliability coefficient
+#'
+#'
+#' @description
+#' Computes a confidence interval for a population reliability coefficient
+#' such as Cronbach's alpha or McDonald's omega using an estimate of the
+#' reliability and its standard error. The standard error can be a robust
+#' standard error or bootstrap standard error obtained from an SEM program.
+#' Use \link[statpsych]{ci.cronbach} for Cronbach's alpha if parallel
+#' measurements can be assumed.
+#'
+#' For more details, see Section 2.8 of Bonett (2021, Volume 4)
+#'
+#'  
+#' @param  alpha  alpha level for 1-alpha confidence
+#' @param  rel    estimated reliability  
+#' @param  se     standard error of reliability
+#' @param  n	  sample size
+#'
+#'
+#' @return 
+#' Returns a 1-row matrix. The columns are:
+#' * Estimate - estimated reliability (from input)
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
+#' 
+#' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
+#' @examples
+#' ci.reliability(.05, .88, .0147, 100)
+#'
+#' # Should return:
+#' # Estimate     LL     UL
+#' #     0.88  0.849 0.9066
+#'  
+#' 
+#' @importFrom stats qf
+#' @export
+ci.reliability <- function(alpha, rel, se, n) {
+ if (rel > .999 | rel < .001) {stop("reliability must be between .001 and .999")}
+ z <- qnorm(1 - alpha/2)
+ b <- log(n/(n - 1))
+ ll <- 1 - exp(log(1 - rel) - b + z*sqrt(se^2/(1 - rel)^2))
+ ul <- 1 - exp(log(1 - rel) - b - z*sqrt(se^2/(1 - rel)^2))
+ out <- cbind(rel, round(ll, 4), round(ul, 4))
+ colnames(out) = c("Estimate", "LL", "UL")
+ rownames(out) <- ""
+ return(out)
+}
+
+
 #  ci.cronbach2 ===============================================================
 #' Confidence interval for a difference in Cronbach reliabilities in a 2-group 
 #' design
@@ -1179,7 +1433,9 @@ ci.theil <- function(alpha, y, x) {
 #' @description
 #' Computes a confidence interval for a difference in population Cronbach 
 #' reliability coefficients in a 2-group design. The number of measurements
-#' (e.g., items or raters) used in each group need not be equal.
+#' (items, raters, forms) used in each group need not be equal.
+#'
+#' For more details, see Section 2.15 of Bonett (2021, Volume 4)
 #'
 #'  
 #' @param  alpha    alpha level for 1-alpha confidence
@@ -1199,6 +1455,8 @@ ci.theil <- function(alpha, y, x) {
 #' 
 #' 
 #' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
 #' \insertRef{Bonett2015}{statpsych}
 #'
 #'
@@ -1206,24 +1464,24 @@ ci.theil <- function(alpha, y, x) {
 #' ci.cronbach2(.05, .88, .76, 8, 8, 200, 250)
 #'
 #' # Should return:
-#' # Estimate         LL       UL
-#' #     0.12 0.06973411 0.173236
+#' # Estimate     LL     UL
+#' #     0.12 0.0697 0.1733
 #'  
 #' 
 #' @importFrom stats qf
 #' @export
 ci.cronbach2 <- function(alpha, rel1, rel2, r1, r2, n1, n2) {
- if (rel1 > .999 || rel1 < .001) {stop("rel1 must be between .001 and .999")}
- if (rel2 > .999 || rel2 < .001) {stop("rel2 must be between .001 and .999")}
+ if (rel1 > .999 | rel1 < .001) {stop("rel1 must be between .001 and .999")}
+ if (rel2 > .999 | rel2 < .001) {stop("rel2 must be between .001 and .999")}
  df11 <- n1 - 1
- df21 <- n1*(r1 - 1)
+ df21 <- (n1 - 1)*(r1 - 1)
  f11 <- qf(1 - alpha/2, df11, df21)
  f21 <- qf(1 - alpha/2, df21, df11)
  f01 <- 1/(1 - rel1)
  LL1 <- 1 - f11/f01
  UL1 <- 1 - 1/(f01*f21)
  df12 <- n2 - 1
- df22 <- n2*(r2 - 1)
+ df22 <- (n2 - 1)*(r2 - 1)
  f12 <- qf(1 - alpha/2, df12, df22)
  f22 <- qf(1 - alpha/2, df22, df12)
  f02 <- 1/(1 - rel2)
@@ -1232,7 +1490,7 @@ ci.cronbach2 <- function(alpha, rel1, rel2, r1, r2, n1, n2) {
  d <- rel1 - rel2
  ll <- d - sqrt((rel1 - LL1)^2 + (UL2 - rel2)^2)
  ul <- d + sqrt((UL1 - rel1)^2 + (rel2 - LL2)^2)
- out <- t(c(d, ll, ul))
+ out <- cbind(round(d, 4), round(ll, 4), round(ul, 4))
  colnames(out) <- c("Estimate", "LL", "UL")
  rownames(out) <- ""
  return(out)
@@ -1251,6 +1509,8 @@ ci.cronbach2 <- function(alpha, rel1, rel2, r1, r2, n1, n2) {
 #' point estimate and a 100(1 - alpha)% confidence interval for each
 #' reliability as input. 
 #'
+#' For more details, see Section 2.15 of Bonett (2021, Volume 4)
+#'
 #'  
 #' @param  rel1  estimated reliability for group 1 
 #' @param  ll1   lower limit for group 1 reliability
@@ -1268,6 +1528,8 @@ ci.cronbach2 <- function(alpha, rel1, rel2, r1, r2, n1, n2) {
 #' 
 #' 
 #' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
 #' \insertRef{Bonett2015}{statpsych}
 #'
 #'
@@ -1275,19 +1537,19 @@ ci.cronbach2 <- function(alpha, rel1, rel2, r1, r2, n1, n2) {
 #' ci.rel2(.4, .35, .47, .2, .1, .32)
 #'
 #' # Should return:
-#' # Estimate   LL        UL
-#' #      0.2 0.07 0.3220656
+#' # Estimate   LL     UL
+#' #      0.2 0.07 0.3221
 #'  
 #' 
 #' @importFrom stats qnorm
 #' @export 
 ci.rel2 <- function(rel1, ll1, ul1, rel2, ll2, ul2) {
- if (rel1 > .999 || rel1 < .001) {stop("reliability must be between .001 and .999")}
- if (rel2 > .999 || rel2 < .001) {stop("reliability must be between .001 and .999")}
- diff <- rel1 - rel2
- ll <- diff - sqrt((rel1 - ll1)^2 + (ul2 - rel2)^2)
- ul <- diff + sqrt((ul1 - rel1)^2 + (rel2 - ll2)^2)
- out <- t(c(diff, ll, ul))
+ if (rel1 > .999 | rel1 < .001) {stop("reliability must be between .001 and .999")}
+ if (rel2 > .999 | rel2 < .001) {stop("reliability must be between .001 and .999")}
+ d <- rel1 - rel2
+ ll <- d - sqrt((rel1 - ll1)^2 + (ul2 - rel2)^2)
+ ul <- d + sqrt((ul1 - rel1)^2 + (rel2 - ll2)^2)
+ out <- cbind(round(d, 4), round(ll, 4), round(ul, 4))
  colnames(out) <- c("Estimate", "LL", "UL")
  rownames(out) <- ""
  return(out)
@@ -1349,8 +1611,8 @@ ci.rel2 <- function(rel1, ll1, ul1, rel2, ll2, ul2) {
 #' ci.bscor(.05, 28.32, 21.48, 3.81, 3.09, 40, 40)
 #'
 #' # Should return:
-#' #   Estimate         SE        LL        UL
-#' #  0.8855666 0.06129908  0.7376327 0.984412
+#' # Estimate     SE      LL     UL
+#' #   0.8856 0.0613  0.7376 0.9844
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -1376,17 +1638,100 @@ ci.bscor <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
  uld <- d + z*se.d
  ll <- a*lld/sqrt(lld^2 + c)
  ul <- a*uld/sqrt(uld^2 + c)
+ bscor <- round(pbcor*a, 4)
+ se.bscor <- round(se.bscor, 5)
  if (ul > 1) {ul = 1}
  if (ll < -1) {ll = -1}
- out <- t(c(bscor, se.bscor, ll, ul))
+ out <- t(c(bscor, se.bscor, round(ll, 4), round(ul, 4)))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  rownames(out) <- ""
  return(out)
 }
 
 
+#  ci.icc =====================================================================
+#' Confidence interval for an intraclass reliablity coefficient
+#'
+#'
+#' @description
+#' Computes a confidence interval for a population intraclass reliability
+#' coefficient using mean squared estimates from a two-way ANOVA. This
+#' function will compute point and interval estimates of the ICC(C, 1) and
+#' ICC(C, r) reliability coefficients where ICC(C, 1) is the reliability of
+#' a single measurements (e.g., a single rater or a single form of a test)
+#' and ICC(C, r) is the reliability of a sum or average of r measurements.
+#' ICC(C, r) is the same as Cronbach's reliability coefficient. The
+#' ci.cronbach function uses a point estimate of Cronbach's reliability
+#' as input. The confidence intervals used in this function assume parallel
+#' measurements which implies a compound symmetric covariance matrix of 
+#' the r measurements.
+#'
+#'
+#'  
+#' @param  alpha  alpha level for 1-alpha confidence
+#' @param  MSr    mean square for rows
+#' @param  MSe    error mean square  
+#' @param  r      number of measurements (items, raters, forms)
+#' @param  n	  sample size
+#'
+#'
+#' @return 
+#' Returns a 2-row matrix. The first row results are for ICC(C, 1) and
+#' the second row results are for ICC(C, r). The columns are:
+#' * Estimate - estimated reliability 
+#' * SE - standard error 
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
+#' 
+#' 
+#' @references
+#' \insertRef{McGraw1996}{statpsych}
+#'
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
+#' @examples
+#' ci.icc(.05, 48.2, 11.3, 5, 30)
+#'
+#' # Should return:
+#' #           Estimate      SE     LL     UL
+#' # ICC(C, 1)   0.3951 0.09166 0.2311 0.5853
+#' # ICC(C, r)   0.7656 0.07005 0.6005 0.8759
+#'  
+#' 
+#' @importFrom stats qf
+#' @export
+ci.icc <- function(alpha, MSr, MSe, r, n) {
+ icc1 <- (MSr - MSe)/(MSr + (r - 1)*MSe)
+ iccr <- (MSr - MSe)/MSr
+ f <- MSr/MSe
+ se1 <- sqrt((2*(1 - icc1)^2)*(1 + (r - 1)*icc1)^2/(r*(r - 1)*(n - 1)))
+ ser <- sqrt((2*r*(1 - iccr)^2)/((r - 1)*(n - 2)))
+ df1 <- n - 1
+ df2 <- (n - 1)*(r - 1)
+ f1 <- qf(1 - alpha/2, df1, df2)
+ f2 <- qf(1 - alpha/2, df2, df1)
+ fL <- f/f1
+ fU <- f*f2
+ ll.1 <- round((fL - 1)/(fL + r - 1), 4)
+ ul.1 <- round((fU - 1)/(fU + r - 1), 4)
+ ll.r <- round(1 - 1/fL, 4)
+ ul.r <- round(1 - 1/fU, 4)
+ icc1 <- round(icc1, 4)
+ iccr <- round(iccr, 4)
+ se1 <- round(se1, 5)
+ ser <- round(ser, 5)
+ out1 <- t(c(icc1, se1, ll.1, ul.1))
+ out2 <- t(c(iccr, ser, ll.r, ul.r))
+ out <- rbind(out1, out2)
+ colnames(out) = c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- c("ICC(C, 1)", "ICC(C, r)")
+ return(out)
+}
+
+
 #  pi.cor ===================================================================== 
-#' Prediction limits for an estimated correlation
+#' Prediction limits for a sample correlation in a future study
 #'
 #'                                        
 #' @description
@@ -1396,18 +1741,21 @@ ci.bscor <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' prior study that had a sample size of n0. 
 #'
 #' Several confidence interval sample size functions in this package require
-#' a planning value of the estimated Pearson correlation that is expected 
+#' a planning value of the expected sample value of a Pearson correlation 
 #' in the planned study. A one-sided lower correlation prediction limit is 
-#' useful as a correlation planning value for the sample size required to 
-#' obtain a confidence interval with desired width. This strategy for 
-#' specifying a correlation planning value is useful in applications where 
-#' the population correlation in the prior study is assumed to be very similar
-#' to the population correlation in the planned study. 
+#' useful as a correlation planning value for a conservatively large sample
+#' size required to obtain a confidence interval with desired width. This 
+#' strategy for specifying a correlation planning value is useful in 
+#' applications where the population correlation in the prior study is
+#' assumed to be very similar to the population correlation in the planned
+#' study. 
+#'
+#' For more details, see Section 1.26 of Bonett (2021, Volume 2)
 #'
 #'
 #' @param  alpha  alpha value for 1-alpha confidence 
 #' @param  cor    estimated Pearson correlation from prior study
-#' @param  n0     sample size used to estimate correlation in prior study
+#' @param  n0     sample size used to estimate the correlation in prior study
 #' @param  n      planned sample size of future study
 #' @param  type   
 #' * set to 1 for two-sided prediction interval 
@@ -1420,23 +1768,28 @@ ci.bscor <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' Pearson correlation in a future study
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' pi.cor(.1, .761, 50, 100, 1)
 #'
 #' # Should return:
-#' #         LL        UL
-#' #  0.6034092 0.8573224
+#' #      LL     UL
+#' #  0.6034 0.8573
 #'  
 #' pi.cor(.1, .761, 50, 100, 3)
 #'
 #' # Should return:
-#' #         LL
-#' #  0.6428751
+#' #      LL
+#' #  0.6429
 #'  
 #' 
 #' @importFrom stats qnorm
 #' @export
 pi.cor <- function(alpha, cor, n0, n, type) {
+ if (cor > .999 | cor < -.999) {stop("correlaton must be between -.999 and .999")}
  if (type == 1) {
   z <- qnorm(1 - alpha/2)
   cor.z <- log((1 + cor)/(1 - cor))/2
@@ -1444,6 +1797,8 @@ pi.cor <- function(alpha, cor, n0, n, type) {
   ul0 <- cor.z - cor/(2*(n0 - 1)) + z*sqrt(1/(n0 - 3) + 1/(n - 3))
   ll <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
   ul <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
+  ll <- round(ll, 4)
+  ul <- round(ul, 4)
   out <- t(c(ll, ul))
   colnames(out) <- c("LL", "UL")
  }
@@ -1452,6 +1807,7 @@ pi.cor <- function(alpha, cor, n0, n, type) {
   cor.z <- log((1 + cor)/(1 - cor))/2
   ul0 <- cor.z - cor/(2*(n0 - 1)) + z*sqrt(1/(n0 - 3) + 1/(n - 3))
   ul <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
+  ul <- round(ul, 4)
   out <- matrix(ul, nrow = 1, ncol = 1)
   colnames(out) <- "UL"
  }
@@ -1460,6 +1816,97 @@ pi.cor <- function(alpha, cor, n0, n, type) {
   cor.z <- log((1 + cor)/(1 - cor))/2
   ll0 <- cor.z - cor/(2*(n0 - 1)) - z*sqrt(1/(n0 - 3) + 1/(n - 3))
   ll <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
+  ll <- round(ll, 4)
+  out <- matrix(ll, nrow = 1, ncol = 1)
+  colnames(out) <- "LL"
+ }
+ rownames(out) <- ""
+ return(out)
+}
+
+
+#  pi.cronbach ================================================================ 
+#' Prediction limits for sample value of Cronbach reliability in a future study
+#'
+#'                                        
+#' @description
+#' Computes approximate one-sided or two-sided prediction limits for the 
+#' estimated Cronbach reliability in a future study with a planned sample 
+#' size of n. The prediction interval uses a Cronbach reliability estimate
+#' from a prior study. 
+#'
+#' The size.ci.cronbach and size.ci.cronbach2 functions require a planning 
+#' value of the expected sample value of Cronbach's reliability in the 
+#' planned study. A one-sided lower prediction limit for the sample value 
+#' of Cronbach's reliability in the planned study can be used in the 
+#' size.ci.cronbach and size.ci.cronbach2 functions to obtain conservatively
+#' large sample size requirements. This strategy for specifying a reliability
+#' planning value is useful in applications where the population Cronbach 
+#' reliability in the prior study is assumed to be very similar to the 
+#' population Cronbach reliability in the planned study. 
+#'
+#'
+#' @param  alpha  alpha value for 1-alpha confidence 
+#' @param  rel    estimated Cronbach reliability from prior study
+#' @param  r      number of measurements (e.g., items, raters, etc.)
+#' @param  n0     sample size used to estimate reliability in prior study
+#' @param  n      planned sample size of future study
+#' @param  type   
+#' * set to 1 for two-sided prediction interval 
+#' * set to 2 for one-sided upper prediction limit 
+#' * set to 3 for one-sided lower prediction limit 
+#'
+#'
+#' @return 
+#' Returns one-sided or two-sided prediction limit(s) of an estimated 
+#' Cronbach reliability in a future study
+#'
+#'
+#' @examples
+#' pi.cronbach(.1, .852, 5, 100, 150, 1)
+#'
+#' # Should return:
+#' #       LL     UL
+#' #   0.7944 0.8956
+#'  
+#' pi.cronbach(.1, .852, 5, 100, 150, 3)
+#'
+#' # Should return:
+#' #      LL
+#' #  0.8092
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export
+pi.cronbach <- function(alpha, rel, r, n0, n, type) {
+ if (rel > .999 | rel < 0) {stop("reliability must be between 0 and .999")}
+ rel.log <- log(1 - rel)
+ v1 <- 2*r/((r - 1)*(n0 - 2))
+ v2 <- 2*r/((r - 1)*(n - 2))
+ if (type == 1) {
+  z <- qnorm(1 - alpha/2)
+  ul0 <- rel.log - z*sqrt(v1 + v2)
+  ll0 <- rel.log + z*sqrt(v1 + v2)
+  ll <- 1 - exp(ll0)
+  ul <- 1 - exp(ul0)
+  ll <- round(ll, 4)
+  ul <- round(ul, 4)
+  out <- t(c(ll, ul))
+  colnames(out) <- c("LL", "UL")
+ }
+ else if (type == 2) {
+  z <- qnorm(1 - alpha)
+  ul0 <- rel.log - z*sqrt(v1 + v2)
+  ul <- 1 - exp(ul0)
+  ul <- round(ul, 4)
+  out <- matrix(ul, nrow = 1, ncol = 1)
+  colnames(out) <- "UL"
+ }
+ else {
+  z <- qnorm(1 - alpha)
+  ll0 <- rel.log + z*sqrt(v1 + v2)
+  ll <- 1 - exp(ll0)
+  ll <- round(ll, 4)
   out <- matrix(ll, nrow = 1, ncol = 1)
   colnames(out) <- "LL"
  }
@@ -1486,6 +1933,8 @@ pi.cor <- function(alpha, cor, n0, n, type) {
 #' that is considered to be small will depend on the application. Set s = 0
 #' for a Pearson correlation. 
 #'
+#' For more details, see Section 1.33 of Bonett (2021, Volume 2)
+#'
 #'
 #' @param   alpha        alpha level for 1-alpha credibility interval
 #' @param   prior_sd     standard deviation of skeptical prior distribution 
@@ -1501,23 +1950,28 @@ pi.cor <- function(alpha, cor, n0, n, type) {
 #' * UL - upper limit of the credible interval
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' ci.bayes.cor(.05, .1, .536, 0, 50)
 #'
 #' # Should return:
-#' # Posterior mean         LL        UL
-#' #      0.1873765 0.02795441 0.3375031
+#' # Posterior mean     LL     UL
+#' #         0.1874  0.028 0.3375
 #'
 #' ci.bayes.cor(.05, .1, .536, 0, 300)
 #'
 #' # Should return:
-#' #  Posterior mean        LL        UL
-#' #       0.4195068 0.3352449 0.4971107
+#' # Posterior mean     LL     UL
+#' #         0.4195 0.3352 0.4971
 #'
 #'
 #' @importFrom stats qnorm
 #' @export
 ci.bayes.cor <- function(alpha, prior_sd, cor, s, n) {
+ if (cor > .999 | cor < -.999) {stop("correlaton must be between -.999 and .999")}
  z <- qnorm(1 - alpha/2)
  se <- 1/sqrt(n - s - 3)
  zr <- log((1 + cor)/(1 - cor))/2 - cor/(2*(n - 1))
@@ -1528,6 +1982,9 @@ ci.bayes.cor <- function(alpha, prior_sd, cor, s, n) {
  mean <- (exp(2*post_mean) - 1)/(exp(2*post_mean) + 1)
  ll <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
  ul <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
+ ll <- round(ll, 4)
+ ul <- round(ul, 4)
+ mean <- round(mean, 4)
  out <- t(c(mean, ll, ul))
  colnames(out) <- c("Posterior mean", "LL", "UL")
  rownames(out) <- ""
@@ -1554,6 +2011,8 @@ ci.bayes.cor <- function(alpha, prior_sd, cor, s, n) {
 #' requires the standard error of the estimated semipartial correlation which
 #' can be obtained from the ci.spcor function. 
 #'
+#' For more details, see Section 2.36 of Bonett (2021, Volume 2)
+#'
 #'
 #' @param   alpha        alpha level for 1-alpha credibility interval
 #' @param   prior_sd     standard deviation of skeptical prior distribution 
@@ -1568,17 +2027,22 @@ ci.bayes.cor <- function(alpha, prior_sd, cor, s, n) {
 #' * UL - upper limit of the credible interval
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' ci.bayes.spcor(.05, .1, .582, .137)
 #'
 #' # Should return:
-#' #  Posterior mean        LL        UL
-#' #       0.2272797 0.07288039 0.3710398
+#' # Posterior mean     LL    UL
+#' #         0.2273 0.0729 0.371
 #'
 #'
 #' @importFrom stats qnorm
 #' @export
 ci.bayes.spcor <- function(alpha, prior_sd, cor, se) {
+ if (cor > .999 | cor < -.999) {stop("correlaton must be between -.999 and .999")}
  z <- qnorm(1 - alpha/2)
  zr <- log((1 + cor)/(1 - cor))/2 
  post_sd <- sqrt(1/(1/prior_sd^2 + 1/se^2))
@@ -1588,6 +2052,9 @@ ci.bayes.spcor <- function(alpha, prior_sd, cor, se) {
  mean <- (exp(2*post_mean) - 1)/(exp(2*post_mean) + 1)
  ll <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
  ul <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
+ ll <- round(ll, 4)
+ ul <- round(ul, 4)
+ mean <- round(mean, 4)
  out <- t(c(mean, ll, ul))
  colnames(out) <- c("Posterior mean", "LL", "UL")
  rownames(out) <- ""
@@ -1606,6 +2073,8 @@ ci.bayes.spcor <- function(alpha, prior_sd, cor, se) {
 #' factor. This function computes both the unequal variance and equal variance
 #' confidence intervals and test statistics. A Satterthwaite adjustment to the
 #' degrees of freedom is used with the unequal variance method. 
+#'
+#' For more details, see Section 1.11 of Bonett (2021, Volume 2)
 #'
 #'
 #' @param     alpha  	alpha level for 1-alpha confidence
@@ -1626,6 +2095,10 @@ ci.bayes.spcor <- function(alpha, prior_sd, cor, se) {
 #' * UL - upper limit of the confidence interval
 #' 
 #' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' m <- c(33.5, 37.9, 38.0, 44.1)
 #' sd <- c(3.84, 3.84, 3.65, 4.98)
@@ -1634,12 +2107,12 @@ ci.bayes.spcor <- function(alpha, prior_sd, cor, se) {
 #' ci.slope.mean.bs(.05, m, sd, n, x)
 #'
 #' # Should return:
-#' #                               Estimate         SE        t       df
-#' # Equal Variances Assumed:     0.3664407 0.06770529 5.412290 36.00000
-#' # Equal Variances Not Assumed: 0.3664407 0.07336289 4.994905 18.65826
-#' #                                         p        LL        UL
-#' # Equal Variances Assumed:     4.242080e-06 0.2291280 0.5037534
-#' # Equal Variances Not Assumed: 8.468223e-05 0.2126998 0.5201815
+#' #                               Estimate         SE      t    df
+#' # Equal Variances Assumed:     0.3664407 0.06770529 5.4123 36.00
+#' # Equal Variances Not Assumed: 0.3664407 0.07336289 4.9949 18.66
+#' #                                  p        LL        UL
+#' # Equal Variances Assumed:     4e-06 0.2291280 0.5037534
+#' # Equal Variances Not Assumed: 8e-05 0.2126998 0.5201815
 #'
 #'
 #' @importFrom stats qt
@@ -1654,16 +2127,17 @@ ci.slope.mean.bs <- function(alpha, m, sd, n, x) {
  df1 <- sum(n) - k
  v1 <- sum((n - 1)*sd^2)/df1
  se1 <- sqrt(v1*t(v)%*%solve(diag(n))%*%v)
- t1 <- est/se1
- p1 <- 2*(1 - pt(abs(t1),df1))
+ t1 <- round(est/se1, 4)
+ p1 <- round(2*(1 - pt(abs(t1), df1)), 5)
  tcrit1 <- qt(1 - alpha/2, df1)
  ll1 <- est - tcrit1*se1
  ul1 <- est + tcrit1*se1
  v2 <- diag(sd^2)%*%(solve(diag(n)))
  se2 <- sqrt(t(v)%*%v2%*%v)
- t2 <- est/se2
+ t2 <- round(est/se2, 4)
  df2 <- (se2^4)/sum(((v^4)*(sd^4)/(n^2*(n - 1))))
- p2 <- 2*(1 - pt(abs(t2),df2))
+ df2 <- round(df2, 2)
+ p2 <- round(2*(1 - pt(abs(t2), df2)), 5)
  tcrit2 <- qt(1 - alpha/2, df2)
  ll2 <- est - tcrit2*se2
  ul2 <- est + tcrit2*se2
@@ -1682,7 +2156,7 @@ ci.slope.mean.bs <- function(alpha, m, sd, n, x) {
 #' 
 #' 
 #' @description
-#' Computes a distrbution-free test and confidence interval for the slope 
+#' Computes a distribution-free test and confidence interval for the slope 
 #' of medians in a one-factor experimental design with a quantitative 
 #' between-subjects factor using sample group medians and standard errors
 #' as input. The sample median and standard error for each group can be 
@@ -1712,8 +2186,8 @@ ci.slope.mean.bs <- function(alpha, m, sd, n, x) {
 #' ci.slope.median.bs(.05, m, se, x)
 #'
 #' # Should return:
-#' #   Estimate        SE        z           p        LL        UL
-#' #  0.3664407 0.1163593 3.149216 0.001637091 0.1383806 0.5945008
+#' #   Estimate        SE      z       p        LL        UL
+#' #  0.3664407 0.1163593 3.1492 0.00164 0.1383806 0.5945008
 #'
 #'
 #' @importFrom stats qnorm
@@ -1726,8 +2200,8 @@ ci.slope.median.bs <- function(alpha, m, se, x) {
  v <- (x - mx)/ssx
  est <- t(v)%*%m 
  se <- sqrt(t(v)%*%diag(se^2)%*%v)
- z <- est/se
- p <- 2*(1 - pnorm(abs(z)))
+ z <- round(est/se, 4)
+ p <- round(2*(1 - pnorm(abs(z))), 5)
  ll <- est - zcrit*se
  ul <- est + zcrit*se
  out <- t(c(est, se, z, p, ll, ul))
@@ -1750,6 +2224,8 @@ ci.slope.median.bs <- function(alpha, m, se, x) {
 #' accompanied with a confidence interval for the population Pearson or
 #' partial correlation value (see \link[statpsych]{ci.cor}).
 #'
+#' For more details, see Section 1.19 of Bonett (2021, Volume 2)
+#'
 #'
 #' @param  cor     estimated correlation 
 #' @param  n       sample size 
@@ -1764,19 +2240,23 @@ ci.slope.median.bs <- function(alpha, m, se, x) {
 #' * p - two-sided p-value
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' test.cor(.484, 100, 0, .2)
 #'
 #' # Should return:
-#' # Estimate        z           p
-#' #    0.484 3.205432 0.001348601
+#' # Estimate      z       p
+#' #    0.484 3.2054 0.00135
 #'
 #'
 #' test.cor(.372, 100, 0, 0)
 #'
 #' # Should return:
-#' #  Estimate        t df           p
-#' #     0.372 3.967337 98 0.000138436
+#' #  Estimate      t df       p
+#' #     0.372 3.9673 98 0.00014
 #'
 #'
 #' @importFrom stats pnorm
@@ -1788,8 +2268,9 @@ test.cor <- function(cor, n, s, h) {
   df <- n - 2 - s
   se <- sqrt((1 - cor^2)/df)
   t <- cor/se
-  pval <- 2*(1 - pt(abs(t), df))
-  out <- t(c(cor, t, df, pval))
+  p <- round(2*(1 - pt(abs(t), df)), 5)
+  t <- round(t, 4)
+  out <- t(c(cor, t, df, p))
   colnames(out) <- c("Estimate", "t", "df", "p")
  }
  else {
@@ -1797,8 +2278,9 @@ test.cor <- function(cor, n, s, h) {
    h.z <- log((1 + h)/(1 - h))/2
    se.z <- sqrt(1/(n - 3 - s))
    z <- (r.z - h.z)/se.z
-   pval <- 2*(1 - pnorm(abs(z)))
-   out <- t(c(cor, z, pval))
+   p <- round(2*(1 - pnorm(abs(z))), 2)
+   z <- round(z, 4)
+   out <- t(c(cor, z, p))
    colnames(out) <- c("Estimate", "z", "p")
  }
  rownames(out) <- ""
@@ -1835,15 +2317,15 @@ test.cor <- function(cor, n, s, h) {
 #' test.spear(.471, .2, 100)
 #'
 #' # Should return:
-#' # Estimate        z           p
-#' #     0.471 3.009628 0.00261568
+#' # Estimate       z       p
+#' #     0.471 3.0096 0.00262
 #'
 #'
-#' test.spear(.342, 0, 100)
+#' test.spear(.341, 0, 100)
 #'
 #' # Should return:
-#' #  Estimate        t df            p
-#' #     0.342 3.602881 98 0.0004965008
+#' #  Estimate     t df       p
+#' #     0.341 3.591 98 0.00052
 #'
 #'
 #' @importFrom stats pnorm
@@ -1855,8 +2337,9 @@ test.spear <- function(cor, h, n) {
   df <- n - 2
   se <- sqrt((1 - cor^2)/df)
   t <- cor/se
-  pval <- 2*(1 - pt(abs(t), df))
-  out <- t(c(cor, t, df, pval))
+  p <- round(2*(1 - pt(abs(t), df)), 5)
+  t <- round(t, 4)
+  out <- t(c(cor, t, df, p))
   colnames(out) <- c("Estimate", "t", "df", "p")
  }
  else {
@@ -1864,8 +2347,9 @@ test.spear <- function(cor, h, n) {
    h.z <- log((1 + h)/(1 - h))/2
    se.z <- sqrt((1 + h^2/2)/(n - 3))
    z <- (r.z - h.z)/se.z
-   pval <- 2*(1 - pnorm(abs(z)))
-   out <- t(c(cor, z, pval))
+   p <- round(2*(1 - pnorm(abs(z))))
+   z <- round(z, 4)
+   out <- t(c(cor, z, p))
    colnames(out) <- c("Estimate", "z", "p")
  }
  rownames(out) <- ""
@@ -1903,8 +2387,8 @@ test.spear <- function(cor, h, n) {
 #' test.cor2(.684, .437, 100, 125, 0)
 #'
 #' # Should return:
-#' # Estimate        z           p
-#' #    0.247 2.705709 0.006815877
+#' # Estimate      z       p
+#' #    0.247 2.7057 0.00682
 #'
 #'
 #' @importFrom stats pnorm
@@ -1921,8 +2405,9 @@ test.cor2 <- function(cor1, cor2, n1, n2, s) {
  se <- sqrt(v1 + v2)
  diff <- cor1 - cor2
  z <- (z1 - z2)/se
- pval <- 2*(1 - pnorm(abs(z)))
- out <- t(c(diff, z, pval))
+ p <- round(2*(1 - pnorm(abs(z))), 5)
+ z <- round(z, 4)
+ out <- t(c(diff, z, p))
  colnames(out) <- c("Estimate", "z", "p")
  rownames(out) <- ""
  return(out)
@@ -1962,8 +2447,8 @@ test.cor2 <- function(cor1, cor2, n1, n2, s) {
 #' test.spear2(.684, .437, 100, 125)
 #'
 #' # Should return:
-#' # Estimate        z          p
-#' #    0.247 2.498645 0.01246691
+#' # Estimate      z       p
+#' #    0.247 2.4986 0.01247
 #'
 #'
 #' @importFrom stats pnorm
@@ -1980,8 +2465,9 @@ test.spear2 <- function(cor1, cor2, n1, n2) {
  se <- sqrt(v1 + v2)
  diff <- cor1 - cor2
  z <- (z1 - z2)/se
- pval <- 2*(1 - pnorm(abs(z)))
- out <- t(c(diff, z, pval))
+ p <- round(2*(1 - pnorm(abs(z))), 5)
+ z <- round(z, 4)
+ out <- t(c(diff, z, p))
  colnames(out) <- c("Estimate", "z", "p")
  rownames(out) <- ""
  return(out)
@@ -2005,6 +2491,8 @@ test.spear2 <- function(cor1, cor2, n1, n2) {
 #' hypothesis of a monotonic trend if any lower limit is greater than 0 and 
 #' any upper limit is less than 0. 
 #'
+#' For more details, see Section 1.21 of Bonett (2021, Volume 2)
+#'
 #'
 #' @param  alpha   alpha level for simultaneous 1-alpha confidence
 #' @param  m       vector of estimated group means
@@ -2019,6 +2507,10 @@ test.spear2 <- function(cor1, cor2, n1, n2) {
 #' * SE - standard error
 #' * LL - one-sided lower limit of the confidence interval
 #' * UL - one-sided upper limit of the confidence interval
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -2075,6 +2567,8 @@ test.mono.mean.bs <-function(alpha, m, sd, n) {
 #' is less than 0. The sample median and standard error for each group
 #' can be computed using the \link[statpsych]{ci.median} function. 
 #'
+#' For more details, see Section 1.21 of Bonett (2021, Volume 2)
+#'
 #'
 #' @param  alpha   alpha level for simultaneous 1-alpha confidence
 #' @param  m       vector of estimated group medians
@@ -2088,6 +2582,10 @@ test.mono.mean.bs <-function(alpha, m, sd, n) {
 #' * SE - standard error
 #' * LL - one-sided lower limit of the confidence interval
 #' * UL - one-sided upper limit of the confidence interval
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -2137,6 +2635,8 @@ test.mono.median.bs <-function(alpha, m, se) {
 #' sizes. Set the error variance planning value to the largest value within 
 #' a plausible range for a conservatively large sample size.
 #'
+#' For more details, see Section 1.24 of Bonett (2021, Volume 2)
+#'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  evar   planning value of within-group (error) variance
@@ -2148,13 +2648,17 @@ test.mono.median.bs <-function(alpha, m, se) {
 #' Returns the required total sample size
 #' 
 #' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
-#' x <- c(2, 5, 8)
-#' size.ci.slope(.05, 31.1, x, 1)
+#' x <- c(5, 7, 9)
+#' size.ci.slope(.05, 300, x, 5)
 #'
 #' # Should return:
 #' # Total sample size
-#' #                83
+#' #                73
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -2182,6 +2686,8 @@ size.ci.slope <- function(alpha, evar, x, w) {
 #' to the smallest absolute value within a plausible range for a conservatively 
 #' large sample size.
 #'
+#' For more details, see Section 1.24 of Bonett (2021, Volume 2)
+#'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  cor    planning value of correlation
@@ -2189,20 +2695,22 @@ size.ci.slope <- function(alpha, evar, x, w) {
 #' @param  w      desired confidence interval width
 #'
 #' 
-#' @references
-#' \insertRef{Bonett2000}{statpsych}
-#'
-#'
 #' @return 
 #' Returns the required sample size
 #' 
 #' 
+#' @references
+#' \insertRef{Bonett2000}{statpsych}
+#'
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
-#' size.ci.cor(.05, .362, 0, .25)
+#' size.ci.cor(.05, .3, 0, .2)
 #'
 #' # Should return:
 #' # Sample size
-#' #         188
+#' #         320
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -2291,6 +2799,8 @@ size.ci.spear <- function(alpha, cor, w) {
 #' Set the correlation planning value to the smallest absolute value within a 
 #' plausible range for a conservatively large sample size.
 #'
+#' For more details, see Section 1.24 of Bonett (2021, Volume 2)
+#'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  cor    planning value of point-biserial correlation
@@ -2298,12 +2808,14 @@ size.ci.spear <- function(alpha, cor, w) {
 #' @param  p      proportion of members in one of the two subpopulations
 #'
 #' 
+#' @return 
+#' Returns the required sample size
+#'
+#'
 #' @references
 #' \insertRef{Bonett2020a}{statpsych}
 #'
-#'
-#' @return 
-#' Returns the required sample size
+#' \insertRef{Bonett2021}{statpsych}
 #' 
 #' 
 #' @examples
@@ -2337,6 +2849,8 @@ size.ci.pbcor <- function(alpha, cor, w, p) {
 #' precision. Set the planning value of the squared multiple correlation to 1/3
 #' for a conservatively large sample size. 
 #'
+#' For more details, see Section 2.28 of Bonett (2021, Volume 2)
+#'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  r2     planning value of squared multiple correlation
@@ -2348,12 +2862,16 @@ size.ci.pbcor <- function(alpha, cor, w, p) {
 #' Returns the required sample size
 #' 
 #' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
-#' size.ci.rsqr(.05, .25, 5, .2)
+#' size.ci.rsqr(.05, .3, 5, .2)
 #' 
 #' # Should return:
 #' # Sample size
-#' #         214
+#' #         227
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -2392,6 +2910,8 @@ size.ci.rsqr <- function(alpha, r2, s, w) {
 #' the fixed factor. Set the error variance planning value to the largest value 
 #' within a plausible range for a conservatively large sample size.
 #'
+#' For more details, see Section 1.24 of Bonett (2021, Volume 2)
+#'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  evar   planning value of within group (error) variance
@@ -2402,6 +2922,10 @@ size.ci.rsqr <- function(alpha, r2, s, w) {
 #' 
 #' @return 
 #' Returns the required total sample size
+#' 
+#' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #' 
 #' 
 #' @examples
@@ -2440,6 +2964,8 @@ size.ci.condmean <- function(alpha, evar, xvar, diff, w) {
 #' planning value to the largest value within a plausible range for a 
 #' conservatively large sample size.
 #'
+#' For more details, see Section 2.28 of Bonett (2021, Volume 2)
+#'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  evar   planning value of within group (error) variance
@@ -2453,13 +2979,17 @@ size.ci.condmean <- function(alpha, evar, xvar, diff, w) {
 #' Returns the required sample size for each group
 #' 
 #' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#' 
+#' 
 #' @examples
-#' v <- c(1, -1)
-#' size.ci.lc.ancova(.05, 1.37, 1, 0, 1.5, v)
+#' v <- c(.5, .5, -.5, -.5)
+#' size.ci.lc.ancova(.05, 6.4, 1, 0, 3.0, v)
 #'
 #' # Should return:
 #' # Sample size per group
-#' #                    21
+#' #                    13
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -2485,6 +3015,8 @@ size.ci.lc.ancova <- function(alpha, evar, s, d, w, v) {
 #' of the independent (exogenous) variable on the response variable, controlling
 #' for the mediator variable, is assumed to be negligible. 
 #'
+#' For more details, see Section 1.19 of Bonett (2021, Volume 4)
+#'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  cor1   planning value of correlation between the independent and mediator variables
@@ -2494,6 +3026,10 @@ size.ci.lc.ancova <- function(alpha, evar, s, d, w, v) {
 #' 
 #' @return 
 #' Returns the required sample size
+#' 
+#' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #' 
 #' 
 #' @examples
@@ -2518,6 +3054,65 @@ size.ci.indirect <- function(alpha, cor1, cor2, w) {
 }
 
 
+#  size.ci.cronbach ========================================================
+#' Sample size for a Cronbach reliability confidence interval
+#'
+#'
+#' Computes the sample size required to estimate a Cronbach reliability
+#' with desired confidence interval precision. Set the reliability planning 
+#' value to the smallest value within a plausible range for a 
+#' conservatively large sample size.
+#'
+#' For more details, see Section 4.26 of Bonett (2021, Volume 1)
+#'
+#'
+#' @param  alpha  alpha value for 1-alpha confidence 
+#' @param  rel    reliability planning value
+#' @param  r      number of measurements (items, raters, forms)
+#' @param  w      desired confidence interval width
+#'
+#'
+#' @references
+#' \insertRef{Bonett2015}{statpsych}
+#'
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
+#' @return 
+#' Returns the required sample size
+#'
+#'
+#' @examples
+#' size.ci.cronbach(.05, .75, 5, .15)
+#'
+#' # Should return:
+#' # Sample size
+#' #         109
+#'  
+#' 
+#' @importFrom stats qf
+#' @importFrom stats qnorm
+#' @export
+size.ci.cronbach <- function(alpha, rel, r, w) {
+ if (rel > .999 | rel < .001) {stop("reliability must be between .001 and .999")}
+ z <- qnorm(1 - alpha/2)
+ n0 <- ceiling((8*r/(r - 1))*((1 - rel)^2*(z/w)^2 + 2))
+ df1 <- n0 - 1
+ df2 <- (n0 - 1)*(r - 1)
+ f1 <- qf(1 - alpha/2, df1, df2)
+ f2 <- qf(1 - alpha/2, df2, df1)
+ f0 <- 1/(1 - rel)
+ ll <- 1 - f1/f0
+ ul <- 1 - 1/(f0*f2)
+ w0 <- ul - ll
+ n <- ceiling((n0 - 2)*(w0/w)^2 + 2)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size"
+ rownames(out) <- ""
+ return(out)
+}
+
+
 #  size.ci.cronbach2 =======================================================
 #' Sample size for a 2-group Cronbach reliability difference confidence
 #' interval
@@ -2526,6 +3121,8 @@ size.ci.indirect <- function(alpha, cor1, cor2, w) {
 #' Computes the sample size per group (assuming equal sample sizes) required
 #' to estimate a difference in population Cronbach reliability coefficients
 #' with desired precision in a 2-group design. 
+#'
+#' For more details, see Section 2.19 of Bonett (2021, Volume 4)
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test 
@@ -2541,6 +3138,8 @@ size.ci.indirect <- function(alpha, cor1, cor2, w) {
 #'
 #' @references
 #' \insertRef{Bonett2015}{statpsych}
+#'
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -2569,6 +3168,75 @@ size.ci.cronbach2 <- function(alpha, rel1, rel2, r, w) {
  n <- ceiling((n0 - 2)*(w0/w)^2 + 2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size per group"
+ rownames(out) <- ""
+ return(out)
+}
+
+
+#  size.ci.icc ================================================================
+#' Sample size for a intraclass correlation confidence interval
+#'
+#'
+#' Computes the sample size required to estimate an intraclass correlation
+#' with desired confidence interval precision. This type of intraclass 
+#' correlation can be used to describe the reliability of a single measurement
+#' (e.g., a single rater or a single form of a test). This intraclass 
+#' correlation assumes a two-factor (subject x measurement) model. Use the
+#' size.ci.cronbach function to determine the sample size required to 
+#' estimate the reliability of a sum or average of r measurements (e.g., items)
+#' with desired confidence interval precision.
+#'
+#' Specifying an intraclass correlation planning value for a conservatively
+#' large sample size requirement is not straightforward with an intraclass 
+#' correlation. For r = 2, the sample size requirement is largest for an
+#' intraclass correlation of zero. But for r = 3, 4, 5, 10, 20, and 40 an 
+#' intraclass correlation planning value of about .26, .33, .38, .43, .44,
+#' and .45, respectively, maximizes the sample size requirement.
+#'
+#'
+#' @param  alpha  alpha value for 1-alpha confidence 
+#' @param  icc    intraclass correlation planning value
+#' @param  r      number of measurements (raters, forms, occasions)
+#' @param  w      desired confidence interval width
+#'
+#'
+#' @references
+#' \insertRef{Bonett2002b}{statpsych}
+#'
+#'
+#' @return 
+#' Returns the required sample size
+#'
+#'
+#' @examples
+#' size.ci.icc(.05, .70, 3, .2)
+#'
+#' # Should return:
+#' # Sample size
+#' #          68
+#'  
+#' 
+#' @importFrom stats qf
+#' @importFrom stats qnorm
+#' @export
+size.ci.icc <- function(alpha, icc, r, w) {
+ if (icc > .999 | icc < .001) {stop("correlation must be between .001 and .999")}
+ z <- qnorm(1 - alpha/2)
+ n0 <- ceiling(8*z^2*((1 - icc)^2*(1 + (r - 1)*icc)^2)/(r*(r - 1)*w^2)) + 1
+ cronbach <- r*icc/(1 + (r - 1)*icc)
+ f <- 1/(1 - cronbach)
+ df1 <- n0 - 1
+ df2 <- (n0 - 1)*(r - 1)
+ f1 <- qf(1 - alpha/2, df1, df2)
+ f2 <- qf(1 - alpha/2, df2, df1)
+ fL <- f/f1
+ fU <- f*f2
+ ll <- (fL - 1)/(fL + r - 1) 
+ ul <- (fU - 1)/(fU + r - 1)
+ w0 <- ul - ll
+ n <- ceiling((n0 - 1)*(w0/w)^2 + 1)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size"
  rownames(out) <- ""
  return(out)
 }
@@ -2741,8 +3409,8 @@ size.ci.spear2 <- function(alpha, cor1, cor2, w) {
 
 
 #  size.ci.cor.prior ==========================================================
-#' Sample size for a Pearson correlation confidence interval using a 
-#' planning value from a prior study
+#' Sample size for a Pearson correlation confidence interval using an 
+#' estimated correlation from a prior study
 #'
 #'                
 #' @description
@@ -2752,23 +3420,25 @@ size.ci.spear2 <- function(alpha, cor1, cor2, w) {
 #' interval width in the planned study will depend on the value of the
 #' estimated correlation in the planned study. An estimated correlation from
 #' a prior study can be used to compute a prediction interval for the value of
-#' the estimated correlation in the planned study. If the prediction interval
+#' the estimated correlation in the planned study, which is then used as a 
+#' planning value in the sample size analysis. If the prediction interval
 #' includes 0, then the correlation planning value is set to 0; otherwise, the
 #' correlation planning value is set to the lower prediction limit (if the prior
 #' correlation is positive) or the upper prediction limit (if the prior correlation
-#' is negative). Using a larger confidence level (1 - alpha2) for the prediction 
-#' interval will increase the probability that the width of the confidence interval
-#' in the planned study will be less than or equal to the desired width.
+#' is negative). The probability that the prediction interval will have a width that
+#' is less than the desired width in the planned study is approximately 1 - alpha2. 
 #'
 #' This sample size approach assumes that the population Pearson correlation 
 #' that was estimated in the prior study is very similar to the population Pearson
-#' correlation that will be estimated in the planned study. However, this type of
-#' prior information is typically not available and the researcher must use expert
-#' opinion to guess the value of the Pearson correlation that will be observed in the 
-#' planned study. The \link[statpsych]{size.ci.cor} function uses a 
-#' correlation planning value that is based on expert opinion regarding the 
-#' likely value of the correlation estimate that will be observed in the 
-#' planned study.
+#' correlation that will be estimated in the planned study. If an estimated 
+#' Pearson correlation from a prior study is not available the researcher must use
+#' expert opinion to guess the value of the Pearson correlation that will be 
+#' observed in the planned study. The \link[statpsych]{size.ci.cor} function uses
+#' a correlation planning value that is based on expert opinion regarding the 
+#' likely value of the correlation estimate that will be observed in the planned 
+#' study.
+#'
+#' For more details, see Section 1.26 of Bonett (2021, Volume 2)
 #'
 #'
 #' @param  alpha1  alpha level for 1-alpha1 confidence in the planned study
@@ -2780,48 +3450,213 @@ size.ci.spear2 <- function(alpha, cor1, cor2, w) {
 #'
 #' @return
 #' Returns the required sample size
+#' 
+#' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
-#' size.ci.cor.prior(.05, .10, .438, 100, .2)
+#' size.ci.cor.prior(.05, .10, -.56, 120, .2)
 #'
 #' # Should return:
 #' # Sample size
-#' #         331
+#' #         246
+#'
+#'
+#' @importFrom stats qnorm
+#' @export  
+size.ci.cor.prior <- function(alpha1, alpha2, cor0, n0, w) {
+ if (cor0 > .999 | cor0 < -.999) {stop("correlation must be between -.999 and .999")}
+ if (alpha2 > .5) {stop("alpha2 cannot be greater than .5")}
+ ci <- ci.cor(2*alpha2, cor0, 0, n0)
+ ll0 <- ci[1,3]                                  
+ ul0 <- ci[1,4] 
+ if (ul0 < 0) {cor = ul0}
+ else if (ll0 > 0) {cor = ll0}
+ else {cor = 0} 
+ n1 <- size.ci.cor(alpha1, cor, 0, w)
+ pi <- pi.cor(2*alpha2, cor0, n0, n1, type = 1)
+ ll0 <- pi[1,1]                                  
+ ul0 <- pi[1,2]
+ if (ul0 < 0) {cor = ul0}
+ else if (ll0 > 0) {cor = ll0}
+ else {cor = 0}
+ n2 <- size.ci.cor(alpha1, cor, 0, w)
+ pi <- pi.cor(2*alpha2, cor0, n0, n2, type = 1)
+ ll0 <- pi[1,1]                                  
+ ul0 <- pi[1,2]
+ if (ul0 < 0) {cor = ul0}
+ else if (ll0 > 0) {cor = ll0}
+ else {cor = 0}
+ n3 <- size.ci.cor(alpha1, cor, 0, w)
+ pi <- pi.cor(2*alpha2, cor0, n0, n3, type = 1)
+ ll0 <- pi[1,1]                                  
+ ul0 <- pi[1,2]
+ if (ul0 < 0) {cor = ul0}
+ else if (ll0 > 0) {cor = ll0}
+ else {cor = 0}
+ n <- size.ci.cor(alpha1, cor, 0, w)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size"
+ rownames(out) <- ""
+ return(out)
+}               
+
+
+#  size.ci.cronbach.prior =====================================================
+#' Sample size for a Cronbach reliability confidence interval using an 
+#' reliability estimate from a prior study
+#'
+#'                
+#' @description
+#' Computes the sample size required to estimate a Cronbach reliability with
+#' desired confidence interval precision in applications where an estimated
+#' Cronbach reliability from a prior study is available. The actual confidence
+#' interval width in the planned study will depend on the value of the
+#' estimated reliability in the planned study. An estimated Cronbach reliability
+#' from a prior study can be used to compute a lower prediction limit for the 
+#' estimated reliability in the planned study, which is then used as a planning
+#' value in the sample size analysis. The probability that the prediction interval
+#' will have a width that is less than the desired width in the planned study is
+#' approximately 1 - alpha2. 
+#'
+#' This sample size approach assumes that the population Cronbach reliability 
+#' that was estimated in the prior study is very similar to the population 
+#' Cronbach reliability that will be estimated in the planned study. If
+#' an estimated Cronbach reliability from a prior study is not available, the 
+#' researcher must use expert opinion to guess the value of the Cronbach 
+#' reliability that will be observed in the planned study. The 
+#' \link[statpsych]{size.ci.cronbach} function uses a reliability planning 
+#' value that is based on expert opinion regarding the likely value of the 
+#' reliability estimate that will be observed in the planned study.
+#'
+#'
+#' @param  alpha1  alpha level for 1-alpha1 confidence in the planned study
+#' @param  alpha2  alpha level for the 1-alpha2 prediction interval 
+#' @param  rel0    estimated reliability in prior study
+#' @param  n0      sample size in prior study
+#' @param  r       number of measurements (items, raters, forms)
+#' @param  w       desired confidence interval width
+#'
+#'
+#' @return
+#' Returns the required sample size
+#'
+#'
+#' @examples
+#' size.ci.cronbach.prior(.05, .10, .86, 50, 5, .15)
+#'
+#' # Should return:
+#' # Sample size
+#' #          71
 #'
 #'
 #' @importFrom stats qnorm
 #' @export                 
-size.ci.cor.prior <- function(alpha1, alpha2, cor0, n0, w) {
- if (cor0 > .999 | cor0 < -.999) {stop("correlation must be between -.999 and .999")}
- ci <- ci.cor(alpha2, cor0, 0, n0)
- ll0 <- ci[1,3]                                  
- ul0 <- ci[1,4]  
- if (ll0 < 0 & ul0 > 0) {
-   cor = 0
-   n <- size.ci.cor(alpha1, cor, 0, w)
- } else {
-   if (abs(ll0) < abs(ul0)) {cor = ll0}
-   if (abs(ll0) > abs(ul0)) {cor = ul0}
-   n <- size.ci.cor(alpha1, cor, 0, w)
-   pi <- pi.cor(alpha2, cor0, n0, n, type = 1)
-   ll <- pi[1,1]                                  
-   ul <- pi[1,2]
-   if (ll < 0 & ul > 0) {
-     cor = 0
-     n <- size.ci.cor(alpha1, cor, 0, w)
-   } else {
-     if (abs(ll) < abs(ul)) {cor = ll}
-     if (abs(ll) > abs(ul)) {cor = ul}
-     n <- size.ci.cor(alpha1, cor, 0, w)
-	 pi <- pi.cor(alpha2, cor0, n0, n, type = 1)
-     ll <- pi[1,1]                                  
-     ul <- pi[1,2]
-	 if (abs(ll) < abs(ul)) {cor = ll}
-     if (abs(ll) > abs(ul)) {cor = ul}
-     n <- size.ci.cor(alpha1, cor, 0, w)
-   }
- }	 
+size.ci.cronbach.prior <- function(alpha1, alpha2, rel0, n0, r, w) {
+ if (rel0 > .999 | rel0 < 0) {stop("reliability must be between 0 and .999")}
+ if (alpha2 > .5) {stop("alpha2 cannot be greater than .5")}
+ ci <- ci.cronbach(2*alpha2, rel0, r, n0)
+ ll <- ci[1,3]                                  
+ if (ll < 0) {rel = 0} else {rel <- ll}
+ n <- size.ci.cronbach(alpha1, rel, r, w)
+ pi <- pi.cronbach(alpha2, rel0, r, n0, n, type = 3)
+ ll <- pi[1,1]                                  
+ if (ll < 0) {rel = 0} else {rel <- ll}
+ n <- size.ci.cronbach(alpha1, rel, r, w)
+ pi <- pi.cronbach(alpha2, rel0, r, n0, n, type = 3)
+ ll <- pi[1,1]                                  
+ if (ll < 0) {rel = 0} else {rel <- ll}
+ n <- size.ci.cronbach(alpha1, rel, r, w)	 
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size"
+ rownames(out) <- ""
+ return(out)
+}
+
+
+#  size.ci.icc.prior =====================================================
+#' Sample size for an intraclass correlation confidence interval using a 
+#' planning value from a prior study
+#'
+#'                
+#' @description
+#' Computes the sample size required to estimate an intraclass correlation
+#' with desired confidence interval precision in applications where an 
+#' estimated intraclass correlation from a prior study is available. The 
+#' actual confidence interval width in the planned study will depend on the
+#' value of the estimated intraclas correlation in the planned study. An 
+#' estimated intraclass correlation from a prior study can be used to compute
+#' a lower prediction limit for the estimated intraclass correlation in the 
+#' planned study, which is then used as a planning value in the sample size 
+#' analysis. The probability that the prediction interval will have a width
+#' that is less than the desired width in the planned study is approximately 
+#' 1 - alpha2. 
+#'
+#' This sample size approach assumes that the population intraclass correlation 
+#' that was estimated in the prior study is very similar to the population 
+#' intraclass correlation that will be estimated in the planned study. If
+#' an estimated intraclas correlation from a prior study is not available, the 
+#' researcher must use expert opinion to guess the value of the intraclass
+#' correlation that will be observed in the planned study. The 
+#' \link[statpsych]{size.ci.icc} function uses an intraclass correlation 
+#' planning value that is based on expert opinion regarding the likely value 
+#' of the intraclass correlation estimate that will be observed in the planned
+#' study.
+#'
+#'
+#' @param  alpha1  alpha level for 1-alpha1 confidence in the planned study
+#' @param  alpha2  alpha level for the 1-alpha2 prediction interval 
+#' @param  cor0    estimated correlation in prior study
+#' @param  n0      sample size in prior study
+#' @param  r       number of measurements (raters, forms)
+#' @param  w       desired confidence interval width
+#'
+#'
+#' @return
+#' Returns the required sample size
+#'
+#'
+#' @examples
+#' size.ci.icc.prior(.05, .10, .674, 50, 3, .2)
+#'
+#' # Should return:
+#' # Sample size
+#' #         114
+#'
+#'
+#' @importFrom stats qnorm
+#' @export                 
+size.ci.icc.prior <- function(alpha1, alpha2, cor0, n0, r, w) {
+ if (cor0 > .999 | cor0 < 0) {stop("correlation must be between 0 and .999")}
+ if (alpha2 > .5) {stop("alpha2 cannot be greater than .5")}
+ min <- -.05*sqrt(r - 2) - .1*(r - 2)^.333 + .45*(r - 2)^.25
+ z1 <- qnorm(1 - alpha1/2)
+ z2 <- qnorm(1 - alpha2)
+ var0 <- 2*(1 - cor0)^2*(1 + (r - 1)*cor0)^2/(r*(r - 1)*(n0 - 1))
+ ll <- cor0 - z2*sqrt(var0) 
+ ul <- cor0 + z2*sqrt(var0) 
+ if (ul < min) {cor.plan = ul} 
+ else if (ll > min) {cor.plan = ll}
+ else {cor.plan = min}
+ n1 <- ceiling(8*z1^2*(1 - cor.plan)^2*(1 + (r - 1)*cor.plan)^2/(r*(r - 1)*w^2) + 1)
+ v <- 2*(1 - cor.plan)^2*(1 + (r - 1)*cor.plan)^2/(r*(r - 1))
+ var1 <- v/(n0 - 1) + v/(n1 - 1)
+ ll <- cor0 - z2*sqrt(var1)
+ ul <- cor0 + z2*sqrt(var1)   
+ if (ul < min) {cor.plan = ul} 
+ else if (ll > min) {cor.plan = ll}
+ else {cor.plan = min}
+ n2 <- ceiling(8*z1^2*(1 - cor.plan)^2*(1 + (r - 1)*cor.plan)^2/(r*(r - 1)*w^2) + 1)
+ v <- 2*(1 - cor.plan)^2*(1 + (r - 1)*cor.plan)^2/(r*(r - 1))
+ var2 <- v/(n0 - 1) + v/(n2 - 1)
+ ll <- cor0 - z2*sqrt(var2)  
+ ul <- cor0 + z2*sqrt(var2)  
+ if (ul < min) {cor.plan = ul} 
+ else if (ll > min) {cor.plan = ll}
+ else {cor.plan = min}
+ n <- ceiling(8*z1^2*(1 - cor.plan)^2*(1 + (r - 1)*cor.plan)^2/(r*(r - 1)*w^2) + 1)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
  rownames(out) <- ""
@@ -2844,6 +3679,8 @@ size.ci.cor.prior <- function(alpha1, alpha2, cor0, n0, w) {
 #' the error variance planning value to the largest value within a 
 #' plausible range for a conservatively large sample size.
 #'
+#' For more details, see Section 2.28 of Bonett (2021, Volume 2)
+#'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  evar   planning value of within group (error) variance
@@ -2855,6 +3692,10 @@ size.ci.cor.prior <- function(alpha1, alpha2, cor0, n0, w) {
 #' 
 #' @return 
 #' Returns the required sample size for each group
+#' 
+#' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #' 
 #' 
 #' @examples
@@ -2904,6 +3745,8 @@ size.ci.ancova2 <- function(alpha, evar, s, d, w, R) {
 #' and standardized factor loadings in a confirmatory factor analysis model.
 #' This function will soon be replaced with size.ci.gen.
 #'
+#' For more details, see Section 2.28 of Bonett (2021, Volume 2)
+#'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  se     standard error of slope from prior/pilot study
@@ -2913,6 +3756,10 @@ size.ci.ancova2 <- function(alpha, evar, s, d, w, R) {
 #' 
 #' @return 
 #' Returns the required sample size
+#' 
+#' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #' 
 #' 
 #' @examples
@@ -3047,6 +3894,8 @@ size.ci.gen2 <- function(alpha, se, n0, w, R) {
 #' planning value to the largest value within a plausible range for a 
 #' conservatively large sample size.
 #'
+#' For more details, see Section 1.25 of Bonett (2021, Volume 2)
+#'
 #'  
 #' @param  alpha   alpha level for hypothesis test
 #' @param  pow     desired power
@@ -3058,6 +3907,10 @@ size.ci.gen2 <- function(alpha, se, n0, w, R) {
 #' 
 #' @return 
 #' Returns the required total sample size
+#' 
+#' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #' 
 #' 
 #' @examples
@@ -3093,6 +3946,8 @@ size.test.slope <- function(alpha, pow, evar, x, slope, h) {
 #' Computes the sample size required to test a population Pearson or a partial
 #' correlation with desired power. Set s = 0 for a Pearson correlation. 
 #'
+#' For more details, see Section 1.25 of Bonett (2021, Volume 2)
+#'
 #'  
 #' @param  alpha   alpha level for hypothesis test
 #' @param  pow     desired power
@@ -3105,12 +3960,22 @@ size.test.slope <- function(alpha, pow, evar, x, slope, h) {
 #' Returns the required sample size
 #' 
 #' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#' 
+#' 
 #' @examples
-#' size.test.cor(.05, .9, .45, 0, 0)
+#' size.test.cor(.05, .95, -.50, 0, 0)
 #'
 #' # Should return:
 #' # Sample size
-#' #          48
+#' #          47
+#'
+#' size.test.cor(.05, .90, .4, 2, 0)
+#'
+#' # Should return:
+#' # Sample size
+#' #          64
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -3142,6 +4007,8 @@ size.test.cor <- function(alpha, pow, cor, s, h) {
 #' for a Pearson correlation. The correlation planning value must be a value 
 #' within the hypothesized interval. 
 #'
+#' For more details, see Section 1.25 of Bonett (2021, Volume 2)
+#'
 #'  
 #' @param  alpha   alpha level for hypothesis test
 #' @param  pow     desired power
@@ -3154,12 +4021,16 @@ size.test.cor <- function(alpha, pow, cor, s, h) {
 #' Returns the required sample size
 #' 
 #' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#' 
+#' 
 #' @examples
-#' size.interval.cor(.05, .8, .1, 0, .25)
+#' size.interval.cor(.05, .9, .1, 0, .3)
 #'
 #' # Should return:
 #' # Sample size
-#' #         360
+#' #         251
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -3251,6 +4122,8 @@ size.test.cor2 <- function(alpha, pow, cor1, cor2, s, R) {
 #' value to the largest value within a plausible range for a conservatively 
 #' large sample size.
 #'
+#' For more details, see Section 2.29 of Bonett (2021, Volume 2)
+#'
 #'  
 #' @param  alpha   alpha level for hypothesis test
 #' @param  pow     desired power
@@ -3265,13 +4138,17 @@ size.test.cor2 <- function(alpha, pow, cor1, cor2, s, R) {
 #' Returns the required sample size for each group
 #' 
 #' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#' 
+#' 
 #' @examples
-#' v <- c(.5, .5, -1)
-#' size.test.lc.ancova(.05, .9, 1.37, .7, 1, 0, v)
+#' v <- c(.25, .25, .25, .25, -1)
+#' size.test.lc.ancova(.05, .9, 17.5, 4.0, 2, 0, v)
 #'
 #' # Should return:
 #' # Sample size per group
-#' #                    46
+#' #                    17
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -3283,6 +4160,122 @@ size.test.lc.ancova <- function(alpha, pow, evar, es, s, d, v) {
  n <- ceiling((evar*(1 + d^2/4)*t(v)%*%v)*(za + zb)^2/es^2 + s + za^2/(2*m))
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size per group"
+ rownames(out) <- ""
+ return(out)
+}
+
+
+#  size.test.ancova2 ==========================================================
+#' Sample size for a 2-group ANCOVA hypothesis test
+#'
+#'
+#' @description
+#' Computes the sample size for each group required to test a mean difference
+#' in an ANCOVA model with desired power in a 2-group design. In a 
+#' nonexperimental design, the sample size is affected by the magnitude of 
+#' covariate mean differences across groups. The covariate mean differences can
+#' be approximated by specifying the largest standardized covariate mean 
+#' difference across of all covariates. In an experiment, this standardized 
+#' mean difference is set to 0. Set the error variance planning value to the 
+#' largest value within a plausible range for a conservatively large sample 
+#' size.
+#'
+#' For more details, see Section 2.29 of Bonett (2021, Volume 2)
+#'
+#'  
+#' @param  alpha   alpha level for hypothesis test
+#' @param  pow     desired power
+#' @param  evar    planning value of within-group (error) variance
+#' @param  es      planning value of mean difference
+#' @param  s       number of covariates 
+#' @param  d       largest standardized mean difference of all covariates
+#' @param  R       n2/n1 ratio
+#'
+#' 
+#' @return 
+#' Returns the required sample size for each group
+#' 
+#' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#' 
+#' 
+#' @examples
+#' size.test.ancova2(.05, .9, 1.37, .7, 1, 0, 1)
+#'
+#' # Should return:
+#' #  n1 n2
+#' #  61 61
+#'
+#' size.test.ancova2(.05, .9, 1.37, .7, 1, 0, 2)
+#'
+#' # Should return:
+#' #  n1 n2
+#' #  47 94
+#'
+#' size.test.ancova2(.05, .9, 1.37, .7, 1, .5, 1)
+#'
+#' # Should return:
+#' #  n1 n2
+#' #  65 65
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export
+size.test.ancova2 <- function(alpha, pow, evar, es, s, d, R) {
+ if (es == 0) {stop("effect size cannot be zero")}
+ za <- qnorm(1 - alpha/2)
+ zb <- qnorm(pow)
+ n1 <- ceiling((evar*(1 + d^2/4)*(1 + 1/R))*(za + zb)^2/es^2 + s + za^2/4)
+ n2 <- ceiling(R*n1)
+ out <- t(c(n1, n2))
+ colnames(out) <- c("n1", "n2")
+ rownames(out) <- ""
+ return(out)
+}
+
+
+#  size.test.cronbach ========================================================
+#' Sample size to test a Cronbach reliability
+#'
+#'
+#' Computes the sample size required to test a Cronbach reliability with
+#' desired power. 
+#'
+#'
+#' @param  alpha  alpha level for hypothesis test 
+#' @param  pow    desired power
+#' @param  rel    reliability planning value
+#' @param  r      number of measurements (items, raters, forms)
+#' @param  h      null hypothesis value of reliability
+#'
+#'
+#' @return 
+#' Returns the required sample size
+#'
+#'
+#' @references
+#' \insertRef{Bonett2015}{statpsych}
+#'
+#'
+#' @examples
+#' size.test.cronbach(.05, .85, .80, 5, .7)
+#'
+#' # Should return:
+#' # Sample size
+#' #         139
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export
+size.test.cronbach <- function(alpha, pow, rel, r, h) {
+ if (rel > .999 | rel < .001) {stop("reliability must be between .001 and .999")}
+ za <- qnorm(1 - alpha/2)
+ zb <- qnorm(pow)
+ e <- (1 - rel)/(1 - h)
+ n <- ceiling((2*r/(r - 1))*(za + zb)^2/log(e)^2 + 2)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size"
  rownames(out) <- ""
  return(out)
 }
@@ -3337,118 +4330,6 @@ size.test.cronbach2 <- function(alpha, pow, rel1, rel2, r) {
 }
 
 
-#  size.test.ancova2 ==========================================================
-#' Sample size for a 2-group ANCOVA hypothesis test
-#'
-#'
-#' @description
-#' Computes the sample size for each group required to test a mean difference
-#' in an ANCOVA model with desired power in a 2-group design. In a 
-#' nonexperimental design, the sample size is affected by the magnitude of 
-#' covariate mean differences across groups. The covariate mean differences can
-#' be approximated by specifying the largest standardized covariate mean 
-#' difference across of all covariates. In an experiment, this standardized 
-#' mean difference is set to 0. Set the error variance planning value to the 
-#' largest value within a plausible range for a conservatively large sample 
-#' size.
-#'
-#'  
-#' @param  alpha   alpha level for hypothesis test
-#' @param  pow     desired power
-#' @param  evar    planning value of within-group (error) variance
-#' @param  es      planning value of mean difference
-#' @param  s       number of covariates 
-#' @param  d       largest standardized mean difference of all covariates
-#' @param  R       n2/n1 rartio
-#'
-#' 
-#' @return 
-#' Returns the required sample size for each group
-#' 
-#' 
-#' @examples
-#' size.test.ancova2(.05, .9, 1.37, .7, 1, 0, 1)
-#'
-#' # Should return:
-#' #  n1 n2
-#' #  61 61
-#'
-#' size.test.ancova2(.05, .9, 1.37, .7, 1, 0, 2)
-#'
-#' # Should return:
-#' #  n1 n2
-#' #  47 94
-#'
-#' size.test.ancova2(.05, .9, 1.37, .7, 1, .5, 1)
-#'
-#' # Should return:
-#' #  n1 n2
-#' #  65 65
-#'  
-#' 
-#' @importFrom stats qnorm
-#' @export
-size.test.ancova2 <- function(alpha, pow, evar, es, s, d, R) {
- if (es == 0) {stop("effect size cannot be zero")}
- za <- qnorm(1 - alpha/2)
- zb <- qnorm(pow)
- n1 <- ceiling((evar*(1 + d^2/4)*(1 + 1/R))*(za + zb)^2/es^2 + s + za^2/4)
- n2 <- ceiling(R*n1)
- out <- t(c(n1, n2))
- colnames(out) <- c("n1", "n2")
- rownames(out) <- ""
- return(out)
-}
-
-
-#  size.test.slope.gen ========================================================
-#' Sample size for a slope hypothesis test in a general statistical model  
-#'
-#'
-#' @description
-#' Computes the sample size required to test a null hypothesis with desired
-#' power that a population slope coefficient in any general statistical model 
-#' is equal to zero. This function requires a standard error estimate for the 
-#' slope of interest from a prior or pilot study and the sample size that was
-#' used in the prior or pilot study. This function can be used for both 
-#' unstandardized and standardized slopes. This function also can be used for 
-#' both unstandardized and standardized factor loadings in a confirmatory
-#' factor analysis model. This function will soon be replaced with size.test.gen.
-#'
-#'  
-#' @param  alpha  alpha level for 1-alpha confidence
-#' @param  pow    desired power
-#' @param  se     standard error of slope from prior/pilot study
-#' @param  n0     sample size used in prior/pilot study 
-#' @param  b      planning value of population slope
-#'
-#' 
-#' @return 
-#' Returns the required sample size
-#' 
-#' 
-#' @examples
-#' size.test.slope.gen(.05, .8, 3.15, 50, 5)
-#'
-#' # Should return:
-#' #  Sample size
-#' #          156
-#'  
-#' 
-#' @importFrom stats qnorm
-#' @export  
-size.test.slope.gen <- function(alpha, pow, se, n0, b) {
- if (b == 0) {stop("slope planning value cannot be zero")}
- za <- qnorm(1 - alpha/2)
- zb <- qnorm(pow)
- n <- ceiling(n0*se^2*(za + zb)^2/b^2)
- out <- matrix(n, nrow = 1, ncol = 1)
- colnames(out) <- "Sample size"
- rownames(out) <- ""
- return(out)
-}
-
-
 #  size.test.gen ============================================================
 #' Sample size for a test of any type of parameter
 #'
@@ -3462,6 +4343,8 @@ size.test.slope.gen <- function(alpha, pow, se, n0, b) {
 #' assumes that the sampling distribution of the parameter estimate is 
 #' approximately normal in large samples.
 #'
+#' For more details, see Section 2.29 of Bonett (2021, Volume 2)
+#'
 #'
 #' @param  alpha  alpha level for hypothesis test 
 #' @param  pow    desired power
@@ -3472,6 +4355,10 @@ size.test.slope.gen <- function(alpha, pow, se, n0, b) {
 #'
 #' @return 
 #' Returns the required sample size 
+#' 
+#' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -3504,7 +4391,7 @@ size.test.gen <- function(alpha, pow, se, n0, es) {
 #'
 #' @description
 #' Computes the sample size per group required to test a difference in two
-#' populatation parameters with desired power using a standard error for a 
+#' population parameters with desired power using a standard error for a 
 #' single parameter estimate from a prior or pilot study. This function can be
 #' used with any type of parameter where the standard error of the parameter 
 #' estimate is a function of the square root of the sample size (most parameter 
@@ -3652,8 +4539,6 @@ power.cor2 <- function(alpha, n1, n2, cor1, cor2, s) {
 }
 
 
-
-
 # ============================= Miscellaneous =================================
 #  slope.contrast =============================================================
 #' Contrast coefficients for the slope of a quantitative factor
@@ -3663,12 +4548,18 @@ power.cor2 <- function(alpha, n1, n2, cor1, cor2, s) {
 #' Computes the contrast coefficients that are needed to estimate the slope of
 #' a line in a one-factor design with a quantitative factor.
 #'
+#' For more details, see Section 1.11 of Bonett (2021, Volume 2)
+#'
 #'
 #' @param   x      vector of numeric factor levels
 #'
 #'
 #' @return 
 #' Returns the vector of contrast coefficients
+#' 
+#' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -3965,6 +4856,8 @@ sim.ci.spear <- function(alpha, n, cor, dist1, dist2, rep) {
 #' adjusted standard errors. These adjusted results are less susceptible to
 #' the negative effects of an exploratory model selection. 
 #'
+#' For more details, see Section 2.25 of Bonett (2021, Volume 2)
+#'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  mse1   mean squared error in full model
@@ -3979,16 +4872,20 @@ sim.ci.spear <- function(alpha, n, cor, dist1, dist2, rep) {
 #' for each slope coefficient
 #' 
 #' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#' 
+#' 
 #' @examples
 #' se <- c(1.57, 3.15, 0.982)
 #' b <- c(3.78, 8.21, 2.99)
 #' adj.se(.05, 10.26, 8.37, 114, se, b)
 #'
 #' # Should return:
-#' #      Estimate   adj SE        t  df           p        LL        UL
-#' # [1,]     3.78 1.738243 2.174609 114 0.031725582 0.3365531  7.223447
-#' # [2,]     8.21 3.487559 2.354082 114 0.020279958 1.3011734 15.118827
-#' # [3,]     2.99 1.087233 2.750102 114 0.006930554 0.8362007  5.143799
+#' #      Estimate   adj SE        t  df       p        LL        UL
+#' # [1,]     3.78 1.738243 2.174609 114 0.03173 0.3365531  7.223447
+#' # [2,]     8.21 3.487559 2.354082 114 0.02028 1.3011734 15.118827
+#' # [3,]     2.99 1.087233 2.750102 114 0.00693 0.8362007  5.143799
 #'  
 #' 
 #' @importFrom stats qt
@@ -4000,7 +4897,8 @@ adj.se <- function(alpha, mse1, mse2, dfe1, se, b) {
  tcrit <- qt(1 - alpha/2, dfe1)
  adjse <- se*sqrt(mse1/mse2)
  t <- b/adjse
- p <- 2*(1 - pt(abs(t),dfe1))
+ p <- 2*(1 - pt(abs(t), dfe1))
+ p <- round(p, 5)
  ll <- b - tcrit*adjse
  ul <- b + tcrit*adjse
  out <- matrix(c(t(b), t(adjse), t(t), t(df), t(p), t(ll), t(ul)), s, 7)
@@ -4020,6 +4918,8 @@ adj.se <- function(alpha, mse1, mse2, dfe1, se, b) {
 #' adj NFI index is recommended because it has smaller sampling variability
 #' than CFI and TLI and less negative bias than NFI.
 #'
+#' For more details, see Section 2.14 of Bonett (2021, Volume 4)
+#'
 #'  
 #' @param  chi1   chi-square test statistic for full model
 #' @param  df1    degrees of freedom for full model
@@ -4032,24 +4932,28 @@ adj.se <- function(alpha, mse1, mse2, dfe1, se, b) {
 #' Returns NFI, adj NFI, CFI, TLI, and RMSEA
 #' 
 #' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#' 
+#' 
 #' @examples
 #' fitindices(14.21, 10, 258.43, 20, 300)
 #'
 #' # Should return:
-#' #        NFI   adj NFI       CFI       TLI      RMSEA
-#' #  0.9450141 0.9837093 0.9823428 0.9646857 0.03746109
+#' #    NFI   adj NFI   CFI    TLI  RMSEA
+#' #  0.945    0.9837  0.98 0.9647 0.0375
 #'  
 #' 
 #' @export  
 fitindices <- function(chi1, df1, chi2, df2, n) {
  if (chi2 == 0) {stop("chi2 must be a positive value")}
- nfi <- 1 - chi1/chi2
+ nfi <- round(1 - chi1/chi2, 4)
  d1 <- chi1 - df1
  if (d1 < 0) {d1 = 0}
- adjnfi <- 1 - d1/chi2
- rmsea <- sqrt(d1/(n*df1))
+ adjnfi <- round(1 - d1/chi2, 4)
+ rmsea <- round(sqrt(d1/(n*df1)), 4)
  if (chi2 - df2 > 0) 
-  {cfi <- 1 - d1/(chi2 - df2)}
+  {cfi <- round(1 - d1/(chi2 - df2), 2)}
  else
   {cfi <- 0}
  d2 <- chi2/df2 - chi1/df1
@@ -4057,7 +4961,7 @@ fitindices <- function(chi1, df1, chi2, df2, n) {
  if (d2 < 0) {d2 = 0}
  if (d3 < 0) {d3 = 0}
  if (d3 > 0)
-  {tli <- d2/d3}
+  {tli <- round(d2/d3, 4)}
  else
   {tli <- 0}
  out <- t(c(nfi, adjnfi, cfi, tli, rmsea))

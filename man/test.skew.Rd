@@ -24,14 +24,19 @@ positive, then the normality assumption can be rejected due to positive
 skewness. If the p-value is small (e.g., less than .05) and the skewness
 estimate is negative, then the normality assumption can be rejected due
 to negative skewness.
+
+For more details, see Section 1.23 of Bonett (2021, Volume 1)
 }
 \examples{
 y <- c(30, 20, 15, 10, 10, 60, 20, 25, 20, 30, 10, 5, 50, 40, 95)
 test.skew(y)
 
 # Should return:
-# Skewness      p
-#   1.5201 0.0067
+# Skewness     p
+#   1.5201 0.007
 
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

@@ -28,18 +28,24 @@ Returns a 1-row matrix. The columns are:
 Computes a distribution-free confidence interval for a difference of population
 medians in a 2-group design. Tied scores within each group are assumed to be
 rare.
+
+For more details, see Section 2.12 of Bonett (2021, Volume 1)
 }
 \examples{
-y1 <- c(32.1, 39.8, 26.3, 35.0, 43.1, 27.0, 40.9, 37.4, 34.0, 29.2)
-y2 <- c(36.8, 44.0, 47.1, 42.7, 49.0, 39.6, 46.2, 31.6, 33.1, 48.4)
+y1 = c(70, 394, 43, 95, 62, 128, 2, 203, 81, 436, 85, 35, 
+        156, 1, 3, 27, 63, 181, 184, 18)
+y2 = c(102, 120, 78, 78, 417, 124, 86, 171, 176, 129, 230, 
+       194, 100, 157, 306, 411, 164, 103, 193, 312)
 ci.median2(.05, y1, y2)
 
 # Should return:
-#  Median1 Median2 Median1-Median2       SE        LL         UL
-#     34.5   43.35           -8.85 4.494993 -17.66002 -0.0399751
+#  Median1 Median2 Median1-Median2       SE        LL        UL
+#     75.5   160.5             -85 37.11502 -157.7441 -12.25589
 
 
 }
 \references{
 \insertRef{Bonett2002}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

@@ -25,16 +25,20 @@ Returns a 1-row matrix. The columns are:
 Computes a continuity-corrected z-test for a population proportion in a
 1-group design. A confidence interval for a population proportion
 is a recommended supplement to the z-test (see \link[statpsych]{ci.prop}).
+
+For more details, see Section 1.7 of Bonett (2021, Volume 3)
 }
 \examples{
-test.prop(9, 20, .2)
+test.prop(76, 100, .6)
 
 # Should return:
-# Estimate        z          p
-#     0.45 2.515576 0.01188379
+# Estimate      z       p
+#     0.76 3.1639 0.00156
 
 
 }
 \references{
 \insertRef{Snedecor1980}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

@@ -2,8 +2,8 @@
 % Please edit documentation in R/statpsych2.R
 \name{size.ci.cor.prior}
 \alias{size.ci.cor.prior}
-\title{Sample size for a Pearson correlation confidence interval using a
-planning value from a prior study}
+\title{Sample size for a Pearson correlation confidence interval using an
+estimated correlation from a prior study}
 \usage{
 size.ci.cor.prior(alpha1, alpha2, cor0, n0, w)
 }
@@ -28,30 +28,35 @@ Pearson correlation from a prior study is available. The actual confidence
 interval width in the planned study will depend on the value of the
 estimated correlation in the planned study. An estimated correlation from
 a prior study can be used to compute a prediction interval for the value of
-the estimated correlation in the planned study. If the prediction interval
+the estimated correlation in the planned study, which is then used as a
+planning value in the sample size analysis. If the prediction interval
 includes 0, then the correlation planning value is set to 0; otherwise, the
 correlation planning value is set to the lower prediction limit (if the prior
 correlation is positive) or the upper prediction limit (if the prior correlation
-is negative). Using a larger confidence level (1 - alpha2) for the prediction
-interval will increase the probability that the width of the confidence interval
-in the planned study will be less than or equal to the desired width.
+is negative). The probability that the prediction interval will have a width that
+is less than the desired width in the planned study is approximately 1 - alpha2.
 
 This sample size approach assumes that the population Pearson correlation
 that was estimated in the prior study is very similar to the population Pearson
-correlation that will be estimated in the planned study. However, this type of
-prior information is typically not available and the researcher must use expert
-opinion to guess the value of the Pearson correlation that will be observed in the
-planned study. The \link[statpsych]{size.ci.cor} function uses a
-correlation planning value that is based on expert opinion regarding the
-likely value of the correlation estimate that will be observed in the
-planned study.
+correlation that will be estimated in the planned study. If an estimated
+Pearson correlation from a prior study is not available the researcher must use
+expert opinion to guess the value of the Pearson correlation that will be
+observed in the planned study. The \link[statpsych]{size.ci.cor} function uses
+a correlation planning value that is based on expert opinion regarding the
+likely value of the correlation estimate that will be observed in the planned
+study.
+
+For more details, see Section 1.26 of Bonett (2021, Volume 2)
 }
 \examples{
-size.ci.cor.prior(.05, .10, .438, 100, .2)
+size.ci.cor.prior(.05, .10, -.56, 120, .2)
 
 # Should return:
 # Sample size
-#         331
+#         246
 
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

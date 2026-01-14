@@ -26,13 +26,18 @@ If a single group first-stage sample size is given, then the function
 computes the single-group sample size required in the second-stage sample.
 The second-stage sample is combined with the first-stage sample to obtain
 the desired confidence interval width.
+
+For more details, see Section 1.30 of Bonett (2021, Volume 1)
 }
 \examples{
-size.ci.second(20, 5.3, 2.5)
+size.ci.second(25, 4.38, 2.0)
 
 # Should return:
 # Second-stage sample size
-#                       70
+#                       95
  
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

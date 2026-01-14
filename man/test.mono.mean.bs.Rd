@@ -37,6 +37,8 @@ limits are less than 0 and no lower limits are greater than 0, then
 conclude that the population means are monotonic increasing. Reject the
 hypothesis of a monotonic trend if any lower limit is greater than 0 and
 any upper limit is less than 0.
+
+For more details, see Section 1.21 of Bonett (2021, Volume 2)
 }
 \examples{
 m <- c(12.86, 24.57, 36.29, 53.21)
@@ -51,4 +53,7 @@ test.mono.mean.bs(.05, m, sd, n)
 # 3 4   -16.92 4.730817 -28.76921 -5.0707936
 
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

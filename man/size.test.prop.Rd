@@ -21,6 +21,8 @@ Returns the required sample size
 \description{
 Computes the sample size required to test a population proportion with
 desired power (using a correction for continuity) in a 1-group design.
+
+For more details, see Section 1.15 of Bonett (2021, Volume 3)
 }
 \examples{
 size.test.prop(.05, .9, .5, .3)
@@ -33,4 +35,6 @@ size.test.prop(.05, .9, .5, .3)
 }
 \references{
 \insertRef{Fleiss2003}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

@@ -26,8 +26,17 @@ required to test a linear contrast of population means with desired
 power in a between-subjects design. Set the variance planning value
 to the largest value within a plausible range for a conservatively
 large sample size.
+
+For more details, see Section 3.25 of Bonett (2021, Volume 1)
 }
 \examples{
+v <- c(1/4, 1/4, 1/4, 1/4, -1)
+size.test.lc.mean.bs(.05, .90, 1, .5, v)
+
+# Should return:
+# Sample size per group
+#                    53
+
 v <- c(1, -1, -1, 1)
 size.test.lc.mean.bs(.05, .90, 27.5, 5, v)
 
@@ -36,4 +45,7 @@ size.test.lc.mean.bs(.05, .90, 27.5, 5, v)
 #                    47
  
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

@@ -35,22 +35,26 @@ recommended in experimental designs. The weighted standardizer is
 recommended in nonexperimental designs with simple random sampling. The
 group 1 standardizer is useful in both experimental and nonexperimental
 designs. Equality of variances is not assumed.
+
+For more details, see Section 3.4 of Bonett (2021, Volume 1)
 }
 \examples{
-m <- c(33.5, 37.9, 38.0, 44.1)
-sd <- c(3.84, 3.84, 3.65, 4.98)
-n <- c(10,10,10,10)
+m <- c(6.94, 7.15, 4.60, 3.68)
+sd <- c(2.21, 2.83, 2.29, 1.90)
+n <- c(40, 40, 40, 40)
 v <- c(.5, .5, -.5, -.5)
 ci.lc.stdmean.bs(.05, m, sd, n, v)
 
 # Should return:
-#                           Estimate  adj Estimate        SE        LL         UL
-# Unweighted standardizer: -1.301263     -1.273964 0.3692800 -2.025039 -0.5774878
-# Weighted standardizer:   -1.301263     -1.273964 0.3514511 -1.990095 -0.6124317
-# Group 1 standardizer:    -1.393229     -1.273810 0.4849842 -2.343781 -0.4426775
+#                          Estimate adj Estimate      SE     LL     UL
+# Unweighted standardizer:   1.2459       1.2399 0.17621 0.9005 1.5912 
+# Weighted standardizer:     1.2459       1.2399 0.17313 0.9065 1.5852
+# Group 1 standardizer:      1.3145       1.2890 0.22515 0.8732 1.7558
 
 
 }
 \references{
 \insertRef{Bonett2008}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

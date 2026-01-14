@@ -27,6 +27,8 @@ Computes confidence intervals for exp(B) - 1 (as a percent) and exp(B)
 where B is a population slope coefficient in a binary logit, ordinal
 logit, or log-Poisson model. This function is useful with software that
 does not have an option to compute exp(B) and exp(B) - 1.
+
+For more details, see Section 4.1 of Bonett (2021, Volume 3)
 }
 \examples{
 expon.slope(.05, .502, .0396)
@@ -37,4 +39,7 @@ expon.slope(.05, .502, .0396)
 # 100[exp(B) - 1]\% 65.202201 52.865066 78.53502
 
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

@@ -1,0 +1,626 @@
+# Package index
+
+## Confidence intervals
+
+Confidence intervals for different effect sizes and designs
+
+- [`ci.2x2.mean.bs()`](https://dgbonett.github.io/statpsych/reference/ci.2x2.mean.bs.md)
+  : Computes tests and confidence intervals of effects in a 2x2
+  between-subjects design for means
+- [`ci.2x2.mean.mixed()`](https://dgbonett.github.io/statpsych/reference/ci.2x2.mean.mixed.md)
+  : Computes tests and confidence intervals of effects in a 2x2 mixed
+  design for means
+- [`ci.2x2.mean.ws()`](https://dgbonett.github.io/statpsych/reference/ci.2x2.mean.ws.md)
+  : Computes tests and confidence intervals of effects in a 2x2
+  within-subjects design for means
+- [`ci.2x2.median.bs()`](https://dgbonett.github.io/statpsych/reference/ci.2x2.median.bs.md)
+  : Computes tests and confidence intervals of effects in a 2x2
+  between-subjects design for medians
+- [`ci.2x2.median.mixed()`](https://dgbonett.github.io/statpsych/reference/ci.2x2.median.mixed.md)
+  : Computes confidence intervals in a 2x2 mixed design for medians
+- [`ci.2x2.median.ws()`](https://dgbonett.github.io/statpsych/reference/ci.2x2.median.ws.md)
+  : Computes confidence intervals of effects in a 2x2 within-subjects
+  design for medians
+- [`ci.2x2.prop.bs()`](https://dgbonett.github.io/statpsych/reference/ci.2x2.prop.bs.md)
+  : Computes tests and confidence intervals of effects in a 2x2 between-
+  subjects design for proportions
+- [`ci.2x2.prop.mixed()`](https://dgbonett.github.io/statpsych/reference/ci.2x2.prop.mixed.md)
+  : Computes tests and confidence intervals of effects in a 2x2 mixed
+  design for proportions
+- [`ci.2x2.stdmean.bs()`](https://dgbonett.github.io/statpsych/reference/ci.2x2.stdmean.bs.md)
+  : Computes confidence intervals of standardized effects in a 2x2
+  between-subjects design
+- [`ci.2x2.stdmean.mixed()`](https://dgbonett.github.io/statpsych/reference/ci.2x2.stdmean.mixed.md)
+  : Computes confidence intervals of standardized effects in a 2x2 mixed
+  design
+- [`ci.2x2.stdmean.ws()`](https://dgbonett.github.io/statpsych/reference/ci.2x2.stdmean.ws.md)
+  : Computes confidence intervals of standardized effects in a 2x2
+  within-subjects design
+- [`ci.agree.3rater()`](https://dgbonett.github.io/statpsych/reference/ci.agree.3rater.md)
+  : Computes confidence intervals for a 3-rater design with dichotomous
+  ratings
+- [`ci.agree()`](https://dgbonett.github.io/statpsych/reference/ci.agree.md)
+  : Confidence interval for a G-index of agreement
+- [`ci.agree2()`](https://dgbonett.github.io/statpsych/reference/ci.agree2.md)
+  : Confidence interval for G-index difference in a 2-group design
+- [`ci.bayes.cor()`](https://dgbonett.github.io/statpsych/reference/ci.bayes.cor.md)
+  : Bayesian credible interval for a Pearson or partial correlation with
+  a skeptical prior
+- [`ci.bayes.normal()`](https://dgbonett.github.io/statpsych/reference/ci.bayes.normal.md)
+  : Bayesian credible interval for a normal prior distribution
+- [`ci.bayes.prop()`](https://dgbonett.github.io/statpsych/reference/ci.bayes.prop.md)
+  : Bayesian credible interval for a proportion
+- [`ci.bayes.spcor()`](https://dgbonett.github.io/statpsych/reference/ci.bayes.spcor.md)
+  : Bayesian credible interval for a semipartial correlation with a
+  skeptical prior
+- [`ci.biphi()`](https://dgbonett.github.io/statpsych/reference/ci.biphi.md)
+  : Confidence interval for a biserial-phi correlation
+- [`ci.bscor()`](https://dgbonett.github.io/statpsych/reference/ci.bscor.md)
+  : Confidence interval for a biserial correlation
+- [`ci.cod()`](https://dgbonett.github.io/statpsych/reference/ci.cod.md)
+  : Confidence interval for a coefficient of dispersion
+- [`ci.condslope.log()`](https://dgbonett.github.io/statpsych/reference/ci.condslope.log.md)
+  : Confidence intervals for conditional (simple) slopes in a logistic
+  model
+- [`ci.condslope()`](https://dgbonett.github.io/statpsych/reference/ci.condslope.md)
+  : Confidence intervals for conditional (simple) slopes in a linear
+  model
+- [`ci.cor.dep()`](https://dgbonett.github.io/statpsych/reference/ci.cor.dep.md)
+  : Confidence interval for a difference in dependent Pearson
+  correlations
+- [`ci.cor()`](https://dgbonett.github.io/statpsych/reference/ci.cor.md)
+  : Confidence interval for a Pearson or partial correlation
+- [`ci.cor2.gen()`](https://dgbonett.github.io/statpsych/reference/ci.cor2.gen.md)
+  : Confidence interval for a 2-group correlation difference
+- [`ci.cor2()`](https://dgbonett.github.io/statpsych/reference/ci.cor2.md)
+  : Confidence interval for a 2-group Pearson correlation difference
+- [`ci.cqv()`](https://dgbonett.github.io/statpsych/reference/ci.cqv.md)
+  : Confidence interval for a coefficient of quartile variation
+- [`ci.cramer()`](https://dgbonett.github.io/statpsych/reference/ci.cramer.md)
+  : Confidence interval for Cramer's V
+- [`ci.cronbach()`](https://dgbonett.github.io/statpsych/reference/ci.cronbach.md)
+  : Confidence interval for a Cronbach reliability
+- [`ci.cronbach2()`](https://dgbonett.github.io/statpsych/reference/ci.cronbach2.md)
+  : Confidence interval for a difference in Cronbach reliabilities in a
+  2-group design
+- [`ci.cv()`](https://dgbonett.github.io/statpsych/reference/ci.cv.md) :
+  Confidence interval for a coefficient of variation
+- [`ci.diversity()`](https://dgbonett.github.io/statpsych/reference/ci.diversity.md)
+  : Confidence intervals for diversity indices
+- [`ci.etasqr()`](https://dgbonett.github.io/statpsych/reference/ci.etasqr.md)
+  : Confidence interval for eta-squared
+- [`ci.fisher()`](https://dgbonett.github.io/statpsych/reference/ci.fisher.md)
+  : Fisher confidence interval
+- [`ci.icc()`](https://dgbonett.github.io/statpsych/reference/ci.icc.md)
+  : Confidence interval for an intraclass reliablity coefficient
+- [`ci.indirect()`](https://dgbonett.github.io/statpsych/reference/ci.indirect.md)
+  : Confidence interval for an indirect effect
+- [`ci.kappa()`](https://dgbonett.github.io/statpsych/reference/ci.kappa.md)
+  : Confidence interval for two kappa reliability coefficients
+- [`ci.lc.gen.bs()`](https://dgbonett.github.io/statpsych/reference/ci.lc.gen.bs.md)
+  : Confidence interval for a linear contrast of parameters in a
+  between-subjects design
+- [`ci.lc.glm()`](https://dgbonett.github.io/statpsych/reference/ci.lc.glm.md)
+  : Confidence interval for a linear contrast of general linear model
+  parameters
+- [`ci.lc.mean.bs()`](https://dgbonett.github.io/statpsych/reference/ci.lc.mean.bs.md)
+  : Confidence interval for a linear contrast of means in a
+  between-subjects design
+- [`ci.lc.mean.scheffe()`](https://dgbonett.github.io/statpsych/reference/ci.lc.mean.scheffe.md)
+  : Scheffe confidence interval for a linear contrast of means in a
+  between-subjects design
+- [`ci.lc.median.bs()`](https://dgbonett.github.io/statpsych/reference/ci.lc.median.bs.md)
+  : Confidence interval for a linear contrast of medians in a
+  between-subjects design
+- [`ci.lc.prop.bs()`](https://dgbonett.github.io/statpsych/reference/ci.lc.prop.bs.md)
+  : Confidence interval for a linear contrast of proportions in a
+  between- subjects design
+- [`ci.lc.prop.scheffe()`](https://dgbonett.github.io/statpsych/reference/ci.lc.prop.scheffe.md)
+  : Scheffe confidence interval for a linear contrast of proportions in
+  a between-subjects design
+- [`ci.lc.reg()`](https://dgbonett.github.io/statpsych/reference/ci.lc.reg.md)
+  : Confidence interval for a linear contrast of regression coefficients
+  in multiple group regression model
+- [`ci.lc.stdmean.bs()`](https://dgbonett.github.io/statpsych/reference/ci.lc.stdmean.bs.md)
+  : Confidence interval for a standardized linear contrast of means in a
+  between-subjects design
+- [`ci.lc.stdmean.ws()`](https://dgbonett.github.io/statpsych/reference/ci.lc.stdmean.ws.md)
+  : Confidence interval for a standardized linear contrast of means in a
+  within-subjects design
+- [`ci.mad()`](https://dgbonett.github.io/statpsych/reference/ci.mad.md)
+  : Confidence interval for a mean absolute deviation
+- [`ci.mann()`](https://dgbonett.github.io/statpsych/reference/ci.mann.md)
+  : Confidence interval for a Mann-Whitney parameter
+- [`ci.mape()`](https://dgbonett.github.io/statpsych/reference/ci.mape.md)
+  : Confidence interval for a mean absolute prediction error
+- [`ci.mean.fpc()`](https://dgbonett.github.io/statpsych/reference/ci.mean.fpc.md)
+  : Confidence interval for a mean with a finite population correction
+- [`ci.mean.gen()`](https://dgbonett.github.io/statpsych/reference/ci.mean.gen.md)
+  : Confidence intervals for generalized means
+- [`ci.mean.ps()`](https://dgbonett.github.io/statpsych/reference/ci.mean.ps.md)
+  : Confidence interval for a paired-samples mean difference
+- [`ci.mean()`](https://dgbonett.github.io/statpsych/reference/ci.mean.md)
+  : Confidence interval for a mean
+- [`ci.mean2()`](https://dgbonett.github.io/statpsych/reference/ci.mean2.md)
+  : Confidence interval for a 2-group mean difference
+- [`ci.median.ps()`](https://dgbonett.github.io/statpsych/reference/ci.median.ps.md)
+  : Confidence interval for a paired-samples median difference
+- [`ci.median()`](https://dgbonett.github.io/statpsych/reference/ci.median.md)
+  : Confidence interval for a median
+- [`ci.median2()`](https://dgbonett.github.io/statpsych/reference/ci.median2.md)
+  : Confidence interval for a 2-group median difference
+- [`ci.oddsratio()`](https://dgbonett.github.io/statpsych/reference/ci.oddsratio.md)
+  : Confidence interval for an odds ratio
+- [`ci.pairs.mult()`](https://dgbonett.github.io/statpsych/reference/ci.pairs.mult.md)
+  : Confidence intervals for pairwise proportion differences of a
+  multinomial variable
+- [`ci.pairs.prop.bs()`](https://dgbonett.github.io/statpsych/reference/ci.pairs.prop.bs.md)
+  : Bonferroni confidence intervals for all pairwise proportion
+  differences in a between-subjects design
+- [`ci.pbcor()`](https://dgbonett.github.io/statpsych/reference/ci.pbcor.md)
+  : Confidence intervals for point-biserial correlations
+- [`ci.phi()`](https://dgbonett.github.io/statpsych/reference/ci.phi.md)
+  : Confidence interval for a phi correlation
+- [`ci.poisson()`](https://dgbonett.github.io/statpsych/reference/ci.poisson.md)
+  : Confidence interval for a Poisson rate
+- [`ci.popsize()`](https://dgbonett.github.io/statpsych/reference/ci.popsize.md)
+  : Confidence interval for an unknown population size
+- [`ci.prop.fpc()`](https://dgbonett.github.io/statpsych/reference/ci.prop.fpc.md)
+  : Confidence interval for a proportion with a finite population
+  correction
+- [`ci.prop.inv()`](https://dgbonett.github.io/statpsych/reference/ci.prop.inv.md)
+  : Confidence interval for a proportion using inverse sampling
+- [`ci.prop.ps()`](https://dgbonett.github.io/statpsych/reference/ci.prop.ps.md)
+  : Confidence interval for a paired-samples proportion difference
+- [`ci.prop()`](https://dgbonett.github.io/statpsych/reference/ci.prop.md)
+  : Confidence intervals for a proportion
+- [`ci.prop2.inv()`](https://dgbonett.github.io/statpsych/reference/ci.prop2.inv.md)
+  : Confidence interval for a 2-group proportion difference using
+  inverse sampling
+- [`ci.prop2()`](https://dgbonett.github.io/statpsych/reference/ci.prop2.md)
+  : Confidence interval for a 2-group proportion difference
+- [`ci.pv()`](https://dgbonett.github.io/statpsych/reference/ci.pv.md) :
+  Confidence intervals for positive and negative predictive values with
+  retrospective sampling
+- [`ci.random.anova()`](https://dgbonett.github.io/statpsych/reference/ci.random.anova.md)
+  : Confidence intervals for parameters of one-way random effects ANOVA
+- [`ci.ratio.cod2()`](https://dgbonett.github.io/statpsych/reference/ci.ratio.cod2.md)
+  : Confidence interval for a ratio of dispersion coefficients in a
+  2-group design
+- [`ci.ratio.cv2()`](https://dgbonett.github.io/statpsych/reference/ci.ratio.cv2.md)
+  : Confidence interval for a ratio of coefficients of variation in a
+  2-group design
+- [`ci.ratio.mad.ps()`](https://dgbonett.github.io/statpsych/reference/ci.ratio.mad.ps.md)
+  : Confidence interval for a paired-samples MAD ratio
+- [`ci.ratio.mad2()`](https://dgbonett.github.io/statpsych/reference/ci.ratio.mad2.md)
+  : Confidence interval for a 2-group ratio of mean absolute deviations
+- [`ci.ratio.mape2()`](https://dgbonett.github.io/statpsych/reference/ci.ratio.mape2.md)
+  : Confidence interval for a ratio of mean absolute prediction errors
+  in a 2-group design
+- [`ci.ratio.mean.ps()`](https://dgbonett.github.io/statpsych/reference/ci.ratio.mean.ps.md)
+  : Confidence interval for a paired-samples mean ratio
+- [`ci.ratio.mean2()`](https://dgbonett.github.io/statpsych/reference/ci.ratio.mean2.md)
+  : Confidence interval for a 2-group mean ratio
+- [`ci.ratio.median.ps()`](https://dgbonett.github.io/statpsych/reference/ci.ratio.median.ps.md)
+  : Confidence interval for a paired-samples median ratio
+- [`ci.ratio.median2()`](https://dgbonett.github.io/statpsych/reference/ci.ratio.median2.md)
+  : Confidence interval for a 2-group median ratio
+- [`ci.ratio.poisson2()`](https://dgbonett.github.io/statpsych/reference/ci.ratio.poisson2.md)
+  : Confidence interval for a ratio of Poisson rates in a 2-group design
+- [`ci.ratio.prop.ps()`](https://dgbonett.github.io/statpsych/reference/ci.ratio.prop.ps.md)
+  : Confidence interval for a paired-samples proportion ratio
+- [`ci.ratio.prop2()`](https://dgbonett.github.io/statpsych/reference/ci.ratio.prop2.md)
+  : Confidence interval for a 2-group proportion ratio
+- [`ci.ratio.sd2()`](https://dgbonett.github.io/statpsych/reference/ci.ratio.sd2.md)
+  : Confidence interval for a 2-group ratio of standard deviations
+- [`ci.rel2()`](https://dgbonett.github.io/statpsych/reference/ci.rel2.md)
+  : Confidence interval for a 2-group reliability difference
+- [`ci.reliability()`](https://dgbonett.github.io/statpsych/reference/ci.reliability.md)
+  : Confidence interval for a reliability coefficient
+- [`ci.rsqr()`](https://dgbonett.github.io/statpsych/reference/ci.rsqr.md)
+  : Confidence interval for squared multiple correlation
+- [`ci.sd()`](https://dgbonett.github.io/statpsych/reference/ci.sd.md) :
+  Confidence interval for a standard deviation
+- [`ci.sign()`](https://dgbonett.github.io/statpsych/reference/ci.sign.md)
+  : Confidence interval for the parameter of the one-sample sign test
+- [`ci.slope.mean.bs()`](https://dgbonett.github.io/statpsych/reference/ci.slope.mean.bs.md)
+  : Confidence interval for the slope of means in a one-factor
+  experimental design with a quantitative between-subjects factor
+- [`ci.slope.median.bs()`](https://dgbonett.github.io/statpsych/reference/ci.slope.median.bs.md)
+  : Confidence interval for the slope of medians in a one-factor
+  experimental design with a quantitative between-subjects factor
+- [`ci.slope.prop.bs()`](https://dgbonett.github.io/statpsych/reference/ci.slope.prop.bs.md)
+  : Confidence interval for a slope of a proportion in a single-factor
+  experimental design with a quantitative between-subjects factor
+- [`ci.slope()`](https://dgbonett.github.io/statpsych/reference/ci.slope.md)
+  : Confidence interval for a slope in a simple linear model
+- [`ci.spcor()`](https://dgbonett.github.io/statpsych/reference/ci.spcor.md)
+  : Confidence interval for a semipartial correlation
+- [`ci.spear()`](https://dgbonett.github.io/statpsych/reference/ci.spear.md)
+  : Confidence interval for a Spearman correlation
+- [`ci.spear2()`](https://dgbonett.github.io/statpsych/reference/ci.spear2.md)
+  : Confidence interval for a 2-group Spearman correlation difference
+- [`ci.stdmean.ps()`](https://dgbonett.github.io/statpsych/reference/ci.stdmean.ps.md)
+  : Confidence intervals for a paired-samples standardized mean
+  difference
+- [`ci.stdmean()`](https://dgbonett.github.io/statpsych/reference/ci.stdmean.md)
+  : Confidence interval for a standardized mean
+- [`ci.stdmean.strat()`](https://dgbonett.github.io/statpsych/reference/ci.stdmean.strat.md)
+  : Confidence intervals for a 2-group standardized mean difference with
+  stratified sampling
+- [`ci.stdmean2()`](https://dgbonett.github.io/statpsych/reference/ci.stdmean2.md)
+  : Confidence intervals for a 2-group standardized mean difference
+- [`ci.tetra()`](https://dgbonett.github.io/statpsych/reference/ci.tetra.md)
+  : Confidence interval for a tetrachoric correlation
+- [`ci.theil()`](https://dgbonett.github.io/statpsych/reference/ci.theil.md)
+  : Theil-Sen estimate and confidence interval for slope
+- [`ci.tukey()`](https://dgbonett.github.io/statpsych/reference/ci.tukey.md)
+  : Tukey-Kramer confidence intervals for all pairwise mean differences
+  in a between-subjects design
+- [`ci.var.upper()`](https://dgbonett.github.io/statpsych/reference/ci.var.upper.md)
+  : Upper confidence limit of a variance
+- [`ci.yule()`](https://dgbonett.github.io/statpsych/reference/ci.yule.md)
+  : Confidence intervals for generalized Yule coefficients
+
+## Miscellaneous
+
+Other functions, including functions for simulating data
+
+- [`adj.se()`](https://dgbonett.github.io/statpsych/reference/adj.se.md)
+  : Adjusted standard errors for slope coefficients in an exploratory
+  analysis
+- [`etasqr.gen.2way()`](https://dgbonett.github.io/statpsych/reference/etasqr.gen.2way.md)
+  : Generalized eta-squared estimates in a two-factor design
+- [`etasqr.adj()`](https://dgbonett.github.io/statpsych/reference/etasqr.adj.md)
+  : Bias adjustment for an eta-squared estimate
+- [`expon.slope()`](https://dgbonett.github.io/statpsych/reference/expon.slope.md)
+  : Confidence interval for an exponentiated slope
+- [`fitindices()`](https://dgbonett.github.io/statpsych/reference/fitindices.md)
+  : SEM fit indices
+- [`iqv()`](https://dgbonett.github.io/statpsych/reference/iqv.md) :
+  Indices of qualitative variation
+- [`pi.score()`](https://dgbonett.github.io/statpsych/reference/pi.score.md)
+  : Prediction interval for one score
+- [`pi.score2()`](https://dgbonett.github.io/statpsych/reference/pi.score2.md)
+  : Prediction interval for a difference of scores in a 2-group
+  experiment
+- [`random.sample()`](https://dgbonett.github.io/statpsych/reference/random.sample.md)
+  : Generate a random sample
+- [`random.y()`](https://dgbonett.github.io/statpsych/reference/random.y.md)
+  : Generate random sample of scores
+- [`random.yx()`](https://dgbonett.github.io/statpsych/reference/random.yx.md)
+  : Generates random bivariate scores
+- [`randomize()`](https://dgbonett.github.io/statpsych/reference/randomize.md)
+  : Randomize a sample into groups
+- [`signal()`](https://dgbonett.github.io/statpsych/reference/signal.md)
+  : Parameter estimates for a signal detection study
+- [`slope.contrast()`](https://dgbonett.github.io/statpsych/reference/slope.contrast.md)
+  : Contrast coefficients for the slope of a quantitative factor
+- [`spearmanbrown()`](https://dgbonett.github.io/statpsych/reference/spearmanbrown.md)
+  : Computes the reliability of a scale with r2 measurements given the
+  reliability of a scale with r1 measurements
+
+## Power
+
+Compute power for a given sample size for various designs
+
+- [`power.cor()`](https://dgbonett.github.io/statpsych/reference/power.cor.md)
+  : Approximates the power of a correlation test for a planned sample
+  size
+- [`power.cor2()`](https://dgbonett.github.io/statpsych/reference/power.cor2.md)
+  : Approximates the power of a test for equal correlations in a 2-group
+  design for planned sample sizes
+- [`power.lc.mean.bs()`](https://dgbonett.github.io/statpsych/reference/power.lc.mean.bs.md)
+  : Approximates the power of a test for a linear contrast of means for
+  planned sample sizes in a between-subjects design
+- [`power.mean.ps()`](https://dgbonett.github.io/statpsych/reference/power.mean.ps.md)
+  : Approximates the power of a paired-samples t-test for a planned
+  sample size
+- [`power.mean()`](https://dgbonett.github.io/statpsych/reference/power.mean.md)
+  : Approximates the power of a one-sample t-test for a planned sample
+  size
+- [`power.mean2()`](https://dgbonett.github.io/statpsych/reference/power.mean2.md)
+  : Approximates the power of a two-sample t-test for planned sample
+  sizes
+- [`power.prop.ps()`](https://dgbonett.github.io/statpsych/reference/power.prop.ps.md)
+  : Approximates the power of a paired-samples test of equal proportions
+  for a planned sample size
+- [`power.prop()`](https://dgbonett.github.io/statpsych/reference/power.prop.md)
+  : Approximates the power of a 1-group proportion test for a planned
+  sample size
+- [`power.prop2()`](https://dgbonett.github.io/statpsych/reference/power.prop2.md)
+  : Approximates the power of a 2-group proportion test for planned
+  sample sizes
+
+## Prediction intervals
+
+Prediction intervals
+
+- [`pi.cor()`](https://dgbonett.github.io/statpsych/reference/pi.cor.md)
+  : Prediction limits for a sample correlation in a future study
+- [`pi.cronbach()`](https://dgbonett.github.io/statpsych/reference/pi.cronbach.md)
+  : Prediction limits for sample value of Cronbach reliability in a
+  future study
+- [`pi.prop()`](https://dgbonett.github.io/statpsych/reference/pi.prop.md)
+  : Prediction interval for a sample proportion in a future study
+- [`pi.score.ps()`](https://dgbonett.github.io/statpsych/reference/pi.score.ps.md)
+  : Prediction interval for difference of scores in a 2-level
+  within-subjects experiment
+- [`pi.score()`](https://dgbonett.github.io/statpsych/reference/pi.score.md)
+  : Prediction interval for one score
+- [`pi.score2()`](https://dgbonett.github.io/statpsych/reference/pi.score2.md)
+  : Prediction interval for a difference of scores in a 2-group
+  experiment
+- [`pi.var()`](https://dgbonett.github.io/statpsych/reference/pi.var.md)
+  : Prediction limits for a sample variance in a future study
+
+## Sample-size planning
+
+Sample sizes for desired precision or power
+
+- [`size.ci.agree()`](https://dgbonett.github.io/statpsych/reference/size.ci.agree.md)
+  : Sample size for a G-index confidence interval
+- [`size.ci.ancova2()`](https://dgbonett.github.io/statpsych/reference/size.ci.ancova2.md)
+  : Sample size for a 2-group ANCOVA confidence interval
+- [`size.ci.biphi()`](https://dgbonett.github.io/statpsych/reference/size.ci.biphi.md)
+  : Sample size for biserial-phi correlation confidence interval
+- [`size.ci.condmean()`](https://dgbonett.github.io/statpsych/reference/size.ci.condmean.md)
+  : Sample size for a conditional mean confidence interval
+- [`size.ci.cor.prior()`](https://dgbonett.github.io/statpsych/reference/size.ci.cor.prior.md)
+  : Sample size for a Pearson correlation confidence interval using an
+  estimated correlation from a prior study
+- [`size.ci.cor()`](https://dgbonett.github.io/statpsych/reference/size.ci.cor.md)
+  : Sample size for a Pearson or partial correlation confidence interval
+- [`size.ci.cor2()`](https://dgbonett.github.io/statpsych/reference/size.ci.cor2.md)
+  : Sample size for a 2-group Pearson correlation difference confidence
+  interval
+- [`size.ci.cronbach.prior()`](https://dgbonett.github.io/statpsych/reference/size.ci.cronbach.prior.md)
+  : Sample size for a Cronbach reliability confidence interval using an
+  reliability estimate from a prior study
+- [`size.ci.cronbach()`](https://dgbonett.github.io/statpsych/reference/size.ci.cronbach.md)
+  : Sample size for a Cronbach reliability confidence interval
+- [`size.ci.cronbach2()`](https://dgbonett.github.io/statpsych/reference/size.ci.cronbach2.md)
+  : Sample size for a 2-group Cronbach reliability difference confidence
+  interval
+- [`size.ci.cv()`](https://dgbonett.github.io/statpsych/reference/size.ci.cv.md)
+  : Sample size for a coefficient of variation
+- [`size.ci.etasqr()`](https://dgbonett.github.io/statpsych/reference/size.ci.etasqr.md)
+  : Sample size for an eta-squared confidence interval
+- [`size.ci.gen()`](https://dgbonett.github.io/statpsych/reference/size.ci.gen.md)
+  : Sample size for a confidence interval for any type of parameter
+- [`size.ci.gen2()`](https://dgbonett.github.io/statpsych/reference/size.ci.gen2.md)
+  : Sample size for a confidence interval for the difference of any type
+  of parameter
+- [`size.ci.icc.prior()`](https://dgbonett.github.io/statpsych/reference/size.ci.icc.prior.md)
+  : Sample size for an intraclass correlation confidence interval using
+  a planning value from a prior study
+- [`size.ci.icc()`](https://dgbonett.github.io/statpsych/reference/size.ci.icc.md)
+  : Sample size for a intraclass correlation confidence interval
+- [`size.ci.indirect()`](https://dgbonett.github.io/statpsych/reference/size.ci.indirect.md)
+  : Sample size for an indirect effect confidence interval
+- [`size.ci.lc.ancova()`](https://dgbonett.github.io/statpsych/reference/size.ci.lc.ancova.md)
+  : Sample size for a linear contrast confidence interval in an ANCOVA
+- [`size.ci.lc.mean.bs()`](https://dgbonett.github.io/statpsych/reference/size.ci.lc.mean.bs.md)
+  : Sample size for a between-subjects mean linear contrast confidence
+  interval
+- [`size.ci.lc.mean.ws()`](https://dgbonett.github.io/statpsych/reference/size.ci.lc.mean.ws.md)
+  : Sample size for a within-subjects mean linear contrast confidence
+  interval
+- [`size.ci.lc.median.bs()`](https://dgbonett.github.io/statpsych/reference/size.ci.lc.median.bs.md)
+  : Sample size for a between-subjects median linear contrast confidence
+  interval
+- [`size.ci.lc.prop.bs()`](https://dgbonett.github.io/statpsych/reference/size.ci.lc.prop.bs.md)
+  : Sample size for a between-subjects proportion linear contrast
+  confidence interval
+- [`size.ci.lc.stdmean.bs()`](https://dgbonett.github.io/statpsych/reference/size.ci.lc.stdmean.bs.md)
+  : Sample size for a between-subjects standardized linear contrast of
+  means confidence interval
+- [`size.ci.lc.stdmean.ws()`](https://dgbonett.github.io/statpsych/reference/size.ci.lc.stdmean.ws.md)
+  : Sample size for a within-subjects standardized linear contrast of
+  means confidence interval
+- [`size.ci.mape()`](https://dgbonett.github.io/statpsych/reference/size.ci.mape.md)
+  : Sample size for a mean absolute prediction error confidence interval
+- [`size.ci.mean.prior()`](https://dgbonett.github.io/statpsych/reference/size.ci.mean.prior.md)
+  : Sample size for a mean confidence interval using an estimated
+  variance from a prior study
+- [`size.ci.mean.ps()`](https://dgbonett.github.io/statpsych/reference/size.ci.mean.ps.md)
+  : Sample size for a paired-samples mean difference confidence interval
+- [`size.ci.mean()`](https://dgbonett.github.io/statpsych/reference/size.ci.mean.md)
+  : Sample size for a mean confidence interval
+- [`size.ci.mean2()`](https://dgbonett.github.io/statpsych/reference/size.ci.mean2.md)
+  : Sample size for a 2-group mean difference confidence interval
+- [`size.ci.median()`](https://dgbonett.github.io/statpsych/reference/size.ci.median.md)
+  : Sample size for a median confidence interval
+- [`size.ci.median2()`](https://dgbonett.github.io/statpsych/reference/size.ci.median2.md)
+  : Sample size for a 2-group median difference confidence interval
+- [`size.ci.oddsratio()`](https://dgbonett.github.io/statpsych/reference/size.ci.oddsratio.md)
+  : Sample size for an odds ratio confidence interval
+- [`size.ci.pbcor()`](https://dgbonett.github.io/statpsych/reference/size.ci.pbcor.md)
+  : Sample size for a point-biserial correlation confidence interval
+- [`size.ci.phi()`](https://dgbonett.github.io/statpsych/reference/size.ci.phi.md)
+  : Sample size for phi correlation confidence interval
+- [`size.ci.prop.prior()`](https://dgbonett.github.io/statpsych/reference/size.ci.prop.prior.md)
+  : Sample size for a proportion confidence interval using an estimated
+  proportion from a prior study
+- [`size.ci.prop.ps()`](https://dgbonett.github.io/statpsych/reference/size.ci.prop.ps.md)
+  : Sample size for a paired-sample proportion difference confidence
+  interval
+- [`size.ci.prop()`](https://dgbonett.github.io/statpsych/reference/size.ci.prop.md)
+  : Sample size for a proportion confidence interval
+- [`size.ci.prop2()`](https://dgbonett.github.io/statpsych/reference/size.ci.prop2.md)
+  : Sample size for a 2-group proportion difference confidence interval
+- [`size.ci.ratio.mean.ps()`](https://dgbonett.github.io/statpsych/reference/size.ci.ratio.mean.ps.md)
+  : Sample size for a paired-samples mean ratio confidence interval
+- [`size.ci.ratio.mean2()`](https://dgbonett.github.io/statpsych/reference/size.ci.ratio.mean2.md)
+  : Sample size for a 2-group mean ratio confidence interval
+- [`size.ci.ratio.prop.ps()`](https://dgbonett.github.io/statpsych/reference/size.ci.ratio.prop.ps.md)
+  : Sample size for a paired-samples proportion ratio confidence
+  interval
+- [`size.ci.ratio.prop2()`](https://dgbonett.github.io/statpsych/reference/size.ci.ratio.prop2.md)
+  : Sample size for a 2-group proportion ratio confidence interval
+- [`size.ci.rsqr()`](https://dgbonett.github.io/statpsych/reference/size.ci.rsqr.md)
+  : Sample size for a squared multiple correlation confidence interval
+- [`size.ci.sd()`](https://dgbonett.github.io/statpsych/reference/size.ci.sd.md)
+  : Sample size for a standard deviation confidence interval
+- [`size.ci.second()`](https://dgbonett.github.io/statpsych/reference/size.ci.second.md)
+  : Sample size for a second-stage confidence interval
+- [`size.ci.slope.gen()`](https://dgbonett.github.io/statpsych/reference/size.ci.slope.gen.md)
+  : Sample size for a slope confidence interval in a general statistical
+  model
+- [`size.ci.slope()`](https://dgbonett.github.io/statpsych/reference/size.ci.slope.md)
+  : Sample size for a slope confidence interval
+- [`size.ci.spear()`](https://dgbonett.github.io/statpsych/reference/size.ci.spear.md)
+  : Sample size for a Spearman correlation confidence interval
+- [`size.ci.spear2()`](https://dgbonett.github.io/statpsych/reference/size.ci.spear2.md)
+  : Sample size for a 2-group Spearman correlation difference confidence
+  interval
+- [`size.ci.stdmean.ps()`](https://dgbonett.github.io/statpsych/reference/size.ci.stdmean.ps.md)
+  : Sample size for a paired-samples standardized mean difference
+  confidence interval
+- [`size.ci.stdmean2()`](https://dgbonett.github.io/statpsych/reference/size.ci.stdmean2.md)
+  : Sample size for a 2-group standardized mean difference confidence
+  interval
+- [`size.ci.tetra()`](https://dgbonett.github.io/statpsych/reference/size.ci.tetra.md)
+  : Sample size for a tetrachoric correlation confidence interval
+- [`size.ci.yule()`](https://dgbonett.github.io/statpsych/reference/size.ci.yule.md)
+  : Sample size for a Yule's Q confidence interval
+- [`size.equiv.mean.ps()`](https://dgbonett.github.io/statpsych/reference/size.equiv.mean.ps.md)
+  : Sample size for a paired-samples mean equivalence test
+- [`size.equiv.mean2()`](https://dgbonett.github.io/statpsych/reference/size.equiv.mean2.md)
+  : Sample size for a 2-group mean equivalence test
+- [`size.equiv.prop.ps()`](https://dgbonett.github.io/statpsych/reference/size.equiv.prop.ps.md)
+  : Sample size for a paired-samples proportion equivalence test
+- [`size.equiv.prop2()`](https://dgbonett.github.io/statpsych/reference/size.equiv.prop2.md)
+  : Sample size for a 2-group proportion equivalence test
+- [`size.interval.cor()`](https://dgbonett.github.io/statpsych/reference/size.interval.cor.md)
+  : Sample size for an interval test of a Pearson or partial correlation
+- [`size.supinf.mean.ps()`](https://dgbonett.github.io/statpsych/reference/size.supinf.mean.ps.md)
+  : Sample size for a paired-samples mean superiority or noninferiority
+  test
+- [`size.supinf.mean2()`](https://dgbonett.github.io/statpsych/reference/size.supinf.mean2.md)
+  : Sample size for a 2-group mean superiority or noninferiority test
+- [`size.supinf.prop.ps()`](https://dgbonett.github.io/statpsych/reference/size.supinf.prop.ps.md)
+  : Sample size for a paired-samples superiority or inferiority test of
+  proportions
+- [`size.supinf.prop2()`](https://dgbonett.github.io/statpsych/reference/size.supinf.prop2.md)
+  : Sample size for a 2-group superiority or inferiority test of
+  proportions
+- [`size.test.ancova2()`](https://dgbonett.github.io/statpsych/reference/size.test.ancova2.md)
+  : Sample size for a 2-group ANCOVA hypothesis test
+- [`size.test.cor()`](https://dgbonett.github.io/statpsych/reference/size.test.cor.md)
+  : Sample size for a test of a Pearson or partial correlation
+- [`size.test.cor2()`](https://dgbonett.github.io/statpsych/reference/size.test.cor2.md)
+  : Sample size for a test of equal Pearson or partial correlation in a
+  2-group design
+- [`size.test.cronbach()`](https://dgbonett.github.io/statpsych/reference/size.test.cronbach.md)
+  : Sample size to test a Cronbach reliability
+- [`size.test.cronbach2()`](https://dgbonett.github.io/statpsych/reference/size.test.cronbach2.md)
+  : Sample size to test equality of Cronbach reliability coefficients in
+  a 2-group design
+- [`size.test.gen()`](https://dgbonett.github.io/statpsych/reference/size.test.gen.md)
+  : Sample size for a test of any type of parameter
+- [`size.test.gen2()`](https://dgbonett.github.io/statpsych/reference/size.test.gen2.md)
+  : Sample size for a test of 2-group difference for any type of
+  parameter
+- [`size.test.lc.ancova()`](https://dgbonett.github.io/statpsych/reference/size.test.lc.ancova.md)
+  : Sample size for a mean linear contrast test in an ANCOVA
+- [`size.test.lc.mean.bs()`](https://dgbonett.github.io/statpsych/reference/size.test.lc.mean.bs.md)
+  : Sample size for a test of a between-subjects mean linear contrast
+- [`size.test.lc.mean.ws()`](https://dgbonett.github.io/statpsych/reference/size.test.lc.mean.ws.md)
+  : Sample size for a test of a within-subjects mean linear contrast
+- [`size.test.lc.prop.bs()`](https://dgbonett.github.io/statpsych/reference/size.test.lc.prop.bs.md)
+  : Sample size for a test of between-subjects proportion linear
+  contrast
+- [`size.test.mann()`](https://dgbonett.github.io/statpsych/reference/size.test.mann.md)
+  : Sample size for a Mann-Whitney test
+- [`size.test.mean.ps()`](https://dgbonett.github.io/statpsych/reference/size.test.mean.ps.md)
+  : Sample size for a test of a paired-samples mean difference
+- [`size.test.mean()`](https://dgbonett.github.io/statpsych/reference/size.test.mean.md)
+  : Sample size for a test of a mean
+- [`size.test.mean2()`](https://dgbonett.github.io/statpsych/reference/size.test.mean2.md)
+  : Sample size for a test of a 2-group mean difference
+- [`size.test.prop.ps()`](https://dgbonett.github.io/statpsych/reference/size.test.prop.ps.md)
+  : Sample size for a test of a paired-samples proportion difference
+- [`size.test.prop()`](https://dgbonett.github.io/statpsych/reference/size.test.prop.md)
+  : Sample size for a test of a single proportion
+- [`size.test.prop2()`](https://dgbonett.github.io/statpsych/reference/size.test.prop2.md)
+  : Sample size for a test of a 2-group proportion difference
+- [`size.test.sign.ps()`](https://dgbonett.github.io/statpsych/reference/size.test.sign.ps.md)
+  : Sample size for a paired-samples sign test
+- [`size.test.sign()`](https://dgbonett.github.io/statpsych/reference/size.test.sign.md)
+  : Sample size for a 1-group sign test
+- [`size.test.slope()`](https://dgbonett.github.io/statpsych/reference/size.test.slope.md)
+  : Sample size for a test of a slope
+
+## Simulations
+
+Test coverage of difference confidence intervals with simulated data
+
+- [`sim.ci.cor()`](https://dgbonett.github.io/statpsych/reference/sim.ci.cor.md)
+  : Simulates confidence interval coverage probability for a Pearson
+  correlation
+- [`sim.ci.mean.ps()`](https://dgbonett.github.io/statpsych/reference/sim.ci.mean.ps.md)
+  : Simulates confidence interval coverage probability for a
+  paired-samples mean difference
+- [`sim.ci.mean()`](https://dgbonett.github.io/statpsych/reference/sim.ci.mean.md)
+  : Simulates confidence interval coverage probability for a mean
+- [`sim.ci.mean2()`](https://dgbonett.github.io/statpsych/reference/sim.ci.mean2.md)
+  : Simulates confidence interval coverage probability for a 2-group
+  mean difference
+- [`sim.ci.median.ps()`](https://dgbonett.github.io/statpsych/reference/sim.ci.median.ps.md)
+  : Simulates confidence interval coverage probability for a median
+  difference in a paired-samples design
+- [`sim.ci.median()`](https://dgbonett.github.io/statpsych/reference/sim.ci.median.md)
+  : Simulates confidence interval coverage probability for a median
+- [`sim.ci.median2()`](https://dgbonett.github.io/statpsych/reference/sim.ci.median2.md)
+  : Simulates confidence interval coverage probability for a median
+  difference in a 2-group design
+- [`sim.ci.spear()`](https://dgbonett.github.io/statpsych/reference/sim.ci.spear.md)
+  : Simulates confidence interval coverage probability for a Spearman
+  correlation
+- [`sim.ci.stdmean.ps()`](https://dgbonett.github.io/statpsych/reference/sim.ci.stdmean.ps.md)
+  : Simulates confidence interval coverage probability for a
+  standardized mean difference in a paired-samples design
+- [`sim.ci.stdmean2()`](https://dgbonett.github.io/statpsych/reference/sim.ci.stdmean2.md)
+  : Simulates confidence interval coverage probability for a
+  standardized mean difference in a 2-group design
+
+## Tests
+
+Hypothesis tests
+
+- [`test.anova.bs()`](https://dgbonett.github.io/statpsych/reference/test.anova.bs.md)
+  : Between-subjects F statistic and eta-squared from summary
+  information
+- [`test.cor()`](https://dgbonett.github.io/statpsych/reference/test.cor.md)
+  : Hypothesis test for a Pearson or partial correlation
+- [`test.cor2()`](https://dgbonett.github.io/statpsych/reference/test.cor2.md)
+  : Hypothesis test for a 2-group Pearson or partial correlation
+  difference
+- [`test.kurtosis()`](https://dgbonett.github.io/statpsych/reference/test.kurtosis.md)
+  : Computes p-value for test of excess kurtosis
+- [`test.mean()`](https://dgbonett.github.io/statpsych/reference/test.mean.md)
+  : Hypothesis test for a mean
+- [`test.mono.mean.bs()`](https://dgbonett.github.io/statpsych/reference/test.mono.mean.bs.md)
+  : Test of a monotonic trend in means for an ordered between-subjects
+  factor
+- [`test.mono.median.bs()`](https://dgbonett.github.io/statpsych/reference/test.mono.median.bs.md)
+  : Test of a monotonic trend in medians for an ordered between-subjects
+  factor
+- [`test.mono.prop.bs()`](https://dgbonett.github.io/statpsych/reference/test.mono.prop.bs.md)
+  : Test of monotonic trend in proportions for an ordered
+  between-subjects factor
+- [`test.prop.bs()`](https://dgbonett.github.io/statpsych/reference/test.prop.bs.md)
+  : Hypothesis test of equal proportions in a between-subjects design
+- [`test.prop.ps()`](https://dgbonett.github.io/statpsych/reference/test.prop.ps.md)
+  : Hypothesis test for a paired-samples proportion difference
+- [`test.prop()`](https://dgbonett.github.io/statpsych/reference/test.prop.md)
+  : Hypothesis test for a proportion
+- [`test.prop2()`](https://dgbonett.github.io/statpsych/reference/test.prop2.md)
+  : Hypothesis test for a 2-group proportion difference
+- [`test.skew()`](https://dgbonett.github.io/statpsych/reference/test.skew.md)
+  : Computes p-value for test of skewness
+- [`test.spear()`](https://dgbonett.github.io/statpsych/reference/test.spear.md)
+  : Hypothesis test for a Spearman correlation
+- [`test.spear2()`](https://dgbonett.github.io/statpsych/reference/test.spear2.md)
+  : Hypothesis test for a 2-group Spearman correlation difference

@@ -32,16 +32,20 @@ corrects for chance agreement. The G-index is a better measure of
 agreement than Cohen's kappa, and the confidence interval for the G-index
 used here has better small-sample properties than the confidence interval
 for Cohen's kappa.
+
+For more details, see Section 3.5 of Bonett (2021, Volume 3)
 }
 \examples{
-ci.agree(.05, 100, 80, 4)
+ci.agree(.05, 250, 214, 3)
 
 # Should return:
-#  Estimate         SE        LL        UL
-# 0.7333333 0.05333333 0.6132949 0.8226025
+#  Estimate      SE     LL     UL
+#     0.784 0.03331 0.7098 0.8414
 
 
 }
 \references{
 \insertRef{Bonett2022}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

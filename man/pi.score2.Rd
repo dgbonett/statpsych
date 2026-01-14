@@ -9,7 +9,7 @@ pi.score2(alpha, m1, m2, sd1, sd2, n1, n2)
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
 
-\item{m1}{estaimted mean for group 1}
+\item{m1}{estamated mean for group 1}
 
 \item{m2}{estimated mean for group 1}
 
@@ -36,17 +36,21 @@ interval for how the response variable score for one randomly selected
 person from the study population would differ under the two treatment
 conditions. Both equal variance and unequal variance prediction intervals
 are computed.
+
+For more details, see Section 2.6 of Bonett (2021, Volume 1)
 }
 \examples{
-pi.score2(.05, 29.57, 18.35, 2.68, 1.92, 40, 45)
+pi.score2(.05, 19.4, 11.3, 2.70, 2.10, 40, 40)
 
 # Should return:
-#                              Predicted       df       LL       UL
-# Equal Variances Assumed:         11.22 83.00000 4.650454 17.78955
-# Equal Variances Not Assumed:     11.22 72.34319 4.603642 17.83636
+#                              Predicted    df       LL       UL
+# Equal Variances Assumed:           8.1 78.00 1.205659 14.99434
+# Equal Variances Not Assumed:       8.1 73.54 1.199073 15.00093
  
 
 }
 \references{
 \insertRef{Hahn1977}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

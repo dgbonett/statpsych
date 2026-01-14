@@ -27,11 +27,11 @@ the smallest absolute value within a plausible range for a conservatively large
 sample size.
 }
 \examples{
-size.ci.tetra(.05, .4, .3, .5, .3)
+size.ci.tetra(.05, .5, .3, .7, .25)
 
 # Should return:
 #  Sample size
-#          296
+#          304
 
 
 }

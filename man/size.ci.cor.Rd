@@ -24,16 +24,20 @@ partial correlation with desired confidence interval precision.
 Set s = 0 for a Pearson correlation. Set the correlation planning value
 to the smallest absolute value within a plausible range for a conservatively
 large sample size.
+
+For more details, see Section 1.24 of Bonett (2021, Volume 2)
 }
 \examples{
-size.ci.cor(.05, .362, 0, .25)
+size.ci.cor(.05, .3, 0, .2)
 
 # Should return:
 # Sample size
-#         188
+#         320
  
 
 }
 \references{
 \insertRef{Bonett2000}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

@@ -42,18 +42,22 @@ The columns of row 3 are:
 Computes adjusted Wald (Agresi-Coull), Wilson, and exact confidence intervals
 for a population proportion. The Wilson confidence interval uses a
 continuity correction.
+
+For more details, see Section 1.5 of Bonett (2021, Volume 3)
 }
 \examples{
-ci.prop(.05, 12, 100)
+ci.prop(.05, 120, 300)
 
 # Should return:
-#                  Estimate         SE         LL        UL
-# Adjusted Wald   0.1346154 0.03346842 0.06901848 0.2002123
-# Wilson with cc  0.1200000 0.03249615 0.06625153 0.2039772
-# Exact           0.1200000 0.03249615 0.06356890 0.2002357
+#                 Estimate         SE        LL        UL
+# Adjusted Wald  0.4013158 0.02811287 0.3462156 0.4564160
+# Wilson with cc 0.4000000 0.02828427 0.3445577 0.4580464
+# Exact          0.4000000 0.02828427 0.3441290 0.4578664
 
 
 }
 \references{
+\insertRef{Bonett2021}{statpsych}
+
 \insertRef{Agresti1998}{statpsych}
 }

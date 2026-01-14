@@ -28,14 +28,19 @@ largest value within a plausible range for a conservatively large
 sample size. Set the Pearson correlation planning value to the
 smallest value within a plausible range for a conservatively
 large sample size.
+
+For more details, see Section 4.26 of Bonett (2021, Volume 1)
 }
 \examples{
 q <- c(.5, .5, -.5, -.5)
-size.ci.lc.mean.ws(.05, 265, .8, 10, q)
+size.ci.lc.mean.ws(.05, 161.9, .77, 4, q)
 
 # Should return:
 # Sample size
-#          11
+#          38
  
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

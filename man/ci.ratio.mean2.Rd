@@ -28,6 +28,9 @@ Computes a confidence interval for a ratio of population means of
 ratio-scale measurements in a 2-group design. Equality of variances
 is not assumed.
 }
+\details{
+For more details, see Section 2.5 of Bonett (2021, Volume 1)
+}
 \examples{
 y2 <- c(32, 39, 26, 35, 43, 27, 40, 37, 34, 29, 49, 42, 40)
 y1 <- c(36, 44, 47, 42, 49, 39, 46, 31, 33, 48)
@@ -42,4 +45,6 @@ ci.ratio.mean2(.05, y1, y2)
 }
 \references{
 \insertRef{Bonett2020b}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

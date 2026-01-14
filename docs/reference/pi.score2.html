@@ -3,11 +3,13 @@
 interval for how the response variable score for one randomly selected
 person from the study population would differ under the two treatment
 conditions. Both equal variance and unequal variance prediction intervals
-are computed."><meta property="og:description" content="For a 2-group experimental design, this function computes a prediction
+are computed.
+For more details, see Section 2.6 of Bonett (2021, Volume 1)"><meta property="og:description" content="For a 2-group experimental design, this function computes a prediction
 interval for how the response variable score for one randomly selected
 person from the study population would differ under the two treatment
 conditions. Both equal variance and unequal variance prediction intervals
-are computed."></head><body>
+are computed.
+For more details, see Section 2.6 of Bonett (2021, Volume 1)"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -15,7 +17,7 @@ are computed."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">statpsych</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.8.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,6 +49,7 @@ interval for how the response variable score for one randomly selected
 person from the study population would differ under the two treatment
 conditions. Both equal variance and unequal variance prediction intervals
 are computed.</p>
+<p>For more details, see Section 2.6 of Bonett (2021, Volume 1)</p>
     </div>
 
     <div class="section level2">
@@ -63,7 +66,7 @@ are computed.</p>
 
 
 <dt id="arg-m-">m1<a class="anchor" aria-label="anchor" href="#arg-m-"></a></dt>
-<dd><p>estaimted mean for group 1</p></dd>
+<dd><p>estamated mean for group 1</p></dd>
 
 
 <dt id="arg-m-">m2<a class="anchor" aria-label="anchor" href="#arg-m-"></a></dt>
@@ -100,19 +103,21 @@ are computed.</p>
 <em>Technometrics</em>, <b>19</b>(2), 131–134.
 ISSN 0040-1706, <a href="https://doi.org/10.1080/00401706.1977.10489520" class="external-link">doi:10.1080/00401706.1977.10489520</a>
 .</p>
+<p>Bonett DG (2021).
+<em>Statistical Methods for Psychologists https://dgbonett.sites.ucsc.edu/</em>.</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">pi.score2</span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">29.57</span>, <span class="fl">18.35</span>, <span class="fl">2.68</span>, <span class="fl">1.92</span>, <span class="fl">40</span>, <span class="fl">45</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                              Predicted       df       LL       UL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Equal Variances Assumed:         11.22 83.00000 4.650454 17.78955</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Equal Variances Not Assumed:     11.22 72.34319 4.603642 17.83636</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">pi.score2</span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">19.4</span>, <span class="fl">11.3</span>, <span class="fl">2.70</span>, <span class="fl">2.10</span>, <span class="fl">40</span>, <span class="fl">40</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                              Predicted    df       LL       UL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Equal Variances Assumed:           8.1 78.00 1.205659 14.99434</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Equal Variances Not Assumed:       8.1 73.54 1.199067 15.00093</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Should return:</span></span></span>
-<span class="r-in"><span><span class="co">#                              Predicted       df       LL       UL</span></span></span>
-<span class="r-in"><span><span class="co"># Equal Variances Assumed:         11.22 83.00000 4.650454 17.78955</span></span></span>
-<span class="r-in"><span><span class="co"># Equal Variances Not Assumed:     11.22 72.34319 4.603642 17.83636</span></span></span>
+<span class="r-in"><span><span class="co">#                              Predicted    df       LL       UL</span></span></span>
+<span class="r-in"><span><span class="co"># Equal Variances Assumed:           8.1 78.00 1.205659 14.99434</span></span></span>
+<span class="r-in"><span><span class="co"># Equal Variances Not Assumed:       8.1 73.54 1.199073 15.00093</span></span></span>
 <span class="r-in"><span> </span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
@@ -126,7 +131,7 @@ ISSN 0040-1706, <a href="https://doi.org/10.1080/00401706.1977.10489520" class="
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

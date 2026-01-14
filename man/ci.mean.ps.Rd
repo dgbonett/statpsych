@@ -38,13 +38,20 @@ Computes a confidence interval for a population paired-samples mean
 difference using the estimated means, estimated standard deviations,
 estimated correlation, and sample size. Also computes a paired-samples
 t-test. Use the t.test function for raw data input.
+
+For more details, see Section 4.2 of Bonett (2021, Volume 1)
 }
 \examples{
 ci.mean.ps(.05, 58.2, 51.4, 7.43, 8.92, .537, 30)
 
 # Should return:
-# Estimate       SE        t df            p       LL       UL
-#      6.8 1.455922 4.670578 29  6.33208e-05 3.822304 9.777696
+# Estimate       SE      t df      p       LL       UL
+#      6.8 1.455922 4.6706 29  6e-05 3.822304 9.777696
 
 
+}
+\references{
+\insertRef{Snedecor1980}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

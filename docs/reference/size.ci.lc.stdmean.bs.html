@@ -5,13 +5,15 @@ population means (unweighted average standardizer and single group
 standardizer) with desired confidence interval precision in a
 between-subjects design. Set the standardized linear contrast of
 means to the largest value within a plausible range for a conservatively
-large sample size."><meta property="og:description" content="Computes the sample size per group (assuming equal sample sizes)
+large sample size.
+For more details, see Section 3.24 of Bonett (2021, Volume 1)"><meta property="og:description" content="Computes the sample size per group (assuming equal sample sizes)
 required to estimate two types of standardized linear contrasts of
 population means (unweighted average standardizer and single group
 standardizer) with desired confidence interval precision in a
 between-subjects design. Set the standardized linear contrast of
 means to the largest value within a plausible range for a conservatively
-large sample size."></head><body>
+large sample size.
+For more details, see Section 3.24 of Bonett (2021, Volume 1)"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -19,7 +21,7 @@ large sample size."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">statpsych</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.8.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,6 +55,7 @@ standardizer) with desired confidence interval precision in a
 between-subjects design. Set the standardized linear contrast of
 means to the largest value within a plausible range for a conservatively
 large sample size.</p>
+<p>For more details, see Section 3.24 of Bonett (2021, Volume 1)</p>
     </div>
 
     <div class="section level2">
@@ -91,20 +94,22 @@ large sample size.</p>
 <em>Psychological Methods</em>, <b>14</b>(1), 1–5.
 ISSN 1939-1463, <a href="https://doi.org/10.1037/a0014270" class="external-link">doi:10.1037/a0014270</a>
 .</p>
+<p>Bonett DG (2021).
+<em>Statistical Methods for Psychologists https://dgbonett.sites.ucsc.edu/</em>.</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">v</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.5</span>, <span class="fl">.5</span>, <span class="op">-</span><span class="fl">.5</span>, <span class="op">-</span><span class="fl">.5</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">size.ci.lc.stdmean.bs</span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">1</span>, <span class="fl">.6</span>, <span class="va">v</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">v</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.5</span>, <span class="fl">.5</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">size.ci.lc.stdmean.bs</span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">.8</span>, <span class="fl">.6</span>, <span class="va">v</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                            Sample size per group</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Unweighted standardizer:                      49</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Single group standardizer:                    65</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Unweighted standardizer:                      69</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Single group standardizer:                    78</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Should return:</span></span></span>
 <span class="r-in"><span><span class="co">#                            Sample size per group</span></span></span>
-<span class="r-in"><span><span class="co"># Unweighted standardizer:                      49</span></span></span>
-<span class="r-in"><span><span class="co"># Single group standardizer:                    65</span></span></span>
+<span class="r-in"><span><span class="co"># Unweighted standardizer:                      69</span></span></span>
+<span class="r-in"><span><span class="co"># Single group standardizer:                    78</span></span></span>
 <span class="r-in"><span> </span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
@@ -118,7 +123,7 @@ ISSN 1939-1463, <a href="https://doi.org/10.1037/a0014270" class="external-link"
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

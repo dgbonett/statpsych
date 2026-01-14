@@ -8,7 +8,8 @@ very large sample size. Equivalence tests usually use 2 x alpha rather than
 alpha (e.g., use alpha = .10 rather alpha = .05). Set the Pearson correlation
 value to the smallest value within a plausible range, and set the variance
 planning value to the largest value within a plausible range for a
-conservatively large sample size."><meta property="og:description" content="Computes the sample size required to perform an equivalence test for the
+conservatively large sample size.
+For more details, see Section 4.27 of Bonett (2021, Volume 1)"><meta property="og:description" content="Computes the sample size required to perform an equivalence test for the
 difference in population means with desired power in a paired-samples
 design. The value of h specifies a range of practical equivalence, -h to h,
 for the difference in population means. The planning value for the absolute
@@ -17,7 +18,8 @@ very large sample size. Equivalence tests usually use 2 x alpha rather than
 alpha (e.g., use alpha = .10 rather alpha = .05). Set the Pearson correlation
 value to the smallest value within a plausible range, and set the variance
 planning value to the largest value within a plausible range for a
-conservatively large sample size."></head><body>
+conservatively large sample size.
+For more details, see Section 4.27 of Bonett (2021, Volume 1)"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -25,7 +27,7 @@ conservatively large sample size."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">statpsych</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.8.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -62,6 +64,7 @@ alpha (e.g., use alpha = .10 rather alpha = .05). Set the Pearson correlation
 value to the smallest value within a plausible range, and set the variance
 planning value to the largest value within a plausible range for a
 conservatively large sample size.</p>
+<p>For more details, see Section 4.27 of Bonett (2021, Volume 1)</p>
     </div>
 
     <div class="section level2">
@@ -101,16 +104,21 @@ conservatively large sample size.</p>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>Returns the required sample size</p>
     </div>
+    <div class="section level2">
+    <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
+    <p>Bonett DG (2021).
+<em>Statistical Methods for Psychologists https://dgbonett.sites.ucsc.edu/</em>.</p>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">size.equiv.mean.ps</span><span class="op">(</span><span class="fl">.10</span>, <span class="fl">.85</span>, <span class="fl">15</span>, <span class="fl">.5</span>, <span class="fl">.7</span>, <span class="fl">1.5</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">size.equiv.mean.ps</span><span class="op">(</span><span class="fl">.10</span>, <span class="fl">.90</span>, <span class="fl">25</span>, <span class="fl">.5</span>, <span class="fl">.75</span>, <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Sample size</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           68</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           49</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Should return:</span></span></span>
 <span class="r-in"><span><span class="co"># Sample size</span></span></span>
-<span class="r-in"><span><span class="co">#          68</span></span></span>
+<span class="r-in"><span><span class="co">#          49</span></span></span>
 <span class="r-in"><span> </span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
@@ -124,7 +132,7 @@ conservatively large sample size.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

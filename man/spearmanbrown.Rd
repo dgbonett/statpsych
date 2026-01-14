@@ -22,6 +22,8 @@ Computes the reliability of a scale that is the sum or average of r2
 parallel measurements given the reliability of a scale that is the sum or
 average of r1 parallel measurements. The "measurements" can be items,
 forms, raters, or occasions.
+
+For more details, see Section 4.19 of Bonett (2021, Volume 1)
 }
 \examples{
 spearmanbrown(.6, 10, 20)
@@ -31,4 +33,7 @@ spearmanbrown(.6, 10, 20)
 #                            .75
 
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

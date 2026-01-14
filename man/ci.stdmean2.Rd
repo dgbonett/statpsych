@@ -40,19 +40,23 @@ unweighted variance standardizer is recommended in 2-group experimental
 designs. The single group standard deviation standardizer can be used with
 experimental or nonexperimental designs. Equality of variances is not
 assumed.
+
+For more details, see Section 2.4 of Bonett (2021, Volume 1)
 }
 \examples{
-ci.stdmean2(.05, 35.1, 26.7, 7.32, 6.98, 30, 30)
+ci.stdmean2(.05, 20.9, 19.1, 3.85, 3.19, 50, 50)
 
 # Should return:
-#                          Estimate  adj Estimate        SE        LL       UL
-# Unweighted standardizer: 1.174493      1.159240 0.2844012 0.6170771 1.731909
-# Weighted standardizer:   1.174493      1.159240 0.2802826 0.6251494 1.723837
-# Group 1 standardizer:    1.147541      1.117605 0.2975582 0.5643375 1.730744
-# Group 2 standardizer:    1.203438      1.172044 0.3120525 0.5918268 1.815050
+#                          Estimate adj Estimate      SE     LL     UL
+# Unweighted standardizer:   0.5091       0.5052 0.20539 0.1066 0.9117
+# Weighted standardizer:     0.5091       0.5052 0.20328 0.1107 0.9076
+# Group 1 standardizer:      0.4675       0.4603 0.19144 0.0923 0.8427
+# Group 2 standardizer:      0.5643       0.5556 0.23105 0.1114 1.0171
 
 
 }
 \references{
 \insertRef{Bonett2008}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

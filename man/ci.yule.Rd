@@ -36,19 +36,22 @@ used as a crude approximation to the tetrachoric correlation. Yule Y is
 equal to the phi coefficient only when all marginal frequencies are equal.
 Bonett-Price Y* is a better approximation to the phi coefficient when the
 marginal frequencies are not equal.
+
+For more details, see Section 3.4 of Bonett (2021, Volume 3)
 }
 \examples{
 ci.yule(.05, 229, 28, 96, 24)
 
 # Should return:
-#      Estimate         SE         LL        UL
-# Q:  0.3430670 0.13280379 0.06247099 0.5734020
-# Y:  0.1769015 0.07290438 0.03126603 0.3151817
-# H:  0.2619244 0.10514465 0.04687994 0.4537659
-# Y*: 0.1311480 0.05457236 0.02307188 0.2361941
+#    Estimate     SE    LL    UL
+# Q:    0.343 0.1328 0.062 0.573
+# Y:    0.177 0.0729 0.031 0.315
+# H:    0.262 0.1051 0.047 0.454
+# Y*:   0.131 0.0546 0.023 0.236
 
 
 }
 \references{
+\insertRef{Bonett2021}{statpsych}
 \insertRef{Bonett2007}{statpsych}
 }

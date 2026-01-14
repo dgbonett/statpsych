@@ -20,13 +20,18 @@ Returns a bias adjusted eta-squared estimate
 Computes an approximate bias adjustment for eta-squared. This adjustment
 can be applied to eta-squared, partial-eta squared, and generalized
 eta-squared estimates.
+
+For more details, see Section 3.7 of Bonett (2021, Volume 1)
 }
 \examples{
 etasqr.adj(.315, 2, 42)
 
 # Should return:
 # adj Eta-squared
-#        0.282381
+#          0.2824
  
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

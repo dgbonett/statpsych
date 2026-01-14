@@ -4,14 +4,16 @@ population correlations in a 2-group design. The correlations can be
 Pearson, Spearman, partial, semipartial, or point-biserial correlations.
 The correlations could also be correlations between two latent factors.
 The function requires a point estimate and a 100(1 - alpha)% confidence
-interval for each correlation as input. The confidence intervals for
-each correlation can be obtained using the ci.fisher function."><meta property="og:description" content="Computes a 100(1 - alpha)% confidence interval for a difference in
+interval for each correlation as input. The confidence intervals for each
+correlation can be obtained using ci.fisher.
+For more details, see Section 2.17 of Bonett (2021, Volume 2)"><meta property="og:description" content="Computes a 100(1 - alpha)% confidence interval for a difference in
 population correlations in a 2-group design. The correlations can be
 Pearson, Spearman, partial, semipartial, or point-biserial correlations.
 The correlations could also be correlations between two latent factors.
 The function requires a point estimate and a 100(1 - alpha)% confidence
-interval for each correlation as input. The confidence intervals for
-each correlation can be obtained using the ci.fisher function."></head><body>
+interval for each correlation as input. The confidence intervals for each
+correlation can be obtained using ci.fisher.
+For more details, see Section 2.17 of Bonett (2021, Volume 2)"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -19,7 +21,7 @@ each correlation can be obtained using the ci.fisher function."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">statpsych</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.8.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,8 +53,9 @@ population correlations in a 2-group design. The correlations can be
 Pearson, Spearman, partial, semipartial, or point-biserial correlations.
 The correlations could also be correlations between two latent factors.
 The function requires a point estimate and a 100(1 - alpha)% confidence
-interval for each correlation as input. The confidence intervals for
-each correlation can be obtained using the ci.fisher function.</p>
+interval for each correlation as input. The confidence intervals for each
+correlation can be obtained using <a href="ci.fisher.html">ci.fisher</a>.</p>
+<p>For more details, see Section 2.17 of Bonett (2021, Volume 2)</p>
     </div>
 
     <div class="section level2">
@@ -101,17 +104,19 @@ each correlation can be obtained using the ci.fisher function.</p>
 <em>Psychological Methods</em>, <b>12</b>(4), 399–413.
 ISSN 1939-1463, <a href="https://doi.org/10.1037/1082-989X.12.4.399" class="external-link">doi:10.1037/1082-989X.12.4.399</a>
 .</p>
+<p>Bonett DG (2021).
+<em>Statistical Methods for Psychologists https://dgbonett.sites.ucsc.edu/</em>.</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">ci.cor2.gen</span><span class="op">(</span><span class="fl">.4</span>, <span class="fl">.35</span>, <span class="fl">.47</span>, <span class="fl">.2</span>, <span class="fl">.1</span>, <span class="fl">.32</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Estimate   LL        UL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       0.2 0.07 0.3220656</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">ci.cor2.gen</span><span class="op">(</span><span class="fl">.64</span>, <span class="fl">.55</span>, <span class="fl">.71</span>, <span class="fl">.31</span>, <span class="fl">.18</span>, <span class="fl">.43</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Estimate   LL     UL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      0.33 0.18 0.4776</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Should return:</span></span></span>
-<span class="r-in"><span><span class="co"># Estimate   LL        UL</span></span></span>
-<span class="r-in"><span><span class="co">#      0.2 0.07 0.3220656</span></span></span>
+<span class="r-in"><span><span class="co"># Estimate    LL     UL</span></span></span>
+<span class="r-in"><span><span class="co">#      0.33 0.18 0.4776</span></span></span>
 <span class="r-in"><span> </span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
@@ -125,7 +130,7 @@ ISSN 1939-1463, <a href="https://doi.org/10.1037/1082-989X.12.4.399" class="exte
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

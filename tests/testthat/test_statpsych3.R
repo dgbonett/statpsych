@@ -786,11 +786,11 @@ test_that("size.ci.prop.prior returns valid matrix", {
     "Sample size"
   )
   
-  res <- size.ci.prop.prior(.05, .20, .1425, 200, .1)
+  res <- size.ci.prop.prior(.05, .10, .78, 50, .1)
   
   testthat::expect_equal(class(res), c("matrix", "array"))
   testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
-  testthat::expect_equal(res[[1,1]], 318)
+  testthat::expect_equal(res[[1,1]], 384)
   testthat::expect_equal(colnames(res), colnames_expected)
   
   testthat::expect_snapshot(res)
@@ -812,6 +812,22 @@ test_that("size.ci.yule example", {
 
 test_that("size.ci.phi example", {
   res <- size.ci.phi(.05, .7, .8, .35, .2)
+  testthat::expect_snapshot(res)
+})
+
+
+test_that("ci.diversity example", {
+  f <- c(847, 320, 57, 274, 36)
+  res <- ci.diversity(.05, f)
+  testthat::expect_snapshot(res)
+})
+
+
+test_that("ci.lc.prop.scheffe example", {
+  f <- c(26, 24, 38)
+  n <- c(60, 60, 60)
+  v <- c(-.5, -.5, 1)
+  res <- ci.lc.prop.scheffe(.05, f, n, v)
   testthat::expect_snapshot(res)
 })
 

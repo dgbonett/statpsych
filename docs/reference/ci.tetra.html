@@ -4,12 +4,14 @@ correlation. This function requires the frequency counts from a 2 x 2
 contingency table for two dichotomous variables. This measure of
 association assumes both of the dichotomous variables are artificially
 dichotomous. An approximate standard error is recovered from the
-confidence interval."><meta property="og:description" content="Computes a confidence interval for an approximation to the tetrachoric
+confidence interval.
+For more details, see Section 3.4 of Bonett (2021, Volume 3)"><meta property="og:description" content="Computes a confidence interval for an approximation to the tetrachoric
 correlation. This function requires the frequency counts from a 2 x 2
 contingency table for two dichotomous variables. This measure of
 association assumes both of the dichotomous variables are artificially
 dichotomous. An approximate standard error is recovered from the
-confidence interval."></head><body>
+confidence interval.
+For more details, see Section 3.4 of Bonett (2021, Volume 3)"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -17,7 +19,7 @@ confidence interval."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">statpsych</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.8.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,6 +52,7 @@ contingency table for two dichotomous variables. This measure of
 association assumes both of the dichotomous variables are artificially
 dichotomous. An approximate standard error is recovered from the
 confidence interval.</p>
+<p>For more details, see Section 3.4 of Bonett (2021, Volume 3)</p>
     </div>
 
     <div class="section level2">
@@ -90,7 +93,9 @@ confidence interval.</p>
 </ul></div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
-    <p>Bonett DG, Price RM (2005).
+    <p>Bonett DG (2021).
+<em>Statistical Methods for Psychologists https://dgbonett.sites.ucsc.edu/</em>.</p>
+<p>Bonett DG, Price RM (2005).
 “Inferential methods for the tetrachoric correlation coefficient.”
 <em>Journal of Educational and Behavioral Statistics</em>, <b>30</b>(2), 213–225.
 ISSN 1076-9986, <a href="https://doi.org/10.3102/10769986030002213" class="external-link">doi:10.3102/10769986030002213</a>
@@ -99,13 +104,13 @@ ISSN 1076-9986, <a href="https://doi.org/10.3102/10769986030002213" class="exter
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">ci.tetra</span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">46</span>, <span class="fl">15</span>, <span class="fl">54</span>, <span class="fl">85</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Estimate         SE        LL        UL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.5135167 0.09301703 0.3102345 0.6748546</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">ci.tetra</span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">86</span>, <span class="fl">16</span>, <span class="fl">7</span>, <span class="fl">93</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Estimate     SE    LL    UL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     0.938 0.0268 0.868 0.973</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Should return:</span></span></span>
-<span class="r-in"><span><span class="co">#  Estimate         SE        LL        UL</span></span></span>
-<span class="r-in"><span><span class="co"># 0.5135167 0.09301703 0.3102345 0.6748546</span></span></span>
+<span class="r-in"><span><span class="co"># Estimate     SE    LL    UL</span></span></span>
+<span class="r-in"><span><span class="co">#    0.938 0.0268 0.868 0.973</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
@@ -119,7 +124,7 @@ ISSN 1076-9986, <a href="https://doi.org/10.3102/10769986030002213" class="exter
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

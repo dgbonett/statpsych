@@ -24,19 +24,24 @@ Returns the required sample size for each group
 Computes the sample size in each group required to estimate a ratio of
 proportions with desired confidence interval precision in a 2-group design.
 Set R = 1 for equal sample sizes.
+
+For more details, see Section 2.22 of Bonett (2021, Volume 3)
 }
 \examples{
-size.ci.ratio.prop2(.05, .2, .1, 2, 1)
+size.ci.ratio.prop2(.05, .9, .7, 1.5, 1)
 
 # Should return:
 #   n1  n2
-#  416 416
+#   51  51
 
-size.ci.ratio.prop2(.05, .2, .1, 2, .5)
+size.ci.ratio.prop2(.05, .9, .7, 1.5, .5)
 
 # Should return:
 #   n1  n2
-#  704 352
+#   91  46
 
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

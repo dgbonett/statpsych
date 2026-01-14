@@ -36,6 +36,8 @@ linear contrast of means (unweighted standardizer and level 1 standardizer)
 in a within-subjects design. Equality of variances is not assumed, but the
 correlations among the repeated measures are assumed to be approximately
 equal.
+
+For more details, see Section 4.7 of Bonett (2021, Volume 1)
 }
 \examples{
 m <- c(33.5, 37.9, 38.0, 44.1)
@@ -44,12 +46,14 @@ q <- c(.5, .5, -.5, -.5)
 ci.lc.stdmean.ws(.05, m, sd, .672, 20, q)
 
 # Should return:
-#                           Estimate  adj Estimate        SE        LL         UL
-# Unweighted standardizer: -1.301263     -1.266557 0.3147937 -1.918248 -0.6842788
-# Level 1 standardizer:    -1.393229     -1.337500 0.3661824 -2.110934 -0.6755248
+#                          Estimate adj Estimate      SE      LL      UL
+# Unweighted standardizer:  -1.3013      -1.2666 0.31479 -1.9182 -0.6843
+# Level 1 standardizer:     -1.3932      -1.3375 0.36618 -2.1109 -0.6755
 
 
 }
 \references{
 \insertRef{Bonett2008}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

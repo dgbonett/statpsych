@@ -5,13 +5,15 @@ squared multiple correlation in the full model that contains the
 predictor variable of interest plus all control variables. This
 function computes a modified Aloe-Becker confidence interval that uses
 n - 3 rather than n in the standard error and also uses a Fisher
-transformation of the semipartial correlation."><meta property="og:description" content="Computes a Fisher confidence interval for a population semipartial
+transformation of the semipartial correlation.
+For more details, see Section 2.7 of Bonett (2021, Volume 2)"><meta property="og:description" content="Computes a Fisher confidence interval for a population semipartial
 correlation. This function requires an (unadjusted) estimate of the
 squared multiple correlation in the full model that contains the
 predictor variable of interest plus all control variables. This
 function computes a modified Aloe-Becker confidence interval that uses
 n - 3 rather than n in the standard error and also uses a Fisher
-transformation of the semipartial correlation."></head><body>
+transformation of the semipartial correlation.
+For more details, see Section 2.7 of Bonett (2021, Volume 2)"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -19,7 +21,7 @@ transformation of the semipartial correlation."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">statpsych</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.8.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,6 +55,7 @@ predictor variable of interest plus all control variables. This
 function computes a modified Aloe-Becker confidence interval that uses
 n - 3 rather than n in the standard error and also uses a Fisher
 transformation of the semipartial correlation.</p>
+<p>For more details, see Section 2.7 of Bonett (2021, Volume 2)</p>
     </div>
 
     <div class="section level2">
@@ -89,7 +92,9 @@ transformation of the semipartial correlation.</p>
 </ul></div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
-    <p>Aloe AM, Becker BJ (2012).
+    <p>Bonett DG (2021).
+<em>Statistical Methods for Psychologists https://dgbonett.sites.ucsc.edu/</em>.</p>
+<p>Aloe AM, Becker BJ (2012).
 “An effect size for regression predictors in meta-analysis.”
 <em>Journal of Educational and Behavioral Statistics</em>, <b>37</b>(2), 278–297.
 ISSN 1076-9986, <a href="https://doi.org/10.3102/1076998610396901" class="external-link">doi:10.3102/1076998610396901</a>
@@ -98,13 +103,13 @@ ISSN 1076-9986, <a href="https://doi.org/10.3102/1076998610396901" class="extern
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">ci.spcor</span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">.582</span>, <span class="fl">.699</span>, <span class="fl">20</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Estimate        SE        LL        UL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     0.582 0.1374298 0.2525662 0.7905182</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">ci.spcor</span><span class="op">(</span><span class="fl">.05</span>, <span class="op">-</span><span class="fl">.355</span>, <span class="fl">.230</span>, <span class="fl">236</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Estimate      SE      LL      UL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    -0.355 0.05426 -0.4565 -0.2444</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Should return:</span></span></span>
-<span class="r-in"><span><span class="co"># Estimate        SE        LL        UL</span></span></span>
-<span class="r-in"><span><span class="co">#    0.582 0.1374298 0.2525662 0.7905182</span></span></span>
+<span class="r-in"><span><span class="co"># Estimate      SE      LL      UL</span></span></span>
+<span class="r-in"><span><span class="co">#   -0.355 0.05426 -0.4565 -0.2444</span></span></span>
 <span class="r-in"><span> </span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
@@ -118,7 +123,7 @@ ISSN 1076-9986, <a href="https://doi.org/10.3102/1076998610396901" class="extern
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

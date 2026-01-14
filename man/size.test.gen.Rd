@@ -28,6 +28,8 @@ standard error of the parameter estimate is a function of the square root of the
 sample size (most parameter estimates have this property). This function also
 assumes that the sampling distribution of the parameter estimate is
 approximately normal in large samples.
+
+For more details, see Section 2.29 of Bonett (2021, Volume 2)
 }
 \examples{
 size.test.gen(.05, .8, 2.89, 30, 5)
@@ -37,4 +39,7 @@ size.test.gen(.05, .8, 2.89, 30, 5)
 #          79
  
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

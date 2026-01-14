@@ -27,18 +27,22 @@ Returns a 1-row matrix. The columns are:
 Computes a distribution-free confidence interval for a ratio of population
 medians in a paired-samples design. Ratio-scale measurements are assumed.
 Tied scores within each measurement are assumed to be rare.
+
+For more details, see Section 4.23 of Bonett (2021, Volume 1)
 }
 \examples{
-y1 <- c(21, 4, 9, 12, 35, 18, 10, 22, 24, 1, 6, 8, 13, 16, 19)
-y2 <- c(67, 28, 30, 28, 52, 40, 25, 37, 44, 10, 14, 20, 28, 40, 51)
+y1 = c(76.41, 66.91, 81.06, 74.78, 83.76, 89.31, 78.78, 87.06, 82.61, 76.74, 88.33, 86.18)
+y2 = c(59.85, 60.64, 84.86, 68.16, 71.53, 86.18, 67.30, 65.46, 83.50, 66.76, 88.37, 65.02)
 ci.ratio.median.ps(.05, y1, y2)
 
 # Should return:
-# Median1  Median2   Median1/Median2        LL        UL
-#      13       30         0.4333333 0.3094838 0.6067451
+# Median1  Median2  Median1/Median2        LL        UL
+#  81.835    67.73         1.208253  1.069251  1.365326
 
 
 }
 \references{
 \insertRef{Bonett2020b}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

@@ -30,6 +30,8 @@ of pairwise comparisons. The columns are:
 Computes adjusted Wald confidence intervals for all pairwise differences
 of population proportions in a between-subjects design using a Bonferroni
 adjusted alpha level.
+
+For more details, see Section 2.7 of Bonett (2021, Volume 3)
 }
 \examples{
 f <- c(111, 161, 132)
@@ -37,13 +39,15 @@ n <- c(200, 200, 200)
 ci.pairs.prop.bs(.05, f, n)
 
 # Should return:
-#        Estimate         SE         z            p          LL          UL
-# 1 2  -0.2475248 0.04482323 -5.522243 3.346989e-08 -0.35483065 -0.14021885
-# 1 3  -0.1039604 0.04833562 -2.150803 3.149174e-02 -0.21967489  0.01175409
-# 2 3   0.1435644 0.04358401  3.293968 9.878366e-04  0.03922511  0.24790360
+#        Estimate         SE       z       p          LL          UL
+# 1 2  -0.2475248 0.04482323 -5.5222 0.00000 -0.35483065 -0.14021885
+# 1 3  -0.1039604 0.04833562 -2.1508 0.03149 -0.21967489  0.01175409
+# 2 3   0.1435644 0.04358401  3.2940 0.00099  0.03922511  0.24790360
 
 
 }
 \references{
 \insertRef{Agresti2000}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

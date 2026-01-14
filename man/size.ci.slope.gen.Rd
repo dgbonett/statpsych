@@ -27,6 +27,8 @@ or pilot study. This function can be used for both unstandardized and
 standardized slopes. This function also can be used for both unstandardized
 and standardized factor loadings in a confirmatory factor analysis model.
 This function will soon be replaced with size.ci.gen.
+
+For more details, see Section 2.28 of Bonett (2021, Volume 2)
 }
 \examples{
 size.ci.slope.gen(.05, 3.15, 50, 5)
@@ -36,4 +38,7 @@ size.ci.slope.gen(.05, 3.15, 50, 5)
 #          305
  
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

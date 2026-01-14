@@ -4,12 +4,18 @@ population means with desired confidence interval precision in a 2-group
 design. This function requires planning values for each mean and the sample
 size requirement is very sensitive to these planning values. Set the
 variance planning value to the largest value within a plausible range for a
-conservatively large sample size. Set R = 1 for equal sample sizes."><meta property="og:description" content="Computes the sample size in each group required to estimate a ratio of
+conservatively large sample size. Set R = 1 for equal sample sizes. For
+unequal sample sizes, this function assumes approximately equal population
+variances.
+For more details, see Section 2.13 of Bonett (2021, Volume 1)"><meta property="og:description" content="Computes the sample size in each group required to estimate a ratio of
 population means with desired confidence interval precision in a 2-group
 design. This function requires planning values for each mean and the sample
 size requirement is very sensitive to these planning values. Set the
 variance planning value to the largest value within a plausible range for a
-conservatively large sample size. Set R = 1 for equal sample sizes."></head><body>
+conservatively large sample size. Set R = 1 for equal sample sizes. For
+unequal sample sizes, this function assumes approximately equal population
+variances.
+For more details, see Section 2.13 of Bonett (2021, Volume 1)"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -17,7 +23,7 @@ conservatively large sample size. Set R = 1 for equal sample sizes."></head><bod
 
     <a class="navbar-brand me-2" href="../index.html">statpsych</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.8.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,7 +55,10 @@ population means with desired confidence interval precision in a 2-group
 design. This function requires planning values for each mean and the sample
 size requirement is very sensitive to these planning values. Set the
 variance planning value to the largest value within a plausible range for a
-conservatively large sample size. Set R = 1 for equal sample sizes.</p>
+conservatively large sample size. Set R = 1 for equal sample sizes. For
+unequal sample sizes, this function assumes approximately equal population
+variances.</p>
+<p>For more details, see Section 2.13 of Bonett (2021, Volume 1)</p>
     </div>
 
     <div class="section level2">
@@ -89,6 +98,11 @@ conservatively large sample size. Set R = 1 for equal sample sizes.</p>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>Returns the required sample size for each group</p>
     </div>
+    <div class="section level2">
+    <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
+    <p>Bonett DG (2021).
+<em>Statistical Methods for Psychologists https://dgbonett.sites.ucsc.edu/</em>.</p>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
@@ -120,7 +134,7 @@ conservatively large sample size. Set R = 1 for equal sample sizes.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

@@ -4,12 +4,14 @@ hypothesis that the sample data come from a normal distribution. If the
 p-value is small (e.g., less than .05) and excess kurtosis is positive,
 then the normality assumption can be rejected due to leptokurtosis. If the
 p-value is small (e.g., less than .05) and excess kurtosis is negative,
-then the normality assumption can be rejected due to platykurtosis."><meta property="og:description" content="Computes a Monte Carlo p-value (250,000 replications) for the null
+then the normality assumption can be rejected due to platykurtosis.
+For more details, see Section 1.23 of Bonett (2021, Volume 1)"><meta property="og:description" content="Computes a Monte Carlo p-value (250,000 replications) for the null
 hypothesis that the sample data come from a normal distribution. If the
 p-value is small (e.g., less than .05) and excess kurtosis is positive,
 then the normality assumption can be rejected due to leptokurtosis. If the
 p-value is small (e.g., less than .05) and excess kurtosis is negative,
-then the normality assumption can be rejected due to platykurtosis."></head><body>
+then the normality assumption can be rejected due to platykurtosis.
+For more details, see Section 1.23 of Bonett (2021, Volume 1)"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -17,7 +19,7 @@ then the normality assumption can be rejected due to platykurtosis."></head><bod
 
     <a class="navbar-brand me-2" href="../index.html">statpsych</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.8.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,6 +52,7 @@ p-value is small (e.g., less than .05) and excess kurtosis is positive,
 then the normality assumption can be rejected due to leptokurtosis. If the
 p-value is small (e.g., less than .05) and excess kurtosis is negative,
 then the normality assumption can be rejected due to platykurtosis.</p>
+<p>For more details, see Section 1.23 of Bonett (2021, Volume 1)</p>
     </div>
 
     <div class="section level2">
@@ -71,17 +74,22 @@ then the normality assumption can be rejected due to platykurtosis.</p>
 <li><p>Excess - estimate of excess kurtosis (kurtosis - 3)</p></li>
 <li><p>p - Monte Carlo two-sided p-value</p></li>
 </ul></div>
+    <div class="section level2">
+    <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
+    <p>Bonett DG (2021).
+<em>Statistical Methods for Psychologists https://dgbonett.sites.ucsc.edu/</em>.</p>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fl">20</span>, <span class="fl">15</span>, <span class="fl">10</span>, <span class="fl">10</span>, <span class="fl">60</span>, <span class="fl">20</span>, <span class="fl">25</span>, <span class="fl">20</span>, <span class="fl">30</span>, <span class="fl">10</span>, <span class="fl">5</span>, <span class="fl">50</span>, <span class="fl">40</span>, <span class="fl">95</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">test.kurtosis</span><span class="op">(</span><span class="va">y</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Kurtosis Excess      p</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    4.8149 1.8149 0.0398</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Kurtosis Excess    p</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     4.815  1.815 0.04</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Should return:</span></span></span>
-<span class="r-in"><span><span class="co"># Kurtosis  Excess      p</span></span></span>
-<span class="r-in"><span><span class="co">#   4.8149  1.8149 0.0385 </span></span></span>
+<span class="r-in"><span><span class="co"># Kurtosis  Excess     p</span></span></span>
+<span class="r-in"><span><span class="co">#   4.8149  1.8149 0.038 </span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
@@ -95,7 +103,7 @@ then the normality assumption can be rejected due to platykurtosis.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

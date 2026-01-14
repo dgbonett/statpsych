@@ -21,6 +21,8 @@ Computes the sample size required to estimate a population G-index of
 agreement for two dichotomous ratings with desired confidence interval
 precision. Set the G-index planning value to the smallest value within a
 plausible range for a conservatively large sample size.
+
+For more details, see Section 3.12 of Bonett (2021, Volume 3)
 }
 \examples{
 size.ci.agree(.05, .8, .2)
@@ -30,4 +32,7 @@ size.ci.agree(.05, .8, .2)
 #         139
 
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

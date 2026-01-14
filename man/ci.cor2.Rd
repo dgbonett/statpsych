@@ -30,16 +30,20 @@ Returns a 1-row matrix. The columns are:
 Computes a confidence interval for a difference in population Pearson
 correlations in a 2-group design. A bias adjustment is used to
 reduce the bias of each Fisher transformed correlation.
+
+For more details, see Section 2.17 of Bonett (2021, Volume 2)
 }
 \examples{
-ci.cor2(.05, .886, .802, 200, 200)
+ci.cor2(.05, .64, .31, 200, 200)
 
 # Should return:
-# Estimate         SE         LL        UL
-#    0.084 0.02967934 0.02803246 0.1463609
+# Estimate      SE      LL     UL
+#     0.33 0.07692  0.1797 0.4814
  
 
 }
 \references{
 \insertRef{Zou2007}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

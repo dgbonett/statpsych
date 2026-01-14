@@ -21,13 +21,18 @@ Computes an upper confidence limit for a population variance using an
 estimated variance from a sample of size n in a prior study. The upper limit
 can be used as a variance planning value in sample size functions for
 desired power that require a planning value of the population variance.
+
+For more details, see Section 1.31 of Bonett (2021, Volume 1)
 }
 \examples{
-ci.var.upper(.25, 15, 60)
+ci.var.upper(.10, 1.45, 100)
 
 # Should return:
 #       UL
-# 17.23264
+# 1.762447
  
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

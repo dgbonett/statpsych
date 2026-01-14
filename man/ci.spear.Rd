@@ -24,7 +24,13 @@ Returns a 1-row matrix. The columns are:
 }
 \description{
 Computes a Fisher confidence interval for a population Spearman correlation.
-This function is not appropropriate for ordered categorical variables.
+Unlike the confidence interval for a Pearson correlation, this function does
+not assume bivariate normality. Unlike the Pearson correlation which
+describes a linear bivariate relation, the Spearman correlation describes a
+monotonic bivariate relation. This function is not appropriate for
+ordered categorical variables.
+
+For more details, see Section 1.32 of Bonett (2021, Volume 2)
 }
 \examples{
 y <- c(21, 4, 9, 12, 35, 18, 10, 22, 24, 1, 6, 8, 13, 16, 19)
@@ -32,11 +38,13 @@ x <- c(67, 28, 30, 28, 52, 40, 25, 37, 44, 10, 14, 20, 28, 40, 51)
 ci.spear(.05, y, x)
 
 # Should return:
-#  Estimate         SE        LL        UL
-# 0.8699639 0.08241326 0.5840951 0.9638297
+# Estimate      SE     LL     UL
+#     0.87 0.08241 0.5841 0.9638
  
 
 }
 \references{
 \insertRef{Bonett2000}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

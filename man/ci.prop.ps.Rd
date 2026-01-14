@@ -31,6 +31,8 @@ Computes an adjusted Wald confidence interval for a difference of
 population proportions in a paired-samples design. This function requires
 the frequency counts from a 2 x 2 contingency table for two repeated
 dichotomous measurements.
+
+For more details, see Section 3.2 of Bonett (2021, Volume 3)
 }
 \examples{
 ci.prop.ps(.05, 12, 4, 26, 6)
@@ -43,4 +45,6 @@ ci.prop.ps(.05, 12, 4, 26, 6)
 }
 \references{
 \insertRef{Bonett2012}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

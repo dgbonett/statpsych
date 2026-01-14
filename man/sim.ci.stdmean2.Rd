@@ -43,9 +43,9 @@ Returns a 1-row matrix. The columns are:
 \description{
 Performs a computer simulation of confidence interval performance for
 two types of standardized mean differences in a 2-group design (see
-ci.stdmean2). Sample data for each group can be generated from five
-different population distributions. All distributions are scaled to have
-a standard deviation of 1.0 for group 1.
+\link[statpsych]{ci.stdmean2}). Sample data for each group can be
+generated from five different population distributions. All distributions
+are scaled to have a standard deviation of 1.0 for group 1.
 }
 \examples{
 sim.ci.stdmean2(.05, 20, 20, 1.5, 3, 4, .75, 5000)

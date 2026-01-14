@@ -29,6 +29,8 @@ Returns a 1-row matrix. The columns are:
 Computes a confidence interval for a ratio of population proportions in a
 paired-samples design. This function requires the frequency counts from
 a 2 x 2 contingency table for two repeated dichotomous measurements.
+
+For more details, see Section 3.2 of Bonett (2021, Volume 3)
 }
 \examples{
 ci.ratio.prop.ps(.05, 12, 4, 26, 6)
@@ -41,4 +43,6 @@ ci.ratio.prop.ps(.05, 12, 4, 26, 6)
 }
 \references{
 \insertRef{Bonett2006a}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

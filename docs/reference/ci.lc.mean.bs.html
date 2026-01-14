@@ -3,11 +3,13 @@
 of means in a between-subjects design. This function computes both unequal
 variance and equal variance confidence intervals and test statistics. A
 Satterthwaite adjustment to the degrees of freedom is used with the
-unequal variance method."><meta property="og:description" content="Computes a test statistic and confidence interval for a linear contrast
+unequal variance method.
+For more details, see Section 3.3 of Bonett (2021, Volume 1)"><meta property="og:description" content="Computes a test statistic and confidence interval for a linear contrast
 of means in a between-subjects design. This function computes both unequal
 variance and equal variance confidence intervals and test statistics. A
 Satterthwaite adjustment to the degrees of freedom is used with the
-unequal variance method."></head><body>
+unequal variance method.
+For more details, see Section 3.3 of Bonett (2021, Volume 1)"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -15,7 +17,7 @@ unequal variance method."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">statpsych</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.8.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,6 +49,7 @@ of means in a between-subjects design. This function computes both unequal
 variance and equal variance confidence intervals and test statistics. A
 Satterthwaite adjustment to the degrees of freedom is used with the
 unequal variance method.</p>
+<p>For more details, see Section 3.3 of Bonett (2021, Volume 1)</p>
     </div>
 
     <div class="section level2">
@@ -93,29 +96,45 @@ unequal variance method.</p>
     <p>Snedecor GW, Cochran WG (1989).
 <em>Statistical Methods</em>, 8th edition.
 ISU University Pres, Ames, Iowa.</p>
+<p>Bonett DG (2021).
+<em>Statistical Methods for Psychologists https://dgbonett.sites.ucsc.edu/</em>.</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">33.5</span>, <span class="fl">37.9</span>, <span class="fl">38.0</span>, <span class="fl">44.1</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">sd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3.84</span>, <span class="fl">3.84</span>, <span class="fl">3.65</span>, <span class="fl">4.98</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">10</span>,<span class="fl">10</span>,<span class="fl">10</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">v</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.5</span>, <span class="fl">.5</span>, <span class="op">-</span><span class="fl">.5</span>, <span class="op">-</span><span class="fl">.5</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">24.9</span>, <span class="fl">23.1</span>, <span class="fl">16.4</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">sd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5.21</span>, <span class="fl">4.67</span>, <span class="fl">4.98</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fl">30</span>, <span class="fl">30</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">v</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.5</span>, <span class="fl">.5</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">ci.lc.mean.bs</span><span class="op">(</span><span class="fl">.05</span>, <span class="va">m</span>, <span class="va">sd</span>, <span class="va">n</span>, <span class="va">v</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                              Estimate       SE         t       df            p</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Equal Variances Assumed:        -5.35 1.300136 -4.114955 36.00000 0.0002152581</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Equal Variances Not Assumed:    -5.35 1.300136 -4.114955 33.52169 0.0002372436</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                     LL        UL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Equal Variances Assumed:     -7.986797 -2.713203</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Equal Variances Not Assumed: -7.993583 -2.706417</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                              Estimate       SE      t    df p       LL       UL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Equal Variances Assumed:          7.6 1.108703 6.8549 87.00 0 5.396332 9.803668</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Equal Variances Not Assumed:      7.6 1.111135 6.8399 57.59 0 5.375484 9.824516</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Should return:</span></span></span>
-<span class="r-in"><span><span class="co">#                              Estimate       SE         t       df </span></span></span>
-<span class="r-in"><span><span class="co"># Equal Variances Assumed:        -5.35 1.300136 -4.114955 36.00000 </span></span></span>
-<span class="r-in"><span><span class="co"># Equal Variances Not Assumed:    -5.35 1.300136 -4.114955 33.52169 </span></span></span>
-<span class="r-in"><span><span class="co">#                                         p         LL        UL</span></span></span>
-<span class="r-in"><span><span class="co"># Equal Variances Assumed:     0.0002152581  -7.986797 -2.713203</span></span></span>
-<span class="r-in"><span><span class="co"># Equal Variances Not Assumed: 0.0002372436  -7.993583 -2.706417</span></span></span>
+<span class="r-in"><span><span class="co">#                              Estimate       SE      t    df p       LL       UL</span></span></span>
+<span class="r-in"><span><span class="co"># Equal Variances Assumed:          7.6 1.108703 6.8549 87.00 0 5.396332 9.803668</span></span></span>
+<span class="r-in"><span><span class="co"># Equal Variances Not Assumed:      7.6 1.111135 6.8399 57.59 0 5.375484 9.824516</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">33.5</span>, <span class="fl">37.9</span>, <span class="fl">38.0</span>, <span class="fl">44.1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">sd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3.84</span>, <span class="fl">3.84</span>, <span class="fl">3.65</span>, <span class="fl">4.98</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">10</span>, <span class="fl">10</span>, <span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">v</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.5</span>, <span class="fl">.5</span>, <span class="op">-</span><span class="fl">.5</span>, <span class="op">-</span><span class="fl">.5</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">ci.lc.mean.bs</span><span class="op">(</span><span class="fl">.05</span>, <span class="va">m</span>, <span class="va">sd</span>, <span class="va">n</span>, <span class="va">v</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                              Estimate       SE      t    df       p        LL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Equal Variances Assumed:        -5.35 1.300136 -4.115 36.00 0.00022 -7.986797</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Equal Variances Not Assumed:    -5.35 1.300136 -4.115 33.52 0.00024 -7.993588</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                     UL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Equal Variances Assumed:     -2.713203</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Equal Variances Not Assumed: -2.706412</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Should return:</span></span></span>
+<span class="r-in"><span><span class="co">#                              Estimate       SE      t    df       p </span></span></span>
+<span class="r-in"><span><span class="co"># Equal Variances Assumed:        -5.35 1.300136 -4.115 36.00 0.00022 </span></span></span>
+<span class="r-in"><span><span class="co"># Equal Variances Not Assumed:    -5.35 1.300136 -4.115 33.52 0.00024 </span></span></span>
+<span class="r-in"><span><span class="co">#                                     LL        UL</span></span></span>
+<span class="r-in"><span><span class="co"># Equal Variances Assumed:     -7.986797 -2.713203</span></span></span>
+<span class="r-in"><span><span class="co"># Equal Variances Not Assumed: -7.993583 -2.706417</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
@@ -129,7 +148,7 @@ ISU University Pres, Ames, Iowa.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

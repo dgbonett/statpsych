@@ -40,6 +40,8 @@ sample. PPV and NPV can be expressed as a function of proportion ratios
 and the known population prevalence rate (the population proportion who
 would "pass"). The confidence intervals for PPV and NPV are based on the
 Price-Bonett adjusted Wald confidence interval for a proportion ratio.
+
+For more details, see Section 3.6 of Bonett (2021, Volume 3)
 }
 \examples{
 ci.pv(.05, 89, 5, 100, 100, .16)
@@ -53,4 +55,6 @@ ci.pv(.05, 89, 5, 100, 100, .16)
 }
 \references{
 \insertRef{Price2008}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

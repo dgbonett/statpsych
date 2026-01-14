@@ -33,16 +33,20 @@ contingency table for two dichotomous variables. This measure of
 association assumes both of the dichotomous variables are artificially
 dichotomous. An approximate standard error is recovered from the
 confidence interval.
+
+For more details, see Section 3.4 of Bonett (2021, Volume 3)
 }
 \examples{
-ci.tetra(.05, 46, 15, 54, 85)
+ci.tetra(.05, 86, 16, 7, 93)
 
 # Should return:
-#  Estimate         SE        LL        UL
-# 0.5135167 0.09301703 0.3102345 0.6748546
+# Estimate     SE    LL    UL
+#    0.938 0.0268 0.868 0.973
 
 
 }
 \references{
+\insertRef{Bonett2021}{statpsych}
+
 \insertRef{Bonett2005}{statpsych}
 }

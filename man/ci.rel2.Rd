@@ -34,16 +34,20 @@ used with any type of reliability coefficient (e.g., Cronbach alpha,
 McDonald omega, intraclass reliability). The function requires a
 point estimate and a 100(1 - alpha)\% confidence interval for each
 reliability as input.
+
+For more details, see Section 2.15 of Bonett (2021, Volume 4)
 }
 \examples{
 ci.rel2(.4, .35, .47, .2, .1, .32)
 
 # Should return:
-# Estimate   LL        UL
-#      0.2 0.07 0.3220656
+# Estimate   LL     UL
+#      0.2 0.07 0.3221
  
 
 }
 \references{
+\insertRef{Bonett2021}{statpsych}
+
 \insertRef{Bonett2015}{statpsych}
 }

@@ -34,16 +34,20 @@ distribution are also reported. For a noninformative prior, set the prior
 mean to .5 and the prior standard deviation to 1/sqrt(12) (which
 corresponds to a Beta(1,1) distribution). The prior variance must be
 less than m(1 - m) where m is the prior mean.
+
+For more details, see Section 1.18 of Bonett (2021, Volume 3)
 }
 \examples{
-ci.bayes.prop(.05, .4, .1, 12, 100)
+ci.bayes.prop(.05, .25, .1, 120, 300)
 
 # Should return:
-# Posterior mean Posterior SD       LL        UL
-#      0.1723577   0.03419454 0.1111747 0.2436185
+# Posterior mean Posterior SD        LL        UL
+#      0.3916208   0.02742595 0.3387206 0.4458133
 
 
 }
 \references{
 \insertRef{Gelman2004}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

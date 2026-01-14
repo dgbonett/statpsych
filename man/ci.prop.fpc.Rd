@@ -29,13 +29,18 @@ Returns a 1-row matrix. The columns are:
 Computes an adjusted Wald interval for a population proportion with a
 finite population correction (fpc). This confidence interval is useful
 when the sample size is not a small fraction of the population size.
+
+For more details, see Section 1.20 of Bonett (2021, Volume 3)
 }
 \examples{
-ci.prop.fpc(.05, 12, 100, 400)
+ci.prop.fpc(.05, 61, 75, 415)
 
 # Should return:
-#   Estimate         SE         LL        UL
-#  0.1346154  0.0290208 0.07773565 0.1914951
+#   Estimate         SE       LL        UL
+#  0.7974684 0.04097594 0.717157 0.8777797
 
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

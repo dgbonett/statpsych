@@ -25,8 +25,10 @@ Returns a 1-row matrix. The columns are:
 }
 \description{
 Computes a distribution-free confidence interval for a ratio of population
-medians of ratio-scale measurements in a 2-group design. Tied scores are
-within each group assumed to be rare.
+medians of ratio-scale measurements in a 2-group design. Tied scores
+within each group are assumed to be rare.
+
+For more details, see Section 2.12 of Bonett (2021, Volume 1)
 }
 \examples{
 y2 <- c(32, 39, 26, 35, 43, 27, 40, 37, 34, 29, 49, 42, 40)
@@ -41,4 +43,6 @@ ci.ratio.median2(.05, y1, y2)
 }
 \references{
 \insertRef{Bonett2020b}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

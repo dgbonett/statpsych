@@ -39,20 +39,23 @@ population 2-group mean difference using the estimated means, estimated
 standard deviations, and sample sizes. Also computes equal variance and
 unequal variance independent-samples t-tests. Use the t.test function for
 raw data input.
+
+For more details, see Section 2.3 of Bonett (2021, Volume 1)
 }
 \examples{
-ci.mean2(.05, 15.4, 10.3, 2.67, 2.15, 30, 20)
-
+ci.mean2(.05, 19.4, 11.3, 2.70, 2.10, 40, 40)
 # Should return:
-#                              Estimate       SE        t      df      
-# Equal Variances Assumed:          5.1 1.602248 3.183029 48.0000 
-# Equal Variances Not Assumed:      5.1 1.406801 3.625247 44.1137 
-#                                          p       LL       UL
-# Equal Variances Assumed:      0.0025578586 1.878465 8.321535
-# Equal Variances Not Assumed:  0.0007438065 2.264986 7.935014
+#                              Estimate        SE       t    df p
+# Equal Variances Assumed:          8.1 0.5408327 14.9769 78.00 0
+# Equal Variances Not Assumed:      8.1 0.5408327 14.9769 73.54 0
+#                                    LL       UL
+# Equal Variances Assumed:     7.023285 9.176715
+# Equal Variances Not Assumed: 7.022256 9.177744
 
 
 }
 \references{
 \insertRef{Snedecor1980}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

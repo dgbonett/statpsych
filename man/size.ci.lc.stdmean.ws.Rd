@@ -29,18 +29,22 @@ within-subjects design. For a conservatively large sample size, set the
 standardized linear contrast of means planning value to the largest value
 within a plausible range, and set the Pearson correlation planning value
 to the smallest value within a plausible range.
+
+For more details, see Section 4.26 of Bonett (2021, Volume 1)
 }
 \examples{
-q <- c(.5, .5, -.5, -.5)
-size.ci.lc.stdmean.ws(.05, 1, .7, .6, q)
+q <- c(1/3, 1/3, 1/3, -1)
+size.ci.lc.stdmean.ws(.05, .5, .7, .4, q)
 
 # Should return:
 #                            Sample size
-# Unweighted standardizer:            26
-# Single level standardizer:          35
+# Unweighted standardizer:            46
+# Single level standardizer:          51
  
 
 }
 \references{
 \insertRef{Bonett2009}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

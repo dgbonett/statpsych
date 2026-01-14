@@ -32,16 +32,20 @@ predictor variable of interest plus all control variables. This
 function computes a modified Aloe-Becker confidence interval that uses
 n - 3 rather than n in the standard error and also uses a Fisher
 transformation of the semipartial correlation.
+
+For more details, see Section 2.7 of Bonett (2021, Volume 2)
 }
 \examples{
-ci.spcor(.05, .582, .699, 20)
+ci.spcor(.05, -.355, .230, 236)
 
 # Should return:
-# Estimate        SE        LL        UL
-#    0.582 0.1374298 0.2525662 0.7905182
+# Estimate      SE      LL      UL
+#   -0.355 0.05426 -0.4565 -0.2444
  
 
 }
 \references{
+\insertRef{Bonett2021}{statpsych}
+
 \insertRef{Aloe2012}{statpsych}
 }

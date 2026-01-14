@@ -35,6 +35,8 @@ confidence intervals for all pairwise comparisons of population means
 using estimated means, estimated standard deviations, and samples sizes as
 input. A Satterthwaite adjustment to the degrees of freedom is used to
 improve the accuracy of the confidence intervals.
+
+For more details, see Section 3.1 of Bonett (2021, Volume 1)
 }
 \examples{
 m <- c(12.86, 17.57, 26.29, 30.21)
@@ -43,16 +45,18 @@ n <- c(20, 20, 20, 20)
 ci.tukey(.05, m, sd, n)
 
 # Should return:
-#     Estimate       SE          t       df           p        LL         UL
-# 1 2    -4.71 4.139530 -1.1378102 37.99200 0.668806358 -15.83085  6.4108517
-# 1 3   -13.43 4.427673 -3.0331960 37.51894 0.021765570 -25.33172 -1.5282764
-# 1 4   -17.35 4.490074 -3.8640790 37.29278 0.002333937 -29.42281 -5.2771918
-# 2 3    -8.72 4.399497 -1.9820446 37.39179 0.212906199 -20.54783  3.1078269
-# 2 4   -12.64 4.462292 -2.8326248 37.14275 0.035716267 -24.64034 -0.6396589
-# 3 4    -3.92 4.730817 -0.8286096 37.97652 0.840551420 -16.62958  8.7895768
+#     Estimate       SE       t    df       p        LL         UL
+# 1 2    -4.71 4.139530 -1.1378 37.99 0.66881 -15.83085  6.4108517
+# 1 3   -13.43 4.427673 -3.0332 37.52 0.02177 -25.33172 -1.5282764
+# 1 4   -17.35 4.490074 -3.8641 37.29 0.00233 -29.42281 -5.2771918
+# 2 3    -8.72 4.399497 -1.9820 37.39 0.21291 -20.54783  3.1078269
+# 2 4   -12.64 4.462292 -2.8326 37.14 0.03572 -24.64034 -0.6396589
+# 3 4    -3.92 4.730817 -0.8286 37.98 0.84055 -16.62958  8.7895768
 
 
 }
 \references{
 \insertRef{Games1976}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

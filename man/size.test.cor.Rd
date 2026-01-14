@@ -23,13 +23,24 @@ Returns the required sample size
 \description{
 Computes the sample size required to test a population Pearson or a partial
 correlation with desired power. Set s = 0 for a Pearson correlation.
+
+For more details, see Section 1.25 of Bonett (2021, Volume 2)
 }
 \examples{
-size.test.cor(.05, .9, .45, 0, 0)
+size.test.cor(.05, .95, -.50, 0, 0)
 
 # Should return:
 # Sample size
-#          48
+#          47
+
+size.test.cor(.05, .90, .4, 2, 0)
+
+# Should return:
+# Sample size
+#          64
  
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

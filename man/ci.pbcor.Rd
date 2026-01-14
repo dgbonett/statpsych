@@ -37,17 +37,21 @@ and is appropriate for nonexperimental designs with simple random sampling
 (but not stratified random sampling). The other type uses an unweighted
 average of the group variances and is appropriate for experimental designs.
 Equality of variances is not assumed for either type.
+
+For more details, see Section 1.18 of Bonett (2021, Volume 2)
 }
 \examples{
 ci.pbcor(.05, 28.32, 21.48, 3.81, 3.09, 40, 40)
 
 # Should return:
-#              Estimate         SE        LL        UL
-# Weighted:   0.7065799 0.04890959 0.5885458 0.7854471
-# Unweighted: 0.7020871 0.05018596 0.5808366 0.7828948
+#             Estimate      SE     LL     UL
+# Weighted:     0.7066 0.04891 0.5885 0.7854
+# Unweighted:   0.7021 0.05019 0.5808 0.7829
  
 
 }
 \references{
 \insertRef{Bonett2020a}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

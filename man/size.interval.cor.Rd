@@ -27,13 +27,18 @@ interval midpoint is equal to zero. This function can be used to plan a study
 where the goal is to show that the population correlation is small. Set s = 0
 for a Pearson correlation. The correlation planning value must be a value
 within the hypothesized interval.
+
+For more details, see Section 1.25 of Bonett (2021, Volume 2)
 }
 \examples{
-size.interval.cor(.05, .8, .1, 0, .25)
+size.interval.cor(.05, .9, .1, 0, .3)
 
 # Should return:
 # Sample size
-#         360
+#         251
  
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

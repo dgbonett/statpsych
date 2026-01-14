@@ -27,6 +27,8 @@ divided by the median. The coefficient of dispersion assumes ratio-scale
 scores and is a robust alternative to the coefficient of variation
 (see \link[statpsych]{ci.cv}). An approximate standard error is
 recovered from the confidence interval.
+
+For more details, see Section 1.27 of Bonett (2021, Volume 1)
 }
 \examples{
 y <- c(30, 20, 15, 10, 10, 60, 20, 25, 20, 30, 10, 5, 50, 40,
@@ -41,4 +43,6 @@ ci.cod(.05, y)
 }
 \references{
 \insertRef{Bonett2006}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

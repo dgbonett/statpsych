@@ -30,6 +30,8 @@ Computes a distribution-free confidence interval for a linear contrast of
 medians in a between-subjects design using estimated medians and their
 standard errors. The sample median and standard error for each group can be
 computed using the \link[statpsych]{ci.median} function.
+
+For more details, see Section 3.21 of Bonett (2021, Volume 1)
 }
 \examples{
 m <- c(46.13, 29.19, 30.32, 49.15)
@@ -45,4 +47,6 @@ ci.lc.median.bs(.05, m, se, v)
 }
 \references{
 \insertRef{Bonett2002}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

@@ -31,16 +31,20 @@ Computes a Fisher confidence interval for a population phi correlation.
 This function requires the frequency counts from a 2 x 2 contingency table
 for two dichotomous variables. This measure of association is usually most
 appropriate when both dichotomous variables are naturally dichotomous.
+
+For more details, see Section 3.4 of Bonett (2021, Volume 3)
 }
 \examples{
 ci.phi(.05, 229, 28, 96, 24)
 
 # Should return:
-#  Estimate         SE         LL        UL
-#  0.1229976 0.05477117 0.01462398 0.2285149
+#  Estimate     SE    LL    UL
+#     0.123 0.0548 0.015 0.229
 
 
 }
 \references{
 \insertRef{Bishop1975}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

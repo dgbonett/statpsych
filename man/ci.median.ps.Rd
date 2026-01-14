@@ -32,6 +32,8 @@ population medians in a paired-samples design. This function also computes
 the standard error of each median and the covariance between the two
 estimated medians. Tied scores within each measurement are assumed to be
 rare.
+
+For more details, see Section 4.23 of Bonett (2021, Volume 1)
 }
 \examples{
 y1 <- c(21.1, 4.9, 9.2, 12.4, 35.8, 18.1, 10.7, 22.9, 24.0, 1.2, 6.1, 8.3, 13.1, 16.2)
@@ -48,4 +50,6 @@ ci.median.ps(.05, y1, y2)
 }
 \references{
 \insertRef{Bonett2020}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

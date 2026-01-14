@@ -30,19 +30,30 @@ Returns a 1-row matrix. The columns are:
 \description{
 Computes an adjusted Wald confidence interval for a linear contrast of
 population proportions in a between-subjects design.
+
+For more details, see Section 2.8 of Bonett (2021, Volume 3)
 }
 \examples{
 f <- c(26, 24, 38)
 n <- c(60, 60, 60)
-v <- c(-.5, -.5, 1)
-ci.lc.prop.bs(.05, f, n, v)
+v1 <- c(-.5, -.5, 1)
+ci.lc.prop.bs(.05/2, f, n, v1)
 
 # Should return:
-#  Estimate         SE        z           p         LL        UL
-# 0.2119565 0.07602892 2.787841 0.005306059 0.06294259 0.3609705
+#  Estimate         SE      z       p        LL        UL
+# 0.2119565 0.07602892 2.7878 0.00531 0.0415451 0.3823679
+
+v2 <- c(1, -1, 0)
+ci.lc.prop.bs(.05/2, f, n, v2)
+
+# Should return:
+#   Estimate         SE       z       p         LL        UL
+# 0.03225806 0.08857951 0.36417 0.71573 -0.1662843 0.2308004
 
 
 }
 \references{
 \insertRef{Price2004}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

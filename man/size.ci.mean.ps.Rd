@@ -25,13 +25,18 @@ design. Set the Pearson correlation planning value to the smallest value
 within a plausible range for a conservatively large sample size. Set the
 variance planning value to the largest value within a plausible range for
 a conservatively large sample size.
+
+For more details, see Section 4.26 of Bonett (2021, Volume 1)
 }
 \examples{
-size.ci.mean.ps(.05, 265, .8, 10)
+size.ci.mean.ps(.05, 5.0, .5, 2.0)
 
 # Should return:
 # Sample size
-#          19
+#          22
  
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

@@ -29,16 +29,20 @@ recovered from the confidence interval. With inverse sampling, the number
 of participants who have the attribute (f) is predetermined and sampling
 continues until f attains its prespecified value. With inverse sampling,
 the sample size (n) will not be known in advance.
+
+For more details, see Section 1.19 of Bonett (2021, Volume 3)
 }
 \examples{
-ci.prop.inv(.05, 5, 67)
+ci.prop.inv(.05, 10, 87)
 
 # Should return:
-#   Estimate         SE         LL        UL
-# 0.07462687 0.03145284 0.02467471 0.1479676
+#  Estimate         SE         LL        UL
+# 0.1149425 0.03389574 0.05651668 0.1893855
 
 
 }
 \references{
 \insertRef{Zou2010}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

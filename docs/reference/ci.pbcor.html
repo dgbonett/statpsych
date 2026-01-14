@@ -4,12 +4,14 @@ correlations. One type uses a weighted average of the group variances
 and is appropriate for nonexperimental designs with simple random sampling
 (but not stratified random sampling). The other type uses an unweighted
 average of the group variances and is appropriate for experimental designs.
-Equality of variances is not assumed for either type."><meta property="og:description" content="Computes confidence intervals for two types of population point-biserial
+Equality of variances is not assumed for either type.
+For more details, see Section 1.18 of Bonett (2021, Volume 2)"><meta property="og:description" content="Computes confidence intervals for two types of population point-biserial
 correlations. One type uses a weighted average of the group variances
 and is appropriate for nonexperimental designs with simple random sampling
 (but not stratified random sampling). The other type uses an unweighted
 average of the group variances and is appropriate for experimental designs.
-Equality of variances is not assumed for either type."></head><body>
+Equality of variances is not assumed for either type.
+For more details, see Section 1.18 of Bonett (2021, Volume 2)"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -17,7 +19,7 @@ Equality of variances is not assumed for either type."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">statpsych</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.8.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,6 +52,7 @@ and is appropriate for nonexperimental designs with simple random sampling
 (but not stratified random sampling). The other type uses an unweighted
 average of the group variances and is appropriate for experimental designs.
 Equality of variances is not assumed for either type.</p>
+<p>For more details, see Section 1.18 of Bonett (2021, Volume 2)</p>
     </div>
 
     <div class="section level2">
@@ -103,19 +106,21 @@ Equality of variances is not assumed for either type.</p>
 <em>British Journal of Mathematical and Statistical Psychology</em>, <b>73</b>(S1), 113–144.
 ISSN 0007-1102, <a href="https://doi.org/10.1111/bmsp.12189" class="external-link">doi:10.1111/bmsp.12189</a>
 .</p>
+<p>Bonett DG (2021).
+<em>Statistical Methods for Psychologists https://dgbonett.sites.ucsc.edu/</em>.</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">ci.pbcor</span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">28.32</span>, <span class="fl">21.48</span>, <span class="fl">3.81</span>, <span class="fl">3.09</span>, <span class="fl">40</span>, <span class="fl">40</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>              Estimate         SE        LL        UL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Weighted:   0.7065799 0.04890959 0.5885458 0.7854471</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Unweighted: 0.7020871 0.05018596 0.5808366 0.7828948</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             Estimate      SE     LL     UL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Weighted:     0.7066 0.04891 0.5885 0.7854</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Unweighted:   0.7021 0.05019 0.5808 0.7829</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Should return:</span></span></span>
-<span class="r-in"><span><span class="co">#              Estimate         SE        LL        UL</span></span></span>
-<span class="r-in"><span><span class="co"># Weighted:   0.7065799 0.04890959 0.5885458 0.7854471</span></span></span>
-<span class="r-in"><span><span class="co"># Unweighted: 0.7020871 0.05018596 0.5808366 0.7828948</span></span></span>
+<span class="r-in"><span><span class="co">#             Estimate      SE     LL     UL</span></span></span>
+<span class="r-in"><span><span class="co"># Weighted:     0.7066 0.04891 0.5885 0.7854</span></span></span>
+<span class="r-in"><span><span class="co"># Unweighted:   0.7021 0.05019 0.5808 0.7829</span></span></span>
 <span class="r-in"><span> </span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
@@ -129,7 +134,7 @@ ISSN 0007-1102, <a href="https://doi.org/10.1111/bmsp.12189" class="external-lin
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

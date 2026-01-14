@@ -24,6 +24,8 @@ Returns a 1-row matrix. The columns are:
 Computes a confidence interval for a population mean absolute deviation
 from the median (MAD). The MAD is a robust alternative to the standard
 deviation.
+
+For more details, see Section 1.26 of Bonett (2021, Volume 1)
 }
 \examples{
 y <- c(30, 20, 15, 10, 10, 60, 20, 25, 20, 30, 10, 5, 50, 40, 
@@ -38,4 +40,6 @@ ci.mad(.05, y)
 }
 \references{
 \insertRef{Bonett2003b}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

@@ -28,15 +28,20 @@ contrast of proportions) could be set equal to the linear contrast of
 proportion planning values or it could be set equal to a minimally interesting
 effect size. For a conservatively large sample size, set the proportion planning
 values to .5 and set the effect size to a minimally interesting value.
+
+For more details, see Section 2.23 of Bonett (2021, Volume 3)
 }
 \examples{
-p <- c(.25, .30, .50, .50)
-v <- c(.5, .5, -.5, -.5)
+p <- c(.35, .35, .20)
+v <- c(.5, .5, -1)
 size.test.lc.prop.bs(.05, .9, p, .15, v)
 
 # Should return:
 # Sample size per group
-#                   105
+#                   128
 
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

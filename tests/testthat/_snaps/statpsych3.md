@@ -39,26 +39,26 @@
     Code
       res
     Output
-        Estimate         SE        z           p         LL        UL
-       0.2119565 0.07602892 2.787841 0.005306059 0.06294259 0.3609705
+        Estimate         SE      z       p         LL        UL
+       0.2119565 0.07602892 2.7878 0.00531 0.06294259 0.3609705
 
 # ci.pairs.prop.bs returns valid matrix
 
     Code
       res
     Output
-             Estimate         SE         z            p          LL          UL
-       1 2 -0.2475248 0.04482323 -5.522243 3.346989e-08 -0.35483065 -0.14021885
-       1 3 -0.1039604 0.04833562 -2.150803 3.149174e-02 -0.21967489  0.01175409
-       2 3  0.1435644 0.04358401  3.293968 9.878366e-04  0.03922511  0.24790360
+             Estimate         SE       z       p          LL          UL
+       1 2 -0.2475248 0.04482323 -5.5222 0.00000 -0.35483065 -0.14021885
+       1 3 -0.1039604 0.04833562 -2.1508 0.03149 -0.21967489  0.01175409
+       2 3  0.1435644 0.04358401  3.2940 0.00099  0.03922511  0.24790360
 
 # ci.slope.prop.bs returns valid matrix
 
     Code
       res
     Output
-          Estimate          SE        z           p          LL         UL
-       0.007542293 0.002016793 3.739746 0.000184206 0.003589452 0.01149513
+          Estimate          SE      z       p          LL         UL
+       0.007542293 0.002016793 3.7397 0.00018 0.003589452 0.01149513
 
 # ci.prop.ps returns valid matrix
 
@@ -81,12 +81,9 @@
     Code
       res
     Output
-                        Estimate exp(Estimate)        z           p       LL
-      At low moderator    0.9328      2.541616 2.269824 0.023218266 1.135802
-      At high moderator   1.7644      5.838068 2.906507 0.003654887 1.776421
-                               UL
-      At low moderator   5.687444
-      At high moderator 19.186357
+                        Estimate exp(Estimate)      z       p       LL        UL
+      At low moderator    0.9328      2.541616 2.2698 0.02322 1.135802  5.687444
+      At high moderator   1.7644      5.838068 2.9065 0.00365 1.776421 19.186357
 
 # ci.oddsratio returns valid matrix
 
@@ -101,92 +98,92 @@
     Code
       res
     Output
-           Estimate         SE         LL        UL
-      Q:  0.3430670 0.13280379 0.06247099 0.5734020
-      Y:  0.1769015 0.07290438 0.03126603 0.3151817
-      H:  0.2619244 0.10514465 0.04687994 0.4537659
-      Y*: 0.1311480 0.05457236 0.02307188 0.2361941
+          Estimate     SE    LL    UL
+      Q:     0.343 0.1328 0.062 0.573
+      Y:     0.177 0.0729 0.031 0.315
+      H:     0.262 0.1051 0.047 0.454
+      Y*:    0.131 0.0546 0.023 0.236
 
 # ci.phi returns valid matrix
 
     Code
       res
     Output
-        Estimate         SE         LL        UL
-       0.1229976 0.05477117 0.01462398 0.2285149
+       Estimate     SE    LL    UL
+          0.123 0.0548 0.015 0.229
 
 # ci.biphi returns valid matrix
 
     Code
       res
     Output
-        Estimate         SE        LL       UL
-       0.4145733 0.07551281 0.2508866 0.546141
+       Estimate     SE    LL    UL
+          0.415 0.0755 0.251 0.546
 
 # ci.tetra returns valid matrix
 
     Code
       res
     Output
-        Estimate         SE        LL        UL
-       0.5135167 0.09301703 0.3102345 0.6748546
+       Estimate    SE   LL    UL
+          0.514 0.093 0.31 0.675
 
 # ci.kappa returns valid matrix
 
     Code
       res
     Output
-                    Estimate         SE        LL        UL
-      IC kappa:    0.6736597 0.07479965 0.5270551 0.8202643
-      Cohen kappa: 0.6756757 0.07344761 0.5317210 0.8196303
+                   Estimate     SE    LL    UL
+      IC kappa:       0.674 0.0748 0.527 0.821
+      Cohen kappa:    0.676 0.0734 0.532 0.820
 
 # ci.agree returns valid matrix
 
     Code
       res
     Output
-        Estimate         SE        LL        UL
-       0.7333333 0.05333333 0.6132949 0.8226025
+       Estimate      SE     LL     UL
+         0.7333 0.05333 0.6133 0.8226
 
 # ci.popsize returns valid matrix
 
     Code
       res
     Output
-       Estimate       SE   LL   UL
-           2908 49.49071 2818 3012
+       Estimate    SE   LL   UL
+           2908 49.49 2818 3012
 
 # test.prop returns valid matrix
 
     Code
       res
     Output
-       Estimate        z          p
-           0.45 2.515576 0.01188379
+       Estimate      z       p
+        0.01188 2.5156 0.01188
 
 # test.prop2 returns valid matrix
 
     Code
       res
     Output
-       Estimate        z           p
-           -0.3 2.899726 0.003734895
+       Estimate      z       p
+           -0.3 2.8997 0.00373
 
 # test.prop.bs returns valid matrix
 
     Code
       res
     Output
-       Chi-square df            p
-         17.41071  2 0.0001656958
+       Chi-square df       p
+          17.4107  2 0.00017
 
 # test.prop.ps returns valid matrix
 
     Code
       res
     Output
-       Estimate        z          p
-           0.07 2.108346 0.03500109
+       Estimate      z     p
+           0.07 2.1083 0.035
 
 # size.ci.prop returns valid numeric
 
@@ -331,10 +328,10 @@
     Code
       res
     Output
-               Estimate         SE        LL        UL
-      G1      0.8666667 0.02880329 0.6974555 0.9481141
-      G2      0.5000000 0.05590170 0.2523379 0.6851621
-      G1 - G2 0.3666667 0.06288585 0.1117076 0.6088621
+              Estimate      SE     LL     UL
+      G1        0.8667 0.02880 0.6975 0.9481
+      G2        0.5000 0.05590 0.2523 0.6852
+      G1 - G2   0.3667 0.06289 0.1117 0.6089
 
 # power.prop returns valid matrix
 
@@ -381,14 +378,14 @@
     Code
       res
     Output
-                       Estimate          LL         UL
-      G(1,2)         0.56666667  0.46601839  0.6524027
-      G(1,3)         0.50000000  0.39564646  0.5911956
-      G(2,3)         0.86666667  0.79701213  0.9135142
-      G(1,2)-G(1,3)  0.06666667  0.00580397  0.1266464
-      G(1,2)-G(2,3) -0.30000000 -0.40683919 -0.1891873
-      G(2,3)-G(1,3) -0.36666667 -0.46222023 -0.2662566
-      G(3)           0.64444444  0.57382971  0.7068720
+                    Estimate      LL      UL
+      G(1,2)          0.5667  0.4660  0.6524
+      G(1,3)          0.5000  0.3956  0.5912
+      G(2,3)          0.8667  0.7970  0.9135
+      G(1,2)-G(1,3)   0.0667  0.0058  0.1266
+      G(1,2)-G(2,3)  -0.3000 -0.4068 -0.1892
+      G(2,3)-G(1,3)  -0.3667 -0.4622 -0.2663
+      G(3)            0.6444  0.5738  0.7069
 
 # ci.bayes.prop returns valid matrix
 
@@ -453,7 +450,7 @@
       res
     Output
        Sample size
-               318
+               384
 
 # size.ci.oddsratio example
 
@@ -477,5 +474,23 @@
       res
     Output
        Sample size
-               416
+               418
+
+# ci.diversity example
+
+    Code
+      res
+    Output
+              Estimate      SE     LL     UL
+      Berger    0.5598 0.01587 0.5287 0.5909
+      Simpson   0.7722 0.01229 0.7481 0.7963
+      Shannon   0.7292 0.01224 0.7052 0.7532
+
+# ci.lc.prop.scheffe example
+
+    Code
+      res
+    Output
+        Estimate         SE      z       p         LL        UL
+       0.2119565 0.07602892 2.7878 0.02053 0.02585698 0.3980561
 

@@ -30,16 +30,20 @@ Computes an approximate confidence interval for a population squared
 multiple correlation in a linear model with random predictor variables.
 This function uses the scaled central F approximation method. An
 approximate standard error is recovered from the confidence interval.
+
+For more details, see Section 2.4 of Bonett (2021, Volume 2)
 }
 \examples{
-ci.rsqr(.05, .241, 3, 116)
+ci.rsqr(.05, .247, 4, 150)
 
 # Should return:
-# R-squared adj R-squared         SE         LL        UL  
-#     0.241     0.2206696 0.06752263 0.09819599 0.3628798
+# R-squared adj R-squared      SE      LL     UL  
+#     0.247        0.2262 0.06024  0.1152 0.3514
  
 
 }
 \references{
 \insertRef{Helland1987}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

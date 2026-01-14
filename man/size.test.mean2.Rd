@@ -24,7 +24,11 @@ Returns the required sample size for each group
 Computes the sample size in each group required  to test a difference in
 population means with desired power in a 2-group design. Set the variance
 planning value to the largest value within a plausible range for a
-conservatively large sample size. Set R =1 for equal sample sizes.
+conservatively large sample size. Set R = 1 for equal sample sizes. For
+unequal sample sizes, this function assumes approximately equal population
+variances.
+
+For more details, see Section 2.14 of Bonett (2021, Volume 1)
 }
 \examples{
 size.test.mean2(.05, .95, 100, 10, 1) 
@@ -46,4 +50,7 @@ size.test.mean2(.05, .95, 100, 10, .5)
 # 40  20
  
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

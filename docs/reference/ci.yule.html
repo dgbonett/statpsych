@@ -7,7 +7,8 @@ each cell frequency. This function requires the frequency counts from a
 used as a crude approximation to the tetrachoric correlation. Yule Y is
 equal to the phi coefficient only when all marginal frequencies are equal.
 Bonett-Price Y* is a better approximation to the phi coefficient when the
-marginal frequencies are not equal."><meta property="og:description" content="Computes confidence intervals for four generalized Yule measures of
+marginal frequencies are not equal.
+For more details, see Section 3.4 of Bonett (2021, Volume 3)"><meta property="og:description" content="Computes confidence intervals for four generalized Yule measures of
 association (Yule Q, Yule Y, Digby H, and Bonett-Price Y*) using a
 transformation of a confidence interval for an odds ratio with .5 added to
 each cell frequency. This function requires the frequency counts from a
@@ -15,7 +16,8 @@ each cell frequency. This function requires the frequency counts from a
 used as a crude approximation to the tetrachoric correlation. Yule Y is
 equal to the phi coefficient only when all marginal frequencies are equal.
 Bonett-Price Y* is a better approximation to the phi coefficient when the
-marginal frequencies are not equal."></head><body>
+marginal frequencies are not equal.
+For more details, see Section 3.4 of Bonett (2021, Volume 3)"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -23,7 +25,7 @@ marginal frequencies are not equal."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">statpsych</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.8.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,6 +61,7 @@ used as a crude approximation to the tetrachoric correlation. Yule Y is
 equal to the phi coefficient only when all marginal frequencies are equal.
 Bonett-Price Y* is a better approximation to the phi coefficient when the
 marginal frequencies are not equal.</p>
+<p>For more details, see Section 3.4 of Bonett (2021, Volume 3)</p>
     </div>
 
     <div class="section level2">
@@ -99,7 +102,10 @@ marginal frequencies are not equal.</p>
 </ul></div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
-    <p>Bonett DG, Price RM (2007).
+    <p>Bonett DG (2021).
+<em>Statistical Methods for Psychologists https://dgbonett.sites.ucsc.edu/</em>.
+
+Bonett DG, Price RM (2007).
 “Statistical inference for generalized Yule coefficients in 2x2 contingency tables.”
 <em>Sociological Methods &amp; Research</em>, <b>35</b>(3), 429–446.
 ISSN 0049-1241, <a href="https://doi.org/10.1177/0049124106292358" class="external-link">doi:10.1177/0049124106292358</a>
@@ -109,18 +115,18 @@ ISSN 0049-1241, <a href="https://doi.org/10.1177/0049124106292358" class="extern
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">ci.yule</span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">229</span>, <span class="fl">28</span>, <span class="fl">96</span>, <span class="fl">24</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      Estimate         SE         LL        UL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Q:  0.3430670 0.13280379 0.06247099 0.5734020</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Y:  0.1769015 0.07290438 0.03126603 0.3151817</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> H:  0.2619244 0.10514465 0.04687994 0.4537659</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Y*: 0.1311480 0.05457236 0.02307188 0.2361941</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     Estimate     SE    LL    UL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Q:     0.343 0.1328 0.062 0.573</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Y:     0.177 0.0729 0.031 0.315</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> H:     0.262 0.1051 0.047 0.454</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Y*:    0.131 0.0546 0.023 0.236</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Should return:</span></span></span>
-<span class="r-in"><span><span class="co">#      Estimate         SE         LL        UL</span></span></span>
-<span class="r-in"><span><span class="co"># Q:  0.3430670 0.13280379 0.06247099 0.5734020</span></span></span>
-<span class="r-in"><span><span class="co"># Y:  0.1769015 0.07290438 0.03126603 0.3151817</span></span></span>
-<span class="r-in"><span><span class="co"># H:  0.2619244 0.10514465 0.04687994 0.4537659</span></span></span>
-<span class="r-in"><span><span class="co"># Y*: 0.1311480 0.05457236 0.02307188 0.2361941</span></span></span>
+<span class="r-in"><span><span class="co">#    Estimate     SE    LL    UL</span></span></span>
+<span class="r-in"><span><span class="co"># Q:    0.343 0.1328 0.062 0.573</span></span></span>
+<span class="r-in"><span><span class="co"># Y:    0.177 0.0729 0.031 0.315</span></span></span>
+<span class="r-in"><span><span class="co"># H:    0.262 0.1051 0.047 0.454</span></span></span>
+<span class="r-in"><span><span class="co"># Y*:   0.131 0.0546 0.023 0.236</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
@@ -134,7 +140,7 @@ ISSN 0049-1241, <a href="https://doi.org/10.1177/0049124106292358" class="extern
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

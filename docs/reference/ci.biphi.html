@@ -3,11 +3,13 @@
 using a transformation of a confidence interval for an odds ratio with .5
 added to each cell frequency. This measure of association assumes the group
 variable is naturally dichotomous and the response variable is artificially
-dichotomous."><meta property="og:description" content="Computes a confidence interval for a population biserial-phi correlation
+dichotomous.
+For more details, see Section 3.4 of Bonett (2021, Volume 3)"><meta property="og:description" content="Computes a confidence interval for a population biserial-phi correlation
 using a transformation of a confidence interval for an odds ratio with .5
 added to each cell frequency. This measure of association assumes the group
 variable is naturally dichotomous and the response variable is artificially
-dichotomous."></head><body>
+dichotomous.
+For more details, see Section 3.4 of Bonett (2021, Volume 3)"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -15,7 +17,7 @@ dichotomous."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">statpsych</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.8.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,6 +49,7 @@ using a transformation of a confidence interval for an odds ratio with .5
 added to each cell frequency. This measure of association assumes the group
 variable is naturally dichotomous and the response variable is artificially
 dichotomous.</p>
+<p>For more details, see Section 3.4 of Bonett (2021, Volume 3)</p>
     </div>
 
     <div class="section level2">
@@ -92,17 +95,19 @@ dichotomous.</p>
 <em>British Journal of Mathematical and Statistical Psychology</em>, <b>57</b>(2), 235–251.
 ISSN 00071102, <a href="https://doi.org/10.1348/0007110042307203" class="external-link">doi:10.1348/0007110042307203</a>
 .</p>
+<p>Bonett DG (2021).
+<em>Statistical Methods for Psychologists https://dgbonett.sites.ucsc.edu/</em>.</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">ci.biphi</span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">46</span>, <span class="fl">15</span>, <span class="fl">100</span>, <span class="fl">100</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Estimate         SE        LL       UL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.4145733 0.07551281 0.2508866 0.546141</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">ci.biphi</span><span class="op">(</span><span class="fl">.05</span>, <span class="fl">34</span>, <span class="fl">22</span>, <span class="fl">50</span>, <span class="fl">50</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Estimate     SE    LL    UL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     0.275 0.1075 0.049 0.464</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Should return:</span></span></span>
-<span class="r-in"><span><span class="co">#  Estimate         SE        LL       UL</span></span></span>
-<span class="r-in"><span><span class="co"># 0.4145733 0.07551281 0.2508866 0.546141</span></span></span>
+<span class="r-in"><span><span class="co">#  Estimate     SE    LL    UL</span></span></span>
+<span class="r-in"><span><span class="co">#     0.275 0.1075 0.049 0.464</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
@@ -116,7 +121,7 @@ ISSN 00071102, <a href="https://doi.org/10.1348/0007110042307203" class="externa
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

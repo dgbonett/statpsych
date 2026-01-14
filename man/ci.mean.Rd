@@ -28,16 +28,20 @@ Returns a 1-row matrix. The columns are:
 Computes a confidence interval for a population mean using the estimated
 mean, estimated standard deviation, and sample size. Use the t.test function
 for raw data input.
+
+For more details, see Section 1.7 of Bonett (2021, Volume 1)
 }
 \examples{
-ci.mean(.05, 24.5, 3.65, 40)
+ci.mean(.05, 38.3, 8.14, 10)
 
 # Should return:
 # Estimate        SE       LL       UL
-#     24.5 0.5771157 23.33267 25.66733
+#     38.3  2.574094 32.47699 44.12301
  
 
 }
 \references{
 \insertRef{Snedecor1980}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

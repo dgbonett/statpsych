@@ -32,16 +32,20 @@ correlations that are estimated from the same sample and have one
 variable in common. A bias adjustment is used to reduce the bias
 of each Fisher transformed correlation. An approximate standard error
 is recovered from the confidence interval.
+
+For more details, see Section 2.17 of Bonett (2021, Volume 2)
 }
 \examples{
 ci.cor.dep(.05, .396, .179, .088, 166)
 
 # Should return:
-# Estimate        SE         LL       UL
-#    0.217 0.1026986 0.01323072 0.415802
+# Estimate     SE     LL     UL
+#    0.217 0.1027 0.0132 0.4158
  
 
 }
 \references{
 \insertRef{Zou2007}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

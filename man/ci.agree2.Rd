@@ -4,7 +4,7 @@
 \alias{ci.agree2}
 \title{Confidence interval for G-index difference in a 2-group design}
 \usage{
-ci.agree2(alpha, n1, f1, n2, f2, r)
+ci.agree2(alpha, n1, f1, n2, f2, k)
 }
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
@@ -17,7 +17,7 @@ ci.agree2(alpha, n1, f1, n2, f2, r)
 
 \item{f2}{number of objects rated in agreement in group 2}
 
-\item{r}{number of rating categories}
+\item{k}{number of rating categories}
 }
 \value{
 Returns a 3-row matrix. The rows are:
@@ -38,18 +38,22 @@ The columns are:
 \description{
 Computes adjusted Wald confidence intervals for the G-index of agreement
 within each group and the difference of G-indices.
+
+For more details, see Section 3.5 of Bonett (2021, Volume 3)
 }
 \examples{
 ci.agree2(.05, 75, 70, 60, 45, 2)
 
 # Should return:
-#          Estimate         SE        LL        UL
-# G1      0.8666667 0.02880329 0.6974555 0.9481141
-# G2      0.5000000 0.05590170 0.2523379 0.6851621
-# G1 - G2 0.3666667 0.06288585 0.1117076 0.6088621
+#         Estimate      SE     LL     UL
+# G1        0.8667 0.02880 0.6975 0.9481
+# G2        0.5000 0.05590 0.2523 0.6852
+# G1 - G2   0.3667 0.06289 0.1117 0.6089               
 
 
 }
 \references{
 \insertRef{Bonett2022}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

@@ -36,6 +36,8 @@ For a 2-level within-subjects experiment, this function computes a
 prediction interval for how the response variable score for one randomly
 selected person from the study population would differ under the two
 treatment conditions.
+
+For more details, see Section 4.5 of Bonett (2021, Volume 1)
 }
 \examples{
 pi.score.ps(.05, 265.1, 208.6, 23.51, 19.94, .814, 30)
@@ -45,4 +47,7 @@ pi.score.ps(.05, 265.1, 208.6, 23.51, 19.94, .814, 30)
 #      56.5 29 28.05936 84.94064
  
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

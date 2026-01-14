@@ -29,6 +29,8 @@ or both factors are classification factors. If both factors are treatment
 factors, then partial eta-square estimates are typically recommended.
 The eta-squared estimates from this function can be used in the
 \link[statpsych]{etasqr.adj} function to obtain bias adjusted estimates.
+
+For more details, see Section 3.12 of Bonett (2021, Volume 1)
 }
 \examples{
 etasqr.gen.2way(12.3, 15.6, 5.2, 7.9)
@@ -40,4 +42,7 @@ etasqr.gen.2way(12.3, 15.6, 5.2, 7.9)
 # A classification, B classification: 0.300000 0.3804878 0.1268293
  
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

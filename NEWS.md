@@ -1,3 +1,27 @@
+statpsych version 1.9.0 (Release date: 2026/01/01)
+===========
+
+Changes:
+
+* New functions:
+    * size.ci.sd -- Computes sample size for a traditional standard deviation confidence interval
+    * size.ci.cronbach.prior -- Computes sample size for a Cronbach reliablity confidence interval using a planning value from a prior study
+    * size.ci.icc.prior -- Computes sample size for an intraclass correlation confidence interval using a planning value from a prior study
+    * size.ci.icc -- Computes sample size for an intraclass correlation confidence interval 
+    * ci.diversity -- Computes estimates and confidence intervals for three types of diversity indices 
+    * ci.mean.gen -- Computes confidence intervals for three types of generalized means
+    * ci.sd -- Computes the traditional confidence interval for a population standard deviation
+    * ci.lc.prop.scheffe -- Computes a Scheffe confidence interval and p-value for a linear contrast of population proportions
+    * ci.lc.mean.scheffe -- Computes a Scheffe confidence interval and p-value for a linear contrast of population means
+    * ci.icc -- Computes intraclass reliability coefficients using mean square estimates as input
+    * ci.slope -- Computes confidence interval for slope in a simple linear model using summary statistics as input
+    * pi.cronbach -- Computes a prediction interval for a Cronbach reliability in a future sample
+* References Manual
+    * Most function descriptions now refer to a specific section in the Bonett (2021) online text for additional details
+* Error Corrections:
+    * size.ci.prop.prior -- corrected a error in the sample size computation
+    
+
 statpsych version 1.8.0 (Release date: 2025/06/06)
 ===========
 
@@ -88,7 +112,8 @@ Changes:
     * one-group function names that end with a "1" have been renamed and now exclude the "1" (for naming consistency and to avoid confusion with lower case L).
     * ci.mape2 has been renamed ci.ratio.mape2, and ci.cod2 has been renamed ci.ratio.cod2
     * The ci.phi function now uses a Fisher transformation for improved coverage probability performance
-
+* Deletions:
+    * size.test.slope.gen removed
 
 statpsych version 1.5.0 (Release date: 2023/12/11)
 ===========
@@ -264,3 +289,14 @@ statpsych 1.0.0 (Release date: 2021/09/09)
 ==============
 
 * Initial release
+
+
+
+
+
+
+
+
+
+
+

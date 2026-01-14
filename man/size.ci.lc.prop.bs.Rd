@@ -24,15 +24,20 @@ Computes the sample size in each group (assuming equal sample sizes) required
 to estimate a linear contrast of population proportions with desired confidence
 interval precision in a between-subjects design. Set the proportion planning
 values to .5 for a conservatively large sample size.
+
+For more details, see Section 2.22 of Bonett (2021, Volume 3)
 }
 \examples{
-p <- c(.25, .30, .50, .50)
-v <- c(.5, .5, -.5, -.5)
+p <- c(.1, .2, .2, .3)
+v <- c(.5, -.5, .5, -.5)
 size.ci.lc.prop.bs(.05, p, .2, v)
 
 # Should return:
 # Sample size per group
-#                    87
+#                    60
 
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

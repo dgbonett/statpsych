@@ -34,16 +34,20 @@ standardized mean difference, standardized linear contrast of means, median,
 median difference, linear contrast of medians, etc.) that has an approximate
 normal sampling distribution. The mean and standard deviation of the posterior
 normal distribution are also reported.
+
+For more details, see Section 1.32 of Bonett (2021, Volume 1)
 }
 \examples{
-ci.bayes.normal(.05, 30, 2, 24.5, 0.577)
+ci.bayes.normal(.05, 50, 5, 38.3, 2.57)
 
 # Should return:
 # Posterior mean Posterior SD       LL       UL
-#        24.9226    0.5543895 23.83602 26.00919
+#       40.74511     2.285735 36.26515 45.22506
 
 
 }
 \references{
 \insertRef{Gelman2004}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

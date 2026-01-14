@@ -25,6 +25,8 @@ terms of the proportion of scores in the population that are greater than
 the hypothesized population median value. Under the null hypothesis, the
 population proportion is equal to .5. This function requires a planning
 value of the population proportion.
+
+For more details, see Section 1.29 of Bonett (2021, Volume 1)
 }
 \examples{
 size.test.sign(.05, .90, .3)
@@ -34,4 +36,7 @@ size.test.sign(.05, .90, .3)
 #          67
  
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

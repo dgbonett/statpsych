@@ -28,16 +28,20 @@ Computes a continuity-corrected z-test for a difference of population
 proportions in a 2-group design. A confidence interval for a difference in
 population proportions is a recommended supplement to the z-test (see
 \link[statpsych]{ci.prop2}).
+
+For more details, see Section 2.4 of Bonett (2021, Volume 3)
 }
 \examples{
-test.prop2(11, 26, 50, 50)
+test.prop2(39, 24, 50, 50)
 
 # Should return:
-# Estimate        z           p
-#     -0.3 2.899726 0.003734895
+# Estimate      z       p
+#      0.3 2.8997 0.00373
 
 
 }
 \references{
 \insertRef{Snedecor1980}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

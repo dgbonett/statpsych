@@ -30,13 +30,18 @@ Equivalence tests often require a very large sample size. Equivalence tests
 usually use 2 x alpha rather than alpha (e.g., use alpha = .10 rather than
 alpha = .05). This function sets the effect size equal to the difference in
 proportion planning values.
+
+For more details, see Section 2.23 of Bonett (2021, Volume 3)
 }
 \examples{
-size.equiv.prop2(.1, .8, .30, .35, .15)
+size.equiv.prop2(.1, .9, .8, .8, .075)
 
 # Should return:
 # Sample size per group
-#                   288
+#                   488
 
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

@@ -39,6 +39,8 @@ coefficient) across groups in a multiple group regression model. Equality
 of error variances across groups is not assumed. A Satterthwaite adjustment
 to the degrees of freedom is used to improve the accuracy of the confidence
 interval.
+
+For more details, see Section 2.20 of Bonett (2021, Volume 2)
 }
 \examples{
 est <- c(1.74, 1.83, 0.482)
@@ -48,8 +50,11 @@ v <- c(.5, .5, -1)
 ci.lc.reg(.05, est, se, n, 4, v)
 
 # Should return:
-# Estimate        SE        t      df          p        LL       UL
-#    1.303 0.5085838 2.562016 78.8197 0.01231256 0.2906532 2.315347
+# Estimate        SE      t      df       p        LL       UL
+#    1.303 0.5085838 2.5620 78.8197 0.01231 0.2906532 2.315347
  
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

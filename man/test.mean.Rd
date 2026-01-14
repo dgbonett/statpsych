@@ -28,16 +28,20 @@ Computes a one-sample t-test for a population mean using the estimated
 mean, estimated standard deviation, sample size, and null hypothesis value.
 Use the t.test function for raw data input. A confidence interval for a
 population mean is a recommended supplement to the t-test (see \link[statpsych]{ci.mean}).
+
+For more details, see Section 1.11 of Bonett (2021, Volume 1)
 }
 \examples{
-test.mean(24.5, 3.65, 40, 23)
+test.mean(7.9, 3.05, 100, 7)
 
 # Should return:
-#         t df          p
-#  2.599132 39 0.01312665
+#        t df       p
+#   2.9508 99 0.00396
  
 
 }
 \references{
 \insertRef{Snedecor1980}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

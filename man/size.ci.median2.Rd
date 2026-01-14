@@ -36,6 +36,8 @@ four distribution options (Normal, Logistic, Laplace, Exponential) that
 approximates the most likely distribution shape in the planned study.
 Select the Normal distribution for a conservatively large sample size
 requirement. Set R = 1 for equal sample sizes.
+
+For more details, see Sections 1.28 and 2.13 of Bonett (2021, Volume 1)
 }
 \examples{
 size.ci.median2(.05, 37.1, 5, 1, 1)
@@ -53,4 +55,6 @@ size.ci.median2(.05, 37.1, 5, 2, 4)
 }
 \references{
 \insertRef{Bonett2002}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

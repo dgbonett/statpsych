@@ -26,6 +26,8 @@ Returns a 1-row matrix. The columns are:
 Computes a Theil-Sen estimate and distribution-free confidence interval
 for the population slope in a simple linear regression model. An approximate
 standard error is recovered from the confidence interval.
+
+For more details, see Section 1.32 of Bonett (2021, Volume 2)
 }
 \examples{
 y <- c(21, 4, 9, 12, 35, 18, 10, 22, 24, 1, 6, 8, 13, 16, 19)
@@ -40,4 +42,6 @@ ci.theil(.05, y, x)
 }
 \references{
 \insertRef{Hollander1999}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

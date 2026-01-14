@@ -27,19 +27,26 @@ Computes adjusted Wald confidence intervals for pairwise proportion
 differences of a multinomial variable in a single sample. These adjusted
 Wald confidence intervals use the same method that is used to compare the
 two proportions in a paired-samples design.
+
+For more details, see Section 1.12 of Bonett (2021, Volume 3)
 }
 \examples{
-f <- c(125, 82, 92)
+f <- c(87, 49, 31, 133)
 ci.pairs.mult(.05, f)
 
 # Should return:
-#        Estimate         SE          LL         UL
-# 1 2  0.14285714 0.04731825  0.05011508 0.23559920
-# 1 3  0.10963455 0.04875715  0.01407230 0.20519680
-# 2 3 -0.03322259 0.04403313 -0.11952594 0.05308076
+#         Estimate         SE           LL          UL
+#  1 2  0.12582781 0.03821865  0.050920628  0.20073500
+#  1 3  0.18543046 0.03466808  0.117482270  0.25337866
+#  1 4 -0.15231788 0.04855183 -0.247477718 -0.05715804
+#  2 3  0.05960265 0.02978792  0.001219398  0.11798590
+#  2 4 -0.27814570 0.04196760 -0.360400688 -0.19589070
+#  3 4 -0.33774834 0.03797851 -0.412184859 -0.26331183
 
 
 }
 \references{
 \insertRef{Bonett2012}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

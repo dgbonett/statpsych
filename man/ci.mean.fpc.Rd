@@ -31,6 +31,8 @@ Computes a confidence interval for a population mean with a finite
 population correction (fpc) using the estimated mean, estimated standard
 deviation, sample size, and population size. This function is useful when
 the sample size is not a small fraction of the population size.
+
+For more details, see Section 1.33 of Bonett (2021, Volume 1)
 }
 \examples{
 ci.mean.fpc(.05, 24.5, 3.65, 40, 300)
@@ -40,4 +42,7 @@ ci.mean.fpc(.05, 24.5, 3.65, 40, 300)
 #     24.5 0.5381631 23.41146 25.58854
  
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

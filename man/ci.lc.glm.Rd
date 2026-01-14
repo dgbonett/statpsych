@@ -33,6 +33,8 @@ Returns a 1-row matrix. The columns are:
 Computes the estimate, standard error, and confidence interval for a linear
 contrast of parameters in a general linear model using coef(object) and
 vcov(object) where "object" is a fitted model object from the lm function.
+
+For more details, see Section 2.28 of Bonett (2021, Volume 2)
 }
 \examples{
 y <- c(43, 62, 49, 60, 36, 79, 55, 42, 67, 50)
@@ -50,8 +52,11 @@ ci.lc.glm(.05, n, b, V, q)
 # (Intercept)          x1          x2 
 #   26.891111    3.648889    2.213333 
 #
-# Estimate        SE       t df           p       LL       UL
-# 2.931111 0.4462518 6.56829  7 0.000313428 1.875893 3.986329
+# Estimate        SE      t df       p       LL       UL
+# 2.931111 0.4462518 6.5683  7 0.00031 1.875893 3.986329
 
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

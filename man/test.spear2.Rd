@@ -34,8 +34,8 @@ Spearman correlation values (see \link[statpsych]{ci.spear2}).
 test.spear2(.684, .437, 100, 125)
 
 # Should return:
-# Estimate        z          p
-#    0.247 2.498645 0.01246691
+# Estimate      z       p
+#    0.247 2.4986 0.01247
 
 
 }

@@ -30,16 +30,20 @@ counts from a 2 x 2 contingency table for two paired dichotomous measurements.
 A confidence interval for a difference in population proportions (see
 \link[statpsych]{ci.prop.ps}) is a recommended supplement to the McNemar
 test.
+
+For more details, see Section 3.2 of Bonett (2021, Volume 3)
 }
 \examples{
-test.prop.ps(156, 96, 68, 80)
+test.prop.ps(12, 4, 26, 6)
 
 # Should return:
-# Estimate        z          p
-#     0.07 2.108346 0.03500109
+#   Estimate      z       p
+# -0.4583333 3.8341 0.00013
 
 
 }
 \references{
 \insertRef{Snedecor1980}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

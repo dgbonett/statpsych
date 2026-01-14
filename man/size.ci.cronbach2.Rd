@@ -26,6 +26,9 @@ Computes the sample size per group (assuming equal sample sizes) required
 to estimate a difference in population Cronbach reliability coefficients
 with desired precision in a 2-group design.
 }
+\details{
+For more details, see Section 2.19 of Bonett (2021, Volume 4)
+}
 \examples{
 size.ci.cronbach2(.05, .85, .70, 8, .15)
 
@@ -37,4 +40,6 @@ size.ci.cronbach2(.05, .85, .70, 8, .15)
 }
 \references{
 \insertRef{Bonett2015}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

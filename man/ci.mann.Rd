@@ -31,18 +31,22 @@ nonexperiment where participants are sampled from two subpopulations of
 sizes N1 and N2, the parameter is the proportion of all N1 x N2 pairs in
 which a member from subpopulation 1 has a larger score than a member from
 subpopulation 2.
+
+For more details, see Section 2.12 of Bonett (2021, Volume 1)
 }
 \examples{
-y2 <- c(36, 44, 47, 42, 49, 39, 46, 31, 33, 48)
-y1 <- c(32, 39, 26, 35, 43, 27, 40, 37, 34, 29)
+y1 <- c(9.4, 10.3, 58.3, 106.0, 31.0, 46.2, 12.0, 19.0, 135.0, 159.0)
+y2 <- c(14.6, 5.1, 8.1, 22.7, 6.4, 4.4, 19.0, 3.2)
 ci.mann(.05, y1, y2)
 
 # Should return:
 # Estimate        SE        LL UL
-#    0.795 0.1401834 0.5202456  1
+#  0.86875 0.1222202 0.6292028  1
 
 
 }
 \references{
 \insertRef{Sen1967}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

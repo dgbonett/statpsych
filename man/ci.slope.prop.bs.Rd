@@ -31,19 +31,23 @@ Returns a 1-row matrix. The columns are:
 Computes a test statistic and an adjusted Wald confidence interval for the
 population slope of proportions in a one-factor experimental design with a
 quantitative between-subjects factor.
+
+For more details, see Section 4.4 of Bonett (2021, Volume 3)
 }
 \examples{
-f <- c(14, 27, 38)
-n <- c(100, 100, 100)
-x <- c(10, 20, 40)
+f <- c(11, 15, 20, 27)
+n <- c(60, 60, 60, 60)
+x <- c(10, 20, 30, 40)
 ci.slope.prop.bs(.05, f, n, x)
 
 # Should return:
-#    Estimate          SE        z           p          LL         UL
-# 0.007542293 0.002016793 3.739746 0.000184206 0.003589452 0.01149513
+#    Estimate          SE      z       p          LL         UL
+# 0.008688525 0.002566409 3.3855 0.00071 0.003658456 0.01371859
 
 
 }
 \references{
 \insertRef{Price2004}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

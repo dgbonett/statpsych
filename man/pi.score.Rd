@@ -27,6 +27,8 @@ Returns a 1-row matrix. The columns are:
 \description{
 Computes a prediction interval for the response variable score of one
 randomly selected member from the study population.
+
+For more details, see Section 1.9 of Bonett (2021, Volume 1)
 }
 \examples{
 pi.score(.05, 24.5, 3.65, 40)
@@ -36,4 +38,7 @@ pi.score(.05, 24.5, 3.65, 40)
 #      24.5  39 17.02546 31.97454
  
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

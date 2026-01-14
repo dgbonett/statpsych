@@ -26,6 +26,8 @@ Returns a 1-row matrix. The columns are:
 \description{
 Computes a confidence interval for a ratio of population MADs (mean absolute
 deviation from median) in a paired-samples design.
+
+For more details, see Section 4.24 of Bonett (2021, Volume 1)
 }
 \examples{
 y2 <- c(21, 4, 9, 12, 35, 18, 10, 22, 24, 1, 6, 8, 13, 16, 19)
@@ -40,4 +42,6 @@ ci.ratio.mad.ps(.05, y1, y2)
 }
 \references{
 \insertRef{Bonett2003a}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

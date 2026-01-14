@@ -27,6 +27,8 @@ of quartile variation which is defined as (Q3 - Q1)/(Q3 + Q1) where Q1 is the
 variation assumes ratio-scale scores and is a robust alternative to the
 coefficient of variation (see \link[statpsych]{ci.cv}). The 25th and 75th
 percentiles are computed using the type = 2 method (SAS default).
+
+For more details, see Section 1.27 of Bonett (2021, Volume 1)
 }
 \examples{
 y <- c(30, 20, 15, 10, 10, 60, 20, 25, 20, 30, 10, 5, 50, 40,
@@ -41,4 +43,6 @@ ci.cqv(.05, y)
 }
 \references{
 \insertRef{Bonett2006c}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

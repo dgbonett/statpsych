@@ -33,17 +33,21 @@ Returns a 1-row matrix. The columns are:
 \description{
 Computes a confidence interval for a difference in population Cronbach
 reliability coefficients in a 2-group design. The number of measurements
-(e.g., items or raters) used in each group need not be equal.
+(items, raters, forms) used in each group need not be equal.
+
+For more details, see Section 2.15 of Bonett (2021, Volume 4)
 }
 \examples{
 ci.cronbach2(.05, .88, .76, 8, 8, 200, 250)
 
 # Should return:
-# Estimate         LL       UL
-#     0.12 0.06973411 0.173236
+# Estimate     LL     UL
+#     0.12 0.0697 0.1733
  
 
 }
 \references{
+\insertRef{Bonett2021}{statpsych}
+
 \insertRef{Bonett2015}{statpsych}
 }

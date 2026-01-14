@@ -29,6 +29,8 @@ alternative to the residual standard deviation. This function requires a
 vector of estimated residuals from a general linear model. This confidence
 interval does not assume zero excess kurtosis but does assume symmetry of
 the population prediction errors.
+
+For more details, see Section 1.16 of Bonett (2021, Volume 2)
 }
 \examples{
 res <- c(-2.70, -2.69, -1.32, 1.02, 1.23, -1.46, 2.21, -2.10, 2.56,
@@ -40,4 +42,7 @@ ci.mape(.05, res, 1)
 #   2.3744 0.3314752 1.751678 3.218499
  
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

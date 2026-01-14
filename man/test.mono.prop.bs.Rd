@@ -34,6 +34,8 @@ less than 0 and no lower limits are greater than 0, then conclude that
 the population proportions are monotonic increasing. Reject the hypothesis
 of a monotonic trend if any lower limit is greater than 0 and any upper
 limit is less than 0.
+
+For more details, see Section 2.12 of Bonett (2021, Volume 3)
 }
 \examples{
 f <- c(67, 49, 30, 10)
@@ -47,4 +49,7 @@ test.mono.prop.bs(.05, f, n)
 # 3 4 0.1960784 0.05493010 0.06457688 0.3275800
 
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

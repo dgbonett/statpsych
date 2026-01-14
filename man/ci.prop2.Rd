@@ -29,16 +29,20 @@ Returns a 1-row matrix. The columns are:
 \description{
 Computes an adjusted Wald confidence interval for a population proportion
 difference in a 2-group design.
+
+For more details, see Section 2.2 of Bonett (2021, Volume 3)
 }
 \examples{
-ci.prop2(.05, 35, 21, 150, 150)
+ci.prop2(.05, 57, 15, 100, 100)
 
 # Should return:
-#   Estimate         SE          LL        UL
-# 0.09210526 0.04476077 0.004375769 0.1798348
+#   Estimate         SE        LL        UL
+#  0.4117647 0.06083948 0.2925215 0.5310079
 
 
 }
 \references{
 \insertRef{Agresti2000}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

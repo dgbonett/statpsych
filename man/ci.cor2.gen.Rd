@@ -33,18 +33,22 @@ population correlations in a 2-group design. The correlations can be
 Pearson, Spearman, partial, semipartial, or point-biserial correlations.
 The correlations could also be correlations between two latent factors.
 The function requires a point estimate and a 100(1 - alpha)\% confidence
-interval for each correlation as input. The confidence intervals for
-each correlation can be obtained using the ci.fisher function.
+interval for each correlation as input. The confidence intervals for each
+correlation can be obtained using \link[statpsych]{ci.fisher}.
+
+For more details, see Section 2.17 of Bonett (2021, Volume 2)
 }
 \examples{
-ci.cor2.gen(.4, .35, .47, .2, .1, .32)
+ci.cor2.gen(.64, .55, .71, .31, .18, .43)
 
 # Should return:
-# Estimate   LL        UL
-#      0.2 0.07 0.3220656
+# Estimate    LL     UL
+#      0.33 0.18 0.4776
  
 
 }
 \references{
 \insertRef{Zou2007}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

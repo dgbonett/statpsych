@@ -29,18 +29,23 @@ kappa. The results in row 2 are for Cohen's kappa. The columns are:
 }
 \description{
 Computes confidence intervals for the intraclass kappa coefficient and
-Cohen's kappa coefficient with two dichotomous ratings.
+Cohen's kappa coefficient with two dichotomous ratings. The G-index of
+agreement (see ci.agree) is arguably a better measure of agreement.
+
+For more details, see Section 3.5 of Bonett (2021, Volume 3)
 }
 \examples{
 ci.kappa(.05, 31, 12, 4, 58)
 
 # Should return:
-#               Estimate         SE        LL        UL
-# IC kappa:    0.6736597 0.07479965 0.5270551 0.8202643
-# Cohen kappa: 0.6756757 0.07344761 0.5317210 0.8196303
+#              Estimate     SE    LL    UL
+# IC kappa:       0.674 0.0748 0.527 0.821
+# Cohen kappa:    0.676 0.0734 0.532 0.820
 
 
 }
 \references{
 \insertRef{Fleiss2003}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

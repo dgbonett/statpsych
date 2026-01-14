@@ -36,6 +36,8 @@ a one-factor experimental design with a quantitative between-subjects
 factor. This function computes both the unequal variance and equal variance
 confidence intervals and test statistics. A Satterthwaite adjustment to the
 degrees of freedom is used with the unequal variance method.
+
+For more details, see Section 1.11 of Bonett (2021, Volume 2)
 }
 \examples{
 m <- c(33.5, 37.9, 38.0, 44.1)
@@ -45,12 +47,15 @@ x <- c(5, 10, 20, 30)
 ci.slope.mean.bs(.05, m, sd, n, x)
 
 # Should return:
-#                               Estimate         SE        t       df
-# Equal Variances Assumed:     0.3664407 0.06770529 5.412290 36.00000
-# Equal Variances Not Assumed: 0.3664407 0.07336289 4.994905 18.65826
-#                                         p        LL        UL
-# Equal Variances Assumed:     4.242080e-06 0.2291280 0.5037534
-# Equal Variances Not Assumed: 8.468223e-05 0.2126998 0.5201815
+#                               Estimate         SE      t    df
+# Equal Variances Assumed:     0.3664407 0.06770529 5.4123 36.00
+# Equal Variances Not Assumed: 0.3664407 0.07336289 4.9949 18.66
+#                                  p        LL        UL
+# Equal Variances Assumed:     4e-06 0.2291280 0.5037534
+# Equal Variances Not Assumed: 8e-05 0.2126998 0.5201815
 
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

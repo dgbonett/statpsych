@@ -36,24 +36,39 @@ of means in a between-subjects design. This function computes both unequal
 variance and equal variance confidence intervals and test statistics. A
 Satterthwaite adjustment to the degrees of freedom is used with the
 unequal variance method.
+
+For more details, see Section 3.3 of Bonett (2021, Volume 1)
 }
 \examples{
+m <- c(24.9, 23.1, 16.4)
+sd <- c(5.21, 4.67, 4.98)
+n <- c(30, 30, 30)
+v <- c(.5, .5, -1)
+ci.lc.mean.bs(.05, m, sd, n, v)
+
+# Should return:
+#                              Estimate       SE      t    df p       LL       UL
+# Equal Variances Assumed:          7.6 1.108703 6.8549 87.00 0 5.396332 9.803668
+# Equal Variances Not Assumed:      7.6 1.111135 6.8399 57.59 0 5.375484 9.824516
+
 m <- c(33.5, 37.9, 38.0, 44.1)
 sd <- c(3.84, 3.84, 3.65, 4.98)
-n <- c(10,10,10,10)
+n <- c(10, 10, 10, 10)
 v <- c(.5, .5, -.5, -.5)
 ci.lc.mean.bs(.05, m, sd, n, v)
 
 # Should return:
-#                              Estimate       SE         t       df 
-# Equal Variances Assumed:        -5.35 1.300136 -4.114955 36.00000 
-# Equal Variances Not Assumed:    -5.35 1.300136 -4.114955 33.52169 
-#                                         p         LL        UL
-# Equal Variances Assumed:     0.0002152581  -7.986797 -2.713203
-# Equal Variances Not Assumed: 0.0002372436  -7.993583 -2.706417
+#                              Estimate       SE      t    df       p 
+# Equal Variances Assumed:        -5.35 1.300136 -4.115 36.00 0.00022 
+# Equal Variances Not Assumed:    -5.35 1.300136 -4.115 33.52 0.00024 
+#                                     LL        UL
+# Equal Variances Assumed:     -7.986797 -2.713203
+# Equal Variances Not Assumed: -7.993583 -2.706417
 
 
 }
 \references{
 \insertRef{Snedecor1980}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

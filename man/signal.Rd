@@ -28,13 +28,15 @@ Returns a 1-row matrix. The columns are:
 \description{
 Computes the hit rate, false alarm rate, d-prime, threshold, and bias
 for one participant (observer) in a Yes/No signal detection study.
-An equal-variance Gausian model is assumed. The parameter estimates are
-computed after adding .5 to the number of "Yes" responses in each condtion
+An equal-variance Gaussian model is assumed. The parameter estimates are
+computed after adding .5 to the number of "Yes" responses in each condition
 (the signal and noise conditions) and adding 1 to the number of signal
 trials and to the number of noise trails. In memory recognition studies,
 the observer is first presented with set of words or images to study,
 and is later presented with another set of words or images where some
 items are from the first list (old items) and some items are new items.
+
+For more details, see Section 3.8 of Bonett (2021, Volume 3)
 }
 \examples{
 signal(82, 46, 100, 100)
@@ -47,4 +49,6 @@ signal(82, 46, 100, 100)
 }
 \references{
 \insertRef{Wickens2002}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

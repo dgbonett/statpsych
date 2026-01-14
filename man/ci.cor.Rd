@@ -30,16 +30,26 @@ or partial correlation with s control variables. Set s = 0 for a Pearson
 correlation. A bias adjustment is used to reduce the bias of the Fisher
 transformed correlation. This function uses an estimated correlation as
 input. Use the cor.test function for raw data input.
+
+For more details, see Section 1.14 of Bonett (2021, Volume 2)
 }
 \examples{
-ci.cor(.05, .536, 0, 50)
+ci.cor(.05, .60, 0, 150)
 
 # Should return:
-# Estimate        SE        LL        UL
-#    0.536 0.1018149 0.2978573 0.7058914
+# Estimate      SE    LL     UL
+#      0.6 0.05243 0.485 0.6925
+
+ci.cor(.05, .70, 1, 135)
+
+# Should return:
+# Estimate      SE     LL     UL
+#      0.7 0.04406 0.6002 0.7763
  
 
 }
 \references{
 \insertRef{Snedecor1980}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }

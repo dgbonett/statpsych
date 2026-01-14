@@ -29,18 +29,22 @@ size requirement. This function does not require the planning value for the
 proportion difference (effect size) to equal the difference of the two
 proportion planning values; for example, the planning value of the proportion
 difference could be set equal to a minimally interesting effect size.
+
+For more details, see Section 2.23 of Bonett (2021, Volume 3)
 }
 \examples{
-size.test.prop2(.05, .8, .5, .5, .2)
+size.test.prop2(.05, .8, .6, .4, .2)
+# Should return:
+# Sample size per group
+#                   106
 
+size.test.prop2(.05, .8, .5, .5, .2)
 # Should return:
 # Sample size per group
 #                   109
 
-size.test.prop2(.05, .8, .3, .1, .2)
-# Should return:
-# Sample size per group
-#                    71
 
-
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

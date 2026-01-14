@@ -8,6 +8,8 @@
 #' mean, estimated standard deviation, and sample size. Use the t.test function
 #' for raw data input.
 #'
+#' For more details, see Section 1.7 of Bonett (2021, Volume 1)
+#'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  m	  estimated mean 
@@ -26,13 +28,15 @@
 #' @references
 #' \insertRef{Snedecor1980}{statpsych}
 #'
+#' \insertRef{Bonett2021}{statpsych}
+#'
 #'
 #' @examples
-#' ci.mean(.05, 24.5, 3.65, 40)
+#' ci.mean(.05, 38.3, 8.14, 10)
 #'
 #' # Should return:
 #' # Estimate        SE       LL       UL
-#' #     24.5 0.5771157 23.33267 25.66733
+#' #     38.3  2.574094 32.47699 44.12301
 #'  
 #' 
 #' @importFrom stats qt
@@ -60,6 +64,8 @@ ci.mean <- function(alpha, m, sd, n) {
 #' deviation, sample size, and population size. This function is useful when 
 #' the sample size is not a small fraction of the population size.
 #'
+#' For more details, see Section 1.33 of Bonett (2021, Volume 1)
+#'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  m	  estimated mean 
@@ -76,6 +82,10 @@ ci.mean <- function(alpha, m, sd, n) {
 #' * UL - upper limit of the confidence interval with fpc
 #' 
 #' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' ci.mean.fpc(.05, 24.5, 3.65, 40, 300)
 #'
@@ -96,6 +106,114 @@ ci.mean.fpc <- function(alpha, m, sd, n, N) {
  out <- t(c(m, se, ll, ul))
  colnames(out) <- c("Estimate", "SE", "LL", "UL")
  rownames(out) <- ""
+ return(out)
+}
+
+
+#  ci.mean.gen  ===============================================================
+#' Confidence intervals for generalized means
+#'                    
+#'
+#' @description
+#' Computes confidence intervals for three population generalized means 
+#' (square-root, geometric, and harmonic) using a vector of response scores as
+#' input. The square-root mean requires non-negative scores. The geometric and
+#' harmonic means require positive scores. The standard errors are recovered 
+#' from the confidence intervals.
+#'
+#'  
+#' @param  alpha  alpha level for 1-alpha confidence
+#' @param  y	  vector of scores
+#'
+#'
+#' @return 
+#' Returns a 1-row matrix. The columns are:
+#' * Estimate - estimated mean
+#' * SE - recovered standard error
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
+#' 
+#' 
+#' @examples
+#' y <- c(32, 47, 28, 15, 20, 41, 87)
+#' ci.mean.gen(.05, y)
+#'
+#' # Should return:
+#' #             Estimate       SE       LL       UL
+#' # Square-root 35.79395 8.141122 18.64498 58.48619
+#' # Geometric   33.26410 7.633328 19.47124 56.82741
+#' # Harmonic    29.07073 7.978149 19.35236 58.39602
+#'  
+#' 
+#' @importFrom stats qt
+#' @importFrom stats na.omit
+#' @export
+ci.mean.gen <- function(alpha, y) {
+ y <- na.omit(y)
+ n <- length(y)
+ df <- n - 1
+ tcrit <- qt(1 - alpha/2, df)
+ # -------- Square-root Mean --------
+ if (min(y) < 0) {
+   m2 <- NA
+   se2 <- NA
+   ll2 <- NA
+   ul2 <- NA
+ } else {
+ y2 <- sqrt(y)
+ m2 <- mean(y2)
+ v2 <- var(y2)
+ ll0 <- m2 - tcrit*sqrt(v2/n)
+ if (ll0 < 0) {
+   ll2 = 0
+ } else {
+   ll2 <- (m2 - tcrit*sqrt(v2/n))^2
+ }
+ ul2 <- (m2 + tcrit*sqrt(v2/n))^2
+ m2 <- m2^2
+ se2 <- (ul2 - ll2)/(2*tcrit)
+ }
+ # -------- Geometric Mean ----------
+ if (min(y) <= 0) {
+   m3 <- NA
+   se3 <- NA
+   ll3 <- NA
+   ul3 <- NA
+ } else {
+ y3 <- log(y)
+ m3 <- mean(y3)
+ v3 <- var(y3)
+ ll3 <- exp(m3 - tcrit*sqrt(v3/n))
+ ul3 <- exp(m3 + tcrit*sqrt(v3/n))
+ m3 <- exp(m3)
+ se3 <- (ul3 - ll3)/(2*tcrit)
+ }
+ # -------- Harmonic Mean ----------
+ if (min(y) <= 0) {
+   m4 <- NA
+   se4 <- NA
+   ll4 <- NA
+   ul4 <- NA
+ } else {
+ y4 <- 1/y
+ m4 <- mean(y4)
+ v4 <- var(y4)
+ ul0 <- m4 - tcrit*sqrt(v4/n)
+ if (ul0 <= 0) {
+   ul4 <- NA
+ } else {
+   ul4 <- 1/(m4 - tcrit*sqrt(v4/n))
+ }
+ ll4 <- 1/(m4 + tcrit*sqrt(v4/n))
+ m4 <- 1/m4
+ se4 <- (ul4 - ll4)/(2*tcrit)
+ }
+ out2 <- t(c(m2, se2, ll2, ul2))
+ out3 <- t(c(m3, se3, ll3, ul3))
+ out4 <- t(c(m4, se4, ll4, ul4))
+ out <- rbind(out2, out3, out4)
+ colnames(out) <- c("Estimate", "SE",  "LL", "UL")
+ rownames(out) <- c("Square-root", "Geometric", "Harmonic")
  return(out)
 }
 
@@ -135,8 +253,8 @@ ci.mean.fpc <- function(alpha, m, sd, n, N) {
 #' ci.stdmean(.05, 24.5, 3.65, 40, 20)
 #'
 #' # Should return:
-#' # Estimate  adj Estimate        SE        LL       UL
-#' # 1.232877      1.209015 0.2124335 0.8165146 1.649239
+#' # Estimate adj Estimate      SE     LL    UL
+#' #   1.2329        1.209 0.21244 0.8165 1.6493
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -145,17 +263,17 @@ ci.stdmean <- function(alpha, m, sd, n, h) {
  z <- qnorm(1 - alpha/2)
  df <- n - 1
  adj <- 1 - 3/(4*df - 1)
- est <- (m - h)/sd
- estu <- adj*est
+ est <- round((m - h)/sd, 4)
+ estu <- round(adj*est, 4)
  se <- sqrt(est^2/(2*df) + 1/df)
- ll <- est - z*se
- ul <- est + z*se
- out <- t(c(est, estu, se, ll, ul))
+ ll <- round(est - z*se, 4)
+ ul <- round(est + z*se, 4)
+ out <- t(c(est, estu, round(se, 5), ll, ul))
  colnames(out) <- c("Estimate", "adj Estimate", "SE", "LL", "UL")
  rownames(out) <- ""
  return(out)
 }
-	
+
 
 #  ci.mean2 ==================================================================
 #' Confidence interval for a 2-group mean difference
@@ -167,6 +285,8 @@ ci.stdmean <- function(alpha, m, sd, n, h) {
 #' standard deviations, and sample sizes. Also computes equal variance and
 #' unequal variance independent-samples t-tests. Use the t.test function for
 #' raw data input.
+#'
+#' For more details, see Section 2.3 of Bonett (2021, Volume 1)
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -192,17 +312,18 @@ ci.stdmean <- function(alpha, m, sd, n, h) {
 #' @references
 #' \insertRef{Snedecor1980}{statpsych}
 #'
+#' \insertRef{Bonett2021}{statpsych}
+#'
 #'
 #' @examples
-#' ci.mean2(.05, 15.4, 10.3, 2.67, 2.15, 30, 20)
-#'
+#' ci.mean2(.05, 19.4, 11.3, 2.70, 2.10, 40, 40)
 #' # Should return:
-#' #                              Estimate       SE        t      df      
-#' # Equal Variances Assumed:          5.1 1.602248 3.183029 48.0000 
-#' # Equal Variances Not Assumed:      5.1 1.406801 3.625247 44.1137 
-#' #                                          p       LL       UL
-#' # Equal Variances Assumed:      0.0025578586 1.878465 8.321535
-#' # Equal Variances Not Assumed:  0.0007438065 2.264986 7.935014
+#' #                              Estimate        SE       t    df p
+#' # Equal Variances Assumed:          8.1 0.5408327 14.9769 78.00 0
+#' # Equal Variances Not Assumed:      8.1 0.5408327 14.9769 73.54 0
+#' #                                    LL       UL
+#' # Equal Variances Assumed:     7.023285 9.176715
+#' # Equal Variances Not Assumed: 7.022256 9.177744
 #'
 #'
 #' @importFrom stats qt
@@ -215,15 +336,18 @@ ci.mean2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
  v2 <- sd2^2
  vp <- ((n1 - 1)*v1 + (n2 - 1)*v2)/df1
  se1 <- sqrt(vp/n1 + vp/n2)
- t1 <- est/se1
- p1 <- 2*(1 - pt(abs(t1),df1))
+ t1 <- round(est/se1, 4)
+ pval1 <- 2*(1 - pt(abs(t1), df1))
+ p1 <- round(pval1, 5)
  tcrit1 <- qt(1 - alpha/2, df1)
  ll1 <- est - tcrit1*se1
  ul1 <- est + tcrit1*se1
  se2 <- sqrt(v1/n1 + v2/n2)
- t2 <- est/se2
+ t2 <- round(est/se2, 4)
  df2 <- (se2^4)/(v1^2/(n1^3 - n1^2) + v2^2/(n2^3 - n2^2))
- p2 <- 2*(1 - pt(abs(t2),df2))
+ df2 <- round(df2, 2)
+ pval2 <- 2*(1 - pt(abs(t2), df2))
+ p2 <- round(pval2, 5)
  tcrit2 <- qt(1 - alpha/2, df2)
  ll2 <- est - tcrit2*se2
  ul2 <- est + tcrit2*se2
@@ -248,6 +372,8 @@ ci.mean2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' Satterthwaite adjustment to the degrees of freedom is used with the 
 #' unequal variance method. 
 #'
+#' For more details, see Section 3.3 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param     alpha  	alpha level for 1-alpha confidence
 #' @param     m     	vector of estimated group means
@@ -270,21 +396,34 @@ ci.mean2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' @references
 #' \insertRef{Snedecor1980}{statpsych}
 #'
+#' \insertRef{Bonett2021}{statpsych}
+#'
 #'
 #' @examples
+#' m <- c(24.9, 23.1, 16.4)
+#' sd <- c(5.21, 4.67, 4.98)
+#' n <- c(30, 30, 30)
+#' v <- c(.5, .5, -1)
+#' ci.lc.mean.bs(.05, m, sd, n, v)
+#'
+#' # Should return:
+#' #                              Estimate       SE      t    df p       LL       UL
+#' # Equal Variances Assumed:          7.6 1.108703 6.8549 87.00 0 5.396332 9.803668
+#' # Equal Variances Not Assumed:      7.6 1.111135 6.8399 57.59 0 5.375484 9.824516
+#'
 #' m <- c(33.5, 37.9, 38.0, 44.1)
 #' sd <- c(3.84, 3.84, 3.65, 4.98)
-#' n <- c(10,10,10,10)
+#' n <- c(10, 10, 10, 10)
 #' v <- c(.5, .5, -.5, -.5)
 #' ci.lc.mean.bs(.05, m, sd, n, v)
 #'
 #' # Should return:
-#' #                              Estimate       SE         t       df 
-#' # Equal Variances Assumed:        -5.35 1.300136 -4.114955 36.00000 
-#' # Equal Variances Not Assumed:    -5.35 1.300136 -4.114955 33.52169 
-#' #                                         p         LL        UL
-#' # Equal Variances Assumed:     0.0002152581  -7.986797 -2.713203
-#' # Equal Variances Not Assumed: 0.0002372436  -7.993583 -2.706417
+#' #                              Estimate       SE      t    df       p 
+#' # Equal Variances Assumed:        -5.35 1.300136 -4.115 36.00 0.00022 
+#' # Equal Variances Not Assumed:    -5.35 1.300136 -4.115 33.52 0.00024 
+#' #                                     LL        UL
+#' # Equal Variances Assumed:     -7.986797 -2.713203
+#' # Equal Variances Not Assumed: -7.993583 -2.706417
 #'
 #'
 #' @importFrom stats qt
@@ -296,16 +435,19 @@ ci.lc.mean.bs <- function(alpha, m, sd, n, v) {
  df1 <- sum(n) - k
  v1 <- sum((n - 1)*sd^2)/df1
  se1 <- sqrt(v1*t(v)%*%solve(diag(n))%*%v)
- t1 <- est/se1
+ t1 <- round(est/se1, 4)
  p1 <- 2*(1 - pt(abs(t1),df1))
+ p1 <- round(p1, 5)
  tcrit1 <- qt(1 - alpha/2, df1)
  ll1 <- est - tcrit1*se1
  ul1 <- est + tcrit1*se1
  v2 <- diag(sd^2)%*%(solve(diag(n)))
  se2 <- sqrt(t(v)%*%v2%*%v)
- t2 <- est/se2
+ t2 <- round(est/se2, 4)
  df2 <- (se2^4)/sum(((v^4)*(sd^4)/(n^2*(n - 1))))
+ df2 <- round(df2, 2)
  p2 <- 2*(1 - pt(abs(t2),df2))
+ p2 <- round(p2, 5)
  tcrit2 <- qt(1 - alpha/2, df2)
  ll2 <- est - tcrit2*se2
  ul2 <- est + tcrit2*se2
@@ -314,6 +456,80 @@ ci.lc.mean.bs <- function(alpha, m, sd, n, v) {
  out <- rbind(out1, out2)
  colnames(out) <- c("Estimate", "SE", "t", "df", "p", "LL", "UL")
  rownames(out) <- c("Equal Variances Assumed:", "Equal Variances Not Assumed:")
+ return(out)
+}
+
+
+#  ci.lc.mean.scheffe =========================================================
+#' Scheffe confidence interval for a linear contrast of means in a 
+#' between-subjects design
+#' 
+#'
+#' @description
+#' Computes a Scheffe confidence interval for a linear contrast of population
+#' means in a between-subjects design. A Scheffe p-value is computed for the
+#' test statistic. The Scheffe method assumes equal population variances. This
+#' function is useful in exploratory studies where the linear contrast of 
+#' means was not planned but was suggested by the pattern of sample means. Use 
+#' the \link[statpsych]{ci.lc.mean.bs} function with a Bonferroni adjusted alpha
+#' value to compute simultaneous confidence intervals for two or more planned 
+#' linear contrasts of means.
+#'
+#'
+#' @param     alpha  	alpha level for 1-alpha confidence
+#' @param     m     	vector of estimated group means
+#' @param     sd    	vector of estimated group standard deviations
+#' @param     n     	vector of sample sizes
+#' @param     v     	vector of between-subjects contrast coefficients
+#' 
+#'
+#' @return 
+#' Returns a 2-row matrix. The columns are:
+#' * Estimate - estimated linear contrast
+#' * SE - standard error
+#' * t - t test statistic
+#' * df - degrees of freedom
+#' * p - two-sided Scheffe p-value
+#' * LL - lower limit of the Scheffe confidence interval
+#' * UL - upper limit of the Scheffe confidence interval
+#' 
+#' 
+#' @references
+#' \insertRef{Snedecor1980}{statpsych}
+#'
+#'
+#' @examples
+#'
+#' m <- c(33.5, 37.9, 38.0, 44.1)
+#' sd <- c(3.49, 3.84, 3.65, 4.98)
+#' n <- c(10, 10, 10, 10)
+#' v <- c(.5, .5, -.5, -.5)
+#' ci.lc.mean.scheffe(.05, m, sd, n, v)
+#'
+#' # Should return:
+#' #  Estimate       SE       t       p        LL        UL
+#' #     -5.35 1.275231 -4.1953 0.00228 -9.089451 -1.610549
+#'
+#'
+#' @importFrom stats qt
+#' @importFrom stats pt
+#' @export
+ci.lc.mean.scheffe <- function(alpha, m, sd, n, v) {
+ est <- t(v)%*%m 
+ a <- length(m)
+ df1 <- a - 1
+ df2 <- sum(n) - a
+ v1 <- sum((n - 1)*sd^2)/df2
+ se <- sqrt(v1*t(v)%*%solve(diag(n))%*%v)
+ t <- round(est/se, 4)
+ pval <- 1 - pf(t^2/df1, df1, df2)
+ p <- round(pval, 5)
+ crit <- sqrt(df1*qf(1 - alpha, df1, df2))
+ ll <- est - crit*se
+ ul <- est + crit*se
+ out <- t(c(est, se, t, p, ll, ul))
+ colnames(out) <- c("Estimate", "SE", "t", "p", "LL", "UL")
+ rownames(out) <- ""
  return(out)
 }
 
@@ -329,6 +545,8 @@ ci.lc.mean.bs <- function(alpha, m, sd, n, v) {
 #' using estimated means, estimated standard deviations, and samples sizes as 
 #' input. A Satterthwaite adjustment to the degrees of freedom is used to 
 #' improve the accuracy of the confidence intervals. 
+#'
+#' For more details, see Section 3.1 of Bonett (2021, Volume 1)
 #'
 #'
 #' @param  alpha   alpha level for simultaneous 1-alpha confidence
@@ -352,6 +570,8 @@ ci.lc.mean.bs <- function(alpha, m, sd, n, v) {
 #' @references
 #' \insertRef{Games1976}{statpsych}
 #'
+#' \insertRef{Bonett2021}{statpsych}
+#'
 #'
 #' @examples
 #' m <- c(12.86, 17.57, 26.29, 30.21)
@@ -360,13 +580,13 @@ ci.lc.mean.bs <- function(alpha, m, sd, n, v) {
 #' ci.tukey(.05, m, sd, n)
 #'
 #' # Should return:
-#' #     Estimate       SE          t       df           p        LL         UL
-#' # 1 2    -4.71 4.139530 -1.1378102 37.99200 0.668806358 -15.83085  6.4108517
-#' # 1 3   -13.43 4.427673 -3.0331960 37.51894 0.021765570 -25.33172 -1.5282764
-#' # 1 4   -17.35 4.490074 -3.8640790 37.29278 0.002333937 -29.42281 -5.2771918
-#' # 2 3    -8.72 4.399497 -1.9820446 37.39179 0.212906199 -20.54783  3.1078269
-#' # 2 4   -12.64 4.462292 -2.8326248 37.14275 0.035716267 -24.64034 -0.6396589
-#' # 3 4    -3.92 4.730817 -0.8286096 37.97652 0.840551420 -16.62958  8.7895768
+#' #     Estimate       SE       t    df       p        LL         UL
+#' # 1 2    -4.71 4.139530 -1.1378 37.99 0.66881 -15.83085  6.4108517
+#' # 1 3   -13.43 4.427673 -3.0332 37.52 0.02177 -25.33172 -1.5282764
+#' # 1 4   -17.35 4.490074 -3.8641 37.29 0.00233 -29.42281 -5.2771918
+#' # 2 3    -8.72 4.399497 -1.9820 37.39 0.21291 -20.54783  3.1078269
+#' # 2 4   -12.64 4.462292 -2.8326 37.14 0.03572 -24.64034 -0.6396589
+#' # 3 4    -3.92 4.730817 -0.8286 37.98 0.84055 -16.62958  8.7895768
 #'
 #'
 #' @importFrom stats qtukey
@@ -383,10 +603,12 @@ ci.tukey <-function(alpha, m, sd, n) {
  v2 <- outer(v2, v2, "+")
  df <- v1^2/v2
  df <- df[lower.tri(df)]
+ df <- round(df, 2)
  SE <- sqrt(v1[lower.tri(v1)])
- t <- Estimate/SE
+ t <- round(Estimate/SE, 4)
  q <- qtukey(p = 1 - alpha, nmeans = a, df = df)/sqrt(2)
- p <- 1 - ptukey(sqrt(2)*abs(t), nmeans = a, df = df)
+ pval <- 1 - ptukey(sqrt(2)*abs(t), nmeans = a, df = df)
+ p <- round(pval, 5)
  LL <- Estimate - q*SE
  UL <- Estimate + q*SE
  pair <- t(combn(seq(1:a), 2))
@@ -403,6 +625,8 @@ ci.tukey <-function(alpha, m, sd, n) {
 #' Computes a confidence interval for a ratio of population means of 
 #' ratio-scale measurements in a 2-group design. Equality of variances 
 #' is not assumed.
+#'
+#' For more details, see Section 2.5 of Bonett (2021, Volume 1)
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -421,6 +645,8 @@ ci.tukey <-function(alpha, m, sd, n) {
 #'
 #' @references
 #' \insertRef{Bonett2020b}{statpsych}
+#'
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -480,6 +706,9 @@ ci.ratio.mean2 <- function(alpha, y1, y2){
 #' experimental or nonexperimental designs. Equality of variances is not 
 #' assumed.
 #'
+#' For more details, see Section 2.4 of Bonett (2021, Volume 1)
+#'
+#'
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  m1     estimated mean for group 1
 #' @param  m2     estimated mean for group 2
@@ -501,16 +730,18 @@ ci.ratio.mean2 <- function(alpha, y1, y2){
 #' @references
 #' \insertRef{Bonett2008}{statpsych}
 #'
+#' \insertRef{Bonett2021}{statpsych}
+#'
 #'
 #' @examples
-#' ci.stdmean2(.05, 35.1, 26.7, 7.32, 6.98, 30, 30)
+#' ci.stdmean2(.05, 20.9, 19.1, 3.85, 3.19, 50, 50)
 #' 
 #' # Should return:
-#' #                          Estimate  adj Estimate        SE        LL       UL
-#' # Unweighted standardizer: 1.174493      1.159240 0.2844012 0.6170771 1.731909
-#' # Weighted standardizer:   1.174493      1.159240 0.2802826 0.6251494 1.723837
-#' # Group 1 standardizer:    1.147541      1.117605 0.2975582 0.5643375 1.730744
-#' # Group 2 standardizer:    1.203438      1.172044 0.3120525 0.5918268 1.815050
+#' #                          Estimate adj Estimate      SE     LL     UL
+#' # Unweighted standardizer:   0.5091       0.5052 0.20539 0.1066 0.9117
+#' # Weighted standardizer:     0.5091       0.5052 0.20328 0.1107 0.9076
+#' # Group 1 standardizer:      0.4675       0.4603 0.19144 0.0923 0.8427
+#' # Group 2 standardizer:      0.5643       0.5556 0.23105 0.1114 1.0171
 #'
 #'
 #' @importFrom stats qnorm
@@ -547,10 +778,10 @@ ci.stdmean2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
  se4 <- sqrt(est4^2/(2*df2) + 1/df2 + v1/(df1*v2))
  ll4 <- est4 - z*se4
  ul4 <- est4 + z*se4
- out1 <- t(c(est1, est1u, se1, ll1, ul1))
- out2 <- t(c(est2, est2u, se2, ll2, ul2))
- out3 <- t(c(est3, est3u, se3, ll3, ul3))
- out4 <- t(c(est4, est4u, se4, ll4, ul4))
+ out1 <- t(c(round(est1, 4), round(est1u, 4), round(se1, 5), round(ll1, 4), round(ul1, 4)))
+ out2 <- t(c(round(est2, 4), round(est2u, 4), round(se2, 5), round(ll2, 4), round(ul2, 4)))
+ out3 <- t(c(round(est3, 4), round(est3u, 4), round(se3, 5), round(ll3, 4), round(ul3, 4)))
+ out4 <- t(c(round(est4, 4), round(est4u, 4), round(se4, 5), round(ll4, 4), round(ul4, 4)))
  out <- rbind(out1, out2, out3, out4)
  colnames(out) <- c("Estimate", "adj Estimate", "SE", "LL", "UL")
  rownames1 <- c("Unweighted standardizer:", "Weighted standardizer:")
@@ -600,10 +831,10 @@ ci.stdmean2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' ci.stdmean.strat(.05, 33.2, 30.8, 10.5, 11.2, 200, 200, .533)
 #'
 #' # Should return:
-#' #                         Estimate  adj Estimate         SE         LL        UL
-#' # Weighted standardizer: 0.2215549     0.2211371 0.10052057 0.02453817 0.4185716
-#' # Group 1 standardizer:  0.2285714     0.2277089 0.10427785 0.02419059 0.4329523
-#' # Group 2 standardizer:  0.2142857     0.2277089 0.09776049 0.02267868 0.4058927
+#' #                        Estimate adj Estimate      SE     LL     UL
+#' # Weighted standardizer:   0.2216       0.2211 0.10052 0.0245 0.4186
+#' # Group 1 standardizer:    0.2286       0.2277 0.10428 0.0242 0.4330
+#' # Group 2 standardizer:    0.2143       0.2277 0.09776 0.0227 0.4059
 #'
 #'
 #' @importFrom stats qnorm
@@ -634,9 +865,9 @@ ci.stdmean.strat <- function(alpha, m1, m2, sd1, sd2, n1, n2, p1) {
  se4 <- sqrt(est4^2/(2*df2) + 1/df2 + v1/(df1*v2))
  ll4 <- est4 - z*se4
  ul4 <- est4 + z*se4
- out1 <- t(c(est1, est1u, se1, ll1, ul1))
- out3 <- t(c(est3, est3u, se3, ll3, ul3))
- out4 <- t(c(est4, est4u, se4, ll4, ul4))
+ out1 <- t(c(round(est1, 4), round(est1u, 4), round(se1, 5), round(ll1, 4), round(ul1, 4)))
+ out3 <- t(c(round(est3, 4), round(est3u, 4), round(se3, 5), round(ll3, 4), round(ul3, 4)))
+ out4 <- t(c(round(est4, 4), round(est4u, 4), round(se4, 5), round(ll4, 4), round(ul4, 4)))
  out <- rbind(out1, out3, out4)
  colnames(out) <- c("Estimate", "adj Estimate", "SE", "LL", "UL")
  rownames1 <- c("Weighted standardizer:")
@@ -659,6 +890,8 @@ ci.stdmean.strat <- function(alpha, m1, m2, sd1, sd2, n1, n2, p1) {
 #' group 1 standardizer is useful in both experimental and nonexperimental
 #' designs. Equality of variances is not assumed.
 #'
+#' For more details, see Section 3.4 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  m      vector of estimated group means
@@ -679,19 +912,21 @@ ci.stdmean.strat <- function(alpha, m1, m2, sd1, sd2, n1, n2, p1) {
 #' @references
 #' \insertRef{Bonett2008}{statpsych}
 #'
+#' \insertRef{Bonett2021}{statpsych}
+#'
 #'
 #' @examples
-#' m <- c(33.5, 37.9, 38.0, 44.1)
-#' sd <- c(3.84, 3.84, 3.65, 4.98)
-#' n <- c(10,10,10,10)
+#' m <- c(6.94, 7.15, 4.60, 3.68)
+#' sd <- c(2.21, 2.83, 2.29, 1.90)
+#' n <- c(40, 40, 40, 40)
 #' v <- c(.5, .5, -.5, -.5)
 #' ci.lc.stdmean.bs(.05, m, sd, n, v)
 #'
 #' # Should return:
-#' #                           Estimate  adj Estimate        SE        LL         UL
-#' # Unweighted standardizer: -1.301263     -1.273964 0.3692800 -2.025039 -0.5774878
-#' # Weighted standardizer:   -1.301263     -1.273964 0.3514511 -1.990095 -0.6124317
-#' # Group 1 standardizer:    -1.393229     -1.273810 0.4849842 -2.343781 -0.4426775
+#' #                          Estimate adj Estimate      SE     LL     UL
+#' # Unweighted standardizer:   1.2459       1.2399 0.17621 0.9005 1.5912 
+#' # Weighted standardizer:     1.2459       1.2399 0.17313 0.9065 1.5852
+#' # Group 1 standardizer:      1.3145       1.2890 0.22515 0.8732 1.7558
 #'
 #'
 #' @importFrom stats qnorm
@@ -730,9 +965,9 @@ ci.lc.stdmean.bs <- function(alpha, m, sd, n, v) {
  se3 <- sqrt(a1 + a2)
  ll3 <- est3 - z*se3
  ul3 <- est3 + z*se3
- out1 <- t(c(est1, est1u, se1, ll1, ul1))
- out2 <- t(c(est2, est2u, se2, ll2, ul2))
- out3 <- t(c(est3, est3u, se3, ll3, ul3))
+ out1 <- t(c(round(est1, 4), round(est1u, 4), round(se1, 5), round(ll1, 4), round(ul1, 4)))
+ out2 <- t(c(round(est2, 4), round(est2u, 4), round(se2, 5), round(ll2, 4), round(ul2, 4)))
+ out3 <- t(c(round(est3, 4), round(est3u, 4), round(se3, 5), round(ll3, 4), round(ul3, 4)))
  out <- rbind(out1, out2, out3)
  colnames(out) <- c("Estimate", "adj Estimate", "SE", "LL", "UL")
  rownames(out) <- c("Unweighted standardizer:", "Weighted standardizer:", "Group 1 standardizer:")
@@ -748,6 +983,8 @@ ci.lc.stdmean.bs <- function(alpha, m, sd, n, v) {
 #' difference using the estimated means, estimated standard deviations, 
 #' estimated correlation, and sample size. Also computes a paired-samples
 #' t-test. Use the t.test function for raw data input.
+#'
+#' For more details, see Section 4.2 of Bonett (2021, Volume 1)
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -770,12 +1007,18 @@ ci.lc.stdmean.bs <- function(alpha, m, sd, n, v) {
 #' * UL - upper limit of the confidence interval
 #' 
 #' 
+#' @references
+#' \insertRef{Snedecor1980}{statpsych}
+#'
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' ci.mean.ps(.05, 58.2, 51.4, 7.43, 8.92, .537, 30)
 #'
 #' # Should return:
-#' # Estimate       SE        t df            p       LL       UL
-#' #      6.8 1.455922 4.670578 29  6.33208e-05 3.822304 9.777696
+#' # Estimate       SE      t df      p       LL       UL
+#' #      6.8 1.455922 4.6706 29  6e-05 3.822304 9.777696
 #'
 #'
 #' @importFrom stats qt
@@ -788,8 +1031,9 @@ ci.mean.ps <- function(alpha, m1, m2, sd1, sd2, cor, n) {
  vd <- sd1^2 + sd2^2 - 2*cor*sd1*sd2
  est <- m1 - m2
  se <- sqrt(vd/n)
- t <- est/se
- p <- 2*(1 - pt(abs(t), df))
+ t <- round(est/se, 4)
+ pval <- 2*(1 - pt(abs(t), df))
+ p <- round(pval, 5)
  ll <- est - tcrit*se
  ul <- est + tcrit*se
  out <- t(c(est, se, t, df, p, ll, ul))
@@ -807,6 +1051,8 @@ ci.mean.ps <- function(alpha, m1, m2, sd1, sd2, cor, n) {
 #' Compute a confidence interval for a ratio of population means of 
 #' ratio-scale measurements in a paired-samples design. Equality of 
 #' variances is not assumed.
+#'
+#' For more details, see Section 4.4 of Bonett (2021, Volume 1)
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -826,15 +1072,17 @@ ci.mean.ps <- function(alpha, m1, m2, sd1, sd2, cor, n) {
 #' @references
 #' \insertRef{Bonett2020b}{statpsych}
 #'
+#' \insertRef{Bonett2021}{statpsych}
+#'
 #'
 #' @examples
-#' y1 <- c(3.3, 3.6, 3.0, 3.1, 3.9, 4.2, 3.5, 3.3)
-#' y2 <- c(3.0, 3.1, 2.7, 2.6, 3.2, 3.8, 3.2, 3.0)
+#' y1 = c(76.41, 66.91, 81.06, 74.78, 83.76, 89.31, 78.78, 87.06, 82.61, 76.74, 88.33, 86.18)
+#' y2 = c(59.85, 60.64, 84.86, 68.16, 71.53, 86.18, 67.30, 65.46, 83.50, 66.76, 88.37, 65.02)
 #' ci.ratio.mean.ps(.05, y1, y2)
 #'
 #' # Should return:
-#' #  Mean1 Mean2 Mean1/Mean2      LL       UL
-#' # 3.4875 3.075    1.134146 1.09417 1.175583
+#' #    Mean1   Mean2 Mean1/Mean2       LL       UL
+#' # 80.99417 72.3025    1.120213 1.040747 1.205745
 #'
 #'
 #' @importFrom stats qt
@@ -882,6 +1130,8 @@ ci.ratio.mean.ps <- function(alpha, y1, y2){
 #' and single measurement standard deviation standardizers are used. Equality 
 #' of variances is not assumed.
 #'
+#' For more details, see Section 4.3 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  m1     estimated mean for measurement 1
@@ -904,15 +1154,17 @@ ci.ratio.mean.ps <- function(alpha, y1, y2){
 #' @references
 #' \insertRef{Bonett2008}{statpsych}
 #'
+#' \insertRef{Bonett2021}{statpsych}
+#'
 #'
 #' @examples
-#' ci.stdmean.ps(.05, 110.4, 102.1, 15.3, 14.6, .75, 25)
+#' ci.stdmean.ps(.05, 602.4, 705.6, 33.17, 51.08, .769, 8)
 #'
 #' # Should return:
-#' #                              Estimate  adj Estimate        SE        LL        UL
-#' # Unweighted standardizer:    0.5550319     0.5433457 0.1609934 0.2394905 0.8705732
-#' # Measurement 1 standardizer: 0.5424837     0.5253526 0.1615500 0.2258515 0.8591158
-#' # Measurement 2 standardizer: 0.5684932     0.5505407 0.1692955 0.2366800 0.9003063
+#' #                             Estimate adj Estimate      SE      LL      UL
+#' # Unweighted standardizer:     -2.3963      -2.2185 0.65209 -3.6744 -1.1182
+#' # Measurement 1 standardizer:  -3.1112      -2.7656 0.91362 -4.9019 -1.3206
+#' # Measurement 2 standardizer:  -2.0204      -1.7959 0.59328 -3.1832 -0.8576
 #'
 #'
 #' @importFrom stats qnorm
@@ -941,9 +1193,9 @@ ci.stdmean.ps <- function(alpha, m1, m2, sd1, sd2, cor, n) {
  se4 <- sqrt(est4^2/(2*df) + vd/(df*v2))
  ll4 <- est4 - z*se4
  ul4 <- est4 + z*se4
- out1 <- t(c(est1, est1u, se1, ll1, ul1))
- out3 <- t(c(est3, est3u, se3, ll3, ul3))
- out4 <- t(c(est4, est4u, se4, ll4, ul4))
+ out1 <- t(c(round(est1, 4), round(est1u, 4), round(se1, 5), round(ll1, 4), round(ul1, 4)))
+ out3 <- t(c(round(est3, 4), round(est3u, 4), round(se3, 5), round(ll3, 4), round(ul3, 4)))
+ out4 <- t(c(round(est4, 4), round(est4u, 4), round(se4, 5), round(ll4, 4), round(ul4, 4)))
  out <- rbind(out1, out3, out4)
  colnames(out) <- c("Estimate", "adj Estimate", "SE", "LL", "UL")
  rownames1 <- c("Unweighted standardizer:")
@@ -964,6 +1216,8 @@ ci.stdmean.ps <- function(alpha, m1, m2, sd1, sd2, cor, n) {
 #' in a within-subjects design. Equality of variances is not assumed, but the
 #' correlations among the repeated measures are assumed to be approximately 
 #' equal.
+#'
+#' For more details, see Section 4.7 of Bonett (2021, Volume 1)
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -986,6 +1240,8 @@ ci.stdmean.ps <- function(alpha, m1, m2, sd1, sd2, cor, n) {
 #' @references
 #' \insertRef{Bonett2008}{statpsych}
 #'
+#' \insertRef{Bonett2021}{statpsych}
+#'
 #'
 #' @examples
 #' m <- c(33.5, 37.9, 38.0, 44.1)
@@ -994,9 +1250,9 @@ ci.stdmean.ps <- function(alpha, m1, m2, sd1, sd2, cor, n) {
 #' ci.lc.stdmean.ws(.05, m, sd, .672, 20, q)
 #'
 #' # Should return:
-#' #                           Estimate  adj Estimate        SE        LL         UL
-#' # Unweighted standardizer: -1.301263     -1.266557 0.3147937 -1.918248 -0.6842788
-#' # Level 1 standardizer:    -1.393229     -1.337500 0.3661824 -2.110934 -0.6755248
+#' #                          Estimate adj Estimate      SE      LL      UL
+#' # Unweighted standardizer:  -1.3013      -1.2666 0.31479 -1.9182 -0.6843
+#' # Level 1 standardizer:     -1.3932      -1.3375 0.36618 -2.1109 -0.6755
 #'
 #'
 #' @importFrom stats qnorm
@@ -1027,8 +1283,8 @@ ci.lc.stdmean.ws <- function(alpha, m, sd, cor, n, q) {
  se2 <- sqrt(v1 + (v4 + 2*v5)/(df*s1^2))
  ll2 <- est2 - z*se2
  ul2 <- est2 + z*se2
- out1 <- t(c(est1, est1u, se1, ll1, ul1))
- out2 <- t(c(est2, est2u, se2, ll2, ul2))
+ out1 <- t(c(round(est1, 4), round(est1u, 4), round(se1, 5), round(ll1, 4), round(ul1, 4)))
+ out2 <- t(c(round(est2, 4), round(est2u, 4), round(se2, 5), round(ll2, 4), round(ul2, 4)))
  out <- rbind(out1, out2)
  colnames(out) <- c("Estimate", "adj Estimate", "SE", "LL", "UL")
  rownames(out) <- c("Unweighted standardizer:", "Level 1 standardizer:")
@@ -1045,6 +1301,8 @@ ci.lc.stdmean.ws <- function(alpha, m, sd, cor, n, q) {
 #' from the median (MAD). The MAD is a robust alternative to the standard 
 #' deviation.
 #'
+#' For more details, see Section 1.26 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
 #' @param  y       vector of scores
@@ -1060,6 +1318,8 @@ ci.lc.stdmean.ws <- function(alpha, m, sd, cor, n, q) {
 #'
 #' @references
 #' \insertRef{Bonett2003b}{statpsych}
+#'
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -1105,6 +1365,8 @@ ci.mad <- function(alpha, y) {
 #' Computes a confidence interval for a ratio of population MADs (mean absolute
 #' deviation from median) in a 2-group design.
 #'
+#' For more details, see Section 2.10 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
 #' @param  y1      vector of scores for group 1
@@ -1122,6 +1384,8 @@ ci.mad <- function(alpha, y) {
 #'
 #' @references
 #' \insertRef{Bonett2003b}{statpsych}
+#'
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -1164,6 +1428,53 @@ ci.ratio.mad2 <- function(alpha, y1, y2) {
  ul <- exp(log(c*est) + z*se)
  out <- t(c(c1*mad1, c2*mad2, c*est, ll, ul))
  colnames(out) <- c("MAD1", "MAD2", "MAD1/MAD2", "LL", "UL")
+ rownames(out) <- ""
+ return(out)
+}
+
+
+#  ci.sd ====================================================================== 
+#' Confidence interval for a standard deviation 
+#'
+#'                     
+#' @description
+#' Computes the traditional confidence interval for a population standard 
+#' deviation using a sample estimate of the standard deviation. The traditional
+#' confidence interval assumes normality and is hypersensitive to minor 
+#' violations of this assumption. This function should be used only if the 
+#' data appear to come from an approximate normal or mildly platykurtic 
+#' distribution.
+#' 
+#'
+#' @param  alpha  alpha value for 1-alpha confidence 
+#' @param  sd     estimated standard deviation
+#' @param  n      sample size
+#'
+#'
+#' @return 
+#' Returns a 1-row matrix. The columns are:
+#' * Estimate - estimated standard deviation (from input)
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
+#'
+#'
+#' @examples
+#' ci.sd(.05, 4.65, 50)
+#'
+#' # Should return:
+#' #  Estimate       LL       UL
+#' #      4.65 3.884303  5.79452
+#'  
+#' 
+#' @importFrom stats qchisq
+#' @export
+ci.sd <- function(alpha, sd, n) {
+ c1 <- qchisq(1 - alpha/2, (n - 1))
+ c2 <- qchisq(alpha/2, (n - 1))
+ ll <- sqrt((n - 1)*sd^2/c1)
+ ul <- sqrt((n - 1)*sd^2/c2)
+ out <- t(c(sd, ll, ul))
+ colnames(out) <- c("Estimate", "LL", "UL")
  rownames(out) <- ""
  return(out)
 }
@@ -1267,6 +1578,8 @@ ci.ratio.sd2 <- function(alpha, y1, y2) {
 #' Computes a confidence interval for a ratio of population MADs (mean absolute
 #' deviation from median) in a paired-samples design.
 #'
+#' For more details, see Section 4.24 of Bonett (2021, Volume 1)
+#'
 #' @param  alpha   alpha level for 1-alpha confidence
 #' @param  y1      vector of measurement 1 scores
 #' @param  y2      vector of measurement 2 scores (paired with y1)
@@ -1283,6 +1596,8 @@ ci.ratio.sd2 <- function(alpha, y1, y2) {
 #'
 #' @references
 #' \insertRef{Bonett2003a}{statpsych}
+#'
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -1345,6 +1660,8 @@ ci.ratio.mad.ps <- function(alpha, y1, y2) {
 #' from the confidence interval. The coefficient of variation assumes 
 #' ratio-scale scores.
 #'
+#' For more details, see Section 1.27 of Bonett (2021, Volume 1)
+#'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  m	  estimated mean 
@@ -1360,6 +1677,10 @@ ci.ratio.mad.ps <- function(alpha, y1, y2) {
 #' * UL - upper limit of the confidence interval
 #' 
 #' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' ci.cv(.05, 24.5, 3.65, 40)
 #'
@@ -1476,6 +1797,8 @@ ci.ratio.cv2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' (see \link[statpsych]{ci.cv}). An approximate standard error is 
 #' recovered from the confidence interval.
 #'
+#' For more details, see Section 1.27 of Bonett (2021, Volume 1)
+#'
 #' @param  alpha   alpha level for 1-alpha confidence
 #' @param  y       vector of scores
 #'
@@ -1490,6 +1813,8 @@ ci.ratio.cv2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #'
 #' @references
 #' \insertRef{Bonett2006}{statpsych}
+#'
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -1664,6 +1989,9 @@ ci.ratio.cod2 <-function(alpha, y1, y2) {
 #' coefficient of variation (see \link[statpsych]{ci.cv}). The 25th and 75th
 #' percentiles are computed using the type = 2 method (SAS default).
 #'
+#' For more details, see Section 1.27 of Bonett (2021, Volume 1)
+#'
+#'
 #' @param  alpha   alpha level for 1-alpha confidence
 #' @param  y       vector of scores
 #'
@@ -1677,7 +2005,9 @@ ci.ratio.cod2 <-function(alpha, y1, y2) {
 #'
 #'
 #' @references
-#' \insertRef{Bonett2006c}{statpsych}                    
+#' \insertRef{Bonett2006c}{statpsych}  
+#'
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -1746,6 +2076,8 @@ ci.cqv <- function(alpha, y) {
 #' Computes a distribution-free confidence interval for a population median.
 #' Tied scores are assumed to be rare.
 #'
+#' For more details, see Section 1.25 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
 #' @param  y       vector of scores
@@ -1762,15 +2094,16 @@ ci.cqv <- function(alpha, y) {
 #' @references
 #' \insertRef{Snedecor1980}{statpsych}
 #'
+#' \insertRef{Bonett2021}{statpsych}
+#'
 #'
 #' @examples
-#' y <- c(30.2, 20.4, 15.1, 10.2, 10.5, 60.8, 20.8, 25.0, 20.7, 30.9, 10.8, 5.1,
-#'          50.9, 40.0, 20.9, 10.8, 0, 20.5, 50.8)
+#' y <- c(25, 29, 35, 36, 36, 40, 41, 43, 44, 54)
 #' ci.median(.05, y)
 #'
 #' # Should return:
-#' #  Estimate       SE   LL   UL
-#' #      20.7 4.292277 10.8 30.9
+#' #  Estimate       SE  LL  UL
+#' #        38 3.261774  29  44
 #'
 #'
 #' @importFrom stats qnorm
@@ -1811,6 +2144,8 @@ ci.median <- function(alpha, y) {
 #' medians in a 2-group design. Tied scores within each group are assumed to be 
 #' rare.
 #'
+#' For more details, see Section 2.12 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
 #' @param  y1      vector of scores for group 1
@@ -1830,15 +2165,19 @@ ci.median <- function(alpha, y) {
 #' @references
 #' \insertRef{Bonett2002}{statpsych}
 #'
+#' \insertRef{Bonett2021}{statpsych}
+#'
 #'
 #' @examples
-#' y1 <- c(32.1, 39.8, 26.3, 35.0, 43.1, 27.0, 40.9, 37.4, 34.0, 29.2)
-#' y2 <- c(36.8, 44.0, 47.1, 42.7, 49.0, 39.6, 46.2, 31.6, 33.1, 48.4)
+#' y1 = c(70, 394, 43, 95, 62, 128, 2, 203, 81, 436, 85, 35, 
+#'         156, 1, 3, 27, 63, 181, 184, 18)
+#' y2 = c(102, 120, 78, 78, 417, 124, 86, 171, 176, 129, 230, 
+#'        194, 100, 157, 306, 411, 164, 103, 193, 312)
 #' ci.median2(.05, y1, y2)
 #'
 #' # Should return:
-#' #  Median1 Median2 Median1-Median2       SE        LL         UL
-#' #     34.5   43.35           -8.85 4.494993 -17.66002 -0.0399751
+#' #  Median1 Median2 Median1-Median2       SE        LL        UL
+#' #     75.5   160.5             -85 37.11502 -157.7441 -12.25589
 #'
 #'
 #' @importFrom stats qnorm
@@ -1887,9 +2226,11 @@ ci.median2 <- function(alpha, y1, y2) {
 #'
 #' @description
 #' Computes a distribution-free confidence interval for a ratio of population 
-#' medians of ratio-scale measurements in a 2-group design. Tied scores are
-#' within each group assumed to be rare.
+#' medians of ratio-scale measurements in a 2-group design. Tied scores 
+#' within each group are assumed to be rare.
 #' 
+#' For more details, see Section 2.12 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
 #' @param  y1      vector of scores for group 1
@@ -1907,6 +2248,8 @@ ci.median2 <- function(alpha, y1, y2) {
 #'
 #' @references
 #' \insertRef{Bonett2020b}{statpsych}
+#'
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -1974,6 +2317,8 @@ ci.ratio.median2 <- function(alpha, y1, y2) {
 #' standard errors. The sample median and standard error for each group can be
 #' computed using the \link[statpsych]{ci.median} function. 
 #'
+#' For more details, see Section 3.21 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
 #' @param  m       vector of estimated group medians
@@ -1991,6 +2336,8 @@ ci.ratio.median2 <- function(alpha, y1, y2) {
 #'
 #' @references
 #' \insertRef{Bonett2002}{statpsych}
+#'
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -2030,6 +2377,8 @@ ci.lc.median.bs <- function(alpha, m, se, v) {
 #' estimated medians. Tied scores within each measurement are assumed to be
 #' rare.
 #'
+#' For more details, see Section 4.23 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
 #' @param  y1      vector of scores for measurement 1
@@ -2050,6 +2399,8 @@ ci.lc.median.bs <- function(alpha, m, se, v) {
 #'
 #' @references
 #' \insertRef{Bonett2020}{statpsych}
+#'
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -2121,6 +2472,8 @@ ci.median.ps <- function(alpha, y1, y2) {
 #' medians in a paired-samples design. Ratio-scale measurements are assumed.
 #' Tied scores within each measurement are assumed to be rare.
 #'
+#' For more details, see Section 4.23 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
 #' @param  y1      vector of scores for measurement 1
@@ -2139,15 +2492,17 @@ ci.median.ps <- function(alpha, y1, y2) {
 #' @references
 #' \insertRef{Bonett2020b}{statpsych}
 #'
+#' \insertRef{Bonett2021}{statpsych}
+#'
 #'
 #' @examples
-#' y1 <- c(21, 4, 9, 12, 35, 18, 10, 22, 24, 1, 6, 8, 13, 16, 19)
-#' y2 <- c(67, 28, 30, 28, 52, 40, 25, 37, 44, 10, 14, 20, 28, 40, 51)
+#' y1 = c(76.41, 66.91, 81.06, 74.78, 83.76, 89.31, 78.78, 87.06, 82.61, 76.74, 88.33, 86.18)
+#' y2 = c(59.85, 60.64, 84.86, 68.16, 71.53, 86.18, 67.30, 65.46, 83.50, 66.76, 88.37, 65.02)
 #' ci.ratio.median.ps(.05, y1, y2)
 #'
 #' # Should return:
-#' # Median1  Median2   Median1/Median2        LL        UL
-#' #      13       30         0.4333333 0.3094838 0.6067451
+#' # Median1  Median2  Median1/Median2        LL        UL
+#' #  81.835    67.73         1.208253  1.069251  1.365326
 #'
 #'
 #' @importFrom stats qnorm
@@ -2214,6 +2569,8 @@ ci.ratio.median.ps <- function(alpha, y1, y2) {
 #' is a measure of effect size that can be reported along with the
 #' sign test.
 #'
+#' For more details, see Section 1.25 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
 #' @param   y       vector of y scores
@@ -2230,6 +2587,8 @@ ci.ratio.median.ps <- function(alpha, y1, y2) {
 #'
 #' @references
 #' \insertRef{Agresti1998}{statpsych}
+#'
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -2279,6 +2638,8 @@ ci.sign <- function(alpha, y, h) {
 #' which a member from subpopulation 1 has a larger score than a member from 
 #' subpopulation 2.
 #'
+#' For more details, see Section 2.12 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha   alpha level for 1-alpha confidence
 #' @param  y1      vector of scores for group 1
@@ -2296,15 +2657,17 @@ ci.sign <- function(alpha, y, h) {
 #' @references
 #' \insertRef{Sen1967}{statpsych}
 #'
+#' \insertRef{Bonett2021}{statpsych}
+#'
 #'
 #' @examples
-#' y2 <- c(36, 44, 47, 42, 49, 39, 46, 31, 33, 48)
-#' y1 <- c(32, 39, 26, 35, 43, 27, 40, 37, 34, 29)
+#' y1 <- c(9.4, 10.3, 58.3, 106.0, 31.0, 46.2, 12.0, 19.0, 135.0, 159.0)
+#' y2 <- c(14.6, 5.1, 8.1, 22.7, 6.4, 4.4, 19.0, 3.2)
 #' ci.mann(.05, y1, y2)
 #'
 #' # Should return:
 #' # Estimate        SE        LL UL
-#' #    0.795 0.1401834 0.5202456  1
+#' #  0.86875 0.1222202 0.6292028  1
 #'
 #'
 #' @importFrom stats qnorm
@@ -2354,6 +2717,8 @@ ci.mann <- function(alpha, y1, y2){
 #' between-group variance component, and 4) the omega-squared coefficient. 
 #' This function assumes equal sample sizes.
 #'
+#' For more details, see Section 3.18 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param   alpha  1 - alpha confidence 
 #' @param   m      vector of estimated group means 
@@ -2373,6 +2738,10 @@ ci.mann <- function(alpha, y1, y2){
 #' * Estimate - estimate of parameter
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -2432,110 +2801,6 @@ ci.random.anova <- function(alpha, m, sd, n) {
 }
 
 
-#  ci.cronbach ===============================================================
-#' Confidence interval for a Cronbach reliability
-#'
-#'
-#' @description
-#' Computes a confidence interval for a population Cronbach reliability. 
-#' The point estimate of Cronbach reliability assumes essentially 
-#' tau-equivalent measurements and the confidence interval assumes parallel
-#' measurements. 
-#'
-#'  
-#' @param  alpha  alpha level for 1-alpha confidence
-#' @param  rel    estimated Cronbach reliability  
-#' @param  r      number of measurements (items, raters, etc.)
-#' @param  n	  sample size
-#'
-#'
-#' @return 
-#' Returns a 1-row matrix. The columns are:
-#' * Estimate - estimated Cronbach reliability (from input)
-#' * LL - lower limit of the confidence interval
-#' * UL - upper limit of the confidence interval
-#' 
-#' 
-#' @references
-#' \insertRef{Feldt1965}{statpsych}
-#'
-#'
-#' @examples
-#' ci.cronbach(.05, .85, 7, 89)
-#'
-#' # Should return:
-#' # Estimate          SE        LL        UL
-#' #     0.85  0.02456518 0.7971254 0.8931436   
-#'  
-#' 
-#' @importFrom stats qf
-#' @export
-ci.cronbach <- function(alpha, rel, r, n) {
- if (rel > .999 | rel < .001) {stop("reliability must be between .001 and .999")}
- se <- sqrt((2*r*(1 - rel)^2)/((r - 1)*(n - 2)))
- df1 <- n - 1
- df2 <- n*(r - 1)
- f1 <- qf(1 - alpha/2, df1, df2)
- f2 <- qf(1 - alpha/2, df2, df1)
- f0 <- 1/(1 - rel)
- ll <- 1 - f1/f0
- ul <- 1 - 1/(f0*f2)
- out <- t(c(rel, se, ll, ul))
- colnames(out) = c("Estimate", "SE", "LL", "UL")
- rownames(out) <- ""
- return(out)
-}
-
-
-#  ci.reliablity =============================================================
-#' Confidence interval for a reliability coefficient
-#'
-#'
-#' @description
-#' Computes a confidence interval for a population reliability coefficient
-#' such as Cronbach's alpha or McDonald's omega using an estimate of the
-#' reliability and its standard error. The standard error can be a robust
-#' standard error or bootstrap standard error obtained from an SEM program.
-#' Use \link[statpsych]{ci.cronbach} for Cronbach's alpha if parallel
-#' measurements can be assumed.
-#'
-#'  
-#' @param  alpha  alpha level for 1-alpha confidence
-#' @param  rel    estimated reliability  
-#' @param  se     standard error of reliability
-#' @param  n	  sample size
-#'
-#'
-#' @return 
-#' Returns a 1-row matrix. The columns are:
-#' * Estimate - estimated reliability (from input)
-#' * LL - lower limit of the confidence interval
-#' * UL - upper limit of the confidence interval
-#' 
-#' 
-#' @examples
-#' ci.reliability(.05, .88, .0147, 100)
-#'
-#' # Should return:
-#' # Estimate         LL        UL
-#' #     0.88  0.8489612 0.9065575
-#'  
-#' 
-#' @importFrom stats qf
-#' @export
-ci.reliability <- function(alpha, rel, se, n) {
- if (rel > .999 | rel < .001) {stop("reliability must be between .001 and .999")}
- z <- qnorm(1 - alpha/2)
- b <- log(n/(n - 1))
- ll <- 1 - exp(log(1 - rel) - b + z*sqrt(se^2/(1 - rel)^2))
- ul <- 1 - exp(log(1 - rel) - b - z*sqrt(se^2/(1 - rel)^2))
- out <- t(c(rel, ll, ul))
- colnames(out) = c("Estimate", "LL", "UL")
- rownames(out) <- ""
- return(out)
-}
-
-
 #  ci.etasqr ================================================================= 
 #' Confidence interval for eta-squared
 #'
@@ -2545,6 +2810,8 @@ ci.reliability <- function(alpha, rel, se, n) {
 #' eta-squared, or generalized eta-squared in a fixed-factor between-subjects 
 #' design. An approximate bias adjusted estimate is computed, and an
 #' approximate standard error is recovered from the confidence interval.
+#'
+#' For more details, see Section 3.7 of Bonett (2021, Volume 1)
 #'
 #'
 #' @param  alpha    alpha value for 1-alpha confidence
@@ -2562,12 +2829,16 @@ ci.reliability <- function(alpha, rel, se, n) {
 #' * UL - upper limit of the confidence interval
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
-#' ci.etasqr(.05, .241, 3, 116)
+#' ci.etasqr(.05, .15, 2, 57)
 #'
 #' # Should return:
-#' # Eta-squared  adj Eta-squared         SE        LL        UL
-#' #       0.241        0.2213707 0.06258283 0.1040229 0.3493431
+#' # Eta-squared  adj Eta-squared       SE      LL      UL
+#' #        0.15           0.1202  0.07414  0.0102  0.3008
 #'  
 #' 
 #' @importFrom stats pf
@@ -2581,6 +2852,7 @@ ci.etasqr <- function(alpha, etasqr, df1, df2) {
  z <- qnorm(alpha2)
  F <- (etasqr/(1 - etasqr))*(df2/df1)
  adj <- 1 - (df2 + df1)*(1 - etasqr)/df2
+ adj <- round(adj, 4)
  if (adj < 0) {adj = 0}
  ul0 <- 1 - exp(log(1 - etasqr) - z*sqrt(4*etasqr/(df2 - 1)))
  du <- ul0*(df1 + df2 + 1)/(1 - ul0)
@@ -2594,6 +2866,9 @@ ci.etasqr <- function(alpha, etasqr, df1, df2) {
  ul <- du/(du + df1 + df2 + 1)
  if (ul == 0) {ul = ul0}
  se <- (ul - ll)/(2*z0)
+ se <- round(se, 5)
+ ll <- round(ll, 4)
+ ul <- round(ul, 4)
  out <- t(c(etasqr, adj, se, ll, ul))
  colnames(out) <- c("Eta-squared", "adj Eta-squared", "SE", "LL", "UL")
  rownames(out) <- ""
@@ -2608,11 +2883,13 @@ ci.etasqr <- function(alpha, etasqr, df1, df2) {
 #'
 #' @description
 #' Computes confidence intervals and tests for the AB interaction effect, 
-#' main effect of A, main efect of B, simple main effects of A, and simple main
+#' main effect of A, main effect of B, simple main effects of A, and simple main
 #' effects of B in a 2x2 mixed factorial design with a quantitative response
 #' variable where Factor A is a within-subjects factor and Factor B is a 
 #' between-subjects factor. A Satterthwaite adjustment to the degrees of 
 #' freedom is used and equality of population variances is not assumed.
+#'
+#' For more details, see Section 4.16 of Bonett (2021, Volume 1)
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
@@ -2633,6 +2910,10 @@ ci.etasqr <- function(alpha, etasqr, df1, df2) {
 #' * UL - upper limit of the confidence interval
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' y11 <- c(18, 19, 20, 17, 20, 16)
 #' y12 <- c(19, 16, 16, 14, 16, 18)
@@ -2641,14 +2922,14 @@ ci.etasqr <- function(alpha, etasqr, df1, df2) {
 #' ci.2x2.mean.mixed(.05, y11, y12, y21, y22)
 #'
 #' # Should return:
-#' #            Estimate        SE         t       df            p         LL        UL
-#' # AB:      -3.8333333 0.9803627 -3.910117 8.346534 0.0041247610 -6.0778198 -1.588847
-#' # A:        2.0833333 0.4901814  4.250128 8.346534 0.0025414549  0.9610901  3.205577
-#' # B:        3.7500000 1.0226599  3.666908 7.601289 0.0069250119  1.3700362  6.129964
-#' # A at b1:  0.1666667 0.8333333  0.200000 5.000000 0.8493605140 -1.9754849  2.308818
-#' # A at b2:  4.0000000 0.5163978  7.745967 5.000000 0.0005732451  2.6725572  5.327443
-#' # B at a1:  1.8333333 0.9803627  1.870056 9.943850 0.0911668588 -0.3527241  4.019391
-#' # B at a2:  5.6666667 1.2692955  4.464419 7.666363 0.0023323966  2.7173445  8.615989
+#' #            Estimate        SE       t   df       p         LL        UL
+#' # AB:      -3.8333333 0.9803627 -3.9101 8.35 0.00412 -6.0778198 -1.588847
+#' # A:        2.0833333 0.4901814  4.2501 8.35 0.00254  0.9610901  3.205577
+#' # B:        3.7500000 1.0226599  3.6669 7.60 0.00693  1.3700362  6.129964
+#' # A at b1:  0.1666667 0.8333333  0.2000 5.00 0.84936 -1.9754849  2.308818
+#' # A at b2:  4.0000000 0.5163978  7.7460 5.00 0.00057  2.6725572  5.327443
+#' # B at a1:  1.8333333 0.9803627  1.8701 9.94 0.09117 -0.3527241  4.019391
+#' # B at a2:  5.6666667 1.2692955  4.4644 7.67 0.00233  2.7173445  8.615989
 #'
 #'
 #' @importFrom stats qt
@@ -2671,9 +2952,10 @@ ci.2x2.mean.mixed <- function(alpha, y11, y12, y21, y22) {
  est1 <- mean(diff1) - mean(diff2)
  se1 <- sqrt(vd1/n1 + vd2/n2)
  df1 <- (se1^4)/(vd1^2/(n1^3 - n1^2) + vd2^2/(n2^3 - n2^2))
+ df1 <- round(df1, 2)
  tcrit1 <- qt(1 - alpha/2, df1)
- t1 <- est1/se1
- p1 <- 2*(1 - pt(abs(t1), df1))
+ t1 <- round(est1/se1, 4)
+ p1 <- round(2*(1 - pt(abs(t1), df1)), 5)
  LL1 <- est1 - tcrit1*se1
  UL1 <- est1 + tcrit1*se1
  row1 <- c(est1, se1, t1, df1, p1, LL1, UL1)
@@ -2681,9 +2963,10 @@ ci.2x2.mean.mixed <- function(alpha, y11, y12, y21, y22) {
  est2 <- (mean(diff1) + mean(diff2))/2
  se2 <- sqrt(vd1/n1 + vd2/n2)/2
  df2 <- (se2^4)/(vd1^2/((n1^3 - n1^2)*16) + vd2^2/((n2^3 - n2^2)*16))
+ df2 <- round(df2, 2)
  tcrit2 <- qt(1 - alpha/2, df2)
- t2 <- est2/se2
- p2 <- 2*(1 - pt(abs(t2), df2))
+ t2 <- round(est2/se2, 4)
+ p2 <- round(2*(1 - pt(abs(t2), df2)), 5)
  LL2 <- est2 - tcrit2*se2
  UL2 <- est2 + tcrit2*se2
  row2 <- c(est2, se2, t2, df2, p2, LL2, UL2)
@@ -2691,9 +2974,10 @@ ci.2x2.mean.mixed <- function(alpha, y11, y12, y21, y22) {
  est3 <- mean(ave1) - mean(ave2)
  se3 <- sqrt(va1/n1 + va2/n2)
  df3 <- (se3^4)/(va1^2/(n1^3 - n1^2) + va2^2/(n2^3 - n2^2))
+ df3 <- round(df3, 2)
  tcrit3 <- qt(1 - alpha/2, df3)
- t3 <- est3/se3
- p3 <- 2*(1 - pt(abs(t3), df3))
+ t3 <- round(est3/se3, 4)
+ p3 <- round(2*(1 - pt(abs(t3), df3)), 5)
  LL3 <- est3 - tcrit3*se3
  UL3 <- est3 + tcrit3*se3
  row3 <- c(est3, se3, t3, df3, p3, LL3, UL3)
@@ -2702,8 +2986,8 @@ ci.2x2.mean.mixed <- function(alpha, y11, y12, y21, y22) {
  se4 <- sqrt(vd1/n1)
  df4 <- n1 - 1
  tcrit4 <- qt(1 - alpha/2, df4)
- t4 <- est4/se4
- p4 <- 2*(1 - pt(abs(t4), df4))
+ t4 <- round(est4/se4, 4)
+ p4 <- round(2*(1 - pt(abs(t4), df4)), 5)
  LL4 <- est4 - tcrit4*se4
  UL4 <- est4 + tcrit4*se4
  row4 <- c(est4, se4, t4, df4, p4, LL4, UL4)
@@ -2712,8 +2996,8 @@ ci.2x2.mean.mixed <- function(alpha, y11, y12, y21, y22) {
  se5 <- sqrt(vd2/n2)
  df5 <- n2 - 1
  tcrit5 <- qt(1 - alpha/2, df5)
- t5 <- est5/se5
- p5 <- 2*(1 - pt(abs(t5), df5))
+ t5 <- round(est5/se5, 4)
+ p5 <- round(2*(1 - pt(abs(t5), df5)), 5)
  LL5 <- est5 - tcrit5*se5
  UL5 <- est5 + tcrit5*se5
  row5 <- c(est5, se5, t5, df5, p5, LL5, UL5)
@@ -2721,9 +3005,10 @@ ci.2x2.mean.mixed <- function(alpha, y11, y12, y21, y22) {
  est6 <- mean(y11) - mean(y12)
  se6 <- sqrt(var(y11)/n1 + var(y12)/n2)
  df6 <- (se6^4)/(var(y11)^2/(n1^3 - n1^2) + var(y12)^2/(n2^3 - n2^2))
+ df6 <- round(df6, 2)
  tcrit6 <- qt(1 - alpha/2, df6)
- t6 <- est6/se6
- p6 <- 2*(1 - pt(abs(t6), df6))
+ t6 <- round(est6/se6, 4)
+ p6 <- round(2*(1 - pt(abs(t6), df6)), 5)
  LL6 <- est6 - tcrit6*se6
  UL6 <- est6 + tcrit6*se6
  row6 <- c(est6, se6, t6, df6, p6, LL6, UL6)
@@ -2731,9 +3016,10 @@ ci.2x2.mean.mixed <- function(alpha, y11, y12, y21, y22) {
  est7 <- mean(y21) - mean(y22)
  se7 <- sqrt(var(y21)/n1 + var(y22)/n2)
  df7 <- (se7^4)/(var(y21)^2/(n1^3 - n1^2) + var(y22)^2/(n2^3 - n2^2))
+ df7 <- round(df7, 2)
  tcrit7 <- qt(1 - alpha/2, df7)
- t7 <- est7/se7
- p7 <- 2*(1 - pt(abs(t7), df7))
+ t7 <- round(est7/se7, 4)
+ p7 <- round(2*(1 - pt(abs(t7), df7)), 5)
  LL7 <- est7 - tcrit7*se7
  UL7 <- est7 + tcrit7*se7
  row7 <- c(est7, se7, t7, df7, p7, LL7, UL7)
@@ -2755,6 +3041,8 @@ ci.2x2.mean.mixed <- function(alpha, y11, y12, y21, y22) {
 #' effects of B in a 2x2 within-subjects factorial design with a quantitative
 #' response variable. 
 #'
+#' For more details, see Section 4.14 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
 #' @param   y11     vector of scores at level 1 of A and level 1 of B
@@ -2774,6 +3062,10 @@ ci.2x2.mean.mixed <- function(alpha, y11, y12, y21, y22) {
 #' * UL - upper limit of the confidence interval
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' y11 <- c(1,2,3,4,5,7,7)
 #' y12 <- c(1,0,2,4,3,8,7)
@@ -2782,14 +3074,14 @@ ci.2x2.mean.mixed <- function(alpha, y11, y12, y21, y22) {
 #' ci.2x2.mean.ws(.05, y11, y12, y21, y22)
 #'
 #' # Should return:
-#' #             Estimate        SE          t df            p          LL          UL
-#' # AB:       1.28571429 0.5654449  2.2738102  6 0.0633355395 -0.09787945  2.66930802
-#' # A:       -3.21428571 0.4862042 -6.6109784  6 0.0005765210 -4.40398462 -2.02458681
-#' # B:       -0.07142857 0.2296107 -0.3110855  6 0.7662600658 -0.63326579  0.49040865
-#' # A at b1: -2.57142857 0.2973809 -8.6469203  6 0.0001318413 -3.29909331 -1.84376383
-#' # A at b2: -3.85714286 0.7377111 -5.2285275  6 0.0019599725 -5.66225692 -2.05202879
-#' # B at a1:  0.57142857 0.4285714  1.3333333  6 0.2308094088 -0.47724794  1.62010508
-#' # B at a2: -0.71428571 0.2857143 -2.5000000  6 0.0465282323 -1.41340339 -0.01516804
+#' #             Estimate        SE       t df       p          LL          UL
+#' # AB:       1.28571429 0.5654449  2.2738  6 0.06334 -0.09787945  2.66930802
+#' # A:       -3.21428571 0.4862042 -6.6110  6 0.00058 -4.40398462 -2.02458681
+#' # B:       -0.07142857 0.2296107 -0.3111  6 0.76626 -0.63326579  0.49040865
+#' # A at b1: -2.57142857 0.2973809 -8.6469  6 0.00013 -3.29909331 -1.84376383
+#' # A at b2: -3.85714286 0.7377111 -5.2285  6 0.00196 -5.66225692 -2.05202879
+#' # B at a1:  0.57142857 0.4285714  1.3333  6 0.23081 -0.47724794  1.62010508
+#' # B at a2: -0.71428571 0.2857143 -2.5000  6 0.04653 -1.41340339 -0.01516804
 #'
 #'
 #' @importFrom stats qt
@@ -2812,50 +3104,50 @@ ci.2x2.mean.ws <- function(alpha, y11, y12, y21, y22) {
  y <- cbind(y11, y12, y21, y22)
  est1 <- mean(q1%*%t(y))
  se1 <- sqrt(var(matrix(q1%*%t(y)))/n)
- t1 <- est1/se1
- p1 <- 2*(1 - pt(abs(t1), df))
+ t1 <- round(est1/se1, 4)
+ p1 <- round(2*(1 - pt(abs(t1), df)), 5)
  LL1 <- est1 - t*se1
  UL1 <- est1 + t*se1
  row1 <- c(est1, se1, t1, df, p1, LL1, UL1)
  est2 <- mean(q2%*%t(y))
  se2 <- sqrt(var(matrix(q2%*%t(y)))/n)
- t2 <- est2/se2
- p2 <- 2*(1 - pt(abs(t2), df))
+ t2 <- round(est2/se2, 4)
+ p2 <- round(2*(1 - pt(abs(t2), df)), 5)
  LL2 <- est2 - t*se2
  UL2 <- est2 + t*se2
  row2 <- c(est2, se2, t2, df, p2, LL2, UL2)
  est3 <- mean(q3%*%t(y))
  se3 <- sqrt(var(matrix(q3%*%t(y)))/n)
- t3 <- est3/se3
- p3 <- 2*(1 - pt(abs(t3), df))
+ t3 <- round(est3/se3, 4)
+ p3 <- round(2*(1 - pt(abs(t3), df)), 5)
  LL3 <- est3 - t*se3
  UL3 <- est3 + t*se3
  row3 <- c(est3, se3, t3, df, p3, LL3, UL3)
  est4 <- mean(q4%*%t(y))
  se4 <- sqrt(var(matrix(q4%*%t(y)))/n)
- t4 <- est4/se4
- p4 <- 2*(1 - pt(abs(t4), df))
+ t4 <- round(est4/se4, 4)
+ p4 <- round(2*(1 - pt(abs(t4), df)), 5)
  LL4 <- est4 - t*se4
  UL4 <- est4 + t*se4
  row4 <- c(est4, se4, t4, df, p4, LL4, UL4)
  est5 <- mean(q5%*%t(y))
  se5 <- sqrt(var(matrix(q5%*%t(y)))/n)
- t5 <- est5/se5
- p5 <- 2*(1 - pt(abs(t5), df))
+ t5 <- round(est5/se5, 4)
+ p5 <- round(2*(1 - pt(abs(t5), df)), 5)
  LL5 <- est5 - t*se5
  UL5 <- est5 + t*se5
  row5 <- c(est5, se5, t5, df, p5, LL5, UL5)
  est6 <- mean(q6%*%t(y))
  se6 <- sqrt(var(matrix(q6%*%t(y)))/n)
- t6 <- est6/se6
- p6 <- 2*(1 - pt(abs(t6), df))
+ t6 <- round(est6/se6, 4)
+ p6 <- round(2*(1 - pt(abs(t6), df)), 5)
  LL6 <- est6 - t*se6
  UL6 <- est6 + t*se6
  row6 <- c(est6, se6, t6, df, p6, LL6, UL6)
  est7 <- mean(q7%*%t(y))
  se7 <- sqrt(var(matrix(q7%*%t(y)))/n)
- t7 <- est7/se7
- p7 <- 2*(1 - pt(abs(t7), df))
+ t7 <- round(est7/se7, 4)
+ p7 <- round(2*(1 - pt(abs(t7), df)), 5)
  LL7 <- est7 - t*se7
  UL7 <- est7 + t*se7
  row7 <- c(est7, se7, t7, df, p7, LL7, UL7)
@@ -2878,6 +3170,8 @@ ci.2x2.mean.ws <- function(alpha, y11, y12, y21, y22) {
 #' response variable. A Satterthwaite adjustment to the degrees of freedom is 
 #' used and equality of population variances is not assumed.
 #'
+#' For more details, see Sections 3.8 and 3.9 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
 #' @param   y11     vector of scores at level 1 of A and level 1 of B
@@ -2897,6 +3191,10 @@ ci.2x2.mean.ws <- function(alpha, y11, y12, y21, y22) {
 #' * UL - upper limit of the confidence interval
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' y11 <- c(14, 15, 11, 7, 16, 12, 15, 16, 10, 9)
 #' y12 <- c(18, 24, 14, 18, 22, 21, 16, 17, 14, 13)
@@ -2905,14 +3203,14 @@ ci.2x2.mean.ws <- function(alpha, y11, y12, y21, y22) {
 #' ci.2x2.mean.bs(.05, y11, y12, y21, y22)
 #'
 #' # Should return:
-#' #          Estimate       SE           t       df           p         LL         UL
-#' # AB:         -5.10 2.224860 -2.29227953 35.47894 0.027931810 -9.6145264 -0.5854736
-#' # A:           1.65 1.112430  1.48323970 35.47894 0.146840430 -0.6072632  3.9072632
-#' # B:          -2.65 1.112430 -2.38217285 35.47894 0.022698654 -4.9072632 -0.3927368
-#' # A at b1:    -0.90 1.545244 -0.58243244 17.56296 0.567678242 -4.1522367  2.3522367
-#' # A at b2:     4.20 1.600694  2.62386142 17.93761 0.017246053  0.8362274  7.5637726
-#' # B at a1:    -5.20 1.536952 -3.38331916 17.61093 0.003393857 -8.4341379 -1.9658621
-#' # B at a2:    -0.10 1.608657 -0.06216365 17.91650 0.951120753 -3.4807927  3.2807927
+#' #          Estimate       SE       t    df       p         LL         UL
+#' # AB:         -5.10 2.224860 -2.2923 35.48 0.02793 -9.6145264 -0.5854736
+#' # A:           1.65 1.112430  1.4832 35.48 0.14684 -0.6072632  3.9072632
+#' # B:          -2.65 1.112430 -2.3822 35.48 0.02270 -4.9072632 -0.3927368
+#' # A at b1:    -0.90 1.545244 -0.5824 17.56 0.56768 -4.1522367  2.3522367
+#' # A at b2:     4.20 1.600694  2.6239 17.94 0.01725  0.8362274  7.5637726
+#' # B at a1:    -5.20 1.536952 -3.3833 17.61 0.00339 -8.4341379 -1.9658621
+#' # B at a2:    -0.10 1.608657 -0.0622 17.92 0.95112 -3.4807927  3.2807927
 #'
 #'
 #' @importFrom stats qt
@@ -2949,64 +3247,71 @@ ci.2x2.mean.bs <- function(alpha, y11, y12, y21, y22) {
  var <- diag(sd^2)%*%(solve(diag(n)))
  est1 <- t(v1)%*%m 
  se1 <- sqrt(t(v1)%*%var%*%v1)
- t1 <- est1/se1
+ t1 <- round(est1/se1, 4)
  df1 <- (se1^4)/sum(((v1^4)*(sd^4)/(n^2*(n - 1))))
+ df1 <- round(df1, 2)
  tcrit1 <- qt(1 - alpha/2, df1)
- p1 <- 2*(1 - pt(abs(t1), df1))
+ p1 <- round(2*(1 - pt(abs(t1), df1)), 5)
  LL1 <- est1 - tcrit1*se1
  UL1 <- est1 + tcrit1*se1
  row1 <- c(est1, se1, t1, df1, p1, LL1, UL1)
  est2 <- t(v2)%*%m 
  se2 <- sqrt(t(v2)%*%var%*%v2)
- t2 <- est2/se2
+ t2 <- round(est2/se2, 4)
  df2 <- (se2^4)/sum(((v2^4)*(sd^4)/(n^2*(n - 1))))
+ df2 <- round(df2, 2)
  tcrit2 <- qt(1 - alpha/2, df2)
- p2 <- 2*(1 - pt(abs(t2), df2))
+ p2 <- round(2*(1 - pt(abs(t2), df2)), 5)
  LL2 <- est2 - tcrit2*se2
  UL2 <- est2 + tcrit2*se2
  row2 <- c(est2, se2, t2, df2, p2, LL2, UL2)
  est3 <- t(v3)%*%m 
  se3 <- sqrt(t(v3)%*%var%*%v3)
- t3 <- est3/se3
+ t3 <- round(est3/se3, 4)
  df3 <- (se3^4)/sum(((v3^4)*(sd^4)/(n^2*(n - 1))))
+ df3 <- round(df3, 2)
  tcrit3 <- qt(1 - alpha/2, df3)
- p3 <- 2*(1 - pt(abs(t3), df3))
+ p3 <- round(2*(1 - pt(abs(t3), df3)), 5)
  LL3 <- est3 - tcrit3*se3
  UL3 <- est3 + tcrit3*se3
  row3 <- c(est3, se3, t3, df3, p3, LL3, UL3)
  est4 <- t(v4)%*%m 
  se4 <- sqrt(t(v4)%*%var%*%v4)
- t4 <- est4/se4
+ t4 <- round(est4/se4, 4)
  df4 <- (se4^4)/sum(((v4^4)*(sd^4)/(n^2*(n - 1))))
+ df4 <- round(df4, 2)
  tcrit4 <- qt(1 - alpha/2, df4)
- p4 <- 2*(1 - pt(abs(t4), df4))
+ p4 <- round(2*(1 - pt(abs(t4), df4)), 5)
  LL4 <- est4 - tcrit4*se4
  UL4 <- est4 + tcrit4*se4
  row4 <- c(est4, se4, t4, df4, p4, LL4, UL4)
  est5 <- t(v5)%*%m 
  se5 <- sqrt(t(v5)%*%var%*%v5)
- t5 <- est5/se5
+ t5 <- round(est5/se5, 4)
  df5 <- (se5^4)/sum(((v5^4)*(sd^4)/(n^2*(n - 1))))
+ df5 <- round(df5, 2)
  tcrit5 <- qt(1 - alpha/2, df5)
- p5 <- 2*(1 - pt(abs(t5), df5))
+ p5 <- round(2*(1 - pt(abs(t5), df5)), 5)
  LL5 <- est5 - tcrit5*se5
  UL5 <- est5 + tcrit5*se5
  row5 <- c(est5, se5, t5, df5, p5, LL5, UL5)
  est6 <- t(v6)%*%m 
  se6 <- sqrt(t(v6)%*%var%*%v6)
- t6 <- est6/se6
+ t6 <- round(est6/se6, 4)
  df6 <- (se6^4)/sum(((v6^4)*(sd^4)/(n^2*(n - 1))))
+ df6 <- round(df6, 2)
  tcrit6 <- qt(1 - alpha/2, df6)
- p6 <- 2*(1 - pt(abs(t6), df6))
+ p6 <- round(2*(1 - pt(abs(t6), df6)), 5)
  LL6 <- est6 - tcrit6*se6
  UL6 <- est6 + tcrit6*se6
  row6 <- c(est6, se6, t6, df6, p6, LL6, UL6)
  est7 <- t(v7)%*%m 
  se7 <- sqrt(t(v7)%*%var%*%v7)
- t7 <- est7/se7
+ t7 <- round(est7/se7, 4)
  df7 <- (se7^4)/sum(((v7^4)*(sd^4)/(n^2*(n - 1))))
+ df7 <- round(df7, 2)
  tcrit7 <- qt(1 - alpha/2, df7)
- p7 <- 2*(1 - pt(abs(t7), df7))
+ p7 <- round(2*(1 - pt(abs(t7), df7)), 5)
  LL7 <- est7 - tcrit7*se7
  UL7 <- est7 + tcrit7*se7
  row7 <- c(est7, se7, t7, df7, p7, LL7, UL7)
@@ -3059,14 +3364,14 @@ ci.2x2.mean.bs <- function(alpha, y11, y12, y21, y22) {
 #' ci.2x2.stdmean.bs(.05, y11, y12, y21, y22)
 #'
 #' # Should return:
-#' #             Estimate  adj Estimate        SE         LL         UL
-#' # AB:      -1.44976487    -1.4193502 0.6885238 -2.7992468 -0.1002829
-#' # A:        0.46904158     0.4592015 0.3379520 -0.1933321  1.1314153
-#' # B:       -0.75330920    -0.7375055 0.3451209 -1.4297338 -0.0768846
-#' # A at b1: -0.25584086    -0.2504736 0.4640186 -1.1653006  0.6536189
-#' # A at b2:  1.19392401     1.1688767 0.5001423  0.2136630  2.1741850
-#' # B at a1: -1.47819163    -1.4471806 0.4928386 -2.4441376 -0.5122457
-#' # B at a2: -0.02842676    -0.0278304 0.4820369 -0.9732017  0.9163482
+#' #          Estimate adj Estimate      SE      LL      UL
+#' # AB:       -1.4498      -1.4194 0.68852 -2.7992 -0.1003
+#' # A:         0.4690       0.4592 0.33795 -0.1933  1.1314
+#' # B:        -0.7533      -0.7375 0.34512 -1.4297 -0.0769
+#' # A at b1:  -0.2558      -0.2505 0.46402 -1.1653  0.6536
+#' # A at b2:   1.1939       1.1689 0.50014  0.2137  2.1742
+#' # B at a1:  -1.4782      -1.4472 0.49284 -2.4441 -0.5122
+#' # B at a2:  -0.0284      -0.0278 0.48204 -0.9732  0.9163
 #'
 #'
 #' @importFrom stats qnorm
@@ -3114,7 +3419,7 @@ ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
  se1 <- sqrt(a2 + a3)
  LL1 <- est1 - z*se1
  UL1 <- est1 + z*se1
- row1 <- c(est1, est1u, se1, LL1, UL1)
+ row1 <- c(round(est1, 4), round(est1u, 4), round(se1, 5), round(LL1, 4), round(UL1, 4))
 # A 
  est2 <- (t(v2)%*%m)/s
  est2u <- adj*est2
@@ -3124,7 +3429,7 @@ ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
  se2 <- sqrt(a2 + a3)
  LL2 <- est2 - z*se2
  UL2 <- est2 + z*se2
- row2 <- c(est2, est2u, se2, LL2, UL2)
+ row2 <- c(round(est2, 4), round(est2u, 4), round(se2, 5), round(LL2, 4), round(UL2, 4))
 # B 
  est3 <- (t(v3)%*%m)/s
  est3u <- adj*est3
@@ -3134,7 +3439,7 @@ ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
  se3 <- sqrt(a2 + a3)
  LL3 <- est3 - z*se3
  UL3 <- est3 + z*se3
- row3 <- c(est3, est3u, se3, LL3, UL3)
+ row3 <- c(round(est3, 4), round(est3u, 4), round(se3, 5), round(LL3, 4), round(UL3, 4))
 # A at b1 
  est4 <- (t(v4)%*%m)/s
  est4u <- adj*est4
@@ -3144,7 +3449,7 @@ ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
  se4 <- sqrt(a2 + a3)
  LL4 <- est4 - z*se4
  UL4 <- est4 + z*se4
- row4 <- c(est4, est4u, se4, LL4, UL4)
+ row4 <- c(round(est4, 4), round(est4u, 4), round(se4, 5), round(LL4, 4), round(UL4, 4))
 # A at b2 
  est5 <- (t(v5)%*%m)/s
  est5u <- adj*est5
@@ -3154,7 +3459,7 @@ ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
  se5 <- sqrt(a2 + a3)
  LL5 <- est5 - z*se5
  UL5 <- est5 + z*se5
- row5 <- c(est5, est5u, se5, LL5, UL5)
+ row5 <- c(round(est5, 4), round(est5u, 4), round(se5, 5), round(LL5, 4), round(UL5, 4))
 # B at a1 
  est6 <- (t(v6)%*%m)/s
  est6u <- adj*est6
@@ -3164,7 +3469,7 @@ ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
  se6 <- sqrt(a2 + a3)
  LL6 <- est6 - z*se6
  UL6 <- est6 + z*se6
- row6 <- c(est6, est6u, se6, LL6, UL6)
+ row6 <- c(round(est6, 4), round(est6u, 4), round(se6, 5), round(LL6, 4), round(UL6, 4))
 # B at a2 
  est7 <- (t(v7)%*%m)/s
  est7u <- adj*est7
@@ -3174,7 +3479,7 @@ ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
  se7 <- sqrt(a2 + a3)
  LL7 <- est7 - z*se7
  UL7 <- est7 + z*se7
- row7 <- c(est7, est7u, se7, LL7, UL7)
+ row7 <- c(round(est7, 4), round(est7u, 4), round(se7, 5), round(LL7, 4), round(UL7, 4))
  out <- rbind(row1, row2, row3, row4, row5, row6, row7)
  rownames(out) <- c("AB:", "A:", "B:", "A at b1:", "A at b2:", "B at a1:", "B at a2:")
  colnames(out) = c("Estimate", "adj Estimate", "SE", "LL", "UL")
@@ -3193,6 +3498,8 @@ ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
 #' simple main effects of B in a 2x2 between-subjects factorial design with a 
 #' quantitative response variable. The effects are defined in terms of medians
 #' rather than means. Tied scores within each group are assumed to be rare.
+#' 
+#' For more details, see Section 3.21 of Bonett (2021, Volume 1)
 #'
 #'
 #' @param   alpha   alpha level for 1-alpha confidence
@@ -3212,6 +3519,8 @@ ci.2x2.stdmean.bs <- function(alpha, y11, y12, y21, y22) {
 #'
 #' @references
 #' \insertRef{Bonett2002}{statpsych}
+#'
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -3351,7 +3660,7 @@ ci.2x2.median.bs <- function(alpha, y11, y12, y21, y22) {
 #' Computes confidence intervals for standardized AB interaction effect, main 
 #' effect of A, main effect of B, simple main effects of A, and simple main
 #' effects of B in a 2x2 within-subjects factorial design. Equality of 
-#' population variances is not assumed. A square root unweigthed average
+#' population variances is not assumed. A square root unweighted average
 #' variance standardizer is used.
 #'
 #'
@@ -3383,14 +3692,14 @@ ci.2x2.median.bs <- function(alpha, y11, y12, y21, y22) {
 #' ci.2x2.stdmean.ws(.05, y11, y12, y21, y22)
 #'
 #' # Should return:
-#' #             Estimate  adj Estimate         SE           LL        UL
-#' # AB:       0.17248839    0.16446123 0.13654635 -0.095137544 0.4401143
-#' # A:        0.10924265    0.10415878 0.05752822 -0.003510596 0.2219959
-#' # B:        0.07474497    0.07126653 0.05920554 -0.041295751 0.1907857
-#' # A at b1:  0.19548684    0.18638939 0.08460680  0.029660560 0.3613131
-#' # A at b2:  0.02299845    0.02192816 0.09371838 -0.160686202 0.2066831
-#' # B at a1:  0.16098916    0.15349715 0.09457347 -0.024371434 0.3463498
-#' # B at a2: -0.01149923   -0.01096408 0.08595873 -0.179975237 0.1569768
+#' #          Estimate adj Estimate      SE      LL     UL
+#' # AB:        0.1725       0.1645 0.13655 -0.0951 0.4401
+#' # A:         0.1092       0.1042 0.05753 -0.0035 0.2220
+#' # B:         0.0747       0.0713 0.05921 -0.0413 0.1908
+#' # A at b1:   0.1955       0.1864 0.08461  0.0297 0.3613
+#' # A at b2:   0.0230       0.0219 0.09372 -0.1607 0.2067
+#' # B at a1:   0.1610       0.1535 0.09457 -0.0244 0.3463
+#' # B at a2:  -0.0115      -0.0110 0.08596 -0.1800 0.1570
 #'
 #'
 #' @importFrom stats qnorm
@@ -3438,7 +3747,7 @@ ci.2x2.stdmean.ws <- function(alpha, y11, y12, y21, y22) {
  se1 <- sqrt(v1*(v2 + 2*v3) + (v4 + 2*v5)/(df*s^2))
  LL1 <- est1 - z*se1
  UL1 <- est1 + z*se1
- row1 <- c(est1, est1u, se1, LL1, UL1)
+ row1 <- c(round(est1, 4), round(est1u, 4), round(se1, 5), round(LL1, 4), round(UL1, 4))
  # A 
  est2 <- (t(q2)%*%m)/s
  est2u <- adj*est2
@@ -3450,7 +3759,7 @@ ci.2x2.stdmean.ws <- function(alpha, y11, y12, y21, y22) {
  se2 <- sqrt(v1*(v2 + 2*v3) + (v4 + 2*v5)/(df*s^2))
  LL2 <- est2 - z*se2
  UL2 <- est2 + z*se2
- row2 <- c(est2, est2u, se2, LL2, UL2)
+ row2 <- c(round(est2, 4), round(est2u, 4), round(se2, 5), round(LL2, 4), round(UL2, 4))
  # B 
  est3 <- (t(q3)%*%m)/s
  est3u <- adj*est3
@@ -3462,7 +3771,7 @@ ci.2x2.stdmean.ws <- function(alpha, y11, y12, y21, y22) {
  se3 <- sqrt(v1*(v2 + 2*v3) + (v4 + 2*v5)/(df*s^2))
  LL3 <- est3 - z*se3
  UL3 <- est3 + z*se3
- row3 <- c(est3, est3u, se3, LL3, UL3)
+ row3 <- c(round(est3, 4), round(est3u, 4), round(se3, 5), round(LL3, 4), round(UL3, 4))
  # A at b1 
  est4 <- (t(q4)%*%m)/s
  est4u <- adj*est4
@@ -3474,7 +3783,7 @@ ci.2x2.stdmean.ws <- function(alpha, y11, y12, y21, y22) {
  se4 <- sqrt(v1*(v2 + 2*v3) + (v4 + 2*v5)/(df*s^2))
  LL4 <- est4 - z*se4
  UL4 <- est4 + z*se4
- row4 <- c(est4, est4u, se4, LL4, UL4)
+ row4 <- c(round(est4, 4), round(est4u, 4), round(se4, 5), round(LL4, 4), round(UL4, 4))
  # A at b2 
  est5 <- (t(q5)%*%m)/s
  est5u <- adj*est5
@@ -3486,7 +3795,7 @@ ci.2x2.stdmean.ws <- function(alpha, y11, y12, y21, y22) {
  se5 <- sqrt(v1*(v2 + 2*v3) + (v4 + 2*v5)/(df*s^2))
  LL5 <- est5 - z*se5
  UL5 <- est5 + z*se5
- row5 <- c(est5, est5u, se5, LL5, UL5)
+ row5 <- c(round(est5, 4), round(est5u, 4), round(se5, 5), round(LL5, 4), round(UL5, 4))
  # B at a1 
  est6 <- (t(q6)%*%m)/s
  est6u <- adj*est6
@@ -3498,7 +3807,7 @@ ci.2x2.stdmean.ws <- function(alpha, y11, y12, y21, y22) {
  se6 <- sqrt(v1*(v2 + 2*v3) + (v4 + 2*v5)/(df*s^2))
  LL6 <- est6 - z*se6
  UL6 <- est6 + z*se6
- row6 <- c(est6, est6u, se6, LL6, UL6)
+ row6 <- c(round(est6, 4), round(est6u, 4), round(se6, 5), round(LL6, 4), round(UL6, 4))
  # B at a2 
  est7 <- (t(q7)%*%m)/s
  est7u <- adj*est7
@@ -3510,7 +3819,7 @@ ci.2x2.stdmean.ws <- function(alpha, y11, y12, y21, y22) {
  se7 <- sqrt(v1*(v2 + 2*v3) + (v4 + 2*v5)/(df*s^2))
  LL7 <- est7 - z*se7
  UL7 <- est7 + z*se7
- row7 <- c(est7, est7u, se7, LL7, UL7)
+ row7 <- c(round(est7, 4), round(est7u, 4), round(se7, 5), round(LL7, 4), round(UL7, 4))
  out <- rbind(row1, row2, row3, row4, row5, row6, row7)
  rownames(out) <- c("AB:", "A:", "B:", "A at b1:", "A at b2:", "B at a1:", "B at a2:")
  colnames(out) = c("Estimate", "adj Estimate", "SE", "LL", "UL")
@@ -3525,10 +3834,10 @@ ci.2x2.stdmean.ws <- function(alpha, y11, y12, y21, y22) {
 #'                          
 #' @description
 #' Computes confidence intervals for the standardized AB interaction effect, 
-#' main effect of A, main efect of B, simple main effects of A, and simple main
+#' main effect of A, main effect of B, simple main effects of A, and simple main
 #' effects of B in a 2x2 mixed factorial design where Factor A is a 
 #' within-subjects factor, and Factor B is a between-subjects factor. Equality 
-#' of population variances is not assumed. A square root unweigthed average 
+#' of population variances is not assumed. A square root unweighted average 
 #' variance standardizer is used.
 #'
 #'
@@ -3560,14 +3869,14 @@ ci.2x2.stdmean.ws <- function(alpha, y11, y12, y21, y22) {
 #' ci.2x2.stdmean.mixed(.05, y11, y12, y21, y22)
 #'
 #' # Should return:
-#' #             Estimate adj Estimate        SE          LL         UL
-#' # AB:      -1.95153666  -1.80141845 0.5407442 -3.01137589 -0.8916974
-#' # A:        1.06061775   1.01125934 0.2797699  0.51227884  1.6089567
-#' # B:        1.90911195   1.76225718 0.5758855  0.78039715  3.0378267
-#' # A at b1:  0.08484942   0.07589163 0.4650441 -0.82662027  0.9963191
-#' # A at b2:  2.03638608   1.82139908 0.2995604  1.44925855  2.6235136
-#' # B at a1:  0.93334362   0.86154796 0.5036429 -0.05377836  1.9204656
-#' # B at a2:  2.88488027   2.66296641 0.7477246  1.41936706  4.3503935
+#' #          Estimate adj Estimate      SE      LL      UL
+#' # AB:       -1.9515      -1.8014 0.54074 -3.0114 -0.8917
+#' # A:         1.0606       1.0113 0.27977  0.5123  1.6090
+#' # B:         1.9091       1.7623 0.57589  0.7804  3.0378
+#' # A at b1:   0.0848       0.0759 0.46504 -0.8266  0.9963
+#' # A at b2:   2.0364       1.8214 0.29956  1.4493  2.6235
+#' # B at a1:   0.9333       0.8615 0.50364 -0.0538  1.9205
+#' # B at a2:   2.8849       2.6630 0.74772  1.4194  4.3504
 #'
 #'
 #' @importFrom stats qnorm
@@ -3609,7 +3918,7 @@ ci.2x2.stdmean.mixed <- function(alpha, y11, y12, y21, y22) {
  se1 <- sqrt(est1*v0/s^4 + v1)
  LL1 <- est1 - z*se1
  UL1 <- est1 + z*se1
- row1 <- c(est1, est1u, se1, LL1, UL1)
+ row1 <- c(round(est1, 4), round(est1u, 4), round(se1, 5), round(LL1, 4), round(UL1, 4))
  # A 
  est2 <- (mean(diff1) + mean(diff2))/(2*s)
  est2u <- adj4*est2
@@ -3617,7 +3926,7 @@ ci.2x2.stdmean.mixed <- function(alpha, y11, y12, y21, y22) {
  se2 <- sqrt(est2*v0/s^4 + v2)
  LL2 <- est2 - z*se2
  UL2 <- est2 + z*se2
- row2 <- c(est2, est2u, se2, LL2, UL2)
+ row2 <- c(round(est2, 4), round(est2u, 4), round(se2, 5), round(LL2, 4), round(UL2, 4))
  # B
  est3 <- (mean(ave1) - mean(ave2))/s
  est3u <- adj1*est3
@@ -3625,7 +3934,7 @@ ci.2x2.stdmean.mixed <- function(alpha, y11, y12, y21, y22) {
  se3 <- sqrt(est3*v0/s^4 + v3)
  LL3 <- est3 - z*se3
  UL3 <- est3 + z*se3
- row3 <- c(est3, est3u, se3, LL3, UL3)
+ row3 <- c(round(est3, 4), round(est3u, 4), round(se3, 5), round(LL3, 4), round(UL3, 4))
  # A at b1
  est4 <- mean(diff1)/s
  est4u <- adj2*est4
@@ -3633,7 +3942,7 @@ ci.2x2.stdmean.mixed <- function(alpha, y11, y12, y21, y22) {
  se4 <- sqrt(est4*v0/s^4 + v4/s^2)
  LL4 <- est4 - z*se4
  UL4 <- est4 + z*se4
- row4 <- c(est4, est4u, se4, LL4, UL4)
+ row4 <- c(round(est4, 4), round(est4u, 4), round(se4, 5), round(LL4, 4), round(UL4, 4))
  # A at b2
  est5 <- mean(diff2)/s
  est5u <- adj3*est5
@@ -3641,7 +3950,7 @@ ci.2x2.stdmean.mixed <- function(alpha, y11, y12, y21, y22) {
  se5 <- sqrt(est5*v0/s^4 + v5/s^2)
  LL5 <- est5 - z*se5
  UL5 <- est5 + z*se5
- row5 <- c(est5, est5u, se5, LL5, UL5)
+ row5 <- c(round(est5, 4), round(est5u, 4), round(se5, 5), round(LL5, 4), round(UL5, 4))
  # B at a1
  est6 <- (mean(y11) - mean(y12))/s
  est6u <- adj1*est6
@@ -3649,7 +3958,7 @@ ci.2x2.stdmean.mixed <- function(alpha, y11, y12, y21, y22) {
  se6 <- sqrt(est6*v0/s^4 + v6/s^2)
  LL6 <- est6 - z*se6
  UL6 <- est6 + z*se6
- row6 <- c(est6, est6u, se6, LL6, UL6)
+ row6 <- c(round(est6, 4), round(est6u, 4), round(se6, 5), round(LL6, 4), round(UL6, 4))
  # B at a2
  est7 <- (mean(y21) - mean(y22))/s
  est7u <- adj1*est7
@@ -3657,7 +3966,7 @@ ci.2x2.stdmean.mixed <- function(alpha, y11, y12, y21, y22) {
  se7 <- sqrt(est7*v0/s^4 + v7/s^2)
  LL7 <- est7 - z*se7
  UL7 <- est7 + z*se7
- row7 <- c(est7, est7u, se7, LL7, UL7)
+ row7 <- c(round(est7, 4), round(est7u, 4), round(se7, 5), round(LL7, 4), round(UL7, 4))
  out <- rbind(row1, row2, row3, row4, row5, row6, row7)
  rownames(out) <- c("AB:", "A:", "B:", "A at b1:", "A at b2:", "B at a1:", "B at a2:")
  colnames(out) = c("Estimate", "adj Estimate", "SE", "LL", "UL")
@@ -3671,7 +3980,7 @@ ci.2x2.stdmean.mixed <- function(alpha, y11, y12, y21, y22) {
 #'
 #' @description
 #' Computes distribution-free confidence intervals for the AB 
-#' interaction effect, main effect of A, main efect of B, simple main effects 
+#' interaction effect, main effect of A, main effect of B, simple main effects 
 #' of A, and simple main effects of B in a 2x2 mixed factorial design where 
 #' Factor A is the within-subjects factor and Factor B is the between subjects
 #' factor. Tied scores within each group and within each within-subjects level
@@ -4048,6 +4357,8 @@ ci.2x2.median.ws <- function(alpha, y11, y12, y21, y22) {
 #' normal sampling distribution. The mean and standard deviation of the posterior
 #' normal distribution are also reported. 
 #'
+#' For more details, see Section 1.32 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param   alpha        alpha level for 1-alpha credibility interval
 #' @param   prior_mean   mean of prior Normal distribution    
@@ -4065,15 +4376,17 @@ ci.2x2.median.ws <- function(alpha, y11, y12, y21, y22) {
 #'
 #'
 #' @references
-#' \insertRef{Gelman2004}{statpsych}                            
+#' \insertRef{Gelman2004}{statpsych}  
+#'
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
-#' ci.bayes.normal(.05, 30, 2, 24.5, 0.577)
+#' ci.bayes.normal(.05, 50, 5, 38.3, 2.57)
 #'
 #' # Should return:
 #' # Posterior mean Posterior SD       LL       UL
-#' #        24.9226    0.5543895 23.83602 26.00919
+#' #       40.74511     2.285735 36.26515 45.22506
 #'
 #'
 #' @importFrom stats qnorm
@@ -4102,6 +4415,8 @@ ci.bayes.normal <- function(alpha, prior_mean, prior_sd, est, se) {
 #' Use the t.test function for raw data input. A confidence interval for a 
 #' population mean is a recommended supplement to the t-test (see \link[statpsych]{ci.mean}).
 #'
+#' For more details, see Section 1.11 of Bonett (2021, Volume 1)
+#'
 #'  
 #' @param  m	  estimated mean 
 #' @param  sd	  estimated standard deviation
@@ -4119,13 +4434,15 @@ ci.bayes.normal <- function(alpha, prior_mean, prior_sd, est, se) {
 #' @references
 #' \insertRef{Snedecor1980}{statpsych}
 #'
+#' \insertRef{Bonett2021}{statpsych}
+#'
 #'
 #' @examples
-#' test.mean(24.5, 3.65, 40, 23)
+#' test.mean(7.9, 3.05, 100, 7)
 #'
 #' # Should return:
-#' #         t df          p
-#' #  2.599132 39 0.01312665
+#' #        t df       p
+#' #   2.9508 99 0.00396
 #'  
 #' 
 #' @importFrom stats pt
@@ -4135,6 +4452,8 @@ test.mean <- function(m, sd, n, h) {
  se <- sd/sqrt(n)
  t <- (m - h)/se
  p <- 2*(1 - pt(abs(t), df))
+ p <- round(p, 5)
+ t <- round(t, 4)
  out <- t(c(t, df, p))
  colnames(out) <- c("t", "df", "p")
  rownames(out) <- ""
@@ -4155,6 +4474,8 @@ test.mean <- function(m, sd, n, h) {
 #' estimate is negative, then the normality assumption can be rejected due 
 #' to negative skewness.
 #'
+#' For more details, see Section 1.23 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param   y      vector of quantitative scores
 #'  
@@ -4165,13 +4486,17 @@ test.mean <- function(m, sd, n, h) {
 #' * p - Monte Carlo two-sided p-value
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' y <- c(30, 20, 15, 10, 10, 60, 20, 25, 20, 30, 10, 5, 50, 40, 95)
 #' test.skew(y)
 #'
 #' # Should return:
-#' # Skewness      p
-#' #   1.5201 0.0067
+#' # Skewness     p
+#' #   1.5201 0.007
 #'
 #'
 #' @importFrom stats rnorm
@@ -4199,7 +4524,7 @@ test.skew <- function(y) {
  e1 <- sum(c1)/rep
  e2 <- sum(c2)/rep
  p <- e1 + e2
- out <- round(t(c(skew, p)), 4)
+ out <- round(t(c(skew, p)), 3)
  colnames(out) <- c("Skewness", "p")
  rownames(out) <- ""
  return(out)
@@ -4218,6 +4543,8 @@ test.skew <- function(y) {
 #' p-value is small (e.g., less than .05) and excess kurtosis is negative,
 #' then the normality assumption can be rejected due to platykurtosis.
 #'
+#' For more details, see Section 1.23 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param   y      vector of quantitative scores
 #'  
@@ -4229,13 +4556,17 @@ test.skew <- function(y) {
 #' * p - Monte Carlo two-sided p-value
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' y <- c(30, 20, 15, 10, 10, 60, 20, 25, 20, 30, 10, 5, 50, 40, 95)
 #' test.kurtosis(y)
 #'
 #' # Should return:
-#' # Kurtosis  Excess      p
-#' #   4.8149  1.8149 0.0385 
+#' # Kurtosis  Excess     p
+#' #   4.8149  1.8149 0.038 
 #'
 #'
 #' @importFrom stats rnorm
@@ -4262,7 +4593,7 @@ test.kurtosis <- function(y) {
  if (kur < 3) {c <- as.integer(kur0 < kur)}
  p <- 2*sum(c)/rep
  if (p > .9999) {p = .9999}
- out <- round(t(c(kur, kur - 3, p)), 4)
+ out <- round(t(c(kur, kur - 3, p)), 3)
  colnames(out) <- c("Kurtosis", "Excess", "p")
  rownames(out) <- ""
  return(out)
@@ -4277,6 +4608,8 @@ test.kurtosis <- function(y) {
 #' Computes the F statistic, p-value, eta-squared, and adjusted eta-squared 
 #' for the main effect in a one-way between-subjects ANOVA using the estimated
 #' group means, estimated group standard deviations, and group sample sizes.  
+#'
+#' For more details, see Section 3.7 of Bonett (2021, Volume 1)
 #'
 #'
 #' @param   m       vector of estimated group means
@@ -4294,6 +4627,10 @@ test.kurtosis <- function(y) {
 #' * adj Eta-squared - a bias adjusted estimate of eta-squared
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' m <- c(12.4, 8.6, 10.5)
 #' sd <- c(3.84, 3.12, 3.48)
@@ -4301,8 +4638,8 @@ test.kurtosis <- function(y) {
 #' test.anova.bs(m, sd, n)
 #'
 #' #  Should return:
-#' #        F dfA  dfE           p Eta-squared  adj Eta-squared
-#' # 5.919585   2   57 0.004614428   0.1719831        0.1429298
+#' #      F dfA  dfE       p Eta-squared  adj Eta-squared
+#' # 5.9196   2   57 0.00461       0.172           0.1429
 #'  
 #' 
 #' @importFrom stats pf
@@ -4318,11 +4655,14 @@ test.anova.bs <- function(m, sd, n) {
  MSe <- SSe/dfe
  SSa <- sum(n*(m - grandmean)^2)
  MSa <- SSa/dfa
- F <- MSa/MSe
+ F <- round(MSa/MSe, 4)
  p <- 1 - pf(F, dfa, dfe)
+ p <- round(p, 5)
  etasqr <- SSa/(SSa + SSe)
- adjetasqr <- 1 - (dfa + dfe)*(1 - etasqr)/dfe
- out <- t(c(F, dfa, dfe, p, etasqr, adjetasqr))
+ adj <- 1 - (dfa + dfe)*(1 - etasqr)/dfe
+ etasqr <- round(etasqr, 4)
+ adj <- round(adj, 4)
+ out <- t(c(F, dfa, dfe, p, etasqr, adj))
  colnames(out) <- c("F", "dfA",  "dfE", "p", "Eta-squared", "adj Eta-squared")
  rownames(out) <- ""
  return(out)
@@ -4340,6 +4680,9 @@ test.anova.bs <- function(m, sd, n) {
 #' the largest value within a plausible range for a conservatively large  
 #' sample size. 
 #'
+#' For more details, see Section 1.28 of Bonett (2021, Volume 1)
+#'
+#'
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  var    planning value of response variable variance
 #' @param  w      desired confidence interval width
@@ -4349,8 +4692,12 @@ test.anova.bs <- function(m, sd, n) {
 #' Returns the required sample size
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
-#' size.ci.mean(.05, 264.4, 10)
+#' size.ci.mean(.05, 6.0, 1.5)
 #'
 #' # Should return:
 #' # Sample size
@@ -4378,7 +4725,10 @@ size.ci.mean <- function(alpha, var, w) {
 #' mean difference with desired confidence interval precision in a 2-group 
 #' design. Set the variance planning value to the largest value within a 
 #' plausible range for a conservatively large sample size. Set R = 1 for 
-#' equal sample sizes.
+#' equal sample sizes. For unequal sample sizes, this function assumes 
+#' approximately equal population variances.
+#'
+#' For more details, see Section 2.13 of Bonett (2021, Volume 1)
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
@@ -4391,24 +4741,22 @@ size.ci.mean <- function(alpha, var, w) {
 #' Returns the required sample size for each group
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
-#' size.ci.mean2(.05, 37.1, 5, 1)
+#' size.ci.mean2(.01, 81, 12, 1)
 #'
 #' # Should return:
 #' # n1  n2
-#' # 47  47
+#' # 32  32
 #'
-#' size.ci.mean2(.05, 37.1, 5, 3)
-#'
-#' # Should return:
-#' # n1  n2
-#' # 32  96
-#'
-#' size.ci.mean2(.05, 37.1, 5, .5)
+#' size.ci.mean2(.05, 4.0, 2.5, 2)
 #'
 #' # Should return:
 #' # n1  n2
-#' # 70  35
+#' # 16  32
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -4434,7 +4782,10 @@ size.ci.mean2 <- function(alpha, var, w, R) {
 #' group standardizer) with desired confidence interval precision in a 2-group 
 #' design. Set the standardized mean difference planning value to the largest 
 #' value within a plausible range for a conservatively large sample size. Set
-#' R = 1 for equal sample sizes.
+#' R = 1 for equal sample sizes. For unequal sample sizes, this function assumes 
+#' approximately equal population variances.
+#'
+#' For more details, see Section 2.13 of Bonett (2021, Volume 1)
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -4446,25 +4797,27 @@ size.ci.mean2 <- function(alpha, var, w, R) {
 #' @references
 #' \insertRef{Bonett2009}{statpsych}
 #'
+#' \insertRef{Bonett2021}{statpsych}
+#'
 #'
 #' @return 
 #' Returns the required sample size per group for each standardizer
 #'
 #'
 #' @examples
-#' size.ci.stdmean2(.05, .75, .5, 1)
+#' size.ci.stdmean2(.05, 1.0, .5, 1)
 #'
 #' # Should return:
 #' #                              n1  n2
-#' # Unweighted standardizer:    132 132
-#' # Single group standardizer:  141 141
+#' # Unweighted standardizer:    139 139
+#' # Single group standardizer:  154 154
 #'
-#' size.ci.stdmean2(.05, .75, .5, 2)
+#' size.ci.stdmean2(.05, 1.0, .5, 2)
 #'
 #' # Should return:
 #' #                              n1  n2
-#' # Unweighted standardizer:     99 198
-#' # Single group standardizer:  106 212
+#' # Unweighted standardizer:    104 208
+#' # Single group standardizer:  116 232
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -4494,7 +4847,11 @@ size.ci.stdmean2 <- function(alpha, d, w, R) {
 #' design. This function requires planning values for each mean and the sample 
 #' size requirement is very sensitive to these planning values. Set the 
 #' variance planning value to the largest value within a plausible range for a
-#' conservatively large sample size. Set R = 1 for equal sample sizes.
+#' conservatively large sample size. Set R = 1 for equal sample sizes. For
+#' unequal sample sizes, this function assumes approximately equal population
+#' variances.
+#'
+#' For more details, see Section 2.13 of Bonett (2021, Volume 1)
 #'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -4507,6 +4864,10 @@ size.ci.stdmean2 <- function(alpha, d, w, R) {
 #'
 #' @return 
 #' Returns the required sample size for each group
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -4547,6 +4908,8 @@ size.ci.ratio.mean2 <- function(alpha, var, m1, m2, r, R) {
 #' variance planning value to the largest value within a plausible range
 #' for a conservatively large sample size. 
 #'
+#' For more details, see Section 3.24 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
 #' @param  var    planning value of average within-group variance  
@@ -4558,13 +4921,17 @@ size.ci.ratio.mean2 <- function(alpha, var, m1, m2, r, R) {
 #' Returns the required sample size for each group
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
-#' v <- c(.5, .5, -1)
-#' size.ci.lc.mean.bs(.05, 5.62, 2.0, v)
+#' v <- c(.5, .5, -.5, -.5)
+#' size.ci.lc.mean.bs(.05, 8.0, 3.0, v)
 #'
 #' # Should return:
 #' # Sample size per group
-#' #                    34
+#' #                    15
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -4594,6 +4961,8 @@ size.ci.lc.mean.bs <- function(alpha, var, w, v) {
 #' means to the largest value within a plausible range for a conservatively
 #' large sample size. 
 #'
+#' For more details, see Section 3.24 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  d      planning value of standardized linear contrast of means 
@@ -4604,19 +4973,21 @@ size.ci.lc.mean.bs <- function(alpha, var, w, v) {
 #' @references
 #' \insertRef{Bonett2009}{statpsych}
 #'
+#' \insertRef{Bonett2021}{statpsych}
+#'
 #'
 #' @return 
 #' Returns the required sample size per group for each standardizer
 #'
 #'
 #' @examples
-#' v <- c(.5, .5, -.5, -.5)
-#' size.ci.lc.stdmean.bs(.05, 1, .6, v)
+#' v <- c(.5, .5, -1)
+#' size.ci.lc.stdmean.bs(.05, .8, .6, v)
 #'
 #' # Should return:
 #' #                            Sample size per group
-#' # Unweighted standardizer:                      49
-#' # Single group standardizer:                    65
+#' # Unweighted standardizer:                      69
+#' # Single group standardizer:                    78
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -4647,6 +5018,8 @@ size.ci.lc.stdmean.bs <- function(alpha, d, w, v) {
 #' variance planning value to the largest value within a plausible range for 
 #' a conservatively large sample size. 
 #'
+#' For more details, see Section 4.26 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  var    planning value of average variance of the two measurements
@@ -4658,12 +5031,16 @@ size.ci.lc.stdmean.bs <- function(alpha, d, w, v) {
 #' Returns the required sample size
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
-#' size.ci.mean.ps(.05, 265, .8, 10)
+#' size.ci.mean.ps(.05, 5.0, .5, 2.0)
 #'
 #' # Should return:
 #' # Sample size
-#' #          19
+#' #          22
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -4692,6 +5069,8 @@ size.ci.mean.ps <- function(alpha, var, cor, w) {
 #' value to the smallest value within a plausible range for a conservatively
 #' large sample size.
 #'
+#' For more details, see Section 4.26 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  d      planning value of standardized mean difference  
@@ -4701,6 +5080,8 @@ size.ci.mean.ps <- function(alpha, var, cor, w) {
 #'
 #' @references
 #' \insertRef{Bonett2009}{statpsych}
+#'
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @return 
@@ -4746,6 +5127,8 @@ size.ci.stdmean.ps <- function(alpha, d, cor, w) {
 #' the largest value within a plausible range for a conservatively large  
 #' sample size. 
 #'
+#' For more details, see Section 4.26 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  var    planning value of average variance of the two measurements
@@ -4757,6 +5140,10 @@ size.ci.stdmean.ps <- function(alpha, d, cor, w) {
 #'
 #' @return 
 #' Returns the required sample size 
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -4793,6 +5180,8 @@ size.ci.ratio.mean.ps <- function(alpha, var, m1, m2, cor, r) {
 #' smallest value within a plausible range for a conservatively 
 #' large sample size. 
 #'
+#' For more details, see Section 4.26 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
 #' @param  var    planning value of average variance of the measurements  
@@ -4805,13 +5194,17 @@ size.ci.ratio.mean.ps <- function(alpha, var, m1, m2, cor, r) {
 #' Returns the required sample size 
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' q <- c(.5, .5, -.5, -.5)
-#' size.ci.lc.mean.ws(.05, 265, .8, 10, q)
+#' size.ci.lc.mean.ws(.05, 161.9, .77, 4, q)
 #'
 #' # Should return:
 #' # Sample size
-#' #          11
+#' #          38
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -4842,6 +5235,8 @@ size.ci.lc.mean.ws <- function(alpha, var, cor, w, q) {
 #' within a plausible range, and set the Pearson correlation planning value
 #' to the smallest value within a plausible range.
 #'
+#' For more details, see Section 4.26 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  d      planning value of standardized linear contrast  
@@ -4853,19 +5248,21 @@ size.ci.lc.mean.ws <- function(alpha, var, cor, w, q) {
 #' @references
 #' \insertRef{Bonett2009}{statpsych}
 #'
+#' \insertRef{Bonett2021}{statpsych}
+#'
 #'
 #' @return 
 #' Returns the required sample size for each standardizer
 #'
 #'
 #' @examples
-#' q <- c(.5, .5, -.5, -.5)
-#' size.ci.lc.stdmean.ws(.05, 1, .7, .6, q)
+#' q <- c(1/3, 1/3, 1/3, -1)
+#' size.ci.lc.stdmean.ws(.05, .5, .7, .4, q)
 #'
 #' # Should return:
 #' #                            Sample size
-#' # Unweighted standardizer:            26
-#' # Single level standardizer:          35
+#' # Unweighted standardizer:            46
+#' # Single level standardizer:          51
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -4885,61 +5282,6 @@ size.ci.lc.stdmean.ws <- function(alpha, d, cor, w, q) {
 }
 
 
-#  size.ci.cronbach ========================================================
-#' Sample size for a Cronbach reliability confidence interval
-#'
-#'
-#' Computes the sample size required to estimate a Cronbach reliability
-#' with desired confidence interval precision. Set the reliability planning 
-#' value to the smallest value within a plausible range for a 
-#' conservatively large sample size.
-#'
-#'
-#' @param  alpha  alpha value for 1-alpha confidence 
-#' @param  rel    reliability planning value
-#' @param  r      number of measurements (items, raters, forms)
-#' @param  w      desired confidence interval width
-#'
-#'
-#' @references
-#' \insertRef{Bonett2015}{statpsych}
-#'
-#'
-#' @return 
-#' Returns the required sample size
-#'
-#'
-#' @examples
-#' size.ci.cronbach(.05, .85, 5, .1)
-#'
-#' # Should return:
-#' # Sample size
-#' #          89
-#'  
-#' 
-#' @importFrom stats qf
-#' @importFrom stats qnorm
-#' @export
-size.ci.cronbach <- function(alpha, rel, r, w) {
- if (rel > .999 | rel < .001) {stop("reliability must be between .001 and .999")}
- z <- qnorm(1 - alpha/2)
- n0 <- ceiling((8*r/(r - 1))*(1 - rel)^2*(z/w)^2 + 2)
- df1 <- n0 - 1
- df2 <- n0*(r - 1)
- f1 <- qf(1 - alpha/2, df1, df2)
- f2 <- qf(1 - alpha/2, df2, df1)
- f0 <- 1/(1 - rel)
- ll <- 1 - f1/f0
- ul <- 1 - 1/(f0*f2)
- w0 <- ul - ll
- n <- ceiling((n0 - 2)*(w0/w)^2 + 2)
- out <- matrix(n, nrow = 1, ncol = 1)
- colnames(out) <- "Sample size"
- rownames(out) <- ""
- return(out)
-}
-
-
 #  size.ci.etasqr =============================================================
 #' Sample size for an eta-squared confidence interval 
 #'
@@ -4949,6 +5291,8 @@ size.ci.cronbach <- function(alpha, rel, r, w) {
 #' in a one-way ANOVA with desired confidence interval precision. Set the 
 #' planning value of eta-squared to about 1/3 for a conservatively large sample
 #' size. 
+#'
+#' For more details, see Section 3.24 of Bonett (2021, Volume 1)
 #'
 #'  
 #' @param  alpha    alpha level for 1-alpha confidence
@@ -4961,12 +5305,16 @@ size.ci.cronbach <- function(alpha, rel, r, w) {
 #' Returns the required sample size for each group
 #' 
 #' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
-#' size.ci.etasqr(.05, .333, 3, .2)
+#' size.ci.etasqr(.05, .2, 3, .15)
 #'
 #' # Should return:
 #' # Sample size per group 
-#' #                    63
+#' #                   103
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -5017,6 +5365,8 @@ size.ci.etasqr <- function(alpha, etasqr, groups, w) {
 #' The second-stage sample is combined with the first-stage sample to obtain 
 #' the desired confidence interval width.
 #'
+#' For more details, see Section 1.30 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  n0     first-stage sample size 
 #' @param  w0     confidence interval width in first-stage sample
@@ -5025,14 +5375,18 @@ size.ci.etasqr <- function(alpha, etasqr, groups, w) {
 #'
 #' @return 
 #' Returns the required sample size for the second-stage sample
+#' 
+#' 
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
-#' size.ci.second(20, 5.3, 2.5)
+#' size.ci.second(25, 4.38, 2.0)
 #'
 #' # Should return:
 #' # Second-stage sample size
-#' #                       70
+#' #                       95
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -5047,7 +5401,7 @@ size.ci.second <- function(n0, w0, w) {
 
 
 #  size.ci.mean.prior =========================================================
-#' Sample size for a mean confidence interval using a planning value from
+#' Sample size for a mean confidence interval using an estimated variance from
 #' a prior study 
 #'
 #'                
@@ -5059,19 +5413,20 @@ size.ci.second <- function(n0, w0, w) {
 #' variance in the planned study. An estimated variance from a prior study 
 #' can be used to compute an upper prediction limit for the estimated variance 
 #' in the planned study. The upper prediction limit is then used as the variance
-#' planning value.  Using a larger confidence level (1 - alpha2) for the 
-#' upper prediction limit will increase the probability that the width of 
-#' of the confidence interval for the population mean in the planned study
-#' will be less than or equal to the desired width.
+#' planning value.  The probability that the prediction interval in the planned
+#' study will have a width that is less than the desired width is approximately
+#' 1 - alpha2.
 #'
 #' This sample size approach assumes that the population variance in the 
 #' prior study is very similar to the population variance in the planned 
-#' study. However, this type of prior information is typically not
-#' available, and the researcher must use expert opinion to guess the value
-#' of the variance that will be observed in the planned study. The 
-#' \link[statpsych]{size.ci.mean} function uses a variance planning value 
-#' that is based on expert opinion regarding the likely value of the 
-#' variance estimate that will be observed in the planned study. 
+#' study. If an estimated variance from a prior study is not available,
+#' the researcher must use expert opinion to guess the value of the variance
+#' that will be observed in the planned study. The \link[statpsych]{size.ci.mean} 
+#' function uses a variance planning value that is based on expert opinion
+#' regarding the likely value of the variance estimate that will be observed 
+#' in the planned study. 
+#'
+#' For more details, see Section 1.31 of Bonett (2021, Volume 1)
 #'
 #'
 #' @param  alpha1  alpha level for 1-alpha1 confidence in the planned study
@@ -5085,16 +5440,21 @@ size.ci.second <- function(n0, w0, w) {
 #' Returns the required sample size
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
-#' size.ci.mean.prior(.05, .10, 26.4, 25, 4)
+#' size.ci.mean.prior(.05, .10, 0.71, 204, .4)
 #'
 #' # Should return:
 #' # Sample size
-#' #          44
+#' #          88
 #'
 #' @export                 
 size.ci.mean.prior <- function(alpha1, alpha2, var0, n0, w) {
  if (var0 < 0) {stop("variance must be positive")}
+ if (alpha2 > .5) {stop("alpha2 cannot be greater than .5")}
  ci <- ci.var.upper(alpha2, var0, n0)
  ul <- ci[1,1]
  n1 <- size.ci.mean(alpha1, ul, w)
@@ -5175,6 +5535,9 @@ size.ci.cv <- function(alpha, CV, w) {
 #' in the planned study. Select the Normal distribution for a conservatively
 #' large sample size requirement.
 #'
+#' For more details, see Section 1.28 of Bonett (2021, Volume 1)
+#'
+#'
 #' @param  alpha  alpha level for 1-alpha confidence
 #' @param  var    planning value of response variable variance
 #' @param  w      desired confidence interval width
@@ -5192,6 +5555,8 @@ size.ci.cv <- function(alpha, CV, w) {
 #'
 #' @references
 #' \insertRef{Bonett2002}{statpsych}
+#'
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -5253,6 +5618,8 @@ size.ci.median <- function(alpha, var, w, dist) {
 #' Select the Normal distribution for a conservatively large sample size 
 #' requirement. Set R = 1 for equal sample sizes.
 #'
+#' For more details, see Sections 1.28 and 2.13 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
 #' @param  var    planning value of average within-group variance
@@ -5272,6 +5639,8 @@ size.ci.median <- function(alpha, var, w, dist) {
 #'
 #' @references
 #' \insertRef{Bonett2002}{statpsych}
+#'
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -5333,6 +5702,8 @@ size.ci.median2 <- function(alpha, var, w, R, dist) {
 #' likely distribution shape in the planned study. Select the Normal 
 #' distribution for a conservatively large sample size requirement.
 #'
+#' For more details, see Sections 1.28 and 3.24 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
 #' @param  var    planning value of average within-group variance  
@@ -5352,6 +5723,8 @@ size.ci.median2 <- function(alpha, var, w, R, dist) {
 #'
 #' @references
 #' \insertRef{Bonett2002}{statpsych}
+#'
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -5399,6 +5772,53 @@ size.ci.lc.median.bs <- function(alpha, var, w, v, dist) {
 }
 
 
+#  size.ci.sd =================================================================
+#' Sample size for a standard deviation confidence interval
+#'
+#'
+#' @description
+#' Computes the sample size required to estimate a population standard
+#' deviation with desired confidence interval precision. This function
+#' assumes that the traditional confidence interval for a population
+#' standard deviation will be used. The traditional confidence interval
+#' assumes that the response variable has an approximate normal 
+#' distribution and can be highly innacurate when this assumption is not
+#' satisfied.
+#'
+#' @param  alpha  alpha level for 1-alpha confidence
+#' @param  r      desired upper to lower confidence interval endpoint ratio
+#'
+#'
+#' @return 
+#' Returns the required sample size
+#'
+#'
+#' @examples
+#' size.ci.sd(.05, 1.5)
+#'
+#' # Should return:
+#' # Sample size
+#' #          49
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export
+size.ci.sd <- function(alpha, r) {
+ z <- qnorm(1 - alpha/2)
+ n0 <- ceiling(2*(z/log(r))^2 + 1)
+ chi1 <- qchisq(alpha/2, (n0 - 1))
+ ul <- sqrt((n0 - 1)/chi1)
+ chi2 <- qchisq(1 - alpha/2, (n0 - 1))
+ ll <- sqrt((n0 - 1)/chi2)
+ r0 <- ul/ll
+ n <- ceiling(n0*(log(r0)/log(r))^2)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size"
+ rownames(out) <- ""
+ return(out)
+}
+
+
 # ======================== Sample Size for Desired Power ======================
 #  size.test.mean ============================================================
 #' Sample size for a test of a mean
@@ -5409,6 +5829,8 @@ size.ci.lc.median.bs <- function(alpha, var, w, v, dist) {
 #' desired power in a 1-group design. Set the variance planning value to the  
 #' largest value within a plausible range for a conservatively large sample 
 #' size.
+#'
+#' For more details, see Section 1.29 of Bonett (2021, Volume 1)
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test 
@@ -5421,12 +5843,16 @@ size.ci.lc.median.bs <- function(alpha, var, w, v, dist) {
 #' Returns the required sample size 
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
-#' size.test.mean(.05, .9, 80.5, 7)
+#' size.test.mean(.05, .9, 8.2, 1.5)
 #'
 #' # Should return:
 #' # Sample size
-#' #          20
+#' #          41
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -5451,7 +5877,11 @@ size.test.mean <- function(alpha, pow, var, es) {
 #' Computes the sample size in each group required  to test a difference in 
 #' population means with desired power in a 2-group design. Set the variance 
 #' planning value to the largest value within a plausible range for a 
-#' conservatively large sample size. Set R =1 for equal sample sizes.
+#' conservatively large sample size. Set R = 1 for equal sample sizes. For
+#' unequal sample sizes, this function assumes approximately equal population
+#' variances.
+#'
+#' For more details, see Section 2.14 of Bonett (2021, Volume 1)
 #'
 #'
 #' @param  alpha  alpha level for hypothesis test
@@ -5465,6 +5895,10 @@ size.test.mean <- function(alpha, pow, var, es) {
 #' Returns the required sample size for each group
 #'
 #'	
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' size.test.mean2(.05, .95, 100, 10, 1) 
 #'
@@ -5511,6 +5945,8 @@ size.test.mean2 <- function(alpha, pow, var, es, R) {
 #' to the largest value within a plausible range for a conservatively 
 #' large sample size.
 #'
+#' For more details, see Section 3.25 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha  alpha level for hypothesis test 
 #' @param  pow    desired power
@@ -5523,7 +5959,18 @@ size.test.mean2 <- function(alpha, pow, var, es, R) {
 #' Returns the required sample size for each group
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
+#' v <- c(1/4, 1/4, 1/4, 1/4, -1)
+#' size.test.lc.mean.bs(.05, .90, 1, .5, v)
+#'
+#' # Should return:
+#' # Sample size per group
+#' #                    53
+#'
 #' v <- c(1, -1, -1, 1)
 #' size.test.lc.mean.bs(.05, .90, 27.5, 5, v)
 #'
@@ -5563,6 +6010,8 @@ size.test.lc.mean.bs <- function(alpha, pow, var, es, v) {
 #' largest value within a plausible range for a conservatively large sample 
 #' size.
 #'
+#' For more details, see Section 2.14 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param   alpha  alpha level for hypothesis test 
 #' @param   pow    desired power
@@ -5573,6 +6022,10 @@ size.test.lc.mean.bs <- function(alpha, pow, var, es, v) {
 #'
 #' @return 
 #' Returns the required sample size for each group
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -5612,6 +6065,8 @@ size.equiv.mean2 <- function(alpha, pow, var, es, h) {
 #' Set the variance planning value to the largest value within a plausible 
 #' range for a conservatively large sample size.
 #'
+#' For more details, see Section 2.14 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param   alpha  alpha level for hypothesis test 
 #' @param   pow    desired power
@@ -5622,6 +6077,10 @@ size.equiv.mean2 <- function(alpha, pow, var, es, h) {
 #'
 #' @return 
 #' Returns the required sample size for each group
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -5656,6 +6115,8 @@ size.supinf.mean2 <- function(alpha, pow, var, es, h) {
 #' variance planning value to the largest value within a plausible range for a
 #' conservatively large sample size.
 #'
+#' For more details, see Section 4.27 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha  alpha level for hypothesis test 
 #' @param  pow    desired power
@@ -5666,6 +6127,10 @@ size.supinf.mean2 <- function(alpha, pow, var, es, h) {
 #'
 #' @return 
 #' Returns the required sample size 
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -5703,6 +6168,8 @@ size.test.mean.ps <- function(alpha, pow, var, es, cor) {
 #' the smallest value within a plausible range for a conservatively large sample 
 #' size. 
 #'
+#' For more details, see Section 4.27 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha  alpha level for hypothesis test 
 #' @param  pow    desired power
@@ -5716,13 +6183,17 @@ size.test.mean.ps <- function(alpha, pow, var, es, cor) {
 #' Returns the required sample size 
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
-#' q <- c(.5, .5, -.5, -.5)
-#' size.test.lc.mean.ws(.05, .90, 50.7, 2, .8, q)
+#' q <- c(1, -1, -1, 1)
+#' size.test.lc.mean.ws(.05, .95, 15.0, 3, .8, q)
 #'
 #' # Should return:
 #' # Sample size
-#' #          29
+#' #          20
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -5756,6 +6227,8 @@ size.test.lc.mean.ws <- function(alpha, pow, var, es, cor, q) {
 #' planning value to the largest value within a plausible range for a
 #' conservatively large sample size.
 #'
+#' For more details, see Section 4.27 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param   alpha  alpha level for hypothesis test 
 #' @param   pow    desired power
@@ -5769,12 +6242,16 @@ size.test.lc.mean.ws <- function(alpha, pow, var, es, cor, q) {
 #' Returns the required sample size
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
-#' size.equiv.mean.ps(.10, .85, 15, .5, .7, 1.5)
+#' size.equiv.mean.ps(.10, .90, 25, .5, .75, 2)
 #'
 #' # Should return:
 #' # Sample size
-#' #          68
+#' #          49
 #'  
 #' 
 #' @importFrom stats qnorm
@@ -5807,6 +6284,8 @@ size.equiv.mean.ps <- function(alpha, pow, var, es, cor, h) {
 #' within a plausible range, and set the variance planning value to the largest
 #' value within a plausible range for a conservatively large sample size.
 #'
+#' For more details, see Section 4.27 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param   alpha  alpha level for hypothesis test 
 #' @param   pow    desired power
@@ -5818,6 +6297,10 @@ size.equiv.mean.ps <- function(alpha, pow, var, es, cor, h) {
 #'
 #' @return 
 #' Returns the required sample size
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -5857,6 +6340,8 @@ size.supinf.mean.ps <- function(alpha, pow, var, es, cor, h) {
 #' which a member from subpopulation 1 has a larger score than a member from 
 #' subpopulation 2.
 #'
+#' For more details, see Section 2.14 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha  alpha level for hypothesis test 
 #' @param  pow    desired power
@@ -5865,6 +6350,8 @@ size.supinf.mean.ps <- function(alpha, pow, var, es, cor, h) {
 #'
 #' @references
 #' \insertRef{Noether1987}{statpsych}
+#'
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @return 
@@ -5908,6 +6395,8 @@ size.test.mann <- function(alpha, pow, p) {
 #' population proportion is equal to .5. This function requires a planning 
 #' value of the population proportion.
 #'
+#' For more details, see Section 1.29 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha  alpha level for hypothesis test 
 #' @param  pow    desired power
@@ -5916,6 +6405,10 @@ size.test.mann <- function(alpha, pow, p) {
 #'
 #' @return 
 #' Returns the required sample size 
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -5983,52 +6476,6 @@ size.test.sign.ps <- function(alpha, pow, p) {
  zb <- qnorm(pow)
  n0 <- ceiling((za*sqrt(.25) + zb*sqrt(p*(1 - p)))^2/((p - .5)^2))
  n <- n0 + 1/abs(p - .5)
- out <- matrix(n, nrow = 1, ncol = 1)
- colnames(out) <- "Sample size"
- rownames(out) <- ""
- return(out)
-}
-
-
-#  size.test.cronbach ========================================================
-#' Sample size to test a Cronbach reliability
-#'
-#'
-#' Computes the sample size required to test a Cronbach reliability with
-#' desired power. 
-#'
-#'
-#' @param  alpha  alpha level for hypothesis test 
-#' @param  pow    desired power
-#' @param  rel    reliability planning value
-#' @param  r      number of measurements
-#' @param  h      null hypothesis value of reliability
-#'
-#'
-#' @return 
-#' Returns the required sample size
-#'
-#'
-#' @references
-#' \insertRef{Bonett2015}{statpsych}
-#'
-#'
-#' @examples
-#' size.test.cronbach(.05, .85, .80, 5, .7)
-#'
-#' # Should return:
-#' # Sample size
-#' #         139
-#'  
-#' 
-#' @importFrom stats qnorm
-#' @export
-size.test.cronbach <- function(alpha, pow, rel, r, h) {
- if (rel > .999 | rel < .001) {stop("reliability must be between .001 and .999")}
- za <- qnorm(1 - alpha/2)
- zb <- qnorm(pow)
- e <- (1 - rel)/(1 - h)
- n <- ceiling((2*r/(r - 1))*(za + zb)^2/log(e)^2 + 2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
  rownames(out) <- ""
@@ -6250,6 +6697,8 @@ power.mean.ps <- function(alpha, n, var1, var2, es, cor) {
 #' Computes a prediction interval for the response variable score of one 
 #' randomly selected member from the study population.
 #'
+#' For more details, see Section 1.9 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
 #' @param  m      estimated mean
@@ -6263,6 +6712,10 @@ power.mean.ps <- function(alpha, n, var1, var2, es, cor) {
 #' * df - degrees of freedom
 #' * LL - lower limit of the prediction interval
 #' * UL - upper limit of the prediction interval
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -6299,9 +6752,11 @@ pi.score <- function(alpha, m, sd, n) {
 #' conditions. Both equal variance and unequal variance prediction intervals 
 #' are computed.
 #'
+#' For more details, see Section 2.6 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
-#' @param  m1     estaimted mean for group 1
+#' @param  m1     estamated mean for group 1
 #' @param  m2     estimated mean for group 1
 #' @param  sd1    estimated standard deviation for group 1
 #' @param  sd2    estimated standard deviation for group 2
@@ -6320,14 +6775,18 @@ pi.score <- function(alpha, m, sd, n) {
 #' @references
 #' \insertRef{Hahn1977}{statpsych}
 #'
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
+#'
 #'
 #' @examples
-#' pi.score2(.05, 29.57, 18.35, 2.68, 1.92, 40, 45)
+#' pi.score2(.05, 19.4, 11.3, 2.70, 2.10, 40, 40)
 #'
 #' # Should return:
-#' #                              Predicted       df       LL       UL
-#' # Equal Variances Assumed:         11.22 83.00000 4.650454 17.78955
-#' # Equal Variances Not Assumed:     11.22 72.34319 4.603642 17.83636
+#' #                              Predicted    df       LL       UL
+#' # Equal Variances Assumed:           8.1 78.00 1.205659 14.99434
+#' # Equal Variances Not Assumed:       8.1 73.54 1.199073 15.00093
 #'  
 #' 
 #' @importFrom stats qt
@@ -6340,10 +6799,11 @@ pi.score2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
  tcrit1 <- qt(1 - alpha/2, df1)
  ll1 <- est - tcrit1*se1
  ul1 <- est + tcrit1*se1
- se2 <- sqrt(sd1^2 + sd2^2 + sd1^1/n1 + sd2^2/n2)
+ se2 <- sqrt(sd1^2 + sd2^2 + sd1^2/n1 + sd2^2/n2)
  c1 <- sd1^2 + sd1^2/n1
  c2 <- sd2^2 + sd2^2/n2
  df2 <- 1/((1/(n1 - 1))*(c1/(c1 + c2))^2 + (1/(n2 - 1))*(c2/(c1 + c2))^2)
+ df2 <- round(df2, 2)
  tcrit2 <- qt(1 - alpha/2, df2)
  ll2 <- est - tcrit2*se2
  ul2 <- est + tcrit2*se2
@@ -6367,6 +6827,8 @@ pi.score2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' selected person from the study population would differ under the two 
 #' treatment conditions. 
 #'
+#' For more details, see Section 4.5 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha  alpha level for 1-alpha confidence 
 #' @param  m1     estimated mean for measurement 1
@@ -6383,6 +6845,10 @@ pi.score2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #' * df - degrees of freedom
 #' * LL - lower limit of the prediction interval
 #' * UL - upper limit of the prediction interval
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -6516,27 +6982,29 @@ random.y <- function(n, m, sd, min, max, dec) {
 
 
 #  pi.var =================================================================== 
-#' Prediction limits for an estimated variance
+#' Prediction limits for a sample variance in a future study
 #'
 #'                        
 #' @description
 #' Computes a two-sided or one-sided prediction limit for the estimated 
-#' variance in a future study for a planned sample size. The prediction limit
-#' uses a variance estimate from a prior study. 
+#' variance in a future study for a planned sample size of n. The prediction 
+#' limit uses a variance estimate from a prior study of size n0. 
 #'
 #' Several confidence interval sample size functions in this package require
-#' a planning value of the estimated variance that is expected in the planned
-#' study. A one-sided upper variance prediction limit is useful as a variance
-#' planning value for the sample size required to obtain a confidence interval
-#' with desired width. This strategy for specifying a variance planning value 
-#' is useful in applications where the population variance in the prior study
-#' is assumed to be very similar to the population variance in the planned
-#' study. 
+#' a planning value of the expected sample variance in the planned study.
+#' A one-sided upper variance prediction limit is useful as a variance
+#' planning value for a conservatively large sample size required to obtain
+#' a confidence interval with desired width. This strategy for specifying a 
+#' variance planning value is useful in applications where the population 
+#' variance in the prior study is assumed to be very similar to the population 
+#' variance in the planned study. 
+#'
+#' For more details, see Section 1.31 of Bonett (2021, Volume 1)
 #'
 #'
 #' @param  alpha  alpha value for upper 1-alpha confidence 
 #' @param  var    estimated variance from prior study
-#' @param  n0     sample size used to estimate variance
+#' @param  n0     sample size used to estimate the variance
 #' @param  n      planned sample size of future study
 #' @param  type   
 #' * set to 1 for two-sided prediction interval 
@@ -6551,6 +7019,10 @@ random.y <- function(n, m, sd, min, max, dec) {
 #'
 #' @references
 #' \insertRef{Hahn1972}{statpsych}
+#'
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #'
 #'
 #' @examples
@@ -6595,6 +7067,8 @@ pi.var <- function(alpha, var, n0, n, type) {
 #' can be used as a variance planning value in sample size functions for 
 #' desired power that require a planning value of the population variance.
 #'
+#' For more details, see Section 1.31 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  alpha  alpha value for 1-alpha confidence (one-sided)
 #' @param  var    estimated variance
@@ -6604,12 +7078,16 @@ pi.var <- function(alpha, var, n0, n, type) {
 #' Returns an upper limit (UL) variance planning value
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
-#' ci.var.upper(.25, 15, 60)
+#' ci.var.upper(.10, 1.45, 100)
 #'
 #' # Should return:
 #' #       UL
-#' # 17.23264
+#' # 1.762447
 #'  
 #' 
 #' @importFrom stats qchisq
@@ -6633,6 +7111,8 @@ ci.var.upper <- function(alpha, var, n) {
 #' can be applied to eta-squared, partial-eta squared, and generalized
 #' eta-squared estimates.
 #'
+#' For more details, see Section 3.7 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param   etasqr    unadjusted eta-square estimate
 #' @param   dfeffect  degrees of freedom for the effect
@@ -6643,18 +7123,23 @@ ci.var.upper <- function(alpha, var, n) {
 #' Returns a bias adjusted eta-squared estimate
 #'
 #'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
 #' @examples
 #' etasqr.adj(.315, 2, 42)
 #'
 #' # Should return:
 #' # adj Eta-squared
-#' #        0.282381
+#' #          0.2824
 #'  
 #' 
 #' @export
 etasqr.adj <- function(etasqr, dfeffect, dferror) {
  if (etasqr > .999 | etasqr < .001) {stop("etasqr must be between .001 and .999")}
  adj <- 1 - (dferror + dfeffect)*(1 - etasqr)/dferror
+ adj <- round(adj, 4)
  if (adj < 0) {adj = 0}
  out <- matrix(adj, nrow = 1, ncol = 1)
  colnames(out) <- "adj Eta-squared"
@@ -6674,6 +7159,8 @@ etasqr.adj <- function(etasqr, dfeffect, dferror) {
 #' The eta-squared estimates from this function can be used in the 
 #' \link[statpsych]{etasqr.adj} function to obtain bias adjusted estimates.
 #'
+#' For more details, see Section 3.12 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param  SSa    sum of squares for factor A
 #' @param  SSb    sum of squares for factor B
@@ -6686,6 +7173,10 @@ etasqr.adj <- function(etasqr, dfeffect, dferror) {
 #' * A - estimate of eta-squared for factor A
 #' * B - estimate of eta-squared for factor B
 #' * AB - estimate of eta-squared for A x B interaction
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples
@@ -7429,9 +7920,9 @@ sim.ci.median.ps <- function(alpha, n, sd2, cor, dist1, dist2, rep) {
 #' @description
 #' Performs a computer simulation of confidence interval performance for  
 #' two types of standardized mean differences in a 2-group design (see
-#' ci.stdmean2). Sample data for each group can be generated from five 
-#' different population distributions. All distributions are scaled to have
-#' a standard deviation of 1.0 for group 1.
+#' \link[statpsych]{ci.stdmean2}). Sample data for each group can be 
+#' generated from five different population distributions. All distributions 
+#' are scaled to have a standard deviation of 1.0 for group 1.
 #'
 #' @param   alpha     alpha level for 1-alpha confidence
 #' @param   n1        sample size for group 1
@@ -7560,11 +8051,11 @@ sim.ci.stdmean2 <- function(alpha, n1, n2, sd2, dist1, dist2, d, rep) {
 #' @description
 #' Performs a computer simulation of confidence interval performance for  
 #' two types of standardized mean differences in a paired-samples design (see
-#' ci.stdmean.ps). Sample data for the two levels of the within-subjects factor
-#' can be generated from five different population distributions. All 
-#' distributions are scaled to have a standard deviation of 1.0 at level 1.
-#' Bivariate random data with specified marginal skewness and kurtosis are 
-#' generated using the unonr function in the mnonr package. 
+#' \link[statpsych]{ci.stdmean.ps}). Sample data for the two levels of the 
+#' within-subjects factor can be generated from five different population 
+#' distributions. All distributions are scaled to have a standard deviation
+#' of 1.0 at level 1. Bivariate random data with specified marginal skewness
+#' and kurtosis are generated using the unonr function in the mnonr package. 
 #'
 #' @param   alpha     alpha level for 1-alpha confidence
 #' @param   n         sample size 
@@ -7697,6 +8188,8 @@ sim.ci.stdmean.ps <- function(alpha, n, sd2, cor, dist1, dist2, d, rep) {
 #' average of r1 parallel measurements. The "measurements" can be items, 
 #' forms, raters, or occasions.
 #'
+#' For more details, see Section 4.19 of Bonett (2021, Volume 1)
+#'
 #'
 #' @param   rel     reliability of the sum or average of r1 measurements
 #' @param   r1      number of measurements in the original scale 
@@ -7705,6 +8198,10 @@ sim.ci.stdmean.ps <- function(alpha, n, sd2, cor, dist1, dist2, d, rep) {
 #'
 #' @return
 #' Returns the reliability of the sum or average of r2 measurements
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
 #'
 #'
 #' @examples

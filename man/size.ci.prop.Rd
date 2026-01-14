@@ -20,13 +20,18 @@ Returns the required sample size
 Computes the sample size required to estimate a population proportion
 with desired confidence interval precision. Set the proportion planning
 value to .5 for a conservatively large sample size.
+
+For more details, see Section 1.14 of Bonett (2021, Volume 3)
 }
 \examples{
-size.ci.prop(.05, .4, .2)
+size.ci.prop(.05, .5, .1)
 
 # Should return:
 # Sample size
-#          93
+#         385
 
 
+}
+\references{
+\insertRef{Bonett2021}{statpsych}
 }

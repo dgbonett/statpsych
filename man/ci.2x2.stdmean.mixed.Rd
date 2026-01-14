@@ -30,10 +30,10 @@ Returns a 7-row matrix (one row per effect). The columns are:
 }
 \description{
 Computes confidence intervals for the standardized AB interaction effect,
-main effect of A, main efect of B, simple main effects of A, and simple main
+main effect of A, main effect of B, simple main effects of A, and simple main
 effects of B in a 2x2 mixed factorial design where Factor A is a
 within-subjects factor, and Factor B is a between-subjects factor. Equality
-of population variances is not assumed. A square root unweigthed average
+of population variances is not assumed. A square root unweighted average
 variance standardizer is used.
 }
 \examples{
@@ -44,14 +44,14 @@ y22 <- c(16, 10, 12,  9, 13, 15)
 ci.2x2.stdmean.mixed(.05, y11, y12, y21, y22)
 
 # Should return:
-#             Estimate adj Estimate        SE          LL         UL
-# AB:      -1.95153666  -1.80141845 0.5407442 -3.01137589 -0.8916974
-# A:        1.06061775   1.01125934 0.2797699  0.51227884  1.6089567
-# B:        1.90911195   1.76225718 0.5758855  0.78039715  3.0378267
-# A at b1:  0.08484942   0.07589163 0.4650441 -0.82662027  0.9963191
-# A at b2:  2.03638608   1.82139908 0.2995604  1.44925855  2.6235136
-# B at a1:  0.93334362   0.86154796 0.5036429 -0.05377836  1.9204656
-# B at a2:  2.88488027   2.66296641 0.7477246  1.41936706  4.3503935
+#          Estimate adj Estimate      SE      LL      UL
+# AB:       -1.9515      -1.8014 0.54074 -3.0114 -0.8917
+# A:         1.0606       1.0113 0.27977  0.5123  1.6090
+# B:         1.9091       1.7623 0.57589  0.7804  3.0378
+# A at b1:   0.0848       0.0759 0.46504 -0.8266  0.9963
+# A at b2:   2.0364       1.8214 0.29956  1.4493  2.6235
+# B at a1:   0.9333       0.8615 0.50364 -0.0538  1.9205
+# B at a2:   2.8849       2.6630 0.74772  1.4194  4.3504
 
 
 }

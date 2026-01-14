@@ -36,18 +36,22 @@ Computes confidence intervals for a population standardized mean difference
 in a paired-samples design. A square root unweighted variance standardizer
 and single measurement standard deviation standardizers are used. Equality
 of variances is not assumed.
+
+For more details, see Section 4.3 of Bonett (2021, Volume 1)
 }
 \examples{
-ci.stdmean.ps(.05, 110.4, 102.1, 15.3, 14.6, .75, 25)
+ci.stdmean.ps(.05, 602.4, 705.6, 33.17, 51.08, .769, 8)
 
 # Should return:
-#                              Estimate  adj Estimate        SE        LL        UL
-# Unweighted standardizer:    0.5550319     0.5433457 0.1609934 0.2394905 0.8705732
-# Measurement 1 standardizer: 0.5424837     0.5253526 0.1615500 0.2258515 0.8591158
-# Measurement 2 standardizer: 0.5684932     0.5505407 0.1692955 0.2366800 0.9003063
+#                             Estimate adj Estimate      SE      LL      UL
+# Unweighted standardizer:     -2.3963      -2.2185 0.65209 -3.6744 -1.1182
+# Measurement 1 standardizer:  -3.1112      -2.7656 0.91362 -4.9019 -1.3206
+# Measurement 2 standardizer:  -2.0204      -1.7959 0.59328 -3.1832 -0.8576
 
 
 }
 \references{
 \insertRef{Bonett2008}{statpsych}
+
+\insertRef{Bonett2021}{statpsych}
 }
