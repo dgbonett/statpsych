@@ -4270,47 +4270,6 @@ power.prop.ps <- function(alpha, n, p1, p2, phi, es) {
 
           
 # ======================== Miscellaneous =====================================
-#  iqv =======================================================================
-#' Indices of qualitative variation 
-#'
-#'
-#' @description
-#' Computes the Shannon, Berger, and Simpson indices of qualitative variation.
-#' Will be replaced soon with ci.diversity.
-#'
-#'  
-#' @param   f   vector of multinomial frequency counts
-#'
-#' 
-#' @return 
-#' Returns estimates of the Shannon, Berger, and Simpson indices
-#' 
-#' 
-#' @examples
-#' f <- c(10, 46, 15, 3)
-#' iqv(f)
-#'
-#' # Should return:
-#' #   Simpson    Berger   Shannon
-#' # 0.7367908 0.5045045       0.7
-#'  
-#' 
-#' @export  
-iqv <- function(f) {
- n <- sum(f)
- p <- f/n
- k <- length(f)
- a <- k/(k - 1)
- iqv1 <- a*(1 - sum(p^2))
- iqv2 <- a*( 1 - max(p))
- iqv3 <- (-1)*sum(p*log(p))/log(k)
- out <- t(c(iqv1, iqv2, iqv3))
- colnames(out) <- c("Simpson", "Berger", "Shannon")
- rownames(out) <- ""
- return(out)
-}
-
-
 #  expon.slope ================================================================== 
 #' Confidence interval for an exponentiated slope
 #'
