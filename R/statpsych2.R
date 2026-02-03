@@ -2785,6 +2785,58 @@ size.ci.spear <- function(alpha, cor, w) {
 }
 
 
+#  size.ci.kendalltau ==============================================================
+#' Sample size for a Kendall-a correlation confidence interval 
+#'
+#'
+#' @description
+#' Computes the sample size required to estimate a population Kendall tau-a
+#' correlation with desired confidence interval precision. Set the correlation 
+#' planning value to the smallest absolute value within a plausible range for a
+#' conservatively large sample size.
+#'
+#'  
+#' @param  alpha  alpha level for 1-alpha confidence
+#' @param  cor    planning value of correlation
+#' @param  w      desired confidence interval width
+#'
+#' 
+#' @return 
+#' Returns the required sample size
+#' 
+#' 
+#' @references
+#' \insertRef{Bonett2000}{statpsych}
+#'
+#'
+#' @examples
+#' size.ci.kendalltau(.05, .3, .2)
+#'
+#' # Should return:
+#' # Sample size
+#' #         143
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export  
+size.ci.kendalltau <- function(alpha, cor, w) {
+ if (cor > .999 | cor < -.999) {stop("correlation must be between -.999 and .999")}
+ z <- qnorm(1 - alpha/2)
+ n1 <- ceiling(1.748*(1 - cor^2)^2*(z/w)^2 + 4)
+ zr <- log((1 + cor)/(1 - cor))/2
+ se <- sqrt(.437/(n1 - 4))
+ ll0 <- zr - z*se
+ ul0 <- zr + z*se
+ ll <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
+ ul <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
+ n <- ceiling((n1 - 4)*((ul - ll)/w)^2 + 4)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size"
+ rownames(out) <- ""
+ return(out)
+}
+
+
 #  size.ci.pbcor ==============================================================
 #' Sample size for a point-biserial correlation confidence interval 
 #'
