@@ -6170,6 +6170,54 @@ size.supinf.mean2 <- function(alpha, pow, var, es, h) {
 }
 
 
+#  size.test.icc ==============================================================
+#' Sample size to test an intraclass correlation 
+#'             
+#'
+#' Computes the sample size required to test an intraclass correlation (icc) 
+#' with desired power in a one-way random effects ANOVA model.
+#'
+#'
+#' @param  alpha  alpha level for hypothesis test 
+#' @param  pow    desired power
+#' @param  icc    icc planning value
+#' @param  r      number of measurements (items, raters, forms)
+#' @param  h      null hypothesis value of icc 
+#'
+#'
+#' @return 
+#' Returns the required sample size
+#'
+#'
+#' @references
+#' \insertRef{Donner1987}{statpsych}          
+#'
+#'
+#' @examples
+#' size.test.icc(.05, .90, .65, 4, .50)
+#'
+#' # Should return:
+#' # Sample size
+#' #         104
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export
+size.test.icc <- function(alpha, pow, icc, r, h) {
+ if (icc > .999 | icc < .001) {stop("icc must be between .001 and .999")}
+ za <- qnorm(1 - alpha/2)
+ zb <- qnorm(pow)
+ f1 <- (1 + (r - 1)*icc)/(1 - icc)
+ f2 <- (1 + (r - 1)*h)/(1 - h)
+ es <- log(f1/f2)
+ n <- ceiling(2*r*(za + zb)^2/((r - 1)*es^2)) + 1
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size"
+ rownames(out) <- ""
+ return(out)
+}
+
+
 #  size.test.mean.ps ========================================================== 
 #' Sample size for a test of a paired-samples mean difference
 #'
