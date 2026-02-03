@@ -4394,9 +4394,72 @@ signal <- function(f1, f2, n1, n2) {
 }
 
 
+#  perf.logit ==================================================================
+#  Computes several measures of model performance for a binary logistic model. 
+#' The confusion matrix is computed using the observed 0 or 1 response variable 
+#' scores, the predicted probabilities from the logistic model, and a specified
+#' cutpoint. 
+#'
+#'
+#' @param  y    vector of observed 0 or 1 response scores 
+#' @param  p    vector of predicted probabilities from model
+#' @param  c    cutpoint (defines the predicted 0 or 1 scores)
+#'
+#'
+#' @return 
+#' Returns a 1-row matrix. The columns are:
+#' * C - percent correctly classified (aka accuracy)
+#' * TP - percent true positives (aka sensitivity, recall)
+#' * FP - percent false positives (1 - TN)
+#' * TN - percent true negatives (aka specificity)
+#' * FN - percent false negatives (1 - TP)
+#' * PPV - percent positive predicted values (aka precision)
+#' * NPV - percent negative predicted values
+#' * F1 - F1 score (2 x PPV x TP)/(PPV + TP)
+#' 
+#'
+#'
+#' @examples
+#' y <- c(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1)
+#' x1 <- c(1,1,3,2,6,8,4,5,6,2,4,3,1,5,3,9,8,9,8,6,6,7,5,3,8,6,5,7,8,9,7,8)
+#' x2 <- c(0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0)
+#' out <- glm(y ~ x1 + x2, family = binomial(link = "logit"))
+#' p <- predict(out, type = "response")
+#' perf.logit(y, p, .3)
+#'
+#' # Should return:
+#' #      C    TP    FP    TN   FN PPV     NPV      F1 
+#' #  81.25 93.75 31.25 68.75 6.25  75 91.6667 83.3333 
+#'
+#' perf.logit(y, p, .4)
+#' # Should return:
+#' #     C    TP    FP    TN   FN     PPV     NPV      F1
+#' #  87.5 93.75 18.75 81.25 6.25 83.3333 92.8571 88.2353
+#'
+#'
+#' @importFrom stats qnorm
+#' @export
+perf.logit <- function(y, p, cut) {
+  if (cut > .99 | cut < .01) {stop("cutpoint must be between .01 and .99")}
+  n <- length(y)
+  yhat <- as.numeric(p > cut)
+  f <- as.numeric(table(y, yhat))
+  a <- 100*(f[1] + f[4])/n
+  tp <- 100*f[4]/(f[2] + f[4])
+  tn <- 100*f[1]/(f[1] + f[3])
+  fp <- 100*f[3]/(f[2] + f[4])
+  fn <- 100*f[2]/(f[1] + f[3])
+  ppv <- 100*f[4]/(f[3] + f[4])
+  npv <- 100*f[1]/(f[1] + f[2])
+  f1 <- 2*ppv*tp/(ppv + tp)
+  out <- round(t(c(a, tp, fp, tn, fn, ppv, npv, f1)), 4)
+  colnames(out) = c("C", "TP", "FP", "TN", "FN", "PPV", "NPV", "F1")
+  rownames(out) = ""
+  return (out)
+}
+
+
 fix_imports <- function() {
   something <- Rdpack::append_to_Rd_list()
   res <- mathjaxr::preview_rd()
 }
-
-
