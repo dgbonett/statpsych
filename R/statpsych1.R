@@ -4600,6 +4600,72 @@ test.kurtosis <- function(y) {
 }
 
 
+#  test.kurtosis.geary ========================================================
+#' Computes estimate and test of excess Geary kurtosis
+#'
+#'                                 
+#' @description
+#' Computes an estimate and test for kurtosis using a modfication of Geary's
+#' measure of kurtosis. If the p-value is small (e.g., less than .05) and excess
+#' kurtosis is positive, then the normality assumption can be rejected due to 
+#' leptokurtosis. If the p-value is small (e.g., less than .05) and excess 
+#' kurtosis is negative, then the normality assumption can be rejected due to 
+#' platykurtosis. The estimate and test of Geary's kurtosis used here is based
+#' on a transformation of Geary's orginal measure of kurtosis proposed by
+#' Bonett and Seier (2002). Geary's kurtosis tends to be more sensitive to 
+#' peakedness than Pearson's kurtosis, and Pearson's kurtosis tend to be more
+#' sensitive to tail weight than Geary's kurtosis. In the same way that it is
+#' informative to assess centrality and variability using more than one 
+#' measure, it is also informative to assess kurtosis using both Pearson
+#' kurtosis and Geary kurtosis. See (see \link[statpsych]{test.kurtosis}) for
+#' test of Pearson kurtosis.
+#'
+#'
+#' @param   y      vector of quantitative scores
+#'  
+#' 
+#' @return
+#' Returns a 1-row matrix. The columns are:
+#' * Kurtosis - estimate of transformed Geary kurtosis coefficient
+#' * Excess - estimate of excess kurtosis (kurtosis - 3)
+#' * z - z test statistic
+#' * p - two-sided p-value
+#'
+#'
+#' @references
+#' \insertRef{Bonett2002}{statpsych}
+#'
+#'
+#' @examples
+#' y <- c(58, 58, 55, 52, 20, 65, 59, 49, 51, 81, 40, 62, 56, 49, 49, 50, 44, 53, 59)
+#' test.kurtosis.geary(y)
+#'
+#' # Should return:
+#' # Kurtosis Excess     z     p
+#' #    5.157  2.157 2.793 0.005
+#'
+#'
+#' @importFrom stats rnorm
+#' @importFrom stats sd
+#' @importFrom stats na.omit
+#' @export
+test.kurtosis.geary <- function(y) {
+ y <- na.omit(y)
+ n <- length(y)
+ a <- sqrt((n - 1)/n)
+ m <- mean(y)
+ s <- a*sd(y)
+ tau <- mean(abs(y - m))
+ kur <- 13.29*(log(s) - log(tau))
+ z <- sqrt(n + 2)*(kur - 3)/3.54
+ p <- 2*(1 - pnorm(abs(z)))
+ out <- round(t(c(kur, kur - 3, z, p)), 3)
+ colnames(out) <- c("Kurtosis", "Excess", "z", "p")
+ rownames(out) <- ""
+ return(out)
+}
+
+
 #  test.anova.bs =============================================================
 #' Between-subjects F statistic and eta-squared from summary information 
 #'
