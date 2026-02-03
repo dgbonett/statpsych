@@ -621,7 +621,62 @@ ci.spear2 <- function(alpha, cor1, cor2, n1, n2) {
  rownames(out) <- ""
  return (out)
 }
-	
+
+
+#  ci.kendalltau  ===================================================================
+#' Confidence interval for a Kendall tau-a correlation
+#'
+#'
+#' @description
+#' Computes a Fisher confidence interval for a population Kendal tau-a correlation. 
+#' This function is useful for Kendall tau-a correlations less than about .8. (Note: 
+#' under bivariate normality, a Kendall tau-a correlation of .8 corresponds to a 
+#' Pearson correlation of about .95.) An estimate of the Kendall tau-a correlation 
+#' can be obtained from the (see \link[stats]{cor.test} function with method = "kendall".
+#' 
+#'
+#' @param  alpha 	alpha level for 1-alpha confidence
+#' @param  cor	  	estimate of Kendall's tau-a correlation
+#' @param  n	  	sample size
+#'
+#'
+#' @references
+#' \insertRef{Bonett2002}{statpsych}
+#'
+#'
+#' @return 
+#' Returns a 1-row matrix. The columns are:
+#' * Estimate - estimated Kendall tau-a correlation (from input)
+#' * SE - standard error
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
+#' 
+#' 
+#' @examples
+#' ci.kendalltau(.05, .734, 40)
+#'
+#' # Should return:
+#' # Estimate      SE     LL     UL
+#' #    0.734 0.05082 0.6178 0.8188
+#'
+#' 
+#' @importFrom stats qnorm
+#' @export
+ci.kendalltau <- function(alpha, cor, n) {
+ z <- qnorm(1 - alpha/2)
+ se <- sqrt(.437*(1 - cor^2)^2/(n - 4))
+ se.z <- sqrt(.437/(n - 4))
+ zr <- log((1 + cor)/(1 - cor))/2
+ ll0 <- zr - z*se.z
+ ul0 <- zr + z*se.z
+ ll <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
+ ul <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
+ out <- cbind(round(cor, 4), round(se, 5), round(ll, 4), round(ul, 4))
+ colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
+ return(out)
+}
+
 
 #  ci.mape  ===================================================================
 #' Confidence interval for a mean absolute prediction error
