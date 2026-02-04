@@ -4633,7 +4633,7 @@ test.kurtosis <- function(y) {
 #'
 #'
 #' @references
-#' \insertRef{Bonett2002}{statpsych}
+#' \insertRef{Bonett2002c}{statpsych}
 #'
 #'
 #' @examples
