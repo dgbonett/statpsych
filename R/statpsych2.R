@@ -3784,13 +3784,17 @@ size.ci.icc.prior <- function(alpha1, alpha2, cor0, n0, r, w) {
 #' standardized covariate mean difference of all covariates. In an 
 #' experiment, this standardized mean difference should be set to 0. Set 
 #' the error variance planning value to the largest value within a 
-#' plausible range for a conservatively large sample size.
+#' plausible range for a conservatively large sample size. Note that
+#' the within-group error variance is equal to the within-group 
+#' variance times 1 minus the the squared correlation (s = 1) or 
+#' squared multiple correlation (s > 1) between the response variable
+#' and the covariate(s).
 #'
 #' For more details, see Section 2.28 of Bonett (2021, Volume 2)
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
-#' @param  evar   planning value of within group (error) variance
+#' @param  evar   planning value of within group error variance
 #' @param  s      number of covariates 
 #' @param  d      largest standardized mean difference of all covariates
 #' @param  w      desired confidence interval width
@@ -4285,14 +4289,16 @@ size.test.lc.ancova <- function(alpha, pow, evar, es, s, d, v) {
 #' difference across of all covariates. In an experiment, this standardized 
 #' mean difference is set to 0. Set the error variance planning value to the 
 #' largest value within a plausible range for a conservatively large sample 
-#' size.
+#' size. Note that the within-group error variance is equal to the within-group 
+#' variance times 1 minus the the squared correlation (s = 1) or squared 
+#' multiple correlation (s > 1) between the response variable and the covariate(s).
 #'
 #' For more details, see Section 2.29 of Bonett (2021, Volume 2)
 #'
 #'  
 #' @param  alpha   alpha level for hypothesis test
 #' @param  pow     desired power
-#' @param  evar    planning value of within-group (error) variance
+#' @param  evar    planning value of within-group error variance
 #' @param  es      planning value of mean difference
 #' @param  s       number of covariates 
 #' @param  d       largest standardized mean difference of all covariates
