@@ -411,7 +411,7 @@ ci.cor2.gen <- function(cor1, ll1, ul1, cor2, ll2, ul2) {
 #' and is appropriate for nonexperimental designs with simple random sampling
 #' (but not stratified random sampling). The other type uses an unweighted 
 #' average of the group variances and is appropriate for experimental designs.
-#' Equality of variances is not assumed for either type. 
+#' Equality of variances is not assumed for the unweighted method. 
 #'
 #' For more details, see Section 1.18 of Bonett (2021, Volume 2)
 #'
@@ -463,7 +463,7 @@ ci.pbcor <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
  k <- (n - 2)/(n*p*(1 - p))
  cor1 <- d1/sqrt(d1^2 + k)
  cor2 <- d2/sqrt(d2^2 + 4)
- se.d1 <- sqrt(d1^2*(1/df1 + 1/df2)/8 + (sd1^2/n1 + sd2^2/n2)/s1^2)
+ se.d1 <- sqrt(d1^2*(1/df1 + 1/df2)/8 + 1/n1 + 1/n2)
  se.d2 <- sqrt(d2^2*(sd1^4/df1 + sd2^4/df2)/(8*s2^4) + (sd1^2/df1 + sd2^2/df2)/s2^2) 
  se.cor1 <- (k/(d1^2 + k)^(3/2))*se.d1
  se.cor2 <- (4/(d2^2 + 4)^(3/2))*se.d2
