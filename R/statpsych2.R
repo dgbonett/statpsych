@@ -444,7 +444,7 @@ ci.cor2.gen <- function(cor1, ll1, ul1, cor2, ll2, ul2) {
 #'
 #' # Should return:
 #' #             Estimate      SE     LL     UL
-#' # Weighted:     0.7066 0.04891 0.5885 0.7854
+#' # Weighted:     0.7066 0.04911 0.5879 0.7857
 #' # Unweighted:   0.7021 0.05019 0.5808 0.7829
 #'  
 #' 
@@ -463,7 +463,7 @@ ci.pbcor <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
  k <- (n - 2)/(n*p*(1 - p))
  cor1 <- d1/sqrt(d1^2 + k)
  cor2 <- d2/sqrt(d2^2 + 4)
- se.d1 <- sqrt(d1^2*(1/n1 + 1/n2)/8 + (sd1^2/n1 + sd2^2/n2)/s1^2)
+ se.d1 <- sqrt(d1^2*(1/df1 + 1/df2)/8 + (sd1^2/n1 + sd2^2/n2)/s1^2)
  se.d2 <- sqrt(d2^2*(sd1^4/df1 + sd2^4/df2)/(8*s2^4) + (sd1^2/df1 + sd2^2/df2)/s2^2) 
  se.cor1 <- (k/(d1^2 + k)^(3/2))*se.d1
  se.cor2 <- (4/(d2^2 + 4)^(3/2))*se.d2
