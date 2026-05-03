@@ -8322,7 +8322,7 @@ sim.ci.stdmean.ps <- function(alpha, n, sd2, cor, dist1, dist2, d, rep) {
 #' spearmanbrown(.6, 10, 20)
 #'
 #' # Should return:
-#' # Reliability of r2 measurements
+#' # Reliability of 20 measurements
 #' #                            .75
 #'
 #'
@@ -8330,7 +8330,7 @@ sim.ci.stdmean.ps <- function(alpha, n, sd2, cor, dist1, dist2, d, rep) {
 spearmanbrown <- function(rel, r1, r2) {
  rel_r2 <- (r2/r1)*rel/(1 + (r2/r1 - 1)*rel)
  out <- matrix(rel_r2, nrow = 1, ncol = 1)
- colnames(out) <- "Reliability of r2 measurements"
+ colnames(out) <- paste("Reliability of", r2, "measurements")
  rownames(out) <- ""
  return(out)
 }
