@@ -6820,7 +6820,10 @@ power.mean.ps <- function(alpha, n, var1, var2, es, cor) {
 #' @param  n1     planned sample size for group 1
 #' @param  n2     planned sample size for group 2
 #' @param  es     planning value of effect size (between .5 and 1) 
-
+#'
+#'
+#' @references
+#' \insertRef{Noether1987}{statpsych}
 #'
 #'
 #' @return
