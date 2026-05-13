@@ -6623,8 +6623,8 @@ size.test.sign.ps <- function(alpha, pow, p) {
 #' power.mean(.05, 15, 80.5, 7)
 #'
 #' # Should return:
-#' #     Power
-#' # 0.8021669
+#' #  Power
+#' # 0.8022
 #'
 #'
 #' @importFrom stats qt
@@ -6637,7 +6637,7 @@ power.mean <- function(alpha, n, var, es) {
  pow1 <- 1 - pt(t, df, z)
  pow2 <- 1 - pt(t, df, -z)
  pow <- pow1 + pow2
- out <- matrix(pow, nrow = 1, ncol = 1)
+ out <- matrix(round(pow, 4), nrow = 1, ncol = 1)
  colnames(out) <- "Power"
  rownames(out) <- ""
  return(out)
@@ -6673,8 +6673,8 @@ power.mean <- function(alpha, n, var, es) {
 #' power.mean2(.05, 25, 25, 5.0, 6.0, 2)
 #'
 #' # Should return:
-#' #     Power
-#' # 0.8398417
+#' #  Power
+#' # 0.8398
 #'
 #'
 #' @importFrom stats qt
@@ -6687,7 +6687,7 @@ power.mean2 <- function(alpha, n1, n2, var1, var2, es) {
  pow1 <- 1 - pt(t, df, z)
  pow2 <- 1 - pt(t, df, -z)
  pow <- pow1 + pow2
- out <- matrix(pow, nrow = 1, ncol = 1)
+ out <- matrix(round(pow, 4), nrow = 1, ncol = 1)
  colnames(out) <- "Power"
  rownames(out) <- ""
  return(out)
@@ -6728,8 +6728,8 @@ power.mean2 <- function(alpha, n1, n2, var1, var2, es) {
 #' power.lc.mean.bs(.05, n, var, 5, v)
 #'
 #' # Should return:
-#' #     Power
-#' # 0.7221171
+#' #  Power
+#' # 0.7221
 #'
 #'
 #' @importFrom stats qt
@@ -6744,7 +6744,7 @@ power.lc.mean.bs <- function(alpha, n, var, es, v) {
  pow1 <- 1 - pt(t, df, z)
  pow2 <- 1 - pt(t, df, -z)
  pow <- pow1 + pow2
- out <- matrix(pow, nrow = 1, ncol = 1)
+ out <- matrix(round(pow, 4), nrow = 1, ncol = 1)
  colnames(out) <- "Power"
  rownames(out) <- ""
  return(out)
@@ -6780,8 +6780,8 @@ power.lc.mean.bs <- function(alpha, n, var, es, v) {
 #' power.mean.ps(.05, 20, 10.0, 12.0, 2, .7)
 #'
 #' # Should return:
-#' #     Power
-#' # 0.9074354
+#' #  Power
+#' # 0.9074
 #'
 #'
 #' @importFrom stats qt
@@ -6795,7 +6795,55 @@ power.mean.ps <- function(alpha, n, var1, var2, es, cor) {
  pow1 <- 1 - pt(t, df, z)
  pow2 <- 1 - pt(t, df, -z)
  pow <- pow1 + pow2
- out <- matrix(pow, nrow = 1, ncol = 1)
+ out <- matrix(round(pow, 4), nrow = 1, ncol = 1)
+ colnames(out) <- "Power"
+ rownames(out) <- ""
+ return(out)
+}
+
+
+#  power.mann ================================================================
+#' Approximates the power of a Mann-Whitney test 
+#'
+#'
+#' @description
+#' Computes the approximate power of a Mann-Whitney U test for a planned 
+#' sample size. In a 2-group experiment, the effect size is the proportion  
+#' of members in the population with scores that would be higher under 
+#' treatment 1 than treatment 2. In a 2-group nonexperiment where participants
+#' are sampled from two subpopulations of sizes N1 and N2, the effect size is 
+#' the proportion of all N1 x N2 pairs in which a member from subpopulation 1 
+#' has a larger score than a member from subpopulation 2.
+#'
+#'
+#' @param  alpha  alpha level for hypothesis test 
+#' @param  n1     planned sample size for group 1
+#' @param  n2     planned sample size for group 2
+#' @param  es     planning value of effect size (between .5 and 1) 
+
+#'
+#'
+#' @return
+#' Returns the approximate power of the test
+#'
+#'
+#' @examples
+#' power.mann(.05, 50, 50, .65)
+#'
+#' # Should return:
+#' #   Power
+#' #  0.7383
+#'
+#'
+#' @importFrom stats qnorm
+#' @importFrom stats pnorm
+#' @export
+power.mann <- function(alpha, n1, n2, es) {
+ if (es > .9999 | es < .5001) {stop("effect size must be between .5001 and .9999")}
+ za <- qnorm(1 - alpha/2)
+ z <- sqrt(12*n1*n2/(n1 + n2))*(es - .5)- za
+ pow <- pnorm(z)
+ out <- matrix(round(pow, 4), nrow = 1, ncol = 1)
  colnames(out) <- "Power"
  rownames(out) <- ""
  return(out)
