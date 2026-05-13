@@ -8,7 +8,8 @@ Changes:
     * size.ci.kendalltau -- Computes sample size for a Kendall tau-a confidence interval
     * size.test.icc  -- Computes sample size for a test of an intraclass correlation
     * test.kurtosis.geary -- Computes test of excess Geary kurtosis
-    * ci.kendalltau -- Computes confidence interval for Kendal tau-a correlation 
+    * ci.kendalltau -- Computes confidence interval for Kendal tau-a correlation
+    * power.mann -- Computes power of Mann-Whitney test for a planned sample size
 * Deleted functions:
     * iqv has been replaced with ci.diversity
     * size.ci.slope.gen has been replaced with size.ci.gen
