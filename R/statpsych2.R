@@ -4575,8 +4575,8 @@ size.test.gen2 <- function(alpha, pow, se, n0, es, R) {
 #' power.cor(.05, 80, .3, 0, 0)
 #'
 #' # Should return:
-#' #     Power
-#' # 0.7751947
+#' #  Power
+#' # 0.7752
 #'
 #'
 #' @importFrom stats qnorm
@@ -4593,7 +4593,7 @@ power.cor <- function(alpha, n, cor, h, s) {
  pow1 <- pnorm(z1)
  pow2 <- 1 - pnorm(z2)
  pow <- pow1 + pow2
- out <- matrix(pow, nrow = 1, ncol = 1)
+ out <- matrix(round(pow, 4), nrow = 1, ncol = 1)
  colnames(out) <- "Power"
  rownames(out) <- ""
  return(out)
@@ -4627,8 +4627,8 @@ power.cor <- function(alpha, n, cor, h, s) {
 #' power.cor2(.05, 200, 200, .4, .2, 0)
 #'
 #' # Should return:
-#' #     Power
-#' # 0.5919682
+#' #  Power
+#' # 0.5920
 #'
 #'
 #' @importFrom stats qnorm
@@ -4645,7 +4645,7 @@ power.cor2 <- function(alpha, n1, n2, cor1, cor2, s) {
  pow1 <- pnorm(z1)
  pow2 <- 1 - pnorm(z2)
  pow <- pow1 + pow2
- out <- matrix(pow, nrow = 1, ncol = 1)
+ out <- matrix(round(pow, 4), nrow = 1, ncol = 1)
  colnames(out) <- "Power"
  rownames(out) <- ""
  return(out)
