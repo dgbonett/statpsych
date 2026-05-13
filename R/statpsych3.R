@@ -4135,8 +4135,8 @@ size.supinf.prop.ps <- function(alpha, pow, p1, p2, phi, h) {
 #' power.prop(.05, 40, .5, .2)
 #'
 #' # Should return:
-#' #     Power
-#' # 0.7156044
+#' #  Power
+#' # 0.7156
 #'
 #'
 #' @importFrom stats qnorm
@@ -4150,7 +4150,7 @@ power.prop <- function(alpha, n, p, es) {
  pow1 <- pnorm(z1)
  pow2 <- 1 - pnorm(z2)
  pow <- pow1 + pow2
- out <- matrix(pow, nrow = 1, ncol = 1)
+ out <- matrix(round(pow, 4), nrow = 1, ncol = 1)
  colnames(out) <- "Power"
  rownames(out) <- ""
  return(out)
@@ -4187,8 +4187,8 @@ power.prop <- function(alpha, n, p, es) {
 #' power.prop2(.05, 60, 40, .5, .5, .2)
 #'
 #' # Should return:
-#' #     Power
-#' # 0.4998959
+#' #  Power
+#' # 0.4999
 #'
 #'
 #' @importFrom stats qnorm
@@ -4203,7 +4203,7 @@ power.prop2 <- function(alpha, n1, n2, p1, p2, es) {
  pow1 <- pnorm(z1)
  pow2 <- 1 - pnorm(z2)
  pow <- pow1 + pow2
- out <- matrix(pow, nrow = 1, ncol = 1)
+ out <- matrix(round(pow, 4), nrow = 1, ncol = 1)
  colnames(out) <- "Power"
  rownames(out) <- ""
  return(out)
@@ -4244,8 +4244,8 @@ power.prop2 <- function(alpha, n1, n2, p1, p2, es) {
 #' power.prop.ps(.05, 45, .5, .5, .4, .2)
 #'
 #' # Should return:
-#' #     Power
-#' # 0.6877704
+#' #  Power
+#' # 0.6878
 #'
 #'
 #' @importFrom stats qnorm
@@ -4262,7 +4262,7 @@ power.prop.ps <- function(alpha, n, p1, p2, phi, es) {
  pow1 <- pnorm(z1)
  pow2 <- 1 - pnorm(z2)
  pow <- pow1 + pow2
- out <- matrix(pow, nrow = 1, ncol = 1)
+ out <- matrix(round(pow, 4), nrow = 1, ncol = 1)
  colnames(out) <- "Power"
  rownames(out) <- ""
  return(out)
