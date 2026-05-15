@@ -4700,7 +4700,7 @@ slope.contrast <- function(x) {
 
 
 #  random.yx =================================================================
-#' Generates random bivariate scores 
+#' Generates random bivariate normal scores 
 #'
 #'
 #' @description
@@ -4748,6 +4748,72 @@ random.yx <- function(n, my, mx, sdy, sdx, cor, dec) {
  x <- sdx*x0 + mx
  y <- sdy*y0 + my
  out <- as.data.frame(round(cbind(y, x), dec))
+ colnames(out) <- c("y", "x")
+ return(out)
+}
+
+
+#  random.yx.nonnormal ========================================================
+#' Generates random bivariate nonnormal scores 
+#'
+#'
+#' @description
+#' Generates a random sample of y scores and x scores from a bivariate 
+#' nonnormal distribution with a specified population correlation and a
+#' specified population mean, standard deviation, skewness, and excess
+#' kurtosis for each variable. This function uses the mvrnonnorm 
+#' function in the semTools package. 
+#'
+#' For population excess kurtosis values greater than 0, the sample 
+#' kurtosis values tend to be smaller than the specified population
+#' values because of their bias. The bias can be substanital for large
+#' excess kurtosis values even in large samples.
+#'
+#'  
+#' @param   n     sample size
+#' @param   my    population mean of y scores
+#' @param   mx    population mean of x scores
+#' @param   sdy   population standard deviation of y scores
+#' @param   sdx   population standard deviation of x scores
+#' @param   skewy population skewness of y scores
+#' @param   skewx population skewness of x scores
+#' @param   kury  population excess kurtosis of y scores
+#' @param   kurx  population excess kurtosis of x scores
+#' @param   cor   population correlation between x and y 
+#' @param   dec   number of decimal points 
+#'
+#' 
+#' @return 
+#' Returns n pairs of y and x scores 
+#' 
+#' 
+#' @examples
+#' random.yx.nonnormal(10, 50, 20, 4, 2, .5, .75, 3, 4, .5, 1)
+#'
+#' # Should return:
+           y    x
+#' # 1  47.3 18.8
+#' # 2  52.0 20.3
+#' # 3  51.3 22.3
+#' # 4  50.9 21.3
+#' # 5  55.2 22.0
+#' # 6  53.7 20.1
+#' # 7  46.4 20.0
+#' # 8  54.9 24.7
+#' # 9  48.7 20.7
+#' # 10 44.7 18.6 
+#'  
+#' 
+#' @importFrom semTools mvrnonnorm
+#' @export  
+random.yx.nonnormal <- function(n, my, mx, sdy, sdx, skewy, skewx, kury, kurx, cor, dec) {
+ if (cor > .999 | cor < -.999) {stop("correlation must be between -.999 and .999")}
+ Sigma <- matrix(c(sdy^2, cor*sdy*sdx, cor*sdy*sdx, sdx^2), 2, 2)
+ skewness <- c(skewy, skewx)
+ kurtosis <- c(kury, kurx) 
+ mu <- c(my, mx)
+ y <- mvrnonnorm(n, mu, Sigma, skewness, kurtosis)
+ out <- as.data.frame(round(y, dec))
  colnames(out) <- c("y", "x")
  return(out)
 }
