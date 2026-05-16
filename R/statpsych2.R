@@ -4860,11 +4860,11 @@ random.yx.nonnormal <- function(n, my, mx, sdy, sdx, skewy, skewx, kury, kurx, c
 #'
 #' # Should return (within sampling error):
 #' #      Coverage Lower Error Upper Error Ave CI Width
-#' # [1,]  0.93815     0.05125      0.0106    0.7778518
+#' # [1,]   0.9353      0.0409      0.0238    0.3903112
 #'
 #'
 #' @importFrom stats qt
-#' @importFrom mnonr unonr
+#' @importFrom semTools mvrnonnorm
 #' @export
 sim.ci.cor <- function(alpha, n, cor, dist1, dist2, rep) {
  if (cor > .999 | cor < -.999) {stop("correlation must be between -.999 and .999")}
@@ -4895,7 +4895,7 @@ sim.ci.cor <- function(alpha, n, cor, dist1, dist2, rep) {
  w <- 0; k <- 0; e1 <-0; e2 <- 0
  repeat {
    k <- k + 1
-   y <- unonr(n, c(0, 0), V, skewness = c(skw1, skw2), kurtosis = c(kur1, kur2))
+   y <- mvrnonnorm(n, c(0, 0), V, skewness = c(skw1, skw2), kurtosis = c(kur1, kur2))
    R <- cor(y)
    r <- R[1,2]
    zr <- log((1 + r)/(1 - r))/2 - r/(2*(n - 1))
@@ -4963,7 +4963,7 @@ sim.ci.cor <- function(alpha, n, cor, dist1, dist2, rep) {
 #'
 #'
 #' @importFrom stats qt
-#' @importFrom mnonr unonr
+#' @importFrom semTools mvrnonnorm
 #' @export
 sim.ci.spear <- function(alpha, n, cor, dist1, dist2, rep) {
  if (cor > .999 | cor < -.999) {stop("correlation must be between -.999 and .999")}
@@ -4991,13 +4991,13 @@ sim.ci.spear <- function(alpha, n, cor, dist1, dist2, rep) {
    skw2 <- 2; kur2 <- 6
  }
  V <- matrix(c(1, cor, cor, 1), 2, 2)
- y <- unonr(100000, c(0, 0), V, skewness = c(skw1, skw2), kurtosis = c(kur1, kur2))
+ y <- mvrnonnorm(100000, c(0, 0), V, skewness = c(skw1, skw2), kurtosis = c(kur1, kur2))
  popR <- cor(y, method = "spearman")
  popspear <- popR[1,2]
  w <- 0; k <- 0; e1 <-0; e2 <- 0
  repeat {
    k <- k + 1
-   y <- unonr(n, c(0, 0), V, skewness = c(skw1, skw2), kurtosis = c(kur1, kur2))
+   y <- mvrnonnorm(n, c(0, 0), V, skewness = c(skw1, skw2), kurtosis = c(kur1, kur2))
    R <- cor(y, method = "spearman")
    r <- R[1,2]
    zr <- log((1 + r)/(1 - r))/2 
