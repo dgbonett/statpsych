@@ -7606,7 +7606,7 @@ sim.ci.mean2 <- function(alpha, n1, n2, sd2, dist1, dist2, rep) {
 #' distributions with five different marginal distributions. All distributions
 #' are scaled to have a standard deviation of 1.0 at level 1. Bivariate random
 #' data with specified marginal skewness and kurtosis are generated using the
-#' unonr function in the mnonr package. 
+#' mvrnonnorm function in the semTools package. 
 #'
 #'
 #' @param   alpha     alpha level for 1-alpha confidence
@@ -7640,7 +7640,7 @@ sim.ci.mean2 <- function(alpha, n1, n2, sd2, dist1, dist2, rep) {
 #'
 #'
 #' @importFrom stats qt
-#' @importFrom mnonr unonr
+#' @importFrom semTools mvrnonnorm
 #' @export
 sim.ci.mean.ps <- function(alpha, n, sd2, cor, dist1, dist2, rep) {
  if (cor > .999 | cor < -.999) {stop("correlation must be between -.999 and .999")}
@@ -7671,7 +7671,7 @@ sim.ci.mean.ps <- function(alpha, n, sd2, cor, dist1, dist2, rep) {
  w <- 0; k <- 0; e1 <-0; e2 <- 0
  repeat {
    k <- k + 1
-   y <- unonr(n, c(0, 0), V, skewness = c(skw1, skw2), kurtosis = c(kur1, kur2))
+   y <- mvrnonnorm(n, c(0, 0), V, skewness = c(skw1, skw2), kurtosis = c(kur1, kur2))
    q <- c(1, -1)
    d <- y%*%q
    m <- mean(d)
@@ -7954,7 +7954,7 @@ sim.ci.median2 <- function(alpha, n1, n2, sd2, dist1, dist2, rep) {
 #' population distributions with five different marginal distributions. All 
 #' distributions are scaled to have a standard deviation of 1.0 at level 1. 
 #' Bivariate random data with specified marginal skewness and kurtosis are 
-#' generated using the unonr function in the mnonr package. 
+#' generated using the mvrnonnorm function in the semTools package. 
 #'
 #' @param   alpha     alpha level for 1-alpha confidence
 #' @param   n         sample size 
@@ -7987,7 +7987,7 @@ sim.ci.median2 <- function(alpha, n1, n2, sd2, dist1, dist2, rep) {
 #'
 #'
 #' @importFrom stats qnorm
-#' @importFrom mnonr unonr
+#' @importFrom semTools mvrnonnorm
 #' @export
 sim.ci.median.ps <- function(alpha, n, sd2, cor, dist1, dist2, rep) {
  if (cor > .999 | cor < -.999) {stop("correlation must be between -.999 and .999")}
@@ -8033,7 +8033,7 @@ sim.ci.median.ps <- function(alpha, n, sd2, cor, dist1, dist2, rep) {
  w <- 0; k <- 0; e1 <- 0; e2 <- 0
  repeat {
    k <- k + 1
-   y <- unonr(n, c(0, 0), V, skewness = c(skw1, skw2), kurtosis = c(kur1, kur2))
+   y <- mvrnonnorm(n, c(0, 0), V, skewness = c(skw1, skw2), kurtosis = c(kur1, kur2))
    y1 <- y[, 1]
    y2 <- y[, 2]
    median1 <- median(y1)
@@ -8220,7 +8220,8 @@ sim.ci.stdmean2 <- function(alpha, n1, n2, sd2, dist1, dist2, d, rep) {
 #' within-subjects factor can be generated from five different population 
 #' distributions. All distributions are scaled to have a standard deviation
 #' of 1.0 at level 1. Bivariate random data with specified marginal skewness
-#' and kurtosis are generated using the unonr function in the mnonr package. 
+#' and kurtosis are generated using the mvrnonnorm function in the 
+#' semTools package. 
 #'
 #' @param   alpha     alpha level for 1-alpha confidence
 #' @param   n         sample size 
@@ -8255,7 +8256,7 @@ sim.ci.stdmean2 <- function(alpha, n1, n2, sd2, dist1, dist2, d, rep) {
 #'
 #'
 #' @importFrom stats qnorm
-#' @importFrom mnonr unonr
+#' @importFrom semTools mvrnonnorm
 #' @export
 sim.ci.stdmean.ps <- function(alpha, n, sd2, cor, dist1, dist2, d, rep) {
  if (cor > .999 | cor < -.999) {stop("correlation must be between -.999 and .999")}
@@ -8292,7 +8293,7 @@ sim.ci.stdmean.ps <- function(alpha, n, sd2, cor, dist1, dist2, d, rep) {
  V <- matrix(c(1, cor*sd2, cor*sd2, sd2^2), 2, 2)
  repeat {
    k <- k + 1
-   y <- unonr(n, c(0, 0), V, skewness = c(skw1, skw2), kurtosis = c(kur1, kur2))
+   y <- mvrnonnorm(n, c(0, 0), V, skewness = c(skw1, skw2), kurtosis = c(kur1, kur2))
    y1 <- y[, 1] 
    y0 <- y[, 2]
    m1 <- mean(y1) + diff1
