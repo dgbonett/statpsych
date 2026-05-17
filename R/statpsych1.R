@@ -2731,7 +2731,7 @@ ci.mann <- function(alpha, y1, y2){
 #' * Grand mean - the mean of the superpopulation of means
 #' * Within SD - the square-root within-group variance component
 #' * Between SD - the square-root between-group variance component
-#' * Omega-squared - the omega-squared coefficient
+#' * Omega-squared - estimated omega-squared coefficient
 #'
 #'
 #' The columns are:
