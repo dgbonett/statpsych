@@ -24,7 +24,7 @@ BugReports: https://github.com/dgbonett/statpsych/issues
 License: GPL-3
 Encoding: UTF-8
 Imports: 
-  utils, stats, mnonr, Rdpack, mathjaxr
+  utils, stats, semTools, Rdpack, mathjaxr
 RoxygenNote: 7.3.3
 Roxygen: list(markdown = TRUE)
 RdMacros: Rdpack, mathjaxr
