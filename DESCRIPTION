@@ -1,7 +1,7 @@
 Package: statpsych
 Type: Package
 Title: Statistical Methods for Psychologists
-Version: 1.9.0
+Version: 2.0.0
 Authors@R: c(
     person(given = "Douglas G.", family = "Bonett", email = "dgbonett@ucsc.edu", role = c("aut", "cre")),
     person(given = "Robert J.", family = "Calin-Jageman", email = "rcalinjageman@dom.edu", role = c("ctb")))
