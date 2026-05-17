@@ -6,7 +6,8 @@ Authors@R: c(
     person(given = "Douglas G.", family = "Bonett", email = "dgbonett@ucsc.edu", role = c("aut", "cre")),
     person(given = "Robert J.", family = "Calin-Jageman", email = "rcalinjageman@dom.edu", role = c("ctb")))
 Description: Implements confidence interval and sample size methods that 
-    are especially useful in psychological research. The methods can be 
+    are especially useful in psychological research, but are also useful in
+    business, social science, and biological research. The methods can be 
     applied in 1-group, 2-group, paired-samples, and multiple-group designs
     and to a variety of parameters including means, medians, proportions, 
     slopes, standardized mean differences, standardized linear contrasts 
