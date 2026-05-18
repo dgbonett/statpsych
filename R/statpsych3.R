@@ -238,7 +238,7 @@ ci.pairs.mult <-function(alpha, f) {
 #' 
 #' @return 
 #' Returns a 3-row matrix. The columns are:
-#' * Estimate - estimate of diversity index
+#' * Estimate - estimated diversity index
 #' * SE - standard error of estimate
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -326,7 +326,7 @@ ci.diversity <- function(alpha, f) {
 #'
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Estimate - estimate of proportion
+#' * Estimate - estimated proportion
 #' * SE - recovered standard error
 #' * LL - lower limit of confidence interval
 #' * UL - upper limit of confidence interval
@@ -454,7 +454,7 @@ ci.prop2 <- function(alpha, f1, f2, n1, n2) {
 #'
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Estimate - estimate of proportion difference
+#' * Estimate - estimated proportion difference
 #' * SE - recovered standard error 
 #' * LL - lower limit of confidence interval
 #' * UL - upper limit of confidence interval
@@ -960,7 +960,7 @@ ci.prop.ps <- function(alpha, f00, f01, f10, f11) {
 #'
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Estimate - estimate of proportion ratio
+#' * Estimate - estimated proportion ratio
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #'
@@ -1103,7 +1103,7 @@ ci.condslope.log <- function(alpha, b1, b2, se1, se2, cov, lo, hi) {
 #'
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Estimate - estimate of odds ratio
+#' * Estimate - estimated odds ratio
 #' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -1171,7 +1171,7 @@ ci.oddsratio <- function(alpha, f00, f01, f10, f11) {
 #'
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Estimate - estimate of generalized Yule coefficient
+#' * Estimate - estimated generalized Yule coefficient
 #' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -1252,7 +1252,7 @@ ci.yule <- function(alpha, f00, f01, f10, f11) {
 #'
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Estimate - estimate of phi correlation
+#' * Estimate - estimated phi correlation
 #' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -1321,7 +1321,7 @@ ci.phi <- function(alpha, f00, f01, f10, f11) {
 #'
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Estimate - estimate of biserial-phi correlation
+#' * Estimate - estimated biserial-phi correlation
 #' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -1400,7 +1400,7 @@ ci.biphi <- function(alpha, f1, f2, n1, n2) {
 #'
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Estimate - estimate of tetrachoric approximation
+#' * Estimate - estimated tetrachoric approximation
 #' * SE - recovered standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -1463,7 +1463,7 @@ ci.tetra <- function(alpha, f00, f01, f10, f11) {
 #' @return
 #' Returns a 2-row matrix. The results in row 1 are for the intraclass
 #' kappa. The results in row 2 are for Cohen's kappa. The columns are:
-#' * Estimate - estimate of interrater reliability 
+#' * Estimate - estimated interrater reliability 
 #' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -1720,7 +1720,7 @@ ci.agree2 <- function(alpha, n1, f1, n2, f2, k) {
 #'
 #'
 #' The columns are:
-#' * Estimate - estimate of G-index (two-rater, difference, or unanimous)  
+#' * Estimate - estimated G-index (two-rater, difference, or unanimous)  
 #' * LL - lower limit of adjusted Wald confidence interval
 #' * UL - upper limit of adjusted Wald confidence interval
 #'
@@ -1843,7 +1843,7 @@ ci.agree.3rater <- function(alpha, f) {
 #'
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Estimate - estimate of the unknown population size 
+#' * Estimate - estimated unknown population size 
 #' * SE - recovered standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -1901,7 +1901,7 @@ ci.popsize <- function(alpha, f00, f01, f10) {
 #'
 #' @return 
 #' Returns a 1-row matrix. The columns are:
-#' * Estimate - estimate of Cramer's V 
+#' * Estimate - estimated Cramer's V 
 #' * SE - recovered standard error 
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
