@@ -1096,7 +1096,7 @@ ci.indirect <- function(alpha, b1, b2, se1, se2) {
 #'
 #' @return 
 #' Returns a 1-row matrix. The columns are:
-#' * Estimate - estimate of linear function 
+#' * Estimate - estimated linear function 
 #' * SE - standard error
 #' * t - t test statistic 
 #' * df - degrees of freedom
@@ -1169,7 +1169,7 @@ ci.lc.glm <-function(alpha, n, b, V, q) {
 #'
 #' @return 
 #' Returns a 1-row matrix. The columns are:
-#' * Estimate - estimate of linear contrast
+#' * Estimate - estimated linear contrast
 #' * SE - standard error of linear contrast
 #' * LL - lower limit of confidence interval
 #' * UL - upper limit of confidence interval
@@ -1227,7 +1227,7 @@ ci.lc.gen.bs <- function(alpha, est, se, v) {
 #'
 #' @return 
 #' Returns a 1-row matrix. The columns are:
-#' * R-squared - estimate of unadjusted R-squared (from input)
+#' * R-squared - estimated unadjusted R-squared (from input)
 #' * adj R-squared - bias adjusted R-squared estimate
 #' * SE - recovered standard error
 #' * LL - lower limit of the confidence interval
@@ -2071,7 +2071,7 @@ ci.bayes.cor <- function(alpha, prior_sd, cor, s, n) {
 #'
 #' @param   alpha        alpha level for 1-alpha credibility interval
 #' @param   prior_sd     standard deviation of skeptical prior distribution 
-#' @param   cor          estimated semipartial partial correlation
+#' @param   cor          estimated semipartial correlation
 #' @param   se	     	 standard error of estimated semipartial correlation
 #'
 #'
@@ -2356,14 +2356,14 @@ test.cor <- function(cor, n, s, h) {
 #' correlation value (see \link[statpsych]{ci.spear}).
 #'
 #'
-#' @param  cor     estimated correlation 
+#' @param  cor     estimated Spearman correlation 
 #' @param  h       null hypothesis value of correlation
 #' @param  n       sample size 
 #'
 #'
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Estimate - estimate of correlation 
+#' * Estimate - estimated Spearman correlation (from input)
 #' * t or z - t test statistic (for h = 0) or z test statistic (for nonzero h)
 #' * p - two-sided p-value
 #'
@@ -2433,7 +2433,7 @@ test.spear <- function(cor, h, n) {
 #'
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Estimate - estimate of correlation difference
+#' * Estimate - estimated correlation difference
 #' * z - z test statistic
 #' * p - two-sided p-value
 #'
@@ -2489,7 +2489,7 @@ test.cor2 <- function(cor1, cor2, n1, n2, s) {
 #'
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Estimate - estimate of correlation difference
+#' * Estimate - estimated Spearman correlation difference
 #' * z - z test statistic
 #' * p - two-sided p-value
 #'
