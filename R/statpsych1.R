@@ -888,7 +888,9 @@ ci.stdmean.strat <- function(alpha, m1, m2, sd1, sd2, n1, n2, p1) {
 #' recommended in experimental designs. The weighted standardizer is
 #' recommended in nonexperimental designs with simple random sampling. The  
 #' group 1 standardizer is useful in both experimental and nonexperimental
-#' designs. Equality of variances is not assumed.
+#' designs. Equality of variances is not assumed. If the group 1 standardizer
+#' is used, group 1 would typically be a control group or a comparison group.
+#
 #'
 #' For more details, see Section 3.4 of Bonett (2021, Volume 1)
 #'
@@ -2590,9 +2592,8 @@ ci.ratio.median.ps <- function(alpha, y1, y2) {
 #'
 #'
 #' @examples
-#' y <- c(30, 20, 15, 10, 10, 60, 20, 25, 20, 30, 10, 5, 50, 40, 20, 10,
-#'         0, 20, 50)
-#' ci.sign(.05, y, 9)
+#' y <- c(30, 20, 15, 10, 10, 60, 20, 25, 20, 30, 10, 5, 50, 40, 20, 10, 0, 20, 50)
+#' ci.sign(.05, y, 9.0)
 #'
 #' # Should return:
 #' # Estimate        SE        LL        UL
@@ -4616,7 +4617,7 @@ test.kurtosis <- function(y) {
 #' informative to assess centrality and variability using more than one 
 #' measure, it is also informative to assess kurtosis using both Pearson
 #' kurtosis and Geary kurtosis. See (see \link[statpsych]{test.kurtosis}) for
-#' test of Pearson kurtosis.
+#' a test of Pearson kurtosis.
 #'
 #'
 #' @param   y      vector of quantitative scores
