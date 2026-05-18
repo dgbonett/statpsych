@@ -7,8 +7,8 @@ Authors@R: c(
     person(given = "Robert J.", family = "Calin-Jageman", email = "rcalinjageman@dom.edu", role = c("ctb")))
 Description: Implements confidence interval and sample size methods that 
     are especially useful in psychological research but are also useful in
-    business, social science, and biological research. This package has 
-    more than 100 confidence interval functions and more than 80 sample
+    educational, social science, business, and biological research. This package
+    includes more than 100 confidence interval functions and more than 80 sample
     size functions for 1-group, 2-group, paired-samples, and multiple-group
     designs and for a variety of parameters including means, medians, proportions, 
     slopes, standardized mean differences, standardized linear contrasts 
