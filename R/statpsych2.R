@@ -382,7 +382,7 @@ ci.cor.dep <- function(alpha, cor1, cor2, cor12, n) {
 #' ci.cor2.gen(.64, .55, .71, .31, .18, .43)
 #'
 #' # Should return:
-#' # Estimate    LL     UL
+#' #  Estimate   LL     UL
 #' #      0.33 0.18 0.4776
 #'  
 #' 
@@ -1980,7 +1980,7 @@ pi.cronbach <- function(alpha, rel, r, n0, n, type) {
 #' partial correlation with a skeptical prior. The skeptical prior 
 #' distribution is Normal with a mean of 0 and a small standard deviation.
 #' A skeptical prior assumes that the population correlation is within 
-#' a range of small values (-r to r). If the skeptic is 95% confident that
+#' a range of small values (-r to r). If a skeptic is 95% confident that
 #' the population correlation is between -r and r, then the prior standard
 #' deviation can be set to r/1.96. A correlation that is less than .2 in 
 #' absolute value is typically considered to be "small", and the prior 
@@ -2057,7 +2057,7 @@ ci.bayes.cor <- function(alpha, prior_sd, cor, s, n) {
 #' correlation with a skeptical prior. The skeptical prior distribution is
 #' Normal with a mean of 0 and a small standard deviation. A skeptical prior 
 #' assumes that the population semipartial correlation is within a range of 
-#' small values (-r to r). If the skeptic is 95% confident that the population
+#' small values (-r to r). If a skeptic is 95% confident that the population
 #' correlation is between -r and r, then the prior standard deviation can be 
 #' set to r/1.96. A semipartial correlation that is less than .2 in absolute 
 #' value is typically considered to be "small", and the prior standard 
