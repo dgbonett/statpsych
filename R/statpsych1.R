@@ -5536,8 +5536,8 @@ size.ci.mean.prior <- function(alpha1, alpha2, var0, n0, w) {
 }
 
 #  size.ci.mean.ps.prior =========================================================
-#' Sample size for a pairedf-samples mean mean difference confidence interval 
-#' using an estimated variance and correlation from a prior study 
+#' Sample size for a paired-samples mean difference confidence interval using
+#' an estimated variance and correlation from a prior study 
 #'
 #'                
 #' @description
@@ -5545,7 +5545,7 @@ size.ci.mean.prior <- function(alpha1, alpha2, var0, n0, w) {
 #' in a paired-samples design with desired confidence interval precision in 
 #' applications where an estimated variance and correlation from a prior study 
 #' is available. The actual confidence interval width in the planned study will 
-#' depend on the value of the estimated variance of teh difference scores in the
+#' depend on the value of the estimated variance of the difference scores in the
 #' planned study. An estimated variance and correlation from a prior study 
 #' can be used to compute an upper prediction limit for the estimated difference
 #' score variance in the planned study. The upper prediction limit is then used
