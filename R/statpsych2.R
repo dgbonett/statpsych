@@ -3532,8 +3532,9 @@ size.ci.spear2 <- function(alpha, cor1, cor2, w) {
 #' includes 0, then the correlation planning value is set to 0; otherwise, the
 #' correlation planning value is set to the lower prediction limit (if the prior
 #' correlation is positive) or the upper prediction limit (if the prior correlation
-#' is negative). The probability that the prediction interval will have a width that
-#' is less than the desired width in the planned study is approximately 1 - alpha2. 
+#' is negative). The probability that the 1 - alpha1 confidence interval
+#' in the planned study will have a width that is less than the desired width
+#' is approximately 1 - alpha2 where alpha1 and alpha2 are specified values.
 #'
 #' This sample size approach assumes that the population Pearson correlation 
 #' that was estimated in the prior study is very similar to the population Pearson
@@ -3624,9 +3625,10 @@ size.ci.cor.prior <- function(alpha1, alpha2, cor0, n0, w) {
 #' estimated reliability in the planned study. An estimated Cronbach reliability
 #' from a prior study can be used to compute a lower prediction limit for the 
 #' estimated reliability in the planned study, which is then used as a planning
-#' value in the sample size analysis. The probability that the prediction interval
-#' will have a width that is less than the desired width in the planned study is
-#' approximately 1 - alpha2. 
+#' value in the sample size analysis. The probability that the 1 - alpha1 
+#' confidence interval in the planned study will have a width that is less than 
+#' the desired width is approximately 1 - alpha2 where alpha1 and alpha2 are 
+#' specified values.
 #'
 #' This sample size approach assumes that the population Cronbach reliability 
 #' that was estimated in the prior study is very similar to the population 
@@ -3697,9 +3699,9 @@ size.ci.cronbach.prior <- function(alpha1, alpha2, rel0, n0, r, w) {
 #' estimated intraclass correlation from a prior study can be used to compute
 #' a lower prediction limit for the estimated intraclass correlation in the 
 #' planned study, which is then used as a planning value in the sample size 
-#' analysis. The probability that the prediction interval will have a width
-#' that is less than the desired width in the planned study is approximately 
-#' 1 - alpha2. 
+#' analysis. The probability that the 1 - alpha1 confidence interval
+#' in the planned study will have a width that is less than the desired width
+#' is approximately 1 - alpha2 where alpha1 and alpha2 are specified values.
 #'
 #' This sample size approach assumes that the population intraclass correlation 
 #' that was estimated in the prior study is very similar to the population 
