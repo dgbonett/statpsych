@@ -5535,6 +5535,82 @@ size.ci.mean.prior <- function(alpha1, alpha2, var0, n0, w) {
  return(out)
 }
 
+#  size.ci.mean.ps.prior =========================================================
+#' Sample size for a pairedf-samples mean mean difference confidence interval 
+#' using an estimated variance and correlation from a prior study 
+#'
+#'                
+#' @description
+#' Computes the sample size required to estimate a population mean difference
+#' in a paired-samples design with desired confidence interval precision in 
+#' applications where an estimated variance and correlation from a prior study 
+#' is available. The actual confidence interval width in the planned study will 
+#' depend on the value of the estimated variance of teh difference scores in the
+#' planned study. An estimated variance and correlation from a prior study 
+#' can be used to compute an upper prediction limit for the estimated difference
+#' score variance in the planned study. The upper prediction limit is then used
+#' as the difference score variance planning value. The probability that the
+#' 1 - alpha1 confidence interval in the planned study will have a width that 
+#' is less than the desired width is approximately 1 - alpha2 where alpha1 and
+#' alpha2 are specified values.
+#'
+#' This sample size approach assumes that the population variance and correlation
+#' in the prior study is very similar to the population variance and correlation
+#' in the planned study. If information from a prior study is not available,
+#' the researcher must use expert opinion to guess the values of the variance
+#' and correlation that will be observed in the planned study. The 
+#' \link[statpsych]{size.ci.mean.ps} function uses variance and correlation 
+#' planning values that are based on expert opinion regarding the likely values
+#' of the variance and correlation estimates that will be observed in the planned 
+#' study. 
+#'
+#' For more details, see Section 1.31 of Bonett (2021, Volume 1)
+#'
+#'
+#' @param  alpha1  alpha level for 1-alpha1 confidence in the planned study
+#' @param  alpha2  alpha level for the 1-alpha2 prediction interval 
+#' @param  var0    estimated variance in prior study
+#' @param  cor0    estimated correlation in prior study
+#' @param  n0      sample size in prior study
+#' @param  w       desired confidence interval width
+#'
+#'
+#' @return
+#' Returns the required sample size
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
+#' @examples
+#' size.ci.mean.ps.prior(.05, .10, 15.2, .78, 10, 2)
+#'
+#' # Should return:
+#' # Sample size
+#' #          59
+#'
+#' @export                 
+size.ci.mean.ps.prior <- function(alpha1, alpha2, var0, cor0, n0, w) {
+ if (var0 < 0) {stop("variance must be positive")}
+ if (cor0 > .999 | cor0 < -.999) {stop("correlation must be between -.999 and .999")}
+ if (alpha2 > .5) {stop("alpha2 cannot be greater than .5")}
+ vard <- 2*var0*(1 - cor0)
+ ci <- ci.var.upper(alpha2, vard, n0)
+ ul <- ci[1,1]
+ n1 <- size.ci.mean(alpha1, ul, w)
+ pi <- pi.var(alpha2, vard, n0, n1, 2)
+ ul <- pi[1,1]
+ n2 <- size.ci.mean(alpha1, ul, w)
+ pi <- pi.var(alpha2, vard, n0, n2, 2)
+ ul <- pi[1,1]
+ n <- size.ci.mean(alpha1, ul, w)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size"
+ rownames(out) <- ""
+ return(out)
+}
+
 
 # size.ci.cv ===============================================================
 #' Sample size for a coefficient of variation 
