@@ -15,8 +15,8 @@ Description: Implements confidence interval and sample size methods that are esp
     sample size functions can be used to approximate the sample size needed to estimate
     a parameter or function of parameters with desired confidence interval precision or 
     to perform a variety of hypothesis tests (directional two-sided, equivalence, 
-    superiority, noninferiority) with desired power. For details see: Statistical Methods
-    for Psychologists, Volumes 1 – 4, <https://dgbonett.sites.ucsc.edu/>.   
+    superiority, noninferiority) with desired power. For details about these methods see: 
+    Statistical Methods for Psychologists, Volumes 1 – 4, <https://dgbonett.sites.ucsc.edu/>.   
 URL: https://github.com/dgbonett/statpsych/, https://dgbonett.github.io/statpsych/
 BugReports: https://github.com/dgbonett/statpsych/issues
 License: GPL-3
