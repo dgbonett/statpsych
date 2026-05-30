@@ -4,7 +4,7 @@ statpsych version 2.0.0 (Release date: 2026/06/xx)
 Changes:
 
 * New functions:
-    * perf.logit -- Computes measures of model performance for a binary logistic model 
+    * logitfit -- Computes measures of model performance for a binary logistic model 
     * size.ci.kendalltau -- Computes sample size for a Kendall tau-a confidence interval
     * size.test.icc -- Computes sample size for a test of an intraclass correlation
     * size.ci.mean.ps.prior -- Computes sample size for a paired-samples mean difference confidence interval using planning values from a prior study
