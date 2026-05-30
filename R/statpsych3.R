@@ -4395,7 +4395,7 @@ signal <- function(f1, f2, n1, n2) {
 }
 
 
-#  perf.logit ==================================================================
+#  logitfit ==================================================================
 #  Computes several measures of model performance for a binary logistic model. 
 #' The confusion matrix is computed using the observed 0 or 1 response variable 
 #' scores, the predicted probabilities from the logistic model, and a specified
@@ -4426,13 +4426,13 @@ signal <- function(f1, f2, n1, n2) {
 #' x2 <- c(0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0)
 #' out <- glm(y ~ x1 + x2, family = binomial(link = "logit"))
 #' p <- predict(out, type = "response")
-#' perf.logit(y, p, .3)
+#' logitfit(y, p, .3)
 #'
 #' # Should return:
 #' #      C    TP    FP    TN   FN PPV     NPV      F1 
 #' #  81.25 93.75 31.25 68.75 6.25  75 91.6667 83.3333 
 #'
-#' perf.logit(y, p, .4)
+#' logitfit(y, p, .4)
 #' # Should return:
 #' #     C    TP    FP    TN   FN     PPV     NPV      F1
 #' #  87.5 93.75 18.75 81.25 6.25 83.3333 92.8571 88.2353
@@ -4440,7 +4440,7 @@ signal <- function(f1, f2, n1, n2) {
 #'
 #' @importFrom stats qnorm
 #' @export
-perf.logit <- function(y, p, cut) {
+logitfit <- function(y, p, cut) {
   if (cut > .99 | cut < .01) {stop("cutpoint must be between .01 and .99")}
   n <- length(y)
   yhat <- as.numeric(p > cut)
