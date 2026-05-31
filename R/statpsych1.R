@@ -5923,7 +5923,7 @@ size.ci.lc.median.bs <- function(alpha, var, w, v, dist) {
 #' assumes that the traditional confidence interval for a population
 #' standard deviation will be used. The traditional confidence interval
 #' assumes that the response variable has an approximate normal 
-#' distribution and can be highly innacurate when this assumption is not
+#' distribution and can be highly inaccurate when this assumption is not
 #' satisfied.
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -6015,7 +6015,7 @@ size.test.mean <- function(alpha, pow, var, es) {
 #'
 #'
 #' @description
-#' Computes the sample size in each group required  to test a difference in 
+#' Computes the sample size in each group required to test a difference in 
 #' population means with desired power in a 2-group design. Set the variance 
 #' planning value to the largest value within a plausible range for a 
 #' conservatively large sample size. Set R = 1 for equal sample sizes. For
