@@ -2386,8 +2386,8 @@ ci.pv <- function(alpha, f1, f2, n1, n2, prev) {
 #'
 #' @details
 #' The time period (t) does not need to be an integer and can be expressed in 
-#' any unit of time such as seconds, hours, or months. The occurances are
-#' assumed to be independent of one another and the unknown occurance rate is
+#' any unit of time such as seconds, hours, or months. The occurrences are
+#' assumed to be independent of one another and the unknown occurrence rate is
 #' assumed to be constant over time. 
 #'
 #'
@@ -2448,7 +2448,7 @@ ci.poisson <- function(alpha, f, t) {
 #'
 #' @details
 #' The time periods do not need to be integers and can be expressed in any unit
-#' of time such as seconds, hours, or months. The occurances are assumed to be
+#' of time such as seconds, hours, or months. The occurrences are assumed to be
 #' independent of one another and the unknown occurrence rate is assumed to be
 #' constant over time within each group condition.
 #'
@@ -2513,7 +2513,7 @@ ci.ratio.poisson2 <- function(alpha, f1, f2, t1, t2) {
 #' For sample size planning, use an upper prediction limit if the population
 #' proportion is assumed to be less than .5; and if the upper prediction limit
 #' is greater than .5, set the proportion planning value to .5. Use a lower
-#' prediction limit if the population proportion is asumed to be greater than
+#' prediction limit if the population proportion is assumed to be greater than
 #' .5; and if the lower prediction limit is less than .5, set the proportion 
 #' planning value to .5.
 #'
