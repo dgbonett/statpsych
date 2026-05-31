@@ -1705,7 +1705,7 @@ ci.bscor <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 
 
 #  ci.icc =====================================================================
-#' Confidence interval for an intraclass reliablity coefficient
+#' Confidence interval for an intraclass reliability coefficient
 #'
 #'
 #' @description
@@ -3695,7 +3695,7 @@ size.ci.cronbach.prior <- function(alpha1, alpha2, rel0, n0, r, w) {
 #' with desired confidence interval precision in applications where an 
 #' estimated intraclass correlation from a prior study is available. The 
 #' actual confidence interval width in the planned study will depend on the
-#' value of the estimated intraclas correlation in the planned study. An 
+#' value of the estimated intraclass correlation in the planned study. An 
 #' estimated intraclass correlation from a prior study can be used to compute
 #' a lower prediction limit for the estimated intraclass correlation in the 
 #' planned study, which is then used as a planning value in the sample size 
@@ -3706,7 +3706,7 @@ size.ci.cronbach.prior <- function(alpha1, alpha2, rel0, n0, r, w) {
 #' This sample size approach assumes that the population intraclass correlation 
 #' that was estimated in the prior study is very similar to the population 
 #' intraclass correlation that will be estimated in the planned study. If
-#' an estimated intraclas correlation from a prior study is not available, the 
+#' an estimated intraclass correlation from a prior study is not available, the 
 #' researcher must use expert opinion to guess the value of the intraclass
 #' correlation that will be observed in the planned study. The 
 #' \link[statpsych]{size.ci.icc} function uses an intraclass correlation 
