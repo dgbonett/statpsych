@@ -39,7 +39,7 @@ ci.kappa(alpha, f00, f01, f10, f11)
 Returns a 2-row matrix. The results in row 1 are for the intraclass
 kappa. The results in row 2 are for Cohen's kappa. The columns are:
 
-- Estimate - estimate of interrater reliability
+- Estimate - estimated interrater reliability
 
 - SE - standard error
 

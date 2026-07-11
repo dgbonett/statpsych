@@ -58,7 +58,7 @@ Returns a 1-row matrix. The columns are:
 ``` r
 sim.ci.median(.05, 20, 5, 1000)
 #>  Coverage Lower Error Upper Error Ave CI Width
-#>     0.947       0.032       0.021    0.9687742
+#>     0.968       0.019       0.013    0.9804095
 
 # Should return (within sampling error):
 # Coverage Lower Error Upper Error Ave CI Width

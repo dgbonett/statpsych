@@ -69,7 +69,7 @@ Returns a 1-row matrix. The columns are:
 ``` r
 sim.ci.spear(.05, 30, .7, 4, 5, 1000)
 #>      Coverage Lower Error Upper Error Ave CI Width
-#> [1,]    0.973       0.012       0.015    0.4270124
+#> [1,]    0.958        0.01       0.032    0.4250366
 
 # Should return (within sampling error):
 #      Coverage Lower Error Upper Error Ave CI Width

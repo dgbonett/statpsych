@@ -40,11 +40,11 @@ Returns the approximate power of the test
 
 ``` r
 power.cor(.05, 80, .3, 0, 0)
-#>      Power
-#>  0.7751947
+#>   Power
+#>  0.7752
 
 # Should return:
-#     Power
-# 0.7751947
+#  Power
+# 0.7752
 
 ```

@@ -37,11 +37,11 @@ Returns the approximate power of the test
 
 ``` r
 power.mean(.05, 15, 80.5, 7)
-#>      Power
-#>  0.8021669
+#>   Power
+#>  0.8022
 
 # Should return:
-#     Power
-# 0.8021669
+#  Power
+# 0.8022
 
 ```

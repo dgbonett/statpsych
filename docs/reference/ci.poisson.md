@@ -39,8 +39,8 @@ Returns a 1-row matrix. The columns are:
 ## Details
 
 The time period (t) does not need to be an integer and can be expressed
-in any unit of time such as seconds, hours, or months. The occurances
-are assumed to be independent of one another and the unknown occurance
+in any unit of time such as seconds, hours, or months. The occurrences
+are assumed to be independent of one another and the unknown occurrence
 rate is assumed to be constant over time.
 
 ## References

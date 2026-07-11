@@ -39,7 +39,7 @@ ci.lc.glm(alpha, n, b, V, q)
 
 Returns a 1-row matrix. The columns are:
 
-- Estimate - estimate of linear function
+- Estimate - estimated linear function
 
 - SE - standard error
 

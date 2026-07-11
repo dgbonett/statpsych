@@ -40,11 +40,11 @@ https://dgbonett.sites.ucsc.edu/*.
 
 ``` r
 spearmanbrown(.6, 10, 20)
-#>  Reliability of r2 measurements
+#>  Reliability of 20 measurements
 #>                            0.75
 
 # Should return:
-# Reliability of r2 measurements
+# Reliability of 20 measurements
 #                            .75
 
 ```

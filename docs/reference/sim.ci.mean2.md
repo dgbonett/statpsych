@@ -72,8 +72,8 @@ Returns a 1-row matrix. The columns are:
 ``` r
 sim.ci.mean2(.05, 30, 25, 1.5, 1, 1, 1000)
 #>                              Coverage Lower Error Upper Error Ave CI Width
-#> Equal Variances Assumed:        0.938       0.025       0.037     1.345152
-#> Equal Variances Not Assumed:    0.949       0.018       0.033     1.402106
+#> Equal Variances Assumed:        0.934       0.026       0.040      1.34483
+#> Equal Variances Not Assumed:    0.946       0.019       0.035      1.40174
 
 # Should return (within sampling error):
 #                              Coverage Lower Error Upper Error Ave CI Width
@@ -82,8 +82,8 @@ sim.ci.mean2(.05, 30, 25, 1.5, 1, 1, 1000)
 
 sim.ci.mean2(.05, 30, 25, 1.5, 4, 5, 1000)
 #>                              Coverage Lower Error Upper Error Ave CI Width
-#> Equal Variances Assumed:        0.938       0.045       0.017     1.352789
-#> Equal Variances Not Assumed:    0.948       0.045       0.007     1.410405
+#> Equal Variances Assumed:        0.937       0.049       0.014     1.351246
+#> Equal Variances Not Assumed:    0.942       0.048       0.010     1.408630
 
 # Should return (within sampling error):
 #                              Coverage Lower Error Upper Error Ave CI Width

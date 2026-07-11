@@ -43,7 +43,7 @@ the population proportion in the planned study.
 For sample size planning, use an upper prediction limit if the population
 proportion is assumed to be less than .5; and if the upper prediction limit
 is greater than .5, set the proportion planning value to .5. Use a lower
-prediction limit if the population proportion is asumed to be greater than
+prediction limit if the population proportion is assumed to be greater than
 .5; and if the lower prediction limit is less than .5, set the proportion
 planning value to .5.
 

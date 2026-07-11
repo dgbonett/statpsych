@@ -19,7 +19,7 @@ ci.lc.gen.bs(alpha, est, se, v)
 \value{
 Returns a 1-row matrix. The columns are:
 \itemize{
-\item Estimate - estimate of linear contrast
+\item Estimate - estimated linear contrast
 \item SE - standard error of linear contrast
 \item LL - lower limit of confidence interval
 \item UL - upper limit of confidence interval

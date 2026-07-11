@@ -20,7 +20,7 @@ ci.yule(alpha, f00, f01, f10, f11)
 \value{
 Returns a 1-row matrix. The columns are:
 \itemize{
-\item Estimate - estimate of generalized Yule coefficient
+\item Estimate - estimated generalized Yule coefficient
 \item SE - standard error
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval

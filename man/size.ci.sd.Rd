@@ -20,7 +20,7 @@ deviation with desired confidence interval precision. This function
 assumes that the traditional confidence interval for a population
 standard deviation will be used. The traditional confidence interval
 assumes that the response variable has an approximate normal
-distribution and can be highly innacurate when this assumption is not
+distribution and can be highly inaccurate when this assumption is not
 satisfied.
 }
 \examples{

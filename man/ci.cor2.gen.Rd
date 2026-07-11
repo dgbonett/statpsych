@@ -42,7 +42,7 @@ For more details, see Section 2.17 of Bonett (2021, Volume 2)
 ci.cor2.gen(.64, .55, .71, .31, .18, .43)
 
 # Should return:
-# Estimate    LL     UL
+#  Estimate   LL     UL
 #      0.33 0.18 0.4776
  
 

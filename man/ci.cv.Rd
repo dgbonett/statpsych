@@ -38,7 +38,7 @@ For more details, see Section 1.27 of Bonett (2021, Volume 1)
 ci.cv(.05, 24.5, 3.65, 40)
 
 # Should return:
-#  Estimate        SE        LL       UL
+#  Estimate         SE        LL       UL
 # 0.1489796 0.01817373 0.1214381 0.1926778
  
 

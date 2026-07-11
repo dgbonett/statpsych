@@ -48,11 +48,11 @@ Returns the approximate power of the test
 
 ``` r
 power.prop2(.05, 60, 40, .5, .5, .2)
-#>      Power
-#>  0.4998959
+#>   Power
+#>  0.4999
 
 # Should return:
-#     Power
-# 0.4998959
+#  Power
+# 0.4999
 
 ```

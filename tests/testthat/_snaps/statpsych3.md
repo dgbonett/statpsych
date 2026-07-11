@@ -305,13 +305,15 @@
        Sample size
                227
 
-# iqv returns valid matrix
+# ci.diversity returns valid matrix
 
     Code
       res
     Output
-         Simpson    Berger   Shannon
-       0.7367908 0.5045045 0.7353931
+              Estimate      SE     LL     UL
+      Berger    0.5598 0.01587 0.5287 0.5909
+      Simpson   0.7722 0.01229 0.7481 0.7963
+      Shannon   0.7292 0.01224 0.7052 0.7532
 
 # test.mono.prop.bs returns valid matrix
 
@@ -338,24 +340,49 @@
     Code
       res
     Output
-           Power
-       0.7156166
+        Power
+       0.7156
 
 # power.prop2 returns valid matrix
 
     Code
       res
     Output
-           Power
-       0.4998959
+        Power
+       0.4999
 
 # power.prop.ps returns valid matrix
 
     Code
       res
     Output
-           Power
-       0.6877704
+        Power
+       0.6878
+
+# expon.slope returns valid matrix
+
+    Code
+      res
+    Output
+                        Estimate        LL       UL
+      exp(B)            1.652022  1.528651  1.78535
+      100[exp(B) - 1]% 65.202201 52.865066 78.53502
+
+# signal returns valid matrix
+
+    Code
+      res
+    Output
+              HR      FAR  d-prime  Threshold       Bias
+       0.8168317 0.460396 1.002793 0.09943603 -0.4019603
+
+# logitfit
+
+    Code
+      res
+    Output
+           C    TP    FP    TN   FN PPV     NPV      F1
+       81.25 93.75 31.25 68.75 6.25  75 91.6667 83.3333
 
 # ci.prop.inv returns valid matrix
 

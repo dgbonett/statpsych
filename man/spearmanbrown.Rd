@@ -29,7 +29,7 @@ For more details, see Section 4.19 of Bonett (2021, Volume 1)
 spearmanbrown(.6, 10, 20)
 
 # Should return:
-# Reliability of r2 measurements
+# Reliability of 20 measurements
 #                            .75
 
 

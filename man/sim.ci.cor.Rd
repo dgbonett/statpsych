@@ -50,7 +50,7 @@ sim.ci.cor(.05, 30, .7, 4, 5, 1000)
 
 # Should return (within sampling error):
 #      Coverage Lower Error Upper Error Ave CI Width
-# [1,]  0.93815     0.05125      0.0106    0.7778518
+# [1,]   0.9353      0.0409      0.0238    0.3903112
 
 
 }

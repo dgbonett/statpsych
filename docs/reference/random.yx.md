@@ -1,4 +1,4 @@
-# Generates random bivariate scores
+# Generates random bivariate normal scores
 
 Generates a random sample of y scores and x scores from a bivariate
 normal distributions with specified population means, standard
@@ -50,16 +50,16 @@ Returns n pairs of y and x scores
 ``` r
 random.yx(10, 50, 20, 4, 2, .5, 1)
 #>       y    x
-#> 1  46.0 21.2
-#> 2  55.8 21.9
-#> 3  41.0 17.8
-#> 4  45.8 19.1
-#> 5  50.3 18.8
-#> 6  50.0 20.1
-#> 7  49.2 19.9
-#> 8  56.0 23.7
-#> 9  47.6 20.7
-#> 10 48.0 17.2
+#> 1  51.2 18.6
+#> 2  50.4 19.4
+#> 3  49.0 16.2
+#> 4  48.9 17.8
+#> 5  45.7 18.4
+#> 6  48.7 20.4
+#> 7  51.3 21.3
+#> 8  48.0 19.2
+#> 9  41.9 15.0
+#> 10 43.5 18.2
 
 # Should return: 
 #        y    x

@@ -40,7 +40,7 @@ ci.biphi(alpha, f1, f2, n1, n2)
 
 Returns a 1-row matrix. The columns are:
 
-- Estimate - estimate of biserial-phi correlation
+- Estimate - estimated biserial-phi correlation
 
 - SE - standard error
 

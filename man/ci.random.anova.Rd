@@ -21,7 +21,7 @@ Returns a 4-row matrix. The rows are:
 \item Grand mean - the mean of the superpopulation of means
 \item Within SD - the square-root within-group variance component
 \item Between SD - the square-root between-group variance component
-\item Omega-squared - the omega-squared coefficient
+\item Omega-squared - estimated omega-squared coefficient
 }
 
 The columns are:

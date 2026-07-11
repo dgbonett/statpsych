@@ -39,7 +39,7 @@ ci.cramer(alpha, chisqr, r, c, n)
 
 Returns a 1-row matrix. The columns are:
 
-- Estimate - estimate of Cramer's V
+- Estimate - estimated Cramer's V
 
 - SE - recovered standard error
 

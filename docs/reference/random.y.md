@@ -44,7 +44,7 @@ Returns a vector of randomly generated scores.
 
 ``` r
 random.y(10, 3.6, 2.8, 1, 7, 0) 
-#>  [1] 1 4 7 3 1 4 4 1 5 5
+#>  [1] 7 3 3 3 5 2 3 5 7 1
 
 # Should return random numbers such as:
 # [1] 2 7 7 1 6 3 1 3 2 1

@@ -20,7 +20,7 @@ ci.tetra(alpha, f00, f01, f10, f11)
 \value{
 Returns a 1-row matrix. The columns are:
 \itemize{
-\item Estimate - estimate of tetrachoric approximation
+\item Estimate - estimated tetrachoric approximation
 \item SE - recovered standard error
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval

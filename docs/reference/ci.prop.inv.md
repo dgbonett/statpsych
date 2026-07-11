@@ -33,7 +33,7 @@ ci.prop.inv(alpha, f, n)
 
 Returns a 1-row matrix. The columns are:
 
-- Estimate - estimate of proportion
+- Estimate - estimated proportion
 
 - SE - recovered standard error
 

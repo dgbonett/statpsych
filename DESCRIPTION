@@ -23,9 +23,9 @@ License: GPL-3
 Encoding: UTF-8
 Imports: 
   utils, stats, semTools, Rdpack, mathjaxr
-RoxygenNote: 7.3.3
 Roxygen: list(markdown = TRUE)
 RdMacros: Rdpack, mathjaxr
 Suggests: 
   MASS, testthat (>= 3.0.0)
 Config/testthat/edition: 3
+Config/roxygen2/version: 8.0.0

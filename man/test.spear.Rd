@@ -7,7 +7,7 @@
 test.spear(cor, h, n)
 }
 \arguments{
-\item{cor}{estimated correlation}
+\item{cor}{estimated Spearman correlation}
 
 \item{h}{null hypothesis value of correlation}
 
@@ -16,7 +16,7 @@ test.spear(cor, h, n)
 \value{
 Returns a 1-row matrix. The columns are:
 \itemize{
-\item Estimate - estimate of correlation
+\item Estimate - estimated Spearman correlation (from input)
 \item t or z - t test statistic (for h = 0) or z test statistic (for nonzero h)
 \item p - two-sided p-value
 }

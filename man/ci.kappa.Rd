@@ -21,7 +21,7 @@ ci.kappa(alpha, f00, f01, f10, f11)
 Returns a 2-row matrix. The results in row 1 are for the intraclass
 kappa. The results in row 2 are for Cohen's kappa. The columns are:
 \itemize{
-\item Estimate - estimate of interrater reliability
+\item Estimate - estimated interrater reliability
 \item SE - standard error
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval

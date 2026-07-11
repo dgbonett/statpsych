@@ -2,7 +2,7 @@
 % Please edit documentation in R/statpsych2.R
 \name{ci.icc}
 \alias{ci.icc}
-\title{Confidence interval for an intraclass reliablity coefficient}
+\title{Confidence interval for an intraclass reliability coefficient}
 \usage{
 ci.icc(alpha, MSr, MSe, r, n)
 }

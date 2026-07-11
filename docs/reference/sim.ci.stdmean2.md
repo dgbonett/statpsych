@@ -77,8 +77,8 @@ Returns a 1-row matrix. The columns are:
 ``` r
 sim.ci.stdmean2(.05, 20, 20, 1.5, 3, 4, .75, 5000)
 #>                         Coverage Lower Error Upper Error Ave CI Width   Ave Est
-#> Unweighted Standardizer   0.9178       0.052      0.0302     1.341802 0.7837455
-#> Group 1 Standardizer      0.9476       0.028      0.0244     1.814108 0.7831089
+#> Unweighted Standardizer   0.9174      0.0524      0.0302     1.341711 0.7830654
+#> Group 1 Standardizer      0.9468      0.0282      0.0250     1.813283 0.7819774
 
 # Should return (within sampling error):
 #                         Coverage Lower Error Upper Error Ave CI Width   Ave Est

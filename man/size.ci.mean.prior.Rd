@@ -29,9 +29,9 @@ width in the planned study will depend on the value of the estimated
 variance in the planned study. An estimated variance from a prior study
 can be used to compute an upper prediction limit for the estimated variance
 in the planned study. The upper prediction limit is then used as the variance
-planning value.  The probability that the prediction interval in the planned
-study will have a width that is less than the desired width is approximately
-1 - alpha2.
+planning value. The probability that the 1 - alpha1 confidence interval
+in the planned study will have a width that is less than the desired width
+is approximately 1 - alpha2 where alpha1 and alpha2 are specified values.
 
 This sample size approach assumes that the population variance in the
 prior study is very similar to the population variance in the planned

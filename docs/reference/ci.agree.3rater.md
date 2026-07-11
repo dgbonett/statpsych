@@ -47,7 +47,7 @@ Returns a 7-row matrix. The rows are:
 
 The columns are:
 
-- Estimate - estimate of G-index (two-rater, difference, or unanimous)
+- Estimate - estimated G-index (two-rater, difference, or unanimous)
 
 - LL - lower limit of adjusted Wald confidence interval
 

@@ -23,7 +23,7 @@ reference:
   - etasqr.adj
   - expon.slope
   - fitindices
-  - iqv
+  - logitfit
   - pi.score
   - pi.score2
   - random.sample
@@ -53,6 +53,7 @@ reference:
   desc:  Test coverage of difference confidence intervals with simulated data
   contents:
   - starts_with("sim.")
+  - random.yx.nonnormal
 
 - title: Tests
   desc:  Hypothesis tests

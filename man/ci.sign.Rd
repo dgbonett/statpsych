@@ -32,9 +32,8 @@ sign test.
 For more details, see Section 1.25 of Bonett (2021, Volume 1)
 }
 \examples{
-y <- c(30, 20, 15, 10, 10, 60, 20, 25, 20, 30, 10, 5, 50, 40, 20, 10,
-        0, 20, 50)
-ci.sign(.05, y, 9)
+y <- c(30, 20, 15, 10, 10, 60, 20, 25, 20, 30, 10, 5, 50, 40, 20, 10, 0, 20, 50)
+ci.sign(.05, y, 9.0)
 
 # Should return:
 # Estimate        SE        LL        UL

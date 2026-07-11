@@ -64,6 +64,7 @@ University Pres, Ames, Iowa.
 ## Examples
 
 ``` r
+
 m <- c(33.5, 37.9, 38.0, 44.1)
 sd <- c(3.49, 3.84, 3.65, 4.98)
 n <- c(10, 10, 10, 10)

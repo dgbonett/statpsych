@@ -16,7 +16,7 @@ ci.prop.inv(alpha, f, n)
 \value{
 Returns a 1-row matrix. The columns are:
 \itemize{
-\item Estimate - estimate of proportion
+\item Estimate - estimated proportion
 \item SE - recovered standard error
 \item LL - lower limit of confidence interval
 \item UL - upper limit of confidence interval

@@ -29,7 +29,7 @@ Returns a 7-row matrix. The rows are:
 
 The columns are:
 \itemize{
-\item Estimate - estimate of G-index (two-rater, difference, or unanimous)
+\item Estimate - estimated G-index (two-rater, difference, or unanimous)
 \item LL - lower limit of adjusted Wald confidence interval
 \item UL - upper limit of adjusted Wald confidence interval
 }
