@@ -4402,8 +4402,8 @@ signal <- function(f1, f2, n1, n2) {
 #' cutpoint. 
 #'
 #'
-#' @param  y    vector of observed 0 or 1 response scores 
-#' @param  p    vector of predicted probabilities from model
+#' @param  y      vector of observed 0 or 1 response scores 
+#' @param  p      vector of predicted probabilities from model
 #' @param  cut    cutpoint (defines the predicted 0 or 1 scores)
 #'
 #'
