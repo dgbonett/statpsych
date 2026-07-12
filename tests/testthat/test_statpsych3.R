@@ -531,16 +531,16 @@ test_that("size.supinf.prop.ps returns valid numeric", {
 })
 
 
-test_that("iqv returns valid matrix", {
+test_that("ci.diversity returns valid matrix", {
   colnames_expected <- c(
-    "Simpson", "Berger", "Shannon"
+    "Estimate",         "SE",         "LL",        "UL"
   )
-  
-  f <- c(10, 46, 15, 3)
-  res <- iqv(f)
-  
+
+  f <- c(847, 320, 57, 274, 36)
+  res <- ci.diversity(.05, f)
+    
   testthat::expect_equal(class(res), c("matrix", "array"))
-  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(dim(res), c(3, length(colnames_expected)))
   testthat::expect_equal(colnames(res), colnames_expected)
   
   testthat::expect_snapshot(res)
@@ -623,6 +623,57 @@ test_that("power.prop.ps returns valid matrix", {
   
   testthat::expect_snapshot(res)
 })
+
+
+test_that("expon.slope returns valid matrix", {
+  colnames_expected <- c(
+    "Estimate",        "LL",       "UL"
+  )
+  
+  res <- expon.slope(.05, .502, .0396)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(2, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+  
+  testthat::expect_snapshot(res)
+})
+
+
+test_that("signal returns valid matrix", {
+  colnames_expected <- c(
+    "HR",      "FAR",  "d-prime",  "Threshold",       "Bias"
+  )
+  
+  res <- signal(82, 46, 100, 100)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+  
+  testthat::expect_snapshot(res)
+})
+
+
+test_that("logitfit", {
+  colnames_expected <- c(
+    "C",    "TP",    "FP",    "TN",   "FN", "PPV",     "NPV",      "F1" 
+  )
+  
+  y <- c(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1)
+  x1 <- c(1,1,3,2,6,8,4,5,6,2,4,3,1,5,3,9,8,9,8,6,6,7,5,3,8,6,5,7,8,9,7,8)
+  x2 <- c(0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0)
+  out <- glm(y ~ x1 + x2, family = binomial(link = "logit"))
+  p <- predict(out, type = "response")
+  res <- logitfit(y, p, .3)
+
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+  
+  testthat::expect_snapshot(res)
+})
+
 
 
 test_that("ci.prop.inv returns valid matrix", {

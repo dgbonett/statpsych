@@ -1239,7 +1239,7 @@ test_that("ci.bayes.normal returns valid matrix", {
 
 test_that("spearmanbrown returns valid matrix", {
   colnames_expected <- c(
-    "Reliability of r2 measurements"
+    "Reliability of 20 measurements"
   )
   
   res <- spearmanbrown(.6, 10, 20)
@@ -1351,5 +1351,69 @@ test_that("ci.lc.mean.scheffe example", {
   n <- c(10, 10, 10, 10)
   v <- c(.5, .5, -.5, -.5)
   res <- ci.lc.mean.scheffe(.05, m, sd, n, v)
+  testthat::expect_snapshot(res)
+})
+
+
+test_that("size.test.icc returns valid matrix", {
+  colnames_expected <- c(
+    "Sample size"
+  )
+  
+  res <- size.test.icc(.05, .90, .65, 4, .50)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+  
+  testthat::expect_snapshot(res)
+})
+
+
+
+test_that("size.ci.mean.ps.prior returns valid matrix", {
+  colnames_expected <- c(
+    "Sample size"
+  )
+  
+  res <- size.ci.mean.ps.prior(.05, .10, 15.2, .78, 10, 2)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+  
+  testthat::expect_snapshot(res)
+})
+
+
+
+test_that("test.kurtosis.geary returns valid matrix", {
+  colnames_expected <- c(
+    "Kurtosis",  "Excess",     "z",     "p"
+  )
+  
+  y <- c(58, 58, 55, 52, 20, 65, 59, 49, 51, 81, 40, 62, 56, 49, 49, 50, 44, 53, 59)
+  res <- test.kurtosis.geary(y)
+
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+  
+  testthat::expect_snapshot(res)
+})
+
+
+
+test_that("power.mann returns valid matrix", {
+  colnames_expected <- c(
+    "Power"
+  )
+  
+  res <- power.mann(.05, 50, 50, .65)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+  
   testthat::expect_snapshot(res)
 })

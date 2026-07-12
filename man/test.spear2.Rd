@@ -18,7 +18,7 @@ test.spear2(cor1, cor2, n1, n2)
 \value{
 Returns a 1-row matrix. The columns are:
 \itemize{
-\item Estimate - estimate of correlation difference
+\item Estimate - estimated Spearman correlation difference
 \item z - z test statistic
 \item p - two-sided p-value
 }

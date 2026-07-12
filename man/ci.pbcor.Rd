@@ -36,7 +36,7 @@ correlations. One type uses a weighted average of the group variances
 and is appropriate for nonexperimental designs with simple random sampling
 (but not stratified random sampling). The other type uses an unweighted
 average of the group variances and is appropriate for experimental designs.
-Equality of variances is not assumed for either type.
+Equality of variances is not assumed.
 
 For more details, see Section 1.18 of Bonett (2021, Volume 2)
 }
@@ -45,7 +45,7 @@ ci.pbcor(.05, 28.32, 21.48, 3.81, 3.09, 40, 40)
 
 # Should return:
 #             Estimate      SE     LL     UL
-# Weighted:     0.7066 0.04891 0.5885 0.7854
+# Weighted:     0.7066 0.04911 0.5879 0.7857
 # Unweighted:   0.7021 0.05019 0.5808 0.7829
  
 

@@ -1,3 +1,23 @@
+statpsych version 2.0.0 (Release date: 2026/07/15)
+===========
+
+Changes:
+
+* New functions:
+    * logitfit -- Computes measures of model performance for a binary logistic model 
+    * size.ci.kendalltau -- Computes sample size for a Kendall tau-a confidence interval
+    * size.test.icc -- Computes sample size for a test of an intraclass correlation
+    * size.ci.mean.ps.prior -- Computes sample size for a paired-samples mean difference confidence interval using planning values from a prior study
+    * test.kurtosis.geary -- Computes test of excess Geary kurtosis
+    * ci.kendalltau -- Computes confidence interval for Kendal tau-a correlation
+    * power.mann -- Computes power of Mann-Whitney test for a planned sample size
+    * random.yx.nonnormal -- Generates a random sample from a bivariate nonnormal distribution
+* Deleted functions:
+    * iqv has been replaced with ci.diversity
+    * size.ci.slope.gen has been replaced with size.ci.gen
+    * size.test.slope.gen has been replaced with size.test.gen
+
+
 statpsych version 1.9.0 (Release date: 2026/01/01)
 ===========
 
@@ -289,6 +309,7 @@ statpsych 1.0.0 (Release date: 2021/09/09)
 ==============
 
 * Initial release
+
 
 
 

@@ -238,7 +238,7 @@ ci.pairs.mult <-function(alpha, f) {
 #' 
 #' @return 
 #' Returns a 3-row matrix. The columns are:
-#' * Estimate - estimate of diversity index
+#' * Estimate - estimated diversity index
 #' * SE - standard error of estimate
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -326,7 +326,7 @@ ci.diversity <- function(alpha, f) {
 #'
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Estimate - estimate of proportion
+#' * Estimate - estimated proportion
 #' * SE - recovered standard error
 #' * LL - lower limit of confidence interval
 #' * UL - upper limit of confidence interval
@@ -454,7 +454,7 @@ ci.prop2 <- function(alpha, f1, f2, n1, n2) {
 #'
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Estimate - estimate of proportion difference
+#' * Estimate - estimated proportion difference
 #' * SE - recovered standard error 
 #' * LL - lower limit of confidence interval
 #' * UL - upper limit of confidence interval
@@ -960,7 +960,7 @@ ci.prop.ps <- function(alpha, f00, f01, f10, f11) {
 #'
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Estimate - estimate of proportion ratio
+#' * Estimate - estimated proportion ratio
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #'
@@ -1103,7 +1103,7 @@ ci.condslope.log <- function(alpha, b1, b2, se1, se2, cov, lo, hi) {
 #'
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Estimate - estimate of odds ratio
+#' * Estimate - estimated odds ratio
 #' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -1171,7 +1171,7 @@ ci.oddsratio <- function(alpha, f00, f01, f10, f11) {
 #'
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Estimate - estimate of generalized Yule coefficient
+#' * Estimate - estimated generalized Yule coefficient
 #' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -1252,7 +1252,7 @@ ci.yule <- function(alpha, f00, f01, f10, f11) {
 #'
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Estimate - estimate of phi correlation
+#' * Estimate - estimated phi correlation
 #' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -1321,7 +1321,7 @@ ci.phi <- function(alpha, f00, f01, f10, f11) {
 #'
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Estimate - estimate of biserial-phi correlation
+#' * Estimate - estimated biserial-phi correlation
 #' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -1400,7 +1400,7 @@ ci.biphi <- function(alpha, f1, f2, n1, n2) {
 #'
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Estimate - estimate of tetrachoric approximation
+#' * Estimate - estimated tetrachoric approximation
 #' * SE - recovered standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -1463,7 +1463,7 @@ ci.tetra <- function(alpha, f00, f01, f10, f11) {
 #' @return
 #' Returns a 2-row matrix. The results in row 1 are for the intraclass
 #' kappa. The results in row 2 are for Cohen's kappa. The columns are:
-#' * Estimate - estimate of interrater reliability 
+#' * Estimate - estimated interrater reliability 
 #' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -1720,7 +1720,7 @@ ci.agree2 <- function(alpha, n1, f1, n2, f2, k) {
 #'
 #'
 #' The columns are:
-#' * Estimate - estimate of G-index (two-rater, difference, or unanimous)  
+#' * Estimate - estimated G-index (two-rater, difference, or unanimous)  
 #' * LL - lower limit of adjusted Wald confidence interval
 #' * UL - upper limit of adjusted Wald confidence interval
 #'
@@ -1843,7 +1843,7 @@ ci.agree.3rater <- function(alpha, f) {
 #'
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Estimate - estimate of the unknown population size 
+#' * Estimate - estimated unknown population size 
 #' * SE - recovered standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -1901,7 +1901,7 @@ ci.popsize <- function(alpha, f00, f01, f10) {
 #'
 #' @return 
 #' Returns a 1-row matrix. The columns are:
-#' * Estimate - estimate of Cramer's V 
+#' * Estimate - estimated Cramer's V 
 #' * SE - recovered standard error 
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -2386,8 +2386,8 @@ ci.pv <- function(alpha, f1, f2, n1, n2, prev) {
 #'
 #' @details
 #' The time period (t) does not need to be an integer and can be expressed in 
-#' any unit of time such as seconds, hours, or months. The occurances are
-#' assumed to be independent of one another and the unknown occurance rate is
+#' any unit of time such as seconds, hours, or months. The occurrences are
+#' assumed to be independent of one another and the unknown occurrence rate is
 #' assumed to be constant over time. 
 #'
 #'
@@ -2448,7 +2448,7 @@ ci.poisson <- function(alpha, f, t) {
 #'
 #' @details
 #' The time periods do not need to be integers and can be expressed in any unit
-#' of time such as seconds, hours, or months. The occurances are assumed to be
+#' of time such as seconds, hours, or months. The occurrences are assumed to be
 #' independent of one another and the unknown occurrence rate is assumed to be
 #' constant over time within each group condition.
 #'
@@ -2513,7 +2513,7 @@ ci.ratio.poisson2 <- function(alpha, f1, f2, t1, t2) {
 #' For sample size planning, use an upper prediction limit if the population
 #' proportion is assumed to be less than .5; and if the upper prediction limit
 #' is greater than .5, set the proportion planning value to .5. Use a lower
-#' prediction limit if the population proportion is asumed to be greater than
+#' prediction limit if the population proportion is assumed to be greater than
 #' .5; and if the lower prediction limit is less than .5, set the proportion 
 #' planning value to .5.
 #'
@@ -3264,9 +3264,10 @@ size.ci.agree <- function(alpha, G, w) {
 #' proportion in the planned study. An estimated proportion from a prior study
 #' is used to predict the value of the estimated proportion in the planned 
 #' study, and the predicted proportion estimate is then used as a planning
-#' value in the sample size computation. The probability that the prediction 
-#' interval in the planned study will have a width that is less than the desired
-#' width is approximately 1 - alpha2.
+#' value in the sample size computation. The probability that the 1 - alpha1
+#' confidence interval in the planned study will have a width that is less
+#' than the desired width is approximately 1 - alpha2 where alpha1 and alpha2
+#' are specified values.
 #'
 #' This sample size approach assumes that the population proportion in the 
 #' prior study is very similar to the population proportion in the planned 
@@ -4135,8 +4136,8 @@ size.supinf.prop.ps <- function(alpha, pow, p1, p2, phi, h) {
 #' power.prop(.05, 40, .5, .2)
 #'
 #' # Should return:
-#' #     Power
-#' # 0.7156044
+#' #  Power
+#' # 0.7156
 #'
 #'
 #' @importFrom stats qnorm
@@ -4150,7 +4151,7 @@ power.prop <- function(alpha, n, p, es) {
  pow1 <- pnorm(z1)
  pow2 <- 1 - pnorm(z2)
  pow <- pow1 + pow2
- out <- matrix(pow, nrow = 1, ncol = 1)
+ out <- matrix(round(pow, 4), nrow = 1, ncol = 1)
  colnames(out) <- "Power"
  rownames(out) <- ""
  return(out)
@@ -4187,8 +4188,8 @@ power.prop <- function(alpha, n, p, es) {
 #' power.prop2(.05, 60, 40, .5, .5, .2)
 #'
 #' # Should return:
-#' #     Power
-#' # 0.4998959
+#' #  Power
+#' # 0.4999
 #'
 #'
 #' @importFrom stats qnorm
@@ -4203,7 +4204,7 @@ power.prop2 <- function(alpha, n1, n2, p1, p2, es) {
  pow1 <- pnorm(z1)
  pow2 <- 1 - pnorm(z2)
  pow <- pow1 + pow2
- out <- matrix(pow, nrow = 1, ncol = 1)
+ out <- matrix(round(pow, 4), nrow = 1, ncol = 1)
  colnames(out) <- "Power"
  rownames(out) <- ""
  return(out)
@@ -4244,8 +4245,8 @@ power.prop2 <- function(alpha, n1, n2, p1, p2, es) {
 #' power.prop.ps(.05, 45, .5, .5, .4, .2)
 #'
 #' # Should return:
-#' #     Power
-#' # 0.6877704
+#' #  Power
+#' # 0.6878
 #'
 #'
 #' @importFrom stats qnorm
@@ -4262,7 +4263,7 @@ power.prop.ps <- function(alpha, n, p1, p2, phi, es) {
  pow1 <- pnorm(z1)
  pow2 <- 1 - pnorm(z2)
  pow <- pow1 + pow2
- out <- matrix(pow, nrow = 1, ncol = 1)
+ out <- matrix(round(pow, 4), nrow = 1, ncol = 1)
  colnames(out) <- "Power"
  rownames(out) <- ""
  return(out)
@@ -4270,47 +4271,6 @@ power.prop.ps <- function(alpha, n, p1, p2, phi, es) {
 
           
 # ======================== Miscellaneous =====================================
-#  iqv =======================================================================
-#' Indices of qualitative variation 
-#'
-#'
-#' @description
-#' Computes the Shannon, Berger, and Simpson indices of qualitative variation.
-#' Will be replaced soon with ci.diversity.
-#'
-#'  
-#' @param   f   vector of multinomial frequency counts
-#'
-#' 
-#' @return 
-#' Returns estimates of the Shannon, Berger, and Simpson indices
-#' 
-#' 
-#' @examples
-#' f <- c(10, 46, 15, 3)
-#' iqv(f)
-#'
-#' # Should return:
-#' #   Simpson    Berger   Shannon
-#' # 0.7367908 0.5045045       0.7
-#'  
-#' 
-#' @export  
-iqv <- function(f) {
- n <- sum(f)
- p <- f/n
- k <- length(f)
- a <- k/(k - 1)
- iqv1 <- a*(1 - sum(p^2))
- iqv2 <- a*( 1 - max(p))
- iqv3 <- (-1)*sum(p*log(p))/log(k)
- out <- t(c(iqv1, iqv2, iqv3))
- colnames(out) <- c("Simpson", "Berger", "Shannon")
- rownames(out) <- ""
- return(out)
-}
-
-
 #  expon.slope ================================================================== 
 #' Confidence interval for an exponentiated slope
 #'
@@ -4435,9 +4395,72 @@ signal <- function(f1, f2, n1, n2) {
 }
 
 
+#  logitfit ==================================================================
+#  Computes several measures of model performance for a binary logistic model. 
+#' The confusion matrix is computed using the observed 0 or 1 response variable 
+#' scores, the predicted probabilities from the logistic model, and a specified
+#' cutpoint. 
+#'
+#'
+#' @param  y      vector of observed 0 or 1 response scores 
+#' @param  p      vector of predicted probabilities from model
+#' @param  cut    cutpoint (defines the predicted 0 or 1 scores)
+#'
+#'
+#' @return 
+#' Returns a 1-row matrix. The columns are:
+#' * C - percent correctly classified (aka accuracy)
+#' * TP - percent true positives (aka sensitivity, recall)
+#' * FP - percent false positives (1 - TN)
+#' * TN - percent true negatives (aka specificity)
+#' * FN - percent false negatives (1 - TP)
+#' * PPV - percent positive predicted values (aka precision)
+#' * NPV - percent negative predicted values
+#' * F1 - F1 score (2 x PPV x TP)/(PPV + TP)
+#' 
+#'
+#'
+#' @examples
+#' y <- c(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1)
+#' x1 <- c(1,1,3,2,6,8,4,5,6,2,4,3,1,5,3,9,8,9,8,6,6,7,5,3,8,6,5,7,8,9,7,8)
+#' x2 <- c(0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0)
+#' out <- glm(y ~ x1 + x2, family = binomial(link = "logit"))
+#' p <- predict(out, type = "response")
+#' logitfit(y, p, .3)
+#'
+#' # Should return:
+#' #      C    TP    FP    TN   FN PPV     NPV      F1 
+#' #  81.25 93.75 31.25 68.75 6.25  75 91.6667 83.3333 
+#'
+#' logitfit(y, p, .4)
+#' # Should return:
+#' #     C    TP    FP    TN   FN     PPV     NPV      F1
+#' #  87.5 93.75 18.75 81.25 6.25 83.3333 92.8571 88.2353
+#'
+#'
+#' @importFrom stats qnorm
+#' @export
+logitfit <- function(y, p, cut) {
+  if (cut > .99 | cut < .01) {stop("cutpoint must be between .01 and .99")}
+  n <- length(y)
+  yhat <- as.numeric(p > cut)
+  f <- as.numeric(table(y, yhat))
+  a <- 100*(f[1] + f[4])/n
+  tp <- 100*f[4]/(f[2] + f[4])
+  tn <- 100*f[1]/(f[1] + f[3])
+  fp <- 100*f[3]/(f[2] + f[4])
+  fn <- 100*f[2]/(f[1] + f[3])
+  ppv <- 100*f[4]/(f[3] + f[4])
+  npv <- 100*f[1]/(f[1] + f[2])
+  f1 <- 2*ppv*tp/(ppv + tp)
+  out <- round(t(c(a, tp, fp, tn, fn, ppv, npv, f1)), 4)
+  colnames(out) = c("C", "TP", "FP", "TN", "FN", "PPV", "NPV", "F1")
+  rownames(out) = ""
+  return (out)
+}
+
+
 fix_imports <- function() {
   something <- Rdpack::append_to_Rd_list()
   res <- mathjaxr::preview_rd()
 }
-
-

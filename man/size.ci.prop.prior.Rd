@@ -29,9 +29,10 @@ width in the planned study will depend on the value of the estimated
 proportion in the planned study. An estimated proportion from a prior study
 is used to predict the value of the estimated proportion in the planned
 study, and the predicted proportion estimate is then used as a planning
-value in the sample size computation. The probability that the prediction
-interval in the planned study will have a width that is less than the desired
-width is approximately 1 - alpha2.
+value in the sample size computation. The probability that the 1 - alpha1
+confidence interval in the planned study will have a width that is less
+than the desired width is approximately 1 - alpha2 where alpha1 and alpha2
+are specified values.
 
 This sample size approach assumes that the population proportion in the
 prior study is very similar to the population proportion in the planned

@@ -33,8 +33,9 @@ planning value in the sample size analysis. If the prediction interval
 includes 0, then the correlation planning value is set to 0; otherwise, the
 correlation planning value is set to the lower prediction limit (if the prior
 correlation is positive) or the upper prediction limit (if the prior correlation
-is negative). The probability that the prediction interval will have a width that
-is less than the desired width in the planned study is approximately 1 - alpha2.
+is negative). The probability that the 1 - alpha1 confidence interval
+in the planned study will have a width that is less than the desired width
+is approximately 1 - alpha2 where alpha1 and alpha2 are specified values.
 
 This sample size approach assumes that the population Pearson correlation
 that was estimated in the prior study is very similar to the population Pearson

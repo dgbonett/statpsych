@@ -21,7 +21,7 @@ ci.prop2.inv(alpha, f1, f2, n1, n2)
 \value{
 Returns a 1-row matrix. The columns are:
 \itemize{
-\item Estimate - estimate of proportion difference
+\item Estimate - estimated proportion difference
 \item SE - recovered standard error
 \item LL - lower limit of confidence interval
 \item UL - upper limit of confidence interval

@@ -70,10 +70,10 @@ Returns a 1-row matrix. The columns are:
 ``` r
 sim.ci.cor(.05, 30, .7, 4, 5, 1000)
 #>      Coverage Lower Error Upper Error Ave CI Width
-#> [1,]    0.934       0.046        0.02    0.3881714
+#> [1,]    0.934       0.041       0.025    0.3860133
 
 # Should return (within sampling error):
 #      Coverage Lower Error Upper Error Ave CI Width
-# [1,]  0.93815     0.05125      0.0106    0.7778518
+# [1,]   0.9353      0.0409      0.0238    0.3903112
 
 ```

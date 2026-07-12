@@ -28,18 +28,18 @@ Computes the sample size required to estimate an intraclass correlation
 with desired confidence interval precision in applications where an
 estimated intraclass correlation from a prior study is available. The
 actual confidence interval width in the planned study will depend on the
-value of the estimated intraclas correlation in the planned study. An
+value of the estimated intraclass correlation in the planned study. An
 estimated intraclass correlation from a prior study can be used to compute
 a lower prediction limit for the estimated intraclass correlation in the
 planned study, which is then used as a planning value in the sample size
-analysis. The probability that the prediction interval will have a width
-that is less than the desired width in the planned study is approximately
-1 - alpha2.
+analysis. The probability that the 1 - alpha1 confidence interval
+in the planned study will have a width that is less than the desired width
+is approximately 1 - alpha2 where alpha1 and alpha2 are specified values.
 
 This sample size approach assumes that the population intraclass correlation
 that was estimated in the prior study is very similar to the population
 intraclass correlation that will be estimated in the planned study. If
-an estimated intraclas correlation from a prior study is not available, the
+an estimated intraclass correlation from a prior study is not available, the
 researcher must use expert opinion to guess the value of the intraclass
 correlation that will be observed in the planned study. The
 \link[statpsych]{size.ci.icc} function uses an intraclass correlation

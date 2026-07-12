@@ -8,7 +8,7 @@ Sample data for the two levels of the within-subjects factor can be
 generated from five different population distributions. All
 distributions are scaled to have a standard deviation of 1.0 at level 1.
 Bivariate random data with specified marginal skewness and kurtosis are
-generated using the unonr function in the mnonr package.
+generated using the mvrnonnorm function in the semTools package.
 
 ## Usage
 
@@ -80,8 +80,8 @@ Returns a 1-row matrix. The columns are:
 ``` r
 sim.ci.stdmean.ps(.05, 20, 1.5, .8, 4, 4, .5, 2000)
 #>                         Coverage Lower Error Upper Error Ave CI Width   Ave Est
-#> Unweighted Standardizer   0.9120      0.0545      0.0335    0.7351741 0.5186650
-#> Level 1 Standardizer      0.9405      0.0355      0.0240    0.9301617 0.5056967
+#> Unweighted Standardizer   0.9115      0.0505      0.0380    0.7382356 0.5197404
+#> Level 1 Standardizer      0.9440      0.0305      0.0255    0.9335999 0.5058330
 
 # Should return (within sampling error):
 #                         Coverage Lower Error Upper Error Ave CI Width   Ave Est

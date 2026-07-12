@@ -45,7 +45,7 @@ two levels of the within-subjects factor can be generated from bivariate
 population distributions with five different marginal distributions. All
 distributions are scaled to have a standard deviation of 1.0 at level 1.
 Bivariate random data with specified marginal skewness and kurtosis are
-generated using the unonr function in the mnonr package.
+generated using the mvrnonnorm function in the semTools package.
 }
 \examples{
 sim.ci.median.ps(.05, 30, 1.5, .7, 4, 3, 1000)

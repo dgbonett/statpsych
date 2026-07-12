@@ -44,11 +44,11 @@ Returns the approximate power of the test
 
 ``` r
 power.cor2(.05, 200, 200, .4, .2, 0)
-#>      Power
-#>  0.5919682
+#>  Power
+#>  0.592
 
 # Should return:
-#     Power
-# 0.5919682
+#  Power
+# 0.5920
 
 ```

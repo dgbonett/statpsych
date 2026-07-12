@@ -47,7 +47,7 @@ Returns a 1-row matrix. The columns are:
 ## Details
 
 The time periods do not need to be integers and can be expressed in any
-unit of time such as seconds, hours, or months. The occurances are
+unit of time such as seconds, hours, or months. The occurrences are
 assumed to be independent of one another and the unknown occurrence rate
 is assumed to be constant over time within each group condition.
 

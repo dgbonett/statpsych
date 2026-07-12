@@ -34,7 +34,8 @@ of means in a between-subjects design. The unweighted standardizer is
 recommended in experimental designs. The weighted standardizer is
 recommended in nonexperimental designs with simple random sampling. The
 group 1 standardizer is useful in both experimental and nonexperimental
-designs. Equality of variances is not assumed.
+designs. Equality of variances is not assumed. If the group 1 standardizer
+is used, group 1 would typically be a control group or a comparison group.
 
 For more details, see Section 3.4 of Bonett (2021, Volume 1)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/statpsych2.R
 \name{random.yx}
 \alias{random.yx}
-\title{Generates random bivariate scores}
+\title{Generates random bivariate normal scores}
 \usage{
 random.yx(n, my, mx, sdy, sdx, cor, dec)
 }

@@ -40,7 +40,7 @@ ci.prop2.inv(alpha, f1, f2, n1, n2)
 
 Returns a 1-row matrix. The columns are:
 
-- Estimate - estimate of proportion difference
+- Estimate - estimated proportion difference
 
 - SE - recovered standard error
 

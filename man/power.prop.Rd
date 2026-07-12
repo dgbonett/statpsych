@@ -29,8 +29,8 @@ not be based on the proportion planning value.
 power.prop(.05, 40, .5, .2)
 
 # Should return:
-#     Power
-# 0.7156044
+#  Power
+# 0.7156
 
 
 }

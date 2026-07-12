@@ -20,7 +20,7 @@ ci.cramer(alpha, chisqr, r, c, n)
 \value{
 Returns a 1-row matrix. The columns are:
 \itemize{
-\item Estimate - estimate of Cramer's V
+\item Estimate - estimated Cramer's V
 \item SE - recovered standard error
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval

@@ -35,7 +35,7 @@ test.spear2(cor1, cor2, n1, n2)
 
 Returns a 1-row matrix. The columns are:
 
-- Estimate - estimate of correlation difference
+- Estimate - estimated Spearman correlation difference
 
 - z - z test statistic
 

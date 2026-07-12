@@ -21,7 +21,7 @@ size.test.mean2(alpha, pow, var, es, R)
 Returns the required sample size for each group
 }
 \description{
-Computes the sample size in each group required  to test a difference in
+Computes the sample size in each group required to test a difference in
 population means with desired power in a 2-group design. Set the variance
 planning value to the largest value within a plausible range for a
 conservatively large sample size. Set R = 1 for equal sample sizes. For

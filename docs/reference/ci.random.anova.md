@@ -42,7 +42,7 @@ Returns a 4-row matrix. The rows are:
 
 - Between SD - the square-root between-group variance component
 
-- Omega-squared - the omega-squared coefficient
+- Omega-squared - estimated omega-squared coefficient
 
 The columns are:
 

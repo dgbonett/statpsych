@@ -8,7 +8,10 @@ differences can be approximated by specifying the largest standardized
 covariate mean difference across of all covariates. In an experiment,
 this standardized mean difference is set to 0. Set the error variance
 planning value to the largest value within a plausible range for a
-conservatively large sample size.
+conservatively large sample size. Note that the within-group error
+variance is equal to the within-group variance times 1 minus the the
+squared correlation (s = 1) or squared multiple correlation (s \> 1)
+between the response variable and the covariate(s).
 
 For more details, see Section 2.29 of Bonett (2021, Volume 2)
 
@@ -30,7 +33,7 @@ size.test.ancova2(alpha, pow, evar, es, s, d, R)
 
 - evar:
 
-  planning value of within-group (error) variance
+  planning value of within-group error variance
 
 - es:
 

@@ -888,7 +888,9 @@ ci.stdmean.strat <- function(alpha, m1, m2, sd1, sd2, n1, n2, p1) {
 #' recommended in experimental designs. The weighted standardizer is
 #' recommended in nonexperimental designs with simple random sampling. The  
 #' group 1 standardizer is useful in both experimental and nonexperimental
-#' designs. Equality of variances is not assumed.
+#' designs. Equality of variances is not assumed. If the group 1 standardizer
+#' is used, group 1 would typically be a control group or a comparison group.
+#
 #'
 #' For more details, see Section 3.4 of Bonett (2021, Volume 1)
 #'
@@ -1685,7 +1687,7 @@ ci.ratio.mad.ps <- function(alpha, y1, y2) {
 #' ci.cv(.05, 24.5, 3.65, 40)
 #'
 #' # Should return:
-#' #  Estimate        SE        LL       UL
+#' #  Estimate         SE        LL       UL
 #' # 0.1489796 0.01817373 0.1214381 0.1926778
 #'  
 #' 
@@ -1818,8 +1820,7 @@ ci.ratio.cv2 <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 #'
 #'
 #' @examples
-#' y <- c(30, 20, 15, 10, 10, 60, 20, 25, 20, 30, 10, 5, 50, 40,
-#'        20, 10, 0, 20, 50)
+#' y <- c(30, 20, 15, 10, 10, 60, 20, 25, 20, 30, 10, 5, 50, 40, 20, 10, 0, 20, 50)
 #' ci.cod(.05, y)
 #'
 #' # Should return:
@@ -2011,8 +2012,7 @@ ci.ratio.cod2 <-function(alpha, y1, y2) {
 #'
 #'
 #' @examples
-#' y <- c(30, 20, 15, 10, 10, 60, 20, 25, 20, 30, 10, 5, 50, 40,
-#'        20, 10, 0, 20, 50)
+#' y <- c(30, 20, 15, 10, 10, 60, 20, 25, 20, 30, 10, 5, 50, 40, 20, 10, 0, 20, 50)
 #' ci.cqv(.05, y)
 #'
 #' # Should return:
@@ -2592,9 +2592,8 @@ ci.ratio.median.ps <- function(alpha, y1, y2) {
 #'
 #'
 #' @examples
-#' y <- c(30, 20, 15, 10, 10, 60, 20, 25, 20, 30, 10, 5, 50, 40, 20, 10,
-#'         0, 20, 50)
-#' ci.sign(.05, y, 9)
+#' y <- c(30, 20, 15, 10, 10, 60, 20, 25, 20, 30, 10, 5, 50, 40, 20, 10, 0, 20, 50)
+#' ci.sign(.05, y, 9.0)
 #'
 #' # Should return:
 #' # Estimate        SE        LL        UL
@@ -2731,7 +2730,7 @@ ci.mann <- function(alpha, y1, y2){
 #' * Grand mean - the mean of the superpopulation of means
 #' * Within SD - the square-root within-group variance component
 #' * Between SD - the square-root between-group variance component
-#' * Omega-squared - the omega-squared coefficient
+#' * Omega-squared - estimated omega-squared coefficient
 #'
 #'
 #' The columns are:
@@ -4561,12 +4560,12 @@ test.skew <- function(y) {
 #'
 #'
 #' @examples
-#' y <- c(30, 20, 15, 10, 10, 60, 20, 25, 20, 30, 10, 5, 50, 40, 95)
+#' y <- c(58, 58, 55, 52, 20, 65, 59, 49, 51, 81, 40, 62, 56, 49, 49, 50, 44, 53, 59)
 #' test.kurtosis(y)
 #'
 #' # Should return:
-#' # Kurtosis  Excess     p
-#' #   4.8149  1.8149 0.038 
+#' # Kurtosis Excess      p
+#' #   5.5081 2.5081 0.0164
 #'
 #'
 #' @importFrom stats rnorm
@@ -4595,6 +4594,72 @@ test.kurtosis <- function(y) {
  if (p > .9999) {p = .9999}
  out <- round(t(c(kur, kur - 3, p)), 3)
  colnames(out) <- c("Kurtosis", "Excess", "p")
+ rownames(out) <- ""
+ return(out)
+}
+
+
+#  test.kurtosis.geary ========================================================
+#' Computes estimate and test of excess Geary kurtosis
+#'
+#'                                 
+#' @description
+#' Computes an estimate and test for kurtosis using a modfication of Geary's
+#' measure of kurtosis. If the p-value is small (e.g., less than .05) and excess
+#' kurtosis is positive, then the normality assumption can be rejected due to 
+#' leptokurtosis. If the p-value is small (e.g., less than .05) and excess 
+#' kurtosis is negative, then the normality assumption can be rejected due to 
+#' platykurtosis. The estimate and test of Geary's kurtosis used here is based
+#' on a transformation of Geary's orginal measure of kurtosis proposed by
+#' Bonett and Seier (2002). Geary's kurtosis tends to be more sensitive to 
+#' peakedness than Pearson's kurtosis, and Pearson's kurtosis tend to be more
+#' sensitive to tail weight than Geary's kurtosis. In the same way that it is
+#' informative to assess centrality and variability using more than one 
+#' measure, it is also informative to assess kurtosis using both Pearson
+#' kurtosis and Geary kurtosis. See (see \link[statpsych]{test.kurtosis}) for
+#' a test of Pearson kurtosis.
+#'
+#'
+#' @param   y      vector of quantitative scores
+#'  
+#' 
+#' @return
+#' Returns a 1-row matrix. The columns are:
+#' * Kurtosis - estimate of transformed Geary kurtosis coefficient
+#' * Excess - estimate of excess kurtosis (kurtosis - 3)
+#' * z - z test statistic
+#' * p - two-sided p-value
+#'
+#'
+#' @references
+#' \insertRef{Bonett2002c}{statpsych}
+#'
+#'
+#' @examples
+#' y <- c(58, 58, 55, 52, 20, 65, 59, 49, 51, 81, 40, 62, 56, 49, 49, 50, 44, 53, 59)
+#' test.kurtosis.geary(y)
+#'
+#' # Should return:
+#' # Kurtosis Excess     z     p
+#' #    5.157  2.157 2.793 0.005
+#'
+#'
+#' @importFrom stats rnorm
+#' @importFrom stats sd
+#' @importFrom stats na.omit
+#' @export
+test.kurtosis.geary <- function(y) {
+ y <- na.omit(y)
+ n <- length(y)
+ a <- sqrt((n - 1)/n)
+ m <- mean(y)
+ s <- a*sd(y)
+ tau <- mean(abs(y - m))
+ kur <- 13.29*(log(s) - log(tau))
+ z <- sqrt(n + 2)*(kur - 3)/3.54
+ p <- 2*(1 - pnorm(abs(z)))
+ out <- round(t(c(kur, kur - 3, z, p)), 3)
+ colnames(out) <- c("Kurtosis", "Excess", "z", "p")
  rownames(out) <- ""
  return(out)
 }
@@ -5413,9 +5478,9 @@ size.ci.second <- function(n0, w0, w) {
 #' variance in the planned study. An estimated variance from a prior study 
 #' can be used to compute an upper prediction limit for the estimated variance 
 #' in the planned study. The upper prediction limit is then used as the variance
-#' planning value.  The probability that the prediction interval in the planned
-#' study will have a width that is less than the desired width is approximately
-#' 1 - alpha2.
+#' planning value. The probability that the 1 - alpha1 confidence interval
+#' in the planned study will have a width that is less than the desired width
+#' is approximately 1 - alpha2 where alpha1 and alpha2 are specified values.
 #'
 #' This sample size approach assumes that the population variance in the 
 #' prior study is very similar to the population variance in the planned 
@@ -5462,6 +5527,82 @@ size.ci.mean.prior <- function(alpha1, alpha2, var0, n0, w) {
  ul <- pi[1,1]
  n2 <- size.ci.mean(alpha1, ul, w)
  pi <- pi.var(alpha2, var0, n0, n2, 2)
+ ul <- pi[1,1]
+ n <- size.ci.mean(alpha1, ul, w)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size"
+ rownames(out) <- ""
+ return(out)
+}
+
+#  size.ci.mean.ps.prior =========================================================
+#' Sample size for a paired-samples mean difference confidence interval using
+#' an estimated variance and correlation from a prior study 
+#'
+#'                
+#' @description
+#' Computes the sample size required to estimate a population mean difference
+#' in a paired-samples design with desired confidence interval precision in 
+#' applications where an estimated variance and correlation from a prior study 
+#' is available. The actual confidence interval width in the planned study will 
+#' depend on the value of the estimated variance of the difference scores in the
+#' planned study. An estimated variance and correlation from a prior study 
+#' can be used to compute an upper prediction limit for the estimated difference
+#' score variance in the planned study. The upper prediction limit is then used
+#' as the difference score variance planning value. The probability that the
+#' 1 - alpha1 confidence interval in the planned study will have a width that 
+#' is less than the desired width is approximately 1 - alpha2 where alpha1 and
+#' alpha2 are specified values.
+#'
+#' This sample size approach assumes that the population variance and correlation
+#' in the prior study is very similar to the population variance and correlation
+#' in the planned study. If information from a prior study is not available,
+#' the researcher must use expert opinion to guess the values of the variance
+#' and correlation that will be observed in the planned study. The 
+#' \link[statpsych]{size.ci.mean.ps} function uses variance and correlation 
+#' planning values that are based on expert opinion regarding the likely values
+#' of the variance and correlation estimates that will be observed in the planned 
+#' study. 
+#'
+#' For more details, see Section 1.31 of Bonett (2021, Volume 1)
+#'
+#'
+#' @param  alpha1  alpha level for 1-alpha1 confidence in the planned study
+#' @param  alpha2  alpha level for the 1-alpha2 prediction interval 
+#' @param  var0    estimated variance in prior study
+#' @param  cor0    estimated correlation in prior study
+#' @param  n0      sample size in prior study
+#' @param  w       desired confidence interval width
+#'
+#'
+#' @return
+#' Returns the required sample size
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
+#' @examples
+#' size.ci.mean.ps.prior(.05, .10, 15.2, .78, 10, 2)
+#'
+#' # Should return:
+#' # Sample size
+#' #          59
+#'
+#' @export                 
+size.ci.mean.ps.prior <- function(alpha1, alpha2, var0, cor0, n0, w) {
+ if (var0 < 0) {stop("variance must be positive")}
+ if (cor0 > .999 | cor0 < -.999) {stop("correlation must be between -.999 and .999")}
+ if (alpha2 > .5) {stop("alpha2 cannot be greater than .5")}
+ vard <- 2*var0*(1 - cor0)
+ ci <- ci.var.upper(alpha2, vard, n0)
+ ul <- ci[1,1]
+ n1 <- size.ci.mean(alpha1, ul, w)
+ pi <- pi.var(alpha2, vard, n0, n1, 2)
+ ul <- pi[1,1]
+ n2 <- size.ci.mean(alpha1, ul, w)
+ pi <- pi.var(alpha2, vard, n0, n2, 2)
  ul <- pi[1,1]
  n <- size.ci.mean(alpha1, ul, w)
  out <- matrix(n, nrow = 1, ncol = 1)
@@ -5782,7 +5923,7 @@ size.ci.lc.median.bs <- function(alpha, var, w, v, dist) {
 #' assumes that the traditional confidence interval for a population
 #' standard deviation will be used. The traditional confidence interval
 #' assumes that the response variable has an approximate normal 
-#' distribution and can be highly innacurate when this assumption is not
+#' distribution and can be highly inaccurate when this assumption is not
 #' satisfied.
 #'
 #' @param  alpha  alpha level for 1-alpha confidence
@@ -5874,7 +6015,7 @@ size.test.mean <- function(alpha, pow, var, es) {
 #'
 #'
 #' @description
-#' Computes the sample size in each group required  to test a difference in 
+#' Computes the sample size in each group required to test a difference in 
 #' population means with desired power in a 2-group design. Set the variance 
 #' planning value to the largest value within a plausible range for a 
 #' conservatively large sample size. Set R = 1 for equal sample sizes. For
@@ -6099,6 +6240,54 @@ size.supinf.mean2 <- function(alpha, pow, var, es, h) {
  n <- ceiling(var*2*(za + zb)^2/(es - h)^2 + za^2/4)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size per group"
+ rownames(out) <- ""
+ return(out)
+}
+
+
+#  size.test.icc ==============================================================
+#' Sample size to test an intraclass correlation 
+#'             
+#'
+#' Computes the sample size required to test an intraclass correlation (icc) 
+#' with desired power in a one-way random effects ANOVA model.
+#'
+#'
+#' @param  alpha  alpha level for hypothesis test 
+#' @param  pow    desired power
+#' @param  icc    icc planning value
+#' @param  r      number of measurements (items, raters, forms)
+#' @param  h      null hypothesis value of icc 
+#'
+#'
+#' @return 
+#' Returns the required sample size
+#'
+#'
+#' @references
+#' \insertRef{Donner1987}{statpsych}          
+#'
+#'
+#' @examples
+#' size.test.icc(.05, .90, .65, 4, .50)
+#'
+#' # Should return:
+#' # Sample size
+#' #         104
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export
+size.test.icc <- function(alpha, pow, icc, r, h) {
+ if (icc > .999 | icc < .001) {stop("icc must be between .001 and .999")}
+ za <- qnorm(1 - alpha/2)
+ zb <- qnorm(pow)
+ f1 <- (1 + (r - 1)*icc)/(1 - icc)
+ f2 <- (1 + (r - 1)*h)/(1 - h)
+ es <- log(f1/f2)
+ n <- ceiling(2*r*(za + zb)^2/((r - 1)*es^2)) + 1
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size"
  rownames(out) <- ""
  return(out)
 }
@@ -6509,8 +6698,8 @@ size.test.sign.ps <- function(alpha, pow, p) {
 #' power.mean(.05, 15, 80.5, 7)
 #'
 #' # Should return:
-#' #     Power
-#' # 0.8021669
+#' #  Power
+#' # 0.8022
 #'
 #'
 #' @importFrom stats qt
@@ -6523,7 +6712,7 @@ power.mean <- function(alpha, n, var, es) {
  pow1 <- 1 - pt(t, df, z)
  pow2 <- 1 - pt(t, df, -z)
  pow <- pow1 + pow2
- out <- matrix(pow, nrow = 1, ncol = 1)
+ out <- matrix(round(pow, 4), nrow = 1, ncol = 1)
  colnames(out) <- "Power"
  rownames(out) <- ""
  return(out)
@@ -6559,8 +6748,8 @@ power.mean <- function(alpha, n, var, es) {
 #' power.mean2(.05, 25, 25, 5.0, 6.0, 2)
 #'
 #' # Should return:
-#' #     Power
-#' # 0.8398417
+#' #  Power
+#' # 0.8398
 #'
 #'
 #' @importFrom stats qt
@@ -6573,7 +6762,7 @@ power.mean2 <- function(alpha, n1, n2, var1, var2, es) {
  pow1 <- 1 - pt(t, df, z)
  pow2 <- 1 - pt(t, df, -z)
  pow <- pow1 + pow2
- out <- matrix(pow, nrow = 1, ncol = 1)
+ out <- matrix(round(pow, 4), nrow = 1, ncol = 1)
  colnames(out) <- "Power"
  rownames(out) <- ""
  return(out)
@@ -6614,8 +6803,8 @@ power.mean2 <- function(alpha, n1, n2, var1, var2, es) {
 #' power.lc.mean.bs(.05, n, var, 5, v)
 #'
 #' # Should return:
-#' #     Power
-#' # 0.7221171
+#' #  Power
+#' # 0.7221
 #'
 #'
 #' @importFrom stats qt
@@ -6630,7 +6819,7 @@ power.lc.mean.bs <- function(alpha, n, var, es, v) {
  pow1 <- 1 - pt(t, df, z)
  pow2 <- 1 - pt(t, df, -z)
  pow <- pow1 + pow2
- out <- matrix(pow, nrow = 1, ncol = 1)
+ out <- matrix(round(pow, 4), nrow = 1, ncol = 1)
  colnames(out) <- "Power"
  rownames(out) <- ""
  return(out)
@@ -6666,8 +6855,8 @@ power.lc.mean.bs <- function(alpha, n, var, es, v) {
 #' power.mean.ps(.05, 20, 10.0, 12.0, 2, .7)
 #'
 #' # Should return:
-#' #     Power
-#' # 0.9074354
+#' #  Power
+#' # 0.9074
 #'
 #'
 #' @importFrom stats qt
@@ -6681,7 +6870,58 @@ power.mean.ps <- function(alpha, n, var1, var2, es, cor) {
  pow1 <- 1 - pt(t, df, z)
  pow2 <- 1 - pt(t, df, -z)
  pow <- pow1 + pow2
- out <- matrix(pow, nrow = 1, ncol = 1)
+ out <- matrix(round(pow, 4), nrow = 1, ncol = 1)
+ colnames(out) <- "Power"
+ rownames(out) <- ""
+ return(out)
+}
+
+
+#  power.mann ================================================================
+#' Approximates the power of a Mann-Whitney test 
+#'
+#'
+#' @description
+#' Computes the approximate power of a Mann-Whitney U test for a planned 
+#' sample size. In a 2-group experiment, the effect size is the proportion  
+#' of members in the population with scores that would be higher under 
+#' treatment 1 than treatment 2. In a 2-group nonexperiment where participants
+#' are sampled from two subpopulations of sizes N1 and N2, the effect size is 
+#' the proportion of all N1 x N2 pairs in which a member from subpopulation 1 
+#' has a larger score than a member from subpopulation 2.
+#'
+#'
+#' @param  alpha  alpha level for hypothesis test 
+#' @param  n1     planned sample size for group 1
+#' @param  n2     planned sample size for group 2
+#' @param  es     planning value of effect size (between .5 and 1) 
+#'
+#'
+#' @references
+#' \insertRef{Noether1987}{statpsych}
+#'
+#'
+#' @return
+#' Returns the approximate power of the test
+#'
+#'
+#' @examples
+#' power.mann(.05, 50, 50, .65)
+#'
+#' # Should return:
+#' #   Power
+#' #  0.7383
+#'
+#'
+#' @importFrom stats qnorm
+#' @importFrom stats pnorm
+#' @export
+power.mann <- function(alpha, n1, n2, es) {
+ if (es > .9999 | es < .5001) {stop("effect size must be between .5001 and .9999")}
+ za <- qnorm(1 - alpha/2)
+ z <- sqrt(12*n1*n2/(n1 + n2))*(es - .5)- za
+ pow <- pnorm(z)
+ out <- matrix(round(pow, 4), nrow = 1, ncol = 1)
  colnames(out) <- "Power"
  rownames(out) <- ""
  return(out)
@@ -7183,7 +7423,7 @@ etasqr.adj <- function(etasqr, dfeffect, dferror) {
 #' etasqr.gen.2way(12.3, 15.6, 5.2, 7.9)
 #'
 #' # Should return:
-#' #                                           A         B        AB
+#' #                                            A         B        AB
 #' # A treatment, B classification:      0.300000 0.5435540 0.1811847
 #' # A classification, B treatment:      0.484252 0.3804878 0.2047244
 #' # A classification, B classification: 0.300000 0.3804878 0.1268293
@@ -7441,7 +7681,7 @@ sim.ci.mean2 <- function(alpha, n1, n2, sd2, dist1, dist2, rep) {
 #' distributions with five different marginal distributions. All distributions
 #' are scaled to have a standard deviation of 1.0 at level 1. Bivariate random
 #' data with specified marginal skewness and kurtosis are generated using the
-#' unonr function in the mnonr package. 
+#' mvrnonnorm function in the semTools package. 
 #'
 #'
 #' @param   alpha     alpha level for 1-alpha confidence
@@ -7475,7 +7715,7 @@ sim.ci.mean2 <- function(alpha, n1, n2, sd2, dist1, dist2, rep) {
 #'
 #'
 #' @importFrom stats qt
-#' @importFrom mnonr unonr
+#' @importFrom semTools mvrnonnorm
 #' @export
 sim.ci.mean.ps <- function(alpha, n, sd2, cor, dist1, dist2, rep) {
  if (cor > .999 | cor < -.999) {stop("correlation must be between -.999 and .999")}
@@ -7506,7 +7746,7 @@ sim.ci.mean.ps <- function(alpha, n, sd2, cor, dist1, dist2, rep) {
  w <- 0; k <- 0; e1 <-0; e2 <- 0
  repeat {
    k <- k + 1
-   y <- unonr(n, c(0, 0), V, skewness = c(skw1, skw2), kurtosis = c(kur1, kur2))
+   y <- mvrnonnorm(n, c(0, 0), V, skewness = c(skw1, skw2), kurtosis = c(kur1, kur2))
    q <- c(1, -1)
    d <- y%*%q
    m <- mean(d)
@@ -7789,7 +8029,7 @@ sim.ci.median2 <- function(alpha, n1, n2, sd2, dist1, dist2, rep) {
 #' population distributions with five different marginal distributions. All 
 #' distributions are scaled to have a standard deviation of 1.0 at level 1. 
 #' Bivariate random data with specified marginal skewness and kurtosis are 
-#' generated using the unonr function in the mnonr package. 
+#' generated using the mvrnonnorm function in the semTools package. 
 #'
 #' @param   alpha     alpha level for 1-alpha confidence
 #' @param   n         sample size 
@@ -7822,7 +8062,7 @@ sim.ci.median2 <- function(alpha, n1, n2, sd2, dist1, dist2, rep) {
 #'
 #'
 #' @importFrom stats qnorm
-#' @importFrom mnonr unonr
+#' @importFrom semTools mvrnonnorm
 #' @export
 sim.ci.median.ps <- function(alpha, n, sd2, cor, dist1, dist2, rep) {
  if (cor > .999 | cor < -.999) {stop("correlation must be between -.999 and .999")}
@@ -7868,7 +8108,7 @@ sim.ci.median.ps <- function(alpha, n, sd2, cor, dist1, dist2, rep) {
  w <- 0; k <- 0; e1 <- 0; e2 <- 0
  repeat {
    k <- k + 1
-   y <- unonr(n, c(0, 0), V, skewness = c(skw1, skw2), kurtosis = c(kur1, kur2))
+   y <- mvrnonnorm(n, c(0, 0), V, skewness = c(skw1, skw2), kurtosis = c(kur1, kur2))
    y1 <- y[, 1]
    y2 <- y[, 2]
    median1 <- median(y1)
@@ -8055,7 +8295,8 @@ sim.ci.stdmean2 <- function(alpha, n1, n2, sd2, dist1, dist2, d, rep) {
 #' within-subjects factor can be generated from five different population 
 #' distributions. All distributions are scaled to have a standard deviation
 #' of 1.0 at level 1. Bivariate random data with specified marginal skewness
-#' and kurtosis are generated using the unonr function in the mnonr package. 
+#' and kurtosis are generated using the mvrnonnorm function in the 
+#' semTools package. 
 #'
 #' @param   alpha     alpha level for 1-alpha confidence
 #' @param   n         sample size 
@@ -8090,7 +8331,7 @@ sim.ci.stdmean2 <- function(alpha, n1, n2, sd2, dist1, dist2, d, rep) {
 #'
 #'
 #' @importFrom stats qnorm
-#' @importFrom mnonr unonr
+#' @importFrom semTools mvrnonnorm
 #' @export
 sim.ci.stdmean.ps <- function(alpha, n, sd2, cor, dist1, dist2, d, rep) {
  if (cor > .999 | cor < -.999) {stop("correlation must be between -.999 and .999")}
@@ -8127,7 +8368,7 @@ sim.ci.stdmean.ps <- function(alpha, n, sd2, cor, dist1, dist2, d, rep) {
  V <- matrix(c(1, cor*sd2, cor*sd2, sd2^2), 2, 2)
  repeat {
    k <- k + 1
-   y <- unonr(n, c(0, 0), V, skewness = c(skw1, skw2), kurtosis = c(kur1, kur2))
+   y <- mvrnonnorm(n, c(0, 0), V, skewness = c(skw1, skw2), kurtosis = c(kur1, kur2))
    y1 <- y[, 1] 
    y0 <- y[, 2]
    m1 <- mean(y1) + diff1
@@ -8208,7 +8449,7 @@ sim.ci.stdmean.ps <- function(alpha, n, sd2, cor, dist1, dist2, d, rep) {
 #' spearmanbrown(.6, 10, 20)
 #'
 #' # Should return:
-#' # Reliability of r2 measurements
+#' # Reliability of 20 measurements
 #' #                            .75
 #'
 #'
@@ -8216,7 +8457,7 @@ sim.ci.stdmean.ps <- function(alpha, n, sd2, cor, dist1, dist2, d, rep) {
 spearmanbrown <- function(rel, r1, r2) {
  rel_r2 <- (r2/r1)*rel/(1 + (r2/r1 - 1)*rel)
  out <- matrix(rel_r2, nrow = 1, ncol = 1)
- colnames(out) <- "Reliability of r2 measurements"
+ colnames(out) <- paste("Reliability of", r2, "measurements")
  rownames(out) <- ""
  return(out)
 }

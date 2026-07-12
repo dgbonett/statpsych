@@ -57,7 +57,7 @@ Returns a 1-row matrix. The columns are:
 ``` r
 sim.ci.mean(.05, 10, 1, 5000)
 #>  Coverage Lower Error Upper Error Ave CI Width
-#>    0.9476      0.0262      0.0262     1.381611
+#>    0.9456       0.031      0.0234     1.386894
 
 # Should return (within sampling error):
 # Coverage Lower Error Upper Error Ave CI Width
@@ -65,7 +65,7 @@ sim.ci.mean(.05, 10, 1, 5000)
 
 sim.ci.mean(.05, 40, 4, 1000)
 #>  Coverage Lower Error Upper Error Ave CI Width
-#>     0.929       0.017       0.054    0.6315832
+#>     0.943       0.016       0.041    0.6312809
 
 # Should return (within sampling error):
 # Coverage Lower Error Upper Error Ave CI Width

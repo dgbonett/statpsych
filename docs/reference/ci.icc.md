@@ -1,4 +1,4 @@
-# Confidence interval for an intraclass reliablity coefficient
+# Confidence interval for an intraclass reliability coefficient
 
 Computes a confidence interval for a population intraclass reliability
 coefficient using mean squared estimates from a two-way ANOVA. This

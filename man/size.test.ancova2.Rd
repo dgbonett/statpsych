@@ -11,7 +11,7 @@ size.test.ancova2(alpha, pow, evar, es, s, d, R)
 
 \item{pow}{desired power}
 
-\item{evar}{planning value of within-group (error) variance}
+\item{evar}{planning value of within-group error variance}
 
 \item{es}{planning value of mean difference}
 
@@ -33,7 +33,9 @@ be approximated by specifying the largest standardized covariate mean
 difference across of all covariates. In an experiment, this standardized
 mean difference is set to 0. Set the error variance planning value to the
 largest value within a plausible range for a conservatively large sample
-size.
+size. Note that the within-group error variance is equal to the within-group
+variance times 1 minus the the squared correlation (s = 1) or squared
+multiple correlation (s > 1) between the response variable and the covariate(s).
 
 For more details, see Section 2.29 of Bonett (2021, Volume 2)
 }

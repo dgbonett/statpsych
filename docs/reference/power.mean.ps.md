@@ -47,11 +47,11 @@ Returns the approximate power of the test
 
 ``` r
 power.mean.ps(.05, 20, 10.0, 12.0, 2, .7)
-#>      Power
-#>  0.9074354
+#>   Power
+#>  0.9074
 
 # Should return:
-#     Power
-# 0.9074354
+#  Power
+# 0.9074
 
 ```

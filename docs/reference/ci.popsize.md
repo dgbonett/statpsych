@@ -39,7 +39,7 @@ ci.popsize(alpha, f00, f01, f10)
 
 Returns a 1-row matrix. The columns are:
 
-- Estimate - estimate of the unknown population size
+- Estimate - estimated unknown population size
 
 - SE - recovered standard error
 

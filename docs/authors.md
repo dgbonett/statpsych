@@ -13,13 +13,12 @@ Source:
 [`DESCRIPTION`](https://github.com/dgbonett/statpsych/blob/HEAD/DESCRIPTION)
 
 Bonett D (2026). *statpsych: Statistical Methods for Psychologists*. R
-package version 1.9.0, https://dgbonett.github.io/statpsych/,
-<https://github.com/dgbonett/statpsych/>.
+package version 2.0.0, <https://github.com/dgbonett/statpsych/>.
 
     @Manual{,
       title = {statpsych: Statistical Methods for Psychologists},
       author = {Douglas G. Bonett},
       year = {2026},
-      note = {R package version 1.9.0, https://dgbonett.github.io/statpsych/},
+      note = {R package version 2.0.0},
       url = {https://github.com/dgbonett/statpsych/},
     }

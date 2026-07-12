@@ -9,7 +9,7 @@ size.ci.ancova2(alpha, evar, s, d, w, R)
 \arguments{
 \item{alpha}{alpha level for 1-alpha confidence}
 
-\item{evar}{planning value of within group (error) variance}
+\item{evar}{planning value of within group error variance}
 
 \item{s}{number of covariates}
 
@@ -31,7 +31,11 @@ mean differences can be approximated by specifying the largest
 standardized covariate mean difference of all covariates. In an
 experiment, this standardized mean difference should be set to 0. Set
 the error variance planning value to the largest value within a
-plausible range for a conservatively large sample size.
+plausible range for a conservatively large sample size. Note that
+the within-group error variance is equal to the within-group
+variance times 1 minus the the squared correlation (s = 1) or
+squared multiple correlation (s > 1) between the response variable
+and the covariate(s).
 
 For more details, see Section 2.28 of Bonett (2021, Volume 2)
 }

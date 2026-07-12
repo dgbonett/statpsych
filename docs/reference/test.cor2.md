@@ -38,7 +38,7 @@ test.cor2(cor1, cor2, n1, n2, s)
 
 Returns a 1-row matrix. The columns are:
 
-- Estimate - estimate of correlation difference
+- Estimate - estimated correlation difference
 
 - z - z test statistic
 

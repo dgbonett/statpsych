@@ -35,7 +35,7 @@ ci.rsqr(alpha, r2, s, n)
 
 Returns a 1-row matrix. The columns are:
 
-- R-squared - estimate of unadjusted R-squared (from input)
+- R-squared - estimated unadjusted R-squared (from input)
 
 - adj R-squared - bias adjusted R-squared estimate
 

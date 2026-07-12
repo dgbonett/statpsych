@@ -26,6 +26,7 @@ You can install the currently-released version from CRAN with this R
 command:
 
 ``` r
+
 install.packages("statpsych")
 ```
 
@@ -33,6 +34,7 @@ Alternatively, you can install the latest development version from
 GitHub with these R commands:
 
 ``` r
+
 install.packages("devtools")
 devtools::install_github("dgbonett/statpsych")
 ```

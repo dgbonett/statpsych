@@ -38,7 +38,7 @@ ci.oddsratio(alpha, f00, f01, f10, f11)
 
 Returns a 1-row matrix. The columns are:
 
-- Estimate - estimate of odds ratio
+- Estimate - estimated odds ratio
 
 - SE - standard error
 

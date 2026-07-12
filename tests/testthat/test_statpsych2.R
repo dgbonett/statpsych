@@ -927,3 +927,34 @@ test_that("pi.cronbach examples", {
   testthat::expect_snapshot(res2)
 })
 
+
+
+test_that("size.ci.kendalltau returns valid matrix", {
+  colnames_expected <- c(
+    "Sample size"
+  )
+  
+  res <- size.ci.kendalltau(.05, .3, .2)
+  
+  testthat::expect_equal(class(res), c("matrix", "array"))
+  testthat::expect_equal(dim(res), c(1, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+  
+  testthat::expect_snapshot(res)
+})
+
+
+test_that("random.yx.nonnormal returns valid matrix", {
+  colnames_expected <- c(
+    "y", "x"
+  )
+  
+  res <- random.yx.nonnormal(10, 50, 20, 4, 2, .5, .75, 3, 4, .5, 1)
+  
+  testthat::expect_equal(class(res), c("data.frame"))
+  testthat::expect_equal(dim(res), c(10, length(colnames_expected)))
+  testthat::expect_equal(colnames(res), colnames_expected)
+  
+  #testthat::expect_snapshot(res)
+})
+

@@ -20,7 +20,7 @@ ci.biphi(alpha, f1, f2, n1, n2)
 \value{
 Returns a 1-row matrix. The columns are:
 \itemize{
-\item Estimate - estimate of biserial-phi correlation
+\item Estimate - estimated biserial-phi correlation
 \item SE - standard error
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval

@@ -28,7 +28,7 @@ ci.diversity(alpha, f)
 
 Returns a 3-row matrix. The columns are:
 
-- Estimate - estimate of diversity index
+- Estimate - estimated diversity index
 
 - SE - standard error of estimate
 

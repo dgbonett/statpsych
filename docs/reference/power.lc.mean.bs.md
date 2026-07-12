@@ -49,11 +49,11 @@ n <- c(20, 20, 20, 20)
 var <- c(70, 70, 80, 80)
 v <- c(.5, .5, -.5, -.5)
 power.lc.mean.bs(.05, n, var, 5, v)
-#>      Power
-#>  0.7221171
+#>   Power
+#>  0.7221
 
 # Should return:
-#     Power
-# 0.7221171
+#  Power
+# 0.7221
 
 ```

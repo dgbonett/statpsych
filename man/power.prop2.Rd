@@ -35,8 +35,8 @@ planning values or it could be set to a minimally interesting effect size.
 power.prop2(.05, 60, 40, .5, .5, .2)
 
 # Should return:
-#     Power
-# 0.4998959
+#  Power
+# 0.4999
 
 
 }

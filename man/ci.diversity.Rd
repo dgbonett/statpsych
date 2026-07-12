@@ -14,7 +14,7 @@ ci.diversity(alpha, f)
 \value{
 Returns a 3-row matrix. The columns are:
 \itemize{
-\item Estimate - estimate of diversity index
+\item Estimate - estimated diversity index
 \item SE - standard error of estimate
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval

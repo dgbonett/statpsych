@@ -382,7 +382,7 @@ ci.cor.dep <- function(alpha, cor1, cor2, cor12, n) {
 #' ci.cor2.gen(.64, .55, .71, .31, .18, .43)
 #'
 #' # Should return:
-#' # Estimate    LL     UL
+#' #  Estimate   LL     UL
 #' #      0.33 0.18 0.4776
 #'  
 #' 
@@ -411,7 +411,7 @@ ci.cor2.gen <- function(cor1, ll1, ul1, cor2, ll2, ul2) {
 #' and is appropriate for nonexperimental designs with simple random sampling
 #' (but not stratified random sampling). The other type uses an unweighted 
 #' average of the group variances and is appropriate for experimental designs.
-#' Equality of variances is not assumed for either type. 
+#' Equality of variances is not assumed. 
 #'
 #' For more details, see Section 1.18 of Bonett (2021, Volume 2)
 #'
@@ -444,7 +444,7 @@ ci.cor2.gen <- function(cor1, ll1, ul1, cor2, ll2, ul2) {
 #'
 #' # Should return:
 #' #             Estimate      SE     LL     UL
-#' # Weighted:     0.7066 0.04891 0.5885 0.7854
+#' # Weighted:     0.7066 0.04911 0.5879 0.7857
 #' # Unweighted:   0.7021 0.05019 0.5808 0.7829
 #'  
 #' 
@@ -463,7 +463,7 @@ ci.pbcor <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
  k <- (n - 2)/(n*p*(1 - p))
  cor1 <- d1/sqrt(d1^2 + k)
  cor2 <- d2/sqrt(d2^2 + 4)
- se.d1 <- sqrt(d1^2*(1/n1 + 1/n2)/8 + (sd1^2/n1 + sd2^2/n2)/s1^2)
+ se.d1 <- sqrt(d1^2*(1/df1 + 1/df2)/8 + (sd1^2/n1 + sd2^2/n2)/s1^2)
  se.d2 <- sqrt(d2^2*(sd1^4/df1 + sd2^4/df2)/(8*s2^4) + (sd1^2/df1 + sd2^2/df2)/s2^2) 
  se.cor1 <- (k/(d1^2 + k)^(3/2))*se.d1
  se.cor2 <- (4/(d2^2 + 4)^(3/2))*se.d2
@@ -621,7 +621,62 @@ ci.spear2 <- function(alpha, cor1, cor2, n1, n2) {
  rownames(out) <- ""
  return (out)
 }
-	
+
+
+#  ci.kendalltau  ===================================================================
+#' Confidence interval for a Kendall tau-a correlation
+#'
+#'
+#' @description
+#' Computes a Fisher confidence interval for a population Kendal tau-a correlation. 
+#' This function is useful for Kendall tau-a correlations less than about .8. (Note: 
+#' under bivariate normality, a Kendall tau-a correlation of .8 corresponds to a 
+#' Pearson correlation of about .95.) An estimate of the Kendall tau-a correlation 
+#' can be obtained from the (see \link[stats]{cor.test} function with method = "kendall".
+#' 
+#'
+#' @param  alpha 	alpha level for 1-alpha confidence
+#' @param  cor	  	estimate of Kendall's tau-a correlation
+#' @param  n	  	sample size
+#'
+#'
+#' @references
+#' \insertRef{Bonett2002}{statpsych}
+#'
+#'
+#' @return 
+#' Returns a 1-row matrix. The columns are:
+#' * Estimate - estimated Kendall tau-a correlation (from input)
+#' * SE - standard error
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
+#' 
+#' 
+#' @examples
+#' ci.kendalltau(.05, .734, 40)
+#'
+#' # Should return:
+#' # Estimate      SE     LL     UL
+#' #    0.734 0.05082 0.6178 0.8188
+#'
+#' 
+#' @importFrom stats qnorm
+#' @export
+ci.kendalltau <- function(alpha, cor, n) {
+ z <- qnorm(1 - alpha/2)
+ se <- sqrt(.437*(1 - cor^2)^2/(n - 4))
+ se.z <- sqrt(.437/(n - 4))
+ zr <- log((1 + cor)/(1 - cor))/2
+ ll0 <- zr - z*se.z
+ ul0 <- zr + z*se.z
+ ll <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
+ ul <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
+ out <- cbind(round(cor, 4), round(se, 5), round(ll, 4), round(ul, 4))
+ colnames(out) <- c("Estimate", "SE", "LL", "UL")
+ rownames(out) <- ""
+ return(out)
+}
+
 
 #  ci.mape  ===================================================================
 #' Confidence interval for a mean absolute prediction error
@@ -1041,7 +1096,7 @@ ci.indirect <- function(alpha, b1, b2, se1, se2) {
 #'
 #' @return 
 #' Returns a 1-row matrix. The columns are:
-#' * Estimate - estimate of linear function 
+#' * Estimate - estimated linear function 
 #' * SE - standard error
 #' * t - t test statistic 
 #' * df - degrees of freedom
@@ -1114,7 +1169,7 @@ ci.lc.glm <-function(alpha, n, b, V, q) {
 #'
 #' @return 
 #' Returns a 1-row matrix. The columns are:
-#' * Estimate - estimate of linear contrast
+#' * Estimate - estimated linear contrast
 #' * SE - standard error of linear contrast
 #' * LL - lower limit of confidence interval
 #' * UL - upper limit of confidence interval
@@ -1172,7 +1227,7 @@ ci.lc.gen.bs <- function(alpha, est, se, v) {
 #'
 #' @return 
 #' Returns a 1-row matrix. The columns are:
-#' * R-squared - estimate of unadjusted R-squared (from input)
+#' * R-squared - estimated unadjusted R-squared (from input)
 #' * adj R-squared - bias adjusted R-squared estimate
 #' * SE - recovered standard error
 #' * LL - lower limit of the confidence interval
@@ -1650,7 +1705,7 @@ ci.bscor <- function(alpha, m1, m2, sd1, sd2, n1, n2) {
 
 
 #  ci.icc =====================================================================
-#' Confidence interval for an intraclass reliablity coefficient
+#' Confidence interval for an intraclass reliability coefficient
 #'
 #'
 #' @description
@@ -1925,7 +1980,7 @@ pi.cronbach <- function(alpha, rel, r, n0, n, type) {
 #' partial correlation with a skeptical prior. The skeptical prior 
 #' distribution is Normal with a mean of 0 and a small standard deviation.
 #' A skeptical prior assumes that the population correlation is within 
-#' a range of small values (-r to r). If the skeptic is 95% confident that
+#' a range of small values (-r to r). If a skeptic is 95% confident that
 #' the population correlation is between -r and r, then the prior standard
 #' deviation can be set to r/1.96. A correlation that is less than .2 in 
 #' absolute value is typically considered to be "small", and the prior 
@@ -2002,7 +2057,7 @@ ci.bayes.cor <- function(alpha, prior_sd, cor, s, n) {
 #' correlation with a skeptical prior. The skeptical prior distribution is
 #' Normal with a mean of 0 and a small standard deviation. A skeptical prior 
 #' assumes that the population semipartial correlation is within a range of 
-#' small values (-r to r). If the skeptic is 95% confident that the population
+#' small values (-r to r). If a skeptic is 95% confident that the population
 #' correlation is between -r and r, then the prior standard deviation can be 
 #' set to r/1.96. A semipartial correlation that is less than .2 in absolute 
 #' value is typically considered to be "small", and the prior standard 
@@ -2016,7 +2071,7 @@ ci.bayes.cor <- function(alpha, prior_sd, cor, s, n) {
 #'
 #' @param   alpha        alpha level for 1-alpha credibility interval
 #' @param   prior_sd     standard deviation of skeptical prior distribution 
-#' @param   cor          estimated semipartial partial correlation
+#' @param   cor          estimated semipartial correlation
 #' @param   se	     	 standard error of estimated semipartial correlation
 #'
 #'
@@ -2301,14 +2356,14 @@ test.cor <- function(cor, n, s, h) {
 #' correlation value (see \link[statpsych]{ci.spear}).
 #'
 #'
-#' @param  cor     estimated correlation 
+#' @param  cor     estimated Spearman correlation 
 #' @param  h       null hypothesis value of correlation
 #' @param  n       sample size 
 #'
 #'
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Estimate - estimate of correlation 
+#' * Estimate - estimated Spearman correlation (from input)
 #' * t or z - t test statistic (for h = 0) or z test statistic (for nonzero h)
 #' * p - two-sided p-value
 #'
@@ -2378,7 +2433,7 @@ test.spear <- function(cor, h, n) {
 #'
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Estimate - estimate of correlation difference
+#' * Estimate - estimated correlation difference
 #' * z - z test statistic
 #' * p - two-sided p-value
 #'
@@ -2434,7 +2489,7 @@ test.cor2 <- function(cor1, cor2, n1, n2, s) {
 #'
 #' @return
 #' Returns a 1-row matrix. The columns are:
-#' * Estimate - estimate of correlation difference
+#' * Estimate - estimated Spearman correlation difference
 #' * z - z test statistic
 #' * p - two-sided p-value
 #'
@@ -2778,6 +2833,58 @@ size.ci.spear <- function(alpha, cor, w) {
  ll <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
  ul <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
  n <- ceiling((n1 - 3)*((ul - ll)/w)^2 + 3)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size"
+ rownames(out) <- ""
+ return(out)
+}
+
+
+#  size.ci.kendalltau ==============================================================
+#' Sample size for a Kendall-a correlation confidence interval 
+#'
+#'
+#' @description
+#' Computes the sample size required to estimate a population Kendall tau-a
+#' correlation with desired confidence interval precision. Set the correlation 
+#' planning value to the smallest absolute value within a plausible range for a
+#' conservatively large sample size.
+#'
+#'  
+#' @param  alpha  alpha level for 1-alpha confidence
+#' @param  cor    planning value of correlation
+#' @param  w      desired confidence interval width
+#'
+#' 
+#' @return 
+#' Returns the required sample size
+#' 
+#' 
+#' @references
+#' \insertRef{Bonett2000}{statpsych}
+#'
+#'
+#' @examples
+#' size.ci.kendalltau(.05, .3, .2)
+#'
+#' # Should return:
+#' # Sample size
+#' #         143
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export  
+size.ci.kendalltau <- function(alpha, cor, w) {
+ if (cor > .999 | cor < -.999) {stop("correlation must be between -.999 and .999")}
+ z <- qnorm(1 - alpha/2)
+ n1 <- ceiling(1.748*(1 - cor^2)^2*(z/w)^2 + 4)
+ zr <- log((1 + cor)/(1 - cor))/2
+ se <- sqrt(.437/(n1 - 4))
+ ll0 <- zr - z*se
+ ul0 <- zr + z*se
+ ll <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
+ ul <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
+ n <- ceiling((n1 - 4)*((ul - ll)/w)^2 + 4)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
  rownames(out) <- ""
@@ -3425,8 +3532,9 @@ size.ci.spear2 <- function(alpha, cor1, cor2, w) {
 #' includes 0, then the correlation planning value is set to 0; otherwise, the
 #' correlation planning value is set to the lower prediction limit (if the prior
 #' correlation is positive) or the upper prediction limit (if the prior correlation
-#' is negative). The probability that the prediction interval will have a width that
-#' is less than the desired width in the planned study is approximately 1 - alpha2. 
+#' is negative). The probability that the 1 - alpha1 confidence interval
+#' in the planned study will have a width that is less than the desired width
+#' is approximately 1 - alpha2 where alpha1 and alpha2 are specified values.
 #'
 #' This sample size approach assumes that the population Pearson correlation 
 #' that was estimated in the prior study is very similar to the population Pearson
@@ -3517,9 +3625,10 @@ size.ci.cor.prior <- function(alpha1, alpha2, cor0, n0, w) {
 #' estimated reliability in the planned study. An estimated Cronbach reliability
 #' from a prior study can be used to compute a lower prediction limit for the 
 #' estimated reliability in the planned study, which is then used as a planning
-#' value in the sample size analysis. The probability that the prediction interval
-#' will have a width that is less than the desired width in the planned study is
-#' approximately 1 - alpha2. 
+#' value in the sample size analysis. The probability that the 1 - alpha1 
+#' confidence interval in the planned study will have a width that is less than 
+#' the desired width is approximately 1 - alpha2 where alpha1 and alpha2 are 
+#' specified values.
 #'
 #' This sample size approach assumes that the population Cronbach reliability 
 #' that was estimated in the prior study is very similar to the population 
@@ -3586,18 +3695,18 @@ size.ci.cronbach.prior <- function(alpha1, alpha2, rel0, n0, r, w) {
 #' with desired confidence interval precision in applications where an 
 #' estimated intraclass correlation from a prior study is available. The 
 #' actual confidence interval width in the planned study will depend on the
-#' value of the estimated intraclas correlation in the planned study. An 
+#' value of the estimated intraclass correlation in the planned study. An 
 #' estimated intraclass correlation from a prior study can be used to compute
 #' a lower prediction limit for the estimated intraclass correlation in the 
 #' planned study, which is then used as a planning value in the sample size 
-#' analysis. The probability that the prediction interval will have a width
-#' that is less than the desired width in the planned study is approximately 
-#' 1 - alpha2. 
+#' analysis. The probability that the 1 - alpha1 confidence interval
+#' in the planned study will have a width that is less than the desired width
+#' is approximately 1 - alpha2 where alpha1 and alpha2 are specified values.
 #'
 #' This sample size approach assumes that the population intraclass correlation 
 #' that was estimated in the prior study is very similar to the population 
 #' intraclass correlation that will be estimated in the planned study. If
-#' an estimated intraclas correlation from a prior study is not available, the 
+#' an estimated intraclass correlation from a prior study is not available, the 
 #' researcher must use expert opinion to guess the value of the intraclass
 #' correlation that will be observed in the planned study. The 
 #' \link[statpsych]{size.ci.icc} function uses an intraclass correlation 
@@ -3677,13 +3786,17 @@ size.ci.icc.prior <- function(alpha1, alpha2, cor0, n0, r, w) {
 #' standardized covariate mean difference of all covariates. In an 
 #' experiment, this standardized mean difference should be set to 0. Set 
 #' the error variance planning value to the largest value within a 
-#' plausible range for a conservatively large sample size.
+#' plausible range for a conservatively large sample size. Note that
+#' the within-group error variance is equal to the within-group 
+#' variance times 1 minus the the squared correlation (s = 1) or 
+#' squared multiple correlation (s > 1) between the response variable
+#' and the covariate(s).
 #'
 #' For more details, see Section 2.28 of Bonett (2021, Volume 2)
 #'
 #'  
 #' @param  alpha  alpha level for 1-alpha confidence
-#' @param  evar   planning value of within group (error) variance
+#' @param  evar   planning value of within group error variance
 #' @param  s      number of covariates 
 #' @param  d      largest standardized mean difference of all covariates
 #' @param  w      desired confidence interval width
@@ -4178,14 +4291,16 @@ size.test.lc.ancova <- function(alpha, pow, evar, es, s, d, v) {
 #' difference across of all covariates. In an experiment, this standardized 
 #' mean difference is set to 0. Set the error variance planning value to the 
 #' largest value within a plausible range for a conservatively large sample 
-#' size.
+#' size. Note that the within-group error variance is equal to the within-group 
+#' variance times 1 minus the the squared correlation (s = 1) or squared 
+#' multiple correlation (s > 1) between the response variable and the covariate(s).
 #'
 #' For more details, see Section 2.29 of Bonett (2021, Volume 2)
 #'
 #'  
 #' @param  alpha   alpha level for hypothesis test
 #' @param  pow     desired power
-#' @param  evar    planning value of within-group (error) variance
+#' @param  evar    planning value of within-group error variance
 #' @param  es      planning value of mean difference
 #' @param  s       number of covariates 
 #' @param  d       largest standardized mean difference of all covariates
@@ -4462,8 +4577,8 @@ size.test.gen2 <- function(alpha, pow, se, n0, es, R) {
 #' power.cor(.05, 80, .3, 0, 0)
 #'
 #' # Should return:
-#' #     Power
-#' # 0.7751947
+#' #  Power
+#' # 0.7752
 #'
 #'
 #' @importFrom stats qnorm
@@ -4480,7 +4595,7 @@ power.cor <- function(alpha, n, cor, h, s) {
  pow1 <- pnorm(z1)
  pow2 <- 1 - pnorm(z2)
  pow <- pow1 + pow2
- out <- matrix(pow, nrow = 1, ncol = 1)
+ out <- matrix(round(pow, 4), nrow = 1, ncol = 1)
  colnames(out) <- "Power"
  rownames(out) <- ""
  return(out)
@@ -4514,8 +4629,8 @@ power.cor <- function(alpha, n, cor, h, s) {
 #' power.cor2(.05, 200, 200, .4, .2, 0)
 #'
 #' # Should return:
-#' #     Power
-#' # 0.5919682
+#' #  Power
+#' # 0.5920
 #'
 #'
 #' @importFrom stats qnorm
@@ -4532,7 +4647,7 @@ power.cor2 <- function(alpha, n1, n2, cor1, cor2, s) {
  pow1 <- pnorm(z1)
  pow2 <- 1 - pnorm(z2)
  pow <- pow1 + pow2
- out <- matrix(pow, nrow = 1, ncol = 1)
+ out <- matrix(round(pow, 4), nrow = 1, ncol = 1)
  colnames(out) <- "Power"
  rownames(out) <- ""
  return(out)
@@ -4587,7 +4702,7 @@ slope.contrast <- function(x) {
 
 
 #  random.yx =================================================================
-#' Generates random bivariate scores 
+#' Generates random bivariate normal scores 
 #'
 #'
 #' @description
@@ -4640,6 +4755,72 @@ random.yx <- function(n, my, mx, sdy, sdx, cor, dec) {
 }
 
 
+#  random.yx.nonnormal ========================================================
+#' Generates random bivariate nonnormal scores 
+#'
+#'
+#' @description
+#' Generates a random sample of y scores and x scores from a bivariate 
+#' nonnormal distribution with a specified population correlation and a
+#' specified population mean, standard deviation, skewness, and excess
+#' kurtosis for each variable. This function uses the mvrnonnorm 
+#' function in the semTools package. 
+#'
+#' For population excess kurtosis values greater than 0, the sample 
+#' kurtosis values tend to be smaller than the specified population
+#' values because of their bias. The bias can be substantial for large
+#' excess kurtosis values even in large samples.
+#'
+#'  
+#' @param   n     sample size
+#' @param   my    population mean of y scores
+#' @param   mx    population mean of x scores
+#' @param   sdy   population standard deviation of y scores
+#' @param   sdx   population standard deviation of x scores
+#' @param   skewy population skewness of y scores
+#' @param   skewx population skewness of x scores
+#' @param   kury  population excess kurtosis of y scores
+#' @param   kurx  population excess kurtosis of x scores
+#' @param   cor   population correlation between x and y 
+#' @param   dec   number of decimal points 
+#'
+#' 
+#' @return 
+#' Returns n pairs of y and x scores 
+#' 
+#' 
+#' @examples
+#' random.yx.nonnormal(10, 50, 20, 4, 2, .5, .75, 3, 4, .5, 1)
+#'
+#' # Should return:
+#' #       y    x
+#' # 1  47.3 18.8
+#' # 2  52.0 20.3
+#' # 3  51.3 22.3
+#' # 4  50.9 21.3
+#' # 5  55.2 22.0
+#' # 6  53.7 20.1
+#' # 7  46.4 20.0
+#' # 8  54.9 24.7
+#' # 9  48.7 20.7
+#' # 10 44.7 18.6 
+#'  
+#' 
+#' @importFrom semTools mvrnonnorm
+#' @export  
+random.yx.nonnormal <- function(n, my, mx, sdy, sdx, skewy, skewx, kury, kurx, cor, dec) {
+ if (cor > .999 | cor < -.999) {stop("correlation must be between -.999 and .999")}
+ Sigma <- matrix(c(sdy^2, cor*sdy*sdx, cor*sdy*sdx, sdx^2), 2, 2)
+ skewness <- c(skewy, skewx)
+ kurtosis <- c(kury, kurx) 
+ mu <- c(my, mx)
+ y <- mvrnonnorm(n, mu, Sigma, skewness, kurtosis)
+ out <- as.data.frame(round(y, dec))
+ colnames(out) <- c("y", "x")
+ return(out)
+}
+
+
 #  sim.ci.cor ===============================================================
 #' Simulates confidence interval coverage probability for a Pearson
 #' correlation
@@ -4681,11 +4862,11 @@ random.yx <- function(n, my, mx, sdy, sdx, cor, dec) {
 #'
 #' # Should return (within sampling error):
 #' #      Coverage Lower Error Upper Error Ave CI Width
-#' # [1,]  0.93815     0.05125      0.0106    0.7778518
+#' # [1,]   0.9353      0.0409      0.0238    0.3903112
 #'
 #'
 #' @importFrom stats qt
-#' @importFrom mnonr unonr
+#' @importFrom semTools mvrnonnorm
 #' @export
 sim.ci.cor <- function(alpha, n, cor, dist1, dist2, rep) {
  if (cor > .999 | cor < -.999) {stop("correlation must be between -.999 and .999")}
@@ -4716,7 +4897,7 @@ sim.ci.cor <- function(alpha, n, cor, dist1, dist2, rep) {
  w <- 0; k <- 0; e1 <-0; e2 <- 0
  repeat {
    k <- k + 1
-   y <- unonr(n, c(0, 0), V, skewness = c(skw1, skw2), kurtosis = c(kur1, kur2))
+   y <- mvrnonnorm(n, c(0, 0), V, skewness = c(skw1, skw2), kurtosis = c(kur1, kur2))
    R <- cor(y)
    r <- R[1,2]
    zr <- log((1 + r)/(1 - r))/2 - r/(2*(n - 1))
@@ -4784,7 +4965,7 @@ sim.ci.cor <- function(alpha, n, cor, dist1, dist2, rep) {
 #'
 #'
 #' @importFrom stats qt
-#' @importFrom mnonr unonr
+#' @importFrom semTools mvrnonnorm
 #' @export
 sim.ci.spear <- function(alpha, n, cor, dist1, dist2, rep) {
  if (cor > .999 | cor < -.999) {stop("correlation must be between -.999 and .999")}
@@ -4812,13 +4993,13 @@ sim.ci.spear <- function(alpha, n, cor, dist1, dist2, rep) {
    skw2 <- 2; kur2 <- 6
  }
  V <- matrix(c(1, cor, cor, 1), 2, 2)
- y <- unonr(100000, c(0, 0), V, skewness = c(skw1, skw2), kurtosis = c(kur1, kur2))
+ y <- mvrnonnorm(100000, c(0, 0), V, skewness = c(skw1, skw2), kurtosis = c(kur1, kur2))
  popR <- cor(y, method = "spearman")
  popspear <- popR[1,2]
  w <- 0; k <- 0; e1 <-0; e2 <- 0
  repeat {
    k <- k + 1
-   y <- unonr(n, c(0, 0), V, skewness = c(skw1, skw2), kurtosis = c(kur1, kur2))
+   y <- mvrnonnorm(n, c(0, 0), V, skewness = c(skw1, skw2), kurtosis = c(kur1, kur2))
    R <- cor(y, method = "spearman")
    r <- R[1,2]
    zr <- log((1 + r)/(1 - r))/2 

@@ -560,32 +560,32 @@
     Code
       res
     Output
-           Power
-       0.8021669
+        Power
+       0.8022
 
 # power.mean2 returns valid matrix
 
     Code
       res
     Output
-           Power
-       0.8398417
+        Power
+       0.8398
 
 # power.mean.ps returns valid matrix
 
     Code
       res
     Output
-           Power
-       0.9074354
+        Power
+       0.9074
 
 # power.lc.bs returns valid matrix
 
     Code
       res
     Output
-           Power
-       0.7221171
+        Power
+       0.7221
 
 # ci.cqv returns valid matrix
 
@@ -716,7 +716,7 @@
     Code
       res
     Output
-       Reliability of r2 measurements
+       Reliability of 20 measurements
                                  0.75
 
 # ci.mean.fpc returns valid matrix
@@ -808,4 +808,36 @@
     Output
        Estimate       SE       t       p        LL        UL
           -5.35 1.275231 -4.1953 0.00228 -9.089451 -1.610549
+
+# size.test.icc returns valid matrix
+
+    Code
+      res
+    Output
+       Sample size
+               104
+
+# size.ci.mean.ps.prior returns valid matrix
+
+    Code
+      res
+    Output
+       Sample size
+                59
+
+# test.kurtosis.geary returns valid matrix
+
+    Code
+      res
+    Output
+       Kurtosis Excess     z     p
+          5.157  2.157 2.793 0.005
+
+# power.mann returns valid matrix
+
+    Code
+      res
+    Output
+        Power
+       0.7383
 

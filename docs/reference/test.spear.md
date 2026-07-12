@@ -18,7 +18,7 @@ test.spear(cor, h, n)
 
 - cor:
 
-  estimated correlation
+  estimated Spearman correlation
 
 - h:
 
@@ -32,7 +32,7 @@ test.spear(cor, h, n)
 
 Returns a 1-row matrix. The columns are:
 
-- Estimate - estimate of correlation
+- Estimate - estimated Spearman correlation (from input)
 
 - t or z - t test statistic (for h = 0) or z test statistic (for nonzero
   h)

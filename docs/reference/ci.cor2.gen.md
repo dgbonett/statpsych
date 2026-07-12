@@ -72,7 +72,7 @@ ci.cor2.gen(.64, .55, .71, .31, .18, .43)
 #>      0.33 0.18 0.4776
 
 # Should return:
-# Estimate    LL     UL
+#  Estimate   LL     UL
 #      0.33 0.18 0.4776
  
 ```

@@ -20,7 +20,7 @@ ci.lc.glm(alpha, n, b, V, q)
 \value{
 Returns a 1-row matrix. The columns are:
 \itemize{
-\item Estimate - estimate of linear function
+\item Estimate - estimated linear function
 \item SE - standard error
 \item t - t test statistic
 \item df - degrees of freedom

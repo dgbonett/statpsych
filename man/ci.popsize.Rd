@@ -18,7 +18,7 @@ ci.popsize(alpha, f00, f01, f10)
 \value{
 Returns a 1-row matrix. The columns are:
 \itemize{
-\item Estimate - estimate of the unknown population size
+\item Estimate - estimated unknown population size
 \item SE - recovered standard error
 \item LL - lower limit of the confidence interval
 \item UL - upper limit of the confidence interval

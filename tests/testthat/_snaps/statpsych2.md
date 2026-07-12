@@ -44,7 +44,7 @@
       res
     Output
                   Estimate      SE     LL     UL
-      Weighted:     0.7066 0.04891 0.5885 0.7854
+      Weighted:     0.7066 0.04911 0.5879 0.7857
       Unweighted:   0.7021 0.05019 0.5808 0.7829
 
 # ci.spear returns valid matrix
@@ -232,16 +232,16 @@
     Code
       res
     Output
-           Power
-       0.7751947
+        Power
+       0.7752
 
 # power.cor2 returns valid matrix
 
     Code
       res
     Output
-           Power
-       0.5919682
+       Power
+       0.592
 
 # size.test.cor2 returns valid matrix
 
@@ -568,4 +568,12 @@
     Output
            LL
        0.8073
+
+# size.ci.kendalltau returns valid matrix
+
+    Code
+      res
+    Output
+       Sample size
+               143
 

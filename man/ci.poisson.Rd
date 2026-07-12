@@ -29,8 +29,8 @@ observed over a specific period of time (t).
 }
 \details{
 The time period (t) does not need to be an integer and can be expressed in
-any unit of time such as seconds, hours, or months. The occurances are
-assumed to be independent of one another and the unknown occurance rate is
+any unit of time such as seconds, hours, or months. The occurrences are
+assumed to be independent of one another and the unknown occurrence rate is
 assumed to be constant over time.
 }
 \examples{

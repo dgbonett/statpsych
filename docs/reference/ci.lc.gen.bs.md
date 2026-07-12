@@ -34,7 +34,7 @@ ci.lc.gen.bs(alpha, est, se, v)
 
 Returns a 1-row matrix. The columns are:
 
-- Estimate - estimate of linear contrast
+- Estimate - estimated linear contrast
 
 - SE - standard error of linear contrast
 
