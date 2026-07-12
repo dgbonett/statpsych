@@ -4768,7 +4768,7 @@ random.yx <- function(n, my, mx, sdy, sdx, cor, dec) {
 #'
 #' For population excess kurtosis values greater than 0, the sample 
 #' kurtosis values tend to be smaller than the specified population
-#' values because of their bias. The bias can be substanital for large
+#' values because of their bias. The bias can be substantial for large
 #' excess kurtosis values even in large samples.
 #'
 #'  
@@ -4793,7 +4793,7 @@ random.yx <- function(n, my, mx, sdy, sdx, cor, dec) {
 #' random.yx.nonnormal(10, 50, 20, 4, 2, .5, .75, 3, 4, .5, 1)
 #'
 #' # Should return:
-#' #    y    x
+#' #       y    x
 #' # 1  47.3 18.8
 #' # 2  52.0 20.3
 #' # 3  51.3 22.3
