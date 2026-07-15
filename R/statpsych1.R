@@ -5960,6 +5960,358 @@ size.ci.sd <- function(alpha, r) {
 }
 
 
+#  trials.ci.mean =============================================================
+#' Sample size for a single mean confidence interval with a given number of 
+#' measurement trials
+#'
+#'
+#' @description
+#' Computes the sample size required to estimate a population mean with desired
+#' confidence interval precision where the response variable is an average  
+#' from t2 measurement trials. Multiple measurement trials are often used 
+#' in studies that measure reaction time, brain activity, or physical 
+#' performance. The measurement trials could also be different raters or 
+#' alternate forms of a test or questionnaire. 
+#'
+#' The planning variance is assumed to have been estimated in a pilot study
+#' that used t1 measurement trials. Using a smaller number of trials in the 
+#' planned study will require a larger sample size but less time per 
+#' participant. This function requires a planning value of the reliability of a
+#' response variable based on t1 measurement trials. If this reliability is not
+#' known, it could be estimated in a pilot study using Cronbach's alpha. 
+#'
+#'
+#' @param   alpha   alpha level for 1-alpha confidence
+#' @param   var     planning value of within-group variance for an average score of t1 trials
+#' @param   w       desired confidence interval width
+#' @param   rel     reliability of an average of t1 trials
+#' @param   t1      number of measurement trials in the pilot study
+#' @param   t2      number of measurement trials in the planned study
+#'
+#'
+#' @return
+#' Returns the required sample size
+#'
+#'
+#' @examples
+#' trials.ci.mean(.05, 264.4, 10, .7, 5, 10)
+#'
+#' # Should return:
+#' # Sample size
+#' #          37
+#'
+#' trials.ci.mean(.05, 264.4, 10, .7, 5, 30)
+#'
+#' # Should return:
+#' # Sample size
+#' #          33
+#'
+#'
+#' @references
+#' \insertRef{Bonett2026}{statpsych}
+#'
+#'
+#'
+#' @importFrom stats qnorm
+#' @export
+trials.ci.mean <- function(alpha, var, w, rel, t1, t2) {
+ z <- qnorm(1 - alpha/2)
+ a <- t2/t1
+ varT <- var*rel
+ rel_t2 <- a*rel/(1 + (a - 1)*rel)
+ var_t2 <- varT/rel_t2
+ n <- ceiling(4*var_t2*(z/w)^2 + z^2/2)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size"
+ rownames(out) <- ""
+ return(out)
+}
+
+
+#  trials.ci.mean2 ==========================================================
+#' Sample size for a 2-group mean difference confidence interval with a given 
+#' number of measurement trials
+#'
+#'
+#' @description
+#' Computes the sample size required to estimate a difference in population
+#' means with desired confidence interval precision in a 2-group design where
+#' the response variable is an average from t2 measurement trials. Multiple
+#' measurement trials are often used in studies that measure reaction time, 
+#' brain activity, or physical performance. The measurement trials could also
+#' be different raters or alternate forms of a test or questionnaire. 
+#'
+#' The planning variance is assumed to have been estimated in a pilot study
+#' that used t1 measurement trials. Using a smaller number of trials in the 
+#' planned study will require a larger sample size but less time per 
+#' participant. This function requires a planning value of the reliability of a
+#' response variable based on t1 measurement trials. If this reliability is not
+#' known, it could be estimated in a pilot study using Cronbach's alpha. 
+#' Set R = 1 for equal sample sizes.
+#'
+#'
+#' @param   alpha   alpha level for 1-alpha confidence
+#' @param   var     planning value of within-group variance for an average score of t1 trials
+#' @param   w       desired confidence interval width
+#' @param   rel     reliability of an average of t1 trials
+#' @param   t1      number of measurement trials in the pilot study
+#' @param   t2      number of measurement trials in the planned study
+#' @param   R       n2/n1 ratio
+#'
+#'
+#' @return
+#' Returns the required sample size per group
+#'
+#'
+#' @examples
+#' trials.ci.mean2(.05, 37.1, 5, .824, 40, 30, 1)
+#'
+#' # Should return:
+#' # n1 n2
+#' # 50 50
+#'
+#' trials.ci.mean2(.05, 37.1, 5, .824, 40, 60, 1)
+#'
+#' # Should return:
+#' # n1 n2
+#' # 44 44
+#'
+#'
+#' @references
+#' \insertRef{Bonett2026}{statpsych}
+#'
+#'
+#' @importFrom stats qnorm
+#' @export
+trials.ci.mean2 <- function(alpha, var, w, rel, t1, t2, R) {
+ z <- qnorm(1 - alpha/2)
+ a <- t2/t1
+ varT <- var*rel
+ rel_t2 <- a*rel/(1 + (a - 1)*rel)
+ var_t2 <- varT/rel_t2
+ n1 <- ceiling(4*var_t2*(1 + 1/R)*(z/w)^2 + z^2/4)
+ n2 <- ceiling(R*n1)
+ out <- t(c(n1, n2))
+ colnames(out) <- c("n1", "n2")
+ rownames(out) <- ""
+ return(out)
+}
+
+
+# trials.ci.mean.ps ===========================================================
+#' Sample size for a paired-samples mean difference confidence interval with a 
+#' given number of measurement trials
+#'
+#'                             
+#' @description
+#' Computes the sample size required to estimate a difference in population
+#' means with desired confidence interval precision in a paired-samples design
+#' where the response variable is an average from t2 measurement trials. 
+#' Multiple measurement trials are often used in studies that measure reaction
+#' time, brain activity, or physical performance. The measurement trials could 
+#' also be different raters or alternate forms of a test or questionnaire. 
+#'
+#' The planning variance is assumed to have been estimated in a pilot study
+#' that used t1 measurement trials. Using a smaller number of trials in the 
+#' planned study will require a larger sample size but less time per 
+#' participant. This function requires a planning value of the reliability of a
+#' response variable based on t1 measurement trials. If this reliability is not
+#' known, it could be estimated in a pilot study using Cronbach's alpha. 
+#'
+#'
+#' @param   alpha   alpha level for 1-alpha confidence
+#' @param   var     planning value of variance for an average score of t1 trials
+#' @param   cor     planning value of correlation for paired average scores of t1 trials
+#' @param   w       desired confidence interval width
+#' @param   rel     reliability of an average score of t1 trials
+#' @param   t1      number of measurement trials in the pilot study
+#' @param   t2      number of measurement trials in the planned study
+#'
+#'
+#' @return
+#' Returns the required sample size
+#'
+#'
+#' @examples
+#' trials.ci.mean.ps(.05, 23550, .427, 100, .402, 20, 30)
+#'
+#' # Should return:
+#' # Sample size
+#' #          29
+#'
+#' trials.ci.mean.ps(.05, 23550, .427, 100, .402, 20, 50)
+#'
+#' # Should return:
+#' # Sample size
+#' #          18
+#'
+#'
+#' @references
+#' \insertRef{Bonett2026}{statpsych}
+#'
+#'
+#' @importFrom stats qnorm
+#' @export
+trials.ci.mean.ps <- function(alpha, var, cor, w, rel, t1, t2) {
+ z <- qnorm(1 - alpha/2)
+ a <- t2/t1
+ varT <- var*rel
+ rel_t2 <- (a)*rel/(1 + (a - 1)*rel)
+ var_t2 <- varT/rel_t2
+ corT <- cor/rel
+ cor_t2 <- corT*rel_t2
+ n <- ceiling(8*var_t2*(1 - cor_t2)*(z/w)^2 + z^2/2)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size"
+ rownames(out) <- ""
+ return(out)
+}
+
+
+#  trials.ci.lc.mean.bs =======================================================
+#' Sample size for between-subjects mean linear contrast confidence interval
+#' with a given number of measurement trials
+#'
+#'
+#' @description
+#' Computes the sample size required to test a linear contrast of population 
+#' means with desired confidence interval precision in a between-subjects design
+#' where the response variable is an average from t2 measurement trials. 
+#' Multiple measurement trials are often used in studies that measure reaction 
+#' time, brain activity, or physical performance. The measurement trials could
+#' also be different raters or alternate forms of a test or questionnaire. 
+#'
+#' The planning variance is assumed to have been estimated in a pilot study
+#' that used t1 measurement trials. Using a smaller number of trials in the 
+#' planned study will require a larger sample size but less time per 
+#' participant. This function requires a planning value of the reliability of a
+#' response variable based on t1 measurement trials. If this reliability is not
+#' known, it could be estimated in a pilot study using Cronbach's alpha. 
+#'
+#'
+#' @param   alpha   alpha level for 1-alpha confidence
+#' @param   var     planning value of within-group variance for an average score of t1 trials
+#' @param   w       desired confidence interval width
+#' @param   rel     reliability of an average score of t1 trials
+#' @param   t1      number of measurement trials in the prior study
+#' @param   t2      number of measurement trials in the planned study
+#' @param   v       vector of contrast coefficients
+#'
+#'
+#' @return
+#' Returns the required sample size per group
+#'
+#'
+#' @examples
+#' v = c(.5, .5, -.5, -.5)
+#' trials.ci.lc.mean.bs(.05, 225, 10, .615, 10, 40, v)
+#'
+#' # Should return:
+#' # Sample size per group
+#' #                    26
+#'
+#' v = c(.5, .5, -.5, -.5)
+#' trials.ci.lc.mean.bs(.05, 225, 10, .615, 10, 20, v)
+#'
+#' # Should return:
+#' # Sample size per group
+#' #                    29
+#'
+#'
+#' @references
+#' \insertRef{Bonett2026}{statpsych}
+#'
+#'
+#' @importFrom stats qnorm
+#' @export
+trials.ci.lc.mean.bs <- function(alpha, var, w, rel, t1, t2, v) {
+ z <- qnorm(1 - alpha/2)
+ a <- t2/t1
+ varT <- var*rel
+ rel_t2 <- a*rel/(1 + (a - 1)*rel)
+ var_t2 <- varT/rel_t2
+ m <- length(v) - sum(v == 0)
+ n <- ceiling(4*var_t2*(t(v)%*%v)*(z/w)^2 + z^2/(2*m))
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size per group"
+ rownames(out) <- ""
+ return(out)
+}
+
+	
+#  trials.ci.lc.mean.ws ========================================================
+#' Sample size for a within-subjects linear contrast confidence interval 
+#' for a given number of measurement trials
+#'
+#'
+#' @description
+#' Computes the sample size required to test a linear contrast of population 
+#' means with desired confidence interval precision in a within-subjects design
+#' where the response variable is an average from t2 measurement trials. 
+#' Multiple measurement trials are often used in studies that measure reaction 
+#' time, brain activity, or physical performance. The measurement trials could
+#' also be different raters or alternate forms of a test or questionnaire. 
+#'
+#' The planning variance is assumed to have been estimated in a pilot study
+#' that used t1 measurement trials. Using a smaller number of trials in the 
+#' planned study will require a larger sample size but less time per 
+#' participant. This function requires a planning value of the reliability of a
+#' response variable based on t1 measurement trials. If this reliability is not
+#' known, it could be estimated in a pilot study using Cronbach's alpha. 
+#'
+#'
+#' @param  alpha  alpha level for 1-alpha confidence 
+#' @param  var    planning value of within-group variance for an average score of t1 trials
+#' @param  cor    planning value of average correlation among average scores of t1 trials
+#' @param  w      desired confidence interval width
+#' @param  rel    reliability of an average score of t1 trials
+#' @param  t1     number of measurement trials in the pilot study
+#' @param  t2     number of measurement trials in the planned study
+#' @param  q      vector of within-subjects contrast coefficients 
+#'
+#'
+#' @return 
+#' Returns the required sample size 
+#'
+#'
+#' @examples
+#' q <- c(1, -1, -1, 1)
+#' trials.ci.lc.mean.ws(.05, 265, .8, 10, .87, 30, 40, q)
+#'
+#' # Should return:
+#' # Sample size
+#' #          30
+#'
+#' q <- c(1, -1, -1, 1)
+#' trials.ci.lc.mean.ws(.05, 265, .8, 10, .87, 30, 20, q)
+#'
+#' # Should return:
+#' # Sample size
+#' #          46
+#'
+#'
+#' @references
+#' \insertRef{Bonett2026}{statpsych}
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export
+trials.ci.lc.mean.ws <- function(alpha, var, cor, w, rel, t1, t2, q) {
+ z <- qnorm(1 - alpha/2)
+ a <- t2/t1
+ varT <- var*rel
+ rel_t2 <- a*rel/(1 + (a - 1)*rel)
+ var_t2 <- varT/rel_t2
+ corT <- cor/rel
+ cor_t2 <- corT*rel_t2
+ n <- ceiling(4*(1 - cor_t2)*var_t2*(t(q)%*%q)*(z/w)^2 + z^2/2)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size"
+ rownames(out) <- ""
+ return(out)
+}
+
+
 # ======================== Sample Size for Desired Power ======================
 #  size.test.mean ============================================================
 #' Sample size for a test of a mean
@@ -6665,6 +7017,367 @@ size.test.sign.ps <- function(alpha, pow, p) {
  zb <- qnorm(pow)
  n0 <- ceiling((za*sqrt(.25) + zb*sqrt(p*(1 - p)))^2/((p - .5)^2))
  n <- n0 + 1/abs(p - .5)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size"
+ rownames(out) <- ""
+ return(out)
+}
+
+
+# trials.test.mean ===========================================================
+#' Sample size for a test of a single mean with a given number of measurement
+#' trials
+#'
+#'
+#' @description
+#' Computes the sample size required to test a single population mean with 
+#' desired power where the response variable is an average from t2
+#' measurement trials. Multiple measurement trials are often used in studies
+#' that measure reaction time, brain activity, or physical performance.
+#' The measurement trials could also be different raters or alternate forms 
+#' of a test or questionnaire. 
+#'
+#' The planning variance is assumed to have been estimated in a pilot study
+#' that used t1 measurement trials. Using a smaller number of trials in the 
+#' planned study will require a larger sample size but less time per 
+#' participant. This function requires a planning value of the reliability of a
+#' response variable based on t1 measurement trials. If this reliability is not
+#' known, it could be estimated in a pilot study using Cronbach's alpha. 
+#'
+#'
+#' @param   alpha   alpha level for hypothesis test
+#' @param   pow     desired power
+#' @param   var     planning value of within-group variance for an average score of t1 trials
+#' @param   es      planning value of mean minus null hypothesis value
+#' @param   rel     reliability of an average of t1 trials
+#' @param   t1      number of measurement trials in the pilot study
+#' @param   t2      number of measurement trials in the planned study
+#'
+#'
+#' @return
+#' Returns the required sample size
+#'
+#'
+#' @examples
+#' trials.test.mean(.05, .9, 80.5, 7, .7, 10, 10)
+#'
+#' # Should return:
+#' # Sample size
+#' #          20
+#'
+#' trials.test.mean(.05, .9, 80.5, 7, .7, 10, 30)
+#'
+#' # Should return:
+#' # Sample size
+#' #          16
+#'
+#'
+#' @references
+#' \insertRef{Bonett2026}{statpsych}
+#'
+#'
+#' @importFrom stats qnorm
+#' @export
+trials.test.mean <- function(alpha, pow, var, es, rel, t1, t2) {
+ za <- qnorm(1 - alpha/2)
+ zb <- qnorm(pow)
+ a <- t2/t1
+ varT <- var*rel
+ rel_t2 <- a*rel/(1 + (a - 1)*rel)
+ var_t2 <- varT/rel_t2
+ n <- ceiling(var_t2*(za + zb)^2/es^2 + za^2/2)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size"
+ rownames(out) <- ""
+ return(out)
+}
+
+
+#  trials.test.mean2 ==========================================================
+#' Sample size for a test of a 2-group mean difference with a given number of 
+#' measurement trials
+#'
+#'
+#' @description
+#' Computes the sample size required to test a difference in population
+#' means with desired power in a 2-group design where the response variable
+#' is an average from t2 measurement trials. Multiple measurement trials
+#' are often used in studies that measure reaction time, brain activity, or 
+#' physical performance. The measurement trials could also be different raters
+#' or alternate forms of a test or questionnaire. 
+#'
+#' The planning variance is assumed to have been estimated in a pilot study
+#' that used t1 measurement trials. Using a smaller number of trials in the 
+#' planned study will require a larger sample size but less time per 
+#' participant. This function requires a planning value of the reliability of a
+#' response variable based on t1 measurement trials. If this reliability is not
+#' known, it could be estimated in a pilot study using Cronbach's alpha. 
+#' Set R = 1 for equal sample sizes.
+#'
+#'
+#' @param   alpha   alpha level for hypothesis test
+#' @param   pow     desired power
+#' @param   var     planning value of within-group variance for an average score of t1 trials
+#' @param   es      planning value of mean difference
+#' @param   rel     reliability of an average score of t1 trials
+#' @param   t1      number of measurement trials in the prior study
+#' @param   t2      number of measurement trials in the planned study
+#' @param   R       n2/n1 ratio
+#'
+#'
+#' @return
+#' Returns the required sample size per group
+#'
+#'
+#' @examples
+#' trials.test.mean2(.05, .95, 100, 10, .824, 40, 30, 1)
+#'
+#' # Should return:
+#' # n1 n2
+#' # 29 29
+#'
+#' trials.test.mean2(.05, .95, 100, 10, .824, 40, 60, 1)
+#'
+#' # Should return:
+#' # n1 n2
+#' # 26 26
+#'
+#'
+#' @references
+#' \insertRef{Bonett2026}{statpsych}
+#'
+#'
+#' @importFrom stats qnorm
+#' @export
+trials.test.mean2 <- function(alpha, pow, var, es, rel, t1, t2, R) {
+ za <- qnorm(1 - alpha/2)
+ zb <- qnorm(pow)
+ a <- t2/t1
+ varT <- var*rel
+ rel_t2 <- a*rel/(1 + (a - 1)*rel)
+ var_t2 <- varT/rel_t2
+ n1 <- ceiling(var_t2*(1 + 1/R)*(za + zb)^2/es^2 + za^2/4)
+ n2 <- ceiling(R*n1)
+ out <- t(c(n1, n2))
+ colnames(out) <- c("n1", "n2")
+ rownames(out) <- ""
+ return(out)
+}
+
+
+#  trials.test.mean.ps ========================================================
+#' Sample size for a test of a paired-samples difference in means with a given
+#' number of measurement trials
+#'
+#'                         
+#' @description
+#' Computes the sample size required to test a difference in population means
+#' with desired power in a paired-samples design where the response variable 
+#' is an average from t2 trials. Multiple measurement trials are often used
+#' in studies that measure reaction time, brain activity, or physical 
+#' performance. The measurement trials could also be different raters or 
+#' alternate forms of a test or questionnaire. 
+#'
+#' The planning variance is assumed to have been estimated in a pilot study
+#' that used t1 measurement trials. Using a smaller number of trials in the 
+#' planned study will require a larger sample size but less time per 
+#' participant. This function requires a planning value of the reliability of a
+#' response variable based on t1 measurement trials. If this reliability is not
+#' known, it could be estimated in a pilot study using Cronbach's alpha. 
+#'
+#'
+#' @param   alpha   alpha level for hypothesis test
+#' @param   pow     desired power
+#' @param   var     planning value of variance for an average score of t1 trials
+#' @param   es      planning value of mean difference
+#' @param   cor     planning value of correlation for paired average scores of t1 trials
+#' @param   rel     reliability of an average score of t1 trials
+#' @param   t1      number of measurement trials in the pilot study
+#' @param   t2      number of measurement trials in the planned study
+#'
+#'
+#' @return
+#' Returns the required sample size
+#'
+#'
+#' @examples
+#' trials.test.mean.ps(.05, .90, .78, .5, .7, .784, 2, 3)
+#'
+#' # Should return:
+#' # Sample size
+#' #          17
+#'
+#' trials.test.mean.ps(.05, .90, .78, .5, .7, .784, 2, 1)
+#'
+#' # Should return:
+#' # Sample size
+#' #          36
+#'
+#'
+#' @references
+#' \insertRef{Bonett2026}{statpsych}
+#'
+#'
+#' @importFrom stats qnorm
+#' @export
+trials.test.mean.ps <- function(alpha, pow, var, es, cor, rel, t1, t2) {
+ za <- qnorm(1 - alpha/2)
+ zb <- qnorm(pow)
+ a <- t2/t1
+ varT <- var*rel
+ rel_t2 <- a*rel/(1 + (a - 1)*rel)
+ var_t2 <- varT/rel_t2
+ corT <- cor/rel
+ cor_t2 <- corT*rel_t2
+ n <- ceiling(2*var_t2*(1 - cor_t2)*(za + zb)^2/es^2 + za^2/2)
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size"
+ rownames(out) <- ""
+ return(out)
+}
+
+
+#  trials.test.lc.mean.bs =====================================================
+#' Sample size for a test of a linear contrast of means in a between-subjects 
+#' design with a given number of measurement trials
+#'
+#'
+#' @description
+#' Computes the sample size required to test a linear contrast of population
+#' means with desired power in a between-subjects design where the response 
+#' variable is an average from t2 measurement trials. Multiple measurement 
+#' trials are often used in studies that measure reaction time, brain activity, 
+#' or physical performance. The measurement trials could also be different
+#' raters or alternate forms of a test or questionnaire. 
+#'
+#' The planning variance is assumed to have been estimated in a pilot study
+#' that used t1 measurement trials. Using a smaller number of trials in the 
+#' planned study will require a larger sample size but less time per 
+#' participant. This function requires a planning value of the reliability of a
+#' response variable based on t1 measurement trials. If this reliability is not
+#' known, it could be estimated in a pilot study using Cronbach's alpha. 
+#'
+#'
+#' @param   alpha   alpha level for hypothesis test
+#' @param   pow     desired power
+#' @param   var     planning value of within-group variance for an average score of t1 trials
+#' @param   es      planning value of mean difference
+#' @param   rel     reliability of an average score of t1 trials
+#' @param   t1      number of measurement trials in the pilot study
+#' @param   t2      number of measurement trials in the planned study
+#' @param   v       vector of contrast coefficients
+#'
+#'
+#' @return
+#' Returns the required sample size per group
+#'
+#'
+#' @examples
+#' v <- c(.5, .5, -.5, -.5)
+#' trials.test.lc.mean.bs(.05, .90, 225, 8.5, .615, 10, 40, v)
+#'
+#' # Should return:
+#' # Sample size per group
+#' #                    24
+#'
+#' v <- c(.5, .5, -.5, -.5)
+#' trials.test.lc.mean.bs(.05, .90, 225, 8.5, .615, 10, 20, v)
+#'
+#' # Should return:
+#' # Sample size per group
+#' #                    27
+#'
+#'
+#' @references
+#' \insertRef{Bonett2026}{statpsych}
+#'
+#'
+#' @importFrom stats qnorm
+#' @export
+trials.test.lc.mean.bs <- function(alpha, pow, var, es, rel, t1, t2, v) {
+ za <- qnorm(1 - alpha/2)
+ zb <- qnorm(pow)
+ a <- t2/t1
+ varT <- var*rel
+ rel_t2 <- a*rel/(1 + (a - 1)*rel)
+ var_t2 <- varT/rel_t2
+ m <- length(v) - sum(v == 0)
+ n <- ceiling(var_t2*(t(v)%*%v)*(za + zb)^2/es^2 + za^2/(2*m))
+ out <- matrix(n, nrow = 1, ncol = 1)
+ colnames(out) <- "Sample size per group"
+ rownames(out) <- ""
+ return(out)
+}
+
+
+#  trials.test.lc.mean.ws ======================================================= 
+#' Sample size for a test of a within-subjects mean linear contrast for a 
+#' given number of measurement trials
+#'
+#'
+#' @description
+#' Computes the sample size required to test a linear contrast of population
+#' means with desired power in a within-subjects design where the response 
+#' variable is an average from t2 trials. Multiple measurement trials are
+#' often used in studies that measure reaction time, brain activity, or 
+#' physical performance. The measurement trials could also be different raters
+#' or alternate forms of a test or questionnaire. 
+#'
+#' The planning variance is assumed to have been estimated in a pilot study
+#' that used t1 measurement trials. Using a smaller number of trials in the 
+#' planned study will require a larger sample size but less time per 
+#' participant. This function requires a planning value of the reliability of a
+#' response variable based on t1 measurement trials. If this reliability is not
+#' known, it could be estimated in a pilot study using Cronbach's alpha. 
+#'
+#'
+#' @param  alpha  alpha level for hypothesis test 
+#' @param  pow    desired power
+#' @param  var    planning value of within-group variance for an average score of t1 trials
+#' @param  es     planning value of linear contrast of means
+#' @param  cor    planning value of average correlation among average scores of t1 trials
+#' @param  rel    reliability of an average score of t1 trials
+#' @param  t1     number of measurement trials in the pilot study
+#' @param  t2     number of measurement trials in the planned study
+#' @param  q      vector of contrast coefficients 
+#'
+#'
+#' @return 
+#' Returns the required sample size 
+#'
+#'
+#' @examples
+#' q <- c(.5, .5, -.5, -.5)
+#' trials.test.lc.mean.ws(.05, .90, 50.7, 2, .85, .95, 80, 40, q)
+#'
+#' # Should return:
+#' # Sample size
+#' #          29
+#'
+#' q <- c(.5, .5, -.5, -.5)
+#' trials.test.lc.mean.ws(.05, .90, 50.7, 2, .85, .95, 80, 120, q)
+#'
+#' # Should return:
+#' # Sample size
+#' #          20
+#'
+#'
+#' @references
+#' \insertRef{Bonett2026}{statpsych}
+#'  
+#' 
+#' @importFrom stats qnorm
+#' @export
+trials.test.lc.mean.ws <- function(alpha, pow, var, es, cor, rel, t1, t2, q) {
+ za <- qnorm(1 - alpha/2)
+ zb <- qnorm(pow)
+ a <- t2/t1
+ varT <- var*rel
+ rel_t2 <- a*rel/(1 + (a - 1)*rel)
+ var_t2 <- varT/rel_t2
+ corT <- cor/rel
+ cor_t2 <- corT*rel_t2
+ n <- ceiling(var_t2*(1 - cor_t2)*(t(q)%*%q)*(za + zb)^2/es^2 + za^2/2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
  rownames(out) <- ""
