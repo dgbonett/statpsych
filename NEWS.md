@@ -1,3 +1,21 @@
+statpsych version 2.1.0 (Release date: 2026/11/xx)
+===========
+
+Changes:
+
+* New functions:
+    * trials.ci.mean -- Computes sample size for a mean confidence interval with a given number of measurement trials
+    * trials.ci.mean2 -- Computes sample size for a 2-group mean difference confidence interval with a given number of measurement trials
+    * trials.ci.mean.ps -- Computes sample size for a paired-sample mean difference confidence interval with a given number of measurement trials
+    * trials.ci.lc.mean.bs -- Computes sample size for between-subjects mean linear contrast confidence interval with a given number of measurement trials
+    * trials.ci.lc.mean.ws -- Computes sample size for within-subjects mean linear contrast confidence interval with a given number of measurement trials
+    * trials.test.mean -- Computes sample size for a test of a mean with a given number of measurement trials
+    * trials.test.mean2 -- Computes sample size for a test of a 2-group mean difference with a given number of measurement trials
+    * trials.test.mean.ps -- Computes sample size for a test of a paired-sample mean difference with a given number of measurement trials
+    * trials.test.lc.mean.bs -- Computes sample size for a test of a between-subjects mean linear contrast with a given number of measurement trials
+    * trials.test.lc.mean.ws -- Computes sample size for a test of a within-subjects mean linear contrast with a given number of measurement trials
+
+
 statpsych version 2.0.0 (Release date: 2026/07/15)
 ===========
 
