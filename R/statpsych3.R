@@ -3274,9 +3274,8 @@ size.ci.agree <- function(alpha, G, w) {
 #' study. If an estimated proportion from a prior study is not available the 
 #' researcher must use expert opinion to guess the value of the proportion
 #' that will be observed in the planned study. The \link[statpsych]{size.ci.prop} 
-#' function uses a proportion planning value that is based on expert opinion 
-#' regarding the likely value of the proportion estimate that will be observed
-#' in the planned study.
+#' function uses a proportion planning value that is a subjective estimate
+#' of the proportion estimate that will be observed in the planned study.
 #'
 #' For more details, see Section 1.16 of Bonett (2021, Volume 3)
 #'
