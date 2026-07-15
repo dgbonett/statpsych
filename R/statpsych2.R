@@ -3542,9 +3542,8 @@ size.ci.spear2 <- function(alpha, cor1, cor2, w) {
 #' Pearson correlation from a prior study is not available the researcher must use
 #' expert opinion to guess the value of the Pearson correlation that will be 
 #' observed in the planned study. The \link[statpsych]{size.ci.cor} function uses
-#' a correlation planning value that is based on expert opinion regarding the 
-#' likely value of the correlation estimate that will be observed in the planned 
-#' study.
+#' a correlation planning value that is a subjective estimate of the correlation
+#' estimate that will be observed in the planned study.
 #'
 #' For more details, see Section 1.26 of Bonett (2021, Volume 2)
 #'
@@ -3637,8 +3636,8 @@ size.ci.cor.prior <- function(alpha1, alpha2, cor0, n0, w) {
 #' researcher must use expert opinion to guess the value of the Cronbach 
 #' reliability that will be observed in the planned study. The 
 #' \link[statpsych]{size.ci.cronbach} function uses a reliability planning 
-#' value that is based on expert opinion regarding the likely value of the 
-#' reliability estimate that will be observed in the planned study.
+#' value that is a subjective estimate of the reliability estimate that will
+#' be observed in the planned study.
 #'
 #'
 #' @param  alpha1  alpha level for 1-alpha1 confidence in the planned study
@@ -3710,9 +3709,8 @@ size.ci.cronbach.prior <- function(alpha1, alpha2, rel0, n0, r, w) {
 #' researcher must use expert opinion to guess the value of the intraclass
 #' correlation that will be observed in the planned study. The 
 #' \link[statpsych]{size.ci.icc} function uses an intraclass correlation 
-#' planning value that is based on expert opinion regarding the likely value 
-#' of the intraclass correlation estimate that will be observed in the planned
-#' study.
+#' planning value that is a subjective estimate of the intraclass correlation
+#' estimate that will be observed in the planned study.
 #'
 #'
 #' @param  alpha1  alpha level for 1-alpha1 confidence in the planned study
