@@ -5487,9 +5487,8 @@ size.ci.second <- function(n0, w0, w) {
 #' study. If an estimated variance from a prior study is not available,
 #' the researcher must use expert opinion to guess the value of the variance
 #' that will be observed in the planned study. The \link[statpsych]{size.ci.mean} 
-#' function uses a variance planning value that is based on expert opinion
-#' regarding the likely value of the variance estimate that will be observed 
-#' in the planned study. 
+#' function uses a variance planning value that is a subjective estimate of the 
+#' variance estimate that will be observed in the planned study. 
 #'
 #' For more details, see Section 1.31 of Bonett (2021, Volume 1)
 #'
@@ -5560,9 +5559,8 @@ size.ci.mean.prior <- function(alpha1, alpha2, var0, n0, w) {
 #' the researcher must use expert opinion to guess the values of the variance
 #' and correlation that will be observed in the planned study. The 
 #' \link[statpsych]{size.ci.mean.ps} function uses variance and correlation 
-#' planning values that are based on expert opinion regarding the likely values
-#' of the variance and correlation estimates that will be observed in the planned 
-#' study. 
+#' planning values that are subjective estimates of the variance and correlation 
+#' estimates that will be observed in the planned study. 
 #'
 #' For more details, see Section 1.31 of Bonett (2021, Volume 1)
 #'
