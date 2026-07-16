@@ -8015,8 +8015,16 @@ pi.var <- function(alpha, var, n0, n, type) {
 #' @description
 #' Computes an upper confidence limit for a population variance using an 
 #' estimated variance from a sample of size n in a prior study. The upper limit
-#' can be used as a variance planning value in sample size functions for 
-#' desired power that require a planning value of the population variance.
+#' can be used as a variance planning value in sample size functions that 
+#' require a planning value of a population variance.
+#'
+#' This function can also be used to compute an upper confidence limit for
+#' a pooled population variance using the estimated pooled variance from
+#' two or more independent groups. When analyzing a pooled variance, n
+#' must be set equal to the total sample size minus the number of groups
+#' plus one. The upper confidence limit for a pooled variance can be used
+#' as a variance planning value in sample size functions that require a
+#' planning value of a population variance.
 #'
 #' For more details, see Section 1.31 of Bonett (2021, Volume 1)
 #'
@@ -8026,7 +8034,7 @@ pi.var <- function(alpha, var, n0, n, type) {
 #' @param  n      sample size
 
 #' @return 
-#' Returns an upper limit (UL) variance planning value
+#' Returns an upper confidence limit (UL) for the population variance
 #'
 #'
 #' @references
