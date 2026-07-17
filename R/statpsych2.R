@@ -3549,7 +3549,7 @@ size.ci.spear2 <- function(alpha, cor1, cor2, w) {
 #'
 #' @param  alpha1  alpha level for 1-alpha1 confidence in the planned study
 #' @param  alpha2  alpha level for the 1-alpha2 prediction interval 
-#' @param  cor0    estimated correlation in prior study
+#' @param  cor0    estimated Pearson correlation in prior study
 #' @param  n0      sample size in prior study
 #' @param  w       desired confidence interval width
 #'
@@ -3623,25 +3623,22 @@ size.ci.cor.prior <- function(alpha1, alpha2, cor0, n0, w) {
 #' estimated reliability in the planned study. An estimated Cronbach reliability
 #' from a prior study can be used to compute a lower prediction limit for the 
 #' estimated reliability in the planned study, which is then used as a planning
-#' value in the sample size analysis. The probability that the 1 - alpha1 
-#' confidence interval in the planned study will have a width that is less than 
-#' the desired width is approximately 1 - alpha2 where alpha1 and alpha2 are 
-#' specified values.
+#' value in the sample size analysis. The probability that the 1-alpha1 
+#' confidence interval for the population Cronbach reliability in the planned 
+#' study will have a width that is less than the desired width is approximately
+#' 1-alpha2 where alpha1 and alpha2 are specified values. This sample size 
+#' approach assumes that the population Cronbach reliability that was estimated
+#' in the prior study is very similar to the population Cronbach reliability 
+#' that will be estimated in the planned study. 
 #'
-#' This sample size approach assumes that the population Cronbach reliability 
-#' that was estimated in the prior study is very similar to the population 
-#' Cronbach reliability that will be estimated in the planned study. If
-#' an estimated Cronbach reliability from a prior study is not available, the 
-#' researcher must use expert opinion to guess the value of the Cronbach 
-#' reliability that will be observed in the planned study. The 
-#' \link[statpsych]{size.ci.cronbach} function uses a reliability planning 
-#' value that is a subjective estimate of the reliability estimate that will
-#' be observed in the planned study.
+#' The similar \link[statpsych]{size.ci.cronbach} function uses a reliability
+#' planning value that is a subjective estimate of the Cronbach reliability
+#' estimate that will be observed in the planned study. 
 #'
 #'
 #' @param  alpha1  alpha level for 1-alpha1 confidence in the planned study
 #' @param  alpha2  alpha level for the 1-alpha2 prediction interval 
-#' @param  rel0    estimated reliability in prior study
+#' @param  rel0    estimated Cronbach reliability in prior study
 #' @param  n0      sample size in prior study
 #' @param  r       number of measurements (items, raters, forms)
 #' @param  w       desired confidence interval width
@@ -3697,24 +3694,22 @@ size.ci.cronbach.prior <- function(alpha1, alpha2, rel0, n0, r, w) {
 #' estimated intraclass correlation from a prior study can be used to compute
 #' a lower prediction limit for the estimated intraclass correlation in the 
 #' planned study, which is then used as a planning value in the sample size 
-#' analysis. The probability that the 1 - alpha1 confidence interval
-#' in the planned study will have a width that is less than the desired width
-#' is approximately 1 - alpha2 where alpha1 and alpha2 are specified values.
+#' analysis. The probability that the 1-alpha1 confidence interval for the
+#' population intraclass correlation in the planned study will have a width
+#' that is less than the desired width is approximately 1-alpha2 where alpha1
+#' and alpha2 are specified values. This sample size approach assumes that the
+#' population intraclass correlation that was estimated in the prior study is 
+#' very similar to the population intraclass correlation that will be estimated
+#' in the planned study. 
 #'
-#' This sample size approach assumes that the population intraclass correlation 
-#' that was estimated in the prior study is very similar to the population 
-#' intraclass correlation that will be estimated in the planned study. If
-#' an estimated intraclass correlation from a prior study is not available, the 
-#' researcher must use expert opinion to guess the value of the intraclass
-#' correlation that will be observed in the planned study. The 
-#' \link[statpsych]{size.ci.icc} function uses an intraclass correlation 
+#' The similar \link[statpsych]{size.ci.icc} function uses a correlation
 #' planning value that is a subjective estimate of the intraclass correlation
-#' estimate that will be observed in the planned study.
+#' estimate that will be observed in the planned study. 
 #'
 #'
 #' @param  alpha1  alpha level for 1-alpha1 confidence in the planned study
 #' @param  alpha2  alpha level for the 1-alpha2 prediction interval 
-#' @param  cor0    estimated correlation in prior study
+#' @param  cor0    estimated intraclass correlation in prior study
 #' @param  n0      sample size in prior study
 #' @param  r       number of measurements (raters, forms)
 #' @param  w       desired confidence interval width
