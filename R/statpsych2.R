@@ -3531,19 +3531,18 @@ size.ci.spear2 <- function(alpha, cor1, cor2, w) {
 #' planning value in the sample size analysis. If the prediction interval
 #' includes 0, then the correlation planning value is set to 0; otherwise, the
 #' correlation planning value is set to the lower prediction limit (if the prior
-#' correlation is positive) or the upper prediction limit (if the prior correlation
-#' is negative). The probability that the 1 - alpha1 confidence interval
-#' in the planned study will have a width that is less than the desired width
-#' is approximately 1 - alpha2 where alpha1 and alpha2 are specified values.
+#' correlation is positive) or the upper prediction limit (if the prior 
+#' correlation is negative). The probability that the 1-alpha1 confidence 
+#' interval for the population Pearson correlation in the planned study will
+#' have a width that is less than the desired width is approximately 1-alpha2
+#' where alpha1 and alpha2 are specified values. This sample size approach 
+#' assumes that the population Pearson correlation that was estimated in the
+#' prior study is very similar to the population Pearson correlation that will
+#' be estimated in the planned study. 
 #'
-#' This sample size approach assumes that the population Pearson correlation 
-#' that was estimated in the prior study is very similar to the population Pearson
-#' correlation that will be estimated in the planned study. If an estimated 
-#' Pearson correlation from a prior study is not available the researcher must use
-#' expert opinion to guess the value of the Pearson correlation that will be 
-#' observed in the planned study. The \link[statpsych]{size.ci.cor} function uses
-#' a correlation planning value that is a subjective estimate of the correlation
-#' estimate that will be observed in the planned study.
+#' The similar \link[statpsych]{size.ci.cor} function uses a correlation
+#' planning value that is a subjective estimate of the Pearson correlation 
+#' estimate that will be observed in the planned study. 
 #'
 #' For more details, see Section 1.26 of Bonett (2021, Volume 2)
 #'
