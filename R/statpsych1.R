@@ -5478,17 +5478,16 @@ size.ci.second <- function(n0, w0, w) {
 #' variance in the planned study. An estimated variance from a prior study 
 #' can be used to compute an upper prediction limit for the estimated variance 
 #' in the planned study. The upper prediction limit is then used as the variance
-#' planning value. The probability that the 1 - alpha1 confidence interval
+#' planning value. The probability that the 1-alpha1 confidence interval
 #' in the planned study will have a width that is less than the desired width
-#' is approximately 1 - alpha2 where alpha1 and alpha2 are specified values.
-#'
+#' is approximately 1-alpha2 where alpha1 and alpha2 are specified values.
 #' This sample size approach assumes that the population variance in the 
 #' prior study is very similar to the population variance in the planned 
-#' study. If an estimated variance from a prior study is not available,
-#' the researcher must use expert opinion to guess the value of the variance
-#' that will be observed in the planned study. The \link[statpsych]{size.ci.mean} 
-#' function uses a variance planning value that is a subjective estimate of the 
-#' variance estimate that will be observed in the planned study. 
+#' study. 
+#'
+#' The similar \link[statpsych]{size.ci.mean} function uses a variance
+#' planning value that is a subjective estimate of the variance estimate that
+#' will be observed in the planned study. 
 #'
 #' For more details, see Section 1.31 of Bonett (2021, Volume 1)
 #'
@@ -5542,25 +5541,23 @@ size.ci.mean.prior <- function(alpha1, alpha2, var0, n0, w) {
 #' @description
 #' Computes the sample size required to estimate a population mean difference
 #' in a paired-samples design with desired confidence interval precision in 
-#' applications where an estimated variance and correlation from a prior study 
-#' is available. The actual confidence interval width in the planned study will 
-#' depend on the value of the estimated variance of the difference scores in the
-#' planned study. An estimated variance and correlation from a prior study 
+#' applications where variance and correlation estimates from a prior study 
+#' are available. The actual confidence interval width in the planned study will 
+#' depend on the value of the estimated variance of the difference scores in 
+#' the planned study. An estimated variance and correlation from a prior study 
 #' can be used to compute an upper prediction limit for the estimated difference
 #' score variance in the planned study. The upper prediction limit is then used
 #' as the difference score variance planning value. The probability that the
-#' 1 - alpha1 confidence interval in the planned study will have a width that 
-#' is less than the desired width is approximately 1 - alpha2 where alpha1 and
-#' alpha2 are specified values.
+#' 1-alpha1 confidence interval for the mean difference in the planned study 
+#' will have a width that is less than the desired width is approximately 
+#' 1-alpha2 where alpha1 and alpha2 are specified values. This sample size 
+#' approach assumes that the population variance and correlation in the prior
+#' study are very similar to the population variance and correlation in the 
+#' planned study. 
 #'
-#' This sample size approach assumes that the population variance and correlation
-#' in the prior study is very similar to the population variance and correlation
-#' in the planned study. If information from a prior study is not available,
-#' the researcher must use expert opinion to guess the values of the variance
-#' and correlation that will be observed in the planned study. The 
-#' \link[statpsych]{size.ci.mean.ps} function uses variance and correlation 
-#' planning values that are subjective estimates of the variance and correlation 
-#' estimates that will be observed in the planned study. 
+#' The similar \link[statpsych]{size.ci.mean.ps} function uses variance and
+#' correlation planning values that are subjective estimates of the variance 
+#' and correlation estimates that will be observed in the planned study. 
 #'
 #' For more details, see Section 1.31 of Bonett (2021, Volume 1)
 #'
