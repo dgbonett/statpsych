@@ -15,6 +15,7 @@ Changes:
     * trials.test.lc.mean.bs -- Computes sample size for a test of a between-subjects mean linear contrast with a given number of measurement trials
     * trials.test.lc.mean.ws -- Computes sample size for a test of a within-subjects mean linear contrast with a given number of measurement trials
     * ci.var -- Computes two-sided or one-sided confidence limits for a one-group variance, a pooled variance, or a residual variance (this function will soon replace the ci.var.upper function)
+    * size.ci.mean2.prior -- Computes sample size for a two-group mean difference confidence interval using a pooled variance planning value from a prior study
 
 
 statpsych version 2.0.0 (Release date: 2026/07/15)
