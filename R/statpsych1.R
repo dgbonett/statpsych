@@ -5606,6 +5606,93 @@ size.ci.mean.prior <- function(alpha1, alpha2, var0, n0, w) {
  return(out)
 }
 
+
+#  size.ci.mean2.prior =========================================================
+#' Sample size for a mean difference confidence interval using an estimated 
+#' pooled variance from a prior study 
+#'
+#'                
+#' @description
+#' Computes the sample size required to estimate a population mean difference
+#' in a 2-group design with desired confidence interval precision in 
+#' applications where an estimated pooled variance from a prior study is 
+#' available. The actual confidence interval width in the planned study will 
+#' depend on the value of the estimated variance in the planned study. An 
+#' estimated pooled variance from a prior study can be used to compute an 
+#' upper 1-alpha2 prediction limit for the estimated pooled variance in the
+#' planned study. The upper prediction limit is then used as the variance 
+#' planning value. The probability that the 1-alpha1 confidence interval for
+#' the population mean difference in the planned study will have a width that
+#' is less than the desired width is approximately 1-alpha2 where alpha1 and
+#' alpha2 are specified values. Set R = 1 for equal sample sizes in the planned
+#' study. For unequal sample sizes in the planned study, this function assumes 
+#' equal population variances. This sample size approach assumes that the 
+#' population pooled variance in the prior study is very similar to the 
+#' population pooled variance in the planned study. 
+#'
+#' The similar \link[statpsych]{size.ci.mean2} function uses an average 
+#' variance planning value that is a subjective estimate of the estimated
+#' average variance that will be observed in the planned study. 
+#'
+#' For more details, see Section 1.31 of Bonett (2021, Volume 1)
+#'
+#'
+#' @param  alpha1  alpha level for 1-alpha1 confidence in the planned study
+#' @param  alpha2  alpha level for the 1-alpha2 prediction interval 
+#' @param  var01   estimated group 1 variance in prior study
+#' @param  var02   estimated group 2 variance in prior study
+#' @param  n01     group 1 sample size in prior study
+#' @param  n02     group 2 sample size in prior study
+#' @param  w       desired confidence interval width
+#' @param  R       n2/n1 ratio in planned study
+#'
+#'
+#' @return
+#' Returns the required sample size per group
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
+#' @examples
+#' size.ci.mean2.prior(.05, .10, 18.35, 24.21, 30, 30, 5, 1)
+#'
+#' # Should return:
+#' # n1  n2
+#' # 38  38
+#'
+#' size.ci.mean2.prior(.05, .20, 18.35, 24.21, 30, 30, 5, 1)
+#'
+#' # Should return:
+#' # n1  n2
+#' # 34  34
+#'
+#'
+#' @export    
+size.ci.mean2.prior <- function(alpha1, alpha2, var01, var02, n01, n02, w, R) {
+  if (var01 < 0) {stop("variances must be positive")}
+  if (alpha2 > .5) {stop("alpha2 cannot be greater than .5")}
+  var0 <- ((n01 - 1)*var01 + (n02 - 1)*var02)/(n01 + n02 - 2)
+  n0 <- n01 + n02 - 1
+  var <- ci.var.upper(alpha2, var0, n0)
+  n1 <- size.ci.mean2(alpha1, var, w, R)
+  n11 <- n1[1,1]
+  n12 <- n1[1,2]
+  n1 <- n11 + n12 - 1
+  var <- pi.var(alpha2, var0, n0, n1, 2)
+  n2 <- size.ci.mean2(alpha1, var, w, R)
+  n21 <- n2[1,1]
+  n22 <- n2[1,2]
+  n2 <- n21 + n22 - 1
+  var <- pi.var(alpha2, var0, n0, n2, 2)
+  out <- size.ci.mean2(alpha1, var, w, R)
+  colnames(out) <- c("n1", "n2")
+  rownames(out) <- ""
+  return(out)
+}
+
+
 #  size.ci.mean.ps.prior =========================================================
 #' Sample size for a paired-samples mean difference confidence interval using
 #' an estimated variance and correlation from a prior study 
