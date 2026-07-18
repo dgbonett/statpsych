@@ -1435,6 +1435,79 @@ ci.ratio.mad2 <- function(alpha, y1, y2) {
 }
 
 
+#  ci.var =================================================================== 
+#' Confidence limits for variance, pooled variance, or residual variance
+#'
+#'                        
+#' @description
+#' Computes a two-sided or one-sided confidence limit for a one-group variance 
+#' variance, a pooled variance from two or more independent groups, or a 
+#' residual variance from a linear model. The function requires an estimate of 
+#' the variance and the degrees of freedom (df) for the variance. For a 
+#' one-group variance df = n - 1, for a pooled variance df = n - k where k is 
+#' the number of groups, and for a residual variance df = n - s - 1 where s is
+#' the number of predictor variables and n is the sample size. 
+#'
+#'
+#' @param  alpha  alpha value for upper 1-alpha confidence 
+#' @param  var    estimated variance 
+#' @param  df     degrees of freedom 
+#' @param  type   
+#' * set to 1 for two-sided confidence interval 
+#' * set to 2 for one-sided upper confidence limit 
+#' * set to 3 for one-sided lower confidence limit 
+#'
+#'
+#' @return 
+#' Returns two-sided or one-sided confidence limit(s) of a population variance
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
+#' @examples
+#' ci.var(.05, 15.2, 98, 2)
+#'
+#' # Should return:
+#' #       UL
+#' # 19.55785
+#'
+#' ci.var(.05, 15, 98, 1)
+#'
+#' # Should return:
+#' #        LL      UL
+#' #  11.70314 20.54594
+#'  
+#' 
+#' @importFrom stats qf
+#' @export
+ci.var <- function(alpha, var, df, type) {
+ if (type == 1) {
+  c1 <- qchisq(1 - alpha/2, df)
+  c2 <- qchisq(alpha/2, df)
+  ll <- df*var/c1
+  ul <- df*var/c2
+  out <- t(c(ll, ul))
+  colnames(out) <- c("LL", "UL")
+ }
+ else if (type == 2) {
+  c2 <- qchisq(alpha, df)
+  ul <- df*var/c2
+  out <- matrix(ul, nrow = 1, ncol = 1)
+  colnames(out) <- "UL"
+ }
+ else {
+  c1 <- qchisq(1-alpha, df)
+  ll <- df*var/c1
+  out <- matrix(ll, nrow = 1, ncol = 1)
+  colnames(out) <- "LL"
+ }
+ rownames(out) <- ""
+ return(out)
+}
+
+
 #  ci.sd ====================================================================== 
 #' Confidence interval for a standard deviation 
 #'
