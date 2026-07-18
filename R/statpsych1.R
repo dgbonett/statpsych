@@ -1440,10 +1440,10 @@ ci.ratio.mad2 <- function(alpha, y1, y2) {
 #'
 #'                        
 #' @description
-#' Computes a two-sided or one-sided confidence limit for a one-group variance 
-#' variance, a pooled variance from two or more independent groups, or a 
-#' residual variance from a linear model. The function requires an estimate of 
-#' the variance and the degrees of freedom (df) for the variance. For a 
+#' Computes two-sided or one-sided confidence limit(s) for a one-group variance, 
+#' a pooled variance from two or more independent groups, or a residual
+#' variance from a linear model. The function requires an estimate of the
+#' variance and the degrees of freedom (df) for the variance. For a 
 #' one-group variance df = n - 1, for a pooled variance df = n - k where k is 
 #' the number of groups, and for a residual variance df = n - s - 1 where s is
 #' the number of predictor variables and n is the sample size. 
