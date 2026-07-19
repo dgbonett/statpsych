@@ -5593,14 +5593,11 @@ size.ci.second <- function(n0, w0, w) {
 size.ci.mean.prior <- function(alpha1, alpha2, var0, n0, w) {
  if (var0 < 0) {stop("variance must be positive")}
  if (alpha2 > .5) {stop("alpha2 cannot be greater than .5")}
- ci <- ci.var.upper(alpha2, var0, n0)
- ul <- ci[1,1]
+ ul <- ci.var.upper(alpha2, var0, n0)
  n1 <- size.ci.mean(alpha1, ul, w)
- pi <- pi.var(alpha2, var0, n0, n1, 2)
- ul <- pi[1,1]
+ ul <- pi.var(alpha2, var0, n0, n1, 2)
  n2 <- size.ci.mean(alpha1, ul, w)
- pi <- pi.var(alpha2, var0, n0, n2, 2)
- ul <- pi[1,1]
+ ul <- pi.var(alpha2, var0, n0, n2, 2)
  n <- size.ci.mean(alpha1, ul, w)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
@@ -5753,14 +5750,11 @@ size.ci.mean.ps.prior <- function(alpha1, alpha2, var0, cor0, n0, w) {
  if (cor0 > .999 | cor0 < -.999) {stop("correlation must be between -.999 and .999")}
  if (alpha2 > .5) {stop("alpha2 cannot be greater than .5")}
  vard <- 2*var0*(1 - cor0)
- ci <- ci.var.upper(alpha2, vard, n0)
- ul <- ci[1,1]
+ ul <- ci.var.upper(alpha2, vard, n0)
  n1 <- size.ci.mean(alpha1, ul, w)
- pi <- pi.var(alpha2, vard, n0, n1, 2)
- ul <- pi[1,1]
+ ul <- pi.var(alpha2, vard, n0, n1, 2)
  n2 <- size.ci.mean(alpha1, ul, w)
- pi <- pi.var(alpha2, vard, n0, n2, 2)
- ul <- pi[1,1]
+ ul <- pi.var(alpha2, vard, n0, n2, 2)
  n <- size.ci.mean(alpha1, ul, w)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
