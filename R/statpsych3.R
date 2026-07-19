@@ -3338,6 +3338,125 @@ size.ci.prop.prior <- function(alpha1, alpha2, p0, n0, w) {
 }
 
 
+#  size.ci.prop2.prior =========================================================
+#' Sample size for a 2-group proportion difference confidence interval using
+#' estimated proportions from a prior study
+#'                            
+#'                
+#' @description
+#' Computes the sample size required to estimate a difference in population 
+#' proportions in a 2-group design with desired confidence interval precision
+#' in applications where an estimated proportion from a prior study is 
+#' available. The actual confidence interval width in the planned study will
+#' depend on the value of the estimated proportion in the planned study.  
+#' Estimated proportions from a prior study are used to predict the value of 
+#' the estimated proportions in the planned study, and the predicted proportion
+#' estimates are then used as planning values in the sample size computation. 
+#' The probability that the 1-alpha1 confidence interval for the proportion
+#' difference in the planned study will have a width that is less than the 
+#' desired width is approximately 1-alpha2 where alpha1 and alpha2 are specified
+#' values. Set R = 1 for equal sample sizes in the planned study. This sample 
+#' size approach assumes that the population proportions in the prior study are
+#' very similar to the population proportions in the planned study. 
+#'
+#' The similar \link[statpsych]{size.ci.prop2} function uses proportion
+#' planning values that are subjective estimates of the proportion estimates
+#' that will be observed in the planned study. 
+#'
+#' For more details, see Section 1.16 of Bonett (2021, Volume 3)
+#'
+#'
+#' @param  alpha1  alpha level for 1-alpha1 confidence in the planned study
+#' @param  alpha2  alpha level for the 1-alpha2 prediction interval 
+#' @param  p01     estimated group 1 proportion in prior study
+#' @param  p02     estimated group 2 proportion in prior study
+#' @param  n01     group 1 sample size in prior study
+#' @param  n02     group 2 sample size in prior study
+#' @param  w       desired confidence interval width
+#' @param  R       n2/n1 ratio in planned study
+#'
+#'
+#' @return
+#' Returns the required sample size per group
+#'
+#'
+#' @references
+#' \insertRef{Bonett2021}{statpsych}
+#'
+#'
+#' @examples
+#' size.ci.prop2.prior(.05, .10, .342, .157, 50, 75, .2, 1)
+#'
+#' # Should return:
+#' #  n1  n2
+#' # 160 160
+#'
+#'
+#' @importFrom stats qnorm
+#' @export
+size.ci.prop2.prior <- function(alpha1, alpha2, p01, p02, n01, n02, w, R) {
+ if (p01 > .9999 | p01 < .0001) {stop("proportion must be between .0001 and .9999")}
+ if (p02 > .9999 | p02 < .0001) {stop("proportion must be between .0001 and .9999")}
+ if (alpha2 > .5) {stop("alpha2 cannot be greater than .5")}
+ z1 <- qnorm(1 - alpha1/2)
+ z2 <- qnorm(1 - alpha2)
+ se1 <- sqrt(p01*(1 - p01)/n01)
+ ll01 <- p01 - z2*se1
+ ul01 <- p01 + z2*se1
+ if (ll01 < .0001) {ll01 = .0001}
+ if (ul01 > .9999) {ul01 = .9999}
+ if (ul01 < .5) {p1 = ul01}
+ else if (ll01 > .5) {p1 = ll01}
+ else {p1 = .5}
+ se2 <- sqrt(p02*(1 - p02)/n02)
+ ll02 <- p02 - z2*se2
+ ul02 <- p02 + z2*se2
+ if (ll02 < .0001) {ll02 = .0001}
+ if (ul02 > .9999) {ul02 = .9999}
+ if (ul02 < .5) {p2 = ul02}
+ else if (ll02 > .5) {p2 = ll02}
+ else {p2 = .5}
+ n11 <- ceiling(4*(p1*(1 - p1) + p2*(1 - p2)/R)*(z1/w)^2)
+ n12 <- ceiling(R*n11)
+ ll01 <- p1 - z2*sqrt(p1*(1 - p1)/n01 + p1*(1 - p1)/n11)
+ ul01 <- p1 + z2*sqrt(p1*(1 - p1)/n01 + p1*(1 - p1)/n11)
+ if (ll01 < .0001) {ll01 = .0001}
+ if (ul01 > .9999) {ul01 = .9999}
+ if (ul01 < .5) {p = ul01}
+ else if (ll01 > .5) {p = ll01}
+ else {p1 = .5}
+ ll02 <- p2 - z2*sqrt(p2*(1 - p2)/n02 + p2*(1 - p2)/n12)
+ ul02 <- p2 + z2*sqrt(p2*(1 - p2)/n02 + p2*(1 - p2)/n12)
+ if (ll02 < .0001) {ll02 = .0001}
+ if (ul02 > .9999) {ul02 = .9999}
+ if (ul02 < .5) {p = ul02}
+ else if (ll02 > .5) {p = ll02}
+ else {p2 = .5}
+ n21 <- ceiling(4*(p1*(1 - p1) + p2*(1 - p2)/R)*(z1/w)^2)
+ n22 <- ceiling(R*n21)
+ ll01 <- p1 - z2*sqrt(p1*(1 - p1)/n01 + p1*(1 - p1)/n21)
+ ul01 <- p1 + z2*sqrt(p1*(1 - p1)/n01 + p1*(1 - p1)/n21)
+ if (ll02 < .0001) {ll02 = .0001}
+ if (ul02 > .9999) {ul02 = .9999}
+ if (ul01 < .5) {p = ul01}
+ else if (ll01 > .5) {p = ll01}
+ else {p1 = .5}
+ ll02 <- p2 - z2*sqrt(p2*(1 - p2)/n02 + p2*(1 - p2)/n22)
+ ul02 <- p2 + z2*sqrt(p2*(1 - p2)/n02 + p2*(1 - p2)/n22)
+ if (ll02 < .0001) {ll02 = .0001}
+ if (ul02 > .9999) {ul02 = .9999}
+ if (ul02 < .5) {p = ul02}
+ else if (ll02 > .5) {p = ll02}
+ else {p2 = .5}
+ n1 <- ceiling(4*(p1*(1 - p1) + p2*(1 - p2)/R)*(z1/w)^2)
+ n2 <- ceiling(R*n1)
+ out <- t(c(n1, n2))
+ colnames(out) <- c("n1", "n2")
+ rownames(out) <- ""
+ return(out)
+}
+
+
 #  size.ci.tetra ==============================================================
 #' Sample size for a tetrachoric correlation confidence interval
 #'
