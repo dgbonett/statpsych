@@ -1446,7 +1446,9 @@ ci.ratio.mad2 <- function(alpha, y1, y2) {
 #' variance and the degrees of freedom (df) for the variance. For a 
 #' one-group variance df = n - 1, for a pooled variance df = n - k where k is 
 #' the number of groups, and for a residual variance df = n - s - 1 where s is
-#' the number of predictor variables and n is the sample size. 
+#' the number of predictor variables and n is the sample size. This function 
+#' should be used only if the data appear to come from an approximate normal 
+#' or mildly platykurtic distribution.
 #'
 #'
 #' @param  alpha  alpha value for upper 1-alpha confidence 
