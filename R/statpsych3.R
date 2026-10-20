@@ -3800,8 +3800,8 @@ size.test.prop <- function(alpha, pow, p, h) {
  if (h > .9999 | h < .0001) {stop("null hypothesis value must be between .0001 and .9999")}
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
- n0 <- ceiling((za*sqrt(h*(1 - h)) + zb*sqrt(p*(1 - p)))^2/((p - h)^2))
- n <- n0 + 1/abs(p - h)
+ n0 <- (za*sqrt(h*(1 - h)) + zb*sqrt(p*(1 - p)))^2/((p - h)^2)
+ n <- ceiling(n0 + 1/abs(p - h))
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Sample size"
  rownames(out) <- ""
