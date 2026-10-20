@@ -2622,9 +2622,9 @@ test.prop <- function(f, n, h) {
  se <- sqrt(h*(1 - h)/n)
  z <- (abs(p - h) - 1/(2*n))/se
  pval <- 2*(1 - pnorm(abs(z)))
- p <- round(pval, 5) 
+ pval <- round(pval, 5) 
  z <- round(z, 4)
- out <- t(c(p, z, p))
+ out <- t(c(p, z, pval))
  colnames(out) <- c("Estimate", "z", "p")
  rownames(out) <- ""
  return(out)
