@@ -4006,8 +4006,7 @@ size.ci.gen2 <- function(alpha, se, n0, w, R) {
 #' @param  pow     desired power
 #' @param  evar    planning value of within-group (error) variance
 #' @param  x       vector of x values of the quantitative factor
-#' @param  slope   planning value of slope
-#' @param  h       null hypothesis value of slope  
+#' @param  es      planning value of slope minus null hypothesis value
 #'
 #' 
 #' @return 
@@ -4020,7 +4019,7 @@ size.ci.gen2 <- function(alpha, se, n0, w, R) {
 #' 
 #' @examples
 #' x <- c(2, 5, 8)
-#' size.test.slope(.05, .9, 31.1, x, .75, 0)
+#' size.test.slope(.05, .9, 31.1, x, .75)
 #'
 #' # Should return:
 #' # Total sample size
@@ -4029,12 +4028,11 @@ size.ci.gen2 <- function(alpha, se, n0, w, R) {
 #' 
 #' @importFrom stats qnorm
 #' @export  
-size.test.slope <- function(alpha, pow, evar, x, slope, h) {
+size.test.slope <- function(alpha, pow, evar, x, es) {
  za <- qnorm(1 - alpha/2)
  zb <- qnorm(pow)
  m <- mean(x)
  xvar <- sum((x - m)^2)/length(x)
- es <- slope - h
  n <- ceiling((evar/xvar)*(za + zb)^2/es^2 + 1 + za^2/2)
  out <- matrix(n, nrow = 1, ncol = 1)
  colnames(out) <- "Total sample size"
